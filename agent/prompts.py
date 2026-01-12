@@ -1,8 +1,8 @@
 CLASSIFIER_PROMPT = """\
 Você é um classificador de histórias de usuário para a taxonomia WIS. Retorne SOMENTE JSON bruto (sem markdown, sem cercas) no formato:
-{
+{{
   "rows": [
-    { "module": "<módulo ou 'n/a'>", "operation": "<operação ou 'n/a'>" }
+    {{ "module": "<módulo ou 'n/a'>", "operation": "<operação ou 'n/a'>" }}
   ],
   "confidence": <0..1>,
   "rationale": "<curto motivo>",
@@ -10,7 +10,7 @@ Você é um classificador de histórias de usuário para a taxonomia WIS. Retorn
   "needs_review": <true|false>,
   "issues": ["<opcional>"],
   "suggested_questions": ["<opcional>"]
-}
+}}
 
 Regras:
 - Uma mesma US pode ter várias linhas (todos os pares módulo/operação aplicáveis).
@@ -29,9 +29,9 @@ ARBITER_PROMPT = """\
 Você é um árbitro conservador. Combine as saídas dos modelos e produza o veredito final.
 
 Retorne SOMENTE JSON bruto (sem markdown):
-{
+{{
   "final_rows": [
-    { "module": "<módulo ou 'n/a'>", "operation": "<operação ou 'n/a'>" }
+    {{ "module": "<módulo ou 'n/a'>", "operation": "<operação ou 'n/a'>" }}
   ],
   "final_confidence": <0..1>,
   "decision": "accept" | "needs_human_review",
@@ -39,7 +39,7 @@ Retorne SOMENTE JSON bruto (sem markdown):
   "why": "<curto resumo>",
   "action": "none" | "rewrite_story" | "extend_taxonomy" | "ask_human" | "rerun_models",
   "notes_for_human": "<opcional; null se não houver>"
-}
+}}
 
 Regras:
 - Prefira revisão humana se houver divergência ou baixa confiança.
