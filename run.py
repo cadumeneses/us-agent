@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from agent.orchestrator import committee_classify, arbitrate_if_needed
+from agent.providers.openai_provider import OpenAIProvider
 from agent.storage import append_jsonl
 
 from agent.providers.http_provider import HttpJSONProvider
@@ -54,6 +55,14 @@ def main():
         return
 
     providers: list[tuple[str, object]] = []
+
+    openai = None
+    openai_api_key = os.getenv("OPENAI_API_KEY", "")
+    if openai_api_key:
+        openai = OpenAIProvider(model=os.getenv("OPENAI_MODEL", None))
+        providers.append(("openai", openai))
+    else:
+        print("Aviso: OPENAI_API_KEY não definido; OpenAI será ignorado.")
 
     # Gemini via SDK google-genai
     gemini_api_key = os.getenv("GEMINI_API_KEY", "")
