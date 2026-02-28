@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "modules": {
+    "Registry": [
+      "Insert data",
+      "Retrieve data",
+      "Update data",
+      "Remove data",
+      "Modify input behavior"
+    ],
+    "Authentication": [
+      "Login with username and password",
+      "Login with OAuth",
+      "Password recovery",
+      "First login",
+      "Validate user permissions",
+      "Update profile",
+      "Create account",
+      "Remove account"
+    ],
+    "Management": [
+      "View dashboard",
+      "Export report to PDF",
+      "Export report to XLS",
+      "Notify via app",
+      "Notify by email"
+    ]
+  }
+}
