@@ -1,51 +1,122 @@
-# WIS User Story Classifier
+﻿# WIS User Story Classifier
 
-Pipeline para classificar histórias de usuário (US) segundo a taxonomia de Web Information Systems (WIS), com suporte a múltiplos pares (módulo, operação) por US. Usa provedores LLM (Gemini via `google-genai` e/ou Deepseek via API compatível OpenAI) em comitê e arbitragem.
+Ferramenta para classificar User Stories (US) na taxonomia WIS com foco em **decisao sob incerteza**.
+O fluxo combina comite de modelos, arbitragem, rerun para incerteza media e revisao humana no proprio CLI.
+
+## Visao geral
+- Classificacao multi-label: uma US pode gerar varios pares `module`/`operation`.
+- Politica de incerteza: calcula risco, consenso e divergencia entre modelos.
+- Escalonamento humano: quando ha risco alto/consenso baixo, a revisao humana acontece no terminal.
+- Evolucao de taxonomia: o revisor pode registrar feedback de taxonomia durante a revisao.
+- Taxonomia externa: carregada de arquivo JSON versionavel (nao hardcoded).
 
 ## Estrutura
-- `run.py`: CLI que lê US separadas por `;`, aciona provedores e grava resultados em `runs/results.jsonl`.
-- `agent/prompts.py`: prompts para classificador, árbitro e formatter.
-- `agent/orchestrator.py`: orquestra comitê, agrega votos e arbitra.
-- `agent/providers/`: integrações de provedores (Gemini via SDK, HTTP genérico para Deepseek).
-- `agent/schemas.py`: modelos Pydantic para entradas/saídas.
-- `agent/storage.py`: utilitário para gravar JSONL.
+- `run.py`: CLI principal (classificacao e modo somente revisor).
+- `agent/orchestrator.py`: comite, metrica de incerteza, rerun e guardrails de escalonamento.
+- `agent/human_review.py`: fluxo interativo de revisao humana e captura de feedback.
+- `agent/taxonomy.py`: carregamento/validacao da taxonomia e conversao para prompt.
+- `agent/providers/`: provedores LLM (`openai`, `gemini`, `deepseek` via HTTP OpenAI-like).
+- `agent/schemas.py`: schemas Pydantic de entrada/saida.
+- `agent/storage.py`: escrita em JSONL.
+- `config/taxonomy.json`: taxonomia WIS versionada.
 
-## Preparar ambiente
+## Setup
 ```bash
 python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Crie um `.env` com pelo menos um provedor:
-```
+Exemplo de `.env` (configure ao menos um provedor):
+```bash
+# OpenAI
+OPENAI_API_KEY=...
+OPENAI_MODEL=gpt-5-pro
+
 # Gemini
 GEMINI_API_KEY=...
-GEMINI_MODEL=gemini-1.5-pro
+GEMINI_MODEL=gemini-2.5-flash
 
-# Deepseek (API estilo OpenAI)
+# Deepseek (API OpenAI-like)
 DEEPSEEK_BASE_URL=https://api.deepseek.com/v1/chat/completions
 DEEPSEEK_API_KEY=...
 DEEPSEEK_MODEL=deepseek-chat
+
+# Taxonomia
+TAXONOMY_PATH=config/taxonomy.json
+
+# Politica de incerteza
+UNCERTAINTY_MAX_RERUNS=1
+UNCERTAINTY_MEDIUM_THRESHOLD=0.33
+UNCERTAINTY_HIGH_THRESHOLD=0.66
+
+# Human-in-the-loop
+HUMAN_REVIEW_ENABLED=true
+HUMAN_REVIEW_ONLY_ON_ESCALATION=true
 ```
 
-## Taxonomia
-Definida em `run.py` (seção `TAXONOMY`): módulos Registry, Authentication, Management e respectivas operações. 
+## Como executar
 
-## Executar
+### 1) Classificacao interativa
 ```bash
 py run.py
 ```
-Entradas:
-- Nome do projeto.
-- US separadas por ponto e vírgula `;` em uma única linha.
+Pergunta projeto, revisor e US separadas por `;`.
 
-Saídas:
-- Console: decisão final por US.
-- Arquivo: `runs/results.jsonl` (uma linha por execução).
+### 2) Classificacao nao interativa
+```bash
+py run.py --project P01 --reviewer ana --stories "US1;US2;US3"
+```
 
-## Dataset
-- Link para dataset: [SAC](https://docs.google.com/spreadsheets/d/17XTasK9oAhMusTyC7fqeG3SxbGurDOwmANK4eW1uqSI/edit?gid=905958695#gid=905958695)
+### 3) Modo somente revisor
+```bash
+py run.py --review-only --reviewer ana
+```
+Opcional:
+```bash
+py run.py --review-only --reviewer ana --results-path runs/results.jsonl
+```
 
-## Notas
-- Se nenhum provedor estiver configurado no `.env`, a execução encerra com aviso.
-- Respostas de LLM são validadas via Pydantic; cercas de código são removidas nos providers.
+## Argumentos CLI
+- `--project`: nome do projeto.
+- `--reviewer`: nome do revisor humano.
+- `--stories`: US separadas por `;`.
+- `--review-only`: abre fila de revisao para resultados ja classificados.
+- `--results-path`: caminho do JSONL a revisar no modo `--review-only`.
+
+## Politica de decisao sob incerteza
+1. Comite coleta votos de provedores.
+2. Calcula `uncertainty_score`, `band`, `consensus_ratio` e sinais de divergencia.
+3. Se banda `medium`, reroda (ate `UNCERTAINTY_MAX_RERUNS`) com instrucao mais conservadora.
+4. Arbitra resultado final.
+5. Guardrails:
+   - `high`: forca `needs_human_review`
+   - `medium` + consenso baixo: forca `needs_human_review`
+
+## Revisao humana no CLI
+Quando ativada, a tela `HUMAN REVIEW` permite:
+- aceitar decisao automatica;
+- classificar manualmente na taxonomia atual;
+- manter item escalado para fila humana;
+- registrar proposta de evolucao da taxonomia.
+
+## Arquivos de saida
+- `runs/results.jsonl`: execucoes completas (votos, incerteza, final, revisao humana).
+- `runs/review_decisions.jsonl`: decisoes tomadas no modo `--review-only`.
+- `runs/taxonomy_feedback.jsonl`: backlog de propostas de evolucao da taxonomia.
+
+## Taxonomia
+- Origem: `config/taxonomy.json`.
+- Formato esperado:
+```json
+{
+  "version": "1.0.0",
+  "modules": {
+    "ModuleName": ["Operation A", "Operation B"]
+  }
+}
+```
+
+## Observacoes
+- Se nenhum provedor estiver configurado, a execucao encerra com aviso.
+- As respostas dos modelos sao validadas por Pydantic.
+- Respostas com cercas markdown sao limpas nos providers antes da validacao.
