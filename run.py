@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from agent.orchestrator import committee_classify, arbitrate_if_needed
+from agent.orchestrator import decide_under_uncertainty
 from agent.providers.openai_provider import OpenAIProvider
 from agent.storage import append_jsonl
 
@@ -91,13 +91,25 @@ def main():
         return
 
     arbiter_provider = deepseek if deepseek.base_url else providers[0][1]
+    max_reruns = int(os.getenv("UNCERTAINTY_MAX_RERUNS", "1"))
+    medium_threshold = float(os.getenv("UNCERTAINTY_MEDIUM_THRESHOLD", "0.33"))
+    high_threshold = float(os.getenv("UNCERTAINTY_HIGH_THRESHOLD", "0.66"))
 
     for us in user_stories:
-        committee = committee_classify(user_story=us, taxonomy=TAXONOMY, providers=providers)
-        final = arbitrate_if_needed(committee, taxonomy=TAXONOMY, arbiter_provider=arbiter_provider)
+        final = decide_under_uncertainty(
+            user_story=us,
+            taxonomy=TAXONOMY,
+            providers=providers,
+            arbiter_provider=arbiter_provider,
+            max_reruns=max_reruns,
+            medium_threshold=medium_threshold,
+            high_threshold=high_threshold,
+        )
         final["project"] = project
         append_jsonl("runs/results.jsonl", final)
-        print(f"[{project}] {us} -> {final['final']}")
+        band = final["uncertainty"]["band"]
+        score = final["uncertainty"]["uncertainty_score"]
+        print(f"[{project}] {us} -> {final['final']} | uncertainty={band} ({score})")
 
 
 if __name__ == "__main__":
