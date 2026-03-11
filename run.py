@@ -1,15 +1,38 @@
 import os
 import json
+import uuid
+import hashlib
 import argparse
 from dotenv import load_dotenv
-from agent.orchestrator import decide_under_uncertainty
+from agent.orchestrator import POLICY_VERSION, decide_under_uncertainty
 from agent.human_review import maybe_apply_human_review
+from agent.prompts import PROMPT_VERSION
 from agent.taxonomy import load_taxonomy_with_version, taxonomy_to_prompt_text
 from agent.providers.openai_provider import OpenAIProvider
 from agent.storage import append_jsonl
 
 from agent.providers.http_provider import HttpJSONProvider
 from agent.providers.gemini_provider import GeminiProvider
+
+
+def normalize_user_story(user_story: str) -> str:
+    return " ".join((user_story or "").split())
+
+
+def generate_story_id(user_story: str) -> str:
+    normalized = normalize_user_story(user_story)
+    digest = hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:16]
+    return f"us_{digest}"
+
+
+def trace_fields_for_result(result: dict) -> dict:
+    return {
+        "story_id": result.get("story_id"),
+        "run_id": result.get("run_id"),
+        "taxonomy_version": result.get("taxonomy_version"),
+        "prompt_version": result.get("prompt_version"),
+        "policy_version": result.get("policy_version"),
+    }
 
 
 def read_user_stories() -> list[str]:
@@ -70,6 +93,7 @@ def append_taxonomy_feedback_if_any(result: dict, project: str):
         "user_story": result.get("user_story"),
         "reviewer": human_review.get("reviewer"),
         "reviewed_at": human_review.get("reviewed_at"),
+        **trace_fields_for_result(result),
         "uncertainty": result.get("uncertainty"),
         "final_decision": result.get("final"),
         "taxonomy_feedback": feedback,
@@ -90,6 +114,12 @@ def run_reviewer_only_mode(reviewer: str, taxonomy_text: str, results_path: str)
 
     print(f"Encontrados {len(pending)} itens pendentes para revisao em {results_path}.")
     for original_index, item in pending:
+        item.setdefault("story_id", generate_story_id(item.get("user_story", "")))
+        item.setdefault("run_id", "legacy_run")
+        item.setdefault("prompt_version", PROMPT_VERSION)
+        item.setdefault("policy_version", item.get("policy", {}).get("policy_version", POLICY_VERSION))
+        item.setdefault("taxonomy_version", item.get("taxonomy_version", "unknown"))
+
         reviewed = maybe_apply_human_review(
             result=item,
             taxonomy_text=taxonomy_text,
@@ -106,6 +136,7 @@ def run_reviewer_only_mode(reviewer: str, taxonomy_text: str, results_path: str)
                 "source_line": original_index,
                 "project": project,
                 "user_story": reviewed.get("user_story"),
+                **trace_fields_for_result(reviewed),
                 "uncertainty": reviewed.get("uncertainty"),
                 "final": reviewed.get("final"),
                 "human_review": reviewed.get("human_review"),
@@ -189,6 +220,7 @@ def main():
         "sim",
         "s",
     }
+    run_id = f"run_{uuid.uuid4().hex}"
 
     for us in user_stories:
         final = decide_under_uncertainty(
@@ -211,12 +243,19 @@ def main():
         )
         final["project"] = project
         final["taxonomy_path"] = taxonomy_path
+        final["story_id"] = generate_story_id(us)
+        final["run_id"] = run_id
         final["taxonomy_version"] = taxonomy_version
+        final["prompt_version"] = PROMPT_VERSION
+        final["policy_version"] = final.get("policy", {}).get("policy_version", POLICY_VERSION)
         append_jsonl("runs/results.jsonl", final)
         append_taxonomy_feedback_if_any(final, project=project)
         band = final["uncertainty"]["band"]
         score = final["uncertainty"]["uncertainty_score"]
-        print(f"[{project}] {us} -> {final['final']} | uncertainty={band} ({score})")
+        print(
+            f"[{project}] story_id={final['story_id']} run_id={run_id} "
+            f"{us} -> {final['final']} | uncertainty={band} ({score})"
+        )
 
 
 if __name__ == "__main__":

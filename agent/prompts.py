@@ -1,3 +1,5 @@
+PROMPT_VERSION = "wis_prompts_v1"
+
 CLASSIFIER_PROMPT = """\
 Você é um classificador de histórias de usuário para a taxonomia WIS. Retorne SOMENTE JSON bruto (sem markdown, sem cercas) no formato:
 {{

@@ -11,6 +11,8 @@ from agent.prompts import ARBITER_PROMPT, CLASSIFIER_PROMPT
 from agent.schemas import ArbiterOutput, ClassificationRow, ClassifierOutput
 from agent.taxonomy import TaxonomyMap, is_valid_taxonomy_row
 
+POLICY_VERSION = "uncertainty_v1"
+
 
 @dataclass
 class ModelVote:
@@ -313,7 +315,7 @@ def decide_under_uncertainty(
     result["uncertainty"] = uncertainty
     result["attempts"] = attempts
     result["policy"] = {
-        "policy_version": "uncertainty_v1",
+        "policy_version": POLICY_VERSION,
         "max_reruns": max_reruns,
         "reruns_used": reruns_used,
         "medium_threshold": medium_threshold,
