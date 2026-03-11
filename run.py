@@ -179,6 +179,7 @@ def main():
     max_reruns = int(os.getenv("UNCERTAINTY_MAX_RERUNS", "1"))
     medium_threshold = float(os.getenv("UNCERTAINTY_MEDIUM_THRESHOLD", "0.33"))
     high_threshold = float(os.getenv("UNCERTAINTY_HIGH_THRESHOLD", "0.66"))
+    provider_timeout_seconds = float(os.getenv("PROVIDER_TIMEOUT_SECONDS", "60"))
     human_review_enabled = os.getenv("HUMAN_REVIEW_ENABLED", "true").lower() in {"1", "true", "yes", "y", "sim", "s"}
     review_only_on_escalation = os.getenv("HUMAN_REVIEW_ONLY_ON_ESCALATION", "true").lower() in {
         "1",
@@ -196,6 +197,7 @@ def main():
             taxonomy_map=taxonomy,
             providers=providers,
             arbiter_provider=arbiter_provider,
+            provider_timeout_seconds=provider_timeout_seconds,
             max_reruns=max_reruns,
             medium_threshold=medium_threshold,
             high_threshold=high_threshold,

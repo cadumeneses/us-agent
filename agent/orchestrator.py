@@ -1,7 +1,11 @@
 import json
 import math
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
+
+import requests
+from pydantic import ValidationError
 
 from agent.prompts import ARBITER_PROMPT, CLASSIFIER_PROMPT
 from agent.schemas import ArbiterOutput, ClassificationRow, ClassifierOutput
@@ -17,6 +21,40 @@ class ModelVote:
 def _canonical_rows(rows: List[ClassificationRow]) -> Tuple[Tuple[str, str], ...]:
     unique_pairs = {(r.module, r.operation) for r in rows}
     return tuple(sorted(unique_pairs))
+
+
+def _call_with_timeout(callable_fn: Any, timeout_seconds: float) -> Any:
+    executor = ThreadPoolExecutor(max_workers=1)
+    future = executor.submit(callable_fn)
+    try:
+        return future.result(timeout=timeout_seconds)
+    finally:
+        executor.shutdown(wait=False, cancel_futures=True)
+
+
+def _provider_error_status(exc: Exception) -> str:
+    if isinstance(exc, FutureTimeoutError):
+        return "timeout"
+    if isinstance(exc, requests.Timeout):
+        return "timeout"
+    if isinstance(exc, (ValidationError, json.JSONDecodeError)):
+        return "parse_error"
+    if isinstance(exc, requests.RequestException):
+        return "http_error"
+
+    name = exc.__class__.__name__.lower()
+    if "timeout" in name:
+        return "timeout"
+    if "validation" in name or "json" in name or "parse" in name:
+        return "parse_error"
+    return "http_error"
+
+
+def _error_message(exc: Exception) -> str:
+    text = str(exc).strip()
+    if not text:
+        return exc.__class__.__name__
+    return f"{exc.__class__.__name__}: {text}"
 
 
 def _assess_uncertainty(committee_result: Dict[str, Any], medium_threshold: float, high_threshold: float) -> Dict[str, Any]:
@@ -35,7 +73,6 @@ def _assess_uncertainty(committee_result: Dict[str, Any], medium_threshold: floa
     consensus_ratio = majority_votes / total_votes
     disagreement_rate = 1.0 - consensus_ratio
 
-    # Normalized entropy to indicate dispersion of model hypotheses.
     if len(hypotheses) <= 1:
         normalized_entropy = 0.0
     else:
@@ -70,6 +107,7 @@ def committee_classify(
     user_story: str,
     taxonomy: str,
     providers: List[Tuple[str, Any]],
+    timeout_seconds: float,
     system_hint: str | None = None,
 ) -> Dict[str, Any]:
     system = "Você é um classificador rigoroso. Produza JSON conforme o schema."
@@ -78,17 +116,31 @@ def committee_classify(
     user = CLASSIFIER_PROMPT.format(taxonomy=taxonomy, user_story=user_story)
 
     votes: List[ModelVote] = []
-    for name, p in providers:
-        out = p.classify(system=system, user=user)
-        votes.append(ModelVote(provider=name, output=out))
+    provider_statuses: List[Dict[str, Any]] = []
+    for name, provider in providers:
+        try:
+            out: ClassifierOutput = _call_with_timeout(
+                lambda p=provider: p.classify(system=system, user=user),
+                timeout_seconds=timeout_seconds,
+            )
+            votes.append(ModelVote(provider=name, output=out))
+            provider_statuses.append({"provider": name, "status": "success", "error": None})
+        except Exception as exc:
+            provider_statuses.append(
+                {
+                    "provider": name,
+                    "status": _provider_error_status(exc),
+                    "error": _error_message(exc),
+                }
+            )
 
-    # Simple aggregation: row union and average confidence.
     all_rows: List[ClassificationRow] = []
     for v in votes:
         all_rows.extend(v.output.rows)
 
-    avg_conf = sum(v.output.confidence for v in votes) / len(votes)
-    any_review = any(v.output.needs_review for v in votes)
+    avg_conf = sum(v.output.confidence for v in votes) / len(votes) if votes else 0.0
+    any_review = any(v.output.needs_review for v in votes) or not votes
+    failed_count = sum(1 for status in provider_statuses if status["status"] != "success")
 
     aggregate = {
         "rows": [r.model_dump() for r in all_rows],
@@ -99,6 +151,12 @@ def committee_classify(
     return {
         "user_story": user_story,
         "votes": [{"provider": v.provider, **v.output.model_dump()} for v in votes],
+        "provider_statuses": provider_statuses,
+        "provider_health": {
+            "total": len(providers),
+            "successful": len(votes),
+            "failed": failed_count,
+        },
         "aggregate": aggregate,
     }
 
@@ -113,17 +171,37 @@ def _find_invalid_arbiter_rows(rows: List[ClassificationRow], taxonomy_map: Taxo
 
 
 def arbitrate_if_needed(
-    committee_result: Dict[str, Any], taxonomy: str, taxonomy_map: TaxonomyMap, arbiter_provider: Any
+    committee_result: Dict[str, Any],
+    taxonomy: str,
+    taxonomy_map: TaxonomyMap,
+    arbiter_provider: Any,
+    timeout_seconds: float,
 ) -> Dict[str, Any]:
-    # Always arbitrate (with a single provider there is no consensus check).
     system = "Você é um árbitro estrito e conservador. Produza JSON conforme o schema."
     user_story = committee_result["user_story"]
     model_outputs = json.dumps(committee_result["votes"], ensure_ascii=False)
     user = ARBITER_PROMPT.format(taxonomy=taxonomy, user_story=user_story, model_outputs=model_outputs)
 
-    arb: ArbiterOutput = arbiter_provider.arbitrate(system=system, user=user)
-    invalid_rows = _find_invalid_arbiter_rows(arb.final_rows, taxonomy_map)
+    try:
+        arb: ArbiterOutput = _call_with_timeout(
+            lambda: arbiter_provider.arbitrate(system=system, user=user),
+            timeout_seconds=timeout_seconds,
+        )
+        committee_result["arbiter_status"] = {"status": "success", "error": None}
+    except Exception as exc:
+        committee_result["arbiter_status"] = {"status": _provider_error_status(exc), "error": _error_message(exc)}
+        committee_result["final"] = {
+            "final_rows": [{"module": "n/a", "operation": "n/a"}],
+            "final_confidence": 0.0,
+            "decision": "needs_human_review",
+            "disagreement_cause": "model_instability",
+            "why": "Arbiter failed; escalated for human review.",
+            "action": "ask_human",
+            "notes_for_human": committee_result["arbiter_status"]["error"],
+        }
+        return committee_result
 
+    invalid_rows = _find_invalid_arbiter_rows(arb.final_rows, taxonomy_map)
     if invalid_rows:
         committee_result["arbiter_validation"] = {"valid": False, "invalid_rows": invalid_rows}
         committee_result["final"] = {
@@ -142,12 +220,28 @@ def arbitrate_if_needed(
     return committee_result
 
 
+def _force_human_review_due_provider_failures(result: Dict[str, Any]) -> None:
+    failed = result.get("provider_health", {}).get("failed", 0)
+    successful = result.get("provider_health", {}).get("successful", 0)
+    if failed < 2 and successful > 0:
+        return
+
+    result["final"]["decision"] = "needs_human_review"
+    result["final"]["action"] = "ask_human"
+    result["final"]["disagreement_cause"] = "model_instability"
+    result["final"]["why"] = (
+        f"Escalonado por falha de providers (successful={successful}, failed={failed})."
+    )
+    result["final"]["notes_for_human"] = "Confiabilidade insuficiente de providers para decisão automática."
+
+
 def decide_under_uncertainty(
     user_story: str,
     taxonomy: str,
     taxonomy_map: TaxonomyMap,
     providers: List[Tuple[str, Any]],
     arbiter_provider: Any,
+    provider_timeout_seconds: float,
     max_reruns: int = 1,
     medium_threshold: float = 0.33,
     high_threshold: float = 0.66,
@@ -155,13 +249,20 @@ def decide_under_uncertainty(
     attempts: List[Dict[str, Any]] = []
     reruns_used = 0
 
-    committee = committee_classify(user_story=user_story, taxonomy=taxonomy, providers=providers)
+    committee = committee_classify(
+        user_story=user_story,
+        taxonomy=taxonomy,
+        providers=providers,
+        timeout_seconds=provider_timeout_seconds,
+    )
     uncertainty = _assess_uncertainty(committee, medium_threshold=medium_threshold, high_threshold=high_threshold)
 
     attempts.append(
         {
             "attempt": 1,
             "aggregate": committee["aggregate"],
+            "provider_health": committee["provider_health"],
+            "provider_statuses": committee["provider_statuses"],
             "uncertainty": uncertainty,
             "reason": "initial",
         }
@@ -173,6 +274,7 @@ def decide_under_uncertainty(
             user_story=user_story,
             taxonomy=taxonomy,
             providers=providers,
+            timeout_seconds=provider_timeout_seconds,
             system_hint=(
                 "Há divergência entre modelos. Seja conservador, não infira além do texto e "
                 "marque needs_review=true em qualquer ambiguidade."
@@ -186,12 +288,13 @@ def decide_under_uncertainty(
             {
                 "attempt": reruns_used + 1,
                 "aggregate": committee_rerun["aggregate"],
+                "provider_health": committee_rerun["provider_health"],
+                "provider_statuses": committee_rerun["provider_statuses"],
                 "uncertainty": rerun_uncertainty,
                 "reason": "medium_uncertainty_rerun",
             }
         )
 
-        # Keep the best scenario for arbitration: lower uncertainty and higher average confidence.
         current_score = (uncertainty["uncertainty_score"], -committee["aggregate"]["avg_confidence"])
         rerun_score = (rerun_uncertainty["uncertainty_score"], -committee_rerun["aggregate"]["avg_confidence"])
         if rerun_score < current_score:
@@ -205,6 +308,7 @@ def decide_under_uncertainty(
         taxonomy=taxonomy,
         taxonomy_map=taxonomy_map,
         arbiter_provider=arbiter_provider,
+        timeout_seconds=provider_timeout_seconds,
     )
     result["uncertainty"] = uncertainty
     result["attempts"] = attempts
@@ -214,9 +318,11 @@ def decide_under_uncertainty(
         "reruns_used": reruns_used,
         "medium_threshold": medium_threshold,
         "high_threshold": high_threshold,
+        "provider_timeout_seconds": provider_timeout_seconds,
     }
 
-    # Operational guardrail: high risk or persistent disagreement -> human review.
+    _force_human_review_due_provider_failures(result)
+
     if uncertainty["band"] == "high":
         result["final"]["decision"] = "needs_human_review"
         result["final"]["action"] = "ask_human"
