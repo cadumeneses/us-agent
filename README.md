@@ -82,6 +82,7 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
 - `--stories`: US separadas por `;`.
 - `--review-only`: abre fila de revisao para resultados ja classificados.
 - `--results-path`: caminho do JSONL a revisar no modo `--review-only`.
+- `--reopen-story-ids`: reabre `story_id`(s) ja revisados para `pending_review` (use `,` ou `;`).
 
 ## Politica de decisao sob incerteza
 1. Comite coleta votos de provedores.
@@ -96,8 +97,20 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
 Quando ativada, a tela `HUMAN REVIEW` permite:
 - aceitar decisao automatica;
 - classificar manualmente na taxonomia atual;
-- manter item escalado para fila humana;
+- manter item escalado para fila humana com motivo (`pending_review`, `taxonomy_gap` ou `needs_rewrite`);
 - registrar proposta de evolucao da taxonomia.
+
+## Status persistente por item
+Cada item em `runs/results.jsonl` passa a ter `review_status`:
+- `pending_review`
+- `reviewed`
+- `accepted_auto`
+- `reclassified`
+- `taxonomy_gap`
+- `needs_rewrite`
+
+No modo `--review-only`, o arquivo `runs/results.jsonl` e atualizado apos cada revisao,
+evitando que item ja revisado volte a aparecer como pendente por falta de persistencia.
 
 ## Arquivos de saida
 - `runs/results.jsonl`: execucoes completas (votos, incerteza, final, revisao humana).

@@ -3,6 +3,7 @@ import json
 import uuid
 import hashlib
 import argparse
+from datetime import datetime, timezone
 from dotenv import load_dotenv
 from agent.orchestrator import POLICY_VERSION, decide_under_uncertainty
 from agent.human_review import maybe_apply_human_review
@@ -13,6 +14,15 @@ from agent.storage import append_jsonl
 
 from agent.providers.http_provider import HttpJSONProvider
 from agent.providers.gemini_provider import GeminiProvider
+
+ALLOWED_REVIEW_STATUSES = {
+    "pending_review",
+    "reviewed",
+    "accepted_auto",
+    "reclassified",
+    "taxonomy_gap",
+    "needs_rewrite",
+}
 
 
 def normalize_user_story(user_story: str) -> str:
@@ -35,6 +45,43 @@ def trace_fields_for_result(result: dict) -> dict:
     }
 
 
+def derive_review_status(item: dict) -> str:
+    explicit_status = item.get("review_status")
+    if explicit_status in ALLOWED_REVIEW_STATUSES:
+        return explicit_status
+
+    human_review = item.get("human_review") or {}
+    outcome = human_review.get("outcome")
+    if outcome == "accepted_automatic_decision":
+        return "accepted_auto"
+    if outcome == "manual_classification_applied":
+        return "reclassified"
+    if outcome == "kept_for_human_queue":
+        queue_status = human_review.get("queue_status")
+        if queue_status in {"pending_review", "taxonomy_gap", "needs_rewrite"}:
+            return queue_status
+
+    final = item.get("final") or {}
+    decision = final.get("decision")
+    action = final.get("action")
+    disagreement_cause = final.get("disagreement_cause")
+
+    if decision != "needs_human_review":
+        return "accepted_auto"
+    if action == "extend_taxonomy" or disagreement_cause == "taxonomy_gap":
+        return "taxonomy_gap"
+    if action == "rewrite_story":
+        return "needs_rewrite"
+    if outcome:
+        return "reviewed"
+    return "pending_review"
+
+
+def stamp_review_status(item: dict) -> dict:
+    item["review_status"] = derive_review_status(item)
+    return item
+
+
 def read_user_stories() -> list[str]:
     """
     Lê US em uma linha separadas por ponto e vírgula (;).
@@ -53,6 +100,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--stories", default=None, help="User stories separated by ';'.")
     parser.add_argument("--review-only", action="store_true", help="Open reviewer-only mode for existing results.")
     parser.add_argument("--results-path", default="runs/results.jsonl", help="Path to classification results JSONL.")
+    parser.add_argument(
+        "--reopen-story-ids",
+        default=None,
+        help="Story IDs to reopen for review (separated by ',' or ';'). Works with --review-only.",
+    )
     return parser.parse_args()
 
 
@@ -72,14 +124,48 @@ def load_jsonl(path: str) -> list[dict]:
     return items
 
 
+def write_jsonl(path: str, items: list[dict]) -> None:
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    temp_path = f"{path}.tmp"
+    with open(temp_path, "w", encoding="utf-8") as f:
+        for item in items:
+            f.write(json.dumps(item, ensure_ascii=False) + "\n")
+    os.replace(temp_path, path)
+
+
+def parse_story_ids(raw_story_ids: str | None) -> set[str]:
+    if not raw_story_ids:
+        return set()
+    parsed: set[str] = set()
+    normalized = raw_story_ids.replace(";", ",")
+    for part in normalized.split(","):
+        story_id = part.strip()
+        if story_id:
+            parsed.add(story_id)
+    return parsed
+
+
 def is_pending_human_review(item: dict) -> bool:
-    human_review = item.get("human_review") or {}
-    outcome = human_review.get("outcome")
-    if outcome in {"manual_classification_applied", "accepted_automatic_decision"}:
-        return False
-    if outcome == "kept_for_human_queue":
-        return True
-    return item.get("final", {}).get("decision") == "needs_human_review"
+    return derive_review_status(item) == "pending_review"
+
+
+def reopen_reviewed_items(records: list[dict], reopen_story_ids: set[str], reviewer: str) -> int:
+    reopened = 0
+    for item in records:
+        story_id = item.get("story_id") or generate_story_id(item.get("user_story", ""))
+        item["story_id"] = story_id
+        status = derive_review_status(item)
+        if story_id not in reopen_story_ids or status == "pending_review":
+            continue
+
+        item["review_status"] = "pending_review"
+        item["review_reopen"] = {
+            "reopened_at": datetime.now(timezone.utc).isoformat(),
+            "reopened_by": reviewer,
+            "previous_status": status,
+        }
+        reopened += 1
+    return reopened
 
 
 def append_taxonomy_feedback_if_any(result: dict, project: str):
@@ -94,6 +180,7 @@ def append_taxonomy_feedback_if_any(result: dict, project: str):
         "reviewer": human_review.get("reviewer"),
         "reviewed_at": human_review.get("reviewed_at"),
         **trace_fields_for_result(result),
+        "review_status": result.get("review_status"),
         "uncertainty": result.get("uncertainty"),
         "final_decision": result.get("final"),
         "taxonomy_feedback": feedback,
@@ -101,11 +188,26 @@ def append_taxonomy_feedback_if_any(result: dict, project: str):
     append_jsonl("runs/taxonomy_feedback.jsonl", feedback_record)
 
 
-def run_reviewer_only_mode(reviewer: str, taxonomy_text: str, results_path: str):
+def run_reviewer_only_mode(reviewer: str, taxonomy_text: str, results_path: str, reopen_story_ids: set[str]):
     records = load_jsonl(results_path)
     if not records:
         print(f"Nenhum registro encontrado em {results_path}.")
         return
+
+    for item in records:
+        item.setdefault("story_id", generate_story_id(item.get("user_story", "")))
+        item.setdefault("run_id", "legacy_run")
+        item.setdefault("prompt_version", PROMPT_VERSION)
+        item.setdefault("policy_version", item.get("policy", {}).get("policy_version", POLICY_VERSION))
+        item.setdefault("taxonomy_version", item.get("taxonomy_version", "unknown"))
+        stamp_review_status(item)
+    write_jsonl(results_path, records)
+
+    if reopen_story_ids:
+        reopened_count = reopen_reviewed_items(records, reopen_story_ids=reopen_story_ids, reviewer=reviewer)
+        if reopened_count:
+            print(f"{reopened_count} item(ns) reabertos para revisao.")
+        write_jsonl(results_path, records)
 
     pending = [(idx, item) for idx, item in enumerate(records, start=1) if is_pending_human_review(item)]
     if not pending:
@@ -114,12 +216,6 @@ def run_reviewer_only_mode(reviewer: str, taxonomy_text: str, results_path: str)
 
     print(f"Encontrados {len(pending)} itens pendentes para revisao em {results_path}.")
     for original_index, item in pending:
-        item.setdefault("story_id", generate_story_id(item.get("user_story", "")))
-        item.setdefault("run_id", "legacy_run")
-        item.setdefault("prompt_version", PROMPT_VERSION)
-        item.setdefault("policy_version", item.get("policy", {}).get("policy_version", POLICY_VERSION))
-        item.setdefault("taxonomy_version", item.get("taxonomy_version", "unknown"))
-
         reviewed = maybe_apply_human_review(
             result=item,
             taxonomy_text=taxonomy_text,
@@ -127,6 +223,10 @@ def run_reviewer_only_mode(reviewer: str, taxonomy_text: str, results_path: str)
             only_on_escalation=False,
             reviewer=reviewer,
         )
+        stamp_review_status(reviewed)
+        records[original_index - 1] = reviewed
+        write_jsonl(results_path, records)
+
         project = reviewed.get("project", "n/a")
         append_taxonomy_feedback_if_any(reviewed, project=project)
         append_jsonl(
@@ -137,6 +237,7 @@ def run_reviewer_only_mode(reviewer: str, taxonomy_text: str, results_path: str)
                 "project": project,
                 "user_story": reviewed.get("user_story"),
                 **trace_fields_for_result(reviewed),
+                "review_status": reviewed.get("review_status"),
                 "uncertainty": reviewed.get("uncertainty"),
                 "final": reviewed.get("final"),
                 "human_review": reviewed.get("human_review"),
@@ -158,7 +259,12 @@ def main():
     print(f"Taxonomia carregada: path={taxonomy_path} version={taxonomy_version}")
     taxonomy_text = taxonomy_to_prompt_text(taxonomy)
     if args.review_only:
-        run_reviewer_only_mode(reviewer=reviewer, taxonomy_text=taxonomy_text, results_path=args.results_path)
+        run_reviewer_only_mode(
+            reviewer=reviewer,
+            taxonomy_text=taxonomy_text,
+            results_path=args.results_path,
+            reopen_story_ids=parse_story_ids(args.reopen_story_ids),
+        )
         return
     project = args.project or input("Nome do projeto (enter para 'n/a'): ").strip() or "n/a"
 
@@ -248,12 +354,13 @@ def main():
         final["taxonomy_version"] = taxonomy_version
         final["prompt_version"] = PROMPT_VERSION
         final["policy_version"] = final.get("policy", {}).get("policy_version", POLICY_VERSION)
+        stamp_review_status(final)
         append_jsonl("runs/results.jsonl", final)
         append_taxonomy_feedback_if_any(final, project=project)
         band = final["uncertainty"]["band"]
         score = final["uncertainty"]["uncertainty_score"]
         print(
-            f"[{project}] story_id={final['story_id']} run_id={run_id} "
+            f"[{project}] story_id={final['story_id']} run_id={run_id} review_status={final['review_status']} "
             f"{us} -> {final['final']} | uncertainty={band} ({score})"
         )
 

@@ -190,9 +190,25 @@ def maybe_apply_human_review(
         result["final"]["notes_for_human"] = None
         review_record["outcome"] = "manual_classification_applied"
     else:
+        print("\nMotivo para manter na fila:")
+        print("  1. Pendente geral de revisao")
+        print("  2. Lacuna de taxonomia (taxonomy_gap)")
+        print("  3. US precisa reescrita (needs_rewrite)")
+        queue_reason = _ask_choice("Escolha [1/2/3]: ", {"1", "2", "3"}, default="1")
+        queue_status = {"1": "pending_review", "2": "taxonomy_gap", "3": "needs_rewrite"}[queue_reason]
+
         result["final"]["decision"] = "needs_human_review"
-        result["final"]["action"] = "ask_human"
+        if queue_status == "taxonomy_gap":
+            result["final"]["action"] = "extend_taxonomy"
+            result["final"]["disagreement_cause"] = "taxonomy_gap"
+        elif queue_status == "needs_rewrite":
+            result["final"]["action"] = "rewrite_story"
+            result["final"]["disagreement_cause"] = "ambiguity_in_story"
+        else:
+            result["final"]["action"] = "ask_human"
+
         review_record["outcome"] = "kept_for_human_queue"
+        review_record["queue_status"] = queue_status
 
     result["human_review"] = review_record
     return result
