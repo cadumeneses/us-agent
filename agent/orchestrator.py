@@ -3,8 +3,9 @@ import math
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
 
-from agent.prompts import CLASSIFIER_PROMPT, ARBITER_PROMPT
-from agent.schemas import ArbiterOutput, ClassifierOutput, ClassificationRow
+from agent.prompts import ARBITER_PROMPT, CLASSIFIER_PROMPT
+from agent.schemas import ArbiterOutput, ClassificationRow, ClassifierOutput
+from agent.taxonomy import TaxonomyMap, is_valid_taxonomy_row
 
 
 @dataclass
@@ -34,7 +35,7 @@ def _assess_uncertainty(committee_result: Dict[str, Any], medium_threshold: floa
     consensus_ratio = majority_votes / total_votes
     disagreement_rate = 1.0 - consensus_ratio
 
-    # Entropia normalizada para indicar dispersão das hipóteses dos modelos.
+    # Normalized entropy to indicate dispersion of model hypotheses.
     if len(hypotheses) <= 1:
         normalized_entropy = 0.0
     else:
@@ -81,7 +82,7 @@ def committee_classify(
         out = p.classify(system=system, user=user)
         votes.append(ModelVote(provider=name, output=out))
 
-    # Agregação simples: união das linhas e média de confiança
+    # Simple aggregation: row union and average confidence.
     all_rows: List[ClassificationRow] = []
     for v in votes:
         all_rows.extend(v.output.rows)
@@ -95,23 +96,48 @@ def committee_classify(
         "any_needs_review": any_review,
     }
 
-    result = {
+    return {
         "user_story": user_story,
         "votes": [{"provider": v.provider, **v.output.model_dump()} for v in votes],
         "aggregate": aggregate,
     }
-    return result
 
 
-def arbitrate_if_needed(committee_result: Dict[str, Any], taxonomy: str, arbiter_provider: Any) -> Dict[str, Any]:
-    # Sempre arbitra (com um provedor só não há consenso a checar)
+def _find_invalid_arbiter_rows(rows: List[ClassificationRow], taxonomy_map: TaxonomyMap) -> List[Dict[str, str]]:
+    invalid_rows: List[Dict[str, str]] = []
+    for row in rows:
+        if is_valid_taxonomy_row(row.module, row.operation, taxonomy_map):
+            continue
+        invalid_rows.append({"module": row.module, "operation": row.operation})
+    return invalid_rows
+
+
+def arbitrate_if_needed(
+    committee_result: Dict[str, Any], taxonomy: str, taxonomy_map: TaxonomyMap, arbiter_provider: Any
+) -> Dict[str, Any]:
+    # Always arbitrate (with a single provider there is no consensus check).
     system = "Você é um árbitro estrito e conservador. Produza JSON conforme o schema."
     user_story = committee_result["user_story"]
     model_outputs = json.dumps(committee_result["votes"], ensure_ascii=False)
-
-    user = ARBITER_PROMPT.format(user_story=user_story, model_outputs=model_outputs)
+    user = ARBITER_PROMPT.format(taxonomy=taxonomy, user_story=user_story, model_outputs=model_outputs)
 
     arb: ArbiterOutput = arbiter_provider.arbitrate(system=system, user=user)
+    invalid_rows = _find_invalid_arbiter_rows(arb.final_rows, taxonomy_map)
+
+    if invalid_rows:
+        committee_result["arbiter_validation"] = {"valid": False, "invalid_rows": invalid_rows}
+        committee_result["final"] = {
+            "final_rows": [{"module": "n/a", "operation": "n/a"}],
+            "final_confidence": 0.0,
+            "decision": "needs_human_review",
+            "disagreement_cause": "prompt_misinterpretation",
+            "why": "Arbiter output rejected: module/operation outside loaded taxonomy.",
+            "action": "ask_human",
+            "notes_for_human": f"Invalid arbiter rows: {invalid_rows}",
+        }
+        return committee_result
+
+    committee_result["arbiter_validation"] = {"valid": True, "invalid_rows": []}
     committee_result["final"] = arb.model_dump()
     return committee_result
 
@@ -119,6 +145,7 @@ def arbitrate_if_needed(committee_result: Dict[str, Any], taxonomy: str, arbiter
 def decide_under_uncertainty(
     user_story: str,
     taxonomy: str,
+    taxonomy_map: TaxonomyMap,
     providers: List[Tuple[str, Any]],
     arbiter_provider: Any,
     max_reruns: int = 1,
@@ -164,7 +191,7 @@ def decide_under_uncertainty(
             }
         )
 
-        # Mantém o melhor cenário para arbitrar: menor incerteza e maior confiança média.
+        # Keep the best scenario for arbitration: lower uncertainty and higher average confidence.
         current_score = (uncertainty["uncertainty_score"], -committee["aggregate"]["avg_confidence"])
         rerun_score = (rerun_uncertainty["uncertainty_score"], -committee_rerun["aggregate"]["avg_confidence"])
         if rerun_score < current_score:
@@ -173,7 +200,12 @@ def decide_under_uncertainty(
         else:
             break
 
-    result = arbitrate_if_needed(committee_result=committee, taxonomy=taxonomy, arbiter_provider=arbiter_provider)
+    result = arbitrate_if_needed(
+        committee_result=committee,
+        taxonomy=taxonomy,
+        taxonomy_map=taxonomy_map,
+        arbiter_provider=arbiter_provider,
+    )
     result["uncertainty"] = uncertainty
     result["attempts"] = attempts
     result["policy"] = {
@@ -184,7 +216,7 @@ def decide_under_uncertainty(
         "high_threshold": high_threshold,
     }
 
-    # Guardrail operacional: risco alto ou divergência persistente -> revisão humana.
+    # Operational guardrail: high risk or persistent disagreement -> human review.
     if uncertainty["band"] == "high":
         result["final"]["decision"] = "needs_human_review"
         result["final"]["action"] = "ask_human"

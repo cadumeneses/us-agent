@@ -13,8 +13,8 @@ Você é um classificador de histórias de usuário para a taxonomia WIS. Retorn
 }}
 
 Regras:
-- Uma mesma US pode ter várias linhas (todos os pares módulo/operação aplicáveis).
-- Use apenas os módulos/operações da lista abaixo; se não encaixar, retorne uma única linha com module='n/a', operation='n/a', confidence<=0.5, needs_review=true e registre o motivo em issues.
+- Uma mesma US pode ter várias linhas (todos os pares módulo/operação aplicáveis).
+- Use apenas os módulos/operações da lista abaixo; se não encaixar, retorne uma única linha com module='n/a', operation='n/a', confidence<=0.5, needs_review=true e registre o motivo em issues.
 - Não invente rótulos. Não use markdown.
 
 Taxonomia:
@@ -43,8 +43,11 @@ Retorne SOMENTE JSON bruto (sem markdown):
 
 Regras:
 - Prefira revisão humana se houver divergência ou baixa confiança.
-- Só use módulos/operações listados na taxonomia ou 'n/a'. Não invente.
+- Só use módulos/operações listados na taxonomia ou 'n/a'. Não invente.
 - Não use markdown nem cercas.
+
+Taxonomia:
+{taxonomy}
 
 História de usuário:
 {user_story}

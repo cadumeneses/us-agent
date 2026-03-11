@@ -4,7 +4,7 @@ import argparse
 from dotenv import load_dotenv
 from agent.orchestrator import decide_under_uncertainty
 from agent.human_review import maybe_apply_human_review
-from agent.taxonomy import load_taxonomy, taxonomy_to_prompt_text
+from agent.taxonomy import load_taxonomy_with_version, taxonomy_to_prompt_text
 from agent.providers.openai_provider import OpenAIProvider
 from agent.storage import append_jsonl
 
@@ -120,10 +120,11 @@ def main():
     reviewer = args.reviewer or input("Revisor humano (enter para 'human_reviewer'): ").strip() or "human_reviewer"
     taxonomy_path = os.getenv("TAXONOMY_PATH", "config/taxonomy.json")
     try:
-        taxonomy = load_taxonomy(taxonomy_path)
+        taxonomy_version, taxonomy = load_taxonomy_with_version(taxonomy_path)
     except (FileNotFoundError, ValueError) as e:
         print(f"Erro ao carregar taxonomia: {e}")
         return
+    print(f"Taxonomia carregada: path={taxonomy_path} version={taxonomy_version}")
     taxonomy_text = taxonomy_to_prompt_text(taxonomy)
     if args.review_only:
         run_reviewer_only_mode(reviewer=reviewer, taxonomy_text=taxonomy_text, results_path=args.results_path)
@@ -192,6 +193,7 @@ def main():
         final = decide_under_uncertainty(
             user_story=us,
             taxonomy=taxonomy_text,
+            taxonomy_map=taxonomy,
             providers=providers,
             arbiter_provider=arbiter_provider,
             max_reruns=max_reruns,
@@ -207,6 +209,7 @@ def main():
         )
         final["project"] = project
         final["taxonomy_path"] = taxonomy_path
+        final["taxonomy_version"] = taxonomy_version
         append_jsonl("runs/results.jsonl", final)
         append_taxonomy_feedback_if_any(final, project=project)
         band = final["uncertainty"]["band"]
