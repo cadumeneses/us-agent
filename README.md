@@ -86,7 +86,11 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
 
 ## Politica de decisao sob incerteza
 1. Comite coleta votos de provedores.
-2. Calcula `uncertainty_score`, `band`, `consensus_ratio` e sinais de divergencia.
+2. Calcula `uncertainty_score`, `band`, `consensus_ratio` e sinais de divergencia com:
+   - entropia de Shannon normalizada das hipoteses;
+   - nivel de desacordo (`none`, `light`, `strong`) em vez de desacordo binario;
+   - overlap medio de rotulos entre votos (`label_overlap`);
+   - penalidade especifica para `n/a` e sinais de lacuna taxonomica.
 3. Se banda `medium`, reroda (ate `UNCERTAINTY_MAX_RERUNS`) com instrucao mais conservadora.
 4. Arbitra resultado final.
 5. Guardrails:

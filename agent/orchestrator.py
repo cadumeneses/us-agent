@@ -11,7 +11,7 @@ from agent.prompts import ARBITER_PROMPT, CLASSIFIER_PROMPT
 from agent.schemas import ArbiterOutput, ClassificationRow, ClassifierOutput
 from agent.taxonomy import TaxonomyMap, is_valid_taxonomy_row
 
-POLICY_VERSION = "uncertainty_v1"
+POLICY_VERSION = "uncertainty_v2"
 
 
 @dataclass
@@ -23,6 +23,23 @@ class ModelVote:
 def _canonical_rows(rows: List[ClassificationRow]) -> Tuple[Tuple[str, str], ...]:
     unique_pairs = {(r.module, r.operation) for r in rows}
     return tuple(sorted(unique_pairs))
+
+
+def _avg_pairwise_jaccard(label_sets: List[set[Tuple[str, str]]]) -> float:
+    if len(label_sets) <= 1:
+        return 1.0
+
+    scores: List[float] = []
+    for i in range(len(label_sets)):
+        for j in range(i + 1, len(label_sets)):
+            left = label_sets[i]
+            right = label_sets[j]
+            union = left | right
+            if not union:
+                scores.append(1.0)
+            else:
+                scores.append(len(left & right) / len(union))
+    return sum(scores) / len(scores) if scores else 1.0
 
 
 def _call_with_timeout(callable_fn: Any, timeout_seconds: float) -> Any:
@@ -65,15 +82,34 @@ def _assess_uncertainty(committee_result: Dict[str, Any], medium_threshold: floa
     any_review = committee_result["aggregate"]["any_needs_review"]
 
     hypotheses: Dict[Tuple[Tuple[str, str], ...], int] = {}
+    vote_label_sets: List[set[Tuple[str, str]]] = []
+    na_vote_count = 0
+    taxonomy_gap_signal_count = 0
     for v in votes:
         rows = [ClassificationRow(**r) for r in v["rows"]]
         key = _canonical_rows(rows)
         hypotheses[key] = hypotheses.get(key, 0) + 1
+        label_set = set(key)
+        vote_label_sets.append(label_set)
+        if any(
+            row.module.strip().lower() == "n/a" or row.operation.strip().lower() == "n/a"
+            for row in rows
+        ):
+            na_vote_count += 1
+        issues = v.get("issues", [])
+        if any(
+            "taxonomy_gap" in str(issue).lower()
+            or "taxonomia" in str(issue).lower()
+            or "lacuna" in str(issue).lower()
+            for issue in issues
+        ):
+            taxonomy_gap_signal_count += 1
 
     total_votes = max(len(votes), 1)
     majority_votes = max(hypotheses.values()) if hypotheses else 0
     consensus_ratio = majority_votes / total_votes
     disagreement_rate = 1.0 - consensus_ratio
+    label_overlap = _avg_pairwise_jaccard(vote_label_sets)
 
     if len(hypotheses) <= 1:
         normalized_entropy = 0.0
@@ -83,8 +119,29 @@ def _assess_uncertainty(committee_result: Dict[str, Any], medium_threshold: floa
         normalized_entropy = entropy / math.log2(len(hypotheses))
 
     confidence_risk = 1.0 - avg_conf
+    entropy_risk = normalized_entropy
+    na_ratio = na_vote_count / total_votes
+    taxonomy_gap_ratio = taxonomy_gap_signal_count / total_votes
+    na_gap_penalty = min(1.0, (0.70 * na_ratio) + (0.30 * taxonomy_gap_ratio))
+
+    if disagreement_rate == 0:
+        disagreement_level = "none"
+        disagreement_risk = 0.0
+    elif disagreement_rate < 0.34 and label_overlap >= 0.50:
+        disagreement_level = "light"
+        disagreement_risk = disagreement_rate * 0.55
+    else:
+        disagreement_level = "strong"
+        disagreement_risk = disagreement_rate
+
     review_risk = 1.0 if any_review else 0.0
-    uncertainty_score = (0.50 * confidence_risk) + (0.35 * disagreement_rate) + (0.15 * review_risk)
+    uncertainty_score = (
+        (0.25 * confidence_risk)
+        + (0.20 * entropy_risk)
+        + (0.25 * disagreement_risk)
+        + (0.15 * na_gap_penalty)
+        + (0.15 * review_risk)
+    )
 
     if uncertainty_score >= high_threshold:
         band = "high"
@@ -98,9 +155,16 @@ def _assess_uncertainty(committee_result: Dict[str, Any], medium_threshold: floa
         "band": band,
         "consensus_ratio": round(consensus_ratio, 4),
         "disagreement_rate": round(disagreement_rate, 4),
+        "disagreement_level": disagreement_level,
+        "disagreement_risk": round(disagreement_risk, 4),
         "hypothesis_count": len(hypotheses),
+        "label_overlap": round(label_overlap, 4),
         "normalized_entropy": round(normalized_entropy, 4),
         "confidence_risk": round(confidence_risk, 4),
+        "entropy_risk": round(entropy_risk, 4),
+        "na_gap_penalty": round(na_gap_penalty, 4),
+        "na_ratio": round(na_ratio, 4),
+        "taxonomy_gap_ratio": round(taxonomy_gap_ratio, 4),
         "review_risk": round(review_risk, 4),
     }
 
