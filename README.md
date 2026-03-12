@@ -8,7 +8,7 @@ O fluxo combina comite de modelos, arbitragem, rerun para incerteza media e revi
 - Politica de incerteza: calcula risco, consenso e divergencia entre modelos.
 - Escalonamento humano: quando ha risco alto/consenso baixo, a revisao humana acontece no terminal.
 - Evolucao de taxonomia: o revisor pode registrar feedback de taxonomia durante a revisao.
-- Taxonomia externa: carregada de arquivo JSON versionavel (nao hardcoded).
+- Taxonomia externa: carregada de arquivo JSON versionavel.
 
 ## Estrutura
 - `run.py`: CLI principal (classificacao e modo somente revisor).
@@ -48,6 +48,7 @@ TAXONOMY_PATH=config/taxonomy.json
 UNCERTAINTY_MAX_RERUNS=1
 UNCERTAINTY_MEDIUM_THRESHOLD=0.33
 UNCERTAINTY_HIGH_THRESHOLD=0.66
+PROVIDER_TIMEOUT_SECONDS=60
 
 # Human-in-the-loop
 HUMAN_REVIEW_ENABLED=true
@@ -91,11 +92,23 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
    - nivel de desacordo (`none`, `light`, `strong`) em vez de desacordo binario;
    - overlap medio de rotulos entre votos (`label_overlap`);
    - penalidade especifica para `n/a` e sinais de lacuna taxonomica.
+   - composicao do score:
+     - `0.25 * confidence_risk`
+     - `0.20 * entropy_risk`
+     - `0.25 * disagreement_risk`
+     - `0.15 * na_gap_penalty`
+     - `0.15 * review_risk`
 3. Se banda `medium`, reroda (ate `UNCERTAINTY_MAX_RERUNS`) com instrucao mais conservadora.
 4. Arbitra resultado final.
 5. Guardrails:
    - `high`: forca `needs_human_review`
-   - `medium` + consenso baixo: forca `needs_human_review`
+   - `medium` + consenso baixo (`consensus_ratio < 0.67`): forca `needs_human_review`
+   - falha de provedores (`failed >= 2` ou sem sucesso efetivo): forca `needs_human_review`
+
+## Arbitragem
+- O arbitro e escolhido automaticamente:
+  - se `DEEPSEEK_BASE_URL` estiver configurado, Deepseek e usado como arbitro;
+  - caso contrario, o primeiro provedor ativo da lista e usado.
 
 ## Revisao humana no CLI
 Quando ativada, a tela `HUMAN REVIEW` permite:
@@ -113,8 +126,17 @@ Cada item em `runs/results.jsonl` passa a ter `review_status`:
 - `taxonomy_gap`
 - `needs_rewrite`
 
+Campos de rastreabilidade gravados por item:
+- `story_id`
+- `run_id`
+- `taxonomy_version`
+- `prompt_version`
+- `policy_version`
+
 No modo `--review-only`, o arquivo `runs/results.jsonl` e atualizado apos cada revisao,
 evitando que item ja revisado volte a aparecer como pendente por falta de persistencia.
+No carregamento de JSONL, linhas invalidas sao ignoradas silenciosamente.
+Ao abrir `--review-only`, registros legados podem ser normalizados com defaults (ex.: `story_id`, `run_id`, `prompt_version`, `policy_version`, `taxonomy_version`).
 
 ## Arquivos de saida
 - `runs/results.jsonl`: execucoes completas (votos, incerteza, final, revisao humana).
@@ -134,6 +156,7 @@ evitando que item ja revisado volte a aparecer como pendente por falta de persis
 ```
 
 ## Observacoes
+- E necessario configurar ao menos um provedor valido (`OPENAI_API_KEY` ou `GEMINI_API_KEY` ou `DEEPSEEK_BASE_URL`).
 - Se nenhum provedor estiver configurado, a execucao encerra com aviso.
 - As respostas dos modelos sao validadas por Pydantic.
 - Respostas com cercas markdown sao limpas nos providers antes da validacao.
