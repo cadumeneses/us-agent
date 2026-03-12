@@ -24,6 +24,8 @@ ALLOWED_REVIEW_STATUSES = {
     "needs_rewrite",
 }
 
+NOT_COVERED_ROW = {"module": "n/a", "operation": "n/a"}
+
 
 def normalize_user_story(user_story: str) -> str:
     return " ".join((user_story or "").split())
@@ -98,6 +100,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--project", default=None, help="Project name.")
     parser.add_argument("--reviewer", default=None, help="Reviewer name.")
     parser.add_argument("--stories", default=None, help="User stories separated by ';'.")
+    parser.add_argument(
+        "--classify-only",
+        action="store_true",
+        help="Classify a batch without waiting for human review. Escalated items are finalized as not covered.",
+    )
     parser.add_argument("--review-only", action="store_true", help="Open reviewer-only mode for existing results.")
     parser.add_argument("--results-path", default="runs/results.jsonl", help="Path to classification results JSONL.")
     parser.add_argument(
@@ -188,6 +195,27 @@ def append_taxonomy_feedback_if_any(result: dict, project: str):
     append_jsonl("runs/taxonomy_feedback.jsonl", feedback_record)
 
 
+def finalize_classification_without_review(result: dict) -> dict:
+    final = result.setdefault("final", {})
+    if final.get("decision") != "needs_human_review":
+        return result
+
+    final["final_rows"] = [dict(NOT_COVERED_ROW)]
+    final["decision"] = "accept"
+    final["action"] = "none"
+    final["why"] = "Auto-finalized in classify-only mode as not covered."
+    final["notes_for_human"] = None
+
+    result["classification_mode"] = "classify_only"
+    result["auto_resolution"] = {
+        "kind": "not_covered",
+        "reason": "human_review_skipped",
+        "resolved_at": datetime.now(timezone.utc).isoformat(),
+    }
+    result["review_status"] = "accepted_auto"
+    return result
+
+
 def run_reviewer_only_mode(reviewer: str, taxonomy_text: str, results_path: str, reopen_story_ids: set[str]):
     records = load_jsonl(results_path)
     if not records:
@@ -248,8 +276,6 @@ def run_reviewer_only_mode(reviewer: str, taxonomy_text: str, results_path: str,
 def main():
     load_dotenv()
     args = parse_args()
-
-    reviewer = args.reviewer or input("Revisor humano (enter para 'human_reviewer'): ").strip() or "human_reviewer"
     taxonomy_path = os.getenv("TAXONOMY_PATH", "config/taxonomy.json")
     try:
         taxonomy_version, taxonomy = load_taxonomy_with_version(taxonomy_path)
@@ -259,6 +285,7 @@ def main():
     print(f"Taxonomia carregada: path={taxonomy_path} version={taxonomy_version}")
     taxonomy_text = taxonomy_to_prompt_text(taxonomy)
     if args.review_only:
+        reviewer = args.reviewer or input("Revisor humano (enter para 'human_reviewer'): ").strip() or "human_reviewer"
         run_reviewer_only_mode(
             reviewer=reviewer,
             taxonomy_text=taxonomy_text,
@@ -266,6 +293,11 @@ def main():
             reopen_story_ids=parse_story_ids(args.reopen_story_ids),
         )
         return
+
+    reviewer = args.reviewer
+    if not args.classify_only:
+        reviewer = reviewer or input("Revisor humano (enter para 'human_reviewer'): ").strip() or "human_reviewer"
+
     project = args.project or input("Nome do projeto (enter para 'n/a'): ").strip() or "n/a"
 
     if args.stories:
@@ -340,13 +372,16 @@ def main():
             medium_threshold=medium_threshold,
             high_threshold=high_threshold,
         )
-        final = maybe_apply_human_review(
-            result=final,
-            taxonomy_text=taxonomy_text,
-            enabled=human_review_enabled,
-            only_on_escalation=review_only_on_escalation,
-            reviewer=reviewer,
-        )
+        if args.classify_only:
+            final = finalize_classification_without_review(final)
+        else:
+            final = maybe_apply_human_review(
+                result=final,
+                taxonomy_text=taxonomy_text,
+                enabled=human_review_enabled,
+                only_on_escalation=review_only_on_escalation,
+                reviewer=reviewer or "human_reviewer",
+            )
         final["project"] = project
         final["taxonomy_path"] = taxonomy_path
         final["story_id"] = generate_story_id(us)

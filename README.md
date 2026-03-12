@@ -68,7 +68,13 @@ Pergunta projeto, revisor e US separadas por `;`.
 py run.py --project P01 --reviewer ana --stories "US1;US2;US3"
 ```
 
-### 3) Modo somente revisor
+### 3) Classificacao em lote sem espera por revisao
+```bash
+py run.py --project P01 --stories "US1;US2;US3" --classify-only
+```
+Nesse modo, o CLI nao abre `HUMAN REVIEW`. Qualquer item que seria escalado para revisao humana e finalizado automaticamente como `not covered` (`module='n/a'`, `operation='n/a'`).
+
+### 4) Modo somente revisor
 ```bash
 py run.py --review-only --reviewer ana
 ```
@@ -81,6 +87,7 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
 - `--project`: nome do projeto.
 - `--reviewer`: nome do revisor humano.
 - `--stories`: US separadas por `;`.
+- `--classify-only`: classifica o lote sem bloquear por revisao humana; itens escalados sao gravados como `not covered`.
 - `--review-only`: abre fila de revisao para resultados ja classificados.
 - `--results-path`: caminho do JSONL a revisar no modo `--review-only`.
 - `--reopen-story-ids`: reabre `story_id`(s) ja revisados para `pending_review` (use `,` ou `;`).
