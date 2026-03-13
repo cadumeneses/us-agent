@@ -95,11 +95,30 @@ def read_user_stories() -> list[str]:
     return [s.strip() for s in raw.split(";") if s.strip()]
 
 
+def parse_user_stories(raw: str) -> list[str]:
+    if not raw:
+        return []
+    normalized = raw.replace("\r\n", "\n")
+    if ";" in normalized:
+        return [s.strip() for s in normalized.split(";") if s.strip()]
+    return [line.strip() for line in normalized.split("\n") if line.strip()]
+
+
+def load_user_stories_from_file(path: str) -> list[str]:
+    with open(path, "r", encoding="utf-8") as f:
+        return parse_user_stories(f.read())
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="WIS classifier with uncertainty-aware human review.")
     parser.add_argument("--project", default=None, help="Project name.")
     parser.add_argument("--reviewer", default=None, help="Reviewer name.")
     parser.add_argument("--stories", default=None, help="User stories separated by ';'.")
+    parser.add_argument(
+        "--stories-file",
+        default=None,
+        help="Path to a text file containing user stories separated by ';' or one per line.",
+    )
     parser.add_argument(
         "--classify-only",
         action="store_true",
@@ -301,7 +320,13 @@ def main():
     project = args.project or input("Nome do projeto (enter para 'n/a'): ").strip() or "n/a"
 
     if args.stories:
-        user_stories = [s.strip() for s in args.stories.split(";") if s.strip()]
+        user_stories = parse_user_stories(args.stories)
+    elif args.stories_file:
+        try:
+            user_stories = load_user_stories_from_file(args.stories_file)
+        except OSError as e:
+            print(f"Erro ao ler arquivo de US ({args.stories_file}): {e}")
+            return
     else:
         user_stories = read_user_stories()
     if not user_stories:

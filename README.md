@@ -74,6 +74,12 @@ py run.py --project P01 --stories "US1;US2;US3" --classify-only
 ```
 Nesse modo, o CLI nao abre `HUMAN REVIEW`. Qualquer item que seria escalado para revisao humana e finalizado automaticamente como `not covered` (`module='n/a'`, `operation='n/a'`).
 
+Tambem e possivel carregar o lote de um arquivo texto:
+```powershell
+py run.py --project P01 --classify-only --stories-file .\lote.txt
+```
+O arquivo pode conter US separadas por `;` ou uma por linha.
+
 ### 4) Modo somente revisor
 ```bash
 py run.py --review-only --reviewer ana
@@ -87,6 +93,7 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
 - `--project`: nome do projeto.
 - `--reviewer`: nome do revisor humano.
 - `--stories`: US separadas por `;`.
+- `--stories-file`: arquivo texto com US separadas por `;` ou uma por linha.
 - `--classify-only`: classifica o lote sem bloquear por revisao humana; itens escalados sao gravados como `not covered`.
 - `--review-only`: abre fila de revisao para resultados ja classificados.
 - `--results-path`: caminho do JSONL a revisar no modo `--review-only`.
