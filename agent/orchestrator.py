@@ -286,6 +286,67 @@ def arbitrate_if_needed(
     return committee_result
 
 
+def _select_committee_majority(committee_result: Dict[str, Any]) -> Dict[str, Any]:
+    votes = committee_result.get("votes", [])
+    if not votes:
+        return {
+            "final_rows": [{"module": "n/a", "operation": "n/a"}],
+            "final_confidence": 0.0,
+            "decision": "needs_human_review",
+            "disagreement_cause": "model_instability",
+            "why": "Nenhum provider classificou com sucesso.",
+            "action": "ask_human",
+            "notes_for_human": "Sem votos validos do comite.",
+        }
+
+    grouped: Dict[Tuple[Tuple[str, str], ...], Dict[str, Any]] = {}
+    for vote in votes:
+        rows = [ClassificationRow(**row) for row in vote.get("rows", [])]
+        key = _canonical_rows(rows)
+        entry = grouped.setdefault(
+            key,
+            {
+                "count": 0,
+                "rows": [row.model_dump() for row in rows],
+                "confidences": [],
+                "needs_review": [],
+                "issues": [],
+            },
+        )
+        entry["count"] += 1
+        entry["confidences"].append(vote.get("confidence", 0.0))
+        entry["needs_review"].append(vote.get("needs_review", False))
+        entry["issues"].extend(vote.get("issues", []))
+
+    best = max(
+        grouped.values(),
+        key=lambda item: (
+            item["count"],
+            sum(item["confidences"]) / len(item["confidences"]) if item["confidences"] else 0.0,
+        ),
+    )
+    avg_confidence = sum(best["confidences"]) / len(best["confidences"]) if best["confidences"] else 0.0
+    needs_review = any(best["needs_review"])
+    has_na = any(
+        row["module"].strip().lower() == "n/a" or row["operation"].strip().lower() == "n/a"
+        for row in best["rows"]
+    )
+
+    disagreement_cause = "model_instability"
+    if has_na:
+        disagreement_cause = "taxonomy_gap"
+
+    return {
+        "final_rows": best["rows"] or [{"module": "n/a", "operation": "n/a"}],
+        "final_confidence": round(avg_confidence, 2),
+        "decision": "needs_human_review" if needs_review else "accept",
+        "disagreement_cause": disagreement_cause,
+        "why": "Resultado escolhido por maioria simples do comite, sem arbitro.",
+        "action": "ask_human" if needs_review else "none",
+        "notes_for_human": None if not best["issues"] else "; ".join(best["issues"][:3]),
+    }
+
+
 def _force_human_review_due_provider_failures(result: Dict[str, Any]) -> None:
     failed = result.get("provider_health", {}).get("failed", 0)
     successful = result.get("provider_health", {}).get("successful", 0)
@@ -405,6 +466,107 @@ def decide_under_uncertainty(
         result["final"]["disagreement_cause"] = "model_instability"
         result["final"]["notes_for_human"] = (
             "Incerteza média com consenso insuficiente entre modelos; decisão mantida para triagem humana."
+        )
+
+    return result
+
+
+def decide_without_arbiter(
+    user_story: str,
+    taxonomy: str,
+    providers: List[Tuple[str, Any]],
+    provider_timeout_seconds: float,
+    max_reruns: int = 1,
+    medium_threshold: float = 0.33,
+    high_threshold: float = 0.66,
+) -> Dict[str, Any]:
+    attempts: List[Dict[str, Any]] = []
+    reruns_used = 0
+
+    committee = committee_classify(
+        user_story=user_story,
+        taxonomy=taxonomy,
+        providers=providers,
+        timeout_seconds=provider_timeout_seconds,
+    )
+    uncertainty = _assess_uncertainty(committee, medium_threshold=medium_threshold, high_threshold=high_threshold)
+
+    attempts.append(
+        {
+            "attempt": 1,
+            "aggregate": committee["aggregate"],
+            "provider_health": committee["provider_health"],
+            "provider_statuses": committee["provider_statuses"],
+            "uncertainty": uncertainty,
+            "reason": "initial",
+        }
+    )
+
+    while uncertainty["band"] == "medium" and reruns_used < max_reruns:
+        reruns_used += 1
+        committee_rerun = committee_classify(
+            user_story=user_story,
+            taxonomy=taxonomy,
+            providers=providers,
+            timeout_seconds=provider_timeout_seconds,
+            system_hint=(
+                "Há divergência entre modelos. Seja conservador, não infira além do texto e "
+                "marque needs_review=true em qualquer ambiguidade."
+            ),
+        )
+        rerun_uncertainty = _assess_uncertainty(
+            committee_rerun, medium_threshold=medium_threshold, high_threshold=high_threshold
+        )
+        attempts.append(
+            {
+                "attempt": reruns_used + 1,
+                "aggregate": committee_rerun["aggregate"],
+                "provider_health": committee_rerun["provider_health"],
+                "provider_statuses": committee_rerun["provider_statuses"],
+                "uncertainty": rerun_uncertainty,
+                "reason": "medium_uncertainty_rerun",
+            }
+        )
+
+        current_score = (uncertainty["uncertainty_score"], -committee["aggregate"]["avg_confidence"])
+        rerun_score = (rerun_uncertainty["uncertainty_score"], -committee_rerun["aggregate"]["avg_confidence"])
+        if rerun_score < current_score:
+            committee = committee_rerun
+            uncertainty = rerun_uncertainty
+        else:
+            break
+
+    result = committee
+    result["arbiter_status"] = {"status": "skipped", "error": None}
+    result["arbiter_validation"] = {"valid": True, "invalid_rows": []}
+    result["final"] = _select_committee_majority(result)
+    result["uncertainty"] = uncertainty
+    result["attempts"] = attempts
+    result["policy"] = {
+        "policy_version": f"{POLICY_VERSION}_no_arbiter",
+        "max_reruns": max_reruns,
+        "reruns_used": reruns_used,
+        "medium_threshold": medium_threshold,
+        "high_threshold": high_threshold,
+        "provider_timeout_seconds": provider_timeout_seconds,
+    }
+
+    _force_human_review_due_provider_failures(result)
+
+    if uncertainty["band"] == "high":
+        result["final"]["decision"] = "needs_human_review"
+        result["final"]["action"] = "ask_human"
+        result["final"]["why"] = (
+            f"Risco alto ({uncertainty['uncertainty_score']}) sem arbitragem; revisão humana obrigatória."
+        )
+        result["final"]["disagreement_cause"] = "model_instability"
+        result["final"]["notes_for_human"] = "Comitê sem árbitro e divergência alta entre classificadores."
+    elif uncertainty["band"] == "medium" and uncertainty["consensus_ratio"] < 0.67:
+        result["final"]["decision"] = "needs_human_review"
+        result["final"]["action"] = "ask_human"
+        result["final"]["disagreement_cause"] = "model_instability"
+        result["final"]["notes_for_human"] = (
+            "Comitê sem árbitro e consenso insuficiente entre classificadores."
         )
 
     return result

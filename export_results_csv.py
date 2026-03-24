@@ -93,6 +93,9 @@ def export_csv(items: list[dict], output_path: Path) -> int:
         "deepseek_rows",
         "deepseek_confidence",
         "deepseek_needs_review",
+        "groq_rows",
+        "groq_confidence",
+        "groq_needs_review",
     ]
 
     with output_path.open("w", encoding="utf-8", newline="") as handle:
@@ -137,6 +140,9 @@ def export_csv(items: list[dict], output_path: Path) -> int:
                     "deepseek_rows": canonical_rows(votes.get("deepseek", {}).get("rows", [])),
                     "deepseek_confidence": votes.get("deepseek", {}).get("confidence"),
                     "deepseek_needs_review": votes.get("deepseek", {}).get("needs_review"),
+                    "groq_rows": canonical_rows(votes.get("groq", {}).get("rows", [])),
+                    "groq_confidence": votes.get("groq", {}).get("confidence"),
+                    "groq_needs_review": votes.get("groq", {}).get("needs_review"),
                 }
             )
             row_count += 1

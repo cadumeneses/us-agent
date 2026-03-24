@@ -365,8 +365,23 @@ def main():
     else:
         print("Aviso: DEEPSEEK_BASE_URL não definido; Deepseek será ignorado.")
 
+    # Groq via HTTP (formato OpenAI-like)
+    groq = HttpJSONProvider(
+        base_url=os.getenv("GROQ_BASE_URL", ""),
+        api_key=os.getenv("GROQ_API_KEY", ""),
+        model=os.getenv("GROQ_MODEL", "llama-3.1-8b-instant"),
+        name="groq",
+    )
+    if groq.base_url:
+        providers.append(("groq", groq))
+    else:
+        print("Aviso: GROQ_BASE_URL não definido; Groq será ignorado.")
+
     if not providers:
-        print("Nenhum provedor configurado. Defina GEMINI_API_KEY ou DEEPSEEK_BASE_URL no .env.")
+        print(
+            "Nenhum provedor configurado. Defina OPENAI_API_KEY, GEMINI_API_KEY, "
+            "DEEPSEEK_BASE_URL ou GROQ_BASE_URL no .env."
+        )
         return
 
     arbiter_provider = deepseek if deepseek.base_url else providers[0][1]

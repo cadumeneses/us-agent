@@ -124,6 +124,15 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
   - se `DEEPSEEK_BASE_URL` estiver configurado, Deepseek e usado como arbitro;
   - caso contrario, o primeiro provedor ativo da lista e usado.
 
+## CLI sem arbitro
+- Use `run_committee.py` quando quiser que todos os modelos apenas classifiquem, sem prompt de arbitro.
+- O resultado final e escolhido pela maioria simples do comite, mantendo a mesma politica de incerteza e rerun.
+
+Exemplo:
+```powershell
+py run_committee.py --project P01 --stories-file .\lote.txt --classify-only
+```
+
 ## Revisao humana no CLI
 Quando ativada, a tela `HUMAN REVIEW` permite:
 - aceitar decisao automatica;
