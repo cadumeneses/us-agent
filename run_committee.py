@@ -16,9 +16,8 @@ from run import (
     append_taxonomy_feedback_if_any,
     finalize_classification_without_review,
     generate_story_id,
-    load_user_stories_from_file,
-    parse_user_stories,
-    read_user_stories,
+    load_project_batches,
+    parse_project_ids,
     stamp_review_status,
 )
 
@@ -26,6 +25,16 @@ from run import (
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="WIS committee-only classifier without arbiter.")
     parser.add_argument("--project", default=None, help="Project name.")
+    parser.add_argument(
+        "--project-ids",
+        default=None,
+        help="Project IDs for batch execution, separated by ',' or ';'. Supports ranges like P01-P10.",
+    )
+    parser.add_argument(
+        "--projects-dir",
+        default="projects",
+        help="Directory containing one file per project (<project_id>.txt). Used with --project-ids.",
+    )
     parser.add_argument("--reviewer", default=None, help="Reviewer name.")
     parser.add_argument("--stories", default=None, help="User stories separated by ';'.")
     parser.add_argument(
@@ -104,22 +113,40 @@ def main() -> None:
     if not args.classify_only:
         reviewer = reviewer or input("Revisor humano (enter para 'human_reviewer'): ").strip() or "human_reviewer"
 
-    project = args.project or input("Nome do projeto (enter para 'n/a'): ").strip() or "n/a"
-
-    if args.stories:
-        user_stories = parse_user_stories(args.stories)
-    elif args.stories_file:
+    project_batches: list[tuple[str, list[str]]]
+    if args.project_ids:
         try:
-            user_stories = load_user_stories_from_file(args.stories_file)
-        except OSError as exc:
-            print(f"Erro ao ler arquivo de US ({args.stories_file}): {exc}")
+            project_batches = load_project_batches(
+                project_ids=parse_project_ids(args.project_ids),
+                projects_dir=args.projects_dir,
+            )
+        except (OSError, ValueError) as exc:
+            print(f"Erro ao carregar lote de projetos: {exc}")
             return
     else:
-        user_stories = read_user_stories()
+        project = args.project or input("Nome do projeto (enter para 'n/a'): ").strip() or "n/a"
 
-    if not user_stories:
-        print("Nenhuma US informada. Encerrando.")
-        return
+        if args.stories:
+            from run import parse_user_stories
+
+            user_stories = parse_user_stories(args.stories)
+        elif args.stories_file:
+            try:
+                from run import load_user_stories_from_file
+
+                user_stories = load_user_stories_from_file(args.stories_file)
+            except OSError as exc:
+                print(f"Erro ao ler arquivo de US ({args.stories_file}): {exc}")
+                return
+        else:
+            from run import read_user_stories
+
+            user_stories = read_user_stories()
+
+        if not user_stories:
+            print("Nenhuma US informada. Encerrando.")
+            return
+        project_batches = [(project, user_stories)]
 
     providers = build_providers()
     if not providers:
@@ -144,44 +171,45 @@ def main() -> None:
     }
     run_id = f"run_{uuid.uuid4().hex}"
 
-    for us in user_stories:
-        final = decide_without_arbiter(
-            user_story=us,
-            taxonomy=taxonomy_text,
-            providers=providers,
-            provider_timeout_seconds=provider_timeout_seconds,
-            max_reruns=max_reruns,
-            medium_threshold=medium_threshold,
-            high_threshold=high_threshold,
-        )
-        final["committee_mode"] = "no_arbiter"
-        if args.classify_only:
-            final = finalize_classification_without_review(final)
-        else:
-            final = maybe_apply_human_review(
-                result=final,
-                taxonomy_text=taxonomy_text,
-                enabled=human_review_enabled,
-                only_on_escalation=review_only_on_escalation,
-                reviewer=reviewer or "human_reviewer",
+    for project, user_stories in project_batches:
+        for us in user_stories:
+            final = decide_without_arbiter(
+                user_story=us,
+                taxonomy=taxonomy_text,
+                providers=providers,
+                provider_timeout_seconds=provider_timeout_seconds,
+                max_reruns=max_reruns,
+                medium_threshold=medium_threshold,
+                high_threshold=high_threshold,
             )
+            final["committee_mode"] = "no_arbiter"
+            if args.classify_only:
+                final = finalize_classification_without_review(final)
+            else:
+                final = maybe_apply_human_review(
+                    result=final,
+                    taxonomy_text=taxonomy_text,
+                    enabled=human_review_enabled,
+                    only_on_escalation=review_only_on_escalation,
+                    reviewer=reviewer or "human_reviewer",
+                )
 
-        final["project"] = project
-        final["taxonomy_path"] = taxonomy_path
-        final["story_id"] = generate_story_id(us)
-        final["run_id"] = run_id
-        final["taxonomy_version"] = taxonomy_version
-        final["prompt_version"] = PROMPT_VERSION
-        final["policy_version"] = final.get("policy", {}).get("policy_version", f"{POLICY_VERSION}_no_arbiter")
-        stamp_review_status(final)
-        append_jsonl(args.results_path, final)
-        append_taxonomy_feedback_if_any(final, project=project)
-        band = final["uncertainty"]["band"]
-        score = final["uncertainty"]["uncertainty_score"]
-        print(
-            f"[{project}] story_id={final['story_id']} run_id={run_id} review_status={final['review_status']} "
-            f"{us} -> {final['final']} | uncertainty={band} ({score})"
-        )
+            final["project"] = project
+            final["taxonomy_path"] = taxonomy_path
+            final["story_id"] = generate_story_id(us)
+            final["run_id"] = run_id
+            final["taxonomy_version"] = taxonomy_version
+            final["prompt_version"] = PROMPT_VERSION
+            final["policy_version"] = final.get("policy", {}).get("policy_version", f"{POLICY_VERSION}_no_arbiter")
+            stamp_review_status(final)
+            append_jsonl(args.results_path, final)
+            append_taxonomy_feedback_if_any(final, project=project)
+            band = final["uncertainty"]["band"]
+            score = final["uncertainty"]["uncertainty_score"]
+            print(
+                f"[{project}] story_id={final['story_id']} run_id={run_id} review_status={final['review_status']} "
+                f"{us} -> {final['final']} | uncertainty={band} ({score})"
+            )
 
 
 if __name__ == "__main__":

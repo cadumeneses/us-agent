@@ -80,6 +80,18 @@ py run.py --project P01 --classify-only --stories-file .\lote.txt
 ```
 O arquivo pode conter US separadas por `;` ou uma por linha.
 
+Tambem e possivel executar varios projetos em uma unica run, carregando automaticamente os arquivos em `projects/`:
+```powershell
+py run.py --project-ids P01-P10 --projects-dir .\projects --classify-only
+```
+Cada projeto deve existir como `.\projects\P01.txt`, `.\projects\P02.txt`, etc. Todos os itens do lote compartilham o mesmo `run_id`.
+
+Atalho em PowerShell para esse lote:
+```powershell
+.\run_projects_p01_p10.ps1
+```
+Por padrao ele roda com `--classify-only` e depois gera `runs/results.csv`. Use `-InteractiveReview` para permitir revisao humana durante a execucao ou `-CommitteeOnly` para usar `run_committee.py`.
+
 ### 4) Modo somente revisor
 ```bash
 py run.py --review-only --reviewer ana
@@ -91,6 +103,8 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
 
 ## Argumentos CLI
 - `--project`: nome do projeto.
+- `--project-ids`: IDs de projeto para execucao em lote, separados por `,` ou `;` e com suporte a intervalo (`P01-P10`).
+- `--projects-dir`: diretorio com os arquivos `<project_id>.txt` usados por `--project-ids`.
 - `--reviewer`: nome do revisor humano.
 - `--stories`: US separadas por `;`.
 - `--stories-file`: arquivo texto com US separadas por `;` ou uma por linha.
