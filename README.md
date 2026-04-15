@@ -12,12 +12,14 @@ O fluxo combina comite de modelos, arbitragem, rerun para incerteza media e revi
 
 ## Estrutura
 - `run.py`: CLI principal (classificacao e modo somente revisor).
+- `run_committee.py`: CLI alternativa sem arbitro, com decisao por maioria simples.
 - `agent/orchestrator.py`: comite, metrica de incerteza, rerun e guardrails de escalonamento.
 - `agent/human_review.py`: fluxo interativo de revisao humana e captura de feedback.
 - `agent/taxonomy.py`: carregamento/validacao da taxonomia e conversao para prompt.
-- `agent/providers/`: provedores LLM (`openai`, `gemini`, `deepseek` via HTTP OpenAI-like).
+- `agent/providers/`: provedores LLM (`openai`, `gemini`, `deepseek` e `groq` via HTTP OpenAI-like).
 - `agent/schemas.py`: schemas Pydantic de entrada/saida.
 - `agent/storage.py`: escrita em JSONL.
+- `export_results_csv.py`: exporta `results.jsonl` para CSV.
 - `config/taxonomy.json`: taxonomia WIS versionada.
 
 ## Setup
@@ -40,6 +42,11 @@ GEMINI_MODEL=gemini-2.5-flash
 DEEPSEEK_BASE_URL=https://api.deepseek.com/v1/chat/completions
 DEEPSEEK_API_KEY=...
 DEEPSEEK_MODEL=deepseek-chat
+
+# Groq (API OpenAI-like)
+GROQ_BASE_URL=https://api.groq.com/openai/v1/chat/completions
+GROQ_API_KEY=...
+GROQ_MODEL=llama-3.1-8b-instant
 
 # Taxonomia
 TAXONOMY_PATH=config/taxonomy.json
@@ -110,7 +117,7 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
 - `--stories-file`: arquivo texto com US separadas por `;` ou uma por linha.
 - `--classify-only`: classifica o lote sem bloquear por revisao humana; itens escalados sao gravados como `not covered`.
 - `--review-only`: abre fila de revisao para resultados ja classificados.
-- `--results-path`: caminho do JSONL a revisar no modo `--review-only`.
+- `--results-path`: caminho do JSONL de resultados; na classificacao define onde gravar e no modo `--review-only` define qual arquivo revisar.
 - `--reopen-story-ids`: reabre `story_id`(s) ja revisados para `pending_review` (use `,` ou `;`).
 
 ## Politica de decisao sob incerteza
@@ -179,6 +186,12 @@ Ao abrir `--review-only`, registros legados podem ser normalizados com defaults 
 - `runs/results.jsonl`: execucoes completas (votos, incerteza, final, revisao humana).
 - `runs/review_decisions.jsonl`: decisoes tomadas no modo `--review-only`.
 - `runs/taxonomy_feedback.jsonl`: backlog de propostas de evolucao da taxonomia.
+- `runs/results.csv`: exportacao tabular opcional gerada por `export_results_csv.py` ou pelo atalho `run_projects_p01_p10.ps1`.
+
+Exportacao manual:
+```powershell
+py .\export_results_csv.py --input .\runs\results.jsonl --output .\runs\results.csv
+```
 
 ## Taxonomia
 - Origem: `config/taxonomy.json`.
@@ -193,7 +206,8 @@ Ao abrir `--review-only`, registros legados podem ser normalizados com defaults 
 ```
 
 ## Observacoes
-- E necessario configurar ao menos um provedor valido (`OPENAI_API_KEY` ou `GEMINI_API_KEY` ou `DEEPSEEK_BASE_URL`).
+- E necessario configurar ao menos um provedor valido (`OPENAI_API_KEY`, `GEMINI_API_KEY`, `DEEPSEEK_BASE_URL` ou `GROQ_BASE_URL`).
 - Se nenhum provedor estiver configurado, a execucao encerra com aviso.
 - As respostas dos modelos sao validadas por Pydantic.
 - Respostas com cercas markdown sao limpas nos providers antes da validacao.
+- O status `reviewed` pode aparecer em registros legados/normalizados, mas o fluxo atual tende a persistir `accepted_auto`, `reclassified`, `pending_review`, `taxonomy_gap` ou `needs_rewrite`.
