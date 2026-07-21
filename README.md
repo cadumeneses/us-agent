@@ -1,5 +1,18 @@
 ﻿# WIS User Story Classifier
 
+## Aplicação web (MVP)
+
+O repositório inclui uma plataforma responsiva com React + TypeScript no frontend e Node.js + Express no backend. Dashboard e histórico usam `runs/results.jsonl`; a taxonomia usa `config/taxonomy.json`.
+
+```powershell
+npm.cmd install
+npm.cmd run dev
+```
+
+Abra `http://localhost:5173`. A API responde em `http://localhost:3333/api`. Para validar: `npm.cmd run build` e `npm.cmd test`.
+
+## Motor de classificação
+
 Ferramenta para classificar User Stories (US) na taxonomia WIS com foco em **decisao sob incerteza**.
 O fluxo combina comite de modelos, arbitragem, rerun para incerteza media e revisao humana no proprio CLI.
 

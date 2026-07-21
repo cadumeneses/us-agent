@@ -1,0 +1,11 @@
+{
+  "name": "us-agent-platform",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "concurrently -n API,WEB -c cyan,blue \"npm run dev -w @us-agent/api\" \"npm run dev -w @us-agent/web\"",
+    "build": "npm run build -w @us-agent/api && npm run build -w @us-agent/web",
+    "test": "npm run test -w @us-agent/api && npm run test -w @us-agent/web"
+  },
+  "devDependencies": { "concurrently": "^9.2.0" }
+}

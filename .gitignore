@@ -5,6 +5,28 @@ __pycache__/
 .venv/
 env/
 .env
+# Node / frontend
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.vite/
+**/.vite/
+*.tsbuildinfo
+coverage/
+**/coverage/
+.eslintcache
+
+# Local environment and IDE metadata
+.env.*
+!.env.example
+.idea/
+.vscode/
+
+# Runtime and test artifacts
+tmp/
+temp/
+*.tmp
 *.log
 *.sqlite
 *.db
