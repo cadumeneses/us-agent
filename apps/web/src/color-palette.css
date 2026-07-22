@@ -1,0 +1,80 @@
+:root {
+  /* Marca */
+  --color-brand-50: #f7f9ff;
+  --color-brand-100: #eef4ff;
+  --color-brand-150: #eaf1ff;
+  --color-brand-200: #dce7ff;
+  --color-brand-300: #98b8f8;
+  --color-brand-400: #6696f2;
+  --color-brand-500: #2563eb;
+  --color-brand-600: #275cc6;
+  --color-brand-650: #245dc4;
+  --color-brand-700: #2451b8;
+  --color-brand-750: #315baf;
+
+  /* Neutros */
+  --color-white: #fff;
+  --color-neutral-25: #fafbfd;
+  --color-neutral-50: #f6f8fb;
+  --color-neutral-75: #f5f7fa;
+  --color-neutral-100: #f4f7fb;
+  --color-neutral-125: #f3f7ff;
+  --color-neutral-150: #eef1f5;
+  --color-neutral-175: #edf0f5;
+  --color-neutral-180: #edf0f4;
+  --color-neutral-200: #e5e9f0;
+  --color-neutral-210: #e4e9f2;
+  --color-neutral-220: #e2e7ef;
+  --color-neutral-230: #e1e7f0;
+  --color-neutral-240: #e1e6ef;
+  --color-neutral-250: #dfe6f0;
+  --color-neutral-260: #dce2ed;
+  --color-neutral-270: #dce2ea;
+  --color-neutral-280: #d9e0ea;
+  --color-neutral-400: #aab5c8;
+  --color-neutral-420: #9aa8c0;
+  --color-neutral-430: #9aa4b4;
+  --color-neutral-450: #8d98a9;
+  --color-neutral-460: #8a95a6;
+  --color-neutral-470: #8894a8;
+  --color-neutral-480: #8792a5;
+  --color-neutral-490: #8591a4;
+  --color-neutral-500: #8490a5;
+  --color-neutral-510: #8390a7;
+  --color-neutral-520: #7e8a9e;
+  --color-neutral-530: #7b8799;
+  --color-neutral-540: #778399;
+  --color-neutral-550: #758198;
+  --color-neutral-560: #718096;
+  --color-neutral-600: #59657a;
+  --color-neutral-610: #5c687b;
+  --color-neutral-620: #58708f;
+  --color-neutral-700: #3e4a5e;
+  --color-neutral-720: #30405a;
+  --color-neutral-750: #273247;
+  --color-neutral-800: #182238;
+  --color-neutral-820: #172238;
+  --color-neutral-850: #111b2e;
+  --color-neutral-900: #101a30;
+  --color-neutral-inverse: #e8edf7;
+  --color-neutral-divider-dark: #263149;
+
+  /* Destaques e estados */
+  --color-violet-500: #7c3aed;
+  --color-indigo-500: #4f46e5;
+  --color-cyan-500: #06b6d4;
+  --color-slate-500: #64748b;
+  --color-success-50: #e5f8f1;
+  --color-success-500: #10b981;
+  --color-success-700: #09815e;
+  --color-warning-50: #fff1d6;
+  --color-warning-500: #f59e0b;
+  --color-warning-700: #ad6700;
+  --color-danger-600: #b42318;
+  --color-indigo-50: #eef2ff;
+
+  /* Transparências */
+  --color-brand-focus: #2563eb13;
+  --color-brand-shadow: #2563eb28;
+  --color-card-shadow: #18223808;
+}

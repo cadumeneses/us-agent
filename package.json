@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "concurrently -n API,WEB -c cyan,blue \"npm run dev -w @us-agent/api\" \"npm run dev -w @us-agent/web\"",
     "build": "npm run build -w @us-agent/api && npm run build -w @us-agent/web",
-    "test": "npm run test -w @us-agent/api && npm run test -w @us-agent/web"
+    "test": "npm run test -w @us-agent/api && npm run test -w @us-agent/web",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:migrate": "npm run db:migrate -w @us-agent/api",
+    "db:import": "npm run db:import -w @us-agent/api"
   },
   "devDependencies": { "concurrently": "^9.2.0" }
 }

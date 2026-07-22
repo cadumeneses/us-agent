@@ -1,6 +1,7 @@
 import argparse
 import os
 import uuid
+import requests
 
 from dotenv import load_dotenv
 
@@ -10,10 +11,9 @@ from agent.prompts import PROMPT_VERSION
 from agent.providers.gemini_provider import GeminiProvider
 from agent.providers.http_provider import HttpJSONProvider
 from agent.providers.openai_provider import OpenAIProvider
-from agent.storage import append_jsonl
-from agent.taxonomy import load_taxonomy_with_version, taxonomy_to_prompt_text
+from agent.api_client import AgentApiClient
+from agent.taxonomy import taxonomy_to_prompt_text
 from run import (
-    append_taxonomy_feedback_if_any,
     finalize_classification_without_review,
     generate_story_id,
     load_project_batches,
@@ -46,11 +46,6 @@ def parse_args() -> argparse.Namespace:
         "--classify-only",
         action="store_true",
         help="Classify a batch without waiting for human review. Escalated items are finalized as not covered.",
-    )
-    parser.add_argument(
-        "--results-path",
-        default="runs/results.jsonl",
-        help="Path to classification results JSONL.",
     )
     return parser.parse_args()
 
@@ -99,14 +94,14 @@ def build_providers() -> list[tuple[str, object]]:
 def main() -> None:
     load_dotenv()
     args = parse_args()
-    taxonomy_path = os.getenv("TAXONOMY_PATH", "config/taxonomy.json")
+    api_client = AgentApiClient()
     try:
-        taxonomy_version, taxonomy = load_taxonomy_with_version(taxonomy_path)
-    except (FileNotFoundError, ValueError) as exc:
-        print(f"Erro ao carregar taxonomia: {exc}")
+        taxonomy_version, taxonomy = api_client.load_taxonomy()
+    except (ValueError, requests.RequestException) as exc:
+        print(f"Erro ao carregar taxonomia da API: {exc}")
         return
 
-    print(f"Taxonomia carregada: path={taxonomy_path} version={taxonomy_version}")
+    print(f"Taxonomia SQL carregada pela API: version={taxonomy_version}")
     taxonomy_text = taxonomy_to_prompt_text(taxonomy)
 
     reviewer = args.reviewer
@@ -195,19 +190,17 @@ def main() -> None:
                 )
 
             final["project"] = project
-            final["taxonomy_path"] = taxonomy_path
             final["story_id"] = generate_story_id(us)
             final["run_id"] = run_id
             final["taxonomy_version"] = taxonomy_version
             final["prompt_version"] = PROMPT_VERSION
             final["policy_version"] = final.get("policy", {}).get("policy_version", f"{POLICY_VERSION}_no_arbiter")
             stamp_review_status(final)
-            append_jsonl(args.results_path, final)
-            append_taxonomy_feedback_if_any(final, project=project)
+            classification_id = api_client.save_classification(final)
             band = final["uncertainty"]["band"]
             score = final["uncertainty"]["uncertainty_score"]
             print(
-                f"[{project}] story_id={final['story_id']} run_id={run_id} review_status={final['review_status']} "
+                f"[{project}] classification_id={classification_id} story_id={final['story_id']} run_id={run_id} review_status={final['review_status']} "
                 f"{us} -> {final['final']} | uncertainty={band} ({score})"
             )
 

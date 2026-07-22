@@ -2,14 +2,38 @@
 
 ## Aplicação web (MVP)
 
-O repositório inclui uma plataforma responsiva com React + TypeScript no frontend e Node.js + Express no backend. Dashboard e histórico usam `runs/results.jsonl`; a taxonomia usa `config/taxonomy.json`.
+O repositório inclui uma plataforma responsiva com React + TypeScript no frontend, Node.js + Express no backend e PostgreSQL para persistência. Dashboard, histórico e taxonomia da API consultam exclusivamente o banco.
 
 ```powershell
 npm.cmd install
+npm.cmd run db:up
+npm.cmd run db:migrate
+npm.cmd run db:import
 npm.cmd run dev
 ```
 
 Abra `http://localhost:5173`. A API responde em `http://localhost:3333/api`. Para validar: `npm.cmd run build` e `npm.cmd test`.
+
+### PostgreSQL
+
+- `npm.cmd run db:up`: inicia o PostgreSQL local pelo Docker.
+- `npm.cmd run db:migrate`: aplica migrations pendentes de forma idempotente.
+- `npm.cmd run db:import`: importa temporariamente `runs/results.jsonl` para as tabelas relacionais.
+- `npm.cmd run db:down`: encerra o container sem apagar o volume de dados.
+
+Em desenvolvimento, a conexão padrão é `postgresql://us_agent:us_agent_local@localhost:5432/us_agent`. Para outro ambiente, copie `.env.example` e configure `DATABASE_URL` no shell ou na plataforma. O importador JSONL existe somente para a transição da base histórica; ele não é usado pela API em runtime.
+
+### Vercel
+
+O projeto possui `api/index.ts` como entrada serverless e `vercel.json` para servir a SPA e encaminhar `/api/*` ao Express. No projeto da Vercel:
+
+1. mantenha a raiz do projeto na raiz deste repositório;
+2. provisione PostgreSQL gerenciado pelo Marketplace (por exemplo, Neon ou Supabase);
+3. configure `DATABASE_URL` com a URL de conexão com pool;
+4. aplique `npm run db:migrate` fora do runtime, antes de liberar a versão;
+5. não execute migrations durante o build ou a inicialização de uma Function.
+
+O pool é criado uma vez por instância e integrado ao gerenciamento de conexões da Vercel. Nenhuma Function depende do sistema de arquivos persistente.
 
 ## Motor de classificação
 
@@ -24,16 +48,29 @@ O fluxo combina comite de modelos, arbitragem, rerun para incerteza media e revi
 - Taxonomia externa: carregada de arquivo JSON versionavel.
 
 ## Estrutura
-- `run.py`: CLI principal (classificacao e modo somente revisor).
+- `apps/api/`: backend Express isolado da interface web.
+  - `src/database/`: pool PostgreSQL, migrations e importação histórica.
+  - `src/routes/`: endpoints HTTP e validação das requisições.
+  - `src/services/`: regras de classificação e agregação de dados.
+  - `src/repositories/`: leitura dos resultados e da taxonomia.
+  - `src/domain/`: tipos centrais da API.
+- `apps/web/`: frontend React isolado da API.
+  - `src/pages/`: páginas associadas às rotas da aplicação.
+  - `src/components/`: layout e componentes reutilizáveis.
+  - `src/services/`: comunicação HTTP com a API.
+  - `src/types/`: contratos de dados usados pela interface.
+- `database/migrations/`: schema SQL versionado.
+- `compose.yaml`: PostgreSQL para desenvolvimento local.
+- `api/index.ts`: entrada serverless da API na Vercel.
+- `run.py`: worker CLI de classificação com persistência via API.
 - `run_committee.py`: CLI alternativa sem arbitro, com decisao por maioria simples.
 - `agent/orchestrator.py`: comite, metrica de incerteza, rerun e guardrails de escalonamento.
 - `agent/human_review.py`: fluxo interativo de revisao humana e captura de feedback.
-- `agent/taxonomy.py`: carregamento/validacao da taxonomia e conversao para prompt.
+- `agent/api_client.py`: acesso seguro do worker Python à API SQL.
+- `agent/taxonomy.py`: conversão e validação da taxonomia recebida da API.
 - `agent/providers/`: provedores LLM (`openai`, `gemini`, `deepseek` e `groq` via HTTP OpenAI-like).
 - `agent/schemas.py`: schemas Pydantic de entrada/saida.
-- `agent/storage.py`: escrita em JSONL.
-- `export_results_csv.py`: exporta `results.jsonl` para CSV.
-- `config/taxonomy.json`: taxonomia WIS versionada.
+- `export_results_csv.py`: exporta as classificações SQL da API para CSV.
 
 ## Setup
 ```bash
@@ -61,8 +98,10 @@ GROQ_BASE_URL=https://api.groq.com/openai/v1/chat/completions
 GROQ_API_KEY=...
 GROQ_MODEL=llama-3.1-8b-instant
 
-# Taxonomia
-TAXONOMY_PATH=config/taxonomy.json
+# API SQL usada pelo worker Python
+US_AGENT_API_URL=http://localhost:3333/api
+# Obrigatória na Vercel e deve ter o mesmo valor na API e no worker
+INGEST_API_KEY=troque-por-um-segredo-forte
 
 # Politica de incerteza
 UNCERTAINTY_MAX_RERUNS=1
@@ -112,14 +151,9 @@ Atalho em PowerShell para esse lote:
 ```
 Por padrao ele roda com `--classify-only` e depois gera `runs/results.csv`. Use `-InteractiveReview` para permitir revisao humana durante a execucao ou `-CommitteeOnly` para usar `run_committee.py`.
 
-### 4) Modo somente revisor
-```bash
-py run.py --review-only --reviewer ana
-```
-Opcional:
-```bash
-py run.py --review-only --reviewer ana --results-path runs/results.jsonl
-```
+### 4) Revisão humana
+
+A revisão persistente é feita em `http://localhost:5173/review`. O antigo `--review-only` apenas informa essa mudança e não manipula arquivos locais.
 
 ## Argumentos CLI
 - `--project`: nome do projeto.
@@ -129,9 +163,7 @@ py run.py --review-only --reviewer ana --results-path runs/results.jsonl
 - `--stories`: US separadas por `;`.
 - `--stories-file`: arquivo texto com US separadas por `;` ou uma por linha.
 - `--classify-only`: classifica o lote sem bloquear por revisao humana; itens escalados sao gravados como `not covered`.
-- `--review-only`: abre fila de revisao para resultados ja classificados.
-- `--results-path`: caminho do JSONL de resultados; na classificacao define onde gravar e no modo `--review-only` define qual arquivo revisar.
-- `--reopen-story-ids`: reabre `story_id`(s) ja revisados para `pending_review` (use `,` ou `;`).
+- `--review-only`: compatibilidade temporária; direciona o usuário à fila da WEB.
 
 ## Politica de decisao sob incerteza
 1. Comite coleta votos de provedores.
@@ -175,7 +207,7 @@ Quando ativada, a tela `HUMAN REVIEW` permite:
 - registrar proposta de evolucao da taxonomia.
 
 ## Status persistente por item
-Cada item em `runs/results.jsonl` passa a ter `review_status`:
+Cada classificação no PostgreSQL possui `review_status`:
 - `pending_review`
 - `reviewed`
 - `accepted_auto`
@@ -190,33 +222,20 @@ Campos de rastreabilidade gravados por item:
 - `prompt_version`
 - `policy_version`
 
-No modo `--review-only`, o arquivo `runs/results.jsonl` e atualizado apos cada revisao,
-evitando que item ja revisado volte a aparecer como pendente por falta de persistencia.
-No carregamento de JSONL, linhas invalidas sao ignoradas silenciosamente.
-Ao abrir `--review-only`, registros legados podem ser normalizados com defaults (ex.: `story_id`, `run_id`, `prompt_version`, `policy_version`, `taxonomy_version`).
+As decisões humanas são gravadas em `review_decisions`, e alterações de rótulo atualizam `classification_labels` na mesma transação.
 
-## Arquivos de saida
-- `runs/results.jsonl`: execucoes completas (votos, incerteza, final, revisao humana).
-- `runs/review_decisions.jsonl`: decisoes tomadas no modo `--review-only`.
-- `runs/taxonomy_feedback.jsonl`: backlog de propostas de evolucao da taxonomia.
-- `runs/results.csv`: exportacao tabular opcional gerada por `export_results_csv.py` ou pelo atalho `run_projects_p01_p10.ps1`.
+## Saída e exportação
+
+Execuções, votos, tentativas, classificações, revisões e feedback de taxonomia são persistidos nas tabelas PostgreSQL. `runs/results.csv` é apenas uma exportação opcional gerada pela API; não é fonte de dados da aplicação.
 
 Exportacao manual:
 ```powershell
-py .\export_results_csv.py --input .\runs\results.jsonl --output .\runs\results.csv
+.\.venv\Scripts\python.exe .\export_results_csv.py --output .\runs\results.csv
 ```
 
 ## Taxonomia
-- Origem: `config/taxonomy.json`.
-- Formato esperado:
-```json
-{
-  "version": "1.0.0",
-  "modules": {
-    "ModuleName": ["Operation A", "Operation B"]
-  }
-}
-```
+
+A fonte de verdade é formada por `taxonomy_versions`, `taxonomy_modules` e `taxonomy_operations`. A API fornece a versão ativa à WEB e ao worker Python.
 
 ## Observacoes
 - E necessario configurar ao menos um provedor valido (`OPENAI_API_KEY`, `GEMINI_API_KEY`, `DEEPSEEK_BASE_URL` ou `GROQ_BASE_URL`).
