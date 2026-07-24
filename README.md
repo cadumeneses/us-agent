@@ -237,6 +237,23 @@ Exportacao manual:
 
 A fonte de verdade é formada por `taxonomy_versions`, `taxonomy_modules` e `taxonomy_operations`. A API fornece a versão ativa à WEB e ao worker Python.
 
+## Recomendador de plano de qualidade
+
+O prompt versionado `quality_plan_prompt_v1` fica em `agent/prompts.py` e usa o
+schema `QualityPlanOutput` de `agent/schemas.py`. Ele recebe a história, os pares
+WIS, confiança, incerteza, evidências e problemas conhecidos.
+
+As recomendações distinguem três bases:
+
+- `explicit_in_story`: informação declarada na história;
+- `inferred_from_story`: inferência que precisa ser confirmada;
+- `general_quality_practice`: prática geral, não um requisito confirmado.
+
+Os provedores OpenAI, Gemini e HTTP OpenAI-like implementam
+`recommend_quality`. O helper `recommend_quality_plan` em
+`agent/quality_plan.py` monta o contexto de forma consistente e valida a saída
+estruturada antes que ela seja persistida ou apresentada ao usuário.
+
 ## Observacoes
 - E necessario configurar ao menos um provedor valido (`OPENAI_API_KEY`, `GEMINI_API_KEY`, `DEEPSEEK_BASE_URL` ou `GROQ_BASE_URL`).
 - Se nenhum provedor estiver configurado, a execucao encerra com aviso.

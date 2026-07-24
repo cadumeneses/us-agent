@@ -1,4 +1,4 @@
-import type { ApplicationContext, Classification, Dashboard, Story, Taxonomy } from '../types/models';
+import type { ApplicationContext, Classification, Dashboard, QualityPlan, Story, Taxonomy } from '../types/models';
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(url, options);
@@ -14,6 +14,18 @@ export const api = {
   stories: () => request<Story[]>('/api/stories'),
   taxonomy: () => request<Taxonomy>('/api/taxonomy'),
   context: () => request<ApplicationContext>('/api/context'),
+  qualityPlans: () => request<QualityPlan[]>('/api/quality-plans'),
+  saveQualityPlan: (plan: QualityPlan, status: 'draft' | 'approved') =>
+    request<{ id: string; status: string; updatedAt: string; updatedBy: string }>(`/api/quality-plans/${plan.story.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        status,
+        questions: plan.questions,
+        acceptanceCriteria: plan.acceptanceCriteria,
+        testCases: plan.testCases
+      })
+    }),
   classify: (stories: string[], project: string) => request<{ runId: string; results: Classification[] }>(
     '/api/classify',
     {

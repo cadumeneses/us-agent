@@ -38,3 +38,22 @@ export type ApplicationContext = {
   defaultExecutionMode: string;
   executionModes: Array<{ key: string; name: string; description: string }>;
 };
+
+export type QualityPlan = {
+  story: Story;
+  health: 'ready' | 'needs_clarification' | 'needs_review';
+  healthIssues: string[];
+  questions: Array<{ text: string; source: 'taxonomy_heuristic' | 'user' }>;
+  acceptanceCriteria: Array<{ text: string; source: 'taxonomy_heuristic' | 'user' }>;
+  testCases: Array<{
+    title: string;
+    type: 'positive' | 'negative' | 'boundary' | 'security';
+    priority: 'high' | 'medium';
+    source: 'taxonomy_heuristic' | 'user';
+    assumption: boolean;
+  }>;
+  generatorVersion: string;
+  status: 'generated' | 'draft' | 'approved';
+  updatedAt?: string;
+  updatedBy?: string;
+};

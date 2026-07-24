@@ -9,6 +9,7 @@ import { query, withTransaction } from '../database/pool.js';
 import { loadApplicationContext } from '../repositories/application-repository.js';
 import { savePreviewClassifications, saveReview } from '../services/classification-store.js';
 import { importRecord, type HistoricalResult } from '../database/import-jsonl.js';
+import { loadQualityPlans, saveQualityPlan } from '../services/quality-plans.js';
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -48,6 +49,26 @@ const ingestionRequest = z.object({
     consensus_ratio: z.number().min(0).max(1)
   }).passthrough()
 }).passthrough();
+
+const qualitySource = z.enum(['taxonomy_heuristic', 'user']);
+const qualityPlanRequest = z.object({
+  status: z.enum(['draft', 'approved']),
+  questions: z.array(z.object({
+    text: z.string().trim().min(1).max(500),
+    source: qualitySource
+  })).max(30),
+  acceptanceCriteria: z.array(z.object({
+    text: z.string().trim().min(1).max(500),
+    source: qualitySource
+  })).max(30),
+  testCases: z.array(z.object({
+    title: z.string().trim().min(1).max(500),
+    type: z.enum(['positive', 'negative', 'boundary', 'security']),
+    priority: z.enum(['high', 'medium']),
+    source: qualitySource,
+    assumption: z.boolean()
+  })).max(50)
+});
 
 function isAuthorizedInternalRequest(req: Request, res: Response) {
   const configuredKey = process.env.INGEST_API_KEY;
@@ -92,6 +113,29 @@ apiRouter.get('/stories', async (req, res) => {
 
 apiRouter.get('/dashboard', async (_req, res) => {
   res.json(buildDashboard(await loadStories()));
+});
+
+apiRouter.get('/quality-plans', async (_req, res) => {
+  res.json(await loadQualityPlans(await loadStories()));
+});
+
+apiRouter.put('/quality-plans/:id', async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) {
+    res.status(400).json({ error: 'Identificador de classificação inválido.' });
+    return;
+  }
+  const parsed = qualityPlanRequest.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: 'Plano de qualidade inválido.', details: parsed.error.issues });
+    return;
+  }
+  const context = await loadApplicationContext();
+  const saved = await saveQualityPlan(req.params.id, context.user.id, parsed.data);
+  if (!saved) {
+    res.status(404).json({ error: 'Classificação não encontrada.' });
+    return;
+  }
+  res.json({ id: req.params.id, status: parsed.data.status, updatedAt: saved.updated_at, updatedBy: context.user.displayName });
 });
 
 apiRouter.post('/classify', async (req, res) => {

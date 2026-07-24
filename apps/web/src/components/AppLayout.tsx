@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { BrainCircuit, FileCheck2, FolderTree, LayoutDashboard, Menu, Search, Settings, Sparkles, X } from 'lucide-react';
+import { BrainCircuit, ClipboardCheck, FileCheck2, FolderTree, LayoutDashboard, Menu, Search, Settings, Sparkles, X } from 'lucide-react';
 import { api } from '../services/api';
 import type { ApplicationContext } from '../types/models';
 
 const navigation = [
   ['Dashboard', '/', LayoutDashboard],
   ['Classificar histórias', '/classify', Sparkles],
+  ['Plano de qualidade', '/quality', ClipboardCheck],
   ['Fila de revisão', '/review', FileCheck2],
   ['Taxonomia', '/taxonomy', FolderTree],
   ['Execuções', '/runs', BrainCircuit],

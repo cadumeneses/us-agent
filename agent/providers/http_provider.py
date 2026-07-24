@@ -1,6 +1,6 @@
 import json
 import requests
-from agent.schemas import ClassifierOutput, ArbiterOutput
+from agent.schemas import ClassifierOutput, ArbiterOutput, QualityPlanOutput
 
 class HttpJSONProvider:
     """
@@ -52,3 +52,10 @@ class HttpJSONProvider:
         r.raise_for_status()
         text = self.parse_text_from_response(r.json())
         return ArbiterOutput.model_validate_json(self._extract_json(text))
+
+    def recommend_quality(self, system: str, user: str) -> QualityPlanOutput:
+        payload = self.build_payload(system, user)
+        r = requests.post(self.base_url, headers=self.build_headers(), data=json.dumps(payload), timeout=60)
+        r.raise_for_status()
+        text = self.parse_text_from_response(r.json())
+        return QualityPlanOutput.model_validate_json(self._extract_json(text))
