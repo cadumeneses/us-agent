@@ -4,6 +4,7 @@ import multer from 'multer';
 import { z } from 'zod';
 import { loadStories, loadTaxonomy } from '../repositories/data-repository.js';
 import { classifyPreview, parseImportedStories } from '../services/classifier.js';
+import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
 import { query, withTransaction } from '../database/pool.js';
 import { loadApplicationContext } from '../repositories/application-repository.js';
@@ -18,7 +19,8 @@ const upload = multer({
 
 const classifyRequest = z.object({
   stories: z.array(z.string().min(10)).min(1).max(100),
-  project: z.string().trim().min(1).max(160).default('Web')
+  project: z.string().trim().min(1).max(160).default('Web'),
+  mode: z.enum(['preview', 'committee']).default('committee')
 });
 
 const reviewRequest = z.discriminatedUnion('action', [
@@ -149,11 +151,10 @@ apiRouter.post('/classify', async (req, res) => {
   }
 
   const taxonomy = await loadTaxonomy();
-  const previews = parsed.data.stories.map(text => ({
-      text,
-      ...classifyPreview(text, taxonomy)
-  }));
-  res.status(201).json(await savePreviewClassifications(parsed.data.project, previews));
+  const previews = parsed.data.mode === 'preview'
+    ? parsed.data.stories.map(text => ({ text, ...classifyPreview(text, taxonomy) }))
+    : await Promise.all(parsed.data.stories.map(async text => ({ text, ...await classifyWithAi(text, taxonomy) })));
+  res.status(201).json(await savePreviewClassifications(parsed.data.project, previews, parsed.data.mode));
 });
 
 apiRouter.patch('/classifications/:id/review', async (req, res) => {

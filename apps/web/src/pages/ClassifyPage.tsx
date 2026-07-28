@@ -12,13 +12,13 @@ export function ClassifyPage() {
   const [running, setRunning] = useState(false);
   const [results, setResults] = useState<Classification[]>([]);
   const [error, setError] = useState('');
-  const [mode, setMode] = useState(context.defaultExecutionMode);
+  const [mode, setMode] = useState('committee');
   const stories = useMemo(() => text.split(/\n|;/).map(value => value.trim()).filter(Boolean), [text]);
 
   async function classify() {
     setError('');
     setRunning(true);
-    try { setResults((await api.classify(stories, project)).results); }
+    try { setResults((await api.classify(stories, project, mode)).results); }
     catch (reason) { setError((reason as Error).message); }
     finally { setRunning(false); }
   }

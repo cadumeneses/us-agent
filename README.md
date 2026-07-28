@@ -21,7 +21,7 @@ Abra `http://localhost:5173`. A API responde em `http://localhost:3333/api`. Par
 - `npm.cmd run db:import`: importa temporariamente `runs/results.jsonl` para as tabelas relacionais.
 - `npm.cmd run db:down`: encerra o container sem apagar o volume de dados.
 
-Em desenvolvimento, a conexão padrão é `postgresql://us_agent:us_agent_local@localhost:5432/us_agent`. Para outro ambiente, copie `.env.example` e configure `DATABASE_URL` no shell ou na plataforma. O importador JSONL existe somente para a transição da base histórica; ele não é usado pela API em runtime.
+Em desenvolvimento, a conexão padrão é o PostgreSQL local (`DATABASE_TARGET=local`). Para usar Neon, defina `DATABASE_TARGET=neon` e `DATABASE_URL_NEON` no `.env`; a URL deve conter `sslmode=require`. `DATABASE_URL` continua tendo precedência para compatibilidade com deploys e pode ser configurada diretamente na plataforma. O importador JSONL existe somente para a transição da base histórica; ele não é usado pela API em runtime.
 
 ### Vercel
 

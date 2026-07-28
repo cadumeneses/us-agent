@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx --env-file=../../.env watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "test": "tsx --test src/**/*.test.ts",
-    "db:migrate": "tsx src/database/migrate.ts",
-    "db:import": "tsx src/database/import-jsonl.ts"
+    "db:migrate": "tsx --env-file=../../.env src/database/migrate.ts",
+    "db:import": "tsx --env-file=../../.env src/database/import-jsonl.ts"
   },
   "dependencies": {
     "@vercel/functions": "^3.7.5",

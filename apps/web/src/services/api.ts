@@ -26,12 +26,12 @@ export const api = {
         testCases: plan.testCases
       })
     }),
-  classify: (stories: string[], project: string) => request<{ runId: string; results: Classification[] }>(
+  classify: (stories: string[], project: string, mode: string) => request<{ runId: string; results: Classification[] }>(
     '/api/classify',
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ stories, project })
+      body: JSON.stringify({ stories, project, mode })
     }
   ),
   importFile: (file: File) => {

@@ -3,9 +3,15 @@ import pg, { type PoolClient, type QueryResult, type QueryResultRow } from 'pg';
 
 const { Pool } = pg;
 const localDatabaseUrl = 'postgresql://us_agent:us_agent_local@localhost:5432/us_agent';
+const databaseTarget = process.env.DATABASE_TARGET ?? 'local';
+const targetConnectionString = databaseTarget === 'neon'
+  ? process.env.DATABASE_URL_NEON
+  : databaseTarget === 'local'
+    ? process.env.DATABASE_URL_LOCAL ?? localDatabaseUrl
+    : undefined;
 const connectionString = process.env.DATABASE_URL
   ?? process.env.POSTGRES_URL
-  ?? (!process.env.VERCEL && process.env.NODE_ENV !== 'production' ? localDatabaseUrl : undefined);
+  ?? targetConnectionString;
 
 export const pool = new Pool({
   connectionString,

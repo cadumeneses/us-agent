@@ -27,13 +27,13 @@ async function upsertProject(client: PoolClient, name: string) {
   return result.rows[0].id;
 }
 
-export async function savePreviewClassifications(project: string, inputs: PreviewInput[]) {
-  const runId = `preview_${randomUUID().replaceAll('-', '')}`;
+export async function savePreviewClassifications(project: string, inputs: PreviewInput[], executionMode: 'preview' | 'committee' = 'preview') {
+  const runId = `${executionMode}_${randomUUID().replaceAll('-', '')}`;
   const results = await withTransaction(async client => {
     await client.query(`
       INSERT INTO classification_runs (id, classification_mode, source, execution_mode_key)
-      VALUES ($1, 'preview', 'web', 'preview')
-    `, [runId]);
+      VALUES ($1, $2, 'web', $2)
+    `, [runId, executionMode]);
     const projectId = await upsertProject(client, project.trim() || 'Web');
     const persisted: PreviewResult[] = [];
 
