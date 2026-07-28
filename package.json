@@ -1,6 +1,7 @@
 {
   "name": "us-agent-platform",
   "private": true,
+  "type": "module",
   "workspaces": ["apps/*"],
   "scripts": {
     "dev": "concurrently -n API,WEB -c cyan,blue \"npm run dev -w @us-agent/api\" \"npm run dev -w @us-agent/web\"",

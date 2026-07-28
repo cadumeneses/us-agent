@@ -30,3 +30,5 @@ temp/
 *.log
 *.sqlite
 *.db
+.vercel
+.env*
