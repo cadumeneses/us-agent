@@ -72,6 +72,12 @@ export async function classifyWithAi(story: string, taxonomy: Taxonomy) {
   if (!providers.length) throw new Error('Nenhum provedor de IA foi configurado. Defina ao menos uma chave de API no ambiente.');
   const { system, user } = prompt(taxonomy, story);
   const settled = await Promise.allSettled(providers.map(async provider => ({ provider: provider.name, vote: parseVote(await provider.call(system, user), taxonomy) })));
+  settled.forEach((result, index) => {
+    if (result.status === 'rejected') {
+      const reason = result.reason instanceof Error ? result.reason.message : String(result.reason);
+      console.error(`AI provider \"${providers[index].name}\" failed: ${reason}`);
+    }
+  });
   const successes = settled.filter((item): item is PromiseFulfilledResult<{ provider: string; vote: Vote }> => item.status === 'fulfilled').map(item => item.value);
   if (!successes.length) throw new Error('Todos os provedores de IA falharam ao classificar esta história.');
   const frequency = new Map<string, { count: number; row: { module: string; operation: string } }>();
