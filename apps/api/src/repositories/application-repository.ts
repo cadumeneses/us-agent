@@ -43,3 +43,8 @@ export async function loadApplicationContext(): Promise<ApplicationContext> {
     executionModes: modes.rows
   };
 }
+
+export async function isExecutionModeActive(key: string): Promise<boolean> {
+  const result = await query('SELECT 1 FROM execution_modes WHERE key = $1 AND is_active', [key]);
+  return Boolean(result.rowCount);
+}

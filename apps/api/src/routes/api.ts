@@ -7,7 +7,7 @@ import { classifyPreview, parseImportedStories } from '../services/classifier.js
 import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
 import { query, withTransaction } from '../database/pool.js';
-import { loadApplicationContext } from '../repositories/application-repository.js';
+import { isExecutionModeActive, loadApplicationContext } from '../repositories/application-repository.js';
 import { savePreviewClassifications, saveReview } from '../services/classification-store.js';
 import { importRecord, type HistoricalResult } from '../database/import-jsonl.js';
 import { loadQualityPlans, saveQualityPlan } from '../services/quality-plans.js';
@@ -147,6 +147,11 @@ apiRouter.post('/classify', async (req, res) => {
       error: 'Envie de 1 a 100 histórias válidas.',
       details: parsed.error.issues
     });
+    return;
+  }
+
+  if (!await isExecutionModeActive(parsed.data.mode)) {
+    res.status(400).json({ error: 'O modo de classifica\u00e7\u00e3o selecionado n\u00e3o est\u00e1 dispon\u00edvel.' });
     return;
   }
 

@@ -12,7 +12,7 @@ export function ClassifyPage() {
   const [running, setRunning] = useState(false);
   const [results, setResults] = useState<Classification[]>([]);
   const [error, setError] = useState('');
-  const [mode, setMode] = useState('committee');
+  const [mode, setMode] = useState(context.defaultExecutionMode);
   const stories = useMemo(() => text.split(/\n|;/).map(value => value.trim()).filter(Boolean), [text]);
 
   async function classify() {
