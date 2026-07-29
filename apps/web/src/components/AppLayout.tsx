@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { BrainCircuit, ClipboardCheck, FileCheck2, FolderTree, LayoutDashboard, Menu, Search, Settings, Sparkles, X } from 'lucide-react';
+import { BrainCircuit, ClipboardCheck, FileCheck2, FolderKanban, FolderTree, LayoutDashboard, Menu, Search, Settings, Sparkles, X } from 'lucide-react';
 import { api } from '../services/api';
 import type { ApplicationContext } from '../types/models';
+import { WorkspaceProvider } from '../services/workspace';
 
 const navigation = [
   ['Dashboard', '/', LayoutDashboard],
+  ['Meus projetos', '/projects', FolderKanban],
   ['Classificar histórias', '/classify', Sparkles],
   ['Plano de qualidade', '/quality', ClipboardCheck],
   ['Fila de revisão', '/review', FileCheck2],
@@ -34,7 +36,7 @@ export function AppLayout() {
     </aside>
     <main>
       <header><button className="icon-button mobile" onClick={() => setOpen(!open)} aria-label="Abrir menu">{open ? <X/> : <Menu/>}</button><div className="global-search"><Search size={16}/><input placeholder="Buscar histórias, módulos ou execuções..."/></div><span className="environment">{context.environment}</span><div className="avatar">{context.user.initials}</div></header>
-      <Outlet context={context}/>
+      <WorkspaceProvider><Outlet context={context}/></WorkspaceProvider>
     </main>
   </div>;
 }

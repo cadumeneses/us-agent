@@ -3,6 +3,7 @@ import { AlertCircle, CheckCircle2, ChevronRight, CircleHelp, Plus, Save, Shield
 import { CardHead, PageTitle } from '../components/ui';
 import { api } from '../services/api';
 import type { QualityPlan } from '../types/models';
+import { useWorkspace } from '../services/workspace';
 
 const healthLabels = {
   ready: 'Pronto para testar',
@@ -18,6 +19,7 @@ const typeLabels = {
 } as const;
 
 export function QualityPlanPage() {
+  const workspace = useWorkspace();
   const [plans, setPlans] = useState<QualityPlan[]>([]);
   const [selectedId, setSelectedId] = useState('');
   const [search, setSearch] = useState('');
@@ -30,16 +32,16 @@ export function QualityPlanPage() {
     api.qualityPlans()
       .then(items => {
         setPlans(items);
-        setSelectedId(items[0]?.story.id ?? '');
+        setSelectedId(items.find(plan => plan.story.id === workspace.selectedStoryId)?.story.id ?? items.find(plan => plan.story.project === workspace.selectedProject)?.story.id ?? items[0]?.story.id ?? '');
       })
       .catch((reason: Error) => setError(reason.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [workspace.selectedProject, workspace.selectedStoryId]);
 
   const visiblePlans = useMemo(() => {
     const term = search.trim().toLowerCase();
-    return plans.filter(plan => !term || `${plan.story.text} ${plan.story.project} ${plan.story.module} ${plan.story.operation}`.toLowerCase().includes(term));
-  }, [plans, search]);
+    return plans.filter(plan => plan.story.project === workspace.selectedProject && (!term || `${plan.story.text} ${plan.story.project} ${plan.story.module} ${plan.story.operation}`.toLowerCase().includes(term)));
+  }, [plans, search, workspace.selectedProject]);
   const selected = plans.find(plan => plan.story.id === selectedId) ?? visiblePlans[0];
 
   function changePlan(next: QualityPlan) {
@@ -77,7 +79,7 @@ export function QualityPlanPage() {
       <div className="card quality-list">
         <CardHead title={`Histórias (${visiblePlans.length})`}/>
         <div className="quality-search"><input value={search} onChange={event => setSearch(event.target.value)} placeholder="Filtrar histórias…"/></div>
-        {visiblePlans.map(plan => <button className={selected?.story.id === plan.story.id ? 'quality-story selected' : 'quality-story'} onClick={() => { setSelectedId(plan.story.id); setNotice(''); setError(''); }} key={plan.story.id}>
+        {visiblePlans.map(plan => <button className={selected?.story.id === plan.story.id ? 'quality-story selected' : 'quality-story'} onClick={() => { setSelectedId(plan.story.id); workspace.selectStory(plan.story.id); setNotice(''); setError(''); }} key={plan.story.id}>
           <span className={`health-indicator ${plan.status === 'approved' ? 'ready' : plan.health}`}/>
           <div><b>{plan.story.text}</b><small>{plan.story.project} · {plan.status === 'generated' ? 'não editado' : plan.status === 'draft' ? 'rascunho' : 'aprovado'}</small></div>
           <ChevronRight size={16}/>

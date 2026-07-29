@@ -57,3 +57,9 @@ export type QualityPlan = {
   updatedAt?: string;
   updatedBy?: string;
 };
+
+export type StoryDetails = {
+  tasks: Array<{ id: string; title: string; done: boolean }>;
+  functionalRequirements: Array<{ id: string; description: string }>;
+  nonFunctionalRequirements: Array<{ id: string; description: string; type: string; metric: string }>;
+};

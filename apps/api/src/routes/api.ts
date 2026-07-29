@@ -11,6 +11,7 @@ import { isExecutionModeActive, loadApplicationContext } from '../repositories/a
 import { savePreviewClassifications, saveReview } from '../services/classification-store.js';
 import { importRecord, type HistoricalResult } from '../database/import-jsonl.js';
 import { loadQualityPlans, saveQualityPlan } from '../services/quality-plans.js';
+import { loadStoryDetails, saveStoryDetails } from '../services/story-details.js';
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -70,6 +71,11 @@ const qualityPlanRequest = z.object({
     source: qualitySource,
     assumption: z.boolean()
   })).max(50)
+});
+const storyDetailsRequest = z.object({
+  tasks: z.array(z.object({ id: z.string().optional(), title: z.string().trim().min(1).max(500), done: z.boolean() })).max(100),
+  functionalRequirements: z.array(z.object({ id: z.string().optional(), description: z.string().trim().min(1).max(1000) })).max(100),
+  nonFunctionalRequirements: z.array(z.object({ id: z.string().optional(), description: z.string().trim().min(1).max(1000), type: z.string().trim().min(1).max(80), metric: z.string().trim().min(1).max(120) })).max(100)
 });
 
 function isAuthorizedInternalRequest(req: Request, res: Response) {
@@ -138,6 +144,18 @@ apiRouter.put('/quality-plans/:id', async (req, res) => {
     return;
   }
   res.json({ id: req.params.id, status: parsed.data.status, updatedAt: saved.updated_at, updatedBy: context.user.displayName });
+});
+
+apiRouter.get('/classifications/:id/details', async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });
+  res.json(await loadStoryDetails(req.params.id));
+});
+apiRouter.put('/classifications/:id/details', async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });
+  const parsed = storyDetailsRequest.safeParse(req.body);
+  if (!parsed.success) return void res.status(400).json({ error: 'Detalhes da história inválidos.', details: parsed.error.issues });
+  if (!await saveStoryDetails(req.params.id, parsed.data)) return void res.status(404).json({ error: 'História não encontrada.' });
+  res.json(await loadStoryDetails(req.params.id));
 });
 
 apiRouter.post('/classify', async (req, res) => {
