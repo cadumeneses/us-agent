@@ -13,7 +13,7 @@ type Provider = { name: string; call: (system: string, user: string) => Promise<
 const timeoutMs = Number(process.env.AI_PROVIDER_TIMEOUT_MS ?? 45_000);
 
 function taxonomyText(taxonomy: Taxonomy) {
-  return Object.entries(taxonomy.modules).map(([module, operations]) => `${module}: ${operations.join(', ')}`).join('\n');
+  return Object.entries(taxonomy.modules).map(([module, operations]) => `${module}: ${operations.map(operation => `${operation}${taxonomy.descriptions?.[module]?.[operation] ? ` (${taxonomy.descriptions[module][operation]})` : ''}`).join(', ')}`).join('\n');
 }
 
 function prompt(taxonomy: Taxonomy, story: string) {

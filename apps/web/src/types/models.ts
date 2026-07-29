@@ -21,6 +21,8 @@ export type Dashboard = {
 export type Taxonomy = {
   version: string;
   modules: Record<string, string[]>;
+  descriptions: Record<string, Record<string, string>>;
+  taxonomies: Array<{ version: string; active: boolean; modules: number; operations: number }>;
 };
 
 export type Classification = {

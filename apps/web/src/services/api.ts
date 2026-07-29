@@ -12,7 +12,9 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 export const api = {
   dashboard: () => request<Dashboard>('/api/dashboard'),
   stories: () => request<Story[]>('/api/stories'),
-  taxonomy: () => request<Taxonomy>('/api/taxonomy'),
+  taxonomy: (version?: string) => request<Taxonomy>(`/api/taxonomy${version ? `?version=${encodeURIComponent(version)}` : ''}`),
+  addTaxonomyOperation: (input: { module: string; operation: string; description: string; version?: string }) => request<Taxonomy>('/api/taxonomy/operations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) }),
+  createTaxonomyVersion: (version: string) => request<Taxonomy>('/api/taxonomy/versions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ version }) }),
   context: () => request<ApplicationContext>('/api/context'),
   qualityPlans: () => request<QualityPlan[]>('/api/quality-plans'),
   saveQualityPlan: (plan: QualityPlan, status: 'draft' | 'approved') =>

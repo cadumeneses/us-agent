@@ -1,0 +1,2 @@
+ALTER TABLE taxonomy_modules ADD COLUMN IF NOT EXISTS description TEXT NOT NULL DEFAULT '';
+ALTER TABLE taxonomy_operations ADD COLUMN IF NOT EXISTS description TEXT NOT NULL DEFAULT '';

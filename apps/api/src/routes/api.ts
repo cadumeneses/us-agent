@@ -2,7 +2,7 @@ import { timingSafeEqual } from 'node:crypto';
 import { Router, type Request, type Response } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
-import { loadStories, loadTaxonomy } from '../repositories/data-repository.js';
+import { addTaxonomyOperation, createTaxonomyVersion, loadStories, loadTaxonomy } from '../repositories/data-repository.js';
 import { classifyPreview, parseImportedStories } from '../services/classifier.js';
 import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
@@ -77,6 +77,8 @@ const storyDetailsRequest = z.object({
   functionalRequirements: z.array(z.object({ id: z.string().optional(), description: z.string().trim().min(1).max(1000) })).max(100),
   nonFunctionalRequirements: z.array(z.object({ id: z.string().optional(), description: z.string().trim().min(1).max(1000), type: z.string().trim().min(1).max(80), metric: z.string().trim().min(1).max(120) })).max(100)
 });
+const taxonomyOperationRequest = z.object({ module: z.string().trim().min(2).max(120), operation: z.string().trim().min(2).max(180), description: z.string().trim().min(5).max(1000), version: z.string().trim().min(1).max(40).optional() });
+const taxonomyVersionRequest = z.object({ version: z.string().trim().min(1).max(40) });
 
 function isAuthorizedInternalRequest(req: Request, res: Response) {
   const configuredKey = process.env.INGEST_API_KEY;
@@ -104,8 +106,8 @@ apiRouter.get('/health', async (_req, res) => {
   res.json({ status: 'ok', service: 'us-agent-api', database: 'connected' });
 });
 
-apiRouter.get('/taxonomy', async (_req, res) => {
-  res.json(await loadTaxonomy());
+apiRouter.get('/taxonomy', async (req, res) => {
+  res.json(await loadTaxonomy(typeof req.query.version === 'string' ? req.query.version : undefined));
 });
 
 apiRouter.get('/context', async (_req, res) => {
@@ -145,6 +147,8 @@ apiRouter.put('/quality-plans/:id', async (req, res) => {
   }
   res.json({ id: req.params.id, status: parsed.data.status, updatedAt: saved.updated_at, updatedBy: context.user.displayName });
 });
+apiRouter.post('/taxonomy/operations', async (req, res) => { const parsed = taxonomyOperationRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Dados da operação inválidos.' }); await addTaxonomyOperation(parsed.data); res.status(201).json(await loadTaxonomy()); });
+apiRouter.post('/taxonomy/versions', async (req, res) => { const parsed = taxonomyVersionRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Versão inválida.' }); await createTaxonomyVersion(parsed.data.version); res.status(201).json(await loadTaxonomy()); });
 
 apiRouter.get('/classifications/:id/details', async (req, res) => {
   if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });
