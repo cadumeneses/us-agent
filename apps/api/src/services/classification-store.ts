@@ -86,15 +86,17 @@ async function saveFallbackSuggestions(client: PoolClient, classificationId: str
   for (const [position, suggestion] of suggestions.entries()) {
     const inserted = await client.query<{ id: string }>(`
       INSERT INTO classification_fallback_suggestions (
-        classification_id, source, suggestion_type, proposed_domain, target_module,
-        proposed_operation, reason, position
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+        classification_id, source, suggestion_type, proposed_domain, target_domain,
+        proposed_module, target_module, proposed_operation, reason, position
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
       RETURNING id
     `, [
       classificationId,
       suggestion.source,
       suggestion.type,
       suggestion.proposedDomain ?? null,
+      suggestion.targetDomain ?? null,
+      suggestion.proposedModule ?? null,
       suggestion.targetModule ?? null,
       suggestion.proposedOperation ?? null,
       suggestion.reason,
@@ -168,8 +170,10 @@ export async function savePreviewClassifications(project: string, inputs: Previe
 }
 
 export type TaxonomyFeedbackInput = {
-  proposalType: 'new_domain' | 'new_operation' | 'clarify_story';
+  proposalType: 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story';
   proposedDomain?: string;
+  targetDomain?: string;
+  proposedModule?: string;
   targetModule?: string;
   proposedOperation?: string;
   justification: string;
@@ -258,14 +262,16 @@ export async function saveReview(input: ReviewInput) {
       if (input.taxonomyFeedback) {
         await client.query(`
           INSERT INTO taxonomy_feedback (
-            classification_id, reviewer, proposal_type, proposed_domain, target_module,
-            proposed_operation, justification, status
-          ) VALUES ($1,$2,$3,$4,$5,$6,$7,'pending_taxonomy_board')
+            classification_id, reviewer, proposal_type, proposed_domain, target_domain,
+            proposed_module, target_module, proposed_operation, justification, status
+          ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,'pending_taxonomy_board')
         `, [
           input.classificationId,
           user.rows[0].display_name,
           input.taxonomyFeedback.proposalType,
           input.taxonomyFeedback.proposedDomain?.trim() || null,
+          input.taxonomyFeedback.targetDomain?.trim() || null,
+          input.taxonomyFeedback.proposedModule?.trim() || null,
           input.taxonomyFeedback.targetModule?.trim() || null,
           input.taxonomyFeedback.proposedOperation?.trim() || null,
           input.taxonomyFeedback.justification.trim()

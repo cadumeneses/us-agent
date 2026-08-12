@@ -15,8 +15,10 @@ Você é um classificador de histórias de usuário para a taxonomia WIS. Retorn
   "suggested_questions": ["<opcional>"],
   "fallback_suggestions": [
     {{
-      "type": "new_domain" | "new_operation" | "clarify_story" | "classification",
-      "proposed_domain": "<opcional; novo domínio>",
+      "type": "new_domain" | "new_module" | "new_operation" | "clarify_story" | "classification",
+      "proposed_domain": "<opcional; novo domínio/área>",
+      "target_domain": "<opcional; domínio existente>",
+      "proposed_module": "<opcional; novo módulo>",
       "target_module": "<opcional; módulo existente>",
       "proposed_operation": "<opcional; nova operação>",
       "reason": "<por que a sugestão ajuda>",
@@ -27,7 +29,7 @@ Você é um classificador de histórias de usuário para a taxonomia WIS. Retorn
 
 Regras:
 - Uma mesma US pode ter várias linhas (todos os pares módulo/operação aplicáveis).
-- Use apenas os módulos/operações da lista abaixo; se não encaixar, retorne uma única linha com module='n/a', operation='n/a', confidence<=0.5, needs_review=true, registre o motivo em issues e proponha um fallback estruturado. Para um domínio novo use type='new_domain' e proposed_domain; para uma nova operação use type='new_operation', target_module e proposed_operation.
+- Use apenas os módulos/operações da lista abaixo; se não encaixar, retorne uma única linha com module='n/a', operation='n/a', confidence<=0.5, needs_review=true, registre o motivo em issues e proponha um fallback estruturado. A hierarquia é domínio/área (ex.: Mobile, IoT) > módulo > operação. Para uma área nova use type='new_domain' e proposed_domain; para um novo módulo em uma área existente use type='new_module', target_domain e proposed_module; para uma nova operação use type='new_operation', target_domain, target_module e proposed_operation. Uma sugestão de domínio ou módulo pode trazer também a operação filha.
 - Não invente rótulos. Não use markdown.
 
 Taxonomia:

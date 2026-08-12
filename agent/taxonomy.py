@@ -4,10 +4,11 @@ from typing import Dict, List
 TaxonomyMap = Dict[str, List[str]]
 
 
-def taxonomy_to_prompt_text(taxonomy: TaxonomyMap) -> str:
+def taxonomy_to_prompt_text(taxonomy: TaxonomyMap, module_domains: Dict[str, str] | None = None) -> str:
     lines: list[str] = []
     for module, operations in taxonomy.items():
-        lines.append(module)
+        domain = (module_domains or {}).get(module)
+        lines.append(f"{domain} > {module}" if domain else module)
         for op in operations:
             lines.append(f"- {op}")
         lines.append("")

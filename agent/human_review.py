@@ -88,12 +88,14 @@ def _collect_taxonomy_feedback() -> dict[str, Any] | None:
         return None
 
     proposal_type = _ask_choice(
-        "Tipo da proposta [1=new_operation, 2=new_domain, 3=clarify_story]: ",
-        {"1", "2", "3"},
+        "Tipo da proposta [1=new_operation, 2=new_module, 3=new_domain, 4=clarify_story]: ",
+        {"1", "2", "3", "4"},
     )
-    mapped_type = {"1": "new_operation", "2": "new_domain", "3": "clarify_story"}[proposal_type]
+    mapped_type = {"1": "new_operation", "2": "new_module", "3": "new_domain", "4": "clarify_story"}[proposal_type]
 
     proposed_domain = input("Novo dominio sugerido (vazio se nao aplicavel): ").strip() or None
+    target_domain = input("Dominio alvo existente (vazio se nao aplicavel): ").strip() or None
+    proposed_module = input("Novo modulo sugerido (vazio se nao aplicavel): ").strip() or None
     target_module = input("Modulo alvo existente (vazio se nao aplicavel): ").strip() or None
     proposed_operation = input("Operacao proposta (vazio se nao aplicavel): ").strip() or None
     justification = input("Justificativa curta: ").strip()
@@ -101,6 +103,8 @@ def _collect_taxonomy_feedback() -> dict[str, Any] | None:
     return {
         "proposal_type": mapped_type,
         "proposed_domain": proposed_domain,
+        "target_domain": target_domain,
+        "proposed_module": proposed_module,
         "target_module": target_module,
         "proposed_operation": proposed_operation,
         "justification": justification,
@@ -177,7 +181,15 @@ def maybe_apply_human_review(
     if fallback_suggestions:
         print("\nSugestoes de fallback:")
         for suggestion in fallback_suggestions:
-            target = suggestion.get("proposed_domain") or suggestion.get("proposed_operation") or "sem rotulo proposto"
+            target = " / ".join(
+                value
+                for value in [
+                    suggestion.get("proposed_domain") or suggestion.get("target_domain"),
+                    suggestion.get("proposed_module") or suggestion.get("target_module"),
+                    suggestion.get("proposed_operation"),
+                ]
+                if value
+            ) or "sem rotulo proposto"
             print(f"- [{suggestion.get('source', 'modelo')}] {suggestion.get('type', 'fallback')}: {target}")
             print(f"  Motivo: {suggestion.get('reason', 'n/a')}")
 

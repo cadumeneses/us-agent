@@ -22,6 +22,8 @@ export type Taxonomy = {
   version: string;
   modules: Record<string, string[]>;
   descriptions: Record<string, Record<string, string>>;
+  domains: Record<string, { description: string; modules: Record<string, string[]> }>;
+  moduleDomains: Record<string, string>;
   taxonomies: Array<{ version: string; active: boolean; modules: number; operations: number }>;
 };
 
@@ -37,8 +39,10 @@ export type Classification = {
 export type FallbackSuggestion = {
   id: string;
   source: string;
-  type: 'new_domain' | 'new_operation' | 'clarify_story' | 'classification';
+  type: 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story' | 'classification';
   proposedDomain?: string;
+  targetDomain?: string;
+  proposedModule?: string;
   targetModule?: string;
   proposedOperation?: string;
   reason: string;

@@ -1,5 +1,83 @@
 import { useEffect, useState } from 'react';
-import { FolderTree, Plus, Tags, Trash2, X } from 'lucide-react';
-import { PageTitle } from '../components/ui'; import { api } from '../services/api'; import type { Taxonomy } from '../types/models';
-type OperationDraft={name:string;description:string};
-export function TaxonomyPage(){const[t,setT]=useState<Taxonomy>();const[v,setV]=useState('');const[s,setS]=useState('');const[m,setM]=useState<'op'|'tax'|null>(null);const[module,setModule]=useState('');const[ops,setOps]=useState<OperationDraft[]>([{name:'',description:''}]);const[name,setName]=useState('');const[e,setE]=useState('');async function load(x?:string){try{const q=await api.taxonomy(x);setT(q);setS(Object.keys(q.modules)[0]||'')}catch(x){setE((x as Error).message)}}useEffect(()=>{void load()},[]);function update(i:number,key:keyof OperationDraft,value:string){setOps(all=>all.map((item,index)=>index===i?{...item,[key]:value}:item))}async function save(){try{if(m==='tax'){await api.createTaxonomyVersion(name);await load(name);setV(name)}else{for(const item of ops.filter(item=>item.name.trim()&&item.description.trim()))await api.addTaxonomyOperation({module,operation:item.name,description:item.description,version:v});await load(v)}setM(null);setModule('');setOps([{name:'',description:''}]);setName('')}catch(x){setE((x as Error).message)}}return <section className="page"><PageTitle eyebrow="GOVERNANÇA" title="Taxonomias">Selecione uma taxonomia para organizar seus módulos e operações.</PageTitle>{t&&<div className="projects-layout"><aside className="project-panel card"><div className="project-panel-head"><div><span>TAXONOMIAS</span><b>Domínios ativos</b></div><button className="square-button" onClick={()=>setM('tax')}><Plus size={16}/></button></div><div className="project-list">{t.taxonomies.map(x=><button key={x.version} className={v===x.version?'project-item selected':'project-item'} onClick={()=>{setV(x.version);void load(x.version)}}><i className="project-mark blue"><Tags size={14}/></i><div><b>{x.version}</b><small>{x.modules} módulos · {x.operations} operações</small></div></button>)}</div></aside><div className="story-workspace card node"><div className="taxonomy-actions"><button onClick={()=>{setModule(s);setM('op')}}><Plus size={14}/> Adicionar operações</button></div><span className="eyebrow">{v||'TAXONOMIA'}</span><h1>{s||'Taxonomia sem módulos'}</h1><p>{s?'Operações disponíveis neste módulo.':'Selecione ou adicione um módulo para começar.'}</p><div className="operations">{s&&t.modules[s].map((q,i)=><div key={q}><span>{i+1}</span><div><b>{q}</b><small>{t.descriptions[s]?.[q]||'Sem descrição.'}</small></div><span className="badge success">Ativa</span></div>)}</div>{Object.keys(t.modules).length>0&&<div className="taxonomy-version-list">{Object.entries(t.modules).map(([n,items])=><button key={n} onClick={()=>setS(n)} className={s===n?'selected':''}><FolderTree size={15}/><span>{n}</span><small>{items.length} operações</small></button>)}</div>}</div></div>}{e&&<p className="inline-error">{e}</p>}{m&&<div className="modal-backdrop"><div className="project-modal taxonomy-modal card"><div className="modal-head"><div><span>{m==='tax'?'NOVA TAXONOMIA':'MÓDULO E OPERAÇÕES'}</span><h2>{m==='tax'?'Criar taxonomia':'Cadastrar operações'}</h2></div><button onClick={()=>setM(null)}><X/></button></div>{m==='tax'?<label>Nome da taxonomia<input value={name} onChange={x=>setName(x.target.value)} placeholder="Ex.: Vendas"/></label>:<><label>Módulo<input value={module} onChange={x=>setModule(x.target.value)} placeholder="Ex.: Orçamentos"/></label><div className="operation-drafts"><div className="operation-drafts-head"><b>Operações do módulo</b><button onClick={()=>setOps(all=>[...all,{name:'',description:''}])}><Plus size={14}/> Adicionar operação</button></div>{ops.map((item,i)=><div className="operation-draft" key={i}><span>{String(i+1).padStart(2,'0')}</span><div><input value={item.name} onChange={x=>update(i,'name',x.target.value)} placeholder="Nome da operação"/><textarea value={item.description} onChange={x=>update(i,'description',x.target.value)} placeholder="Quando essa operação deve ser usada?"/></div><button className="remove-item" disabled={ops.length===1} onClick={()=>setOps(all=>all.filter((_,index)=>index!==i))}><Trash2 size={15}/></button></div>)}</div></>}<div className="modal-actions"><button onClick={()=>setM(null)}>Cancelar</button><button className="primary" onClick={save}>Salvar</button></div></div></div>}</section>}
+import { FolderTree, Plus, Tags, X } from 'lucide-react';
+import { PageTitle } from '../components/ui';
+import { api } from '../services/api';
+import type { Taxonomy } from '../types/models';
+
+type Modal = 'taxonomy' | 'domain' | 'operation' | null;
+
+export function TaxonomyPage() {
+  const [taxonomy, setTaxonomy] = useState<Taxonomy>();
+  const [version, setVersion] = useState('');
+  const [domain, setDomain] = useState('');
+  const [modal, setModal] = useState<Modal>(null);
+  const [name, setName] = useState('');
+  const [module, setModule] = useState('');
+  const [operation, setOperation] = useState('');
+  const [description, setDescription] = useState('');
+  const [error, setError] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  async function load(nextVersion?: string) {
+    try {
+      const next = await api.taxonomy(nextVersion);
+      const selectedVersion = nextVersion ?? (version || next.taxonomies[0]?.version || '');
+      const domains = Object.keys(next.domains);
+      setTaxonomy(next);
+      setVersion(selectedVersion);
+      setDomain(current => domains.includes(current) ? current : domains[0] ?? '');
+    } catch (reason) {
+      setError((reason as Error).message);
+    }
+  }
+
+  useEffect(() => { void load(); }, []);
+
+  function closeModal() {
+    setModal(null);
+    setName('');
+    setModule('');
+    setOperation('');
+    setDescription('');
+  }
+
+  async function save() {
+    setError('');
+    setSaving(true);
+    try {
+      if (modal === 'taxonomy') await api.createTaxonomyVersion(name.trim());
+      if (modal === 'domain') await api.addTaxonomyDomain({ domain: name.trim(), description: description.trim(), version: version || undefined });
+      if (modal === 'operation') await api.addTaxonomyOperation({ domain, module: module.trim(), operation: operation.trim(), description: description.trim(), version: version || undefined });
+      const nextVersion = modal === 'taxonomy' ? name.trim() : version;
+      closeModal();
+      await load(nextVersion);
+    } catch (reason) {
+      setError((reason as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  const selectedDomain = domain && taxonomy ? taxonomy.domains[domain] : undefined;
+  const domainNames = taxonomy ? Object.keys(taxonomy.domains) : [];
+
+  return <section className="page">
+    <PageTitle eyebrow="GOVERNANÇA" title="Taxonomias">Organize a classificação por domínio, módulo e operação.</PageTitle>
+    {taxonomy && <div className="projects-layout">
+      <aside className="project-panel card">
+        <div className="project-panel-head"><div><span>TAXONOMIAS</span><b>Versões ativas</b></div><button className="square-button" onClick={() => setModal('taxonomy')}><Plus size={16}/></button></div>
+        <div className="project-list">{taxonomy.taxonomies.map(item => <button key={item.version} className={version === item.version ? 'project-item selected' : 'project-item'} onClick={() => void load(item.version)}><i className="project-mark blue"><Tags size={14}/></i><div><b>{item.version}</b><small>{item.modules} módulos · {item.operations} operações</small></div></button>)}</div>
+      </aside>
+      <div className="story-workspace card node">
+        <div className="taxonomy-actions"><button onClick={() => setModal('domain')}><Plus size={14}/> Adicionar domínio</button>{domain && <button onClick={() => setModal('operation')}><Plus size={14}/> Adicionar módulo ou operação</button>}</div>
+        <span className="eyebrow">{version || 'TAXONOMIA'}</span>
+        <h1>Domínios</h1>
+        <p>Domínio é uma área da solução, como Mobile ou IoT. Cada domínio agrupa módulos e suas operações.</p>
+        {domainNames.length ? <div className="taxonomy-version-list">{domainNames.map(item => <button key={item} className={domain === item ? 'selected' : ''} onClick={() => setDomain(item)}><FolderTree size={15}/><span>{item}</span><small>{Object.keys(taxonomy.domains[item].modules).length} módulos</small></button>)}</div> : <div className="empty">Adicione o primeiro domínio para começar.</div>}
+        {selectedDomain && <><h2 className="taxonomy-domain-title">{domain}</h2>{selectedDomain.description && <p>{selectedDomain.description}</p>}<div className="module-grid">{Object.entries(selectedDomain.modules).map(([moduleName, operations]) => <article className="module-card" key={moduleName}><FolderTree size={17}/><h2>{moduleName}</h2><small>{operations.length} operações</small><div className="operations">{operations.length ? operations.map((item, index) => <div key={item}><span>{index + 1}</span><div><b>{item}</b><small>{taxonomy.descriptions[moduleName]?.[item] || 'Sem descrição.'}</small></div><span className="badge success">Ativa</span></div>) : <div className="empty">Sem operações.</div>}</div></article>)}</div>{Object.keys(selectedDomain.modules).length === 0 && <div className="empty">Este domínio ainda não possui módulos.</div>}</>}
+      </div>
+    </div>}
+    {error && <p className="inline-error">{error}</p>}
+    {modal && <div className="modal-backdrop"><div className="project-modal taxonomy-modal card"><div className="modal-head"><div><span>{modal === 'taxonomy' ? 'NOVA TAXONOMIA' : modal === 'domain' ? 'NOVO DOMÍNIO' : 'MÓDULO E OPERAÇÃO'}</span><h2>{modal === 'taxonomy' ? 'Criar taxonomia' : modal === 'domain' ? 'Cadastrar domínio' : `Adicionar em ${domain}`}</h2></div><button onClick={closeModal}><X/></button></div>{modal === 'taxonomy' && <label>Nome da taxonomia<input value={name} onChange={event => setName(event.target.value)} placeholder="Ex.: Plataforma 2.0"/></label>}{modal === 'domain' && <><label>Nome do domínio<input value={name} onChange={event => setName(event.target.value)} placeholder="Ex.: Mobile ou IoT"/></label><label>Descrição<textarea value={description} onChange={event => setDescription(event.target.value)} placeholder="Qual área da solução este domínio representa?"/></label></>}{modal === 'operation' && <><label>Módulo<input value={module} onChange={event => setModule(event.target.value)} placeholder="Ex.: Sincronização"/></label><label>Operação<input value={operation} onChange={event => setOperation(event.target.value)} placeholder="Ex.: Sincronizar offline"/></label><label>Descrição<textarea value={description} onChange={event => setDescription(event.target.value)} placeholder="Quando essa operação deve ser usada?"/></label></>}<div className="modal-actions"><button onClick={closeModal}>Cancelar</button><button className="primary" disabled={saving || !name.trim() && modal !== 'operation' || modal === 'operation' && (!module.trim() || !operation.trim() || !description.trim()) || modal === 'domain' && !description.trim()} onClick={() => void save()}>{saving ? 'Salvando…' : 'Salvar'}</button></div></div></div>}
+  </section>;
+}

@@ -1,4 +1,5 @@
 import type { FallbackSuggestion, ProviderVote, ReviewContext, Story, Taxonomy } from '../domain/models.js';
+import type { PoolClient } from 'pg';
 import { query, withTransaction } from '../database/pool.js';
 
 type StoryRow = {
@@ -108,12 +109,14 @@ export async function loadReviewContext(classificationId: string): Promise<Revie
     source: string;
     suggestion_type: FallbackSuggestion['type'];
     proposed_domain: string | null;
+    target_domain: string | null;
+    proposed_module: string | null;
     target_module: string | null;
     proposed_operation: string | null;
     reason: string;
     applied_at: string | null;
   }>(`
-    SELECT id::text, source, suggestion_type, proposed_domain, target_module, proposed_operation, reason, applied_at
+    SELECT id::text, source, suggestion_type, proposed_domain, target_domain, proposed_module, target_module, proposed_operation, reason, applied_at
     FROM classification_fallback_suggestions
     WHERE classification_id = $1 ORDER BY position, id
   `, [classificationId]);
@@ -143,6 +146,8 @@ export async function loadReviewContext(classificationId: string): Promise<Revie
       source: row.source,
       type: row.suggestion_type,
       proposedDomain: row.proposed_domain ?? undefined,
+      targetDomain: row.target_domain ?? undefined,
+      proposedModule: row.proposed_module ?? undefined,
       targetModule: row.target_module ?? undefined,
       proposedOperation: row.proposed_operation ?? undefined,
       reason: row.reason,
@@ -160,36 +165,99 @@ export async function loadTaxonomy(versionFilter?: string): Promise<Taxonomy> {
       (SELECT COUNT(*)::int FROM taxonomy_operations operation JOIN taxonomy_modules module ON module.id = operation.module_id WHERE module.taxonomy_version_id = taxonomy_versions.id) AS operations
     FROM taxonomy_versions ORDER BY created_at
   `);
-  const result = await query<{ version: string; module: string; operation: string | null; description: string }>(`
-    SELECT version.version, module.name AS module, operation.name AS operation, operation.description
+  const result = await query<{
+    version: string;
+    domain: string;
+    domain_description: string;
+    module: string | null;
+    operation: string | null;
+    description: string | null;
+  }>(`
+    SELECT version.version, domain.name AS domain, domain.description AS domain_description,
+      module.name AS module, operation.name AS operation, operation.description
     FROM taxonomy_versions version
-    JOIN taxonomy_modules module ON module.taxonomy_version_id = version.id
+    JOIN taxonomy_domains domain ON domain.taxonomy_version_id = version.id
+    LEFT JOIN taxonomy_modules module ON module.domain_id = domain.id
     LEFT JOIN taxonomy_operations operation ON operation.module_id = module.id AND operation.is_active
     WHERE version.is_active ${versionFilter ? 'AND version.version = $1' : ''}
-    ORDER BY module.position, operation.position
+    ORDER BY domain.position, module.position, operation.position
   `, versionFilter ? [versionFilter] : []);
 
-  if (!result.rows.length) return { version: '', modules: {}, descriptions: {}, taxonomies: versions.rows };
-  const modules = result.rows.reduce<Record<string, string[]>>((all, row) => {
-    const operations = (all[row.module] ??= []);
-    if (row.operation) operations.push(row.operation);
-    return all;
-  }, {});
-  const descriptions = result.rows.reduce<Record<string, Record<string, string>>>((all, row) => {
-    if (row.operation) (all[row.module] ??= {})[row.operation] = row.description;
-    return all;
-  }, {});
-  return { version: [...new Set(result.rows.map(row => row.version))].join(' + '), modules, descriptions, taxonomies: versions.rows };
+  if (!result.rows.length) return { version: '', modules: {}, descriptions: {}, domains: {}, moduleDomains: {}, taxonomies: versions.rows };
+  const modules: Record<string, string[]> = {};
+  const descriptions: Record<string, Record<string, string>> = {};
+  const domains: NonNullable<Taxonomy['domains']> = {};
+  const moduleDomains: Record<string, string> = {};
+  for (const row of result.rows) {
+    const domain = (domains[row.domain] ??= { description: row.domain_description, modules: {} });
+    if (!row.module) continue;
+    const operations = (modules[row.module] ??= []);
+    const domainOperations = (domain.modules[row.module] ??= []);
+    moduleDomains[row.module] = row.domain;
+    if (!row.operation) continue;
+    operations.push(row.operation);
+    domainOperations.push(row.operation);
+    (descriptions[row.module] ??= {})[row.operation] = row.description ?? '';
+  }
+  return {
+    version: [...new Set(result.rows.map(row => row.version))].join(' + '),
+    modules,
+    descriptions,
+    domains,
+    moduleDomains,
+    taxonomies: versions.rows
+  };
 }
 
-export async function addTaxonomyOperation(input: { module: string; operation: string; description: string; version?: string }) {
-  const version = await query<{ id: string }>(`SELECT id::text FROM taxonomy_versions WHERE is_active ${input.version ? 'AND version = $1' : ''} ORDER BY created_at LIMIT 1`, input.version ? [input.version] : []);
-  if (!version.rows[0]) throw new Error('Nenhuma taxonomia ativa foi encontrada.');
-  const module = await query<{ id: string }>(`INSERT INTO taxonomy_modules (taxonomy_version_id, name, description, position) VALUES ($1, $2, '', COALESCE((SELECT MAX(position) + 1 FROM taxonomy_modules WHERE taxonomy_version_id = $1), 1)) ON CONFLICT (taxonomy_version_id, name) DO UPDATE SET name = EXCLUDED.name RETURNING id::text`, [version.rows[0].id, input.module]);
-  const operations = input.operation.split(/[\n;,]+/).map(value => value.trim()).filter(Boolean);
-  for (const operation of operations) {
-    await query(`INSERT INTO taxonomy_operations (module_id, name, description, position, is_active) VALUES ($1, $2, $3, COALESCE((SELECT MAX(position) + 1 FROM taxonomy_operations WHERE module_id = $1), 1), TRUE) ON CONFLICT (module_id, name) DO UPDATE SET description = EXCLUDED.description, is_active = TRUE`, [module.rows[0].id, operation, input.description]);
-  }
+async function ensureDomain(client: PoolClient, versionId: string, name: string, description: string) {
+  const result = await client.query<{ id: string }>(`
+    INSERT INTO taxonomy_domains (taxonomy_version_id, name, description, position)
+    VALUES ($1, $2, $3, COALESCE((SELECT MAX(position) + 1 FROM taxonomy_domains WHERE taxonomy_version_id = $1), 1))
+    ON CONFLICT (taxonomy_version_id, name) DO UPDATE SET
+      description = CASE WHEN taxonomy_domains.description = '' THEN EXCLUDED.description ELSE taxonomy_domains.description END
+    RETURNING id::text
+  `, [versionId, name, description]);
+  return result.rows[0].id;
+}
+
+async function ensureModule(client: PoolClient, versionId: string, domainId: string, name: string, description: string) {
+  const result = await client.query<{ id: string }>(`
+    INSERT INTO taxonomy_modules (taxonomy_version_id, domain_id, name, description, position)
+    VALUES ($1, $2, $3, $4, COALESCE((SELECT MAX(position) + 1 FROM taxonomy_modules WHERE taxonomy_version_id = $1), 1))
+    ON CONFLICT (taxonomy_version_id, name) DO UPDATE SET
+      description = CASE WHEN taxonomy_modules.description = '' THEN EXCLUDED.description ELSE taxonomy_modules.description END
+    RETURNING id::text
+  `, [versionId, domainId, name, description]);
+  return result.rows[0].id;
+}
+
+async function ensureOperation(client: PoolClient, moduleId: string, name: string, description: string) {
+  await client.query(`
+    INSERT INTO taxonomy_operations (module_id, name, description, position, is_active)
+    VALUES ($1, $2, $3, COALESCE((SELECT MAX(position) + 1 FROM taxonomy_operations WHERE module_id = $1), 1), TRUE)
+    ON CONFLICT (module_id, name) DO UPDATE SET
+      description = CASE WHEN taxonomy_operations.description = '' THEN EXCLUDED.description ELSE taxonomy_operations.description END,
+      is_active = TRUE
+  `, [moduleId, name, description]);
+}
+
+export async function addTaxonomyOperation(input: { domain?: string; module: string; operation: string; description: string; version?: string }) {
+  await withTransaction(async client => {
+    const version = await client.query<{ id: string }>(`SELECT id::text FROM taxonomy_versions WHERE is_active ${input.version ? 'AND version = $1' : ''} ORDER BY created_at LIMIT 1`, input.version ? [input.version] : []);
+    if (!version.rows[0]) throw new Error('Nenhuma taxonomia ativa foi encontrada.');
+    const domainId = await ensureDomain(client, version.rows[0].id, input.domain?.trim() || 'General', 'Domínio base para módulos sem área definida.');
+    const moduleId = await ensureModule(client, version.rows[0].id, domainId, input.module, '');
+    const operations = input.operation.split(/[\n;,]+/).map(value => value.trim()).filter(Boolean);
+    for (const operation of operations) await ensureOperation(client, moduleId, operation, input.description);
+  });
+}
+
+export async function addTaxonomyDomain(input: { domain: string; description: string; version?: string }) {
+  await withTransaction(async client => {
+    const version = await client.query<{ id: string }>(`SELECT id::text FROM taxonomy_versions WHERE is_active ${input.version ? 'AND version = $1' : ''} ORDER BY created_at LIMIT 1`, input.version ? [input.version] : []);
+    if (!version.rows[0]) throw new Error('Nenhuma taxonomia ativa foi encontrada.');
+    await ensureDomain(client, version.rows[0].id, input.domain, input.description);
+  });
 }
 
 export async function createTaxonomyVersion(version: string) {
@@ -198,69 +266,68 @@ export async function createTaxonomyVersion(version: string) {
 
 export type ApplyFallbackSuggestionResult =
   | { status: 'applied' | 'already_applied' }
-  | { status: 'not_actionable' | 'target_module_not_found' | 'no_active_taxonomy' };
+  | { status: 'not_actionable' | 'target_domain_not_found' | 'target_module_not_found' | 'no_active_taxonomy' };
 
 export async function applyFallbackSuggestion(suggestionId: string): Promise<ApplyFallbackSuggestionResult | null> {
   return withTransaction(async client => {
     const suggestion = await client.query<{
       suggestion_type: FallbackSuggestion['type'];
       proposed_domain: string | null;
+      target_domain: string | null;
+      proposed_module: string | null;
       target_module: string | null;
       proposed_operation: string | null;
       reason: string;
       applied_at: string | null;
     }>(`
-      SELECT suggestion_type, proposed_domain, target_module, proposed_operation, reason, applied_at
+      SELECT suggestion_type, proposed_domain, target_domain, proposed_module, target_module, proposed_operation, reason, applied_at
       FROM classification_fallback_suggestions
       WHERE id = $1 FOR UPDATE
     `, [suggestionId]);
     const item = suggestion.rows[0];
     if (!item) return null;
     if (item.applied_at) return { status: 'already_applied' };
-    if (item.suggestion_type !== 'new_domain' && item.suggestion_type !== 'new_operation') {
-      return { status: 'not_actionable' };
-    }
+    if (!['new_domain', 'new_module', 'new_operation'].includes(item.suggestion_type)) return { status: 'not_actionable' };
 
     const version = await client.query<{ id: string }>(`
-      SELECT id::text FROM taxonomy_versions
-      WHERE is_active ORDER BY created_at LIMIT 1
+      SELECT id::text FROM taxonomy_versions WHERE is_active ORDER BY created_at LIMIT 1
     `);
     if (!version.rows[0]) return { status: 'no_active_taxonomy' };
+    const versionId = version.rows[0].id;
 
     if (item.suggestion_type === 'new_domain') {
       if (!item.proposed_domain) return { status: 'not_actionable' };
-      await client.query(`
-        INSERT INTO taxonomy_modules (taxonomy_version_id, name, description, position)
-        VALUES ($1, $2, $3, COALESCE((SELECT MAX(position) + 1 FROM taxonomy_modules WHERE taxonomy_version_id = $1), 1))
-        ON CONFLICT (taxonomy_version_id, name) DO UPDATE SET
-          description = CASE
-            WHEN taxonomy_modules.description = '' THEN EXCLUDED.description
-            ELSE taxonomy_modules.description
-          END
-      `, [version.rows[0].id, item.proposed_domain, item.reason]);
-    } else {
-      if (!item.target_module || !item.proposed_operation) return { status: 'not_actionable' };
-      const module = await client.query<{ id: string }>(`
-        SELECT id::text FROM taxonomy_modules
-        WHERE taxonomy_version_id = $1 AND name = $2
-      `, [version.rows[0].id, item.target_module]);
-      if (!module.rows[0]) return { status: 'target_module_not_found' };
-      await client.query(`
-        INSERT INTO taxonomy_operations (module_id, name, description, position, is_active)
-        VALUES ($1, $2, $3, COALESCE((SELECT MAX(position) + 1 FROM taxonomy_operations WHERE module_id = $1), 1), TRUE)
-        ON CONFLICT (module_id, name) DO UPDATE SET
-          description = CASE
-            WHEN taxonomy_operations.description = '' THEN EXCLUDED.description
-            ELSE taxonomy_operations.description
-          END,
-          is_active = TRUE
-      `, [module.rows[0].id, item.proposed_operation, item.reason]);
+      const domainId = await ensureDomain(client, versionId, item.proposed_domain, item.reason);
+      if (item.proposed_module) {
+        const moduleId = await ensureModule(client, versionId, domainId, item.proposed_module, item.reason);
+        if (item.proposed_operation) await ensureOperation(client, moduleId, item.proposed_operation, item.reason);
+      }
     }
 
-    await client.query(
-      'UPDATE classification_fallback_suggestions SET applied_at = NOW() WHERE id = $1',
-      [suggestionId]
-    );
+    if (item.suggestion_type === 'new_module') {
+      if (!item.target_domain || !item.proposed_module) return { status: 'not_actionable' };
+      const domain = await client.query<{ id: string }>(`
+        SELECT id::text FROM taxonomy_domains WHERE taxonomy_version_id = $1 AND name = $2
+      `, [versionId, item.target_domain]);
+      if (!domain.rows[0]) return { status: 'target_domain_not_found' };
+      const moduleId = await ensureModule(client, versionId, domain.rows[0].id, item.proposed_module, item.reason);
+      if (item.proposed_operation) await ensureOperation(client, moduleId, item.proposed_operation, item.reason);
+    }
+
+    if (item.suggestion_type === 'new_operation') {
+      if (!item.target_module || !item.proposed_operation) return { status: 'not_actionable' };
+      const module = await client.query<{ id: string }>(`
+        SELECT module.id::text
+        FROM taxonomy_modules module
+        JOIN taxonomy_domains domain ON domain.id = module.domain_id
+        WHERE module.taxonomy_version_id = $1 AND module.name = $2
+          AND ($3::varchar IS NULL OR domain.name = $3)
+      `, [versionId, item.target_module, item.target_domain]);
+      if (!module.rows[0]) return item.target_domain ? { status: 'target_domain_not_found' } : { status: 'target_module_not_found' };
+      await ensureOperation(client, module.rows[0].id, item.proposed_operation, item.reason);
+    }
+
+    await client.query('UPDATE classification_fallback_suggestions SET applied_at = NOW() WHERE id = $1', [suggestionId]);
     return { status: 'applied' };
   });
 }

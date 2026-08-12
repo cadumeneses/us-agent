@@ -20,8 +20,10 @@ type Vote = {
 };
 type FallbackSuggestion = {
   source?: string;
-  type?: 'new_domain' | 'new_operation' | 'clarify_story' | 'classification';
+  type?: 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story' | 'classification';
   proposed_domain?: string | null;
+  target_domain?: string | null;
+  proposed_module?: string | null;
   target_module?: string | null;
   proposed_operation?: string | null;
   reason?: string;
@@ -43,6 +45,8 @@ type Attempt = {
 type TaxonomyFeedback = {
   proposal_type?: string;
   proposed_domain?: string | null;
+  target_domain?: string | null;
+  proposed_module?: string | null;
   target_module?: string | null;
   proposed_operation?: string | null;
   justification?: string;
@@ -111,15 +115,17 @@ async function saveFallbackSuggestions(
     if (!suggestion.type || !suggestion.reason?.trim()) continue;
     const inserted = await client.query<{ id: string }>(`
       INSERT INTO classification_fallback_suggestions (
-        classification_id, source, suggestion_type, proposed_domain, target_module,
-        proposed_operation, reason, position
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+        classification_id, source, suggestion_type, proposed_domain, target_domain,
+        proposed_module, target_module, proposed_operation, reason, position
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
       RETURNING id
     `, [
       classificationId,
       suggestion.source,
       suggestion.type,
       suggestion.proposed_domain ?? null,
+      suggestion.target_domain ?? null,
+      suggestion.proposed_module ?? null,
       suggestion.target_module ?? null,
       suggestion.proposed_operation ?? null,
       suggestion.reason.trim(),
@@ -274,10 +280,10 @@ export async function importRecord(client: PoolClient, item: HistoricalResult, i
     const feedback = review.taxonomy_feedback;
     await client.query(`
       INSERT INTO taxonomy_feedback (
-          classification_id, reviewer, proposal_type, target_module, proposed_operation,
-        proposed_domain, justification, status, created_at
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,COALESCE($9, NOW()))
-    `, [classificationId, review.reviewer ?? null, feedback.proposal_type, feedback.target_module ?? null, feedback.proposed_operation ?? null, feedback.proposed_domain ?? null, feedback.justification ?? '', feedback.status ?? 'pending_taxonomy_board', review.reviewed_at ?? null]);
+          classification_id, reviewer, proposal_type, target_domain, target_module,
+          proposed_domain, proposed_module, proposed_operation, justification, status, created_at
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,COALESCE($11, NOW()))
+    `, [classificationId, review.reviewer ?? null, feedback.proposal_type, feedback.target_domain ?? null, feedback.target_module ?? null, feedback.proposed_domain ?? null, feedback.proposed_module ?? null, feedback.proposed_operation ?? null, feedback.justification ?? '', feedback.status ?? 'pending_taxonomy_board', review.reviewed_at ?? null]);
   }
   return classificationId;
 }

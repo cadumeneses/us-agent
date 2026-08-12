@@ -8,14 +8,16 @@ import type { FallbackSuggestion, ReviewContext, Story, Taxonomy } from '../type
 const pendingStatuses = new Set(['pending_review', 'taxonomy_gap', 'needs_rewrite']);
 const suggestionTypeLabel: Record<FallbackSuggestion['type'], string> = {
   new_domain: 'Novo domínio',
+  new_module: 'Novo módulo',
   new_operation: 'Nova operação',
   clarify_story: 'Esclarecer história',
   classification: 'Classificação alternativa'
 };
 
 function suggestionTarget(suggestion: FallbackSuggestion) {
-  if (suggestion.type === 'new_domain' && suggestion.proposedDomain) return `Domínio sugerido: ${suggestion.proposedDomain}`;
-  if (suggestion.type === 'new_operation' && suggestion.proposedOperation) return `Operação sugerida: ${suggestion.targetModule ?? 'Módulo não informado'} / ${suggestion.proposedOperation}`;
+  if (suggestion.type === 'new_domain' && suggestion.proposedDomain) return `Domínio sugerido: ${[suggestion.proposedDomain, suggestion.proposedModule, suggestion.proposedOperation].filter(Boolean).join(' / ')}`;
+  if (suggestion.type === 'new_module' && suggestion.proposedModule) return `Módulo sugerido: ${[suggestion.targetDomain ?? 'Domínio não informado', suggestion.proposedModule, suggestion.proposedOperation].filter(Boolean).join(' / ')}`;
+  if (suggestion.type === 'new_operation' && suggestion.proposedOperation) return `Operação sugerida: ${[suggestion.targetDomain, suggestion.targetModule ?? 'Módulo não informado', suggestion.proposedOperation].filter(Boolean).join(' / ')}`;
   return undefined;
 }
 
@@ -30,8 +32,11 @@ export function ReviewPage() {
   const [operation, setOperation] = useState('n/a');
   const [notes, setNotes] = useState('');
   const [showFeedback, setShowFeedback] = useState(false);
-  const [proposalType, setProposalType] = useState<'new_domain' | 'new_operation' | 'clarify_story'>('new_domain');
+  const [proposalType, setProposalType] = useState<'new_domain' | 'new_module' | 'new_operation' | 'clarify_story'>('new_domain');
   const [proposedDomain, setProposedDomain] = useState('');
+  const [targetDomain, setTargetDomain] = useState('');
+  const [proposedModule, setProposedModule] = useState('');
+  const [targetModule, setTargetModule] = useState('');
   const [proposedOperation, setProposedOperation] = useState('');
   const [feedbackJustification, setFeedbackJustification] = useState('');
   const [saving, setSaving] = useState(false);
@@ -64,6 +69,9 @@ export function ReviewPage() {
     setShowFeedback(false);
     setProposalType('new_domain');
     setProposedDomain('');
+    setTargetDomain('');
+    setProposedModule('');
+    setTargetModule('');
     setProposedOperation('');
     setFeedbackJustification('');
     setError('');
@@ -103,15 +111,21 @@ export function ReviewPage() {
       setError('Informe o domínio sugerido.');
       return null;
     }
-    if (proposalType === 'new_operation' && (module === 'n/a' || proposedOperation.trim().length < 2)) {
-      setError('Selecione o módulo alvo e informe a operação sugerida.');
+    if (proposalType === 'new_module' && (targetDomain.trim().length < 2 || proposedModule.trim().length < 2)) {
+      setError('Informe o domínio alvo e o módulo sugerido.');
+      return null;
+    }
+    if (proposalType === 'new_operation' && (targetModule.trim().length < 2 || proposedOperation.trim().length < 2)) {
+      setError('Informe o módulo alvo e a operação sugerida.');
       return null;
     }
     return {
       proposalType,
       proposedDomain: proposalType === 'new_domain' ? proposedDomain.trim() : undefined,
-      targetModule: proposalType === 'new_operation' ? module : undefined,
-      proposedOperation: proposalType === 'new_operation' ? proposedOperation.trim() : undefined,
+      targetDomain: proposalType === 'new_module' || proposalType === 'new_operation' ? targetDomain.trim() || undefined : undefined,
+      proposedModule: proposalType === 'new_domain' || proposalType === 'new_module' ? proposedModule.trim() || undefined : undefined,
+      targetModule: proposalType === 'new_operation' ? targetModule.trim() : undefined,
+      proposedOperation: proposalType === 'new_domain' || proposalType === 'new_module' || proposalType === 'new_operation' ? proposedOperation.trim() || undefined : undefined,
       justification: feedbackJustification.trim()
     };
   }
@@ -181,7 +195,7 @@ export function ReviewPage() {
                 <h4>Sugestões de fallback</h4>
                 {reviewContext.suggestions.map(suggestion => <article key={suggestion.id}>
                   <span>{suggestionTypeLabel[suggestion.type]}</span>
-                  <div><b>{suggestionTarget(suggestion) ?? `Origem: ${suggestion.source}`}</b><p>{suggestion.reason}</p>{suggestion.evidence.length > 0 && <small>Evidência: {suggestion.evidence.join(' · ')}</small>}{(suggestion.type === 'new_domain' || suggestion.type === 'new_operation') && <button className="apply-suggestion" disabled={Boolean(suggestion.appliedAt) || applyingSuggestion === suggestion.id} onClick={() => void applySuggestion(suggestion)}>{suggestion.appliedAt ? 'Adicionada à taxonomia' : applyingSuggestion === suggestion.id ? 'Adicionando…' : suggestion.type === 'new_domain' ? 'Adicionar domínio' : 'Adicionar operação'}</button>}</div>
+                  <div><b>{suggestionTarget(suggestion) ?? `Origem: ${suggestion.source}`}</b><p>{suggestion.reason}</p>{suggestion.evidence.length > 0 && <small>Evidência: {suggestion.evidence.join(' · ')}</small>}{(suggestion.type === 'new_domain' || suggestion.type === 'new_module' || suggestion.type === 'new_operation') && <button className="apply-suggestion" disabled={Boolean(suggestion.appliedAt) || applyingSuggestion === suggestion.id} onClick={() => void applySuggestion(suggestion)}>{suggestion.appliedAt ? 'Adicionada à taxonomia' : applyingSuggestion === suggestion.id ? 'Adicionando…' : suggestion.type === 'new_domain' ? 'Adicionar domínio' : suggestion.type === 'new_module' ? 'Adicionar módulo' : 'Adicionar operação'}</button>}</div>
                 </article>)}
               </div> : null}
               {reviewContext?.votes.length ? <div className="vote-list">
@@ -204,9 +218,10 @@ export function ReviewPage() {
           <div className="taxonomy-feedback">
             <button type="button" onClick={() => setShowFeedback(value => !value)}>{showFeedback ? 'Cancelar proposta de evolução' : 'Sugerir evolução da taxonomia'}</button>
             {showFeedback && <div className="feedback-fields">
-              <label>Tipo de proposta<select value={proposalType} onChange={event => setProposalType(event.target.value as typeof proposalType)}><option value="new_domain">Novo domínio</option><option value="new_operation">Nova operação em um módulo</option><option value="clarify_story">Solicitar esclarecimento da história</option></select></label>
-              {proposalType === 'new_domain' && <label>Domínio sugerido<input value={proposedDomain} onChange={event => setProposedDomain(event.target.value)} placeholder="Ex.: Faturamento"/></label>}
-              {proposalType === 'new_operation' && <label>Operação sugerida para {module === 'n/a' ? 'um módulo selecionado' : module}<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Conciliar pagamento"/></label>}
+              <label>Tipo de proposta<select value={proposalType} onChange={event => setProposalType(event.target.value as typeof proposalType)}><option value="new_domain">Novo domínio (nova área)</option><option value="new_module">Novo módulo em um domínio</option><option value="new_operation">Nova operação em um módulo</option><option value="clarify_story">Solicitar esclarecimento da história</option></select></label>
+              {proposalType === 'new_domain' && <><label>Domínio sugerido<input value={proposedDomain} onChange={event => setProposedDomain(event.target.value)} placeholder="Ex.: Mobile ou IoT"/></label><label>Módulo inicial (opcional)<input value={proposedModule} onChange={event => setProposedModule(event.target.value)} placeholder="Ex.: Sincronização"/></label><label>Operação inicial (opcional)<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Sincronizar offline"/></label></>}
+              {proposalType === 'new_module' && <><label>Domínio alvo<input value={targetDomain} onChange={event => setTargetDomain(event.target.value)} placeholder="Ex.: Mobile"/></label><label>Módulo sugerido<input value={proposedModule} onChange={event => setProposedModule(event.target.value)} placeholder="Ex.: Notificações push"/></label><label>Operação inicial (opcional)<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Agendar notificação"/></label></>}
+              {proposalType === 'new_operation' && <><label>Domínio alvo (opcional)<input value={targetDomain} onChange={event => setTargetDomain(event.target.value)} placeholder="Ex.: Mobile"/></label><label>Módulo alvo<input value={targetModule} onChange={event => setTargetModule(event.target.value)} placeholder="Ex.: Sincronização"/></label><label>Operação sugerida<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Sincronizar offline"/></label></>}
               <label>Justificativa da proposta<textarea className="small-area" value={feedbackJustification} onChange={event => setFeedbackJustification(event.target.value)} placeholder="Explique a lacuna observada e por que a proposta ajuda a cobri-la…"/></label>
               <small>A proposta será registrada ao marcar a lacuna e seguirá para a governança da taxonomia.</small>
             </div>}

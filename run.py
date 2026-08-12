@@ -202,12 +202,12 @@ def main():
     args = parse_args()
     api_client = AgentApiClient()
     try:
-        taxonomy_version, taxonomy = api_client.load_taxonomy()
+        taxonomy_version, taxonomy, module_domains = api_client.load_taxonomy()
     except (ValueError, requests.RequestException) as e:
         print(f"Erro ao carregar taxonomia da API: {e}")
         return
     print(f"Taxonomia SQL carregada pela API: version={taxonomy_version}")
-    taxonomy_text = taxonomy_to_prompt_text(taxonomy)
+    taxonomy_text = taxonomy_to_prompt_text(taxonomy, module_domains)
     if args.review_only:
         print("O modo --review-only foi transferido para a fila de revisão da aplicação WEB.")
         return

@@ -18,7 +18,7 @@ class AgentApiClient:
             return {}
         return {"Authorization": f"Bearer {self.ingest_api_key}"}
 
-    def load_taxonomy(self) -> tuple[str, dict[str, list[str]]]:
+    def load_taxonomy(self) -> tuple[str, dict[str, list[str]], dict[str, str]]:
         response = self.session.get(
             f"{self.base_url}/taxonomy",
             timeout=self.timeout_seconds,
@@ -34,7 +34,13 @@ class AgentApiClient:
             if not isinstance(module, str) or not isinstance(operations, list):
                 raise ValueError("A API retornou uma taxonomia inválida.")
             normalized[module] = [str(operation) for operation in operations]
-        return version, normalized
+        module_domains: dict[str, str] = {}
+        raw_domains = payload.get("moduleDomains")
+        if isinstance(raw_domains, dict):
+            for module, domain in raw_domains.items():
+                if isinstance(module, str) and isinstance(domain, str):
+                    module_domains[module] = domain
+        return version, normalized, module_domains
 
     def save_classification(self, result: dict[str, Any]) -> str:
         response = self.session.post(

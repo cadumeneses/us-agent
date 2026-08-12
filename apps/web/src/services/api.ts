@@ -13,7 +13,8 @@ export const api = {
   dashboard: () => request<Dashboard>('/api/dashboard'),
   stories: () => request<Story[]>('/api/stories'),
   taxonomy: (version?: string) => request<Taxonomy>(`/api/taxonomy${version ? `?version=${encodeURIComponent(version)}` : ''}`),
-  addTaxonomyOperation: (input: { module: string; operation: string; description: string; version?: string }) => request<Taxonomy>('/api/taxonomy/operations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) }),
+  addTaxonomyOperation: (input: { domain?: string; module: string; operation: string; description: string; version?: string }) => request<Taxonomy>('/api/taxonomy/operations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) }),
+  addTaxonomyDomain: (input: { domain: string; description: string; version?: string }) => request<Taxonomy>('/api/taxonomy/domains', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) }),
   applyFallbackSuggestion: (id: string) => request<{ status: 'applied' | 'already_applied'; taxonomy: Taxonomy }>(`/api/taxonomy/fallback-suggestions/${id}/apply`, { method: 'POST' }),
   createTaxonomyVersion: (version: string) => request<Taxonomy>('/api/taxonomy/versions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ version }) }),
   context: () => request<ApplicationContext>('/api/context'),
@@ -49,8 +50,10 @@ export const api = {
     action: 'taxonomy_gap';
     notes?: string;
     taxonomyFeedback?: {
-      proposalType: 'new_domain' | 'new_operation' | 'clarify_story';
+      proposalType: 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story';
       proposedDomain?: string;
+      targetDomain?: string;
+      proposedModule?: string;
       targetModule?: string;
       proposedOperation?: string;
       justification: string;

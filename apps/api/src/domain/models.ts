@@ -10,13 +10,15 @@ export type Story = {
   consensus: number;
 };
 
-export type FallbackSuggestionType = 'new_domain' | 'new_operation' | 'clarify_story' | 'classification';
+export type FallbackSuggestionType = 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story' | 'classification';
 
 export type FallbackSuggestion = {
   id?: string;
   source: string;
   type: FallbackSuggestionType;
   proposedDomain?: string;
+  targetDomain?: string;
+  proposedModule?: string;
   targetModule?: string;
   proposedOperation?: string;
   reason: string;
@@ -52,6 +54,8 @@ export type Taxonomy = {
   version: string;
   modules: Record<string, string[]>;
   descriptions?: Record<string, Record<string, string>>;
+  domains?: Record<string, { description: string; modules: Record<string, string[]> }>;
+  moduleDomains?: Record<string, string>;
   taxonomies?: Array<{ version: string; active: boolean; modules: number; operations: number }>;
 };
 

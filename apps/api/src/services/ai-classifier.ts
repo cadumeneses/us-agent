@@ -2,8 +2,10 @@ import { z } from 'zod';
 import type { FallbackSuggestion, ProviderVote, Taxonomy } from '../domain/models.js';
 
 const fallbackSuggestion = z.object({
-  type: z.enum(['new_domain', 'new_operation', 'clarify_story', 'classification']),
+  type: z.enum(['new_domain', 'new_module', 'new_operation', 'clarify_story', 'classification']),
   proposed_domain: z.string().trim().min(1).max(120).optional(),
+  target_domain: z.string().trim().min(1).max(120).optional(),
+  proposed_module: z.string().trim().min(1).max(120).optional(),
   target_module: z.string().trim().min(1).max(120).optional(),
   proposed_operation: z.string().trim().min(1).max(180).optional(),
   reason: z.string().trim().min(1).max(2_000),
@@ -27,12 +29,20 @@ type Provider = { name: string; call: (system: string, user: string) => Promise<
 const timeoutMs = Number(process.env.AI_PROVIDER_TIMEOUT_MS ?? 45_000);
 
 function taxonomyText(taxonomy: Taxonomy) {
+  if (taxonomy.domains && Object.keys(taxonomy.domains).length) {
+    return Object.entries(taxonomy.domains).map(([domain, value]) => [
+      domain,
+      ...Object.entries(value.modules).map(([module, operations]) =>
+        `- ${module}: ${operations.map(operation => `${operation}${taxonomy.descriptions?.[module]?.[operation] ? ` (${taxonomy.descriptions[module][operation]})` : ''}`).join(', ')}`
+      )
+    ].join('\n')).join('\n\n');
+  }
   return Object.entries(taxonomy.modules).map(([module, operations]) => `${module}: ${operations.map(operation => `${operation}${taxonomy.descriptions?.[module]?.[operation] ? ` (${taxonomy.descriptions[module][operation]})` : ''}`).join(', ')}`).join('\n');
 }
 
 function prompt(taxonomy: Taxonomy, story: string) {
   const system = 'Você classifica histórias de usuário. Retorne somente JSON válido, sem markdown.';
-  const user = `Classifique a história exclusivamente na taxonomia abaixo. Não invente rótulos. Se não houver cobertura, use uma única linha {"module":"n/a","operation":"n/a"}, confidence até 0.5 e needs_review true. Nesse caso, ou quando faltar contexto, preencha fallback_suggestions com até 4 propostas estruturadas. type pode ser new_domain, new_operation, clarify_story ou classification; new_domain pode usar proposed_domain, new_operation deve usar target_module e proposed_operation. Sempre explique reason e, quando houver, evidence.\n\nTaxonomia:\n${taxonomyText(taxonomy)}\n\nHistória:\n${story}\n\nFormato JSON: {"rows":[{"module":"...","operation":"..."}],"confidence":0.0,"rationale":"...","evidence":["..."],"needs_review":false,"issues":["..."],"suggested_questions":["..."],"fallback_suggestions":[{"type":"clarify_story","reason":"...","evidence":["..."]}]}`;
+  const user = `Classifique a história exclusivamente na taxonomia abaixo. Não invente rótulos. Se não houver cobertura, use uma única linha {"module":"n/a","operation":"n/a"}, confidence até 0.5 e needs_review true. Nesse caso, ou quando faltar contexto, preencha fallback_suggestions com até 4 propostas estruturadas. A hierarquia é domínio (nova área como Mobile ou IoT) > módulo > operação: use new_domain com proposed_domain quando a área não existir; new_module com target_domain e proposed_module quando faltar um módulo nessa área; e new_operation com target_domain, target_module e proposed_operation quando faltar apenas a operação. Uma sugestão new_domain ou new_module também pode incluir os níveis filhos em proposed_module e proposed_operation. Sempre explique reason e, quando houver, evidence.\n\nTaxonomia:\n${taxonomyText(taxonomy)}\n\nHistória:\n${story}\n\nFormato JSON: {"rows":[{"module":"...","operation":"..."}],"confidence":0.0,"rationale":"...","evidence":["..."],"needs_review":false,"issues":["..."],"suggested_questions":["..."],"fallback_suggestions":[{"type":"new_domain","proposed_domain":"Mobile","proposed_module":"Sincronização","proposed_operation":"Sincronizar offline","reason":"...","evidence":["..."]}]}`;
   return { system, user };
 }
 
@@ -86,6 +96,8 @@ function normalizeFallbackSuggestions(provider: string, suggestions: Vote['fallb
     source: provider,
     type: suggestion.type,
     proposedDomain: suggestion.proposed_domain,
+    targetDomain: suggestion.target_domain,
+    proposedModule: suggestion.proposed_module,
     targetModule: suggestion.target_module,
     proposedOperation: suggestion.proposed_operation,
     reason: suggestion.reason,
@@ -96,7 +108,7 @@ function normalizeFallbackSuggestions(provider: string, suggestions: Vote['fallb
 function dedupeFallbackSuggestions(suggestions: FallbackSuggestion[]) {
   const seen = new Set<string>();
   return suggestions.filter(suggestion => {
-    const key = [suggestion.type, suggestion.proposedDomain, suggestion.targetModule, suggestion.proposedOperation, suggestion.reason].join('\u0000');
+    const key = [suggestion.type, suggestion.proposedDomain, suggestion.targetDomain, suggestion.proposedModule, suggestion.targetModule, suggestion.proposedOperation, suggestion.reason].join('\u0000');
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

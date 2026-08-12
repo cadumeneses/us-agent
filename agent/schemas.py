@@ -9,8 +9,10 @@ class ClassificationRow(BaseModel):
 
 
 class FallbackSuggestion(BaseModel):
-    type: Literal["new_domain", "new_operation", "clarify_story", "classification"]
+    type: Literal["new_domain", "new_module", "new_operation", "clarify_story", "classification"]
     proposed_domain: Optional[str] = None
+    target_domain: Optional[str] = None
+    proposed_module: Optional[str] = None
     target_module: Optional[str] = None
     proposed_operation: Optional[str] = None
     reason: str

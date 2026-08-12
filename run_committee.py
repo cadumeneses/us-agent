@@ -96,13 +96,13 @@ def main() -> None:
     args = parse_args()
     api_client = AgentApiClient()
     try:
-        taxonomy_version, taxonomy = api_client.load_taxonomy()
+        taxonomy_version, taxonomy, module_domains = api_client.load_taxonomy()
     except (ValueError, requests.RequestException) as exc:
         print(f"Erro ao carregar taxonomia da API: {exc}")
         return
 
     print(f"Taxonomia SQL carregada pela API: version={taxonomy_version}")
-    taxonomy_text = taxonomy_to_prompt_text(taxonomy)
+    taxonomy_text = taxonomy_to_prompt_text(taxonomy, module_domains)
 
     reviewer = args.reviewer
     if not args.classify_only:

@@ -155,7 +155,7 @@ Por padrao ele roda com `--classify-only` e depois gera `runs/results.csv`. Use 
 
 A revisão persistente é feita em `http://localhost:5173/review`. O antigo `--review-only` apenas informa essa mudança e não manipula arquivos locais.
 
-A fila exibe o contexto que levou ao fallback: decisão e motivo final, sugestões estruturadas, votos dos classificadores, evidências, problemas e perguntas. Ao marcar uma lacuna, o revisor pode registrar uma proposta de novo domínio, nova operação em um módulo existente ou esclarecimento da história. As propostas ficam em `taxonomy_feedback` com status `pending_taxonomy_board`.
+A fila exibe o contexto que levou ao fallback: decisão e motivo final, sugestões estruturadas, votos dos classificadores, evidências, problemas e perguntas. A taxonomia segue a hierarquia **domínio (área, como Mobile ou IoT) → módulo → operação**. Ao marcar uma lacuna, o revisor pode registrar uma proposta de novo domínio, módulo ou operação; sugestões da IA podem ser incorporadas explicitamente na própria fila. As propostas ficam em `taxonomy_feedback` com status `pending_taxonomy_board`.
 
 ## Argumentos CLI
 - `--project`: nome do projeto.
@@ -237,7 +237,7 @@ Exportacao manual:
 
 ## Taxonomia
 
-A fonte de verdade é formada por `taxonomy_versions`, `taxonomy_modules` e `taxonomy_operations`. A API fornece a versão ativa à WEB e ao worker Python.
+A fonte de verdade é formada por `taxonomy_versions`, `taxonomy_domains`, `taxonomy_modules` e `taxonomy_operations`. Um domínio representa uma nova área de negócio ou plataforma; módulos ficam dentro de um domínio, e operações dentro de um módulo. A API fornece a versão ativa à WEB e ao worker Python.
 
 ## Recomendador de plano de qualidade
 

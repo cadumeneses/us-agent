@@ -2,7 +2,7 @@ import { timingSafeEqual } from 'node:crypto';
 import { Router, type Request, type Response } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
-import { addTaxonomyOperation, applyFallbackSuggestion, createTaxonomyVersion, loadReviewContext, loadStories, loadTaxonomy } from '../repositories/data-repository.js';
+import { addTaxonomyDomain, addTaxonomyOperation, applyFallbackSuggestion, createTaxonomyVersion, loadReviewContext, loadStories, loadTaxonomy } from '../repositories/data-repository.js';
 import { classifyPreview, parseImportedStories } from '../services/classifier.js';
 import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
@@ -25,14 +25,19 @@ const classifyRequest = z.object({
 });
 
 const taxonomyFeedbackRequest = z.object({
-  proposalType: z.enum(['new_domain', 'new_operation', 'clarify_story']),
+  proposalType: z.enum(['new_domain', 'new_module', 'new_operation', 'clarify_story']),
   proposedDomain: z.string().trim().min(2).max(120).optional(),
+  targetDomain: z.string().trim().min(2).max(120).optional(),
+  proposedModule: z.string().trim().min(2).max(120).optional(),
   targetModule: z.string().trim().min(2).max(120).optional(),
   proposedOperation: z.string().trim().min(2).max(180).optional(),
   justification: z.string().trim().min(5).max(2_000)
 }).superRefine((feedback, context) => {
   if (feedback.proposalType === 'new_domain' && !feedback.proposedDomain) {
     context.addIssue({ code: 'custom', path: ['proposedDomain'], message: 'Informe o domínio sugerido.' });
+  }
+  if (feedback.proposalType === 'new_module' && (!feedback.targetDomain || !feedback.proposedModule)) {
+    context.addIssue({ code: 'custom', message: 'Informe o domínio alvo e o módulo sugerido.' });
   }
   if (feedback.proposalType === 'new_operation' && (!feedback.targetModule || !feedback.proposedOperation)) {
     context.addIssue({ code: 'custom', message: 'Informe o módulo alvo e a operação sugerida.' });
@@ -93,7 +98,8 @@ const storyDetailsRequest = z.object({
   functionalRequirements: z.array(z.object({ id: z.string().optional(), description: z.string().trim().min(1).max(1000) })).max(100),
   nonFunctionalRequirements: z.array(z.object({ id: z.string().optional(), description: z.string().trim().min(1).max(1000), type: z.string().trim().min(1).max(80), metric: z.string().trim().min(1).max(120) })).max(100)
 });
-const taxonomyOperationRequest = z.object({ module: z.string().trim().min(2).max(120), operation: z.string().trim().min(2).max(180), description: z.string().trim().min(5).max(1000), version: z.string().trim().min(1).max(40).optional() });
+const taxonomyOperationRequest = z.object({ domain: z.string().trim().min(2).max(120).optional(), module: z.string().trim().min(2).max(120), operation: z.string().trim().min(2).max(180), description: z.string().trim().min(5).max(1000), version: z.string().trim().min(1).max(40).optional() });
+const taxonomyDomainRequest = z.object({ domain: z.string().trim().min(2).max(120), description: z.string().trim().min(5).max(1000), version: z.string().trim().min(1).max(40).optional() });
 const taxonomyVersionRequest = z.object({ version: z.string().trim().min(1).max(40) });
 
 function isAuthorizedInternalRequest(req: Request, res: Response) {
@@ -164,6 +170,7 @@ apiRouter.put('/quality-plans/:id', async (req, res) => {
   res.json({ id: req.params.id, status: parsed.data.status, updatedAt: saved.updated_at, updatedBy: context.user.displayName });
 });
 apiRouter.post('/taxonomy/operations', async (req, res) => { const parsed = taxonomyOperationRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Dados da operação inválidos.' }); await addTaxonomyOperation(parsed.data); res.status(201).json(await loadTaxonomy()); });
+apiRouter.post('/taxonomy/domains', async (req, res) => { const parsed = taxonomyDomainRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Dados do domínio inválidos.' }); await addTaxonomyDomain(parsed.data); res.status(201).json(await loadTaxonomy()); });
 apiRouter.post('/taxonomy/versions', async (req, res) => { const parsed = taxonomyVersionRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Versão inválida.' }); await createTaxonomyVersion(parsed.data.version); res.status(201).json(await loadTaxonomy()); });
 
 apiRouter.post('/taxonomy/fallback-suggestions/:id/apply', async (req, res) => {
@@ -174,8 +181,9 @@ apiRouter.post('/taxonomy/fallback-suggestions/:id/apply', async (req, res) => {
     return void res.json({ status: result.status, taxonomy: await loadTaxonomy() });
   }
   const messages = {
-    not_actionable: 'Esta sugestão não representa um domínio ou uma operação adicionável.',
-    target_module_not_found: 'O módulo alvo da operação sugerida não existe na taxonomia ativa.',
+      not_actionable: 'Esta sugestão não representa um domínio ou uma operação adicionável.',
+      target_domain_not_found: 'O domínio alvo da sugestão não existe na taxonomia ativa.',
+      target_module_not_found: 'O módulo alvo da operação sugerida não existe na taxonomia ativa.',
     no_active_taxonomy: 'Nenhuma taxonomia ativa foi encontrada.'
   };
   res.status(422).json({ error: messages[result.status] });
