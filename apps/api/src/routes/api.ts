@@ -2,7 +2,7 @@ import { timingSafeEqual } from 'node:crypto';
 import { Router, type Request, type Response } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
-import { addTaxonomyDomain, addTaxonomyOperation, applyFallbackSuggestion, createTaxonomyVersion, loadReviewContext, loadStories, loadTaxonomy } from '../repositories/data-repository.js';
+import { addTaxonomyDomain, addTaxonomyOperation, applyFallbackSuggestion, createTaxonomyVersion, loadProjectSprints, loadReviewContext, loadStories, loadTaxonomy } from '../repositories/data-repository.js';
 import { classifyPreview, parseImportedStories } from '../services/classifier.js';
 import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
@@ -10,7 +10,7 @@ import { query, withTransaction } from '../database/pool.js';
 import { isExecutionModeActive, loadApplicationContext } from '../repositories/application-repository.js';
 import { savePreviewClassifications, saveReview } from '../services/classification-store.js';
 import { importRecord, type HistoricalResult } from '../database/import-jsonl.js';
-import { loadQualityPlans, saveQualityPlan } from '../services/quality-plans.js';
+import { buildQualityPlanScope, createQualityPlanScope, loadQualityPlans, saveQualityPlanScope } from '../services/quality-plans.js';
 import { loadStoryDetails, saveStoryDetails } from '../services/story-details.js';
 
 const upload = multer({
@@ -21,6 +21,7 @@ const upload = multer({
 const classifyRequest = z.object({
   stories: z.array(z.string().min(10)).min(1).max(100),
   project: z.string().trim().min(1).max(160).default('Web'),
+  sprint: z.string().trim().min(1).max(120).default('Backlog'),
   mode: z.enum(['preview', 'committee']).default('committee')
 });
 
@@ -75,23 +76,52 @@ const ingestionRequest = z.object({
 }).passthrough();
 
 const qualitySource = z.enum(['taxonomy_heuristic', 'user']);
+const qualityPlanScopeRequest = z.object({
+  project: z.string().trim().min(1).max(160),
+  sprint: z.string().trim().min(1).max(120),
+  storyIds: z.array(z.string().regex(/^\d+$/)).min(1).max(100)
+});
 const qualityPlanRequest = z.object({
   status: z.enum(['draft', 'approved']),
+  storyIds: z.array(z.string().regex(/^\d+$/)).min(1).max(100),
   questions: z.array(z.object({
+    id: z.string().trim().max(80).optional().default(''),
     text: z.string().trim().min(1).max(500),
     source: qualitySource
-  })).max(30),
+  })).max(500),
   acceptanceCriteria: z.array(z.object({
+    id: z.string().trim().max(80).optional().default(''),
     text: z.string().trim().min(1).max(500),
     source: qualitySource
-  })).max(30),
+  })).max(500),
   testCases: z.array(z.object({
+    id: z.string().trim().max(80).optional().default(''),
     title: z.string().trim().min(1).max(500),
     type: z.enum(['positive', 'negative', 'boundary', 'security']),
     priority: z.enum(['high', 'medium']),
     source: qualitySource,
-    assumption: z.boolean()
-  })).max(50)
+    assumption: z.boolean(),
+    preconditions: z.array(z.string().trim().min(1).max(500)).max(30).optional().default([]),
+    testData: z.string().trim().max(2_000).optional().default(''),
+    steps: z.array(z.string().trim().min(1).max(1_000)).max(30).optional().default([]),
+    expectedResult: z.string().trim().max(2_000).optional().default(''),
+    linkedCriteria: z.array(z.string().trim().min(1).max(80)).max(30).optional().default([]),
+    automation: z.enum(['manual', 'candidate']).optional().default('manual')
+  })).max(1_000)
+}).superRefine((plan, context) => {
+  if (plan.status !== 'approved') return;
+  if (!plan.testCases.length) {
+    context.addIssue({ code: 'custom', path: ['testCases'], message: 'Inclua ao menos um caso de teste antes de aprovar.' });
+  }
+  plan.testCases.forEach((testCase, index) => {
+    if (!testCase.steps.length) context.addIssue({ code: 'custom', path: ['testCases', index, 'steps'], message: 'Descreva ao menos um passo para cada caso aprovado.' });
+    if (!testCase.expectedResult) context.addIssue({ code: 'custom', path: ['testCases', index, 'expectedResult'], message: 'Informe o resultado esperado de cada caso aprovado.' });
+  });
+  const criterionIds = plan.acceptanceCriteria.map((criterion, index) => criterion.id || `AC-${String(index + 1).padStart(3, '0')}`);
+  const linkedCriteria = new Set(plan.testCases.flatMap(testCase => testCase.linkedCriteria));
+  criterionIds.forEach((id, index) => {
+    if (!linkedCriteria.has(id)) context.addIssue({ code: 'custom', path: ['acceptanceCriteria', index], message: 'Todo critério de aceitação precisa estar ligado a pelo menos um caso de teste.' });
+  });
 });
 const storyDetailsRequest = z.object({
   tasks: z.array(z.object({ id: z.string().optional(), title: z.string().trim().min(1).max(500), done: z.boolean() })).max(100),
@@ -151,9 +181,38 @@ apiRouter.get('/quality-plans', async (_req, res) => {
   res.json(await loadQualityPlans(await loadStories()));
 });
 
+apiRouter.get('/sprints', async (_req, res) => {
+  res.json(await loadProjectSprints());
+});
+
+apiRouter.post('/quality-plans/scopes', async (req, res) => {
+  const parsed = qualityPlanScopeRequest.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: 'Informe projeto, sprint e ao menos uma User Story para criar o plano.' });
+    return;
+  }
+  const stories = (await loadStories()).filter(story => parsed.data.storyIds.includes(story.id) && story.project === parsed.data.project);
+  if (stories.length !== parsed.data.storyIds.length) {
+    res.status(400).json({ error: 'Uma ou mais histórias não pertencem ao projeto selecionado.' });
+    return;
+  }
+  const plan = buildQualityPlanScope({ id: '', project: parsed.data.project, sprint: parsed.data.sprint, stories, status: 'draft' });
+  const context = await loadApplicationContext();
+  const saved = await createQualityPlanScope(context.user.id, { ...plan, storyIds: parsed.data.storyIds, status: 'draft' });
+  if (!saved) {
+    res.status(404).json({ error: 'Projeto não encontrado.' });
+    return;
+  }
+  if (saved.conflict) {
+    res.status(409).json({ error: 'Já existe um plano para este projeto e sprint.' });
+    return;
+  }
+  res.status(201).json({ ...plan, id: saved.id, status: 'draft', updatedAt: saved.updated_at, updatedBy: context.user.displayName });
+});
+
 apiRouter.put('/quality-plans/:id', async (req, res) => {
   if (!/^\d+$/.test(req.params.id)) {
-    res.status(400).json({ error: 'Identificador de classificação inválido.' });
+    res.status(400).json({ error: 'Identificador de plano inválido.' });
     return;
   }
   const parsed = qualityPlanRequest.safeParse(req.body);
@@ -162,9 +221,9 @@ apiRouter.put('/quality-plans/:id', async (req, res) => {
     return;
   }
   const context = await loadApplicationContext();
-  const saved = await saveQualityPlan(req.params.id, context.user.id, parsed.data);
+  const saved = await saveQualityPlanScope(req.params.id, context.user.id, parsed.data);
   if (!saved) {
-    res.status(404).json({ error: 'Classificação não encontrada.' });
+    res.status(404).json({ error: 'Plano de qualidade não encontrado.' });
     return;
   }
   res.json({ id: req.params.id, status: parsed.data.status, updatedAt: saved.updated_at, updatedBy: context.user.displayName });
@@ -226,7 +285,7 @@ apiRouter.post('/classify', async (req, res) => {
   const previews = parsed.data.mode === 'preview'
     ? parsed.data.stories.map(text => ({ text, ...classifyPreview(text, taxonomy) }))
     : await Promise.all(parsed.data.stories.map(async text => ({ text, ...await classifyWithAi(text, taxonomy) })));
-  res.status(201).json(await savePreviewClassifications(parsed.data.project, previews, parsed.data.mode));
+  res.status(201).json(await savePreviewClassifications(parsed.data.project, parsed.data.sprint, previews, parsed.data.mode));
 });
 
 apiRouter.patch('/classifications/:id/review', async (req, res) => {

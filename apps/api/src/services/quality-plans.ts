@@ -1,12 +1,12 @@
-import type { QualityPlan, QualityTestCase, Story } from '../domain/models.js';
-import { query } from '../database/pool.js';
+import type { QualityPlan, QualityPlanItem, QualityTestCase, Story } from '../domain/models.js';
+import { query, withTransaction } from '../database/pool.js';
 
-const GENERATOR_VERSION = 'quality_plan_v1';
+const GENERATOR_VERSION = 'quality_plan_v2';
 
 type RecommendationTemplate = {
   questions: string[];
   criteria: string[];
-  tests: Array<Omit<QualityTestCase, 'source'>>;
+  tests: Array<Pick<QualityTestCase, 'title' | 'type' | 'priority' | 'assumption'>>;
 };
 
 const commonSecurityTest = {
@@ -15,6 +15,92 @@ const commonSecurityTest = {
   priority: 'high',
   assumption: true
 } as const;
+
+type QualityPlanContent = Pick<QualityPlan, 'questions' | 'acceptanceCriteria' | 'testCases'>;
+
+type StoryQualityPlan = QualityPlanContent & {
+  story: Story;
+  health: QualityPlan['health'];
+  healthIssues: string[];
+  generatorVersion: string;
+  status: QualityPlan['status'];
+};
+
+function itemId(prefix: 'Q' | 'AC' | 'TC', index: number) {
+  return `${prefix}-${String(index + 1).padStart(3, '0')}`;
+}
+
+function cleanLines(value: unknown): string[] {
+  return Array.isArray(value)
+    ? value.filter((item): item is string => typeof item === 'string').map(item => item.trim()).filter(Boolean)
+    : [];
+}
+
+function defaultExpectedResult(type: QualityTestCase['type'], criterion?: string) {
+  if (type === 'positive' && criterion) return criterion;
+  if (type === 'security') return 'A operação é bloqueada ou limitada de forma segura, sem expor dados ou permitir acesso indevido.';
+  if (type === 'boundary') return 'O sistema trata o limite informado de forma previsível, sem perda ou corrupção de dados.';
+  return 'O sistema trata a condição sem concluir uma operação indevida e apresenta o retorno esperado.';
+}
+
+function buildGeneratedTestCase(
+  testCase: Pick<QualityTestCase, 'title' | 'type' | 'priority' | 'assumption'>,
+  index: number,
+  criteria: QualityPlanItem[]
+): QualityTestCase {
+  const linkedCriterion = criteria.length ? criteria[index % criteria.length] : undefined;
+  return {
+    ...testCase,
+    id: itemId('TC', index),
+    source: 'taxonomy_heuristic',
+    preconditions: ['Ambiente de teste disponível e dados preparados para o cenário.'],
+    testData: 'Dados de teste compatíveis com o cenário.',
+    steps: ['Preparar as condições necessárias.', testCase.title, 'Registrar o comportamento apresentado pelo sistema.'],
+    expectedResult: defaultExpectedResult(testCase.type, linkedCriterion?.text),
+    linkedCriteria: linkedCriterion ? [linkedCriterion.id] : [],
+    automation: testCase.type === 'positive' ? 'candidate' : 'manual'
+  };
+}
+
+/**
+ * Mantém os rascunhos antigos compatíveis e garante que todo plano tenha a
+ * estrutura necessária para execução e rastreabilidade de cobertura.
+ */
+export function normalizeQualityPlanContent(content: QualityPlanContent): QualityPlanContent {
+  const questions = (content.questions ?? []).map((item, index) => ({
+    id: item.id || itemId('Q', index),
+    text: item.text,
+    source: item.source ?? 'taxonomy_heuristic'
+  }));
+  const acceptanceCriteria = (content.acceptanceCriteria ?? []).map((item, index) => ({
+    id: item.id || itemId('AC', index),
+    text: item.text,
+    source: item.source ?? 'taxonomy_heuristic'
+  }));
+  const testCases = (content.testCases ?? []).map((testCase, index) => {
+    const linkedCriterion = acceptanceCriteria.length ? acceptanceCriteria[index % acceptanceCriteria.length] : undefined;
+    const preconditions = cleanLines(testCase.preconditions);
+    const steps = cleanLines(testCase.steps);
+    const linkedCriteria = cleanLines(testCase.linkedCriteria);
+    return {
+      id: testCase.id || itemId('TC', index),
+      title: testCase.title,
+      type: testCase.type,
+      priority: testCase.priority,
+      source: testCase.source ?? 'taxonomy_heuristic',
+      assumption: testCase.assumption,
+      preconditions: preconditions.length ? preconditions : ['Ambiente de teste disponível e dados preparados para o cenário.'],
+      testData: testCase.testData?.trim() || 'Dados de teste compatíveis com o cenário.',
+      steps: steps.length ? steps : ['Preparar as condições necessárias.', testCase.title, 'Registrar o comportamento apresentado pelo sistema.'],
+      expectedResult: testCase.expectedResult?.trim() || defaultExpectedResult(testCase.type, linkedCriterion?.text),
+      linkedCriteria: linkedCriteria.length
+        ? linkedCriteria.filter(id => acceptanceCriteria.some(criterion => criterion.id === id))
+        : linkedCriterion ? [linkedCriterion.id] : [],
+      automation: testCase.automation === 'candidate' ? 'candidate' as const : 'manual' as const
+    };
+  });
+  return { questions, acceptanceCriteria, testCases };
+}
 
 function exportTemplate(format: string): RecommendationTemplate {
   return {
@@ -146,34 +232,89 @@ const templates: Record<string, RecommendationTemplate> = {
   }
 };
 
-export function buildQualityPlan(story: Story): QualityPlan {
+export function buildQualityPlan(story: Story): StoryQualityPlan {
   const template = templates[`${story.module} / ${story.operation}`];
   const healthIssues: string[] = [];
   if (!template || story.module === 'n/a') healthIssues.push('A história ainda não possui uma classificação coberta pela taxonomia.');
   if (['pending_review', 'taxonomy_gap', 'needs_rewrite'].includes(story.status)) healthIssues.push('A classificação precisa de validação humana antes de consolidar o plano.');
   if (story.uncertainty >= 0.33) healthIssues.push('A classificação apresenta incerteza relevante.');
 
+  const questions = (template?.questions ?? [
+    'Qual comportamento principal esta história deve entregar?',
+    'Quais resultados indicam que a história foi concluída com sucesso?',
+    'Quais erros, limites e permissões precisam ser considerados?'
+  ]).map((text, index) => ({ id: itemId('Q', index), text, source: 'taxonomy_heuristic' as const }));
+  const acceptanceCriteria = (template?.criteria ?? []).map((text, index) => ({ id: itemId('AC', index), text, source: 'taxonomy_heuristic' as const }));
+
   return {
     story,
     health: !template ? 'needs_clarification' : healthIssues.length ? 'needs_review' : 'ready',
     healthIssues,
-    questions: (template?.questions ?? [
-      'Qual comportamento principal esta história deve entregar?',
-      'Quais resultados indicam que a história foi concluída com sucesso?',
-      'Quais erros, limites e permissões precisam ser considerados?'
-    ]).map(text => ({ text, source: 'taxonomy_heuristic' })),
-    acceptanceCriteria: (template?.criteria ?? []).map(text => ({ text, source: 'taxonomy_heuristic' })),
-    testCases: (template?.tests ?? []).map(testCase => ({ ...testCase, source: 'taxonomy_heuristic' })),
+    questions,
+    acceptanceCriteria,
+    testCases: (template?.tests ?? []).map((testCase, index) => buildGeneratedTestCase(testCase, index, acceptanceCriteria)),
     generatorVersion: GENERATOR_VERSION,
     status: 'generated'
   };
 }
 
-export function buildQualityPlans(stories: Story[]): QualityPlan[] {
+export function buildQualityPlans(stories: Story[]): StoryQualityPlan[] {
   return stories.map(buildQualityPlan);
 }
 
-type StoredPlan = {
+export function buildQualityPlanScope(input: {
+  id: string;
+  project: string;
+  sprint: string;
+  stories: Story[];
+  storyPlans?: StoryQualityPlan[];
+  status?: QualityPlan['status'];
+  updatedAt?: string;
+  updatedBy?: string;
+}): QualityPlan {
+  const storyPlans = input.storyPlans ?? buildQualityPlans(input.stories);
+  const questions: QualityPlan['questions'] = [];
+  const acceptanceCriteria: QualityPlan['acceptanceCriteria'] = [];
+  const testCases: QualityPlan['testCases'] = [];
+  const healthIssues: string[] = [];
+
+  storyPlans.forEach(storyPlan => {
+    const prefix = `US-${storyPlan.story.id}`;
+    const criterionIds = new Map(storyPlan.acceptanceCriteria.map(item => [item.id, `${prefix}-${item.id}`]));
+    storyPlan.questions.forEach(item => questions.push({ ...item, id: `${prefix}-${item.id}`, text: `${prefix} · ${item.text}` }));
+    storyPlan.acceptanceCriteria.forEach(item => acceptanceCriteria.push({ ...item, id: `${prefix}-${item.id}`, text: `${prefix} · ${item.text}` }));
+    storyPlan.testCases.forEach(testCase => testCases.push({
+      ...testCase,
+      id: `${prefix}-${testCase.id}`,
+      title: `${prefix} · ${testCase.title}`,
+      linkedCriteria: testCase.linkedCriteria.map(id => criterionIds.get(id) ?? id)
+    }));
+    healthIssues.push(...storyPlan.healthIssues.map(issue => `${prefix}: ${issue}`));
+  });
+
+  const health = !storyPlans.length || storyPlans.some(plan => plan.health === 'needs_clarification')
+    ? 'needs_clarification'
+    : storyPlans.some(plan => plan.health === 'needs_review') ? 'needs_review' : 'ready';
+  if (!storyPlans.length) healthIssues.push('Selecione ao menos uma User Story para compor o plano desta sprint.');
+
+  return {
+    id: input.id,
+    project: input.project,
+    sprint: input.sprint,
+    stories: input.stories,
+    health,
+    healthIssues,
+    questions,
+    acceptanceCriteria,
+    testCases,
+    generatorVersion: 'quality_plan_scope_v1',
+    status: input.status ?? 'generated',
+    updatedAt: input.updatedAt,
+    updatedBy: input.updatedBy
+  };
+}
+
+type StoredStoryPlan = {
   classification_id: string;
   content: Pick<QualityPlan, 'questions' | 'acceptanceCriteria' | 'testCases'>;
   status: 'draft' | 'approved';
@@ -181,9 +322,20 @@ type StoredPlan = {
   updated_by: string | null;
 };
 
-export async function loadQualityPlans(stories: Story[]): Promise<QualityPlan[]> {
+type StoredScope = {
+  id: string;
+  project: string;
+  sprint: string;
+  content: QualityPlanContent;
+  status: 'draft' | 'approved';
+  updated_at: string;
+  updated_by: string | null;
+  story_ids: string[];
+};
+
+async function loadLegacyStoryPlans(stories: Story[]): Promise<StoryQualityPlan[]> {
   const generated = buildQualityPlans(stories);
-  const saved = await query<StoredPlan>(`
+  const saved = await query<StoredStoryPlan>(`
     SELECT
       draft.classification_id::text,
       draft.content,
@@ -200,7 +352,11 @@ export async function loadQualityPlans(stories: Story[]): Promise<QualityPlan[]>
     if (!custom) return plan;
     return {
       ...plan,
-      ...custom.content,
+      ...normalizeQualityPlanContent({
+        questions: custom.content.questions ?? plan.questions,
+        acceptanceCriteria: custom.content.acceptanceCriteria ?? plan.acceptanceCriteria,
+        testCases: custom.content.testCases ?? plan.testCases
+      }),
       status: custom.status,
       updatedAt: custom.updated_at,
       updatedBy: custom.updated_by ?? undefined
@@ -208,30 +364,134 @@ export async function loadQualityPlans(stories: Story[]): Promise<QualityPlan[]>
   });
 }
 
-export type SaveQualityPlanInput = Pick<QualityPlan, 'questions' | 'acceptanceCriteria' | 'testCases'> & {
+export async function loadQualityPlans(stories: Story[]): Promise<QualityPlan[]> {
+  const [storyPlans, storedScopes] = await Promise.all([
+    loadLegacyStoryPlans(stories),
+    query<StoredScope>(`
+      SELECT
+        scope.id::text,
+        project.name AS project,
+        scope.sprint,
+        scope.content,
+        scope.status,
+        scope.updated_at::text,
+        user_account.display_name AS updated_by,
+        COALESCE(array_agg(scope_story.classification_id::text) FILTER (WHERE scope_story.classification_id IS NOT NULL), ARRAY[]::text[]) AS story_ids
+      FROM quality_plan_scopes scope
+      JOIN projects project ON project.id = scope.project_id
+      LEFT JOIN quality_plan_scope_stories scope_story ON scope_story.quality_plan_scope_id = scope.id
+      LEFT JOIN app_users user_account ON user_account.id = scope.updated_by
+      GROUP BY scope.id, project.name, user_account.display_name
+      ORDER BY project.name, scope.updated_at DESC
+    `)
+  ]);
+  const storyPlansById = new Map(storyPlans.map(plan => [plan.story.id, plan]));
+  const storiesById = new Map(stories.map(story => [story.id, story]));
+  const scopedStoryIds = new Set(storedScopes.rows.flatMap(scope => scope.story_ids));
+  const savedPlans = storedScopes.rows.map(scope => {
+    const selectedStoryPlans = scope.story_ids.map(id => storyPlansById.get(id)).filter((plan): plan is StoryQualityPlan => Boolean(plan));
+    const generated = buildQualityPlanScope({
+      id: scope.id,
+      project: scope.project,
+      sprint: scope.sprint,
+      stories: scope.story_ids.map(id => storiesById.get(id)).filter((story): story is Story => Boolean(story)),
+      storyPlans: selectedStoryPlans,
+      status: scope.status,
+      updatedAt: scope.updated_at,
+      updatedBy: scope.updated_by ?? undefined
+    });
+    return {
+      ...generated,
+      ...normalizeQualityPlanContent(scope.content),
+      status: scope.status,
+      updatedAt: scope.updated_at,
+      updatedBy: scope.updated_by ?? undefined
+    };
+  });
+  const defaultPlans = [...new Set(stories.map(story => story.project))]
+    .map(project => {
+      const projectStories = stories.filter(story => story.project === project && !scopedStoryIds.has(story.id));
+      if (!projectStories.length) return null;
+      return buildQualityPlanScope({
+        id: `new:${project}:backlog`,
+        project,
+        sprint: 'Backlog',
+        stories: projectStories,
+        storyPlans: projectStories.map(story => storyPlansById.get(story.id)!).filter(Boolean)
+      });
+    })
+    .filter((plan): plan is QualityPlan => Boolean(plan));
+  return [...savedPlans, ...defaultPlans];
+}
+
+export type SaveQualityPlanInput = QualityPlanContent & {
   status: 'draft' | 'approved';
+  storyIds: string[];
 };
 
-export async function saveQualityPlan(classificationId: string, userId: string, input: SaveQualityPlanInput) {
+async function validateStoriesInProject(projectId: string, storyIds: string[]) {
+  const uniqueIds = [...new Set(storyIds)];
+  const result = await query<{ id: string }>(`
+    SELECT classification.id::text AS id
+    FROM classifications classification
+    JOIN stories story ON story.id = classification.story_id
+    WHERE story.project_id = $1 AND classification.id = ANY($2::bigint[])
+  `, [projectId, uniqueIds]);
+  if (result.rows.length !== uniqueIds.length) throw new Error('Uma ou mais histórias não pertencem ao projeto selecionado.');
+  return uniqueIds;
+}
+
+async function replaceScopeStories(scopeId: string, storyIds: string[]) {
+  await withTransaction(async client => {
+    await client.query('DELETE FROM quality_plan_scope_stories WHERE quality_plan_scope_id = $1', [scopeId]);
+    if (storyIds.length) await client.query(`
+      INSERT INTO quality_plan_scope_stories (quality_plan_scope_id, classification_id)
+      SELECT $1, value::bigint FROM unnest($2::text[]) AS value
+    `, [scopeId, storyIds]);
+  });
+}
+
+export async function createQualityPlanScope(userId: string, input: SaveQualityPlanInput & { project: string; sprint: string }) {
+  const project = await query<{ id: string }>('SELECT id::text FROM projects WHERE name = $1', [input.project]);
+  if (!project.rows[0]) return null;
+  const sprint = await query<{ id: string }>(`
+    INSERT INTO project_sprints (project_id, name, status)
+    VALUES ($1, $2, 'planning')
+    ON CONFLICT (project_id, name) DO UPDATE SET name = EXCLUDED.name
+    RETURNING id::text
+  `, [project.rows[0].id, input.sprint]);
+  const storyIds = await validateStoriesInProject(project.rows[0].id, input.storyIds);
+  const content = normalizeQualityPlanContent(input);
+  const result = await query<{ id: string; updated_at: string }>(`
+    INSERT INTO quality_plan_scopes (project_id, sprint_id, sprint, content, status, updated_by)
+    VALUES ($1, $2, $3, $4::jsonb, $5, $6)
+    ON CONFLICT (sprint_id) DO NOTHING
+    RETURNING id::text, updated_at::text
+  `, [project.rows[0].id, sprint.rows[0].id, input.sprint, JSON.stringify(content), input.status, userId]);
+  if (!result.rows[0]) return { conflict: true } as const;
+  await replaceScopeStories(result.rows[0].id, storyIds);
+  return { ...result.rows[0], conflict: false } as const;
+}
+
+export async function saveQualityPlanScope(scopeId: string, userId: string, input: SaveQualityPlanInput) {
+  const content = normalizeQualityPlanContent(input);
+  const scope = await query<{ project_id: string }>('SELECT project_id::text FROM quality_plan_scopes WHERE id = $1', [scopeId]);
+  if (!scope.rows[0]) return null;
+  const storyIds = await validateStoriesInProject(scope.rows[0].project_id, input.storyIds);
   const result = await query<{ updated_at: string }>(`
-    INSERT INTO quality_plan_drafts (classification_id, content, status, updated_by)
-    SELECT $1, $2::jsonb, $3, $4
-    WHERE EXISTS (SELECT 1 FROM classifications WHERE id = $1)
-    ON CONFLICT (classification_id) DO UPDATE SET
-      content = EXCLUDED.content,
-      status = EXCLUDED.status,
-      updated_by = EXCLUDED.updated_by,
+    UPDATE quality_plan_scopes SET
+      content = $2::jsonb,
+      status = $3,
+      updated_by = $4,
       updated_at = NOW()
+    WHERE id = $1
     RETURNING updated_at::text
   `, [
-    classificationId,
-    JSON.stringify({
-      questions: input.questions,
-      acceptanceCriteria: input.acceptanceCriteria,
-      testCases: input.testCases
-    }),
+    scopeId,
+    JSON.stringify(content),
     input.status,
     userId
   ]);
+  await replaceScopeStories(scopeId, storyIds);
   return result.rows[0] ?? null;
 }

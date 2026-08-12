@@ -4,8 +4,8 @@ import type { Story } from '../domain/models.js';
 import { buildDashboard, filterStories } from './stories.js';
 
 const stories: Story[] = [
-  { id: '1', text: 'Login', project: 'A', module: 'Auth', operation: 'Login', confidence: 0.8, uncertainty: 0.2, consensus: 0.9, status: 'reviewed' },
-  { id: '2', text: 'Reset password', project: 'A', module: 'Auth', operation: 'Reset', confidence: 0.6, uncertainty: 0.4, consensus: 0.5, status: 'pending_review' }
+  { id: '1', text: 'Login', project: 'A', sprint: 'Sprint 1', module: 'Auth', operation: 'Login', confidence: 0.8, uncertainty: 0.2, consensus: 0.9, status: 'reviewed' },
+  { id: '2', text: 'Reset password', project: 'A', sprint: 'Sprint 1', module: 'Auth', operation: 'Reset', confidence: 0.6, uncertainty: 0.4, consensus: 0.5, status: 'pending_review' }
 ];
 
 test('builds dashboard totals', () => {

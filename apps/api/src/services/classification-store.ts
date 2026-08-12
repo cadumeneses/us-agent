@@ -37,6 +37,15 @@ async function upsertProject(client: PoolClient, name: string) {
   return result.rows[0].id;
 }
 
+async function upsertSprint(client: PoolClient, projectId: string, name: string) {
+  const result = await client.query<{ id: string }>(`
+    INSERT INTO project_sprints (project_id, name, status) VALUES ($1, $2, 'planning')
+    ON CONFLICT (project_id, name) DO UPDATE SET name = EXCLUDED.name
+    RETURNING id
+  `, [projectId, name]);
+  return result.rows[0].id;
+}
+
 async function saveProviderVotes(client: PoolClient, classificationId: string, votes: ProviderVote[] = []) {
   for (const [position, vote] of votes.entries()) {
     const inserted = await client.query<{ id: string }>(`
@@ -111,7 +120,7 @@ async function saveFallbackSuggestions(client: PoolClient, classificationId: str
   }
 }
 
-export async function savePreviewClassifications(project: string, inputs: PreviewInput[], executionMode: 'preview' | 'committee' = 'preview') {
+export async function savePreviewClassifications(project: string, sprint: string, inputs: PreviewInput[], executionMode: 'preview' | 'committee' = 'preview') {
   const runId = `${executionMode}_${randomUUID().replaceAll('-', '')}`;
   const results = await withTransaction(async client => {
     await client.query(`
@@ -119,14 +128,15 @@ export async function savePreviewClassifications(project: string, inputs: Previe
       VALUES ($1, $2, 'web', $2)
     `, [runId, executionMode]);
     const projectId = await upsertProject(client, project.trim() || 'Web');
+    const sprintId = await upsertSprint(client, projectId, sprint.trim() || 'Backlog');
     const persisted: PreviewResult[] = [];
 
     for (const input of inputs) {
       const story = await client.query<{ id: string }>(`
-        INSERT INTO stories (project_id, external_id, content) VALUES ($1, $2, $3)
-        ON CONFLICT (project_id, external_id) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW()
+        INSERT INTO stories (project_id, sprint_id, external_id, content) VALUES ($1, $2, $3, $4)
+        ON CONFLICT (project_id, external_id) DO UPDATE SET sprint_id = EXCLUDED.sprint_id, content = EXCLUDED.content, updated_at = NOW()
         RETURNING id
-      `, [projectId, storyExternalId(input.text), input.text]);
+      `, [projectId, sprintId, storyExternalId(input.text), input.text]);
       const classification = await client.query<{ id: string }>(`
         INSERT INTO classifications (
           story_id, run_id, review_status, final_confidence, uncertainty_score,

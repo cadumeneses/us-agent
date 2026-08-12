@@ -146,6 +146,11 @@ export async function importRecord(client: PoolClient, item: HistoricalResult, i
     ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name
     RETURNING id
   `, [projectName]);
+  const sprint = await client.query<{ id: string }>(`
+    INSERT INTO project_sprints (project_id, name, status) VALUES ($1, 'Backlog', 'planning')
+    ON CONFLICT (project_id, name) DO UPDATE SET name = EXCLUDED.name
+    RETURNING id
+  `, [project.rows[0].id]);
 
   await client.query(`
     INSERT INTO classification_runs (id, classification_mode, taxonomy_version, prompt_version, policy_version)
@@ -158,10 +163,10 @@ export async function importRecord(client: PoolClient, item: HistoricalResult, i
   `, [runId, item.classification_mode ?? null, item.taxonomy_version ?? null, item.prompt_version ?? null, item.policy_version ?? null]);
 
   const story = await client.query<{ id: string }>(`
-    INSERT INTO stories (project_id, external_id, content) VALUES ($1, $2, $3)
-    ON CONFLICT (project_id, external_id) DO UPDATE SET content = EXCLUDED.content, updated_at = NOW()
+    INSERT INTO stories (project_id, sprint_id, external_id, content) VALUES ($1, $2, $3, $4)
+    ON CONFLICT (project_id, external_id) DO UPDATE SET sprint_id = EXCLUDED.sprint_id, content = EXCLUDED.content, updated_at = NOW()
     RETURNING id
-  `, [project.rows[0].id, externalStoryId, content]);
+  `, [project.rows[0].id, sprint.rows[0].id, externalStoryId, content]);
 
   const final = item.final ?? {};
   const uncertainty = item.uncertainty ?? {};

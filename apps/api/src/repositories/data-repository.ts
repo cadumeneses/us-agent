@@ -1,4 +1,4 @@
-import type { FallbackSuggestion, ProviderVote, ReviewContext, Story, Taxonomy } from '../domain/models.js';
+import type { FallbackSuggestion, ProjectSprint, ProviderVote, ReviewContext, Story, Taxonomy } from '../domain/models.js';
 import type { PoolClient } from 'pg';
 import { query, withTransaction } from '../database/pool.js';
 
@@ -6,6 +6,7 @@ type StoryRow = {
   id: string;
   text: string;
   project: string;
+  sprint: string;
   module: string;
   operation: string;
   confidence: number;
@@ -20,6 +21,7 @@ export async function loadStories(): Promise<Story[]> {
       classification.id::text AS id,
       story.content AS text,
       project.name AS project,
+      sprint.name AS sprint,
       COALESCE(label.module, 'n/a') AS module,
       COALESCE(label.operation, 'n/a') AS operation,
       classification.final_confidence AS confidence,
@@ -29,6 +31,7 @@ export async function loadStories(): Promise<Story[]> {
     FROM classifications classification
     JOIN stories story ON story.id = classification.story_id
     JOIN projects project ON project.id = story.project_id
+    JOIN project_sprints sprint ON sprint.id = story.sprint_id
     LEFT JOIN LATERAL (
       SELECT module, operation
       FROM classification_labels
@@ -39,6 +42,23 @@ export async function loadStories(): Promise<Story[]> {
     ORDER BY classification.created_at DESC, classification.id DESC
   `);
   return result.rows.map(row => ({ ...row, confidence: Number(row.confidence), uncertainty: Number(row.uncertainty), consensus: Number(row.consensus) }));
+}
+
+export async function loadProjectSprints(): Promise<ProjectSprint[]> {
+  const result = await query<{ id: string; project: string; name: string; status: ProjectSprint['status']; stories: number }>(`
+    SELECT
+      sprint.id::text,
+      project.name AS project,
+      sprint.name,
+      sprint.status,
+      COUNT(story.id)::int AS stories
+    FROM project_sprints sprint
+    JOIN projects project ON project.id = sprint.project_id
+    LEFT JOIN stories story ON story.sprint_id = sprint.id
+    GROUP BY sprint.id, project.name
+    ORDER BY project.name, sprint.created_at DESC
+  `);
+  return result.rows.map(row => ({ ...row, stories: Number(row.stories) }));
 }
 
 export async function loadReviewContext(classificationId: string): Promise<ReviewContext | null> {

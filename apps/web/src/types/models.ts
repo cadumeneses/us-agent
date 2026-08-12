@@ -2,6 +2,7 @@ export type Story = {
   id: string;
   text: string;
   project: string;
+  sprint: string;
   module: string;
   operation: string;
   confidence: number;
@@ -25,6 +26,14 @@ export type Taxonomy = {
   domains: Record<string, { description: string; modules: Record<string, string[]> }>;
   moduleDomains: Record<string, string>;
   taxonomies: Array<{ version: string; active: boolean; modules: number; operations: number }>;
+};
+
+export type ProjectSprint = {
+  id: string;
+  project: string;
+  name: string;
+  status: 'planning' | 'active' | 'completed';
+  stories: number;
 };
 
 export type Classification = {
@@ -80,17 +89,27 @@ export type ApplicationContext = {
 };
 
 export type QualityPlan = {
-  story: Story;
+  id: string;
+  project: string;
+  sprint: string;
+  stories: Story[];
   health: 'ready' | 'needs_clarification' | 'needs_review';
   healthIssues: string[];
-  questions: Array<{ text: string; source: 'taxonomy_heuristic' | 'user' }>;
-  acceptanceCriteria: Array<{ text: string; source: 'taxonomy_heuristic' | 'user' }>;
+  questions: Array<{ id: string; text: string; source: 'taxonomy_heuristic' | 'user' }>;
+  acceptanceCriteria: Array<{ id: string; text: string; source: 'taxonomy_heuristic' | 'user' }>;
   testCases: Array<{
+    id: string;
     title: string;
     type: 'positive' | 'negative' | 'boundary' | 'security';
     priority: 'high' | 'medium';
     source: 'taxonomy_heuristic' | 'user';
     assumption: boolean;
+    preconditions: string[];
+    testData: string;
+    steps: string[];
+    expectedResult: string;
+    linkedCriteria: string[];
+    automation: 'manual' | 'candidate';
   }>;
   generatorVersion: string;
   status: 'generated' | 'draft' | 'approved';

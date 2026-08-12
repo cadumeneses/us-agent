@@ -2,12 +2,21 @@ export type Story = {
   id: string;
   text: string;
   project: string;
+  sprint: string;
   module: string;
   operation: string;
   confidence: number;
   uncertainty: number;
   status: string;
   consensus: number;
+};
+
+export type ProjectSprint = {
+  id: string;
+  project: string;
+  name: string;
+  status: 'planning' | 'active' | 'completed';
+  stories: number;
 };
 
 export type FallbackSuggestionType = 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story' | 'classification';
@@ -68,20 +77,31 @@ export type Dashboard = {
 };
 
 export type QualityTestCase = {
+  id: string;
   title: string;
   type: 'positive' | 'negative' | 'boundary' | 'security';
   priority: 'high' | 'medium';
   source: 'taxonomy_heuristic' | 'user';
   assumption: boolean;
+  preconditions: string[];
+  testData: string;
+  steps: string[];
+  expectedResult: string;
+  linkedCriteria: string[];
+  automation: 'manual' | 'candidate';
 };
 
 export type QualityPlanItem = {
+  id: string;
   text: string;
   source: 'taxonomy_heuristic' | 'user';
 };
 
 export type QualityPlan = {
-  story: Story;
+  id: string;
+  project: string;
+  sprint: string;
+  stories: Story[];
   health: 'ready' | 'needs_clarification' | 'needs_review';
   healthIssues: string[];
   questions: QualityPlanItem[];

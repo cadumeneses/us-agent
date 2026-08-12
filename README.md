@@ -251,6 +251,18 @@ As recomendações distinguem três bases:
 - `inferred_from_story`: inferência que precisa ser confirmada;
 - `general_quality_practice`: prática geral, não um requisito confirmado.
 
+Na tela **Plano de qualidade**, cada sugestão passa por um chart de modelagem:
+**critérios de aceitação → cenários → variações → casos executáveis**. Os casos
+mantêm identificador, pré-condições, dados de teste, passos, resultado esperado,
+tipo, prioridade, candidato à automação e vínculo com um ou mais critérios.
+O plano só pode ser aprovado quando todo critério estiver coberto e os casos
+possuírem passos e resultado esperado; rascunhos continuam livres para edição.
+
+O plano é uma unidade de **projeto + sprint**. Ao criar uma sprint, o QA seleciona
+as User Stories do ciclo e recebe um plano único, com os casos identificados pela
+história de origem. Histórias que ainda não entraram em uma sprint ficam no plano
+virtual **Backlog** do projeto até serem alocadas ou salvas.
+
 Os provedores OpenAI, Gemini e HTTP OpenAI-like implementam
 `recommend_quality`. O helper `recommend_quality_plan` em
 `agent/quality_plan.py` monta o contexto de forma consistente e valida a saída
