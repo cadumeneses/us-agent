@@ -34,6 +34,40 @@ export type Classification = {
   needsReview: boolean;
 };
 
+export type FallbackSuggestion = {
+  id: string;
+  source: string;
+  type: 'new_domain' | 'new_operation' | 'clarify_story' | 'classification';
+  proposedDomain?: string;
+  targetModule?: string;
+  proposedOperation?: string;
+  reason: string;
+  evidence: string[];
+  appliedAt?: string;
+};
+
+export type ReviewContext = {
+  final: {
+    reason?: string;
+    notesForHuman?: string;
+    disagreementCause?: string;
+    action?: string;
+  };
+  suggestions: FallbackSuggestion[];
+  votes: Array<{
+    provider: string;
+    status: string;
+    error?: string;
+    confidence?: number;
+    rationale?: string;
+    needsReview: boolean;
+    rows: Array<{ module: string; operation: string }>;
+    evidence: string[];
+    issues: string[];
+    suggestedQuestions: string[];
+  }>;
+};
+
 export type ApplicationContext = {
   user: { id: string; displayName: string; initials: string; role: string };
   environment: string;

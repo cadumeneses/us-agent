@@ -88,17 +88,19 @@ def _collect_taxonomy_feedback() -> dict[str, Any] | None:
         return None
 
     proposal_type = _ask_choice(
-        "Tipo da proposta [1=new_operation, 2=new_module, 3=clarify_story]: ",
+        "Tipo da proposta [1=new_operation, 2=new_domain, 3=clarify_story]: ",
         {"1", "2", "3"},
     )
-    mapped_type = {"1": "new_operation", "2": "new_module", "3": "clarify_story"}[proposal_type]
+    mapped_type = {"1": "new_operation", "2": "new_domain", "3": "clarify_story"}[proposal_type]
 
-    target_module = input("Modulo alvo (vazio se nao aplicavel): ").strip() or None
+    proposed_domain = input("Novo dominio sugerido (vazio se nao aplicavel): ").strip() or None
+    target_module = input("Modulo alvo existente (vazio se nao aplicavel): ").strip() or None
     proposed_operation = input("Operacao proposta (vazio se nao aplicavel): ").strip() or None
     justification = input("Justificativa curta: ").strip()
 
     return {
         "proposal_type": mapped_type,
+        "proposed_domain": proposed_domain,
         "target_module": target_module,
         "proposed_operation": proposed_operation,
         "justification": justification,
@@ -119,6 +121,19 @@ def _extract_fallback_signals(result: dict[str, Any]) -> dict[str, list[str]]:
     return {"issues": issues, "suggested_questions": questions}
 
 
+def _extract_fallback_suggestions(result: dict[str, Any]) -> list[dict[str, Any]]:
+    suggestions: list[dict[str, Any]] = []
+    for vote in result.get("votes", []):
+        provider = vote.get("provider", "modelo")
+        for suggestion in vote.get("fallback_suggestions", []):
+            if not isinstance(suggestion, dict):
+                continue
+            normalized = {"source": provider, **suggestion}
+            if normalized not in suggestions:
+                suggestions.append(normalized)
+    return suggestions
+
+
 def maybe_apply_human_review(
     result: dict[str, Any],
     taxonomy_text: str,
@@ -136,6 +151,7 @@ def maybe_apply_human_review(
     taxonomy = _parse_taxonomy(taxonomy_text)
     uncertainty = result.get("uncertainty", {})
     fallback = _extract_fallback_signals(result)
+    fallback_suggestions = _extract_fallback_suggestions(result)
 
     print("\n" + "=" * 72)
     print("HUMAN REVIEW")
@@ -158,6 +174,12 @@ def maybe_apply_human_review(
         print("\nPerguntas sugeridas pelos modelos:")
         for item in fallback["suggested_questions"]:
             print(f"- {item}")
+    if fallback_suggestions:
+        print("\nSugestoes de fallback:")
+        for suggestion in fallback_suggestions:
+            target = suggestion.get("proposed_domain") or suggestion.get("proposed_operation") or "sem rotulo proposto"
+            print(f"- [{suggestion.get('source', 'modelo')}] {suggestion.get('type', 'fallback')}: {target}")
+            print(f"  Motivo: {suggestion.get('reason', 'n/a')}")
 
     print("\nAcoes:")
     print("  1. Aceitar decisao automatica")

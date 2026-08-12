@@ -8,6 +8,15 @@ class ClassificationRow(BaseModel):
     operation: str
 
 
+class FallbackSuggestion(BaseModel):
+    type: Literal["new_domain", "new_operation", "clarify_story", "classification"]
+    proposed_domain: Optional[str] = None
+    target_module: Optional[str] = None
+    proposed_operation: Optional[str] = None
+    reason: str
+    evidence: List[str] = Field(default_factory=list)
+
+
 class ClassifierOutput(BaseModel):
     rows: List[ClassificationRow]
     confidence: confloat(ge=0.0, le=1.0)
@@ -16,6 +25,7 @@ class ClassifierOutput(BaseModel):
     needs_review: bool = False
     issues: List[str] = Field(default_factory=list)
     suggested_questions: List[str] = Field(default_factory=list)
+    fallback_suggestions: List[FallbackSuggestion] = Field(default_factory=list)
 
 
 class ArbiterOutput(BaseModel):

@@ -16,6 +16,16 @@ type Vote = {
   needs_review?: boolean;
   issues?: string[];
   suggested_questions?: string[];
+  fallback_suggestions?: FallbackSuggestion[];
+};
+type FallbackSuggestion = {
+  source?: string;
+  type?: 'new_domain' | 'new_operation' | 'clarify_story' | 'classification';
+  proposed_domain?: string | null;
+  target_module?: string | null;
+  proposed_operation?: string | null;
+  reason?: string;
+  evidence?: string[];
 };
 type Attempt = {
   attempt?: number;
@@ -32,6 +42,7 @@ type Attempt = {
 };
 type TaxonomyFeedback = {
   proposal_type?: string;
+  proposed_domain?: string | null;
   target_module?: string | null;
   proposed_operation?: string | null;
   justification?: string;
@@ -62,6 +73,7 @@ export type HistoricalResult = {
   };
   uncertainty?: { uncertainty_score?: number; consensus_ratio?: number; band?: string };
   auto_resolution?: { kind?: string; reason?: string; resolved_at?: string };
+  fallback_suggestions?: FallbackSuggestion[];
   human_review?: {
     reviewer?: string;
     action?: string;
@@ -86,6 +98,34 @@ async function replaceList(client: PoolClient, table: string, parentColumn: stri
       `INSERT INTO ${table} (${parentColumn}, position, content) VALUES ($1, $2, $3)`,
       [parentId, position, content]
     );
+  }
+}
+
+async function saveFallbackSuggestions(
+  client: PoolClient,
+  classificationId: string,
+  suggestions: Array<FallbackSuggestion & { source: string }>
+) {
+  await client.query('DELETE FROM classification_fallback_suggestions WHERE classification_id = $1', [classificationId]);
+  for (const [position, suggestion] of suggestions.entries()) {
+    if (!suggestion.type || !suggestion.reason?.trim()) continue;
+    const inserted = await client.query<{ id: string }>(`
+      INSERT INTO classification_fallback_suggestions (
+        classification_id, source, suggestion_type, proposed_domain, target_module,
+        proposed_operation, reason, position
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      RETURNING id
+    `, [
+      classificationId,
+      suggestion.source,
+      suggestion.type,
+      suggestion.proposed_domain ?? null,
+      suggestion.target_module ?? null,
+      suggestion.proposed_operation ?? null,
+      suggestion.reason.trim(),
+      position
+    ]);
+    await replaceList(client, 'classification_fallback_evidence', 'fallback_suggestion_id', inserted.rows[0].id, suggestion.evidence ?? []);
   }
 }
 
@@ -195,6 +235,14 @@ export async function importRecord(client: PoolClient, item: HistoricalResult, i
     `, [classificationId, status.provider, position, status.status ?? 'error', status.error ?? null]);
   }
 
+  const fallbackSuggestions: Array<FallbackSuggestion & { source: string }> = [
+    ...(item.fallback_suggestions ?? []).map(suggestion => ({ ...suggestion, source: suggestion.source ?? 'arbiter' })),
+    ...(item.votes ?? []).flatMap((vote, position) =>
+      (vote.fallback_suggestions ?? []).map(suggestion => ({ ...suggestion, source: suggestion.source ?? vote.provider ?? `unknown-${position}` }))
+    )
+  ];
+  await saveFallbackSuggestions(client, classificationId, fallbackSuggestions);
+
   await client.query('DELETE FROM classification_attempts WHERE classification_id = $1', [classificationId]);
   for (const [position, attempt] of (item.attempts ?? []).entries()) {
     await client.query(`
@@ -226,10 +274,10 @@ export async function importRecord(client: PoolClient, item: HistoricalResult, i
     const feedback = review.taxonomy_feedback;
     await client.query(`
       INSERT INTO taxonomy_feedback (
-        classification_id, reviewer, proposal_type, target_module, proposed_operation,
-        justification, status, created_at
-      ) VALUES ($1,$2,$3,$4,$5,$6,$7,COALESCE($8, NOW()))
-    `, [classificationId, review.reviewer ?? null, feedback.proposal_type, feedback.target_module ?? null, feedback.proposed_operation ?? null, feedback.justification ?? '', feedback.status ?? 'pending_taxonomy_board', review.reviewed_at ?? null]);
+          classification_id, reviewer, proposal_type, target_module, proposed_operation,
+        proposed_domain, justification, status, created_at
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,COALESCE($9, NOW()))
+    `, [classificationId, review.reviewer ?? null, feedback.proposal_type, feedback.target_module ?? null, feedback.proposed_operation ?? null, feedback.proposed_domain ?? null, feedback.justification ?? '', feedback.status ?? 'pending_taxonomy_board', review.reviewed_at ?? null]);
   }
   return classificationId;
 }

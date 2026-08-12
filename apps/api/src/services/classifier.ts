@@ -23,7 +23,19 @@ export function classifyPreview(text: string, taxonomy: Taxonomy) {
     module: match?.[1] ?? 'n/a',
     operation: match?.[2] ?? 'n/a',
     confidence: match ? 0.86 : 0.35,
-    needsReview: !match
+    needsReview: !match,
+    finalReason: match
+      ? `A regra local identificou a intenção compatível com ${match[1]} / ${match[2]}.`
+      : 'Nenhuma regra da pré-classificação encontrou uma operação equivalente na taxonomia ativa.',
+    notesForHuman: match ? undefined : 'Confirme a classificação ou registre uma lacuna da taxonomia.',
+    disagreementCause: match ? undefined : 'taxonomy_gap',
+    finalAction: match ? 'none' : 'ask_human',
+    fallbackSuggestions: match ? [] : [{
+      source: 'preview_rules',
+      type: 'clarify_story' as const,
+      reason: 'A pré-classificação não encontrou cobertura suficiente para classificar a história com segurança.',
+      evidence: [text]
+    }]
   };
 }
 

@@ -12,12 +12,22 @@ Você é um classificador de histórias de usuário para a taxonomia WIS. Retorn
   "evidence": ["<trechos usados>"],
   "needs_review": <true|false>,
   "issues": ["<opcional>"],
-  "suggested_questions": ["<opcional>"]
+  "suggested_questions": ["<opcional>"],
+  "fallback_suggestions": [
+    {{
+      "type": "new_domain" | "new_operation" | "clarify_story" | "classification",
+      "proposed_domain": "<opcional; novo domínio>",
+      "target_module": "<opcional; módulo existente>",
+      "proposed_operation": "<opcional; nova operação>",
+      "reason": "<por que a sugestão ajuda>",
+      "evidence": ["<trechos usados>"]
+    }}
+  ]
 }}
 
 Regras:
 - Uma mesma US pode ter várias linhas (todos os pares módulo/operação aplicáveis).
-- Use apenas os módulos/operações da lista abaixo; se não encaixar, retorne uma única linha com module='n/a', operation='n/a', confidence<=0.5, needs_review=true e registre o motivo em issues.
+- Use apenas os módulos/operações da lista abaixo; se não encaixar, retorne uma única linha com module='n/a', operation='n/a', confidence<=0.5, needs_review=true, registre o motivo em issues e proponha um fallback estruturado. Para um domínio novo use type='new_domain' e proposed_domain; para uma nova operação use type='new_operation', target_module e proposed_operation.
 - Não invente rótulos. Não use markdown.
 
 Taxonomia:

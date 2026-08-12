@@ -2,7 +2,7 @@ import { timingSafeEqual } from 'node:crypto';
 import { Router, type Request, type Response } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
-import { addTaxonomyOperation, createTaxonomyVersion, loadStories, loadTaxonomy } from '../repositories/data-repository.js';
+import { addTaxonomyOperation, applyFallbackSuggestion, createTaxonomyVersion, loadReviewContext, loadStories, loadTaxonomy } from '../repositories/data-repository.js';
 import { classifyPreview, parseImportedStories } from '../services/classifier.js';
 import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
@@ -24,16 +24,32 @@ const classifyRequest = z.object({
   mode: z.enum(['preview', 'committee']).default('committee')
 });
 
+const taxonomyFeedbackRequest = z.object({
+  proposalType: z.enum(['new_domain', 'new_operation', 'clarify_story']),
+  proposedDomain: z.string().trim().min(2).max(120).optional(),
+  targetModule: z.string().trim().min(2).max(120).optional(),
+  proposedOperation: z.string().trim().min(2).max(180).optional(),
+  justification: z.string().trim().min(5).max(2_000)
+}).superRefine((feedback, context) => {
+  if (feedback.proposalType === 'new_domain' && !feedback.proposedDomain) {
+    context.addIssue({ code: 'custom', path: ['proposedDomain'], message: 'Informe o domínio sugerido.' });
+  }
+  if (feedback.proposalType === 'new_operation' && (!feedback.targetModule || !feedback.proposedOperation)) {
+    context.addIssue({ code: 'custom', message: 'Informe o módulo alvo e a operação sugerida.' });
+  }
+});
+
 const reviewRequest = z.discriminatedUnion('action', [
   z.object({
     action: z.literal('approve'),
-    module: z.string().trim().min(1).max(120),
-    operation: z.string().trim().min(1).max(180),
+    module: z.string().trim().min(1).max(120).refine(value => value !== 'n/a', 'Selecione um módulo da taxonomia ou marque uma lacuna.'),
+    operation: z.string().trim().min(1).max(180).refine(value => value !== 'n/a', 'Selecione uma operação da taxonomia ou marque uma lacuna.'),
     notes: z.string().trim().max(2_000).optional()
   }),
   z.object({
     action: z.literal('taxonomy_gap'),
-    notes: z.string().trim().max(2_000).optional()
+    notes: z.string().trim().max(2_000).optional(),
+    taxonomyFeedback: taxonomyFeedbackRequest.optional()
   })
 ]);
 
@@ -150,9 +166,30 @@ apiRouter.put('/quality-plans/:id', async (req, res) => {
 apiRouter.post('/taxonomy/operations', async (req, res) => { const parsed = taxonomyOperationRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Dados da operação inválidos.' }); await addTaxonomyOperation(parsed.data); res.status(201).json(await loadTaxonomy()); });
 apiRouter.post('/taxonomy/versions', async (req, res) => { const parsed = taxonomyVersionRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Versão inválida.' }); await createTaxonomyVersion(parsed.data.version); res.status(201).json(await loadTaxonomy()); });
 
+apiRouter.post('/taxonomy/fallback-suggestions/:id/apply', async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador da sugestão inválido.' });
+  const result = await applyFallbackSuggestion(req.params.id);
+  if (!result) return void res.status(404).json({ error: 'Sugestão de fallback não encontrada.' });
+  if (result.status === 'applied' || result.status === 'already_applied') {
+    return void res.json({ status: result.status, taxonomy: await loadTaxonomy() });
+  }
+  const messages = {
+    not_actionable: 'Esta sugestão não representa um domínio ou uma operação adicionável.',
+    target_module_not_found: 'O módulo alvo da operação sugerida não existe na taxonomia ativa.',
+    no_active_taxonomy: 'Nenhuma taxonomia ativa foi encontrada.'
+  };
+  res.status(422).json({ error: messages[result.status] });
+});
+
 apiRouter.get('/classifications/:id/details', async (req, res) => {
   if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });
   res.json(await loadStoryDetails(req.params.id));
+});
+apiRouter.get('/classifications/:id/review-context', async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });
+  const context = await loadReviewContext(req.params.id);
+  if (!context) return void res.status(404).json({ error: 'Classificação não encontrada.' });
+  res.json(context);
 });
 apiRouter.put('/classifications/:id/details', async (req, res) => {
   if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });

@@ -1,4 +1,4 @@
-import type { ApplicationContext, Classification, Dashboard, QualityPlan, Story, StoryDetails, Taxonomy } from '../types/models';
+import type { ApplicationContext, Classification, Dashboard, QualityPlan, ReviewContext, Story, StoryDetails, Taxonomy } from '../types/models';
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(url, options);
@@ -14,6 +14,7 @@ export const api = {
   stories: () => request<Story[]>('/api/stories'),
   taxonomy: (version?: string) => request<Taxonomy>(`/api/taxonomy${version ? `?version=${encodeURIComponent(version)}` : ''}`),
   addTaxonomyOperation: (input: { module: string; operation: string; description: string; version?: string }) => request<Taxonomy>('/api/taxonomy/operations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) }),
+  applyFallbackSuggestion: (id: string) => request<{ status: 'applied' | 'already_applied'; taxonomy: Taxonomy }>(`/api/taxonomy/fallback-suggestions/${id}/apply`, { method: 'POST' }),
   createTaxonomyVersion: (version: string) => request<Taxonomy>('/api/taxonomy/versions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ version }) }),
   context: () => request<ApplicationContext>('/api/context'),
   qualityPlans: () => request<QualityPlan[]>('/api/quality-plans'),
@@ -29,6 +30,7 @@ export const api = {
       })
     }),
   storyDetails: (id: string) => request<StoryDetails>(`/api/classifications/${id}/details`),
+  reviewContext: (id: string) => request<ReviewContext>(`/api/classifications/${id}/review-context`),
   saveStoryDetails: (id: string, details: StoryDetails) => request<StoryDetails>(`/api/classifications/${id}/details`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(details) }),
   classify: (stories: string[], project: string, mode: string) => request<{ runId: string; results: Classification[] }>(
     '/api/classify',
@@ -43,7 +45,17 @@ export const api = {
     body.append('file', file);
     return request<{ filename: string; stories: string[] }>('/api/import', { method: 'POST', body });
   },
-  review: (id: string, input: { action: 'approve'; module: string; operation: string; notes?: string } | { action: 'taxonomy_gap'; notes?: string }) =>
+  review: (id: string, input: { action: 'approve'; module: string; operation: string; notes?: string } | {
+    action: 'taxonomy_gap';
+    notes?: string;
+    taxonomyFeedback?: {
+      proposalType: 'new_domain' | 'new_operation' | 'clarify_story';
+      proposedDomain?: string;
+      targetModule?: string;
+      proposedOperation?: string;
+      justification: string;
+    };
+  }) =>
     request<{ id: string; status: string }>(`/api/classifications/${id}/review`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },

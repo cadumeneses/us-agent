@@ -1,5 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto';
 import type { PoolClient } from 'pg';
+import type { FallbackSuggestion, ProviderVote } from '../domain/models.js';
 import { withTransaction } from '../database/pool.js';
 
 export type PreviewResult = {
@@ -11,7 +12,16 @@ export type PreviewResult = {
   needsReview: boolean;
 };
 
-type PreviewInput = Omit<PreviewResult, 'id'>;
+export type ClassificationInput = Omit<PreviewResult, 'id'> & {
+  finalReason?: string;
+  notesForHuman?: string;
+  disagreementCause?: string;
+  finalAction?: string;
+  providerVotes?: ProviderVote[];
+  fallbackSuggestions?: FallbackSuggestion[];
+};
+
+type PreviewInput = ClassificationInput;
 
 function storyExternalId(text: string) {
   const normalized = text.trim().replace(/\s+/g, ' ');
@@ -25,6 +35,78 @@ async function upsertProject(client: PoolClient, name: string) {
     RETURNING id
   `, [name]);
   return result.rows[0].id;
+}
+
+async function saveProviderVotes(client: PoolClient, classificationId: string, votes: ProviderVote[] = []) {
+  for (const [position, vote] of votes.entries()) {
+    const inserted = await client.query<{ id: string }>(`
+      INSERT INTO provider_votes (
+        classification_id, provider, position, status, error, confidence, rationale, needs_review
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      RETURNING id
+    `, [
+      classificationId,
+      vote.provider,
+      position,
+      vote.status,
+      vote.error ?? null,
+      vote.confidence ?? null,
+      vote.rationale ?? null,
+      vote.needsReview
+    ]);
+    const voteId = inserted.rows[0].id;
+    for (const [labelPosition, row] of vote.rows.entries()) {
+      await client.query(
+        'INSERT INTO provider_vote_labels (vote_id, module, operation, position) VALUES ($1,$2,$3,$4)',
+        [voteId, row.module, row.operation, labelPosition]
+      );
+    }
+    for (const [evidencePosition, evidence] of vote.evidence.entries()) {
+      await client.query(
+        'INSERT INTO provider_vote_evidence (vote_id, position, content) VALUES ($1,$2,$3)',
+        [voteId, evidencePosition, evidence]
+      );
+    }
+    for (const [issuePosition, issue] of vote.issues.entries()) {
+      await client.query(
+        'INSERT INTO provider_vote_issues (vote_id, position, content) VALUES ($1,$2,$3)',
+        [voteId, issuePosition, issue]
+      );
+    }
+    for (const [questionPosition, question] of vote.suggestedQuestions.entries()) {
+      await client.query(
+        'INSERT INTO provider_vote_questions (vote_id, position, content) VALUES ($1,$2,$3)',
+        [voteId, questionPosition, question]
+      );
+    }
+  }
+}
+
+async function saveFallbackSuggestions(client: PoolClient, classificationId: string, suggestions: FallbackSuggestion[] = []) {
+  for (const [position, suggestion] of suggestions.entries()) {
+    const inserted = await client.query<{ id: string }>(`
+      INSERT INTO classification_fallback_suggestions (
+        classification_id, source, suggestion_type, proposed_domain, target_module,
+        proposed_operation, reason, position
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      RETURNING id
+    `, [
+      classificationId,
+      suggestion.source,
+      suggestion.type,
+      suggestion.proposedDomain ?? null,
+      suggestion.targetModule ?? null,
+      suggestion.proposedOperation ?? null,
+      suggestion.reason,
+      position
+    ]);
+    for (const [evidencePosition, evidence] of (suggestion.evidence ?? []).entries()) {
+      await client.query(
+        'INSERT INTO classification_fallback_evidence (fallback_suggestion_id, position, content) VALUES ($1,$2,$3)',
+        [inserted.rows[0].id, evidencePosition, evidence]
+      );
+    }
+  }
 }
 
 export async function savePreviewClassifications(project: string, inputs: PreviewInput[], executionMode: 'preview' | 'committee' = 'preview') {
@@ -47,8 +129,8 @@ export async function savePreviewClassifications(project: string, inputs: Previe
         INSERT INTO classifications (
           story_id, run_id, review_status, final_confidence, uncertainty_score,
           consensus_ratio, uncertainty_band, final_decision, disagreement_cause,
-          final_action, final_reason
-        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+          final_action, final_reason, notes_for_human
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
         RETURNING id
       `, [
         story.rows[0].id,
@@ -59,20 +141,39 @@ export async function savePreviewClassifications(project: string, inputs: Previe
         input.needsReview ? 0 : 1,
         input.needsReview ? 'high' : 'low',
         input.needsReview ? 'needs_human_review' : 'accept',
-        input.needsReview ? 'taxonomy_gap' : null,
-        input.needsReview ? 'ask_human' : 'none',
-        'Pré-classificação persistida pela aplicação web.'
+        input.disagreementCause ?? (input.needsReview ? 'taxonomy_gap' : null),
+        input.finalAction ?? (input.needsReview ? 'ask_human' : 'none'),
+        input.finalReason ?? 'Pré-classificação persistida pela aplicação web.',
+        input.notesForHuman ?? null
       ]);
+      const classificationId = classification.rows[0].id;
       await client.query(`
         INSERT INTO classification_labels (classification_id, module, operation, position)
         VALUES ($1, $2, $3, 0)
-      `, [classification.rows[0].id, input.module, input.operation]);
-      persisted.push({ ...input, id: classification.rows[0].id });
+      `, [classificationId, input.module, input.operation]);
+      await saveProviderVotes(client, classificationId, input.providerVotes);
+      await saveFallbackSuggestions(client, classificationId, input.fallbackSuggestions);
+      persisted.push({
+        id: classificationId,
+        text: input.text,
+        module: input.module,
+        operation: input.operation,
+        confidence: input.confidence,
+        needsReview: input.needsReview
+      });
     }
     return persisted;
   });
   return { runId, results };
 }
+
+export type TaxonomyFeedbackInput = {
+  proposalType: 'new_domain' | 'new_operation' | 'clarify_story';
+  proposedDomain?: string;
+  targetModule?: string;
+  proposedOperation?: string;
+  justification: string;
+};
 
 export type ReviewInput = {
   classificationId: string;
@@ -80,16 +181,25 @@ export type ReviewInput = {
   module?: string;
   operation?: string;
   notes?: string;
+  taxonomyFeedback?: TaxonomyFeedbackInput;
 };
 
 export async function saveReview(input: ReviewInput) {
   return withTransaction(async client => {
-    const current = await client.query<{ id: string; review_status: string }>(
-      'SELECT id::text, review_status FROM classifications WHERE id = $1 FOR UPDATE',
+    const current = await client.query<{ id: string; review_status: string; has_not_covered_label: boolean }>(
+      `SELECT classification.id::text, classification.review_status,
+        EXISTS (
+          SELECT 1 FROM classification_labels label
+          WHERE label.classification_id = classification.id
+            AND (label.module = 'n/a' OR label.operation = 'n/a')
+        ) AS has_not_covered_label
+      FROM classifications classification
+      WHERE classification.id = $1 FOR UPDATE`,
       [input.classificationId]
     );
     if (!current.rows[0]) return null;
-    if (!['pending_review', 'taxonomy_gap', 'needs_rewrite'].includes(current.rows[0].review_status)) {
+    const isRecoverableApproval = current.rows[0].review_status === 'reviewed' && current.rows[0].has_not_covered_label;
+    if (!['pending_review', 'taxonomy_gap', 'needs_rewrite'].includes(current.rows[0].review_status) && !isRecoverableApproval) {
       return { id: input.classificationId, status: current.rows[0].review_status, notReviewable: true as const };
     }
 
@@ -104,17 +214,16 @@ export async function saveReview(input: ReviewInput) {
     if (input.action === 'approve') {
       const module = input.module?.trim() || 'n/a';
       const operation = input.operation?.trim() || 'n/a';
-      if (module !== 'n/a' || operation !== 'n/a') {
-        const valid = await client.query(`
-          SELECT 1
-          FROM taxonomy_versions version
-          JOIN taxonomy_modules taxonomy_module ON taxonomy_module.taxonomy_version_id = version.id
-          JOIN taxonomy_operations taxonomy_operation ON taxonomy_operation.module_id = taxonomy_module.id
-          WHERE version.is_active AND taxonomy_operation.is_active
-            AND taxonomy_module.name = $1 AND taxonomy_operation.name = $2
-        `, [module, operation]);
-        if (!valid.rowCount) throw new Error('Módulo e operação não pertencem à taxonomia ativa.');
-      }
+      if (module === 'n/a' || operation === 'n/a') throw new Error('Aprovação requer um módulo e uma operação da taxonomia ativa.');
+      const valid = await client.query(`
+        SELECT 1
+        FROM taxonomy_versions version
+        JOIN taxonomy_modules taxonomy_module ON taxonomy_module.taxonomy_version_id = version.id
+        JOIN taxonomy_operations taxonomy_operation ON taxonomy_operation.module_id = taxonomy_module.id
+        WHERE version.is_active AND taxonomy_operation.is_active
+          AND taxonomy_module.name = $1 AND taxonomy_operation.name = $2
+      `, [module, operation]);
+      if (!valid.rowCount) throw new Error('Módulo e operação não pertencem à taxonomia ativa.');
       await client.query(`
         UPDATE classifications SET
           review_status = 'reviewed', final_decision = 'accept', final_action = 'none',
@@ -146,6 +255,22 @@ export async function saveReview(input: ReviewInput) {
           classification_id, user_id, reviewer, action, outcome, queue_status, notes
         ) VALUES ($1, $2, $3, 'taxonomy_gap', 'kept_for_human_queue', 'taxonomy_gap', $4)
       `, [input.classificationId, user.rows[0].id, user.rows[0].display_name, input.notes?.trim() || null]);
+      if (input.taxonomyFeedback) {
+        await client.query(`
+          INSERT INTO taxonomy_feedback (
+            classification_id, reviewer, proposal_type, proposed_domain, target_module,
+            proposed_operation, justification, status
+          ) VALUES ($1,$2,$3,$4,$5,$6,$7,'pending_taxonomy_board')
+        `, [
+          input.classificationId,
+          user.rows[0].display_name,
+          input.taxonomyFeedback.proposalType,
+          input.taxonomyFeedback.proposedDomain?.trim() || null,
+          input.taxonomyFeedback.targetModule?.trim() || null,
+          input.taxonomyFeedback.proposedOperation?.trim() || null,
+          input.taxonomyFeedback.justification.trim()
+        ]);
+      }
     }
     return { id: input.classificationId, status: input.action === 'approve' ? 'reviewed' : 'taxonomy_gap' };
   });

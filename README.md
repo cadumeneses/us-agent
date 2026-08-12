@@ -155,6 +155,8 @@ Por padrao ele roda com `--classify-only` e depois gera `runs/results.csv`. Use 
 
 A revisão persistente é feita em `http://localhost:5173/review`. O antigo `--review-only` apenas informa essa mudança e não manipula arquivos locais.
 
+A fila exibe o contexto que levou ao fallback: decisão e motivo final, sugestões estruturadas, votos dos classificadores, evidências, problemas e perguntas. Ao marcar uma lacuna, o revisor pode registrar uma proposta de novo domínio, nova operação em um módulo existente ou esclarecimento da história. As propostas ficam em `taxonomy_feedback` com status `pending_taxonomy_board`.
+
 ## Argumentos CLI
 - `--project`: nome do projeto.
 - `--project-ids`: IDs de projeto para execucao em lote, separados por `,` ou `;` e com suporte a intervalo (`P01-P10`).

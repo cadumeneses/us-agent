@@ -1,10 +1,24 @@
 import { z } from 'zod';
-import type { Taxonomy } from '../domain/models.js';
+import type { FallbackSuggestion, ProviderVote, Taxonomy } from '../domain/models.js';
+
+const fallbackSuggestion = z.object({
+  type: z.enum(['new_domain', 'new_operation', 'clarify_story', 'classification']),
+  proposed_domain: z.string().trim().min(1).max(120).optional(),
+  target_module: z.string().trim().min(1).max(120).optional(),
+  proposed_operation: z.string().trim().min(1).max(180).optional(),
+  reason: z.string().trim().min(1).max(2_000),
+  evidence: z.array(z.string().trim().min(1).max(1_000)).max(8).default([])
+});
 
 const aiOutput = z.object({
   rows: z.array(z.object({ module: z.string(), operation: z.string() })).min(1).max(8),
   confidence: z.number().min(0).max(1),
-  needs_review: z.boolean().optional()
+  rationale: z.string().trim().max(2_000).default(''),
+  evidence: z.array(z.string().trim().min(1).max(1_000)).max(8).default([]),
+  needs_review: z.boolean().default(false),
+  issues: z.array(z.string().trim().min(1).max(1_000)).max(8).default([]),
+  suggested_questions: z.array(z.string().trim().min(1).max(1_000)).max(8).default([]),
+  fallback_suggestions: z.array(fallbackSuggestion).max(4).default([])
 });
 
 type Vote = z.infer<typeof aiOutput>;
@@ -18,7 +32,7 @@ function taxonomyText(taxonomy: Taxonomy) {
 
 function prompt(taxonomy: Taxonomy, story: string) {
   const system = 'Você classifica histórias de usuário. Retorne somente JSON válido, sem markdown.';
-  const user = `Classifique a história exclusivamente na taxonomia abaixo. Não invente rótulos. Se não houver cobertura, use uma única linha {"module":"n/a","operation":"n/a"}, confidence até 0.5 e needs_review true.\n\nTaxonomia:\n${taxonomyText(taxonomy)}\n\nHistória:\n${story}\n\nFormato JSON: {"rows":[{"module":"...","operation":"..."}],"confidence":0.0,"needs_review":false}`;
+  const user = `Classifique a história exclusivamente na taxonomia abaixo. Não invente rótulos. Se não houver cobertura, use uma única linha {"module":"n/a","operation":"n/a"}, confidence até 0.5 e needs_review true. Nesse caso, ou quando faltar contexto, preencha fallback_suggestions com até 4 propostas estruturadas. type pode ser new_domain, new_operation, clarify_story ou classification; new_domain pode usar proposed_domain, new_operation deve usar target_module e proposed_operation. Sempre explique reason e, quando houver, evidence.\n\nTaxonomia:\n${taxonomyText(taxonomy)}\n\nHistória:\n${story}\n\nFormato JSON: {"rows":[{"module":"...","operation":"..."}],"confidence":0.0,"rationale":"...","evidence":["..."],"needs_review":false,"issues":["..."],"suggested_questions":["..."],"fallback_suggestions":[{"type":"clarify_story","reason":"...","evidence":["..."]}]}`;
   return { system, user };
 }
 
@@ -67,6 +81,28 @@ function parseVote(raw: string, taxonomy: Taxonomy): Vote {
   return { ...parsed, rows };
 }
 
+function normalizeFallbackSuggestions(provider: string, suggestions: Vote['fallback_suggestions']): FallbackSuggestion[] {
+  return suggestions.map(suggestion => ({
+    source: provider,
+    type: suggestion.type,
+    proposedDomain: suggestion.proposed_domain,
+    targetModule: suggestion.target_module,
+    proposedOperation: suggestion.proposed_operation,
+    reason: suggestion.reason,
+    evidence: suggestion.evidence
+  }));
+}
+
+function dedupeFallbackSuggestions(suggestions: FallbackSuggestion[]) {
+  const seen = new Set<string>();
+  return suggestions.filter(suggestion => {
+    const key = [suggestion.type, suggestion.proposedDomain, suggestion.targetModule, suggestion.proposedOperation, suggestion.reason].join('\u0000');
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 export async function classifyWithAi(story: string, taxonomy: Taxonomy) {
   const providers = configuredProviders();
   if (!providers.length) throw new Error('Nenhum provedor de IA foi configurado. Defina ao menos uma chave de API no ambiente.');
@@ -75,7 +111,7 @@ export async function classifyWithAi(story: string, taxonomy: Taxonomy) {
   settled.forEach((result, index) => {
     if (result.status === 'rejected') {
       const reason = result.reason instanceof Error ? result.reason.message : String(result.reason);
-      console.error(`AI provider \"${providers[index].name}\" failed: ${reason}`);
+      console.error(`AI provider "${providers[index].name}" failed: ${reason}`);
     }
   });
   const successes = settled.filter((item): item is PromiseFulfilledResult<{ provider: string; vote: Vote }> => item.status === 'fulfilled').map(item => item.value);
@@ -89,5 +125,56 @@ export async function classifyWithAi(story: string, taxonomy: Taxonomy) {
   const winner = [...frequency.values()].sort((a, b) => b.count - a.count)[0];
   const consensus = winner.count / successes.length;
   const averageConfidence = successes.reduce((total, result) => total + result.vote.confidence, 0) / successes.length;
-  return { module: winner.row.module, operation: winner.row.operation, confidence: Number((averageConfidence * consensus).toFixed(2)), needsReview: consensus < 0.5 || successes.some(result => result.vote.needs_review), providers: successes.map(result => result.provider) };
+  const needsReview = consensus < 0.5 || successes.some(result => result.vote.needs_review);
+  const providerVotes: ProviderVote[] = settled.map((result, index) => {
+    const provider = providers[index].name;
+    if (result.status === 'rejected') {
+      return {
+        provider,
+        status: 'error',
+        error: result.reason instanceof Error ? result.reason.message : String(result.reason),
+        needsReview: true,
+        rows: [],
+        evidence: [],
+        issues: [],
+        suggestedQuestions: []
+      };
+    }
+    const { vote } = result.value;
+    return {
+      provider,
+      status: 'success',
+      confidence: vote.confidence,
+      rationale: vote.rationale,
+      needsReview: vote.needs_review,
+      rows: vote.rows,
+      evidence: vote.evidence,
+      issues: vote.issues,
+      suggestedQuestions: vote.suggested_questions
+    };
+  });
+  const fallbackSuggestions = dedupeFallbackSuggestions(successes.flatMap(result => normalizeFallbackSuggestions(result.provider, result.vote.fallback_suggestions)));
+  if (needsReview && !fallbackSuggestions.length) {
+    fallbackSuggestions.push({
+      source: 'committee',
+      type: 'clarify_story',
+      reason: 'O comitê não atingiu segurança suficiente para decidir automaticamente; a história precisa de validação humana.',
+      evidence: [story]
+    });
+  }
+  const finalConfidence = Number((averageConfidence * consensus).toFixed(2));
+  const hasNotCoveredRow = winner.row.module === 'n/a' || winner.row.operation === 'n/a';
+  return {
+    module: winner.row.module,
+    operation: winner.row.operation,
+    confidence: finalConfidence,
+    needsReview,
+    providers: successes.map(result => result.provider),
+    providerVotes,
+    fallbackSuggestions,
+    finalReason: `Sugestão escolhida pelo comitê com ${Math.round(consensus * 100)}% de consenso entre ${successes.length} resposta(s) válida(s).`,
+    notesForHuman: needsReview ? 'Revise as sugestões, os motivos e as questões dos classificadores antes de decidir.' : undefined,
+    disagreementCause: hasNotCoveredRow ? 'taxonomy_gap' : needsReview ? 'model_instability' : undefined,
+    finalAction: needsReview ? (hasNotCoveredRow ? 'extend_taxonomy' : 'ask_human') : 'none'
+  };
 }

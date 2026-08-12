@@ -10,6 +10,44 @@ export type Story = {
   consensus: number;
 };
 
+export type FallbackSuggestionType = 'new_domain' | 'new_operation' | 'clarify_story' | 'classification';
+
+export type FallbackSuggestion = {
+  id?: string;
+  source: string;
+  type: FallbackSuggestionType;
+  proposedDomain?: string;
+  targetModule?: string;
+  proposedOperation?: string;
+  reason: string;
+  evidence?: string[];
+  appliedAt?: string;
+};
+
+export type ProviderVote = {
+  provider: string;
+  status: string;
+  error?: string;
+  confidence?: number;
+  rationale?: string;
+  needsReview: boolean;
+  rows: Array<{ module: string; operation: string }>;
+  evidence: string[];
+  issues: string[];
+  suggestedQuestions: string[];
+};
+
+export type ReviewContext = {
+  final: {
+    reason?: string;
+    notesForHuman?: string;
+    disagreementCause?: string;
+    action?: string;
+  };
+  suggestions: FallbackSuggestion[];
+  votes: ProviderVote[];
+};
+
 export type Taxonomy = {
   version: string;
   modules: Record<string, string[]>;
