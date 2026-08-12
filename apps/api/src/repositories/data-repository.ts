@@ -61,6 +61,51 @@ export async function loadProjectSprints(): Promise<ProjectSprint[]> {
   return result.rows.map(row => ({ ...row, stories: Number(row.stories) }));
 }
 
+export async function createProjectSprint(input: { project: string; name: string; status: ProjectSprint['status'] }) {
+  const result = await query<{ id: string; project: string; name: string; status: ProjectSprint['status']; stories: number }>(`
+    INSERT INTO project_sprints (project_id, name, status)
+    SELECT id, $2, $3 FROM projects WHERE name = $1
+    RETURNING id::text, $1::text AS project, name, status,
+      0::int AS stories
+  `, [input.project, input.name.trim(), input.status]);
+  return result.rows[0] ?? null;
+}
+
+export async function updateProjectSprintStatus(id: string, status: ProjectSprint['status']) {
+  const result = await query<{ id: string; project: string; name: string; status: ProjectSprint['status']; stories: number }>(`
+    UPDATE project_sprints sprint SET status = $2
+    FROM projects project
+    WHERE sprint.id = $1 AND project.id = sprint.project_id
+    RETURNING sprint.id::text, project.name AS project, sprint.name, sprint.status,
+      (SELECT COUNT(*)::int FROM stories WHERE sprint_id = sprint.id) AS stories
+  `, [id, status]);
+  return result.rows[0] ?? null;
+}
+
+export async function assignStoriesToSprint(sprintId: string, classificationIds: string[]) {
+  const ids = [...new Set(classificationIds)];
+  const sprint = await query<{ project_id: string }>('SELECT project_id::text FROM project_sprints WHERE id = $1', [sprintId]);
+  if (!sprint.rows[0]) return null;
+  const previous = await query<{ sprint_id: string }>(`
+    SELECT DISTINCT story.sprint_id::text
+    FROM classifications classification
+    JOIN stories story ON story.id = classification.story_id
+    WHERE classification.id = ANY($1::bigint[]) AND story.project_id = $2
+  `, [ids, sprint.rows[0].project_id]);
+  const eligible = await query<{ id: string }>(`
+    SELECT classification.id::text AS id
+    FROM classifications classification
+    JOIN stories story ON story.id = classification.story_id
+    WHERE classification.id = ANY($1::bigint[]) AND story.project_id = $2
+  `, [ids, sprint.rows[0].project_id]);
+  if (eligible.rows.length !== ids.length) throw new Error('Uma ou mais histórias não pertencem ao projeto desta sprint.');
+  await query(`
+    UPDATE stories SET sprint_id = $1, updated_at = NOW()
+    WHERE id IN (SELECT story_id FROM classifications WHERE id = ANY($2::bigint[]))
+  `, [sprintId, ids]);
+  return { previousSprintIds: [...new Set(previous.rows.map(row => row.sprint_id))], sprintId };
+}
+
 export async function loadReviewContext(classificationId: string): Promise<ReviewContext | null> {
   const classification = await query<{
     final_reason: string | null;

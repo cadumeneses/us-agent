@@ -495,3 +495,78 @@ export async function saveQualityPlanScope(scopeId: string, userId: string, inpu
   await replaceScopeStories(scopeId, storyIds);
   return result.rows[0] ?? null;
 }
+
+function mergeGeneratedContent(generated: QualityPlanContent, saved?: QualityPlanContent): QualityPlanContent {
+  if (!saved) return generated;
+  const merge = <T extends { id: string }>(fresh: T[], old: T[]) => {
+    const byId = new Map(old.map(item => [item.id, item]));
+    return fresh.map(item => byId.get(item.id) ?? item);
+  };
+  return {
+    questions: merge(generated.questions, saved.questions ?? []),
+    acceptanceCriteria: merge(generated.acceptanceCriteria, saved.acceptanceCriteria ?? []),
+    testCases: merge(generated.testCases, saved.testCases ?? [])
+  };
+}
+
+/** Rebuilds the sprint scope from the stories currently assigned to it while
+ * preserving edits made by QA for IDs that still exist. */
+export async function syncQualityPlanForSprint(sprintId: string, userId?: string) {
+  const sprint = await query<{ project_id: string; project: string; name: string }>(`
+    SELECT sprint.project_id::text, project.name AS project, sprint.name
+    FROM project_sprints sprint JOIN projects project ON project.id = sprint.project_id
+    WHERE sprint.id = $1
+  `, [sprintId]);
+  if (!sprint.rows[0]) return null;
+  const allStories = await loadStoriesForQualityPlan();
+  const sprintStories = allStories.filter(story => story.project === sprint.rows[0].project && story.sprint === sprint.rows[0].name);
+  const existing = await query<{ id: string; content: QualityPlanContent; status: 'draft' | 'approved'; updated_by: string | null }>(`
+    SELECT id::text, content, status, updated_by::text FROM quality_plan_scopes WHERE sprint_id = $1
+  `, [sprintId]);
+  const current = existing.rows[0];
+  const generated = buildQualityPlanScope({
+    id: current?.id ?? '',
+    project: sprint.rows[0].project,
+    sprint: sprint.rows[0].name,
+    stories: sprintStories,
+    status: current?.status ?? 'draft'
+  });
+  const content = mergeGeneratedContent(generated, current?.content);
+  const status = current?.status === 'approved' ? 'draft' : current?.status ?? 'draft';
+  const saved = await query<{ id: string; updated_at: string }>(`
+    INSERT INTO quality_plan_scopes (project_id, sprint_id, sprint, content, status, updated_by)
+    VALUES ($1, $2, $3, $4::jsonb, $5, $6)
+    ON CONFLICT (sprint_id) DO UPDATE SET content = EXCLUDED.content, status = EXCLUDED.status, updated_by = EXCLUDED.updated_by, updated_at = NOW()
+    RETURNING id::text, updated_at::text
+  `, [sprint.rows[0].project_id, sprintId, sprint.rows[0].name, JSON.stringify(content), status, userId ?? current?.updated_by ?? null]);
+  const scopeId = saved.rows[0]?.id ?? current?.id;
+  if (!scopeId) return null;
+  const classificationIds = await query<{ id: string }>(`
+    SELECT classification.id::text AS id
+    FROM classifications classification JOIN stories story ON story.id = classification.story_id
+    WHERE story.sprint_id = $1
+  `, [sprintId]);
+  await withTransaction(async client => {
+    await client.query('DELETE FROM quality_plan_scope_stories WHERE quality_plan_scope_id = $1', [scopeId]);
+    if (classificationIds.rows.length) await client.query(`
+      INSERT INTO quality_plan_scope_stories (quality_plan_scope_id, classification_id)
+      SELECT $1, value::bigint FROM unnest($2::text[]) AS value
+    `, [scopeId, classificationIds.rows.map(row => row.id)]);
+  });
+  return { id: scopeId, updatedAt: saved.rows[0]?.updated_at };
+}
+
+async function loadStoriesForQualityPlan(): Promise<Story[]> {
+  const result = await query<{ id: string; text: string; project: string; sprint: string; module: string; operation: string; confidence: number; uncertainty: number; consensus: number; status: string }>(`
+    SELECT classification.id::text AS id, story.content AS text, project.name AS project, sprint.name AS sprint,
+      COALESCE(label.module, 'n/a') AS module, COALESCE(label.operation, 'n/a') AS operation,
+      classification.final_confidence AS confidence, classification.uncertainty_score AS uncertainty,
+      classification.consensus_ratio AS consensus, classification.review_status AS status
+    FROM classifications classification
+    JOIN stories story ON story.id = classification.story_id
+    JOIN projects project ON project.id = story.project_id
+    JOIN project_sprints sprint ON sprint.id = story.sprint_id
+    LEFT JOIN LATERAL (SELECT module, operation FROM classification_labels WHERE classification_id = classification.id ORDER BY position LIMIT 1) label ON TRUE
+  `);
+  return result.rows.map(row => ({ ...row, confidence: Number(row.confidence), uncertainty: Number(row.uncertainty), consensus: Number(row.consensus) }));
+}

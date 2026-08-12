@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { AlertCircle, ArrowRight, CheckCircle2, ChevronRight, CircleHelp, Copy, ListChecks, Plus, Save, ShieldCheck, Target, Trash2 } from 'lucide-react';
 import { CardHead, PageTitle } from '../components/ui';
 import { api } from '../services/api';
@@ -74,6 +75,7 @@ function isExecutable(testCase: QualityPlan['testCases'][number]) {
 
 export function QualityPlanPage() {
   const workspace = useWorkspace();
+  const [searchParams] = useSearchParams();
   const [plans, setPlans] = useState<QualityPlan[]>([]);
   const [selectedId, setSelectedId] = useState('');
   const [search, setSearch] = useState('');
@@ -89,11 +91,12 @@ export function QualityPlanPage() {
     api.qualityPlans()
       .then(items => {
         setPlans(items);
-        setSelectedId(items.find(plan => plan.project === workspace.selectedProject)?.id ?? items[0]?.id ?? '');
+        const requestedSprint = searchParams.get('sprint');
+        setSelectedId(items.find(plan => plan.project === workspace.selectedProject && plan.sprint === requestedSprint)?.id ?? items.find(plan => plan.project === workspace.selectedProject)?.id ?? items[0]?.id ?? '');
       })
       .catch((reason: Error) => setError(reason.message))
       .finally(() => setLoading(false));
-  }, [workspace.selectedProject, workspace.selectedStoryId]);
+  }, [workspace.selectedProject, workspace.selectedStoryId, searchParams]);
 
   const visiblePlans = useMemo(() => {
     const term = search.trim().toLowerCase();

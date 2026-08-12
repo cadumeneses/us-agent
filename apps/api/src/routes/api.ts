@@ -2,7 +2,7 @@ import { timingSafeEqual } from 'node:crypto';
 import { Router, type Request, type Response } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
-import { addTaxonomyDomain, addTaxonomyOperation, applyFallbackSuggestion, createTaxonomyVersion, loadProjectSprints, loadReviewContext, loadStories, loadTaxonomy } from '../repositories/data-repository.js';
+import { addTaxonomyDomain, addTaxonomyOperation, applyFallbackSuggestion, assignStoriesToSprint, createProjectSprint, createTaxonomyVersion, loadProjectSprints, loadReviewContext, loadStories, loadTaxonomy, updateProjectSprintStatus } from '../repositories/data-repository.js';
 import { classifyPreview, parseImportedStories } from '../services/classifier.js';
 import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
@@ -10,7 +10,7 @@ import { query, withTransaction } from '../database/pool.js';
 import { isExecutionModeActive, loadApplicationContext } from '../repositories/application-repository.js';
 import { savePreviewClassifications, saveReview } from '../services/classification-store.js';
 import { importRecord, type HistoricalResult } from '../database/import-jsonl.js';
-import { buildQualityPlanScope, createQualityPlanScope, loadQualityPlans, saveQualityPlanScope } from '../services/quality-plans.js';
+import { buildQualityPlanScope, createQualityPlanScope, loadQualityPlans, saveQualityPlanScope, syncQualityPlanForSprint } from '../services/quality-plans.js';
 import { loadStoryDetails, saveStoryDetails } from '../services/story-details.js';
 
 const upload = multer({
@@ -81,6 +81,13 @@ const qualityPlanScopeRequest = z.object({
   sprint: z.string().trim().min(1).max(120),
   storyIds: z.array(z.string().regex(/^\d+$/)).min(1).max(100)
 });
+const sprintCreateRequest = z.object({
+  project: z.string().trim().min(1).max(160),
+  name: z.string().trim().min(1).max(120),
+  status: z.enum(['planning', 'active', 'completed']).default('planning')
+});
+const sprintStatusRequest = z.object({ status: z.enum(['planning', 'active', 'completed']) });
+const sprintStoriesRequest = z.object({ classificationIds: z.array(z.string().regex(/^\d+$/)).min(1).max(500) });
 const qualityPlanRequest = z.object({
   status: z.enum(['draft', 'approved']),
   storyIds: z.array(z.string().regex(/^\d+$/)).min(1).max(100),
@@ -183,6 +190,44 @@ apiRouter.get('/quality-plans', async (_req, res) => {
 
 apiRouter.get('/sprints', async (_req, res) => {
   res.json(await loadProjectSprints());
+});
+
+apiRouter.post('/sprints', async (req, res) => {
+  const parsed = sprintCreateRequest.safeParse(req.body);
+  if (!parsed.success) return void res.status(400).json({ error: 'Informe projeto, nome e status válidos para a sprint.' });
+  try {
+    const sprint = await createProjectSprint(parsed.data);
+    if (!sprint) return void res.status(404).json({ error: 'Projeto não encontrado.' });
+    res.status(201).json(sprint);
+  } catch (reason) {
+    if ((reason as { code?: string }).code === '23505') return void res.status(409).json({ error: 'Já existe uma sprint com esse nome neste projeto.' });
+    throw reason;
+  }
+});
+
+apiRouter.patch('/sprints/:id/status', async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de sprint inválido.' });
+  const parsed = sprintStatusRequest.safeParse(req.body);
+  if (!parsed.success) return void res.status(400).json({ error: 'Status de sprint inválido.' });
+  const sprint = await updateProjectSprintStatus(req.params.id, parsed.data.status);
+  if (!sprint) return void res.status(404).json({ error: 'Sprint não encontrada.' });
+  res.json(sprint);
+});
+
+apiRouter.put('/sprints/:id/stories', async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de sprint inválido.' });
+  const parsed = sprintStoriesRequest.safeParse(req.body);
+  if (!parsed.success) return void res.status(400).json({ error: 'Selecione ao menos uma User Story.' });
+  try {
+    const changed = await assignStoriesToSprint(req.params.id, parsed.data.classificationIds);
+    if (!changed) return void res.status(404).json({ error: 'Sprint não encontrada.' });
+    const context = await loadApplicationContext();
+    await syncQualityPlanForSprint(req.params.id, context.user.id);
+    for (const previousSprintId of changed.previousSprintIds.filter(id => id !== req.params.id)) await syncQualityPlanForSprint(previousSprintId, context.user.id);
+    res.json({ sprintId: req.params.id, classificationIds: parsed.data.classificationIds });
+  } catch (reason) {
+    res.status(400).json({ error: (reason as Error).message });
+  }
 });
 
 apiRouter.post('/quality-plans/scopes', async (req, res) => {
