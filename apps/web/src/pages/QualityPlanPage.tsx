@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { AlertCircle, ArrowRight, CheckCircle2, ChevronRight, CircleHelp, Copy, ListChecks, Plus, Save, ShieldCheck, Target, Trash2 } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ChevronRight, CircleHelp, Copy, ListChecks, Plus, Save, ShieldCheck, Target, Trash2 } from 'lucide-react';
 import { CardHead, PageTitle } from '../components/ui';
 import { api } from '../services/api';
 import type { QualityPlan } from '../types/models';
@@ -71,6 +71,18 @@ function coverageFor(plan: QualityPlan) {
 
 function isExecutable(testCase: QualityPlan['testCases'][number]) {
   return Boolean(testCase.title.trim() && testCase.steps.length && testCase.expectedResult.trim());
+}
+
+function modelingReadiness(testCase: QualityPlan['testCases'][number]) {
+  const checks = [
+    { label: 'Cenário', done: Boolean(testCase.title.trim()), required: true },
+    { label: 'Pré-condições', done: testCase.preconditions.some(item => item.trim()), required: false },
+    { label: 'Dados', done: Boolean(testCase.testData.trim()), required: false },
+    { label: 'Passos', done: testCase.steps.length > 0, required: true },
+    { label: 'Resultado', done: Boolean(testCase.expectedResult.trim()), required: true },
+    { label: 'Rastreado', done: testCase.linkedCriteria.length > 0, required: true }
+  ];
+  return { checks, complete: checks.every(check => check.done || !check.required), score: checks.filter(check => check.done).length };
 }
 
 export function QualityPlanPage() {
@@ -316,27 +328,65 @@ function QualityPlanEditor({ plan, onChange, onSave, saving }: EditorProps) {
 }
 
 function TestModelingChart({ plan, coverage, incompleteCases, approvalIssues }: { plan: QualityPlan; coverage: ReturnType<typeof coverageFor>; incompleteCases: number; approvalIssues: string[] }) {
-  const types = new Set(plan.testCases.map(testCase => testCase.type));
-  const assumptions = plan.testCases.filter(testCase => testCase.assumption).length;
   const coveredCriteria = coverage.filter(item => item.testCases.length).length;
-  const executableCases = plan.testCases.length - incompleteCases;
+  const coveragePercent = coverage.length ? Math.round((coveredCriteria / coverage.length) * 100) : 0;
+  const executableCases = plan.testCases.filter(isExecutable).length;
+  const contextualizedCases = plan.testCases.filter(testCase => testCase.preconditions.some(item => item.trim()) && testCase.testData.trim()).length;
+  const highRiskCases = plan.testCases.filter(testCase => testCase.priority === 'high').length;
+  const automationCandidates = plan.testCases.filter(testCase => testCase.automation === 'candidate').length;
+  const assumptions = plan.testCases.filter(testCase => testCase.assumption).length;
+  const dimensions = (Object.keys(typeLabels) as TestType[]).map(type => ({
+    type,
+    label: typeLabels[type],
+    count: plan.testCases.filter(testCase => testCase.type === type).length,
+    hint: type === 'positive' ? 'fluxo válido e regra aceita' : type === 'negative' ? 'rejeição, erro e recuperação' : type === 'boundary' ? 'limites, partições e volume' : 'permissão, exposição e abuso'
+  }));
+  const actions: Array<{ tone: 'danger' | 'warning' | 'info'; text: string }> = [];
+  coverage.filter(item => !item.testCases.length).slice(0, 3).forEach(item => actions.push({ tone: 'danger', text: `${item.criterion.id} ainda não tem caso ligado.` }));
+  if (coverage.filter(item => !item.testCases.length).length > 3) actions.push({ tone: 'danger', text: `Existem mais ${coverage.filter(item => !item.testCases.length).length - 3} critérios sem cobertura.` });
+  if (incompleteCases) actions.push({ tone: 'danger', text: `${incompleteCases} caso(s) não podem ser executados: falta cenário, passo ou resultado.` });
+  if (plan.testCases.length && contextualizedCases < plan.testCases.length) actions.push({ tone: 'warning', text: `${plan.testCases.length - contextualizedCases} caso(s) ainda precisam de pré-condições e dados explícitos.` });
+  if (!dimensions.find(item => item.type === 'negative')?.count) actions.push({ tone: 'warning', text: 'Adicione uma variação negativa para validar rejeições e mensagens.' });
+  if (!dimensions.find(item => item.type === 'boundary')?.count) actions.push({ tone: 'warning', text: 'Adicione limites ou partições para evitar lacunas de borda.' });
+  if (!dimensions.find(item => item.type === 'security')?.count) actions.push({ tone: 'info', text: 'Avalie pelo menos um cenário de acesso, permissão ou exposição de dados.' });
+  if (!automationCandidates && plan.testCases.length) actions.push({ tone: 'info', text: 'Marque os fluxos repetitivos e estáveis como candidatos à automação.' });
+  if (assumptions) actions.push({ tone: 'warning', text: `${assumptions} regra(s) estão marcadas como hipótese e precisam de confirmação.` });
+  const storyRows = plan.stories.map(story => {
+    const storyCriteria = coverage.filter(item => item.criterion.id.startsWith(`US-${story.id}-`));
+    const storyTests = plan.testCases.filter(testCase => testCase.id.startsWith(`US-${story.id}-`) || testCase.linkedCriteria.some(id => id.startsWith(`US-${story.id}-`)));
+    const covered = storyCriteria.filter(item => item.testCases.length).length;
+    return { story, storyCriteria, storyTests, percent: storyCriteria.length ? Math.round((covered / storyCriteria.length) * 100) : storyTests.length ? 100 : 0 };
+  });
   return <section className="card test-modeling-chart">
-    <div className="modeling-chart-head"><div><span>CHART DE MODELAGEM</span><h2>Do requisito ao caso executável</h2><p>Use o fluxo para revisar cobertura, profundidade do cenário e prontidão do plano.</p></div><ListChecks size={22}/></div>
-    <div className="modeling-flow">
-      <ModelStep index="1" title="Critérios" value={`${coveredCriteria}/${coverage.length || 0}`} description={coverage.length ? 'cobertos por testes' : 'a definir'} state={coverage.length && coveredCriteria === coverage.length ? 'ready' : 'attention'}/>
-      <ArrowRight size={17}/>
-      <ModelStep index="2" title="Cenários" value={String(plan.testCases.length)} description="casos planejados" state={plan.testCases.length ? 'ready' : 'attention'}/>
-      <ArrowRight size={17}/>
-      <ModelStep index="3" title="Variações" value={`${types.size}/4`} description="positivo, negativo, limite e segurança" state={types.size >= 2 ? 'ready' : 'attention'}/>
-      <ArrowRight size={17}/>
-      <ModelStep index="4" title="Executáveis" value={`${executableCases}/${plan.testCases.length || 0}`} description="com passos e resultado" state={plan.testCases.length && !incompleteCases ? 'ready' : 'attention'}/>
+    <div className="modeling-chart-head"><div><span>CHART DE MODELAGEM</span><h2>Mapa de qualidade da sprint</h2><p>Confira a cadeia escopo → critério → cenário → execução e corrija as lacunas antes de aprovar.</p></div><ListChecks size={22}/></div>
+
+    <div className="modeling-kpis">
+      <div className="modeling-kpi"><span className="kpi-icon brand"><Target size={14}/></span><div><small>Cobertura de critérios</small><strong>{coveragePercent}%</strong><em>{coveredCriteria}/{coverage.length || 0} cobertos</em></div></div>
+      <div className="modeling-kpi"><span className={`kpi-icon ${incompleteCases ? 'warning' : 'success'}`}><CheckCircle2 size={14}/></span><div><small>Prontos para executar</small><strong>{executableCases}/{plan.testCases.length}</strong><em>{contextualizedCases} com contexto completo</em></div></div>
+      <div className="modeling-kpi"><span className="kpi-icon danger"><AlertCircle size={14}/></span><div><small>Risco alto</small><strong>{highRiskCases}</strong><em>prioridade alta</em></div></div>
+      <div className="modeling-kpi"><span className="kpi-icon success"><ShieldCheck size={14}/></span><div><small>Automação</small><strong>{automationCandidates}</strong><em>candidato(s) identificado(s)</em></div></div>
+    </div>
+
+    <div className="modeling-section-heading"><div><b>Rastreabilidade por critério</b><span>Cada requisito precisa apontar para pelo menos um caso executável.</span></div><span className={coveragePercent === 100 ? 'modeling-status success' : 'modeling-status warning'}>{coveragePercent === 100 ? 'Cobertura completa' : 'Cobertura pendente'}</span></div>
+    <div className="coverage-matrix">
+      {coverage.length ? coverage.map(item => <div className={`coverage-row ${item.testCases.length ? 'covered' : 'missing'}`} key={item.criterion.id}>
+        <div className="coverage-main"><span>{item.criterion.id}</span><b>{item.criterion.text || 'Critério sem descrição'}</b></div>
+        <div className="coverage-linked">{item.testCases.length ? item.testCases.map(testCase => <span key={testCase.id}>{testCase.id}</span>) : <small>Nenhum caso ligado</small>}</div>
+        <strong className={item.testCases.length ? 'success' : 'warning'}>{item.testCases.length ? `${item.testCases.length} caso(s)` : 'Ação necessária'}</strong>
+      </div>) : <div className="modeling-empty">Adicione critérios de aceitação para visualizar a matriz de cobertura.</div>}
+    </div>
+
+    <div className="modeling-two-columns">
+      <div className="modeling-panel"><div className="modeling-section-heading"><div><b>Dimensões de teste</b><span>Use mais de um tipo para explorar o comportamento real.</span></div><span className="modeling-count">{dimensions.filter(item => item.count).length}/4</span></div><div className="dimension-list">{dimensions.map(item => <div className={`dimension-row ${item.count ? 'present' : 'missing'}`} key={item.type}><span className={`dimension-dot ${item.type}`}/><div><b>{item.label}</b><small>{item.hint}</small></div><strong>{item.count}</strong></div>)}</div></div>
+      <div className="modeling-panel"><div className="modeling-section-heading"><div><b>Prontidão dos casos</b><span>O QA deve conseguir executar sem contexto oral.</span></div><span className="modeling-count">{contextualizedCases}/{plan.testCases.length}</span></div><div className="readiness-list">{plan.testCases.length ? plan.testCases.slice(0, 6).map(testCase => { const readiness = modelingReadiness(testCase); return <div className="readiness-row" key={testCase.id}><div className="readiness-title"><span>{testCase.id}</span><b>{testCase.title || 'Sem título'}</b><em>{readiness.score}/6</em></div><div className="readiness-checks">{readiness.checks.map(check => <span className={check.done ? 'done' : check.required ? 'missing' : 'optional'} title={check.label} key={check.label}>{check.done ? '✓' : '·'} {check.label}</span>)}</div></div>; }) : <div className="modeling-empty">Crie o primeiro caso para acompanhar a prontidão.</div>}{plan.testCases.length > 6 && <small className="modeling-more">+ {plan.testCases.length - 6} caso(s) no editor abaixo</small>}</div></div>
+    </div>
+
+    <div className="modeling-two-columns modeling-bottom">
+      <div className="modeling-panel"><div className="modeling-section-heading"><div><b>Saúde por User Story</b><span>Veja onde a sprint está descoberta antes de olhar o detalhe.</span></div></div><div className="story-coverage-list">{storyRows.length ? storyRows.map(row => <div className="story-coverage-row" key={row.story.id}><div><b>US-{row.story.id}</b><span>{row.story.text}</span></div><strong>{row.percent}%</strong><small>{row.storyTests.length} caso(s) · {row.storyCriteria.length} critério(s)</small></div>) : <div className="modeling-empty">Nenhuma User Story no escopo.</div>}</div></div>
+      <div className="modeling-panel"><div className="modeling-section-heading"><div><b>Próximas ações do QA</b><span>Itens ordenados para reduzir risco e destravar a aprovação.</span></div><span className={actions.length ? 'modeling-count warning-text' : 'modeling-count'}>{actions.length}</span></div><div className="modeling-actions">{actions.length ? actions.slice(0, 6).map((action, index) => <div className={`modeling-action ${action.tone}`} key={`${action.text}-${index}`}><span>{action.tone === 'danger' ? '!' : action.tone === 'warning' ? '△' : 'i'}</span><p>{action.text}</p></div>) : <div className="modeling-empty ready-empty">Tudo certo: o plano não tem lacunas detectadas.</div>}{actions.length > 6 && <small className="modeling-more">+ {actions.length - 6} recomendação(ões) no detalhamento.</small>}</div></div>
     </div>
     <div className="modeling-chart-foot"><span className={assumptions ? 'attention' : 'ready'}>{assumptions ? `${assumptions} regra(s) a confirmar` : 'Sem regras pendentes'}</span><span className={approvalIssues.length ? 'attention' : 'ready'}>{approvalIssues.length ? `${approvalIssues.length} gate(s) pendente(s) para aprovação` : 'Plano pronto para aprovação'}</span></div>
   </section>;
-}
-
-function ModelStep({ index, title, value, description, state }: { index: string; title: string; value: string; description: string; state: 'ready' | 'attention' }) {
-  return <article className={state === 'ready' ? 'model-step ready' : 'model-step attention'}><span>{index}</span><div><b>{title}</b><strong>{value}</strong><small>{description}</small></div></article>;
 }
 
 type TextSectionProps = {
