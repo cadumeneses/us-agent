@@ -306,12 +306,23 @@ async function ensureOperation(client: PoolClient, moduleId: string, name: strin
   `, [moduleId, name, description]);
 }
 
+async function findActiveTaxonomyVersion(client: PoolClient, version?: string) {
+  const result = await client.query<{ id: string }>(`
+    SELECT id::text
+    FROM taxonomy_versions
+    WHERE is_active ${version ? 'AND version = $1' : ''}
+    ORDER BY created_at DESC, id DESC
+    LIMIT 1
+  `, version ? [version] : []);
+  return result.rows[0]?.id;
+}
+
 export async function addTaxonomyOperation(input: { domain?: string; module: string; operation: string; description: string; version?: string }) {
   await withTransaction(async client => {
-    const version = await client.query<{ id: string }>(`SELECT id::text FROM taxonomy_versions WHERE is_active ${input.version ? 'AND version = $1' : ''} ORDER BY created_at LIMIT 1`, input.version ? [input.version] : []);
-    if (!version.rows[0]) throw new Error('Nenhuma taxonomia ativa foi encontrada.');
-    const domainId = await ensureDomain(client, version.rows[0].id, input.domain?.trim() || 'General', 'Domínio base para módulos sem área definida.');
-    const moduleId = await ensureModule(client, version.rows[0].id, domainId, input.module, '');
+    const versionId = await findActiveTaxonomyVersion(client, input.version);
+    if (!versionId) throw new Error(input.version ? 'A versão da taxonomia selecionada não está ativa.' : 'Nenhuma taxonomia ativa foi encontrada.');
+    const domainId = await ensureDomain(client, versionId, input.domain?.trim() || 'General', 'Domínio base para módulos sem área definida.');
+    const moduleId = await ensureModule(client, versionId, domainId, input.module, '');
     const operations = input.operation.split(/[\n;,]+/).map(value => value.trim()).filter(Boolean);
     for (const operation of operations) await ensureOperation(client, moduleId, operation, input.description);
   });
@@ -319,9 +330,9 @@ export async function addTaxonomyOperation(input: { domain?: string; module: str
 
 export async function addTaxonomyDomain(input: { domain: string; description: string; version?: string }) {
   await withTransaction(async client => {
-    const version = await client.query<{ id: string }>(`SELECT id::text FROM taxonomy_versions WHERE is_active ${input.version ? 'AND version = $1' : ''} ORDER BY created_at LIMIT 1`, input.version ? [input.version] : []);
-    if (!version.rows[0]) throw new Error('Nenhuma taxonomia ativa foi encontrada.');
-    await ensureDomain(client, version.rows[0].id, input.domain, input.description);
+    const versionId = await findActiveTaxonomyVersion(client, input.version);
+    if (!versionId) throw new Error(input.version ? 'A versão da taxonomia selecionada não está ativa.' : 'Nenhuma taxonomia ativa foi encontrada.');
+    await ensureDomain(client, versionId, input.domain, input.description);
   });
 }
 
@@ -354,14 +365,10 @@ export async function applyFallbackSuggestion(suggestionId: string): Promise<App
     if (item.applied_at) return { status: 'already_applied' };
     if (!['new_domain', 'new_module', 'new_operation'].includes(item.suggestion_type)) return { status: 'not_actionable' };
 
-    const version = await client.query<{ id: string }>(`
-      SELECT id::text FROM taxonomy_versions WHERE is_active ORDER BY created_at LIMIT 1
-    `);
-    if (!version.rows[0]) return { status: 'no_active_taxonomy' };
-    const versionId = version.rows[0].id;
-
     if (item.suggestion_type === 'new_domain') {
       if (!item.proposed_domain) return { status: 'not_actionable' };
+      const versionId = await findActiveTaxonomyVersion(client);
+      if (!versionId) return { status: 'no_active_taxonomy' };
       const domainId = await ensureDomain(client, versionId, item.proposed_domain, item.reason);
       if (item.proposed_module) {
         const moduleId = await ensureModule(client, versionId, domainId, item.proposed_module, item.reason);
@@ -371,11 +378,16 @@ export async function applyFallbackSuggestion(suggestionId: string): Promise<App
 
     if (item.suggestion_type === 'new_module') {
       if (!item.target_domain || !item.proposed_module) return { status: 'not_actionable' };
-      const domain = await client.query<{ id: string }>(`
-        SELECT id::text FROM taxonomy_domains WHERE taxonomy_version_id = $1 AND name = $2
-      `, [versionId, item.target_domain]);
+      const domain = await client.query<{ id: string; taxonomy_version_id: string }>(`
+        SELECT domain.id::text, domain.taxonomy_version_id::text
+        FROM taxonomy_domains domain
+        JOIN taxonomy_versions version ON version.id = domain.taxonomy_version_id
+        WHERE version.is_active AND domain.name = $1
+        ORDER BY version.created_at DESC, version.id DESC
+        LIMIT 1
+      `, [item.target_domain]);
       if (!domain.rows[0]) return { status: 'target_domain_not_found' };
-      const moduleId = await ensureModule(client, versionId, domain.rows[0].id, item.proposed_module, item.reason);
+      const moduleId = await ensureModule(client, domain.rows[0].taxonomy_version_id, domain.rows[0].id, item.proposed_module, item.reason);
       if (item.proposed_operation) await ensureOperation(client, moduleId, item.proposed_operation, item.reason);
     }
 
@@ -385,10 +397,23 @@ export async function applyFallbackSuggestion(suggestionId: string): Promise<App
         SELECT module.id::text
         FROM taxonomy_modules module
         JOIN taxonomy_domains domain ON domain.id = module.domain_id
-        WHERE module.taxonomy_version_id = $1 AND module.name = $2
-          AND ($3::varchar IS NULL OR domain.name = $3)
-      `, [versionId, item.target_module, item.target_domain]);
-      if (!module.rows[0]) return item.target_domain ? { status: 'target_domain_not_found' } : { status: 'target_module_not_found' };
+        JOIN taxonomy_versions version ON version.id = module.taxonomy_version_id
+        WHERE version.is_active AND module.name = $1
+          AND ($2::varchar IS NULL OR domain.name = $2)
+        ORDER BY version.created_at DESC, version.id DESC
+        LIMIT 1
+      `, [item.target_module, item.target_domain]);
+      if (!module.rows[0]) {
+        if (!item.target_domain) return { status: 'target_module_not_found' };
+        const domain = await client.query(`
+          SELECT 1
+          FROM taxonomy_domains domain
+          JOIN taxonomy_versions version ON version.id = domain.taxonomy_version_id
+          WHERE version.is_active AND domain.name = $1
+          LIMIT 1
+        `, [item.target_domain]);
+        return domain.rowCount ? { status: 'target_module_not_found' } : { status: 'target_domain_not_found' };
+      }
       await ensureOperation(client, module.rows[0].id, item.proposed_operation, item.reason);
     }
 
