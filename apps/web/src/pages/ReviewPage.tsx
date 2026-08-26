@@ -6,6 +6,7 @@ import { useWorkspace } from '../services/workspace';
 import type { FallbackSuggestion, ReviewContext, Story, Taxonomy } from '../types/models';
 
 const pendingStatuses = new Set(['pending_review', 'taxonomy_gap', 'needs_rewrite']);
+const newDomainOption = '__new_domain__';
 type ProposalType = 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story';
 type TaxonomyFeedbackInput = {
   proposalType: ProposalType;
@@ -46,6 +47,7 @@ export function ReviewPage() {
   const [taxonomy, setTaxonomy] = useState<Taxonomy>();
   const [reviewContext, setReviewContext] = useState<ReviewContext>();
   const [loadingContext, setLoadingContext] = useState(false);
+  const [classificationDomain, setClassificationDomain] = useState('');
   const [module, setModule] = useState('n/a');
   const [operation, setOperation] = useState('n/a');
   const [notes, setNotes] = useState('');
@@ -84,6 +86,7 @@ export function ReviewPage() {
       return;
     }
     let active = true;
+    setClassificationDomain(selected.module === 'n/a' ? '' : taxonomy?.moduleDomains[selected.module] ?? '');
     setModule(selected.module);
     setOperation(selected.operation);
     setNotes('');
@@ -99,6 +102,11 @@ export function ReviewPage() {
     return () => { active = false; };
   }, [selected]);
 
+  useEffect(() => {
+    if (!selected || selected.module === 'n/a' || classificationDomain || !taxonomy) return;
+    setClassificationDomain(taxonomy.moduleDomains[selected.module] ?? '');
+  }, [classificationDomain, selected, taxonomy]);
+
   function domainNames() {
     return Object.keys(taxonomy?.domains ?? {});
   }
@@ -108,7 +116,11 @@ export function ReviewPage() {
   }
 
   function resetFeedbackFields(nextType: ProposalType) {
-    const nextDomain = ['new_module', 'new_operation'].includes(nextType) ? domainNames()[0] ?? '' : '';
+    const nextDomain = nextType === 'new_module'
+      ? domainNames()[0] ?? newDomainOption
+      : nextType === 'new_operation'
+        ? domainNames()[0] ?? ''
+        : '';
     setProposalType(nextType);
     setProposedDomain('');
     setTargetDomain(nextDomain);
@@ -137,16 +149,25 @@ export function ReviewPage() {
 
   function selectTargetDomain(nextDomain: string) {
     setTargetDomain(nextDomain);
-    setTargetModule(modulesForDomain(nextDomain)[0] ?? '');
+    setTargetModule(nextDomain === newDomainOption ? '' : modulesForDomain(nextDomain)[0] ?? '');
+  }
+
+  function selectClassificationDomain(nextDomain: string) {
+    setClassificationDomain(nextDomain);
+    const nextModule = modulesForDomain(nextDomain)[0] ?? 'n/a';
+    setModule(nextModule);
+    setOperation(nextModule === 'n/a' ? 'n/a' : taxonomy?.modules[nextModule]?.[0] ?? 'n/a');
   }
 
   function selectModule(nextModule: string) {
+    setClassificationDomain(nextModule === 'n/a' ? '' : taxonomy?.moduleDomains[nextModule] ?? classificationDomain);
     setModule(nextModule);
     setOperation(nextModule === 'n/a' ? 'n/a' : taxonomy?.modules[nextModule]?.[0] ?? 'n/a');
   }
 
   function useSuggestedClassification(nextModule: string, nextOperation: string) {
-    selectModule(nextModule);
+    setClassificationDomain(taxonomy?.moduleDomains[nextModule] ?? '');
+    setModule(nextModule);
     setOperation(nextOperation);
     setError('');
   }
@@ -171,7 +192,11 @@ export function ReviewPage() {
       setError('Informe o domínio sugerido.');
       return null;
     }
-    if (proposalType === 'new_module' && (targetDomain.trim().length < 2 || proposedModule.trim().length < 2)) {
+    if (proposalType === 'new_module' && targetDomain === newDomainOption && (proposedDomain.trim().length < 2 || proposedModule.trim().length < 2)) {
+      setError('Informe o novo domínio e o módulo sugerido.');
+      return null;
+    }
+    if (proposalType === 'new_module' && targetDomain !== newDomainOption && (targetDomain.trim().length < 2 || proposedModule.trim().length < 2)) {
       setError('Selecione o domínio existente e informe o módulo sugerido.');
       return null;
     }
@@ -179,10 +204,11 @@ export function ReviewPage() {
       setError('Selecione o domínio e o módulo existentes e informe a operação sugerida.');
       return null;
     }
+    const moduleCreatesDomain = proposalType === 'new_module' && targetDomain === newDomainOption;
     return {
-      proposalType,
-      proposedDomain: proposalType === 'new_domain' ? proposedDomain.trim() : undefined,
-      targetDomain: proposalType === 'new_module' || proposalType === 'new_operation' ? targetDomain.trim() : undefined,
+      proposalType: moduleCreatesDomain ? 'new_domain' : proposalType,
+      proposedDomain: proposalType === 'new_domain' || moduleCreatesDomain ? proposedDomain.trim() : undefined,
+      targetDomain: (proposalType === 'new_module' && !moduleCreatesDomain) || proposalType === 'new_operation' ? targetDomain.trim() : undefined,
       proposedModule: proposalType === 'new_domain' || proposalType === 'new_module' ? proposedModule.trim() || undefined : undefined,
       targetModule: proposalType === 'new_operation' ? targetModule.trim() : undefined,
       proposedOperation: proposalType === 'new_domain' || proposalType === 'new_module' || proposalType === 'new_operation' ? proposedOperation.trim() || undefined : undefined,
@@ -199,6 +225,7 @@ export function ReviewPage() {
     try {
       const saved = await api.saveTaxonomyFeedback(selected.id, feedback);
       setTaxonomy(saved.taxonomy);
+      useTaxonomyExpansion(saved.taxonomy, feedback);
       setReviewContext(await api.reviewContext(selected.id));
       setShowFeedback(false);
       setProposalSuccess(saved.status === 'applied'
@@ -233,6 +260,7 @@ export function ReviewPage() {
     try {
       const result = await api.applyTaxonomyFeedback(feedback.id);
       setTaxonomy(result.taxonomy);
+      useTaxonomyExpansion(result.taxonomy, feedback);
       setReviewContext(await api.reviewContext(selected.id));
       setProposalSuccess(result.status === 'applied'
         ? 'Expansão aplicada à taxonomia. Ela já pode ser usada para confirmar a classificação.'
@@ -242,6 +270,20 @@ export function ReviewPage() {
     } finally {
       setApplyingFeedback(undefined);
     }
+  }
+
+  function useTaxonomyExpansion(nextTaxonomy: Taxonomy, expansion: TaxonomyFeedbackInput | ReviewContext['taxonomyFeedbacks'][number]) {
+    const nextDomain = expansion.proposalType === 'new_domain' ? expansion.proposedDomain : expansion.targetDomain;
+    const nextModule = expansion.proposalType === 'new_domain' || expansion.proposalType === 'new_module'
+      ? expansion.proposedModule
+      : expansion.targetModule;
+    const nextOperation = expansion.proposedOperation;
+    if (!nextDomain || !nextModule || !nextTaxonomy.modules[nextModule]) return;
+    setClassificationDomain(nextDomain);
+    setModule(nextModule);
+    setOperation(nextOperation && nextTaxonomy.modules[nextModule].includes(nextOperation)
+      ? nextOperation
+      : nextTaxonomy.modules[nextModule][0] ?? 'n/a');
   }
 
   async function review(action: 'approve' | 'taxonomy_gap') {
@@ -273,6 +315,8 @@ export function ReviewPage() {
   }
 
   const operations = module === 'n/a' ? ['n/a'] : taxonomy?.modules[module] ?? [];
+  const classificationDomains = domainNames();
+  const classificationModules = modulesForDomain(classificationDomain);
   const targetDomains = domainNames();
   const targetModules = modulesForDomain(targetDomain);
   const currentSelectionIsValid = Boolean(taxonomy?.modules[module]?.includes(operation));
@@ -282,7 +326,9 @@ export function ReviewPage() {
       ? 'A proposta de evolução está sendo salva.'
       : !taxonomy
         ? 'A taxonomia ainda está sendo carregada.'
-        : module === 'n/a'
+        : !classificationDomain
+          ? 'Selecione um domínio existente para confirmar a classificação.'
+          : module === 'n/a'
           ? 'Selecione um módulo existente para confirmar a classificação.'
           : operation === 'n/a'
             ? 'Selecione uma operação do módulo para confirmar a classificação.'
@@ -334,7 +380,8 @@ export function ReviewPage() {
               </div> : null}
             </>}
           </section>
-          <label>Módulo<select value={module} onChange={event => selectModule(event.target.value)}><option value="n/a">n/a</option>{taxonomy && Object.keys(taxonomy.modules).map(name => <option key={name} value={name}>{name}</option>)}</select></label>
+          <label>Domínio<select value={classificationDomain} onChange={event => selectClassificationDomain(event.target.value)}><option value="" disabled>Selecione um domínio</option>{classificationDomains.map(name => <option key={name} value={name}>{name}</option>)}</select></label>
+          <label>Módulo<select value={module} onChange={event => selectModule(event.target.value)} disabled={!classificationDomain}><option value="n/a">Selecione um módulo</option>{classificationModules.map(name => <option key={name} value={name}>{name}</option>)}</select></label>
           <label>Operação<select value={operation} onChange={event => setOperation(event.target.value)}>{operations.map(name => <option key={name} value={name}>{name}</option>)}</select></label>
           <label>Notas da revisão<textarea className="small-area" value={notes} onChange={event => setNotes(event.target.value)} placeholder="Registre o motivo da decisão…"/></label>
           <div className="taxonomy-feedback">
@@ -342,7 +389,7 @@ export function ReviewPage() {
             {showFeedback && <div className="feedback-fields">
               <label>Tipo de proposta<select value={proposalType} onChange={event => selectFeedbackProposalType(event.target.value as ProposalType)}><option value="new_domain">Novo domínio (nova área)</option><option value="new_module">Novo módulo em um domínio existente</option><option value="new_operation">Nova operação em um módulo existente</option><option value="clarify_story">Solicitar esclarecimento da história</option></select></label>
               {proposalType === 'new_domain' && <><label>Domínio sugerido<input value={proposedDomain} onChange={event => setProposedDomain(event.target.value)} placeholder="Ex.: Mobile ou IoT"/></label><label>Módulo inicial (opcional)<input value={proposedModule} onChange={event => setProposedModule(event.target.value)} placeholder="Ex.: Sincronização"/></label><label>Operação inicial (opcional)<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Sincronizar offline"/></label></>}
-              {proposalType === 'new_module' && <><label>Domínio existente<select value={targetDomain} onChange={event => selectTargetDomain(event.target.value)}><option value="" disabled>Selecione um domínio</option>{targetDomains.map(name => <option key={name} value={name}>{name}</option>)}</select></label><label>Módulo sugerido<input value={proposedModule} onChange={event => setProposedModule(event.target.value)} placeholder="Ex.: Notificações push"/></label><label>Operação inicial (opcional)<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Agendar notificação"/></label></>}
+              {proposalType === 'new_module' && <><label>Domínio<select value={targetDomain} onChange={event => selectTargetDomain(event.target.value)}><option value="" disabled>Selecione um domínio</option>{targetDomains.map(name => <option key={name} value={name}>{name}</option>)}<option value={newDomainOption}>Adicionar novo domínio…</option></select></label>{targetDomain === newDomainOption && <label>Novo domínio<input value={proposedDomain} onChange={event => setProposedDomain(event.target.value)} placeholder="Ex.: Mobile ou IoT"/></label>}<label>Módulo sugerido<input value={proposedModule} onChange={event => setProposedModule(event.target.value)} placeholder="Ex.: Notificações push"/></label><label>Operação inicial (opcional)<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Agendar notificação"/></label></>}
               {proposalType === 'new_operation' && <><label>Domínio existente<select value={targetDomain} onChange={event => selectTargetDomain(event.target.value)}><option value="" disabled>Selecione um domínio</option>{targetDomains.map(name => <option key={name} value={name}>{name}</option>)}</select></label><label>Módulo existente<select value={targetModule} onChange={event => setTargetModule(event.target.value)} disabled={!targetDomain}><option value="" disabled>Selecione um módulo</option>{targetModules.map(name => <option key={name} value={name}>{name}</option>)}</select></label><label>Operação sugerida<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Sincronizar offline"/></label></>}
               <label>Justificativa da proposta<textarea className="small-area" value={feedbackJustification} onChange={event => setFeedbackJustification(event.target.value)} placeholder="Explique a lacuna observada e por que a proposta ajuda a cobri-la…"/></label>
               <div className="feedback-actions"><button type="button" className="primary" disabled={savingProposal || !taxonomy} onClick={() => void saveTaxonomyProposal()}>{savingProposal ? 'Salvando expansão…' : proposalType === 'clarify_story' ? 'Salvar solicitação' : 'Salvar e aplicar expansão'}</button><small>A expansão entra na taxonomia ativa e pode ser selecionada nesta revisão; a solicitação de esclarecimento apenas fica registrada.</small></div>
