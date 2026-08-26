@@ -348,6 +348,64 @@ async function findActiveTaxonomyVersion(client: PoolClient, version?: string) {
   return result.rows[0]?.id;
 }
 
+export type TaxonomyExpansionInput = {
+  proposalType: 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story';
+  proposedDomain?: string;
+  targetDomain?: string;
+  proposedModule?: string;
+  targetModule?: string;
+  proposedOperation?: string;
+  justification: string;
+};
+
+export async function applyTaxonomyExpansion(client: PoolClient, input: TaxonomyExpansionInput) {
+  if (input.proposalType === 'clarify_story') return 'needs_clarification' as const;
+
+  if (input.proposalType === 'new_domain') {
+    if (!input.proposedDomain) throw new Error('Informe o domínio a adicionar.');
+    const versionId = await findActiveTaxonomyVersion(client);
+    if (!versionId) throw new Error('Nenhuma taxonomia ativa foi encontrada.');
+    const domainId = await ensureDomain(client, versionId, input.proposedDomain, input.justification);
+    if (input.proposedModule) {
+      const moduleId = await ensureModule(client, versionId, domainId, input.proposedModule, input.justification);
+      if (input.proposedOperation) await ensureOperation(client, moduleId, input.proposedOperation, input.justification);
+    }
+    return 'applied' as const;
+  }
+
+  if (input.proposalType === 'new_module') {
+    if (!input.targetDomain || !input.proposedModule) throw new Error('Informe o domínio existente e o módulo a adicionar.');
+    const domain = await client.query<{ id: string; taxonomy_version_id: string }>(`
+      SELECT domain.id::text, domain.taxonomy_version_id::text
+      FROM taxonomy_domains domain
+      JOIN taxonomy_versions version ON version.id = domain.taxonomy_version_id
+      WHERE version.is_active AND domain.name = $1
+      ORDER BY version.created_at DESC, version.id DESC
+      LIMIT 1
+    `, [input.targetDomain]);
+    if (!domain.rows[0]) throw new Error('O domínio selecionado não existe na taxonomia ativa.');
+    const moduleId = await ensureModule(client, domain.rows[0].taxonomy_version_id, domain.rows[0].id, input.proposedModule, input.justification);
+    if (input.proposedOperation) await ensureOperation(client, moduleId, input.proposedOperation, input.justification);
+    return 'applied' as const;
+  }
+
+  if (!input.targetDomain || !input.targetModule || !input.proposedOperation) {
+    throw new Error('Informe o domínio, o módulo existente e a operação a adicionar.');
+  }
+  const module = await client.query<{ id: string }>(`
+    SELECT module.id::text
+    FROM taxonomy_modules module
+    JOIN taxonomy_domains domain ON domain.id = module.domain_id
+    JOIN taxonomy_versions version ON version.id = module.taxonomy_version_id
+    WHERE version.is_active AND domain.name = $1 AND module.name = $2
+    ORDER BY version.created_at DESC, version.id DESC
+    LIMIT 1
+  `, [input.targetDomain, input.targetModule]);
+  if (!module.rows[0]) throw new Error('O módulo selecionado não existe no domínio da taxonomia ativa.');
+  await ensureOperation(client, module.rows[0].id, input.proposedOperation, input.justification);
+  return 'applied' as const;
+}
+
 export async function addTaxonomyOperation(input: { domain?: string; module: string; operation: string; description: string; version?: string }) {
   await withTransaction(async client => {
     const versionId = await findActiveTaxonomyVersion(client, input.version);

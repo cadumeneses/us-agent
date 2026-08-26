@@ -20,6 +20,7 @@ export const api = {
   addTaxonomyOperation: (input: { domain?: string; module: string; operation: string; description: string; version?: string }) => request<Taxonomy>('/api/taxonomy/operations', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) }),
   addTaxonomyDomain: (input: { domain: string; description: string; version?: string }) => request<Taxonomy>('/api/taxonomy/domains', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) }),
   applyFallbackSuggestion: (id: string) => request<{ status: 'applied' | 'already_applied'; taxonomy: Taxonomy }>(`/api/taxonomy/fallback-suggestions/${id}/apply`, { method: 'POST' }),
+  applyTaxonomyFeedback: (id: string) => request<{ status: 'applied' | 'already_applied'; taxonomy: Taxonomy }>(`/api/taxonomy/feedback/${id}/apply`, { method: 'POST' }),
   createTaxonomyVersion: (version: string) => request<Taxonomy>('/api/taxonomy/versions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ version }) }),
   context: () => request<ApplicationContext>('/api/context'),
   qualityPlans: () => request<QualityPlan[]>('/api/quality-plans'),
@@ -50,7 +51,7 @@ export const api = {
     targetModule?: string;
     proposedOperation?: string;
     justification: string;
-  }) => request<{ id: string; status: string }>(`/api/classifications/${id}/taxonomy-feedback`, {
+  }) => request<{ id: string; status: 'applied' | 'needs_clarification'; taxonomy: Taxonomy }>(`/api/classifications/${id}/taxonomy-feedback`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(input)

@@ -8,7 +8,7 @@ import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
 import { query, withTransaction } from '../database/pool.js';
 import { isExecutionModeActive, loadApplicationContext } from '../repositories/application-repository.js';
-import { savePreviewClassifications, saveReview, saveTaxonomyFeedback } from '../services/classification-store.js';
+import { applySavedTaxonomyFeedback, savePreviewClassifications, saveReview, saveTaxonomyFeedback } from '../services/classification-store.js';
 import { importRecord, type HistoricalResult } from '../database/import-jsonl.js';
 import { buildQualityPlanScope, createQualityPlanScope, loadQualityPlans, saveQualityPlanScope, syncQualityPlanForSprint } from '../services/quality-plans.js';
 import { loadStoryDetails, saveStoryDetails } from '../services/story-details.js';
@@ -306,9 +306,26 @@ apiRouter.post('/classifications/:id/taxonomy-feedback', async (req, res) => {
   if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador da classificação inválido.' });
   const parsed = taxonomyFeedbackRequest.safeParse(req.body);
   if (!parsed.success) return void res.status(400).json({ error: 'Dados da proposta de evolução inválidos.', details: parsed.error.issues });
-  const saved = await saveTaxonomyFeedback(req.params.id, parsed.data);
+  let saved;
+  try {
+    saved = await saveTaxonomyFeedback(req.params.id, parsed.data);
+  } catch (reason) {
+    return void res.status(422).json({ error: (reason as Error).message });
+  }
   if (!saved) return void res.status(404).json({ error: 'Classificação não encontrada.' });
-  res.status(201).json(saved);
+  res.status(201).json({ ...saved, taxonomy: await loadTaxonomy() });
+});
+apiRouter.post('/taxonomy/feedback/:id/apply', async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador da proposta inválido.' });
+  let result;
+  try {
+    result = await applySavedTaxonomyFeedback(req.params.id);
+  } catch (reason) {
+    return void res.status(422).json({ error: (reason as Error).message });
+  }
+  if (!result) return void res.status(404).json({ error: 'Proposta de evolução não encontrada.' });
+  if (result.status === 'not_actionable') return void res.status(422).json({ error: 'Solicitações de esclarecimento não alteram a taxonomia.' });
+  res.json({ status: result.status, taxonomy: await loadTaxonomy() });
 });
 apiRouter.put('/classifications/:id/details', async (req, res) => {
   if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });

@@ -61,6 +61,7 @@ export function ReviewPage() {
   const [savingProposal, setSavingProposal] = useState(false);
   const [proposalSuccess, setProposalSuccess] = useState('');
   const [applyingSuggestion, setApplyingSuggestion] = useState<string>();
+  const [applyingFeedback, setApplyingFeedback] = useState<string>();
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -196,10 +197,13 @@ export function ReviewPage() {
     if (!feedback) return;
     setSavingProposal(true);
     try {
-      await api.saveTaxonomyFeedback(selected.id, feedback);
+      const saved = await api.saveTaxonomyFeedback(selected.id, feedback);
+      setTaxonomy(saved.taxonomy);
       setReviewContext(await api.reviewContext(selected.id));
       setShowFeedback(false);
-      setProposalSuccess('Proposta salva para a governança da taxonomia. A classificação continua disponível para revisão.');
+      setProposalSuccess(saved.status === 'applied'
+        ? 'Expansão salva e aplicada à taxonomia. Ela já pode ser usada para confirmar a classificação.'
+        : 'Solicitação de esclarecimento salva. A classificação continua disponível para revisão.');
     } catch (reason) {
       setError((reason as Error).message);
     } finally {
@@ -219,6 +223,24 @@ export function ReviewPage() {
       setError((reason as Error).message);
     } finally {
       setApplyingSuggestion(undefined);
+    }
+  }
+
+  async function applySavedFeedback(feedback: ReviewContext['taxonomyFeedbacks'][number]) {
+    if (!selected || feedback.status === 'applied') return;
+    setApplyingFeedback(feedback.id);
+    setError('');
+    try {
+      const result = await api.applyTaxonomyFeedback(feedback.id);
+      setTaxonomy(result.taxonomy);
+      setReviewContext(await api.reviewContext(selected.id));
+      setProposalSuccess(result.status === 'applied'
+        ? 'Expansão aplicada à taxonomia. Ela já pode ser usada para confirmar a classificação.'
+        : 'A expansão já estava aplicada à taxonomia.');
+    } catch (reason) {
+      setError((reason as Error).message);
+    } finally {
+      setApplyingFeedback(undefined);
     }
   }
 
@@ -296,7 +318,7 @@ export function ReviewPage() {
               </div> : null}
               {reviewContext?.taxonomyFeedbacks.length ? <div className="saved-feedback-list">
                 <h4>Propostas de evolução salvas</h4>
-                {reviewContext.taxonomyFeedbacks.map(feedback => <article key={feedback.id}><b>{feedbackTarget(feedback)}</b><p>{feedback.justification}</p><small>Status: {feedback.status === 'pending_taxonomy_board' ? 'aguardando governança da taxonomia' : feedback.status}</small></article>)}
+                {reviewContext.taxonomyFeedbacks.map(feedback => <article key={feedback.id}><b>{feedbackTarget(feedback)}</b><p>{feedback.justification}</p><small>Status: {feedback.status === 'applied' ? 'aplicada à taxonomia' : feedback.status === 'needs_clarification' ? 'aguardando esclarecimento da história' : 'proposta ainda não aplicada'}</small>{feedback.status !== 'applied' && feedback.proposalType !== 'clarify_story' && <button className="apply-suggestion" disabled={applyingFeedback === feedback.id} onClick={() => void applySavedFeedback(feedback)}>{applyingFeedback === feedback.id ? 'Aplicando…' : 'Aplicar à taxonomia'}</button>}</article>)}
               </div> : null}
               {reviewContext?.votes.length ? <div className="vote-list">
                 <h4>Sugestões dos classificadores</h4>
@@ -323,7 +345,7 @@ export function ReviewPage() {
               {proposalType === 'new_module' && <><label>Domínio existente<select value={targetDomain} onChange={event => selectTargetDomain(event.target.value)}><option value="" disabled>Selecione um domínio</option>{targetDomains.map(name => <option key={name} value={name}>{name}</option>)}</select></label><label>Módulo sugerido<input value={proposedModule} onChange={event => setProposedModule(event.target.value)} placeholder="Ex.: Notificações push"/></label><label>Operação inicial (opcional)<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Agendar notificação"/></label></>}
               {proposalType === 'new_operation' && <><label>Domínio existente<select value={targetDomain} onChange={event => selectTargetDomain(event.target.value)}><option value="" disabled>Selecione um domínio</option>{targetDomains.map(name => <option key={name} value={name}>{name}</option>)}</select></label><label>Módulo existente<select value={targetModule} onChange={event => setTargetModule(event.target.value)} disabled={!targetDomain}><option value="" disabled>Selecione um módulo</option>{targetModules.map(name => <option key={name} value={name}>{name}</option>)}</select></label><label>Operação sugerida<input value={proposedOperation} onChange={event => setProposedOperation(event.target.value)} placeholder="Ex.: Sincronizar offline"/></label></>}
               <label>Justificativa da proposta<textarea className="small-area" value={feedbackJustification} onChange={event => setFeedbackJustification(event.target.value)} placeholder="Explique a lacuna observada e por que a proposta ajuda a cobri-la…"/></label>
-              <div className="feedback-actions"><button type="button" className="primary" disabled={savingProposal || !taxonomy} onClick={() => void saveTaxonomyProposal()}>{savingProposal ? 'Salvando proposta…' : 'Salvar proposta'}</button><small>Salvar a proposta não altera esta classificação: você ainda pode confirmá-la ou marcar uma lacuna.</small></div>
+              <div className="feedback-actions"><button type="button" className="primary" disabled={savingProposal || !taxonomy} onClick={() => void saveTaxonomyProposal()}>{savingProposal ? 'Salvando expansão…' : proposalType === 'clarify_story' ? 'Salvar solicitação' : 'Salvar e aplicar expansão'}</button><small>A expansão entra na taxonomia ativa e pode ser selecionada nesta revisão; a solicitação de esclarecimento apenas fica registrada.</small></div>
             </div>}
           </div>
           {proposalSuccess && <p className="inline-success" role="status">{proposalSuccess}</p>}

@@ -2,6 +2,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import type { PoolClient } from 'pg';
 import type { FallbackSuggestion, ProviderVote } from '../domain/models.js';
 import { withTransaction } from '../database/pool.js';
+import { applyTaxonomyExpansion } from '../repositories/data-repository.js';
 
 export type PreviewResult = {
   id: string;
@@ -212,13 +213,14 @@ async function persistTaxonomyFeedback(
   client: PoolClient,
   classificationId: string,
   reviewer: string,
-  feedback: TaxonomyFeedbackInput
+  feedback: TaxonomyFeedbackInput,
+  status: 'applied' | 'needs_clarification'
 ) {
   const saved = await client.query<{ id: string; status: string }>(`
     INSERT INTO taxonomy_feedback (
       classification_id, reviewer, proposal_type, proposed_domain, target_domain,
       proposed_module, target_module, proposed_operation, justification, status
-    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,'pending_taxonomy_board')
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
     RETURNING id::text, status
   `, [
     classificationId,
@@ -229,7 +231,8 @@ async function persistTaxonomyFeedback(
     feedback.proposedModule?.trim() || null,
     feedback.targetModule?.trim() || null,
     feedback.proposedOperation?.trim() || null,
-    feedback.justification.trim()
+    feedback.justification.trim(),
+    status
   ]);
   return saved.rows[0];
 }
@@ -239,7 +242,43 @@ export async function saveTaxonomyFeedback(classificationId: string, feedback: T
     const classification = await client.query('SELECT 1 FROM classifications WHERE id = $1 FOR UPDATE', [classificationId]);
     if (!classification.rowCount) return null;
     const user = await loadDefaultReviewer(client);
-    return persistTaxonomyFeedback(client, classificationId, user.display_name, feedback);
+    const status = await applyTaxonomyExpansion(client, feedback);
+    return persistTaxonomyFeedback(client, classificationId, user.display_name, feedback, status);
+  });
+}
+
+export async function applySavedTaxonomyFeedback(feedbackId: string) {
+  return withTransaction(async client => {
+    const feedback = await client.query<{
+      proposal_type: TaxonomyFeedbackInput['proposalType'];
+      proposed_domain: string | null;
+      target_domain: string | null;
+      proposed_module: string | null;
+      target_module: string | null;
+      proposed_operation: string | null;
+      justification: string;
+      status: string;
+    }>(`
+      SELECT proposal_type, proposed_domain, target_domain, proposed_module, target_module,
+        proposed_operation, justification, status
+      FROM taxonomy_feedback
+      WHERE id = $1 FOR UPDATE
+    `, [feedbackId]);
+    const item = feedback.rows[0];
+    if (!item) return null;
+    if (item.status === 'applied') return { status: 'already_applied' as const };
+    if (item.proposal_type === 'clarify_story') return { status: 'not_actionable' as const };
+    await applyTaxonomyExpansion(client, {
+      proposalType: item.proposal_type,
+      proposedDomain: item.proposed_domain ?? undefined,
+      targetDomain: item.target_domain ?? undefined,
+      proposedModule: item.proposed_module ?? undefined,
+      targetModule: item.target_module ?? undefined,
+      proposedOperation: item.proposed_operation ?? undefined,
+      justification: item.justification
+    });
+    await client.query("UPDATE taxonomy_feedback SET status = 'applied' WHERE id = $1", [feedbackId]);
+    return { status: 'applied' as const };
   });
 }
 
