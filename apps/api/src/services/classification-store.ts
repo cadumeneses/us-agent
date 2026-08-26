@@ -195,8 +195,53 @@ export type ReviewInput = {
   module?: string;
   operation?: string;
   notes?: string;
-  taxonomyFeedback?: TaxonomyFeedbackInput;
 };
+
+async function loadDefaultReviewer(client: PoolClient) {
+  const user = await client.query<{ id: string; display_name: string }>(`
+    SELECT user_account.id::text, user_account.display_name
+    FROM application_settings settings
+    JOIN app_users user_account ON user_account.id = settings.default_user_id
+    WHERE settings.singleton
+  `);
+  if (!user.rows[0]) throw new Error('Usuário padrão não configurado.');
+  return user.rows[0];
+}
+
+async function persistTaxonomyFeedback(
+  client: PoolClient,
+  classificationId: string,
+  reviewer: string,
+  feedback: TaxonomyFeedbackInput
+) {
+  const saved = await client.query<{ id: string; status: string }>(`
+    INSERT INTO taxonomy_feedback (
+      classification_id, reviewer, proposal_type, proposed_domain, target_domain,
+      proposed_module, target_module, proposed_operation, justification, status
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,'pending_taxonomy_board')
+    RETURNING id::text, status
+  `, [
+    classificationId,
+    reviewer,
+    feedback.proposalType,
+    feedback.proposedDomain?.trim() || null,
+    feedback.targetDomain?.trim() || null,
+    feedback.proposedModule?.trim() || null,
+    feedback.targetModule?.trim() || null,
+    feedback.proposedOperation?.trim() || null,
+    feedback.justification.trim()
+  ]);
+  return saved.rows[0];
+}
+
+export async function saveTaxonomyFeedback(classificationId: string, feedback: TaxonomyFeedbackInput) {
+  return withTransaction(async client => {
+    const classification = await client.query('SELECT 1 FROM classifications WHERE id = $1 FOR UPDATE', [classificationId]);
+    if (!classification.rowCount) return null;
+    const user = await loadDefaultReviewer(client);
+    return persistTaxonomyFeedback(client, classificationId, user.display_name, feedback);
+  });
+}
 
 export async function saveReview(input: ReviewInput) {
   return withTransaction(async client => {
@@ -217,13 +262,7 @@ export async function saveReview(input: ReviewInput) {
       return { id: input.classificationId, status: current.rows[0].review_status, notReviewable: true as const };
     }
 
-    const user = await client.query<{ id: string; display_name: string }>(`
-      SELECT user_account.id::text, user_account.display_name
-      FROM application_settings settings
-      JOIN app_users user_account ON user_account.id = settings.default_user_id
-      WHERE settings.singleton
-    `);
-    if (!user.rows[0]) throw new Error('Usuário padrão não configurado.');
+    const user = await loadDefaultReviewer(client);
 
     if (input.action === 'approve') {
       const module = input.module?.trim() || 'n/a';
@@ -255,7 +294,7 @@ export async function saveReview(input: ReviewInput) {
         INSERT INTO review_decisions (
           classification_id, user_id, reviewer, action, outcome, notes
         ) VALUES ($1, $2, $3, 'approve', 'manual_classification_applied', $4)
-      `, [input.classificationId, user.rows[0].id, user.rows[0].display_name, input.notes?.trim() || null]);
+      `, [input.classificationId, user.id, user.display_name, input.notes?.trim() || null]);
     } else {
       await client.query(`
         UPDATE classifications SET
@@ -268,25 +307,7 @@ export async function saveReview(input: ReviewInput) {
         INSERT INTO review_decisions (
           classification_id, user_id, reviewer, action, outcome, queue_status, notes
         ) VALUES ($1, $2, $3, 'taxonomy_gap', 'kept_for_human_queue', 'taxonomy_gap', $4)
-      `, [input.classificationId, user.rows[0].id, user.rows[0].display_name, input.notes?.trim() || null]);
-      if (input.taxonomyFeedback) {
-        await client.query(`
-          INSERT INTO taxonomy_feedback (
-            classification_id, reviewer, proposal_type, proposed_domain, target_domain,
-            proposed_module, target_module, proposed_operation, justification, status
-          ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,'pending_taxonomy_board')
-        `, [
-          input.classificationId,
-          user.rows[0].display_name,
-          input.taxonomyFeedback.proposalType,
-          input.taxonomyFeedback.proposedDomain?.trim() || null,
-          input.taxonomyFeedback.targetDomain?.trim() || null,
-          input.taxonomyFeedback.proposedModule?.trim() || null,
-          input.taxonomyFeedback.targetModule?.trim() || null,
-          input.taxonomyFeedback.proposedOperation?.trim() || null,
-          input.taxonomyFeedback.justification.trim()
-        ]);
-      }
+      `, [input.classificationId, user.id, user.display_name, input.notes?.trim() || null]);
     }
     return { id: input.classificationId, status: input.action === 'approve' ? 'reviewed' : 'taxonomy_gap' };
   });

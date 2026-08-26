@@ -67,6 +67,18 @@ export type ReviewContext = {
     action?: string;
   };
   suggestions: FallbackSuggestion[];
+  taxonomyFeedbacks: Array<{
+    id: string;
+    proposalType: 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story';
+    proposedDomain?: string;
+    targetDomain?: string;
+    proposedModule?: string;
+    targetModule?: string;
+    proposedOperation?: string;
+    justification: string;
+    status: string;
+    createdAt: string;
+  }>;
   votes: Array<{
     provider: string;
     status: string;

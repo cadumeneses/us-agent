@@ -8,7 +8,7 @@ import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
 import { query, withTransaction } from '../database/pool.js';
 import { isExecutionModeActive, loadApplicationContext } from '../repositories/application-repository.js';
-import { savePreviewClassifications, saveReview } from '../services/classification-store.js';
+import { savePreviewClassifications, saveReview, saveTaxonomyFeedback } from '../services/classification-store.js';
 import { importRecord, type HistoricalResult } from '../database/import-jsonl.js';
 import { buildQualityPlanScope, createQualityPlanScope, loadQualityPlans, saveQualityPlanScope, syncQualityPlanForSprint } from '../services/quality-plans.js';
 import { loadStoryDetails, saveStoryDetails } from '../services/story-details.js';
@@ -40,8 +40,8 @@ const taxonomyFeedbackRequest = z.object({
   if (feedback.proposalType === 'new_module' && (!feedback.targetDomain || !feedback.proposedModule)) {
     context.addIssue({ code: 'custom', message: 'Informe o domínio alvo e o módulo sugerido.' });
   }
-  if (feedback.proposalType === 'new_operation' && (!feedback.targetModule || !feedback.proposedOperation)) {
-    context.addIssue({ code: 'custom', message: 'Informe o módulo alvo e a operação sugerida.' });
+  if (feedback.proposalType === 'new_operation' && (!feedback.targetDomain || !feedback.targetModule || !feedback.proposedOperation)) {
+    context.addIssue({ code: 'custom', message: 'Informe o domínio, o módulo alvo e a operação sugerida.' });
   }
 });
 
@@ -54,8 +54,7 @@ const reviewRequest = z.discriminatedUnion('action', [
   }),
   z.object({
     action: z.literal('taxonomy_gap'),
-    notes: z.string().trim().max(2_000).optional(),
-    taxonomyFeedback: taxonomyFeedbackRequest.optional()
+    notes: z.string().trim().max(2_000).optional()
   })
 ]);
 
@@ -302,6 +301,14 @@ apiRouter.get('/classifications/:id/review-context', async (req, res) => {
   const context = await loadReviewContext(req.params.id);
   if (!context) return void res.status(404).json({ error: 'Classificação não encontrada.' });
   res.json(context);
+});
+apiRouter.post('/classifications/:id/taxonomy-feedback', async (req, res) => {
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador da classificação inválido.' });
+  const parsed = taxonomyFeedbackRequest.safeParse(req.body);
+  if (!parsed.success) return void res.status(400).json({ error: 'Dados da proposta de evolução inválidos.', details: parsed.error.issues });
+  const saved = await saveTaxonomyFeedback(req.params.id, parsed.data);
+  if (!saved) return void res.status(404).json({ error: 'Classificação não encontrada.' });
+  res.status(201).json(saved);
 });
 apiRouter.put('/classifications/:id/details', async (req, res) => {
   if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });

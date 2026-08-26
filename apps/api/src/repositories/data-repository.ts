@@ -199,6 +199,25 @@ export async function loadReviewContext(classificationId: string): Promise<Revie
     });
   }
 
+  const feedbackResult = await query<{
+    id: string;
+    proposal_type: 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story';
+    proposed_domain: string | null;
+    target_domain: string | null;
+    proposed_module: string | null;
+    target_module: string | null;
+    proposed_operation: string | null;
+    justification: string;
+    status: string;
+    created_at: string;
+  }>(`
+    SELECT id::text, proposal_type, proposed_domain, target_domain, proposed_module,
+      target_module, proposed_operation, justification, status, created_at
+    FROM taxonomy_feedback
+    WHERE classification_id = $1
+    ORDER BY created_at DESC, id DESC
+  `, [classificationId]);
+
   return {
     final: {
       reason: classification.rows[0].final_reason ?? undefined,
@@ -218,6 +237,18 @@ export async function loadReviewContext(classificationId: string): Promise<Revie
       reason: row.reason,
       evidence: evidenceBySuggestion.get(row.id) ?? [],
       appliedAt: row.applied_at ?? undefined
+    })),
+    taxonomyFeedbacks: feedbackResult.rows.map(row => ({
+      id: row.id,
+      proposalType: row.proposal_type,
+      proposedDomain: row.proposed_domain ?? undefined,
+      targetDomain: row.target_domain ?? undefined,
+      proposedModule: row.proposed_module ?? undefined,
+      targetModule: row.target_module ?? undefined,
+      proposedOperation: row.proposed_operation ?? undefined,
+      justification: row.justification,
+      status: row.status,
+      createdAt: row.created_at
     })),
     votes: voteResult.rows.map(row => votesById.get(row.id)!).filter(Boolean)
   };

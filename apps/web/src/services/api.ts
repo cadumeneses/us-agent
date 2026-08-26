@@ -42,6 +42,19 @@ export const api = {
     }),
   storyDetails: (id: string) => request<StoryDetails>(`/api/classifications/${id}/details`),
   reviewContext: (id: string) => request<ReviewContext>(`/api/classifications/${id}/review-context`),
+  saveTaxonomyFeedback: (id: string, input: {
+    proposalType: 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story';
+    proposedDomain?: string;
+    targetDomain?: string;
+    proposedModule?: string;
+    targetModule?: string;
+    proposedOperation?: string;
+    justification: string;
+  }) => request<{ id: string; status: string }>(`/api/classifications/${id}/taxonomy-feedback`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(input)
+  }),
   saveStoryDetails: (id: string, details: StoryDetails) => request<StoryDetails>(`/api/classifications/${id}/details`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(details) }),
   classify: (stories: string[], project: string, sprint: string, mode: string) => request<{ runId: string; results: Classification[] }>(
     '/api/classify',
@@ -59,15 +72,6 @@ export const api = {
   review: (id: string, input: { action: 'approve'; module: string; operation: string; notes?: string } | {
     action: 'taxonomy_gap';
     notes?: string;
-    taxonomyFeedback?: {
-      proposalType: 'new_domain' | 'new_module' | 'new_operation' | 'clarify_story';
-      proposedDomain?: string;
-      targetDomain?: string;
-      proposedModule?: string;
-      targetModule?: string;
-      proposedOperation?: string;
-      justification: string;
-    };
   }) =>
     request<{ id: string; status: string }>(`/api/classifications/${id}/review`, {
       method: 'PATCH',
