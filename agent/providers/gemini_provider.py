@@ -1,6 +1,6 @@
 from google import genai
 
-from agent.schemas import ArbiterOutput, ClassifierOutput, QualityPlanOutput
+from agent.schemas import ArbiterOutput, ClassifierOutput
 
 
 class GeminiProvider:
@@ -40,7 +40,3 @@ class GeminiProvider:
     def arbitrate(self, system: str, user: str) -> ArbiterOutput:
         text = self._run(system, user)
         return ArbiterOutput.model_validate_json(self._extract_json(text))
-
-    def recommend_quality(self, system: str, user: str) -> QualityPlanOutput:
-        text = self._run(system, user)
-        return QualityPlanOutput.model_validate_json(self._extract_json(text))

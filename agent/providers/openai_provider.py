@@ -1,6 +1,6 @@
 import os
 from openai import OpenAI
-from agent.schemas import ClassifierOutput, ArbiterOutput, QualityPlanOutput
+from agent.schemas import ClassifierOutput, ArbiterOutput
 
 class OpenAIProvider:
     def __init__(self, model: str | None = None):
@@ -27,18 +27,6 @@ class OpenAIProvider:
                 {"role": "user", "content": user},
             ],
             text_format=ArbiterOutput,
-            store=False,
-        )
-        return resp.output_parsed
-
-    def recommend_quality(self, system: str, user: str) -> QualityPlanOutput:
-        resp = self.client.responses.parse(
-            model=self.model,
-            input=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            text_format=QualityPlanOutput,
             store=False,
         )
         return resp.output_parsed

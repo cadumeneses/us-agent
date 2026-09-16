@@ -1,4 +1,5 @@
 import { timingSafeEqual } from 'node:crypto';
+import { nfrRouter } from './nfr.js';
 import { Router, type Request, type Response } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
@@ -10,8 +11,8 @@ import { query, withTransaction } from '../database/pool.js';
 import { isExecutionModeActive, loadApplicationContext } from '../repositories/application-repository.js';
 import { applySavedTaxonomyFeedback, savePreviewClassifications, saveReview, saveTaxonomyFeedback } from '../services/classification-store.js';
 import { importRecord, type HistoricalResult } from '../database/import-jsonl.js';
-import { buildQualityPlanScope, createQualityPlanScope, loadQualityPlans, saveQualityPlanScope, syncQualityPlanForSprint } from '../services/quality-plans.js';
 import { loadStoryDetails, saveStoryDetails } from '../services/story-details.js';
+import { technologiesSchema, projectResearchProfileSchema, loadProjectResearchProfile, saveProjectResearchProfile } from '../services/research-inputs.js';
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -74,12 +75,6 @@ const ingestionRequest = z.object({
   }).passthrough()
 }).passthrough();
 
-const qualitySource = z.enum(['taxonomy_heuristic', 'user']);
-const qualityPlanScopeRequest = z.object({
-  project: z.string().trim().min(1).max(160),
-  sprint: z.string().trim().min(1).max(120),
-  storyIds: z.array(z.string().regex(/^\d+$/)).min(1).max(100)
-});
 const sprintCreateRequest = z.object({
   project: z.string().trim().min(1).max(160),
   name: z.string().trim().min(1).max(120),
@@ -87,50 +82,8 @@ const sprintCreateRequest = z.object({
 });
 const sprintStatusRequest = z.object({ status: z.enum(['planning', 'active', 'completed']) });
 const sprintStoriesRequest = z.object({ classificationIds: z.array(z.string().regex(/^\d+$/)).min(1).max(500) });
-const qualityPlanRequest = z.object({
-  status: z.enum(['draft', 'approved']),
-  storyIds: z.array(z.string().regex(/^\d+$/)).min(1).max(100),
-  questions: z.array(z.object({
-    id: z.string().trim().max(80).optional().default(''),
-    text: z.string().trim().min(1).max(500),
-    source: qualitySource
-  })).max(500),
-  acceptanceCriteria: z.array(z.object({
-    id: z.string().trim().max(80).optional().default(''),
-    text: z.string().trim().min(1).max(500),
-    source: qualitySource
-  })).max(500),
-  testCases: z.array(z.object({
-    id: z.string().trim().max(80).optional().default(''),
-    title: z.string().trim().min(1).max(500),
-    type: z.enum(['positive', 'negative', 'boundary', 'security']),
-    priority: z.enum(['high', 'medium']),
-    source: qualitySource,
-    assumption: z.boolean(),
-    preconditions: z.array(z.string().trim().min(1).max(500)).max(30).optional().default([]),
-    testData: z.string().trim().max(2_000).optional().default(''),
-    steps: z.array(z.string().trim().min(1).max(1_000)).max(30).optional().default([]),
-    expectedResult: z.string().trim().max(2_000).optional().default(''),
-    linkedCriteria: z.array(z.string().trim().min(1).max(80)).max(30).optional().default([]),
-    automation: z.enum(['manual', 'candidate']).optional().default('manual')
-  })).max(1_000)
-}).superRefine((plan, context) => {
-  if (plan.status !== 'approved') return;
-  if (!plan.testCases.length) {
-    context.addIssue({ code: 'custom', path: ['testCases'], message: 'Inclua ao menos um caso de teste antes de aprovar.' });
-  }
-  plan.testCases.forEach((testCase, index) => {
-    if (!testCase.steps.length) context.addIssue({ code: 'custom', path: ['testCases', index, 'steps'], message: 'Descreva ao menos um passo para cada caso aprovado.' });
-    if (!testCase.expectedResult) context.addIssue({ code: 'custom', path: ['testCases', index, 'expectedResult'], message: 'Informe o resultado esperado de cada caso aprovado.' });
-  });
-  const criterionIds = plan.acceptanceCriteria.map((criterion, index) => criterion.id || `AC-${String(index + 1).padStart(3, '0')}`);
-  const linkedCriteria = new Set(plan.testCases.flatMap(testCase => testCase.linkedCriteria));
-  criterionIds.forEach((id, index) => {
-    if (!linkedCriteria.has(id)) context.addIssue({ code: 'custom', path: ['acceptanceCriteria', index], message: 'Todo critério de aceitação precisa estar ligado a pelo menos um caso de teste.' });
-  });
-});
 const storyDetailsRequest = z.object({
-  tasks: z.array(z.object({ id: z.string().optional(), title: z.string().trim().min(1).max(500), done: z.boolean() })).max(100),
+  tasks: z.array(z.object({ id: z.string().optional(), title: z.string().trim().min(1).max(500), done: z.boolean(), category: z.string().trim().max(160).optional(), technologies: technologiesSchema.optional() })).max(100),
   functionalRequirements: z.array(z.object({ id: z.string().optional(), description: z.string().trim().min(1).max(1000) })).max(100),
   nonFunctionalRequirements: z.array(z.object({ id: z.string().optional(), description: z.string().trim().min(1).max(1000), type: z.string().trim().min(1).max(80), metric: z.string().trim().min(1).max(120) })).max(100)
 });
@@ -158,6 +111,23 @@ function isAuthorizedInternalRequest(req: Request, res: Response) {
 }
 
 export const apiRouter = Router();
+apiRouter.use(nfrRouter);
+
+apiRouter.get('/project-research-profile', async (req, res) => {
+  const name = z.string().trim().min(1).max(160).safeParse(req.query.project);
+  if (!name.success) return void res.status(400).json({ error: 'Informe o projeto.' });
+  const profile = await loadProjectResearchProfile(name.data);
+  if (!profile) return void res.status(404).json({ error: 'Projeto não encontrado.' });
+  res.json(profile);
+});
+
+apiRouter.put('/project-research-profile', async (req, res) => {
+  const name = z.string().trim().min(1).max(160).safeParse(req.query.project);
+  const parsed = projectResearchProfileSchema.safeParse(req.body);
+  if (!name.success || !parsed.success) return void res.status(400).json({ error: 'Perfil do projeto inválido.' });
+  if (!await saveProjectResearchProfile(name.data, parsed.data)) return void res.status(404).json({ error: 'Projeto não encontrado.' });
+  res.json(parsed.data);
+});
 
 apiRouter.get('/health', async (_req, res) => {
   await query('SELECT 1');
@@ -181,10 +151,6 @@ apiRouter.get('/stories', async (req, res) => {
 
 apiRouter.get('/dashboard', async (_req, res) => {
   res.json(buildDashboard(await loadStories()));
-});
-
-apiRouter.get('/quality-plans', async (_req, res) => {
-  res.json(await loadQualityPlans(await loadStories()));
 });
 
 apiRouter.get('/sprints', async (_req, res) => {
@@ -220,58 +186,12 @@ apiRouter.put('/sprints/:id/stories', async (req, res) => {
   try {
     const changed = await assignStoriesToSprint(req.params.id, parsed.data.classificationIds);
     if (!changed) return void res.status(404).json({ error: 'Sprint não encontrada.' });
-    const context = await loadApplicationContext();
-    await syncQualityPlanForSprint(req.params.id, context.user.id);
-    for (const previousSprintId of changed.previousSprintIds.filter(id => id !== req.params.id)) await syncQualityPlanForSprint(previousSprintId, context.user.id);
     res.json({ sprintId: req.params.id, classificationIds: parsed.data.classificationIds });
   } catch (reason) {
     res.status(400).json({ error: (reason as Error).message });
   }
 });
 
-apiRouter.post('/quality-plans/scopes', async (req, res) => {
-  const parsed = qualityPlanScopeRequest.safeParse(req.body);
-  if (!parsed.success) {
-    res.status(400).json({ error: 'Informe projeto, sprint e ao menos uma User Story para criar o plano.' });
-    return;
-  }
-  const stories = (await loadStories()).filter(story => parsed.data.storyIds.includes(story.id) && story.project === parsed.data.project);
-  if (stories.length !== parsed.data.storyIds.length) {
-    res.status(400).json({ error: 'Uma ou mais histórias não pertencem ao projeto selecionado.' });
-    return;
-  }
-  const plan = buildQualityPlanScope({ id: '', project: parsed.data.project, sprint: parsed.data.sprint, stories, status: 'draft' });
-  const context = await loadApplicationContext();
-  const saved = await createQualityPlanScope(context.user.id, { ...plan, storyIds: parsed.data.storyIds, status: 'draft' });
-  if (!saved) {
-    res.status(404).json({ error: 'Projeto não encontrado.' });
-    return;
-  }
-  if (saved.conflict) {
-    res.status(409).json({ error: 'Já existe um plano para este projeto e sprint.' });
-    return;
-  }
-  res.status(201).json({ ...plan, id: saved.id, status: 'draft', updatedAt: saved.updated_at, updatedBy: context.user.displayName });
-});
-
-apiRouter.put('/quality-plans/:id', async (req, res) => {
-  if (!/^\d+$/.test(req.params.id)) {
-    res.status(400).json({ error: 'Identificador de plano inválido.' });
-    return;
-  }
-  const parsed = qualityPlanRequest.safeParse(req.body);
-  if (!parsed.success) {
-    res.status(400).json({ error: 'Plano de qualidade inválido.', details: parsed.error.issues });
-    return;
-  }
-  const context = await loadApplicationContext();
-  const saved = await saveQualityPlanScope(req.params.id, context.user.id, parsed.data);
-  if (!saved) {
-    res.status(404).json({ error: 'Plano de qualidade não encontrado.' });
-    return;
-  }
-  res.json({ id: req.params.id, status: parsed.data.status, updatedAt: saved.updated_at, updatedBy: context.user.displayName });
-});
 apiRouter.post('/taxonomy/operations', async (req, res) => { const parsed = taxonomyOperationRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Dados da operação inválidos.' }); await addTaxonomyOperation(parsed.data); res.status(201).json(await loadTaxonomy()); });
 apiRouter.post('/taxonomy/domains', async (req, res) => { const parsed = taxonomyDomainRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Dados do domínio inválidos.' }); await addTaxonomyDomain(parsed.data); res.status(201).json(await loadTaxonomy()); });
 apiRouter.post('/taxonomy/versions', async (req, res) => { const parsed = taxonomyVersionRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Versão inválida.' }); await createTaxonomyVersion(parsed.data.version); res.status(201).json(await loadTaxonomy()); });

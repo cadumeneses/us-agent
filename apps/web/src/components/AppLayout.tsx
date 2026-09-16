@@ -9,7 +9,7 @@ const navigation = [
   ['Dashboard', '/', LayoutDashboard],
   ['Meus projetos', '/projects', FolderKanban],
   ['Classificar histórias', '/classify', Sparkles],
-  ['Plano de qualidade', '/quality', ClipboardCheck],
+  ['Recomendadores · RNFs', '/recommendations', ClipboardCheck],
   ['Fila de revisão', '/review', FileCheck2],
   ['Taxonomia', '/taxonomy', FolderTree],
   ['Execuções', '/runs', BrainCircuit],

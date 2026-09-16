@@ -100,37 +100,15 @@ export type ApplicationContext = {
   executionModes: Array<{ key: string; name: string; description: string }>;
 };
 
-export type QualityPlan = {
-  id: string;
-  project: string;
-  sprint: string;
-  stories: Story[];
-  health: 'ready' | 'needs_clarification' | 'needs_review';
-  healthIssues: string[];
-  questions: Array<{ id: string; text: string; source: 'taxonomy_heuristic' | 'user' }>;
-  acceptanceCriteria: Array<{ id: string; text: string; source: 'taxonomy_heuristic' | 'user' }>;
-  testCases: Array<{
-    id: string;
-    title: string;
-    type: 'positive' | 'negative' | 'boundary' | 'security';
-    priority: 'high' | 'medium';
-    source: 'taxonomy_heuristic' | 'user';
-    assumption: boolean;
-    preconditions: string[];
-    testData: string;
-    steps: string[];
-    expectedResult: string;
-    linkedCriteria: string[];
-    automation: 'manual' | 'candidate';
-  }>;
-  generatorVersion: string;
-  status: 'generated' | 'draft' | 'approved';
-  updatedAt?: string;
-  updatedBy?: string;
+export type ResearchTechnologies = {
+  languages: string[]; frameworks: string[]; apis: string[]; dataPersistence: string[];
 };
-
+export type ProjectResearchProfile = {
+  platforms: string[]; applicationDomains: string[]; objective: '' | 'product' | 'prototype';
+  architectures: string[]; technologies: ResearchTechnologies;
+};
 export type StoryDetails = {
-  tasks: Array<{ id: string; title: string; done: boolean }>;
+  tasks: Array<{ id: string; title: string; done: boolean; category?: string; technologies?: ResearchTechnologies }>;
   functionalRequirements: Array<{ id: string; description: string }>;
   nonFunctionalRequirements: Array<{ id: string; description: string; type: string; metric: string }>;
 };

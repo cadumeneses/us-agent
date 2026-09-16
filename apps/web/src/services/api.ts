@@ -1,4 +1,6 @@
-import type { ApplicationContext, Classification, Dashboard, ProjectSprint, QualityPlan, ReviewContext, Story, StoryDetails, Taxonomy } from '../types/models';
+import type { ApplicationContext, Classification, Dashboard, ProjectSprint, ReviewContext, Story, StoryDetails, Taxonomy } from '../types/models';
+import type { ProjectResearchProfile } from '../types/models';
+import type { NfrContext, NfrRun } from '../types/nfr';
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(url, options);
@@ -10,6 +12,12 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  nfrContext: (id: string) => request<NfrContext>(`/api/classifications/${id}/nfr-context`),
+  nfrRuns: (id: string) => request<NfrRun[]>(`/api/classifications/${id}/nfr-runs`),
+  recommendNfr: (id: string, labelIndex: number) => request<NfrRun>(`/api/classifications/${id}/nfr-runs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ labelIndex }) }),
+  decideNfr: (runId: string, itemKey: string, decision: 'accepted' | 'rejected') => request<{ decision: string }>(`/api/nfr-runs/${runId}/decisions`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ itemKey, decision }) }),
+  projectResearchProfile: (project: string) => request<ProjectResearchProfile>(`/api/project-research-profile?project=${encodeURIComponent(project)}`),
+  saveProjectResearchProfile: (project: string, profile: ProjectResearchProfile) => request<ProjectResearchProfile>(`/api/project-research-profile?project=${encodeURIComponent(project)}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(profile) }),
   dashboard: () => request<Dashboard>('/api/dashboard'),
   stories: () => request<Story[]>('/api/stories'),
   sprints: () => request<ProjectSprint[]>('/api/sprints'),
@@ -23,24 +31,6 @@ export const api = {
   applyTaxonomyFeedback: (id: string) => request<{ status: 'applied' | 'already_applied'; taxonomy: Taxonomy }>(`/api/taxonomy/feedback/${id}/apply`, { method: 'POST' }),
   createTaxonomyVersion: (version: string) => request<Taxonomy>('/api/taxonomy/versions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ version }) }),
   context: () => request<ApplicationContext>('/api/context'),
-  qualityPlans: () => request<QualityPlan[]>('/api/quality-plans'),
-  createQualityPlanScope: (project: string, sprint: string, storyIds: string[]) => request<QualityPlan>('/api/quality-plans/scopes', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ project, sprint, storyIds })
-  }),
-  saveQualityPlan: (plan: QualityPlan, status: 'draft' | 'approved') =>
-    request<{ id: string; status: string; updatedAt: string; updatedBy: string }>(`/api/quality-plans/${plan.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        status,
-        storyIds: plan.stories.map(story => story.id),
-        questions: plan.questions,
-        acceptanceCriteria: plan.acceptanceCriteria,
-        testCases: plan.testCases
-      })
-    }),
   storyDetails: (id: string) => request<StoryDetails>(`/api/classifications/${id}/details`),
   reviewContext: (id: string) => request<ReviewContext>(`/api/classifications/${id}/review-context`),
   saveTaxonomyFeedback: (id: string, input: {

@@ -35,6 +35,30 @@ O projeto possui `api/index.ts` como entrada serverless e `vercel.json` para ser
 
 O pool é criado uma vez por instância e integrado ao gerenciamento de conexões da Vercel. Nenhuma Function depende do sistema de arquivos persistente.
 
+## Recomendação de requisitos não funcionais
+
+A aba **Recomendadores · RNFs** usa o método descrito por Felipe Ramos (2019):
+pré-filtragem por módulo/operação, exclusão de projetos de protótipo, vetores binários
+com as características do alvo, similaridade de Manhattan e k=1. Os RNFs são
+recuperados da US vizinha, com origem e comparação das características disponíveis
+na interface. Não há geração de testes nem plano de qualidade.
+
+Preencha o perfil do projeto e as categorias das tarefas em **Meus projetos**.
+O histórico precisa conter outras US aceitas, com perfil completo e RNFs associados.
+Em **Recomendadores · RNFs**, escolha a US e o par módulo/operação, execute e avalie
+os resultados. **Aceitar e vincular** registra o RNF na US; rejeitar somente registra
+a avaliação. Execuções preservam snapshots de entrada, resultados e versão do método.
+
+Classificação multi-label, comitê, incerteza, revisão e evolução da taxonomia são
+preservados. As adaptações e os limites da reprodução estão em
+[docs/motor-rnf.md](docs/motor-rnf.md). A base original da pesquisa ainda não foi
+localizada para download; exemplos dos testes automatizados não são essa base.
+
+Aplique as migrations normalmente com `npm.cmd run db:migrate`. As tabelas antigas
+de planos permanecem apenas como arquivo histórico, sem telas ou endpoints ativos.
+Após o build, `node scripts/check-nfr-recommendations.mjs` verifica o fluxo HTTP e a
+persistência em um schema temporário do PostgreSQL local, sem alterar dados da pesquisa.
+
 ## Motor de classificação
 
 Ferramenta para classificar User Stories (US) na taxonomia WIS com foco em **decisao sob incerteza**.
@@ -238,35 +262,6 @@ Exportacao manual:
 ## Taxonomia
 
 A fonte de verdade é formada por `taxonomy_versions`, `taxonomy_domains`, `taxonomy_modules` e `taxonomy_operations`. Um domínio representa uma nova área de negócio ou plataforma; módulos ficam dentro de um domínio, e operações dentro de um módulo. A API fornece a versão ativa à WEB e ao worker Python.
-
-## Recomendador de plano de qualidade
-
-O prompt versionado `quality_plan_prompt_v1` fica em `agent/prompts.py` e usa o
-schema `QualityPlanOutput` de `agent/schemas.py`. Ele recebe a história, os pares
-WIS, confiança, incerteza, evidências e problemas conhecidos.
-
-As recomendações distinguem três bases:
-
-- `explicit_in_story`: informação declarada na história;
-- `inferred_from_story`: inferência que precisa ser confirmada;
-- `general_quality_practice`: prática geral, não um requisito confirmado.
-
-Na tela **Plano de qualidade**, cada sugestão passa por um chart de modelagem:
-**critérios de aceitação → cenários → variações → casos executáveis**. Os casos
-mantêm identificador, pré-condições, dados de teste, passos, resultado esperado,
-tipo, prioridade, candidato à automação e vínculo com um ou mais critérios.
-O plano só pode ser aprovado quando todo critério estiver coberto e os casos
-possuírem passos e resultado esperado; rascunhos continuam livres para edição.
-
-O plano é uma unidade de **projeto + sprint**. Ao criar uma sprint, o QA seleciona
-as User Stories do ciclo e recebe um plano único, com os casos identificados pela
-história de origem. Histórias que ainda não entraram em uma sprint ficam no plano
-virtual **Backlog** do projeto até serem alocadas ou salvas.
-
-Os provedores OpenAI, Gemini e HTTP OpenAI-like implementam
-`recommend_quality`. O helper `recommend_quality_plan` em
-`agent/quality_plan.py` monta o contexto de forma consistente e valida a saída
-estruturada antes que ela seja persistida ou apresentada ao usuário.
 
 ## Observacoes
 - E necessario configurar ao menos um provedor valido (`OPENAI_API_KEY`, `GEMINI_API_KEY`, `DEEPSEEK_BASE_URL` ou `GROQ_BASE_URL`).
