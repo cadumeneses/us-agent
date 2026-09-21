@@ -19,7 +19,7 @@ export const api = {
   projectResearchProfile: (project: string) => request<ProjectResearchProfile>(`/api/project-research-profile?project=${encodeURIComponent(project)}`),
   saveProjectResearchProfile: (project: string, profile: ProjectResearchProfile) => request<ProjectResearchProfile>(`/api/project-research-profile?project=${encodeURIComponent(project)}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(profile) }),
   dashboard: () => request<Dashboard>('/api/dashboard'),
-  stories: () => request<Story[]>('/api/stories'),
+  stories: () => request<Story[]>('/api/stories?limit=10000'),
   sprints: () => request<ProjectSprint[]>('/api/sprints'),
   createSprint: (input: { project: string; name: string; status?: ProjectSprint['status'] }) => request<ProjectSprint>('/api/sprints', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) }),
   updateSprintStatus: (id: string, status: ProjectSprint['status']) => request<ProjectSprint>(`/api/sprints/${id}/status`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status }) }),
@@ -47,12 +47,12 @@ export const api = {
     body: JSON.stringify(input)
   }),
   saveStoryDetails: (id: string, details: StoryDetails) => request<StoryDetails>(`/api/classifications/${id}/details`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(details) }),
-  classify: (stories: string[], project: string, sprint: string, mode: string) => request<{ runId: string; results: Classification[] }>(
+  classify: (stories: string[], project: string, sprint: string, mode: string, taxonomyVersion: string) => request<{ runId: string; results: Classification[] }>(
     '/api/classify',
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ stories, project, sprint, mode })
+      body: JSON.stringify({ stories, project, sprint, mode, taxonomyVersion })
     }
   ),
   importFile: (file: File) => {

@@ -13,6 +13,7 @@ type StoryRow = {
   uncertainty: number;
   consensus: number;
   status: string;
+  taxonomyVersion: string;
 };
 
 export async function loadStories(): Promise<Story[]> {
@@ -27,7 +28,8 @@ export async function loadStories(): Promise<Story[]> {
       classification.final_confidence AS confidence,
       classification.uncertainty_score AS uncertainty,
       classification.consensus_ratio AS consensus,
-      classification.review_status AS status
+      classification.review_status AS status,
+      COALESCE(classification.taxonomy_version, '') AS "taxonomyVersion"
     FROM classifications classification
     JOIN stories story ON story.id = classification.story_id
     JOIN projects project ON project.id = story.project_id
@@ -39,6 +41,11 @@ export async function loadStories(): Promise<Story[]> {
       ORDER BY position
       LIMIT 1
     ) label ON TRUE
+    WHERE classification.id = (
+      SELECT latest.id FROM classifications latest
+      WHERE latest.story_id = story.id
+      ORDER BY latest.created_at DESC, latest.id DESC LIMIT 1
+    )
     ORDER BY classification.created_at DESC, classification.id DESC
   `);
   return result.rows.map(row => ({ ...row, confidence: Number(row.confidence), uncertainty: Number(row.uncertainty), consensus: Number(row.consensus) }));

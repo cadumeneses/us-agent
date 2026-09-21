@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { BrainCircuit, ClipboardCheck, FileCheck2, FolderKanban, FolderTree, LayoutDashboard, Menu, Search, Settings, Sparkles, X } from 'lucide-react';
+import { BrainCircuit, ClipboardCheck, FileCheck2, FolderKanban, FolderTree, LayoutDashboard, Menu, Sparkles, X } from 'lucide-react';
 import { api } from '../services/api';
 import type { ApplicationContext } from '../types/models';
 import { WorkspaceProvider } from '../services/workspace';
@@ -11,9 +11,7 @@ const navigation = [
   ['Classificar histórias', '/classify', Sparkles],
   ['Recomendadores · RNFs', '/recommendations', ClipboardCheck],
   ['Fila de revisão', '/review', FileCheck2],
-  ['Taxonomia', '/taxonomy', FolderTree],
-  ['Execuções', '/runs', BrainCircuit],
-  ['Configurações', '/settings', Settings]
+  ['Taxonomia', '/taxonomy', FolderTree]
 ] as const;
 
 export function AppLayout() {
@@ -35,7 +33,7 @@ export function AppLayout() {
       <div className="sidebar-foot"><div className="avatar">{context.user.initials}</div><div><b>{context.user.displayName}</b><small>{context.user.role}</small></div></div>
     </aside>
     <main>
-      <header><button className="icon-button mobile" onClick={() => setOpen(!open)} aria-label="Abrir menu">{open ? <X/> : <Menu/>}</button><div className="global-search"><Search size={16}/><input placeholder="Buscar histórias, módulos ou execuções..."/></div><span className="environment">{context.environment}</span><div className="avatar">{context.user.initials}</div></header>
+      <header><button className="icon-button mobile" onClick={() => setOpen(!open)} aria-label="Abrir menu">{open ? <X/> : <Menu/>}</button><div className="app-purpose">Classificação de histórias e recomendação de RNFs</div><span className="environment">{context.environment}</span><div className="avatar">{context.user.initials}</div></header>
       <WorkspaceProvider><Outlet context={context}/></WorkspaceProvider>
     </main>
   </div>;

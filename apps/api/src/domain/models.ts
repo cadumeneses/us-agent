@@ -8,6 +8,7 @@ export type Story = {
   confidence: number;
   uncertainty: number;
   status: string;
+  taxonomyVersion: string;
   consensus: number;
 };
 

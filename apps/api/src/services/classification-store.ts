@@ -3,6 +3,7 @@ import type { PoolClient } from 'pg';
 import type { FallbackSuggestion, ProviderVote } from '../domain/models.js';
 import { withTransaction } from '../database/pool.js';
 import { applyTaxonomyExpansion } from '../repositories/data-repository.js';
+import { emptyProjectResearchProfile } from './research-inputs.js';
 
 export type PreviewResult = {
   id: string;
@@ -121,14 +122,20 @@ async function saveFallbackSuggestions(client: PoolClient, classificationId: str
   }
 }
 
-export async function savePreviewClassifications(project: string, sprint: string, inputs: PreviewInput[], executionMode: 'preview' | 'committee' = 'preview') {
+export async function savePreviewClassifications(project: string, sprint: string, inputs: PreviewInput[], taxonomyVersion: string, executionMode: 'preview' | 'committee' = 'preview') {
   const runId = `${executionMode}_${randomUUID().replaceAll('-', '')}`;
   const results = await withTransaction(async client => {
     await client.query(`
-      INSERT INTO classification_runs (id, classification_mode, source, execution_mode_key)
-      VALUES ($1, $2, 'web', $2)
-    `, [runId, executionMode]);
+      INSERT INTO classification_runs (id, classification_mode, source, execution_mode_key, taxonomy_version)
+      VALUES ($1, $2, 'web', $2, $3)
+    `, [runId, executionMode, taxonomyVersion]);
     const projectId = await upsertProject(client, project.trim() || 'Web');
+    await client.query(`
+      INSERT INTO project_research_profiles (project_id, content) VALUES ($1, $2::jsonb)
+      ON CONFLICT (project_id) DO UPDATE SET
+        content = jsonb_set(project_research_profiles.content, '{taxonomyVersion}', to_jsonb($3::text), true),
+        updated_at = NOW()
+    `, [projectId, JSON.stringify({ ...emptyProjectResearchProfile(), taxonomyVersion }), taxonomyVersion]);
     const sprintId = await upsertSprint(client, projectId, sprint.trim() || 'Backlog');
     const persisted: PreviewResult[] = [];
 
@@ -138,12 +145,16 @@ export async function savePreviewClassifications(project: string, sprint: string
         ON CONFLICT (project_id, external_id) DO UPDATE SET sprint_id = EXCLUDED.sprint_id, content = EXCLUDED.content, updated_at = NOW()
         RETURNING id
       `, [projectId, sprintId, storyExternalId(input.text), input.text]);
+      const previous = await client.query<{ id: string }>(
+        'SELECT id::text FROM classifications WHERE story_id = $1 ORDER BY created_at DESC, id DESC LIMIT 1',
+        [story.rows[0].id]
+      );
       const classification = await client.query<{ id: string }>(`
         INSERT INTO classifications (
           story_id, run_id, review_status, final_confidence, uncertainty_score,
           consensus_ratio, uncertainty_band, final_decision, disagreement_cause,
-          final_action, final_reason, notes_for_human
-        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+          final_action, final_reason, notes_for_human, taxonomy_version
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
         RETURNING id
       `, [
         story.rows[0].id,
@@ -157,9 +168,19 @@ export async function savePreviewClassifications(project: string, sprint: string
         input.disagreementCause ?? (input.needsReview ? 'taxonomy_gap' : null),
         input.finalAction ?? (input.needsReview ? 'ask_human' : 'none'),
         input.finalReason ?? 'Pré-classificação persistida pela aplicação web.',
-        input.notesForHuman ?? null
+        input.notesForHuman ?? null,
+        taxonomyVersion
       ]);
       const classificationId = classification.rows[0].id;
+      if (previous.rows[0]) {
+        const previousId = previous.rows[0].id;
+        await client.query(`INSERT INTO story_tasks (classification_id, title, is_done, position, category, technologies)
+          SELECT $1, title, is_done, position, category, technologies FROM story_tasks WHERE classification_id = $2`, [classificationId, previousId]);
+        await client.query(`INSERT INTO story_functional_requirements (classification_id, description, position)
+          SELECT $1, description, position FROM story_functional_requirements WHERE classification_id = $2`, [classificationId, previousId]);
+        await client.query(`INSERT INTO story_non_functional_requirements (classification_id, description, nfr_type, metric, position)
+          SELECT $1, description, nfr_type, metric, position FROM story_non_functional_requirements WHERE classification_id = $2`, [classificationId, previousId]);
+      }
       await client.query(`
         INSERT INTO classification_labels (classification_id, module, operation, position)
         VALUES ($1, $2, $3, 0)
@@ -284,8 +305,8 @@ export async function applySavedTaxonomyFeedback(feedbackId: string) {
 
 export async function saveReview(input: ReviewInput) {
   return withTransaction(async client => {
-    const current = await client.query<{ id: string; review_status: string; has_not_covered_label: boolean }>(
-      `SELECT classification.id::text, classification.review_status,
+    const current = await client.query<{ id: string; review_status: string; taxonomy_version: string; has_not_covered_label: boolean }>(
+      `SELECT classification.id::text, classification.review_status, COALESCE(classification.taxonomy_version, '') AS taxonomy_version,
         EXISTS (
           SELECT 1 FROM classification_labels label
           WHERE label.classification_id = classification.id
@@ -313,8 +334,9 @@ export async function saveReview(input: ReviewInput) {
         JOIN taxonomy_modules taxonomy_module ON taxonomy_module.taxonomy_version_id = version.id
         JOIN taxonomy_operations taxonomy_operation ON taxonomy_operation.module_id = taxonomy_module.id
         WHERE version.is_active AND taxonomy_operation.is_active
+          AND ($3 = '' OR version.version = $3)
           AND taxonomy_module.name = $1 AND taxonomy_operation.name = $2
-      `, [module, operation]);
+      `, [module, operation, current.rows[0].taxonomy_version]);
       if (!valid.rowCount) throw new Error('Módulo e operação não pertencem à taxonomia ativa.');
       await client.query(`
         UPDATE classifications SET

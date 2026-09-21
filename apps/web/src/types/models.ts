@@ -9,6 +9,7 @@ export type Story = {
   uncertainty: number;
   consensus: number;
   status: string;
+  taxonomyVersion: string;
 };
 
 export type Dashboard = {
@@ -104,6 +105,7 @@ export type ResearchTechnologies = {
   languages: string[]; frameworks: string[]; apis: string[]; dataPersistence: string[];
 };
 export type ProjectResearchProfile = {
+  taxonomyVersion: string;
   platforms: string[]; applicationDomains: string[]; objective: '' | 'product' | 'prototype';
   architectures: string[]; technologies: ResearchTechnologies;
 };

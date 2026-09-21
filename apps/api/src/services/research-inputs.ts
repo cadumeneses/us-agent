@@ -7,6 +7,7 @@ export const technologiesSchema = z.object({
   languages: tags, frameworks: tags, apis: tags, dataPersistence: tags
 });
 export const projectResearchProfileSchema = z.object({
+  taxonomyVersion: z.string().trim().max(40).default(''),
   platforms: tags,
   applicationDomains: tags,
   // Prototype exclusion is part of the original recommendation method.
@@ -17,7 +18,7 @@ export const projectResearchProfileSchema = z.object({
 export type ProjectResearchProfile = z.infer<typeof projectResearchProfileSchema>;
 export const emptyTechnologies = (): z.infer<typeof technologiesSchema> => ({ languages: [], frameworks: [], apis: [], dataPersistence: [] });
 export const emptyProjectResearchProfile = (): ProjectResearchProfile => ({
-  platforms: [], applicationDomains: [], objective: '', architectures: [], technologies: emptyTechnologies()
+  taxonomyVersion: '', platforms: [], applicationDomains: [], objective: '', architectures: [], technologies: emptyTechnologies()
 });
 
 export async function loadProjectResearchProfile(project: string) {
@@ -26,7 +27,7 @@ export async function loadProjectResearchProfile(project: string) {
     LEFT JOIN project_research_profiles profile ON profile.project_id = project.id
     WHERE project.name = $1
   `, [project]);
-  return result.rows.length ? result.rows[0].content ?? emptyProjectResearchProfile() : null;
+  return result.rows.length ? projectResearchProfileSchema.parse(result.rows[0].content ?? emptyProjectResearchProfile()) : null;
 }
 
 export async function saveProjectResearchProfile(project: string, profile: ProjectResearchProfile) {

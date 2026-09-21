@@ -23,7 +23,8 @@ const classifyRequest = z.object({
   stories: z.array(z.string().min(10)).min(1).max(100),
   project: z.string().trim().min(1).max(160).default('Web'),
   sprint: z.string().trim().min(1).max(120).default('Backlog'),
-  mode: z.enum(['preview', 'committee']).default('committee')
+  mode: z.enum(['preview', 'committee']).default('committee'),
+  taxonomyVersion: z.string().trim().min(1).max(40).optional()
 });
 
 const taxonomyFeedbackRequest = z.object({
@@ -125,6 +126,10 @@ apiRouter.put('/project-research-profile', async (req, res) => {
   const name = z.string().trim().min(1).max(160).safeParse(req.query.project);
   const parsed = projectResearchProfileSchema.safeParse(req.body);
   if (!name.success || !parsed.success) return void res.status(400).json({ error: 'Perfil do projeto inválido.' });
+  if (parsed.data.taxonomyVersion) {
+    const version = await loadTaxonomy(parsed.data.taxonomyVersion);
+    if (version.version !== parsed.data.taxonomyVersion || !Object.values(version.modules).some(operations => operations.length)) return void res.status(400).json({ error: 'Selecione uma taxonomia ativa com operações para o projeto.' });
+  }
   if (!await saveProjectResearchProfile(name.data, parsed.data)) return void res.status(404).json({ error: 'Projeto não encontrado.' });
   res.json(parsed.data);
 });
@@ -270,11 +275,19 @@ apiRouter.post('/classify', async (req, res) => {
     return;
   }
 
-  const taxonomy = await loadTaxonomy();
+  const profile = await loadProjectResearchProfile(parsed.data.project);
+  const catalog = await loadTaxonomy();
+  const activeVersions = (catalog.taxonomies ?? []).filter(item => item.active && item.operations > 0);
+  const taxonomyVersion = parsed.data.taxonomyVersion || profile?.taxonomyVersion || (activeVersions.length === 1 ? activeVersions[0].version : '');
+  if (!taxonomyVersion) return void res.status(400).json({ error: 'Selecione a taxonomia que será usada para classificar estas histórias.' });
+  const taxonomy = await loadTaxonomy(taxonomyVersion);
+  if (taxonomy.version !== taxonomyVersion || !Object.values(taxonomy.modules).some(operations => operations.length)) {
+    return void res.status(400).json({ error: 'A taxonomia selecionada não está ativa ou não possui operações.' });
+  }
   const previews = parsed.data.mode === 'preview'
     ? parsed.data.stories.map(text => ({ text, ...classifyPreview(text, taxonomy) }))
     : await Promise.all(parsed.data.stories.map(async text => ({ text, ...await classifyWithAi(text, taxonomy) })));
-  res.status(201).json(await savePreviewClassifications(parsed.data.project, parsed.data.sprint, previews, parsed.data.mode));
+  res.status(201).json(await savePreviewClassifications(parsed.data.project, parsed.data.sprint, previews, taxonomyVersion, parsed.data.mode));
 });
 
 apiRouter.patch('/classifications/:id/review', async (req, res) => {

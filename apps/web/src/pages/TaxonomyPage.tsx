@@ -61,7 +61,7 @@ export function TaxonomyPage() {
   const selectedDomain = domain && taxonomy ? taxonomy.domains[domain] : undefined;
   const domainNames = taxonomy ? Object.keys(taxonomy.domains) : [];
 
-  return <section className="page">
+  return <section className="page taxonomy-page">
     <PageTitle eyebrow="GOVERNANÇA" title="Taxonomias">Organize a classificação por domínio, módulo e operação.</PageTitle>
     {taxonomy && <div className="projects-layout">
       <aside className="project-panel card">

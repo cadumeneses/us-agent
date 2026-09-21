@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { CardHead, PageTitle } from '../components/ui';
 import { api } from '../services/api';
@@ -41,6 +42,8 @@ function feedbackTarget(feedback: ReviewContext['taxonomyFeedbacks'][number]) {
 }
 
 export function ReviewPage() {
+  const [params] = useSearchParams();
+  const requestedId = params.get('classificationId');
   const workspace = useWorkspace();
   const [stories, setStories] = useState<Story[]>([]);
   const [selected, setSelected] = useState<Story>();
@@ -67,18 +70,17 @@ export function ReviewPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    Promise.all([api.stories(), api.taxonomy()])
-      .then(([allStories, activeTaxonomy]) => {
+    api.stories()
+      .then(allStories => {
         const pending = allStories.filter(story =>
           pendingStatuses.has(story.status)
           || (story.status === 'reviewed' && (story.module === 'n/a' || story.operation === 'n/a'))
         );
         setStories(pending);
-        setSelected(pending[0]);
-        setTaxonomy(activeTaxonomy);
+        setSelected(pending.find(story => story.id === requestedId) ?? pending[0]);
       })
       .catch((reason: Error) => setError(reason.message));
-  }, []);
+  }, [requestedId]);
 
   useEffect(() => {
     if (!selected) {
@@ -95,8 +97,9 @@ export function ReviewPage() {
     setProposalSuccess('');
     setError('');
     setLoadingContext(true);
-    api.reviewContext(selected.id)
-      .then(context => { if (active) setReviewContext(context); })
+    setTaxonomy(undefined);
+    Promise.all([api.reviewContext(selected.id), api.taxonomy(selected.taxonomyVersion || undefined)])
+      .then(([context, selectedTaxonomy]) => { if (active) { setReviewContext(context); setTaxonomy(selectedTaxonomy); } })
       .catch((reason: Error) => { if (active) setError(reason.message); })
       .finally(() => { if (active) setLoadingContext(false); });
     return () => { active = false; };

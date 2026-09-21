@@ -7,7 +7,7 @@ function profile(id: string): NfrProfile {
   return {
     classificationId: id, storyId: id, project: `P${id}`, text: 'Retrieve data', taxonomyVersion: 'wis-v1', reviewStatus: 'reviewed',
     labels: [{ module: 'Registry', operation: 'Retrieve data' }],
-    projectProfile: { platforms: ['Web'], architectures: ['Client-server'], applicationDomains: ['Education'], objective: 'product',
+    projectProfile: { taxonomyVersion: 'wis-v1', platforms: ['Web'], architectures: ['Client-server'], applicationDomains: ['Education'], objective: 'product',
       technologies: { languages: ['TypeScript'], frameworks: ['Angular'], apis: ['Mongoose'], dataPersistence: ['MongoDB'] } },
     tasks: [{ category: 't6' }, { category: 't7' }],
     nfrs: [{ type: 'Performance', attribute: 'response_time', sentence: 'Response within five seconds.' }]

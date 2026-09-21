@@ -28,6 +28,11 @@ vizinho se o mais próximo não tiver RNFs elegíveis.
 
 ## Integração com a pesquisa de classificação
 
+A interface permite escolher uma taxonomia ativa no perfil do projeto e confirma a versão
+ao classificar. A versão usada é gravada na execução e em cada classificação. Alterar a
+seleção do projeto afeta classificações futuras; classificações existentes mantêm a versão
+histórica, e a recomendação exige a mesma versão entre alvo e vizinho.
+
 Estas são políticas explícitas do US-Agent, não conclusões atribuídas à tese:
 
 - Usar somente a classificação mais recente de cada US, por data e identificador. Classificações anteriores permanecem no histórico, mas não contam como novas US.
