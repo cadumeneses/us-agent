@@ -90,7 +90,7 @@ test('numeric tie-breaking is deterministic and independent of input order', () 
   for (const history of [[profile('10'), profile('2')], [profile('2'), profile('10')]]) {
     const result = recommendNfr(profile('1'), history, 0);
     assert.equal(result.neighbor!.classificationId, '2');
-    assert.match(result.messages.join(' '), /Empate/);
+    assert.match(result.messages.join(' '), /Tie/);
   }
 });
 

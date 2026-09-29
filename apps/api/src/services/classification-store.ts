@@ -167,7 +167,7 @@ export async function savePreviewClassifications(project: string, sprint: string
         input.needsReview ? 'needs_human_review' : 'accept',
         input.disagreementCause ?? (input.needsReview ? 'taxonomy_gap' : null),
         input.finalAction ?? (input.needsReview ? 'ask_human' : 'none'),
-        input.finalReason ?? 'Pré-classificação persistida pela aplicação web.',
+        input.finalReason ?? 'Pre-classification saved by the web application.',
         input.notesForHuman ?? null,
         taxonomyVersion
       ]);
@@ -226,7 +226,7 @@ async function loadDefaultReviewer(client: PoolClient) {
     JOIN app_users user_account ON user_account.id = settings.default_user_id
     WHERE settings.singleton
   `);
-  if (!user.rows[0]) throw new Error('Usuário padrão não configurado.');
+  if (!user.rows[0]) throw new Error('No default user is configured.');
   return user.rows[0];
 }
 
@@ -327,7 +327,7 @@ export async function saveReview(input: ReviewInput) {
     if (input.action === 'approve') {
       const module = input.module?.trim() || 'n/a';
       const operation = input.operation?.trim() || 'n/a';
-      if (module === 'n/a' || operation === 'n/a') throw new Error('Aprovação requer um módulo e uma operação da taxonomia ativa.');
+      if (module === 'n/a' || operation === 'n/a') throw new Error('Approval requires a module and operation from the active taxonomy.');
       const valid = await client.query(`
         SELECT 1
         FROM taxonomy_versions version
@@ -337,12 +337,12 @@ export async function saveReview(input: ReviewInput) {
           AND ($3 = '' OR version.version = $3)
           AND taxonomy_module.name = $1 AND taxonomy_operation.name = $2
       `, [module, operation, current.rows[0].taxonomy_version]);
-      if (!valid.rowCount) throw new Error('Módulo e operação não pertencem à taxonomia ativa.');
+      if (!valid.rowCount) throw new Error('The module and operation do not belong to the active taxonomy.');
       await client.query(`
         UPDATE classifications SET
           review_status = 'reviewed', final_decision = 'accept', final_action = 'none',
           disagreement_cause = 'annotation_error_suspected',
-          final_reason = 'Decisão final definida pela revisão humana na aplicação web.',
+          final_reason = 'Final decision set through human review in the web application.',
           notes_for_human = NULL, updated_at = NOW()
         WHERE id = $1
       `, [input.classificationId]);

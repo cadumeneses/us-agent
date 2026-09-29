@@ -7,9 +7,9 @@ import type { Story } from '../types/models';
 export function StoriesPage() {
   const [stories, setStories] = useState<Story[]>([]);
   useEffect(() => { api.stories().then(setStories); }, []);
-  return <section className="page"><PageTitle eyebrow="HISTÓRICO" title="Execuções e resultados">Consulte as classificações processadas pelo agente.</PageTitle><div className="card"><StoryTable stories={stories}/></div></section>;
+  return <section className="page"><PageTitle eyebrow="HISTORY" title="Runs and results">View classifications processed by the agent.</PageTitle><div className="card"><StoryTable stories={stories}/></div></section>;
 }
 
 export function SettingsPage() {
-  return <section className="page"><PageTitle title="Configurações">Esta área será habilitada na próxima etapa de integração.</PageTitle></section>;
+  return <section className="page"><PageTitle title="Settings">This area will be enabled in a future integration phase.</PageTitle></section>;
 }

@@ -26,6 +26,15 @@ const aiOutput = z.object({
 type Vote = z.infer<typeof aiOutput>;
 type Provider = { name: string; call: (system: string, user: string) => Promise<string> };
 
+export function chatRequestBody(name: string, model: string, system: string, user: string) {
+  return {
+    model,
+    ...(name === 'openai' ? {} : { temperature: 0 }),
+    response_format: { type: 'json_object' },
+    messages: [{ role: 'system', content: system }, { role: 'user', content: user }]
+  };
+}
+
 const timeoutMs = Number(process.env.AI_PROVIDER_TIMEOUT_MS ?? 45_000);
 
 function taxonomyText(taxonomy: Taxonomy) {
@@ -41,8 +50,8 @@ function taxonomyText(taxonomy: Taxonomy) {
 }
 
 function prompt(taxonomy: Taxonomy, story: string) {
-  const system = 'Você classifica histórias de usuário. Retorne somente JSON válido, sem markdown.';
-  const user = `Classifique a história exclusivamente na taxonomia abaixo. Não invente rótulos. Se não houver cobertura, use uma única linha {"module":"n/a","operation":"n/a"}, confidence até 0.5 e needs_review true. Nesse caso, ou quando faltar contexto, preencha fallback_suggestions com até 4 propostas estruturadas. A hierarquia é domínio (nova área como Mobile ou IoT) > módulo > operação: use new_domain com proposed_domain quando a área não existir; new_module com target_domain e proposed_module quando faltar um módulo nessa área; e new_operation com target_domain, target_module e proposed_operation quando faltar apenas a operação. Uma sugestão new_domain ou new_module também pode incluir os níveis filhos em proposed_module e proposed_operation. Sempre explique reason e, quando houver, evidence.\n\nTaxonomia:\n${taxonomyText(taxonomy)}\n\nHistória:\n${story}\n\nFormato JSON: {"rows":[{"module":"...","operation":"..."}],"confidence":0.0,"rationale":"...","evidence":["..."],"needs_review":false,"issues":["..."],"suggested_questions":["..."],"fallback_suggestions":[{"type":"new_domain","proposed_domain":"Mobile","proposed_module":"Sincronização","proposed_operation":"Sincronizar offline","reason":"...","evidence":["..."]}]}`;
+  const system = 'You classify user stories. Return valid JSON only, without Markdown.';
+  const user = `Classify the story exclusively within the taxonomy below. Do not invent labels. If there is no coverage, use exactly one row {"module":"n/a","operation":"n/a"}, confidence at most 0.5, and needs_review true. In that case, or when context is missing, fill fallback_suggestions with up to 4 structured proposals. The hierarchy is domain (a new area such as Mobile or IoT) > module > operation: use new_domain with proposed_domain when the area does not exist; new_module with target_domain and proposed_module when a module is missing from that area; and new_operation with target_domain, target_module, and proposed_operation when only the operation is missing. A new_domain or new_module suggestion may also include child levels in proposed_module and proposed_operation. Always explain reason and include evidence when available. Write all explanatory text in English.\n\nTaxonomy:\n${taxonomyText(taxonomy)}\n\nStory:\n${story}\n\nJSON format: {"rows":[{"module":"...","operation":"..."}],"confidence":0.0,"rationale":"...","evidence":["..."],"needs_review":false,"issues":["..."],"suggested_questions":["..."],"fallback_suggestions":[{"type":"new_domain","proposed_domain":"Mobile","proposed_module":"Synchronization","proposed_operation":"Sync offline","reason":"...","evidence":["..."]}]}`;
   return { system, user };
 }
 
@@ -56,9 +65,13 @@ function chatProvider(name: string, apiKey: string | undefined, baseUrl: string 
   if (!apiKey || !model) return undefined;
   const url = baseUrl?.replace(/\/$/, '') || 'https://api.openai.com/v1/chat/completions';
   return { name, call: async (system, user) => {
-    const data = await postJson(url, { authorization: `Bearer ${apiKey}` }, { model, temperature: 0, response_format: { type: 'json_object' }, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }) as { choices?: Array<{ message?: { content?: string } }> };
+    // Current OpenAI reasoning models reject temperature=0 and only accept their
+    // default sampling value. OpenAI therefore receives no temperature override;
+    // compatible OpenAI-style providers keep deterministic sampling.
+    const body = chatRequestBody(name, model, system, user);
+    const data = await postJson(url, { authorization: `Bearer ${apiKey}` }, body) as { choices?: Array<{ message?: { content?: string } }> };
     const content = data.choices?.[0]?.message?.content;
-    if (!content) throw new Error('Resposta sem conteúdo.');
+    if (!content) throw new Error('The provider returned no content.');
     return content;
   }};
 }
@@ -70,7 +83,7 @@ function geminiProvider(): Provider | undefined {
   return { name: 'gemini', call: async (system, user) => {
     const data = await postJson(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`, {}, { systemInstruction: { parts: [{ text: system }] }, contents: [{ role: 'user', parts: [{ text: user }] }], generationConfig: { temperature: 0, responseMimeType: 'application/json' } }) as { candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }> };
     const content = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!content) throw new Error('Resposta sem conteúdo.');
+    if (!content) throw new Error('The provider returned no content.');
     return content;
   }};
 }
@@ -87,7 +100,7 @@ function configuredProviders() {
 function parseVote(raw: string, taxonomy: Taxonomy): Vote {
   const parsed = aiOutput.parse(JSON.parse(raw.replace(/^```json\s*|```$/g, '').trim()));
   const rows = parsed.rows.filter(row => row.module === 'n/a' && row.operation === 'n/a' || taxonomy.modules[row.module]?.includes(row.operation));
-  if (!rows.length) throw new Error('A IA retornou rótulos fora da taxonomia.');
+  if (!rows.length) throw new Error('The AI returned labels outside the taxonomy.');
   return { ...parsed, rows };
 }
 
@@ -117,7 +130,7 @@ function dedupeFallbackSuggestions(suggestions: FallbackSuggestion[]) {
 
 export async function classifyWithAi(story: string, taxonomy: Taxonomy) {
   const providers = configuredProviders();
-  if (!providers.length) throw new Error('Nenhum provedor de IA foi configurado. Defina ao menos uma chave de API no ambiente.');
+  if (!providers.length) throw new Error('No AI provider is configured. Set at least one API key in the environment.');
   const { system, user } = prompt(taxonomy, story);
   const settled = await Promise.allSettled(providers.map(async provider => ({ provider: provider.name, vote: parseVote(await provider.call(system, user), taxonomy) })));
   settled.forEach((result, index) => {
@@ -127,7 +140,7 @@ export async function classifyWithAi(story: string, taxonomy: Taxonomy) {
     }
   });
   const successes = settled.filter((item): item is PromiseFulfilledResult<{ provider: string; vote: Vote }> => item.status === 'fulfilled').map(item => item.value);
-  if (!successes.length) throw new Error('Todos os provedores de IA falharam ao classificar esta história.');
+  if (!successes.length) throw new Error('All AI providers failed to classify this story.');
   const frequency = new Map<string, { count: number; row: { module: string; operation: string } }>();
   for (const { vote } of successes) for (const row of vote.rows) {
     const key = `${row.module}\u0000${row.operation}`;
@@ -170,7 +183,7 @@ export async function classifyWithAi(story: string, taxonomy: Taxonomy) {
     fallbackSuggestions.push({
       source: 'committee',
       type: 'clarify_story',
-      reason: 'O comitê não atingiu segurança suficiente para decidir automaticamente; a história precisa de validação humana.',
+      reason: 'The committee was not confident enough to decide automatically; this story requires human validation.',
       evidence: [story]
     });
   }
@@ -184,8 +197,8 @@ export async function classifyWithAi(story: string, taxonomy: Taxonomy) {
     providers: successes.map(result => result.provider),
     providerVotes,
     fallbackSuggestions,
-    finalReason: `Sugestão escolhida pelo comitê com ${Math.round(consensus * 100)}% de consenso entre ${successes.length} resposta(s) válida(s).`,
-    notesForHuman: needsReview ? 'Revise as sugestões, os motivos e as questões dos classificadores antes de decidir.' : undefined,
+    finalReason: `The committee selected this suggestion with ${Math.round(consensus * 100)}% consensus across ${successes.length} valid response(s).`,
+    notesForHuman: needsReview ? 'Review the suggestions, rationales, and classifier questions before deciding.' : undefined,
     disagreementCause: hasNotCoveredRow ? 'taxonomy_gap' : needsReview ? 'model_instability' : undefined,
     finalAction: needsReview ? (hasNotCoveredRow ? 'extend_taxonomy' : 'ask_human') : 'none'
   };

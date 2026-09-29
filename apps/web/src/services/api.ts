@@ -6,12 +6,14 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(url, options);
   if (!response.ok) {
     const body = await response.json().catch(() => ({})) as { error?: string };
-    throw new Error(body.error ?? 'Falha na comunicação com a API');
+    throw new Error(body.error ?? 'Could not communicate with the API.');
   }
   return response.json() as Promise<T>;
 }
 
 export const api = {
+  projects: () => request<string[]>('/api/projects'),
+  createProject: (name: string) => request<{ name: string }>('/api/projects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) }),
   nfrContext: (id: string) => request<NfrContext>(`/api/classifications/${id}/nfr-context`),
   nfrRuns: (id: string) => request<NfrRun[]>(`/api/classifications/${id}/nfr-runs`),
   recommendNfr: (id: string, labelIndex: number) => request<NfrRun>(`/api/classifications/${id}/nfr-runs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ labelIndex }) }),

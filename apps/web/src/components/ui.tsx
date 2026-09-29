@@ -5,7 +5,7 @@ export function PageTitle({ eyebrow, title, children }: { eyebrow?: string; titl
 }
 
 export function LoadState({ loading, error }: { loading: boolean; error: string }) {
-  if (loading) return <div className="state">Carregando dados…</div>;
+  if (loading) return <div className="state">Loading data…</div>;
   if (error) return <div className="state error">{error}</div>;
   return null;
 }

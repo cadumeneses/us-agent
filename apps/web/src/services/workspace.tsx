@@ -7,16 +7,16 @@ const WorkspaceContext = createContext<Workspace | undefined>(undefined);
 
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [stories, setStories] = useState<Story[]>([]);
+  const [projects, setProjects] = useState<string[]>([]);
   const [selectedProject, setSelectedProject] = useState('');
   const [selectedStoryId, setSelectedStoryId] = useState('');
   const [loading, setLoading] = useState(true);
   async function refreshStories() {
     setLoading(true);
-    try { const next = await api.stories(); setStories(next); setSelectedProject(current => current && next.some(story => story.project === current) ? current : next[0]?.project ?? ''); setSelectedStoryId(current => current && next.some(story => story.id === current) ? current : next[0]?.id ?? ''); }
+    try { const [nextStories, nextProjects] = await Promise.all([api.stories(), api.projects()]); setStories(nextStories); setProjects(nextProjects); setSelectedProject(current => current && nextProjects.includes(current) ? current : nextProjects[0] ?? ''); setSelectedStoryId(current => current && nextStories.some(story => story.id === current) ? current : nextStories[0]?.id ?? ''); }
     finally { setLoading(false); }
   }
   useEffect(() => { void refreshStories(); }, []);
-  const projects = useMemo(() => [...new Set(stories.map(story => story.project))].sort(), [stories]);
   const value = useMemo(() => ({ stories, projects, selectedProject, selectedStoryId, loading, refreshStories,
     selectProject: (project: string) => { setSelectedProject(project); setSelectedStoryId(stories.find(story => story.project === project)?.id ?? ''); },
     selectStory: (storyId: string) => { const story = stories.find(item => item.id === storyId); if (story) { setSelectedStoryId(storyId); setSelectedProject(story.project); } }
@@ -24,4 +24,4 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   return <WorkspaceContext.Provider value={value}>{children}</WorkspaceContext.Provider>;
 }
 
-export function useWorkspace() { const workspace = useContext(WorkspaceContext); if (!workspace) throw new Error('WorkspaceProvider ausente.'); return workspace; }
+export function useWorkspace() { const workspace = useContext(WorkspaceContext); if (!workspace) throw new Error('WorkspaceProvider is missing.'); return workspace; }

@@ -6,12 +6,12 @@ import type { ApplicationContext } from '../types/models';
 import { WorkspaceProvider } from '../services/workspace';
 
 const navigation = [
-  ['Dashboard', '/', LayoutDashboard],
-  ['Meus projetos', '/projects', FolderKanban],
-  ['Classificar histórias', '/classify', Sparkles],
-  ['Recomendadores · RNFs', '/recommendations', ClipboardCheck],
-  ['Fila de revisão', '/review', FileCheck2],
-  ['Taxonomia', '/taxonomy', FolderTree]
+  ['My Projects', '/projects', FolderKanban],
+  ['Classify Stories', '/classify', Sparkles],
+  ['NFR Recommender', '/recommendations', ClipboardCheck],
+  ['Review Queue', '/review', FileCheck2],
+  ['Taxonomy', '/taxonomy', FolderTree],
+  ['Dashboard', '/dashboard', LayoutDashboard]
 ] as const;
 
 export function AppLayout() {
@@ -24,16 +24,16 @@ export function AppLayout() {
   }, []);
 
   if (error) return <div className="state error">{error}</div>;
-  if (!context) return <div className="state">Carregando aplicação…</div>;
+  if (!context) return <div className="state">Loading application…</div>;
 
   return <div className="shell">
     <aside className={open ? 'sidebar open' : 'sidebar'}>
       <div className="brand"><span className="brand-icon"><BrainCircuit size={19}/></span><div><strong>US-Agent</strong><small>AI Classification</small></div></div>
-      <nav>{navigation.map(([label, path, Icon]) => <NavLink key={path} to={path} end={path === '/'} onClick={() => setOpen(false)}><Icon size={17}/><span>{label}</span></NavLink>)}</nav>
+      <nav>{navigation.map(([label, path, Icon]) => <NavLink key={path} to={path} onClick={() => setOpen(false)}><Icon size={17}/><span>{label}</span></NavLink>)}</nav>
       <div className="sidebar-foot"><div className="avatar">{context.user.initials}</div><div><b>{context.user.displayName}</b><small>{context.user.role}</small></div></div>
     </aside>
     <main>
-      <header><button className="icon-button mobile" onClick={() => setOpen(!open)} aria-label="Abrir menu">{open ? <X/> : <Menu/>}</button><div className="app-purpose">Classificação de histórias e recomendação de RNFs</div><span className="environment">{context.environment}</span><div className="avatar">{context.user.initials}</div></header>
+      <header><button className="icon-button mobile" onClick={() => setOpen(!open)} aria-label="Open menu">{open ? <X/> : <Menu/>}</button><div className="app-purpose">User story classification and NFR recommendation</div><span className="environment">{context.environment}</span><div className="avatar">{context.user.initials}</div></header>
       <WorkspaceProvider><Outlet context={context}/></WorkspaceProvider>
     </main>
   </div>;

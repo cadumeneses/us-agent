@@ -25,15 +25,15 @@ export function classifyPreview(text: string, taxonomy: Taxonomy) {
     confidence: match ? 0.86 : 0.35,
     needsReview: !match,
     finalReason: match
-      ? `A regra local identificou a intenção compatível com ${match[1]} / ${match[2]}.`
-      : 'Nenhuma regra da pré-classificação encontrou uma operação equivalente na taxonomia ativa.',
-    notesForHuman: match ? undefined : 'Confirme a classificação ou registre uma lacuna da taxonomia.',
+      ? `The local rule identified an intent compatible with ${match[1]} / ${match[2]}.`
+      : 'No pre-classification rule found an equivalent operation in the active taxonomy.',
+    notesForHuman: match ? undefined : 'Confirm the classification or record a taxonomy gap.',
     disagreementCause: match ? undefined : 'taxonomy_gap',
     finalAction: match ? 'none' : 'ask_human',
     fallbackSuggestions: match ? [] : [{
       source: 'preview_rules',
       type: 'clarify_story' as const,
-      reason: 'A pré-classificação não encontrou cobertura suficiente para classificar a história com segurança.',
+      reason: 'Pre-classification did not find enough coverage to classify the story safely.',
       evidence: [text]
     }]
   };

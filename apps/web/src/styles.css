@@ -80,6 +80,7 @@
 .nfr-info-button{margin-top:var(--space-2)}
 .nfr-flow{margin:var(--space-6) 0 var(--space-4)}
 .nfr-panel{padding:var(--space-6);margin:0 0 var(--space-4)}
+.nfr-linked{margin-top:var(--space-5);padding-top:var(--space-4);border-top:1px solid var(--color-neutral-200)}.nfr-linked h3{margin:0 0 var(--space-3);font-size:13px}
 .nfr-section-heading{margin-bottom:var(--space-4)}
 .nfr-results{margin-top:0}
 .config label{padding:var(--space-4) var(--space-6) 0}

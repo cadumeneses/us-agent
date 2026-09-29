@@ -6,6 +6,7 @@ export type NfrContext = {
     labels: Array<{ module: string; operation: string }>;
     projectProfile: ProjectResearchProfile;
     tasks: Array<{ category: string }>;
+    nfrs: Array<{ type: string; attribute: string; sentence: string }>;
   };
   issues: string[];
 };

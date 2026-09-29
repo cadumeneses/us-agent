@@ -6,14 +6,14 @@ import type { ProjectResearchProfile, ResearchTechnologies, Taxonomy } from '../
 
 export const emptyTechnologies = (): ResearchTechnologies => ({ languages: [], frameworks: [], apis: [], dataPersistence: [] });
 const technologyLabels: Record<keyof ResearchTechnologies, string> = {
-  languages: 'Linguagens de programação', frameworks: 'Frameworks', apis: 'APIs', dataPersistence: 'Persistência de dados'
+  languages: 'Programming languages', frameworks: 'Frameworks', apis: 'APIs', dataPersistence: 'Data persistence'
 };
 // Initial suggestions from Ramos (2019), sections 5.2.1–5.2.2 and table 5.2.
 // They are examples, not a complete or authoritative taxonomy of project tags.
 const profileOptions = {
-  platforms: ['Web', 'Móvel', 'Desktop', 'Embarcado'],
-  applicationDomains: ['Automação residencial', 'Bancário', 'Educação', 'Ferramentas de desenvolvimento', 'Recuperação de informação', 'Saúde'],
-  architectures: ['Camadas', 'Cliente-servidor', 'MVC'],
+  platforms: ['Web', 'Mobile', 'Desktop', 'Embedded'],
+  applicationDomains: ['Home automation', 'Banking', 'Education', 'Developer tools', 'Information retrieval', 'Healthcare'],
+  architectures: ['Layered', 'Client-server', 'MVC'],
   languages: ['Java', 'JavaScript', 'Python', 'TypeScript'],
   frameworks: ['Angular', 'Django', 'Node', 'Spring Boot'],
   apis: ['Facebook', 'Firebase', 'JPA', 'Mongoose'],
@@ -21,7 +21,7 @@ const profileOptions = {
 } as const;
 
 function searchText(value: string) {
-  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR');
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('en-US');
 }
 
 export function TagField({ label, values, options = [], onChange }: { label: string; values: string[]; options?: readonly string[]; onChange: (values: string[]) => void }) {
@@ -57,12 +57,12 @@ export function TagField({ label, values, options = [], onChange }: { label: str
   return <div className="tag-field">
     <label htmlFor={id}>{label}</label>
     <div className="tag-input-wrap" onClick={() => inputRef.current?.focus()}>
-      {values.map(value => <span className="tag-chip" key={value}>{value}<button type="button" aria-label={`Remover ${value}`} onMouseDown={event => event.preventDefault()} onClick={() => onChange(values.filter(item => item !== value))}><X size={12}/></button></span>)}
-      <input ref={inputRef} id={id} value={text} maxLength={120} role="combobox" aria-autocomplete="list" aria-expanded={open} aria-controls={`${id}-options`} aria-activedescendant={open && suggestions[active] ? `${id}-option-${active}` : undefined} placeholder={values.length ? 'Adicionar outra tag' : 'Buscar ou adicionar uma tag'} onFocus={() => setOpen(true)} onClick={() => setOpen(true)} onBlur={() => { if (text.trim()) add(options.find(option => searchText(option) === query) ?? text); setOpen(false); }} onChange={event => { setText(event.target.value); setActive(0); setOpen(true); }} onKeyDown={handleKeyDown}/>
-      <button className="tag-add-button" type="button" aria-label={`Adicionar ${text || 'tag'}`} disabled={!custom || values.length >= 100} onMouseDown={event => event.preventDefault()} onClick={() => add(custom)}><Plus size={15}/></button>
+      {values.map(value => <span className="tag-chip" key={value}>{value}<button type="button" aria-label={`Remove ${value}`} onMouseDown={event => event.preventDefault()} onClick={() => onChange(values.filter(item => item !== value))}><X size={12}/></button></span>)}
+      <input ref={inputRef} id={id} value={text} maxLength={120} role="combobox" aria-autocomplete="list" aria-expanded={open} aria-controls={`${id}-options`} aria-activedescendant={open && suggestions[active] ? `${id}-option-${active}` : undefined} placeholder={values.length ? 'Add another tag' : 'Search or add a tag'} onFocus={() => setOpen(true)} onClick={() => setOpen(true)} onBlur={() => { if (text.trim()) add(options.find(option => searchText(option) === query) ?? text); setOpen(false); }} onChange={event => { setText(event.target.value); setActive(0); setOpen(true); }} onKeyDown={handleKeyDown}/>
+      <button className="tag-add-button" type="button" aria-label={`Add ${text || 'tag'}`} disabled={!custom || values.length >= 100} onMouseDown={event => event.preventDefault()} onClick={() => add(custom)}><Plus size={15}/></button>
     </div>
     {open && suggestions.length > 0 && <div className="tag-options" id={`${id}-options`} role="listbox">{suggestions.map((option, index) => <button type="button" role="option" id={`${id}-option-${index}`} aria-selected={active === index} className={active === index ? 'active' : ''} key={option} onMouseDown={event => event.preventDefault()} onClick={() => add(option)}>{option}</button>)}</div>}
-    {open && custom && <button className="tag-custom-option" type="button" onMouseDown={event => event.preventDefault()} onClick={() => add(custom)}>Adicionar “{custom}” como nova tag</button>}
+    {open && custom && <button className="tag-custom-option" type="button" onMouseDown={event => event.preventDefault()} onClick={() => add(custom)}>Add “{custom}” as a new tag</button>}
   </div>;
 }
 
@@ -99,18 +99,18 @@ export function ResearchProfile({ project }: { project: string }) {
     catch (reason) { setError((reason as Error).message); }
     finally { setSaving(false); }
   }
-  return <details className="card research-profile"><summary>Perfil do projeto · {project}</summary>
-    <p>Escolha a taxonomia das próximas classificações e descreva o projeto com tags. As histórias já classificadas preservam a versão usada quando foram processadas.</p>
+  return <details className="card research-profile"><summary>Project profile · {project}</summary>
+    <p>Choose the taxonomy for future classifications and describe the project with tags. Previously classified stories retain the version used when they were processed.</p>
     {error && <p role="alert" className="inline-error">{error}</p>}
-    {!profile ? <p>{error ? 'Não foi possível carregar o perfil.' : 'Carregando perfil…'}</p> : <form onSubmit={save}><fieldset disabled={saving}>
-      <label>Taxonomia para classificar histórias<select required value={profile.taxonomyVersion} onChange={event => update({ ...profile, taxonomyVersion: event.target.value })}><option value="">Selecione uma taxonomia</option>{taxonomies.map(item => <option key={item.version} value={item.version}>{item.version} · {item.modules} módulos · {item.operations} operações</option>)}</select><small>{inactiveTaxonomy ? `A versão ${inactiveTaxonomy} não está disponível para classificação. Escolha outra. ` : ''}Alterar esta escolha não reclassifica histórias existentes.</small>{!taxonomies.length && <Link to="/taxonomy">Configurar uma taxonomia com operações</Link>}</label>
-      <TagField label="Plataformas" values={profile.platforms} options={profileOptions.platforms} onChange={platforms => update({ ...profile, platforms })}/>
-      <TagField label="Domínios de aplicação" values={profile.applicationDomains} options={profileOptions.applicationDomains} onChange={applicationDomains => update({ ...profile, applicationDomains })}/>
-      <label>Objetivo<select value={profile.objective} onChange={event => update({ ...profile, objective: event.target.value as ProjectResearchProfile['objective'] })}><option value="">Não informado</option><option value="product">Produto</option><option value="prototype">Protótipo</option></select></label>
-      <TagField label="Arquiteturas de software" values={profile.architectures} options={profileOptions.architectures} onChange={architectures => update({ ...profile, architectures })}/>
+    {!profile ? <p>{error ? 'The profile could not be loaded.' : 'Loading profile…'}</p> : <form onSubmit={save}><fieldset disabled={saving}>
+      <label>Taxonomy for story classification<select required value={profile.taxonomyVersion} onChange={event => update({ ...profile, taxonomyVersion: event.target.value })}><option value="">Select a taxonomy</option>{taxonomies.map(item => <option key={item.version} value={item.version}>{item.version} · {item.modules} modules · {item.operations} operations</option>)}</select><small>{inactiveTaxonomy ? `Version ${inactiveTaxonomy} is not available for classification. Choose another. ` : ''}Changing this choice does not reclassify existing stories.</small>{!taxonomies.length && <Link to="/taxonomy">Configure a taxonomy with operations</Link>}</label>
+      <TagField label="Platforms" values={profile.platforms} options={profileOptions.platforms} onChange={platforms => update({ ...profile, platforms })}/>
+      <TagField label="Application domains" values={profile.applicationDomains} options={profileOptions.applicationDomains} onChange={applicationDomains => update({ ...profile, applicationDomains })}/>
+      <label>Purpose<select value={profile.objective} onChange={event => update({ ...profile, objective: event.target.value as ProjectResearchProfile['objective'] })}><option value="">Not specified</option><option value="product">Product</option><option value="prototype">Prototype</option></select></label>
+      <TagField label="Software architectures" values={profile.architectures} options={profileOptions.architectures} onChange={architectures => update({ ...profile, architectures })}/>
       <TechnologyFields value={profile.technologies} onChange={technologies => update({ ...profile, technologies })}/>
-      <button className="primary" type="submit">{saving ? 'Salvando…' : 'Salvar perfil'}</button>
-      {saved && <span role="status">Perfil salvo.</span>}
+      <button className="primary" type="submit">{saving ? 'Saving…' : 'Save profile'}</button>
+      {saved && <span role="status">Profile saved.</span>}
     </fieldset></form>}
   </details>;
 }

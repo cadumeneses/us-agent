@@ -3,7 +3,7 @@ import { nfrRouter } from './nfr.js';
 import { Router, type Request, type Response } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
-import { addTaxonomyDomain, addTaxonomyOperation, applyFallbackSuggestion, assignStoriesToSprint, createProjectSprint, createTaxonomyVersion, loadProjectSprints, loadReviewContext, loadStories, loadTaxonomy, updateProjectSprintStatus } from '../repositories/data-repository.js';
+import { addTaxonomyDomain, addTaxonomyOperation, applyFallbackSuggestion, assignStoriesToSprint, createProject, createProjectSprint, createTaxonomyVersion, loadProjects, loadProjectSprints, loadReviewContext, loadStories, loadTaxonomy, updateProjectSprintStatus } from '../repositories/data-repository.js';
 import { classifyPreview, parseImportedStories } from '../services/classifier.js';
 import { classifyWithAi } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
@@ -27,6 +27,8 @@ const classifyRequest = z.object({
   taxonomyVersion: z.string().trim().min(1).max(40).optional()
 });
 
+const projectCreateRequest = z.object({ name: z.string().trim().min(2).max(160) });
+
 const taxonomyFeedbackRequest = z.object({
   proposalType: z.enum(['new_domain', 'new_module', 'new_operation', 'clarify_story']),
   proposedDomain: z.string().trim().min(2).max(120).optional(),
@@ -37,21 +39,21 @@ const taxonomyFeedbackRequest = z.object({
   justification: z.string().trim().min(5).max(2_000)
 }).superRefine((feedback, context) => {
   if (feedback.proposalType === 'new_domain' && !feedback.proposedDomain) {
-    context.addIssue({ code: 'custom', path: ['proposedDomain'], message: 'Informe o domínio sugerido.' });
+    context.addIssue({ code: 'custom', path: ['proposedDomain'], message: 'Enter the proposed domain.' });
   }
   if (feedback.proposalType === 'new_module' && (!feedback.targetDomain || !feedback.proposedModule)) {
-    context.addIssue({ code: 'custom', message: 'Informe o domínio alvo e o módulo sugerido.' });
+    context.addIssue({ code: 'custom', message: 'Enter the target domain and proposed module.' });
   }
   if (feedback.proposalType === 'new_operation' && (!feedback.targetDomain || !feedback.targetModule || !feedback.proposedOperation)) {
-    context.addIssue({ code: 'custom', message: 'Informe o domínio, o módulo alvo e a operação sugerida.' });
+    context.addIssue({ code: 'custom', message: 'Enter the domain, target module, and proposed operation.' });
   }
 });
 
 const reviewRequest = z.discriminatedUnion('action', [
   z.object({
     action: z.literal('approve'),
-    module: z.string().trim().min(1).max(120).refine(value => value !== 'n/a', 'Selecione um módulo da taxonomia ou marque uma lacuna.'),
-    operation: z.string().trim().min(1).max(180).refine(value => value !== 'n/a', 'Selecione uma operação da taxonomia ou marque uma lacuna.'),
+    module: z.string().trim().min(1).max(120).refine(value => value !== 'n/a', 'Select a taxonomy module or mark a gap.'),
+    operation: z.string().trim().min(1).max(180).refine(value => value !== 'n/a', 'Select a taxonomy operation or mark a gap.'),
     notes: z.string().trim().max(2_000).optional()
   }),
   z.object({
@@ -96,7 +98,7 @@ function isAuthorizedInternalRequest(req: Request, res: Response) {
   const configuredKey = process.env.INGEST_API_KEY;
   if (!configuredKey) {
     if (process.env.VERCEL) {
-      res.status(503).json({ error: 'INGEST_API_KEY não foi configurada no ambiente.' });
+      res.status(503).json({ error: 'INGEST_API_KEY is not configured in the environment.' });
       return false;
     }
     return true;
@@ -105,7 +107,7 @@ function isAuthorizedInternalRequest(req: Request, res: Response) {
   const expected = Buffer.from(configuredKey);
   const supplied = Buffer.from(suppliedKey);
   if (expected.length !== supplied.length || !timingSafeEqual(expected, supplied)) {
-    res.status(401).json({ error: 'Credencial de ingestão inválida.' });
+    res.status(401).json({ error: 'Invalid ingestion credential.' });
     return false;
   }
   return true;
@@ -114,23 +116,38 @@ function isAuthorizedInternalRequest(req: Request, res: Response) {
 export const apiRouter = Router();
 apiRouter.use(nfrRouter);
 
+apiRouter.get('/projects', async (_req, res) => {
+  res.json(await loadProjects());
+});
+
+apiRouter.post('/projects', async (req, res) => {
+  const parsed = projectCreateRequest.safeParse(req.body);
+  if (!parsed.success) return void res.status(400).json({ error: 'Enter a project name between 2 and 160 characters.' });
+  try {
+    res.status(201).json({ name: await createProject(parsed.data.name) });
+  } catch (reason) {
+    if ((reason as { code?: string }).code === '23505') return void res.status(409).json({ error: 'A project with this name already exists.' });
+    throw reason;
+  }
+});
+
 apiRouter.get('/project-research-profile', async (req, res) => {
   const name = z.string().trim().min(1).max(160).safeParse(req.query.project);
-  if (!name.success) return void res.status(400).json({ error: 'Informe o projeto.' });
+  if (!name.success) return void res.status(400).json({ error: 'Enter a project.' });
   const profile = await loadProjectResearchProfile(name.data);
-  if (!profile) return void res.status(404).json({ error: 'Projeto não encontrado.' });
+  if (!profile) return void res.status(404).json({ error: 'Project not found.' });
   res.json(profile);
 });
 
 apiRouter.put('/project-research-profile', async (req, res) => {
   const name = z.string().trim().min(1).max(160).safeParse(req.query.project);
   const parsed = projectResearchProfileSchema.safeParse(req.body);
-  if (!name.success || !parsed.success) return void res.status(400).json({ error: 'Perfil do projeto inválido.' });
+  if (!name.success || !parsed.success) return void res.status(400).json({ error: 'Invalid project profile.' });
   if (parsed.data.taxonomyVersion) {
     const version = await loadTaxonomy(parsed.data.taxonomyVersion);
-    if (version.version !== parsed.data.taxonomyVersion || !Object.values(version.modules).some(operations => operations.length)) return void res.status(400).json({ error: 'Selecione uma taxonomia ativa com operações para o projeto.' });
+    if (version.version !== parsed.data.taxonomyVersion || !Object.values(version.modules).some(operations => operations.length)) return void res.status(400).json({ error: 'Select an active taxonomy with operations for the project.' });
   }
-  if (!await saveProjectResearchProfile(name.data, parsed.data)) return void res.status(404).json({ error: 'Projeto não encontrado.' });
+  if (!await saveProjectResearchProfile(name.data, parsed.data)) return void res.status(404).json({ error: 'Project not found.' });
   res.json(parsed.data);
 });
 
@@ -164,99 +181,99 @@ apiRouter.get('/sprints', async (_req, res) => {
 
 apiRouter.post('/sprints', async (req, res) => {
   const parsed = sprintCreateRequest.safeParse(req.body);
-  if (!parsed.success) return void res.status(400).json({ error: 'Informe projeto, nome e status válidos para a sprint.' });
+  if (!parsed.success) return void res.status(400).json({ error: 'Enter a valid project, name, and sprint status.' });
   try {
     const sprint = await createProjectSprint(parsed.data);
-    if (!sprint) return void res.status(404).json({ error: 'Projeto não encontrado.' });
+    if (!sprint) return void res.status(404).json({ error: 'Project not found.' });
     res.status(201).json(sprint);
   } catch (reason) {
-    if ((reason as { code?: string }).code === '23505') return void res.status(409).json({ error: 'Já existe uma sprint com esse nome neste projeto.' });
+    if ((reason as { code?: string }).code === '23505') return void res.status(409).json({ error: 'A sprint with this name already exists in the project.' });
     throw reason;
   }
 });
 
 apiRouter.patch('/sprints/:id/status', async (req, res) => {
-  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de sprint inválido.' });
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Invalid sprint identifier.' });
   const parsed = sprintStatusRequest.safeParse(req.body);
-  if (!parsed.success) return void res.status(400).json({ error: 'Status de sprint inválido.' });
+  if (!parsed.success) return void res.status(400).json({ error: 'Invalid sprint status.' });
   const sprint = await updateProjectSprintStatus(req.params.id, parsed.data.status);
-  if (!sprint) return void res.status(404).json({ error: 'Sprint não encontrada.' });
+  if (!sprint) return void res.status(404).json({ error: 'Sprint not found.' });
   res.json(sprint);
 });
 
 apiRouter.put('/sprints/:id/stories', async (req, res) => {
-  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de sprint inválido.' });
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Invalid sprint identifier.' });
   const parsed = sprintStoriesRequest.safeParse(req.body);
-  if (!parsed.success) return void res.status(400).json({ error: 'Selecione ao menos uma User Story.' });
+  if (!parsed.success) return void res.status(400).json({ error: 'Select at least one user story.' });
   try {
     const changed = await assignStoriesToSprint(req.params.id, parsed.data.classificationIds);
-    if (!changed) return void res.status(404).json({ error: 'Sprint não encontrada.' });
+    if (!changed) return void res.status(404).json({ error: 'Sprint not found.' });
     res.json({ sprintId: req.params.id, classificationIds: parsed.data.classificationIds });
   } catch (reason) {
     res.status(400).json({ error: (reason as Error).message });
   }
 });
 
-apiRouter.post('/taxonomy/operations', async (req, res) => { const parsed = taxonomyOperationRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Dados da operação inválidos.' }); await addTaxonomyOperation(parsed.data); res.status(201).json(await loadTaxonomy()); });
-apiRouter.post('/taxonomy/domains', async (req, res) => { const parsed = taxonomyDomainRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Dados do domínio inválidos.' }); await addTaxonomyDomain(parsed.data); res.status(201).json(await loadTaxonomy()); });
-apiRouter.post('/taxonomy/versions', async (req, res) => { const parsed = taxonomyVersionRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Versão inválida.' }); await createTaxonomyVersion(parsed.data.version); res.status(201).json(await loadTaxonomy()); });
+apiRouter.post('/taxonomy/operations', async (req, res) => { const parsed = taxonomyOperationRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Invalid operation data.' }); await addTaxonomyOperation(parsed.data); res.status(201).json(await loadTaxonomy()); });
+apiRouter.post('/taxonomy/domains', async (req, res) => { const parsed = taxonomyDomainRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Invalid domain data.' }); await addTaxonomyDomain(parsed.data); res.status(201).json(await loadTaxonomy()); });
+apiRouter.post('/taxonomy/versions', async (req, res) => { const parsed = taxonomyVersionRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Invalid version.' }); await createTaxonomyVersion(parsed.data.version); res.status(201).json(await loadTaxonomy()); });
 
 apiRouter.post('/taxonomy/fallback-suggestions/:id/apply', async (req, res) => {
-  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador da sugestão inválido.' });
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Invalid suggestion identifier.' });
   const result = await applyFallbackSuggestion(req.params.id);
-  if (!result) return void res.status(404).json({ error: 'Sugestão de fallback não encontrada.' });
+  if (!result) return void res.status(404).json({ error: 'Fallback suggestion not found.' });
   if (result.status === 'applied' || result.status === 'already_applied') {
     return void res.json({ status: result.status, taxonomy: await loadTaxonomy() });
   }
   const messages = {
-      not_actionable: 'Esta sugestão não representa um domínio ou uma operação adicionável.',
-      target_domain_not_found: 'O domínio alvo da sugestão não existe na taxonomia ativa.',
-      target_module_not_found: 'O módulo alvo da operação sugerida não existe na taxonomia ativa.',
-    no_active_taxonomy: 'Nenhuma taxonomia ativa foi encontrada.'
+      not_actionable: 'This suggestion does not represent a domain or operation that can be added.',
+      target_domain_not_found: 'The suggestion target domain does not exist in the active taxonomy.',
+      target_module_not_found: 'The suggested operation target module does not exist in the active taxonomy.',
+    no_active_taxonomy: 'No active taxonomy was found.'
   };
   res.status(422).json({ error: messages[result.status] });
 });
 
 apiRouter.get('/classifications/:id/details', async (req, res) => {
-  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Invalid classification identifier.' });
   res.json(await loadStoryDetails(req.params.id));
 });
 apiRouter.get('/classifications/:id/review-context', async (req, res) => {
-  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Invalid classification identifier.' });
   const context = await loadReviewContext(req.params.id);
-  if (!context) return void res.status(404).json({ error: 'Classificação não encontrada.' });
+  if (!context) return void res.status(404).json({ error: 'Classification not found.' });
   res.json(context);
 });
 apiRouter.post('/classifications/:id/taxonomy-feedback', async (req, res) => {
-  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador da classificação inválido.' });
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Invalid classification identifier.' });
   const parsed = taxonomyFeedbackRequest.safeParse(req.body);
-  if (!parsed.success) return void res.status(400).json({ error: 'Dados da proposta de evolução inválidos.', details: parsed.error.issues });
+  if (!parsed.success) return void res.status(400).json({ error: 'Invalid taxonomy proposal data.', details: parsed.error.issues });
   let saved;
   try {
     saved = await saveTaxonomyFeedback(req.params.id, parsed.data);
   } catch (reason) {
     return void res.status(422).json({ error: (reason as Error).message });
   }
-  if (!saved) return void res.status(404).json({ error: 'Classificação não encontrada.' });
+  if (!saved) return void res.status(404).json({ error: 'Classification not found.' });
   res.status(201).json({ ...saved, taxonomy: await loadTaxonomy() });
 });
 apiRouter.post('/taxonomy/feedback/:id/apply', async (req, res) => {
-  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador da proposta inválido.' });
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Invalid proposal identifier.' });
   let result;
   try {
     result = await applySavedTaxonomyFeedback(req.params.id);
   } catch (reason) {
     return void res.status(422).json({ error: (reason as Error).message });
   }
-  if (!result) return void res.status(404).json({ error: 'Proposta de evolução não encontrada.' });
-  if (result.status === 'not_actionable') return void res.status(422).json({ error: 'Solicitações de esclarecimento não alteram a taxonomia.' });
+  if (!result) return void res.status(404).json({ error: 'Taxonomy proposal not found.' });
+  if (result.status === 'not_actionable') return void res.status(422).json({ error: 'Clarification requests do not change the taxonomy.' });
   res.json({ status: result.status, taxonomy: await loadTaxonomy() });
 });
 apiRouter.put('/classifications/:id/details', async (req, res) => {
-  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Identificador de classificação inválido.' });
+  if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Invalid classification identifier.' });
   const parsed = storyDetailsRequest.safeParse(req.body);
-  if (!parsed.success) return void res.status(400).json({ error: 'Detalhes da história inválidos.', details: parsed.error.issues });
-  if (!await saveStoryDetails(req.params.id, parsed.data)) return void res.status(404).json({ error: 'História não encontrada.' });
+  if (!parsed.success) return void res.status(400).json({ error: 'Invalid story details.', details: parsed.error.issues });
+  if (!await saveStoryDetails(req.params.id, parsed.data)) return void res.status(404).json({ error: 'Story not found.' });
   res.json(await loadStoryDetails(req.params.id));
 });
 
@@ -264,14 +281,14 @@ apiRouter.post('/classify', async (req, res) => {
   const parsed = classifyRequest.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({
-      error: 'Envie de 1 a 100 histórias válidas.',
+      error: 'Submit between 1 and 100 valid stories.',
       details: parsed.error.issues
     });
     return;
   }
 
   if (!await isExecutionModeActive(parsed.data.mode)) {
-    res.status(400).json({ error: 'O modo de classifica\u00e7\u00e3o selecionado n\u00e3o est\u00e1 dispon\u00edvel.' });
+    res.status(400).json({ error: 'The selected classification mode is unavailable.' });
     return;
   }
 
@@ -279,10 +296,10 @@ apiRouter.post('/classify', async (req, res) => {
   const catalog = await loadTaxonomy();
   const activeVersions = (catalog.taxonomies ?? []).filter(item => item.active && item.operations > 0);
   const taxonomyVersion = parsed.data.taxonomyVersion || profile?.taxonomyVersion || (activeVersions.length === 1 ? activeVersions[0].version : '');
-  if (!taxonomyVersion) return void res.status(400).json({ error: 'Selecione a taxonomia que será usada para classificar estas histórias.' });
+  if (!taxonomyVersion) return void res.status(400).json({ error: 'Select the taxonomy to use for these stories.' });
   const taxonomy = await loadTaxonomy(taxonomyVersion);
   if (taxonomy.version !== taxonomyVersion || !Object.values(taxonomy.modules).some(operations => operations.length)) {
-    return void res.status(400).json({ error: 'A taxonomia selecionada não está ativa ou não possui operações.' });
+    return void res.status(400).json({ error: 'The selected taxonomy is inactive or has no operations.' });
   }
   const previews = parsed.data.mode === 'preview'
     ? parsed.data.stories.map(text => ({ text, ...classifyPreview(text, taxonomy) }))
@@ -292,21 +309,21 @@ apiRouter.post('/classify', async (req, res) => {
 
 apiRouter.patch('/classifications/:id/review', async (req, res) => {
   if (!/^\d+$/.test(req.params.id)) {
-    res.status(400).json({ error: 'Identificador de classificação inválido.' });
+    res.status(400).json({ error: 'Invalid classification identifier.' });
     return;
   }
   const parsed = reviewRequest.safeParse(req.body);
   if (!parsed.success) {
-    res.status(400).json({ error: 'Dados de revisão inválidos.', details: parsed.error.issues });
+    res.status(400).json({ error: 'Invalid review data.', details: parsed.error.issues });
     return;
   }
   const result = await saveReview({ classificationId: req.params.id, ...parsed.data });
   if (!result) {
-    res.status(404).json({ error: 'Classificação não encontrada.' });
+    res.status(404).json({ error: 'Classification not found.' });
     return;
   }
   if ('notReviewable' in result) {
-    res.status(409).json({ error: `A classificação já está no estado ${result.status}.` });
+    res.status(409).json({ error: `The classification is already in the ${result.status} state.` });
     return;
   }
   res.json(result);
@@ -316,7 +333,7 @@ apiRouter.post('/internal/classifications', async (req, res) => {
   if (!isAuthorizedInternalRequest(req, res)) return;
   const parsed = ingestionRequest.safeParse(req.body);
   if (!parsed.success) {
-    res.status(400).json({ error: 'Resultado de classificação inválido.', details: parsed.error.issues });
+    res.status(400).json({ error: 'Invalid classification result.', details: parsed.error.issues });
     return;
   }
   const classificationId = await withTransaction(client =>
@@ -327,7 +344,7 @@ apiRouter.post('/internal/classifications', async (req, res) => {
 
 apiRouter.post('/import', upload.single('file'), (req, res) => {
   if (!req.file) {
-    res.status(400).json({ error: 'Arquivo ausente.' });
+    res.status(400).json({ error: 'No file was provided.' });
     return;
   }
 

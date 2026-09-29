@@ -10,5 +10,5 @@ import { ProjectsPage } from './pages/ProjectsPage';
 import { ProjectDetailsPage } from './pages/ProjectDetailsPage';
 
 export default function App() {
-  return <Routes><Route element={<AppLayout/>}><Route path="/" element={<DashboardPage/>}/><Route path="/projects" element={<ProjectsPage/>}/><Route path="/projects/:projectName" element={<ProjectDetailsPage/>}/><Route path="/classify" element={<ClassifyPage/>}/><Route path="/recommendations" element={<NfrRecommendationsPage/>}/><Route path="/review" element={<ReviewPage/>}/><Route path="/taxonomy" element={<TaxonomyPage/>}/><Route path="/runs" element={<StoriesPage/>}/><Route path="*" element={<Navigate to="/projects" replace/>}/></Route></Routes>;
+  return <Routes><Route element={<AppLayout/>}><Route path="/" element={<Navigate to="/projects" replace/>}/><Route path="/projects" element={<ProjectsPage/>}/><Route path="/projects/:projectName" element={<ProjectDetailsPage/>}/><Route path="/classify" element={<ClassifyPage/>}/><Route path="/recommendations" element={<NfrRecommendationsPage/>}/><Route path="/review" element={<ReviewPage/>}/><Route path="/taxonomy" element={<TaxonomyPage/>}/><Route path="/runs" element={<StoriesPage/>}/><Route path="/dashboard" element={<DashboardPage/>}/><Route path="*" element={<Navigate to="/projects" replace/>}/></Route></Routes>;
 }

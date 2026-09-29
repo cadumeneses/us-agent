@@ -27,7 +27,7 @@ export async function loadApplicationContext(): Promise<ApplicationContext> {
     JOIN app_users user_account ON user_account.id = settings.default_user_id
     WHERE settings.singleton
   `);
-  if (!settings.rows[0]) throw new Error('Configurações da aplicação não foram inicializadas.');
+  if (!settings.rows[0]) throw new Error('Application settings have not been initialized.');
 
   const modes = await query<{ key: string; name: string; description: string }>(`
     SELECT key, name, description
@@ -37,10 +37,14 @@ export async function loadApplicationContext(): Promise<ApplicationContext> {
   `);
   const row = settings.rows[0];
   return {
-    user: { id: row.user_id, displayName: row.display_name, initials: row.initials, role: row.role },
-    environment: row.environment_name,
+    user: { id: row.user_id, displayName: row.display_name, initials: row.initials, role: row.role === 'Administrador' ? 'Administrator' : row.role },
+    environment: row.environment_name === 'Ambiente local' ? 'Local environment' : row.environment_name,
     defaultExecutionMode: row.default_execution_mode_key,
-    executionModes: modes.rows
+    executionModes: modes.rows.map(mode => mode.key === 'preview'
+      ? { ...mode, name: 'Local preview', description: 'Classification using only deterministic local rules.' }
+      : mode.key === 'committee'
+        ? { ...mode, name: 'Model committee', description: 'Full classification using the configured providers.' }
+        : mode)
   };
 }
 

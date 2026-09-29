@@ -49,14 +49,14 @@ export function profileFeatures(profile: NfrProfile): string[] {
 
 export function profileIssues(profile: NfrProfile): string[] {
   const issues: string[] = [];
-  if (!usableClassification(profile)) issues.push('A classificação precisa ser aceita ou revisada antes da recomendação.');
-  if (!profile.taxonomyVersion) issues.push('A classificação precisa identificar a versão da taxonomia.');
+  if (!usableClassification(profile)) issues.push('The classification must be accepted or reviewed before recommendation.');
+  if (!profile.taxonomyVersion) issues.push('The classification must identify the taxonomy version.');
   const p = profile.projectProfile;
-  if (!p.platforms.length) issues.push('Informe a plataforma do projeto.');
-  if (!p.applicationDomains.length) issues.push('Informe o domínio de aplicação do projeto.');
-  if (!p.architectures.length) issues.push('Informe a arquitetura do projeto.');
-  if (!p.objective) issues.push('Informe o objetivo do projeto (produto ou protótipo).');
-  if (profile.tasks.some(task => !task.category.trim())) issues.push('Classifique as tarefas cadastradas com uma categoria antes de recomendar.');
+  if (!p.platforms.length) issues.push('Enter the project platform.');
+  if (!p.applicationDomains.length) issues.push('Enter the project application domain.');
+  if (!p.architectures.length) issues.push('Enter the project architecture.');
+  if (!p.objective) issues.push('Enter the project purpose (product or prototype).');
+  if (profile.tasks.some(task => !task.category.trim())) issues.push('Assign a category to every registered task before requesting recommendations.');
   return issues;
 }
 
@@ -66,7 +66,7 @@ export function recommendNfr(target: NfrProfile, history: NfrProfile[], labelInd
     method: NFR_METHOD, k: 1, status: 'blocked', messages: profileIssues(target),
     label, dimensions: profileFeatures(target), eligibleCount: 0, excludedCount: 0, neighbor: null, items: []
   };
-  if (!Number.isInteger(labelIndex) || labelIndex < 0 || !label || [label.module, label.operation].some(value => !value || value === 'n/a')) result.messages.push('Selecione um par módulo/operação válido da classificação.');
+  if (!Number.isInteger(labelIndex) || labelIndex < 0 || !label || [label.module, label.operation].some(value => !value || value === 'n/a')) result.messages.push('Select a valid module/operation pair from the classification.');
   if (result.messages.length || !label) return result;
   const candidates = history.filter(candidate =>
     candidate.storyId !== target.storyId && candidate.projectProfile.objective === 'product' &&
@@ -77,7 +77,7 @@ export function recommendNfr(target: NfrProfile, history: NfrProfile[], labelInd
   result.excludedCount = history.length - candidates.length;
   if (!candidates.length) {
     result.status = 'no_candidates';
-    result.messages.push('Nenhuma US histórica compatível: verifique perfis, classificação aceita, versão da taxonomia e módulo/operação. Projetos de protótipo e a própria US são excluídos.');
+    result.messages.push('No compatible historical story was found. Check profiles, accepted classification, taxonomy version, and module/operation. Prototype projects and the current story are excluded.');
     return result;
   }
   const ranked = candidates.map(profile => {
@@ -87,7 +87,7 @@ export function recommendNfr(target: NfrProfile, history: NfrProfile[], labelInd
     return { profile, vector, similarity: 1 - distance / result.dimensions.length };
   }).sort((a, b) => b.similarity - a.similarity || compareId(a.profile.classificationId, b.profile.classificationId));
   const best = ranked[0];
-  if (ranked.length > 1 && best.similarity === ranked[1].similarity) result.messages.push('Empate: selecionada a classificação de menor identificador. Política determinística do US-Agent; k permanece igual a 1.');
+  if (ranked.length > 1 && best.similarity === ranked[1].similarity) result.messages.push('Tie: the classification with the lowest identifier was selected. This is the deterministic US-Agent policy; k remains 1.');
   result.neighbor = {
     classificationId: best.profile.classificationId, storyId: best.profile.storyId,
     project: best.profile.project, text: best.profile.text, similarity: best.similarity, vector: best.vector,
@@ -105,8 +105,8 @@ export function recommendNfr(target: NfrProfile, history: NfrProfile[], labelInd
   }
   result.items = [...unique.values()].sort((a, b) => a.key.localeCompare(b.key));
   result.status = result.items.length ? 'completed' : 'no_items';
-  if (!result.items.length) result.messages.push('O vizinho mais próximo não possui RNFs no recorte de Felipe. O motor mantém k=1 e não substitui esse vizinho por outro.');
-  if (best.similarity === 0) result.messages.push('O vizinho não compartilha características com o alvo: similaridade e utilidade iguais a zero.');
+  if (!result.items.length) result.messages.push('The nearest neighbor has no eligible NFRs. The engine keeps k=1 and does not replace it with another neighbor.');
+  if (best.similarity === 0) result.messages.push('The neighbor shares no characteristics with the target, so similarity and utility are zero.');
   return result;
 }
 

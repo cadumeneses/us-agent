@@ -22,7 +22,7 @@ export function StoryItemModal({ editor, details, saving, onClose, onSave }: {
   const [technologies, setTechnologies] = useState(existing && 'technologies' in existing ? existing.technologies ?? emptyTechnologies() : emptyTechnologies());
   const [type, setType] = useState(existing && 'type' in existing && typeof existing.type === 'string' ? existing.type : 'Performance');
   const [metric, setMetric] = useState(existing && 'metric' in existing && typeof existing.metric === 'string' ? existing.metric : 'response_time');
-  const title = editor.kind === 'task' ? 'Tarefa' : editor.kind === 'functional' ? 'Requisito funcional' : 'Requisito não funcional';
+  const title = editor.kind === 'task' ? 'Task' : editor.kind === 'functional' ? 'Functional requirement' : 'Non-functional requirement';
   const types = [...new Set([...Object.keys(attributes), type])];
   const metrics = [...new Set([...(attributes[type] ?? []), metric])];
   function submit(event: React.FormEvent) {
@@ -47,20 +47,20 @@ export function StoryItemModal({ editor, details, saving, onClose, onSave }: {
     }
   }
   return <div className="modal-backdrop"><form className="project-modal card research-item-modal" onSubmit={submit}>
-    <div className="modal-head"><div><span>{editor.index === undefined ? 'ADICIONAR' : 'EDITAR'}</span><h2>{title}</h2></div><button type="button" disabled={saving} onClick={onClose} aria-label="Fechar"><X size={18}/></button></div>
+    <div className="modal-head"><div><span>{editor.index === undefined ? 'ADD' : 'EDIT'}</span><h2>{title}</h2></div><button type="button" disabled={saving} onClick={onClose} aria-label="Close"><X size={18}/></button></div>
     <fieldset disabled={saving}>
-      <label>{editor.kind === 'task' ? 'Descrição da tarefa' : editor.kind === 'nonFunctional' ? 'Sentença do RNF' : 'Descrição'}<textarea required maxLength={editor.kind === 'task' ? 500 : 1000} value={text} onChange={event => setText(event.target.value)} autoFocus/></label>
+      <label>{editor.kind === 'task' ? 'Task description' : editor.kind === 'nonFunctional' ? 'NFR statement' : 'Description'}<textarea required maxLength={editor.kind === 'task' ? 500 : 1000} value={text} onChange={event => setText(event.target.value)} autoFocus/></label>
       {editor.kind === 'task' && <>
-        <label>Categoria da tarefa<input value={category} maxLength={160} onChange={event => setCategory(event.target.value)} placeholder="Ex.: Associar entidades no banco de dados"/></label>
-        <p>Use a mesma categoria para tarefas equivalentes. As tecnologias complementam o perfil do projeto.</p>
+        <label>Task category<input value={category} maxLength={160} onChange={event => setCategory(event.target.value)} placeholder="Example: Link database entities"/></label>
+        <p>Use the same category for equivalent tasks. Technologies complement the project profile.</p>
         <TechnologyFields value={technologies} onChange={setTechnologies}/>
-        <label className="inline-check"><input type="checkbox" checked={done} onChange={event => setDone(event.target.checked)}/> Concluída</label>
+        <label className="inline-check"><input type="checkbox" checked={done} onChange={event => setDone(event.target.checked)}/> Completed</label>
       </>}
       {editor.kind === 'nonFunctional' && <div className="nfr-selects">
-        <label>Tipo<select value={type} onChange={event => { setType(event.target.value); setMetric(attributes[event.target.value]?.[0] ?? metric); }}>{types.map(value => <option key={value}>{value}</option>)}</select></label>
-        <label>Atributo<select value={metric} onChange={event => setMetric(event.target.value)}>{metrics.map(value => <option key={value}>{value}</option>)}</select></label>
+        <label>Type<select value={type} onChange={event => { setType(event.target.value); setMetric(attributes[event.target.value]?.[0] ?? metric); }}>{types.map(value => <option key={value}>{value}</option>)}</select></label>
+        <label>Attribute<select value={metric} onChange={event => setMetric(event.target.value)}>{metrics.map(value => <option key={value}>{value}</option>)}</select></label>
       </div>}
     </fieldset>
-    <div className="modal-actions"><button type="button" disabled={saving} onClick={onClose}>Cancelar</button><button className="primary" disabled={saving}>Salvar</button></div>
+    <div className="modal-actions"><button type="button" disabled={saving} onClick={onClose}>Cancel</button><button className="primary" disabled={saving}>Save</button></div>
   </form></div>;
 }

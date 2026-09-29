@@ -26,7 +26,7 @@ test('records an explainable fallback when no local rule covers the story', () =
   assert.equal(result.module, 'n/a');
   assert.equal(result.needsReview, true);
   assert.equal(result.fallbackSuggestions[0].type, 'clarify_story');
-  assert.match(result.fallbackSuggestions[0].reason, /cobertura/i);
+  assert.match(result.fallbackSuggestions[0].reason, /coverage/i);
 });
 
 test('limits imported stories and removes invalid lines', () => {
