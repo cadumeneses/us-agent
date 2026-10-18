@@ -8,5 +8,5 @@ function Status({ value }: { value: string }) {
 }
 
 export function StoryTable({ stories }: { stories: Story[] }) {
-  return <div className="table-wrap"><table><thead><tr><th>Story</th><th>Classification</th><th>Confidence</th><th>Status</th></tr></thead><tbody>{stories.map(story => <tr key={story.id}><td><b>{story.text}</b><small>{story.project}</small></td><td><span className="tag">{story.module}</span><small>{story.operation}</small></td><td><b>{Math.round(story.confidence * 100)}%</b></td><td><Status value={story.status}/></td></tr>)}</tbody></table>{!stories.length && <div className="empty">No stories found.</div>}</div>;
+  return <div className="table-wrap"><table><thead><tr><th>Story</th><th>Classification</th><th>Confidence</th><th>Status</th></tr></thead><tbody>{stories.map(story => <tr key={story.id}><td><b>{story.text}</b><small>{story.project}</small></td><td>{story.labels.map(label => <div key={JSON.stringify(label)}><span className="tag">{label.module}</span><small>{label.operation}</small></div>)}</td><td><b>{Math.round(story.confidence * 100)}%</b></td><td><Status value={story.status}/></td></tr>)}</tbody></table>{!stories.length && <div className="empty">No stories found.</div>}</div>;
 }

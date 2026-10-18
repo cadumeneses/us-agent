@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 import type { StoryDetails } from '../types/models';
 import { emptyTechnologies, TechnologyFields } from './ResearchProfile';
+import taskCatalog from '../data/ramos-task-catalog.json';
+import nfrCatalog from '../data/ramos-nfr-catalog.json';
 
 // Ramos (2019), table 5.1 and appendix D. Existing values remain editable.
 const attributes: Record<string, string[]> = {
@@ -11,8 +13,8 @@ const attributes: Record<string, string[]> = {
 };
 export type StoryEditor = { kind: 'task' | 'functional' | 'nonFunctional'; index?: number };
 
-export function StoryItemModal({ editor, details, saving, onClose, onSave }: {
-  editor: StoryEditor; details: StoryDetails; saving: boolean;
+export function StoryItemModal({ editor, details, module, operation, saving, onClose, onSave }: {
+  editor: StoryEditor; details: StoryDetails; module: string; operation: string; saving: boolean;
   onClose: () => void; onSave: (details: StoryDetails) => void;
 }) {
   const existing = editor.index === undefined ? undefined : editor.kind === 'task' ? details.tasks[editor.index] : editor.kind === 'functional' ? details.functionalRequirements[editor.index] : details.nonFunctionalRequirements[editor.index];
@@ -22,9 +24,15 @@ export function StoryItemModal({ editor, details, saving, onClose, onSave }: {
   const [technologies, setTechnologies] = useState(existing && 'technologies' in existing ? existing.technologies ?? emptyTechnologies() : emptyTechnologies());
   const [type, setType] = useState(existing && 'type' in existing && typeof existing.type === 'string' ? existing.type : 'Performance');
   const [metric, setMetric] = useState(existing && 'metric' in existing && typeof existing.metric === 'string' ? existing.metric : 'response_time');
+  const [exampleIndex, setExampleIndex] = useState('');
   const title = editor.kind === 'task' ? 'Task' : editor.kind === 'functional' ? 'Functional requirement' : 'Non-functional requirement';
   const types = [...new Set([...Object.keys(attributes), type])];
   const metrics = [...new Set([...(attributes[type] ?? []), metric])];
+  const normalizeLabel = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('en-US');
+  const taskSuggestions = [...new Set(taskCatalog.filter(item =>
+    (item.module === module && item.operation === operation) ||
+    (normalizeLabel(item.sourceModule) === normalizeLabel(module) && normalizeLabel(item.sourceOperation) === normalizeLabel(operation))
+  ).map(item => item.title))];
   function submit(event: React.FormEvent) {
     event.preventDefault();
     if (!text.trim() || saving) return;
@@ -49,10 +57,12 @@ export function StoryItemModal({ editor, details, saving, onClose, onSave }: {
   return <div className="modal-backdrop"><form className="project-modal card research-item-modal" onSubmit={submit}>
     <div className="modal-head"><div><span>{editor.index === undefined ? 'ADD' : 'EDIT'}</span><h2>{title}</h2></div><button type="button" disabled={saving} onClick={onClose} aria-label="Close"><X size={18}/></button></div>
     <fieldset disabled={saving}>
+      {editor.kind === 'nonFunctional' && <label>Example from Ramos (2019), Appendix D<select value={exampleIndex} onChange={event => { const index = event.target.value; setExampleIndex(index); if (index) { const example = nfrCatalog[Number(index) - 1]; setText(example.sentence); setType(example.type); setMetric(example.attribute); } }}><option value="">No example selected</option>{nfrCatalog.map((item, index) => <option key={index} value={index + 1}>{item.type} / {item.attribute} · {item.sentence.slice(0, 82)}{item.sentence.length > 82 ? '…' : ''}</option>)}</select><small>The examples have specific values and contexts. Adapt the statement before linking it to the story.</small></label>}
       <label>{editor.kind === 'task' ? 'Task description' : editor.kind === 'nonFunctional' ? 'NFR statement' : 'Description'}<textarea required maxLength={editor.kind === 'task' ? 500 : 1000} value={text} onChange={event => setText(event.target.value)} autoFocus/></label>
       {editor.kind === 'task' && <>
-        <label>Task category<input value={category} maxLength={160} onChange={event => setCategory(event.target.value)} placeholder="Example: Link database entities"/></label>
-        <p>Use the same category for equivalent tasks. Technologies complement the project profile.</p>
+        <label>Task category<input value={category} maxLength={160} list="ramos-task-categories" onChange={event => setCategory(event.target.value)} placeholder="Search the task catalog or describe another task"/></label>
+        <datalist id="ramos-task-categories">{taskSuggestions.map(value => <option value={value} key={value}/>)}</datalist>
+        <p>{taskSuggestions.length ? `${taskSuggestions.length} task taxonomy categories from Ramos (2019) for ${module} / ${operation}. ` : ''}Use the same category for equivalent tasks. Technologies complement the project profile.</p>
         <TechnologyFields value={technologies} onChange={setTechnologies}/>
         <label className="inline-check"><input type="checkbox" checked={done} onChange={event => setDone(event.target.checked)}/> Completed</label>
       </>}

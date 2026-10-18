@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "capturedOn": "2026-10-17",
+  "gitHead": "9ddbcb3594bcc392f89f85f805f6cf71e3850577",
+  "workingTree": "dirty",
+  "method": "ramos_2019_manhattan_k1_v2",
+  "referenceFile": "reference.json",
+  "referenceSha256": "62a8059a6d11ab6026deade7c010b0682714bcc7e77f9132aac6c840792e1510",
+  "hashEncoding": "Reference: SHA-256 of UTF-8 text with LF line endings. Source inventory: SHA-256 of original local file bytes.",
+  "sourceHashes": {
+    "apps/api/src/services/nfr-engine.ts": "a0fe36c52a5d93602926d9453076fb699110bda29a15992d9006cc3612eb1b34",
+    "apps/api/src/services/nfr-engine.test.ts": "b8f674e79c17a29a29a31d119009316048b00f383e959433f5282f8620558f02",
+    "apps/api/src/services/nfr-recommendations.ts": "e1cffd90767c82b7848e42d6561b48ccc1c49ccbfee6d17aa44ffdc21a26a83e",
+    "apps/api/src/services/research-inputs.ts": "59aa4008942d40766bb825143a6000bb5a8dfe7510275760a421f59a8050a5d6",
+    "agent/orchestrator.py": "6299292a1301c4a3f325f38d1bccdcab53b8ef980fecb44ccb86f04ea6d94879",
+    "scripts/seed-ramos-example.mjs": "ec97be9c97b6ac397983f667ed1e59800ea64a7ada9f999364262c476d457708",
+    "scripts/check-ramos-example.ts": "c398ce1645fffdd04266419f8950333aa3d5968368442504164ed58eb6dddf1b"
+  },
+  "preexistingChanges": [
+    {
+      "path": "README.md",
+      "status": " M",
+      "sha256": "f4e0ae67b271c35849f549a4b2cb47ff7e8425839b9d27549640b6c017be266a"
+    },
+    {
+      "path": "apps/api/src/services/nfr-engine.test.ts",
+      "status": " M",
+      "sha256": "b8f674e79c17a29a29a31d119009316048b00f383e959433f5282f8620558f02"
+    },
+    {
+      "path": "apps/api/src/services/nfr-engine.ts",
+      "status": " M",
+      "sha256": "a0fe36c52a5d93602926d9453076fb699110bda29a15992d9006cc3612eb1b34"
+    },
+    {
+      "path": "apps/api/src/services/nfr-recommendations.ts",
+      "status": " M",
+      "sha256": "e1cffd90767c82b7848e42d6561b48ccc1c49ccbfee6d17aa44ffdc21a26a83e"
+    },
+    {
+      "path": "apps/web/src/components/StoryItemModal.tsx",
+      "status": " M",
+      "sha256": "ac87aa2830cfbbba59fd600ce50d9cdf82c9b5c9a3a536fa65f8f788e20361fa"
+    },
+    {
+      "path": "apps/web/src/pages/NfrRecommendationsPage.tsx",
+      "status": " M",
+      "sha256": "3172dfd31e7536482d9d2972a5173e04d1787c69fc6f059cb21bf32c69a83ab3"
+    },
+    {
+      "path": "apps/web/src/pages/ProjectDetailsPage.tsx",
+      "status": " M",
+      "sha256": "baea600688160633cec3020cc1483feacc034e47321d839b78f743f2b02a15a2"
+    },
+    {
+      "path": "docs/motor-rnf.md",
+      "status": " M",
+      "sha256": "3aee2e0905d27a7bcc8afbfc20b98ec29a3f5a35548b9f79a343d610e01950b8"
+    },
+    {
+      "path": "package.json",
+      "status": " M",
+      "sha256": "b65ab408014e362e15ba9bdfeac5af9060676058a6381193f9055dce2208fe9f"
+    },
+    {
+      "path": "scripts/check-nfr-recommendations.mjs",
+      "status": " M",
+      "sha256": "75d400d9749d977f6ed22f2590300742357df16e1e698435f33dd4cfcb747d76"
+    },
+    {
+      "path": "2019_FelipeRamos_Recomendação de requisitos não funcionais em projetos ágeis baseados em Scrum.pdf",
+      "status": "??",
+      "sha256": "a1e7092095f5d5f3139e5a2e9e6f5a756fbfe61a5d7bd086852026066cd371d7"
+    },
+    {
+      "path": "2021_EdnaldoFilho_Uma Abordagem para Recomendação de Casos de Teste em Projetos Ágeis Baseados no Scrum.pdf",
+      "status": "??",
+      "sha256": "f69cd99f2a68b2cc349bcb294f0873439d31c0a93a50272c3d6668740a1eee53"
+    },
+    {
+      "path": "apps/web/src/data/ramos-nfr-catalog.json",
+      "status": "??",
+      "sha256": "35237c85f5fd6dac039f4169754e85aa6b5e384a686def2e5a51e5848a88d90d"
+    },
+    {
+      "path": "apps/web/src/data/ramos-task-catalog.json",
+      "status": "??",
+      "sha256": "05a411625c639d4b084520b24734475497c684763a3382535d852aa9339fa9cf"
+    },
+    {
+      "path": "docs/plano-evolucao-us-agent.md",
+      "status": "??",
+      "sha256": "6c4ddc7c7e3577f501de4e6ff21059194874e53d0a84b71f7458c12942365b7f"
+    },
+    {
+      "path": "docs/referencias-e-fidelidade.md",
+      "status": "??",
+      "sha256": "84484288c0df778c1f385b2d2b37391ac16ce89f52d6734d5c3835f1db0ce8c7"
+    },
+    {
+      "path": "docs/workflow-evolucao-us-agent.md",
+      "status": "??",
+      "sha256": "864a80d4a9ebcbf10feebc73aa3505e0b2c6c81c518f96341eda43e477bf2e7a"
+    },
+    {
+      "path": "scripts/check-ramos-example.ts",
+      "status": "??",
+      "sha256": "c398ce1645fffdd04266419f8950333aa3d5968368442504164ed58eb6dddf1b"
+    },
+    {
+      "path": "scripts/extract-ramos-nfr-catalog.py",
+      "status": "??",
+      "sha256": "b8895068529abba567371d07e4d8e6ec2ca5c40900128deaf63ae143fe372f38"
+    },
+    {
+      "path": "scripts/extract-ramos-task-catalog.py",
+      "status": "??",
+      "sha256": "49f1eae054127aeb2c81b275366971b065c5f4992407ba4b713dd9ad757884fd"
+    },
+    {
+      "path": "scripts/seed-ramos-example.mjs",
+      "status": "??",
+      "sha256": "ec97be9c97b6ac397983f667ed1e59800ea64a7ada9f999364262c476d457708"
+    }
+  ],
+  "scientificScope": "US-Agent compatibility baseline; not evidence of equivalence to NFRec or experimental recommendation quality."
+}

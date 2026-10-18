@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "testrec-equations-demo",
+  "version": "demo.1",
+  "name": "Test cases — E21 equations, synthetic demonstration",
+  "state": "draft",
+  "attributes": [
+    { "id": "story_id", "name": "Source story ID", "valueType": { "type": "text" }, "scope": "artifact", "cardinality": "single", "required": true, "role": "context", "representation": "none" },
+    { "id": "module", "name": "Module", "valueType": { "type": "category" }, "scope": "artifact", "cardinality": "single", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "operation", "name": "Operation", "valueType": { "type": "category" }, "scope": "artifact", "cardinality": "single", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "platforms", "name": "Platforms", "valueType": { "type": "category" }, "scope": "project", "cardinality": "many", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "application_domain", "name": "Application domain", "valueType": { "type": "category" }, "scope": "project", "cardinality": "single", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "acceptance_criteria", "name": "Acceptance criterion IDs", "valueType": { "type": "category" }, "scope": "artifact", "cardinality": "many", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "nfrs", "name": "Context NFR IDs", "valueType": { "type": "category" }, "scope": "project", "cardinality": "many", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "test_case_ids", "name": "Associated test IDs", "valueType": { "type": "category" }, "scope": "artifact", "cardinality": "many", "required": false, "role": "output", "representation": "none" }
+  ],
+  "method": {
+    "id": "us_agent_e21_equations_demo_v1", "version": "1",
+    "parameters": {
+      "mode": "equation_demonstration", "reference": "E21", "scientific_reproduction": false, "sources": "synthetic_only",
+      "representation": "target_binary_presence", "k": 3, "similarity": "normalized_manhattan_eq4_2",
+      "aggregation": "sum_similarity_over_k_eq4_3", "tie": "more_test_ids_then_ascending_record_id",
+      "eligibility": "exclude_target_record_or_story", "insufficient_candidates": "block", "unknown_associations": "block",
+      "zero_similarity": "keep", "item_tie": "ascending_test_id"
+    },
+    "bindings": { "story_id": "story_id", "module": "module", "operation": "operation", "platforms": "platforms",
+      "application_domain": "application_domain", "acceptance_criteria": "acceptance_criteria", "nfrs": "nfrs", "test_case_ids": "test_case_ids" }
+  }
+}

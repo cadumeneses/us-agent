@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Edg/155.0.4283.45",
+    "revision": "@50f24ef2aa5369a074b8888b7db82d9c0652d642",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+    "jsVersion": "15.5.9.4"
+  },
+  "runId": "03198d3c-ccbd-4c54-8132-b3ff25d0b3cd",
+  "rawRunSha256": "6fd24447d0658e1e6fdce00fd6251cf7a2c2fa777ebdd8ebdfd18d6e8b3f6920",
+  "observations": {
+    "desktop": {
+      "width": 1440,
+      "documentWidth": 1425,
+      "unlabelledControls": 0
+    },
+    "mobile": {
+      "width": 390,
+      "documentWidth": 390,
+      "unlabelledControls": 0
+    }
+  },
+  "verified": [
+    "taxonomy-publication",
+    "definition-context",
+    "import-preview-publication",
+    "dynamic-input",
+    "explicit-destination",
+    "accept-reject",
+    "persisted-history",
+    "replay"
+  ],
+  "scope": "Synthetic local browser verification; not an empirical article reproduction."
+}

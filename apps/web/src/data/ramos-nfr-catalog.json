@@ -1,0 +1,232 @@
+[
+  {
+    "type": "Performance",
+    "attribute": "response_time",
+    "sentence": "In 100% of all cases, the system must have a mean response time of < 3s between event <user login> and event <first page view>. It is assumed that there are 50 concurrent users, during 120 seconds with 30-seconds of ramp-up."
+  },
+  {
+    "type": "Performance",
+    "attribute": "response_time",
+    "sentence": "In 99% of all cases, the system must have a mean response time of <= 1s between event <view dashboard> and event <time to first byte>."
+  },
+  {
+    "type": "Performance",
+    "attribute": "response_time",
+    "sentence": "In 100% of all cases, the system must have a mean response time of < 5s between event <view chart> and event <first page view>."
+  },
+  {
+    "type": "Performance",
+    "attribute": "response_time",
+    "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users."
+  },
+  {
+    "type": "Performance",
+    "attribute": "capacity",
+    "sentence": "The system must be able to export a maximum of 10000 items at a time."
+  },
+  {
+    "type": "Performance",
+    "attribute": "capacity",
+    "sentence": "The system must be able to store a minimum of 10000 user accounts."
+  },
+  {
+    "type": "Performance",
+    "attribute": "transit_delay",
+    "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page."
+  },
+  {
+    "type": "Performance",
+    "attribute": "efficiency_compliance",
+    "sentence": "The system shall be able to process a value of 1 notification per second or less, and up to and including 100 notifications in 15 seconds or less."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "availability",
+    "sentence": "The system must notify users and customers when the function they are accessing is unavailable."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "integrity",
+    "sentence": "The system must validate all data when entered based on the data validation rules. The system must use client-side data validation to improve performance for ordinary execution, i.e., no attacks. Client-side validation is faster since no request is sent to server."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "integrity",
+    "sentence": "The system must store and display a four digit year for all dates."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "integrity",
+    "sentence": "To be strict, all methods should always validate all parameters. Do not assume that data, e.g., HTTP parameters, comes from your client code. It could come from an attacker. Server-side validation is necessary, whether there is client-side validation or not. This not only improves security, but also reduces the risk of corrupt data, makes it easier to find bugs and facilitates error handling."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "integrity",
+    "sentence": "The system must identify data that did not pass edit checks, and present such data to the customer/user for correction. Edit checking will continue until all data submitted is correct."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "integrity",
+    "sentence": "For entities that are bound by effective and end dates, the system shall verify that there is no other conflicting or overlapping record as defined by business rules."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "integrity",
+    "sentence": "The system must present data submitted back to the customer for verification."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "integrity",
+    "sentence": "The system must support business rules for validation of data (formatting)."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "fault_tolerance",
+    "sentence": "If the server goes offline during data insertion, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data insertion operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "fault_tolerance",
+    "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "recoverability",
+    "sentence": "The system must provide a mechanism that allows the system to backup and recover data."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "recoverability",
+    "sentence": "The system must have the ability for point in time recovery."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "recoverability",
+    "sentence": "The system must be able to perform incremental and full system backups."
+  },
+  {
+    "type": "Reliability",
+    "attribute": "recoverability",
+    "sentence": "The system must allow for redundant data stores and application servers to support business continuity."
+  },
+  {
+    "type": "Security",
+    "attribute": "confidentiality",
+    "sentence": "Use Secure Sockets Layer (SSL) connections to encrypt information that travels between the device and the server."
+  },
+  {
+    "type": "Security",
+    "attribute": "confidentiality",
+    "sentence": "If users replace their security information, the system must send them a verification token via e-mail before allowing them to log in."
+  },
+  {
+    "type": "Security",
+    "attribute": "confidentiality",
+    "sentence": "The system must capture the user identification and timestamp when information is exported."
+  },
+  {
+    "type": "Security",
+    "attribute": "confidentiality",
+    "sentence": "The system must capture the user identification and timestamp when information is created, or deleted."
+  },
+  {
+    "type": "Security",
+    "attribute": "confidentiality",
+    "sentence": "The system must use parameterized queries, implemented with prepared statements to prohibit SQL injection. The prepared statement execution consists of two stages: prepare and execute. At the prepare stage a statement template is sent to the database server. The server performs a syntax check and initializes server internal resources for later use. During execute stage the client binds parameter values and sends them to the server. The server creates a statement from the statement template and the bound values and executes it."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "The system must dynamically display menus, pages, and functionality based on the security access of the user."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "The system must automatically disable customer and user accounts for inactivity after a designated period of time. This should be configurable by user type."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "The system must provide the capability for an administrator to reset PINs/passwords enabling users and customers to sign-on with a default, whereupon the system will require that the PIN/password be changed before granting access."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "The system must provide the capability to create permission policy levels for users who will add, edit, or delete items from a list, open a list, and view items, lists, and pages."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "Access key must be generated automatically in the entity's registry."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "The system must enable authorized users to export data using standard file formats."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "Users shall be forced to change their password the next time they log in if they have not changed it within the length of time established as “password expiration duration."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "Users must change the initially assigned login authentication information (password) immediately after the first successful login. The initial password may never be reused."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "The system must provide the capability for users see just the information they have permission to access."
+  },
+  {
+    "type": "Security",
+    "attribute": "access_control",
+    "sentence": "The system must provide the capability for an administrator to enable and disable customer and user access."
+  },
+  {
+    "type": "Security",
+    "attribute": "authentication",
+    "sentence": "The system must support a unique user-id and password of configurable length to access the system for all system users based on user role."
+  },
+  {
+    "type": "Security",
+    "attribute": "authentication",
+    "sentence": "The system must require a first time user to login to the system using a combination of a unique identifier and a shared secret."
+  },
+  {
+    "type": "Security",
+    "attribute": "authentication",
+    "sentence": "When the password has changed, the system must automatically notify a customer via e-mail."
+  },
+  {
+    "type": "Security",
+    "attribute": "authentication",
+    "sentence": "The system must expire passwords within a configurable time, to be determined by the administrator."
+  },
+  {
+    "type": "Security",
+    "attribute": "authentication",
+    "sentence": "The system must give the customer a designated number of attempts to establish a valid PIN/password, according to business rules, before requesting the customer contact support help desk."
+  },
+  {
+    "type": "Security",
+    "attribute": "authentication",
+    "sentence": "The system must allow customers and users to establish and change their own PIN/password."
+  },
+  {
+    "type": "Security",
+    "attribute": "authentication",
+    "sentence": "The system must verify newly registered users by sending them a verification token via e-mail before allowing them to log in."
+  },
+  {
+    "type": "Security",
+    "attribute": "authentication",
+    "sentence": "The password must be at least 7 characters long and contain at least: 1 Uppercase letter, 1 Lowercase letter, 1 digit, 1 special character."
+  },
+  {
+    "type": "Security",
+    "attribute": "authentication",
+    "sentence": "The system must terminate a user session after a specified configurable period of inactivity by the user. This timeout should end the session and require authenticated logon to return to session."
+  }
+]

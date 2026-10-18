@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "kind": "synthetic_equation_demonstration",
+  "source": "US-Agent synthetic profiles and associations; not E21/E26 original data or figure reconstruction.",
+  "target": {
+    "id": "demo-target",
+    "provenance": { "source": "US-Agent synthetic target" },
+    "values": { "story_id": "synthetic-target", "module": "Cadastro", "operation": "criar", "platforms": ["Web"], "application_domain": "Demo", "acceptance_criteria": ["required", "unique"], "nfrs": ["privacy", "audit"] }
+  },
+  "dataset": {
+    "id": "testrec-equations-synthetic",
+    "version": "1",
+    "source": "US-Agent synthetic demonstration; associations are authored fixtures, not inferred from the thesis",
+    "records": [
+      { "id": "candidate-a", "provenance": { "source": "US-Agent synthetic" }, "values": { "story_id": "synthetic-a", "module": "Cadastro", "operation": "criar", "platforms": ["Web"], "application_domain": "Demo", "acceptance_criteria": ["required", "unique"], "nfrs": ["privacy", "audit"], "test_case_ids": ["demo-create"] } },
+      { "id": "candidate-b", "provenance": { "source": "US-Agent synthetic" }, "values": { "story_id": "synthetic-b", "module": "Cadastro", "operation": "alterar", "platforms": ["Web"], "application_domain": "Demo", "acceptance_criteria": ["required", "unique"], "nfrs": ["privacy", "audit"], "test_case_ids": ["demo-required"] } },
+      { "id": "candidate-c", "provenance": { "source": "US-Agent synthetic" }, "values": { "story_id": "synthetic-c", "module": "Cadastro", "operation": "criar", "platforms": ["Web"], "application_domain": "Outro", "acceptance_criteria": ["required", "unique"], "nfrs": ["privacy", "audit"], "test_case_ids": ["demo-create", "demo-required"] } },
+      { "id": "candidate-d", "provenance": { "source": "US-Agent synthetic" }, "values": { "story_id": "synthetic-d", "module": "Outro", "operation": "criar", "platforms": ["Web"], "application_domain": "Demo", "acceptance_criteria": ["required", "unique"], "nfrs": ["privacy", "audit"], "test_case_ids": ["demo-create", "demo-required"] } },
+      { "id": "target-alias", "provenance": { "source": "US-Agent synthetic self-identity exclusion fixture" }, "values": { "story_id": "synthetic-target", "module": "Cadastro", "operation": "criar", "platforms": ["Web"], "application_domain": "Demo", "acceptance_criteria": ["required", "unique"], "nfrs": ["privacy", "audit"] } }
+    ]
+  },
+  "expected": {
+    "dimensions": 8,
+    "rankedIds": ["candidate-a", "candidate-c", "candidate-d", "candidate-b"],
+    "neighborIds": ["candidate-a", "candidate-c", "candidate-d"],
+    "scores": { "demo-create": 0.9166666666666666, "demo-required": 0.5833333333333334 }
+  }
+}

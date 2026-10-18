@@ -39,17 +39,25 @@ test('uses target dimensions only and keeps k=1', () => {
   assert.equal(result.items[0].alreadyLinked, false);
 });
 
-test('excludes prototypes, self, other versions, pending classifications and other operations', () => {
+test('excludes prototypes, self, pending classifications and other operations', () => {
   const target = profile('1');
   const prototype = profile('2'); prototype.projectProfile.objective = 'prototype';
   const self = profile('3'); self.storyId = '1';
-  const version = profile('4'); version.taxonomyVersion = 'another-version';
   const pending = profile('5'); pending.reviewStatus = 'pending_review';
   const operation = profile('6'); operation.labels[0].operation = 'Insert data';
-  const result = recommendNfr(target, [prototype, self, version, pending, operation], 0);
+  const result = recommendNfr(target, [prototype, self, pending, operation], 0);
   assert.equal(result.status, 'no_candidates');
-  assert.equal(result.excludedCount, 5);
+  assert.equal(result.excludedCount, 4);
   assert.deepEqual(result.items, []);
+});
+
+test('recommends across taxonomy versions and when the version is absent', () => {
+  const target = profile('1'); target.taxonomyVersion = '';
+  const neighbor = profile('2'); neighbor.taxonomyVersion = 'another-version';
+  const result = recommendNfr(target, [neighbor], 0);
+  assert.equal(result.status, 'completed');
+  assert.equal(result.neighbor?.classificationId, '2');
+  assert.equal(result.items.length, 1);
 });
 
 test('does not replace the nearest neighbor when it has no eligible NFR', () => {
@@ -90,7 +98,7 @@ test('numeric tie-breaking is deterministic and independent of input order', () 
   for (const history of [[profile('10'), profile('2')], [profile('2'), profile('10')]]) {
     const result = recommendNfr(profile('1'), history, 0);
     assert.equal(result.neighbor!.classificationId, '2');
-    assert.match(result.messages.join(' '), /Tie/);
+    assert.match(result.messages.join(' '), /Empate/);
   }
 });
 

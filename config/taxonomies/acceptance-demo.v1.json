@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "acceptance-demo",
+  "version": "1",
+  "name": "Critérios sintéticos",
+  "kind": "tree",
+  "selection": "leaf",
+  "source": "Exemplo sintético de validação de árvores; não é a taxonomia nem o catálogo de Ednaldo.",
+  "nodes": [
+    { "id": "criterion-group", "name": "Grupo demonstrativo", "description": "Hierarquia sintética, sem atribuição a Ednaldo", "parentId": null },
+    { "id": "example-one", "name": "Critério demonstrativo", "description": "Não pertence ao catálogo de Ednaldo", "parentId": "criterion-group" }
+  ]
+}

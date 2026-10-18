@@ -1,0 +1,919 @@
+[
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Criar campos Login e Senha"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Armazenar dados temporários (Função \"Remember me\")"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Criar serviço Auth (Server)"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Criar serviço Auth (Client)"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Declarar o provider"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Integrar back com front"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Criptografar senha no banco"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Configurar API"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Fazer logout"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Verificação de senha expirada"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Implementar timeout de sessão"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Implementar Captcha"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with username and password",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com usuário e senha",
+    "title": "Fazer o roteamento da URL"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with OAuth",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com OAuth",
+    "title": "Criar serviço"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with OAuth",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com OAuth",
+    "title": "Fazer roteamento de URL"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Login with OAuth",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Fazer login com OAuth",
+    "title": "Consumir API externa"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Password recovery",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Recuperar senha",
+    "title": "Alterar tela de login"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Password recovery",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Recuperar senha",
+    "title": "Validar e-mail e senha informado"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Password recovery",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Recuperar senha",
+    "title": "Criar rota de recuperação de senha"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Password recovery",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Recuperar senha",
+    "title": "Gerar senha padrão"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Password recovery",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Recuperar senha",
+    "title": "Criar serviço de notificação"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Password recovery",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Recuperar senha",
+    "title": "Criar tela para cadastro de nova senha"
+  },
+  {
+    "module": "Authentication",
+    "operation": "First login",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Acessar pela primeira vez o sistema",
+    "title": "Criar tela para primeiro acesso"
+  },
+  {
+    "module": "Authentication",
+    "operation": "First login",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Acessar pela primeira vez o sistema",
+    "title": "Comparar senhas informadas"
+  },
+  {
+    "module": "Authentication",
+    "operation": "First login",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Acessar pela primeira vez o sistema",
+    "title": "Validar e-mail e senha informado"
+  },
+  {
+    "module": "Authentication",
+    "operation": "First login",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Acessar pela primeira vez o sistema",
+    "title": "Integrar back com front"
+  },
+  {
+    "module": "Authentication",
+    "operation": "First login",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Acessar pela primeira vez o sistema",
+    "title": "Criar rota de cadastro"
+  },
+  {
+    "module": "Authentication",
+    "operation": "First login",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Acessar pela primeira vez o sistema",
+    "title": "Encriptar senha do novo usuário"
+  },
+  {
+    "module": "Authentication",
+    "operation": "First login",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Acessar pela primeira vez o sistema",
+    "title": "Persistir no banco os dados de acesso"
+  },
+  {
+    "module": "Authentication",
+    "operation": "First login",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Acessar pela primeira vez o sistema",
+    "title": "Fazer o roteamento da URL"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Validate user permissions",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Validar Permissão do Usuário",
+    "title": "Adicionar atributo de proteção no provider"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Validate user permissions",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Validar Permissão do Usuário",
+    "title": "Recuperar dados do usuário logado"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Validate user permissions",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Validar Permissão do Usuário",
+    "title": "Validar permissão do usuário na aplicação"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Validate user permissions",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Validar Permissão do Usuário",
+    "title": "Criar middlewares para validação do token"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Validate user permissions",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Validar Permissão do Usuário",
+    "title": "Bloquear rotas"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Update profile",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Atualizar perfil",
+    "title": "Criar tela para atualizar perfil"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Update profile",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Atualizar perfil",
+    "title": "Integrar back com front"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Update profile",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Atualizar perfil",
+    "title": "Criar serviço user"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Update profile",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Atualizar perfil",
+    "title": "Declarar o provider"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Update profile",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Atualizar perfil",
+    "title": "Validar senha com confirmar senha"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Update profile",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Atualizar perfil",
+    "title": "Criar rota de cadastro"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Update profile",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Atualizar perfil",
+    "title": "Persistir no banco os dados de acesso"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Create account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Criar conta",
+    "title": "Criar tela para nova conta"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Create account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Criar conta",
+    "title": "Criar entidade no banco de dados"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Create account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Criar conta",
+    "title": "Integrar back com front"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Create account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Criar conta",
+    "title": "Atualizar serviço para nova conta"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Create account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Criar conta",
+    "title": "Declarar o provider"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Create account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Criar conta",
+    "title": "Criar rota de cadastro"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Create account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Criar conta",
+    "title": "Encriptar senha do usuário"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Create account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Criar conta",
+    "title": "Persistir no banco os dados de acesso"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Remove account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Remover conta",
+    "title": "Integrar back com front"
+  },
+  {
+    "module": "Authentication",
+    "operation": "Remove account",
+    "sourceModule": "Autenticação",
+    "sourceOperation": "Remover conta",
+    "title": "Criar serviço"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Criar tela listagem"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Criar paginação para listagem"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Criar ordenação para listagem"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Criar filtro para listagem"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Criar Gráfico"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Criar tela para visualizar detalhes"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Alterar menu do sistema"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Expandir informações de item da listagem"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Fazer chamada para tela de listagem"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Criar serviço de listagem"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Criar rotas para listagem"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Consumir serviço para listagem"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Criar tela para visualizar detalhes"
+  },
+  {
+    "module": "Registry",
+    "operation": "Retrieve data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Recuperação de Dados",
+    "title": "Recuperar dados do banco de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Update data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Atualizar dados",
+    "title": "Criar tela alteração"
+  },
+  {
+    "module": "Registry",
+    "operation": "Update data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Atualizar dados",
+    "title": "Fazer validação de dados no cliente."
+  },
+  {
+    "module": "Registry",
+    "operation": "Update data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Atualizar dados",
+    "title": "Fazer chamada para tela de alteração"
+  },
+  {
+    "module": "Registry",
+    "operation": "Update data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Atualizar dados",
+    "title": "Criar serviço alteração"
+  },
+  {
+    "module": "Registry",
+    "operation": "Update data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Atualizar dados",
+    "title": "Validar Dados no Servidor"
+  },
+  {
+    "module": "Registry",
+    "operation": "Update data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Atualizar dados",
+    "title": "Consumir serviço para alteração"
+  },
+  {
+    "module": "Registry",
+    "operation": "Update data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Atualizar dados",
+    "title": "Associar entidades no banco de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Update data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Atualizar dados",
+    "title": "Atualizar dados banco de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Insert data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Inserir dados",
+    "title": "Criar tela inserção"
+  },
+  {
+    "module": "Registry",
+    "operation": "Insert data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Inserir dados",
+    "title": "Criar entidade no banco de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Insert data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Inserir dados",
+    "title": "Criar rota de inserção de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Insert data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Inserir dados",
+    "title": "Fazer validação de dados no cliente"
+  },
+  {
+    "module": "Registry",
+    "operation": "Insert data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Inserir dados",
+    "title": "Fazer chamada para tela de inserção"
+  },
+  {
+    "module": "Registry",
+    "operation": "Insert data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Inserir dados",
+    "title": "Criar método de inserção"
+  },
+  {
+    "module": "Registry",
+    "operation": "Insert data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Inserir dados",
+    "title": "Validar dados inserção no servidor"
+  },
+  {
+    "module": "Registry",
+    "operation": "Insert data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Inserir dados",
+    "title": "Consumir serviço para inserção"
+  },
+  {
+    "module": "Registry",
+    "operation": "Insert data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Inserir dados",
+    "title": "Persistir dados banco de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Modify input behavior",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Modificar inserção de dados",
+    "title": "Modificar tela inserção"
+  },
+  {
+    "module": "Registry",
+    "operation": "Modify input behavior",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Modificar inserção de dados",
+    "title": "Modificar entidade no banco de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Modify input behavior",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Modificar inserção de dados",
+    "title": "Modificar rota de inserção de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Modify input behavior",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Modificar inserção de dados",
+    "title": "Modificar validação de dados no cliente"
+  },
+  {
+    "module": "Registry",
+    "operation": "Modify input behavior",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Modificar inserção de dados",
+    "title": "Modificar chamada para tela de inserção"
+  },
+  {
+    "module": "Registry",
+    "operation": "Modify input behavior",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Modificar inserção de dados",
+    "title": "Modificar método de inserção"
+  },
+  {
+    "module": "Registry",
+    "operation": "Modify input behavior",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Modificar inserção de dados",
+    "title": "Modificar validação dados inserção no servidor"
+  },
+  {
+    "module": "Registry",
+    "operation": "Modify input behavior",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Modificar inserção de dados",
+    "title": "Consumir serviço para inserção"
+  },
+  {
+    "module": "Registry",
+    "operation": "Modify input behavior",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Modificar inserção de dados",
+    "title": "Persistir dados banco de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Remove data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Remover dados",
+    "title": "Alterar tela para exclusão"
+  },
+  {
+    "module": "Registry",
+    "operation": "Remove data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Remover dados",
+    "title": "Criar serviço exclusão"
+  },
+  {
+    "module": "Registry",
+    "operation": "Remove data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Remover dados",
+    "title": "Criar rotas para remoção de dados"
+  },
+  {
+    "module": "Registry",
+    "operation": "Remove data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Remover dados",
+    "title": "Consumir serviço para exclusão"
+  },
+  {
+    "module": "Registry",
+    "operation": "Remove data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Remover dados",
+    "title": "Criar modal de confirmação e toast de feedback"
+  },
+  {
+    "module": "Registry",
+    "operation": "Remove data",
+    "sourceModule": "Cadastro",
+    "sourceOperation": "Remover dados",
+    "title": "Remover dados banco de dados"
+  },
+  {
+    "module": "Management",
+    "operation": "View dashboard",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Visualizar painel",
+    "title": "Criar tela do painel"
+  },
+  {
+    "module": "Management",
+    "operation": "View dashboard",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Visualizar painel",
+    "title": "Declarar no provider"
+  },
+  {
+    "module": "Management",
+    "operation": "View dashboard",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Visualizar painel",
+    "title": "Adicionar verificação de autorização"
+  },
+  {
+    "module": "Management",
+    "operation": "View dashboard",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Visualizar painel",
+    "title": "Adicionar menus no painel"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to PDF",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em PDF",
+    "title": "Adicionar botão para exportação do relatório"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to PDF",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em PDF",
+    "title": "Criar Relatório"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to PDF",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em PDF",
+    "title": "Modificar relatório"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to PDF",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em PDF",
+    "title": "Criar dialog para pegar o titulo do PDF"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to PDF",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em PDF",
+    "title": "Adicionar campo de titulo no dialog"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to PDF",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em PDF",
+    "title": "Integrar back com front"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to PDF",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em PDF",
+    "title": "Criar serviço para exportação de relatórios"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to PDF",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em PDF",
+    "title": "Exportar Gráfico"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to PDF",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em PDF",
+    "title": "Implementar metodo para exportação de relatório em PDF"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to XLS",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em XLS",
+    "title": "Adicionar botão para exportação do relatório"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to XLS",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em XLS",
+    "title": "Criar dialog para pegar o título do relatório"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to XLS",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em XLS",
+    "title": "Adicionar campo de titulo no dialog"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to XLS",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em XLS",
+    "title": "Integrar back com front"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to XLS",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em XLS",
+    "title": "Criar serviço para exportação de relatórios"
+  },
+  {
+    "module": "Management",
+    "operation": "Export report to XLS",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Exportar relatório em XLS",
+    "title": "Implementar método para exportação de relatório"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify by email",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via E-mail",
+    "title": "Criar serviço de envio de e-mail"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify by email",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via E-mail",
+    "title": "Implementar metodo para envio do e-mail"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify by email",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via E-mail",
+    "title": "Agendar notificação"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify by email",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via E-mail",
+    "title": "Recuperar dados para envio do e-mail"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify by email",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via E-mail",
+    "title": "Consumir API externa"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify by email",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via E-mail",
+    "title": "Criar Layout do E-mail"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify by email",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via E-mail",
+    "title": "Recuperar dados referentes ao e-mail"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify via app",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via aplicação",
+    "title": "Adicionar no painel uma aba de notificações"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify via app",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via aplicação",
+    "title": "Criar view do card de notificação"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify via app",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via aplicação",
+    "title": "Criar serviço de notificação via Firebase no backend"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify via app",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via aplicação",
+    "title": "Recuperar dados do usuário que receberá a notificação"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify via app",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via aplicação",
+    "title": "Recuperar dados da notificação"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify via app",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via aplicação",
+    "title": "Criar serviço para conexão com firebase no frontend"
+  },
+  {
+    "module": "Management",
+    "operation": "Notify via app",
+    "sourceModule": "Gerencial",
+    "sourceOperation": "Notificar via aplicação",
+    "title": "Atualizar aba notificações com os novos cards de notificação"
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "kind": "synthetic_annotation",
+  "source": "Hand-declared software-check fixtures. These are not human judgments of real projects, author data or ground truth derived from engine output.",
+  "cases": [
+    {
+      "id": "synthetic-one-hit",
+      "candidateId": "f4",
+      "invalidInput": false,
+      "relevant": [{ "type": "Performance", "attribute": "response_time", "sentence": "Synthetic sentence for checking item retrieval." }]
+    },
+    {
+      "id": "synthetic-no-items",
+      "candidateId": "noItems",
+      "invalidInput": false,
+      "relevant": [{ "type": "Performance", "attribute": "response_time", "sentence": "Synthetic sentence for checking item retrieval." }]
+    },
+    {
+      "id": "synthetic-no-reference",
+      "candidateId": "f4",
+      "invalidInput": false,
+      "relevant": []
+    },
+    {
+      "id": "synthetic-mismatch",
+      "candidateId": "f4",
+      "invalidInput": false,
+      "relevant": [{ "type": "Security", "attribute": "access_control", "sentence": "Synthetic relevance item absent from the candidate." }]
+    },
+    {
+      "id": "synthetic-invalid-input",
+      "candidateId": "f4",
+      "invalidInput": true,
+      "relevant": [{ "type": "Performance", "attribute": "response_time", "sentence": "Synthetic sentence for checking item retrieval." }]
+    }
+  ]
+}

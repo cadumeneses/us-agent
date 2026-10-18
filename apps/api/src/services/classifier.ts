@@ -1,4 +1,5 @@
 import type { Taxonomy } from '../domain/models.js';
+import { createClassificationProvenance } from './classification-provenance.js';
 
 const rules: Array<[RegExp, string, string]> = [
   [/password|senha|reset/, 'Authentication', 'Password recovery'],
@@ -19,9 +20,10 @@ export function classifyPreview(text: string, taxonomy: Taxonomy) {
     pattern.test(text.toLowerCase()) && taxonomy.modules[module]?.includes(operation)
   );
 
-  return {
+  const result = {
     module: match?.[1] ?? 'n/a',
     operation: match?.[2] ?? 'n/a',
+    labels: [{ module: match?.[1] ?? 'n/a', operation: match?.[2] ?? 'n/a' }],
     confidence: match ? 0.86 : 0.35,
     needsReview: !match,
     finalReason: match
@@ -37,6 +39,12 @@ export function classifyPreview(text: string, taxonomy: Taxonomy) {
       evidence: [text]
     }]
   };
+  return { ...result, provenance: createClassificationProvenance(text, taxonomy, {
+    engine: 'web_preview_rules_v1', policyVersion: 'web_preview_rules_v1', promptVersion: null, prompt: null,
+    decision: { labels: result.labels, confidence: result.confidence, needsReview: result.needsReview,
+      consensusRatio: null, uncertainty: null, reviewReasons: match ? [] : ['no_rule_match'],
+      reason: result.finalReason, providerHealth: { total: 0, successful: 0, failed: 0 } }
+  }) };
 }
 
 export function parseImportedStories(content: string): string[] {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { BrainCircuit, ClipboardCheck, FileCheck2, FolderKanban, FolderTree, LayoutDashboard, Menu, Sparkles, X } from 'lucide-react';
+import { BrainCircuit, ClipboardCheck, FileCheck2, FolderKanban, FolderTree, LayoutDashboard, Menu, Settings2, Sparkles, X } from 'lucide-react';
 import { api } from '../services/api';
 import type { ApplicationContext } from '../types/models';
 import { WorkspaceProvider } from '../services/workspace';
@@ -9,6 +9,7 @@ const navigation = [
   ['My Projects', '/projects', FolderKanban],
   ['Classify Stories', '/classify', Sparkles],
   ['NFR Recommender', '/recommendations', ClipboardCheck],
+  ['Published datasets', '/configured-recommendations', Settings2],
   ['Review Queue', '/review', FileCheck2],
   ['Taxonomy', '/taxonomy', FolderTree],
   ['Dashboard', '/dashboard', LayoutDashboard]

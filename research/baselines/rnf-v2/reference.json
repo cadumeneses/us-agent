@@ -1,0 +1,1117 @@
+{
+  "schemaVersion": 1,
+  "kind": "reconstructed_demonstration",
+  "method": "ramos_2019_manhattan_k1_v2",
+  "notes": [
+    "Profiles fa/f4/f5 reconstruct the nine dimensions of table 5.7 in Ramos (2019).",
+    "Story text, NFR sentences, identifiers and edge cases are synthetic; this is not the original experimental dataset.",
+    "Expected results were captured from the local engine before extraction; verification never rewrites them."
+  ],
+  "profiles": {
+    "fa": {
+      "classificationId": "1",
+      "storyId": "1",
+      "project": "[DEMO] 1",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": []
+    },
+    "f4": {
+      "classificationId": "4",
+      "storyId": "4",
+      "project": "[DEMO] 4",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ]
+    },
+    "f5": {
+      "classificationId": "5",
+      "storyId": "5",
+      "project": "[DEMO] 5",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Layers"
+        ],
+        "applicationDomains": [
+          "Information retrieval"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "Python"
+          ],
+          "frameworks": [
+            "Django"
+          ],
+          "apis": [
+            "Firebase"
+          ],
+          "dataPersistence": [
+            "MySQL"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ]
+    },
+    "noItems": {
+      "classificationId": "2",
+      "storyId": "2",
+      "project": "[DEMO] 2",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": []
+    },
+    "prototype": {
+      "classificationId": "3",
+      "storyId": "3",
+      "project": "[DEMO] 3",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "prototype",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ]
+    },
+    "pending": {
+      "classificationId": "6",
+      "storyId": "6",
+      "project": "[DEMO] 6",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "pending_review",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ]
+    },
+    "tie10": {
+      "classificationId": "10",
+      "storyId": "10",
+      "project": "[DEMO] 10",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ]
+    },
+    "crossVersion": {
+      "classificationId": "7",
+      "storyId": "7",
+      "project": "[DEMO] 7",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v2",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ]
+    },
+    "blocked": {
+      "classificationId": "8",
+      "storyId": "8",
+      "project": "[DEMO] 8",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ]
+    },
+    "multi": {
+      "classificationId": "9",
+      "storyId": "9",
+      "project": "[DEMO] 9",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        {
+          "module": "Authentication",
+          "operation": "Login"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ]
+    },
+    "login": {
+      "classificationId": "11",
+      "storyId": "11",
+      "project": "[DEMO] 11",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "taxonomyVersion": "wis-v1",
+      "reviewStatus": "reviewed",
+      "labels": [
+        {
+          "module": "Authentication",
+          "operation": "Login"
+        }
+      ],
+      "projectProfile": {
+        "taxonomyVersion": "wis-v1",
+        "platforms": [
+          "Web"
+        ],
+        "architectures": [
+          "Client-server"
+        ],
+        "applicationDomains": [
+          "Education"
+        ],
+        "objective": "product",
+        "technologies": {
+          "languages": [
+            "TypeScript"
+          ],
+          "frameworks": [
+            "Angular"
+          ],
+          "apis": [
+            "Mongoose"
+          ],
+          "dataPersistence": [
+            "MongoDB"
+          ]
+        }
+      },
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "table-5-7-nearest",
+      "targetId": "fa",
+      "historyIds": [
+        "f4",
+        "f5"
+      ],
+      "labelIndex": 0,
+      "expected": {
+        "method": "ramos_2019_manhattan_k1_v2",
+        "k": 1,
+        "status": "completed",
+        "messages": [],
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "dimensions": [
+          "api:Mongoose",
+          "applicationDomain:Education",
+          "architecture:Client-server",
+          "framework:Angular",
+          "language:TypeScript",
+          "persistence:MongoDB",
+          "platform:Web",
+          "task:t6",
+          "task:t7"
+        ],
+        "eligibleCount": 2,
+        "excludedCount": 0,
+        "neighbor": {
+          "classificationId": "4",
+          "storyId": "4",
+          "project": "[DEMO] 4",
+          "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+          "similarity": 1,
+          "vector": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "matched": [
+            "api:Mongoose",
+            "applicationDomain:Education",
+            "architecture:Client-server",
+            "framework:Angular",
+            "language:TypeScript",
+            "persistence:MongoDB",
+            "platform:Web",
+            "task:t6",
+            "task:t7"
+          ],
+          "missing": []
+        },
+        "items": [
+          {
+            "type": "Performance",
+            "attribute": "response_time",
+            "sentence": "Synthetic sentence for checking item retrieval.",
+            "key": "ee667bae9d2b7b7e01428462213a0e99d272828664749b1549e5bc12568a3809",
+            "score": 1,
+            "alreadyLinked": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "table-5-7-distance-six",
+      "targetId": "fa",
+      "historyIds": [
+        "f5"
+      ],
+      "labelIndex": 0,
+      "expected": {
+        "method": "ramos_2019_manhattan_k1_v2",
+        "k": 1,
+        "status": "completed",
+        "messages": [],
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "dimensions": [
+          "api:Mongoose",
+          "applicationDomain:Education",
+          "architecture:Client-server",
+          "framework:Angular",
+          "language:TypeScript",
+          "persistence:MongoDB",
+          "platform:Web",
+          "task:t6",
+          "task:t7"
+        ],
+        "eligibleCount": 1,
+        "excludedCount": 0,
+        "neighbor": {
+          "classificationId": "5",
+          "storyId": "5",
+          "project": "[DEMO] 5",
+          "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+          "similarity": 0.33333333333333337,
+          "vector": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "matched": [
+            "platform:Web",
+            "task:t6",
+            "task:t7"
+          ],
+          "missing": [
+            "api:Mongoose",
+            "applicationDomain:Education",
+            "architecture:Client-server",
+            "framework:Angular",
+            "language:TypeScript",
+            "persistence:MongoDB"
+          ]
+        },
+        "items": [
+          {
+            "type": "Performance",
+            "attribute": "response_time",
+            "sentence": "Synthetic sentence for checking item retrieval.",
+            "key": "ee667bae9d2b7b7e01428462213a0e99d272828664749b1549e5bc12568a3809",
+            "score": 0.33333333333333337,
+            "alreadyLinked": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "nearest-without-items",
+      "targetId": "fa",
+      "historyIds": [
+        "noItems",
+        "f5"
+      ],
+      "labelIndex": 0,
+      "expected": {
+        "method": "ramos_2019_manhattan_k1_v2",
+        "k": 1,
+        "status": "no_items",
+        "messages": [
+          "O vizinho mais próximo não possui RNFs no recorte de Felipe. O motor mantém k=1 e não substitui esse vizinho por outro."
+        ],
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "dimensions": [
+          "api:Mongoose",
+          "applicationDomain:Education",
+          "architecture:Client-server",
+          "framework:Angular",
+          "language:TypeScript",
+          "persistence:MongoDB",
+          "platform:Web",
+          "task:t6",
+          "task:t7"
+        ],
+        "eligibleCount": 2,
+        "excludedCount": 0,
+        "neighbor": {
+          "classificationId": "2",
+          "storyId": "2",
+          "project": "[DEMO] 2",
+          "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+          "similarity": 1,
+          "vector": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "matched": [
+            "api:Mongoose",
+            "applicationDomain:Education",
+            "architecture:Client-server",
+            "framework:Angular",
+            "language:TypeScript",
+            "persistence:MongoDB",
+            "platform:Web",
+            "task:t6",
+            "task:t7"
+          ],
+          "missing": []
+        },
+        "items": []
+      }
+    },
+    {
+      "id": "excluded-candidates",
+      "targetId": "fa",
+      "historyIds": [
+        "fa",
+        "prototype",
+        "pending"
+      ],
+      "labelIndex": 0,
+      "expected": {
+        "method": "ramos_2019_manhattan_k1_v2",
+        "k": 1,
+        "status": "no_candidates",
+        "messages": [
+          "Nenhuma US histórica compatível: verifique perfis, classificação aceita e módulo/operação. Projetos de protótipo e a própria US são excluídos."
+        ],
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "dimensions": [
+          "api:Mongoose",
+          "applicationDomain:Education",
+          "architecture:Client-server",
+          "framework:Angular",
+          "language:TypeScript",
+          "persistence:MongoDB",
+          "platform:Web",
+          "task:t6",
+          "task:t7"
+        ],
+        "eligibleCount": 0,
+        "excludedCount": 3,
+        "neighbor": null,
+        "items": []
+      }
+    },
+    {
+      "id": "numeric-tie",
+      "targetId": "fa",
+      "historyIds": [
+        "tie10",
+        "f4"
+      ],
+      "labelIndex": 0,
+      "expected": {
+        "method": "ramos_2019_manhattan_k1_v2",
+        "k": 1,
+        "status": "completed",
+        "messages": [
+          "Empate: selecionada a classificação de menor identificador. Política determinística do US-Agent; k permanece igual a 1."
+        ],
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "dimensions": [
+          "api:Mongoose",
+          "applicationDomain:Education",
+          "architecture:Client-server",
+          "framework:Angular",
+          "language:TypeScript",
+          "persistence:MongoDB",
+          "platform:Web",
+          "task:t6",
+          "task:t7"
+        ],
+        "eligibleCount": 2,
+        "excludedCount": 0,
+        "neighbor": {
+          "classificationId": "4",
+          "storyId": "4",
+          "project": "[DEMO] 4",
+          "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+          "similarity": 1,
+          "vector": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "matched": [
+            "api:Mongoose",
+            "applicationDomain:Education",
+            "architecture:Client-server",
+            "framework:Angular",
+            "language:TypeScript",
+            "persistence:MongoDB",
+            "platform:Web",
+            "task:t6",
+            "task:t7"
+          ],
+          "missing": []
+        },
+        "items": [
+          {
+            "type": "Performance",
+            "attribute": "response_time",
+            "sentence": "Synthetic sentence for checking item retrieval.",
+            "key": "ee667bae9d2b7b7e01428462213a0e99d272828664749b1549e5bc12568a3809",
+            "score": 1,
+            "alreadyLinked": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "taxonomy-version-compatibility",
+      "targetId": "fa",
+      "historyIds": [
+        "crossVersion"
+      ],
+      "labelIndex": 0,
+      "expected": {
+        "method": "ramos_2019_manhattan_k1_v2",
+        "k": 1,
+        "status": "completed",
+        "messages": [],
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "dimensions": [
+          "api:Mongoose",
+          "applicationDomain:Education",
+          "architecture:Client-server",
+          "framework:Angular",
+          "language:TypeScript",
+          "persistence:MongoDB",
+          "platform:Web",
+          "task:t6",
+          "task:t7"
+        ],
+        "eligibleCount": 1,
+        "excludedCount": 0,
+        "neighbor": {
+          "classificationId": "7",
+          "storyId": "7",
+          "project": "[DEMO] 7",
+          "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+          "similarity": 1,
+          "vector": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "matched": [
+            "api:Mongoose",
+            "applicationDomain:Education",
+            "architecture:Client-server",
+            "framework:Angular",
+            "language:TypeScript",
+            "persistence:MongoDB",
+            "platform:Web",
+            "task:t6",
+            "task:t7"
+          ],
+          "missing": []
+        },
+        "items": [
+          {
+            "type": "Performance",
+            "attribute": "response_time",
+            "sentence": "Synthetic sentence for checking item retrieval.",
+            "key": "ee667bae9d2b7b7e01428462213a0e99d272828664749b1549e5bc12568a3809",
+            "score": 1,
+            "alreadyLinked": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "missing-profile-field",
+      "targetId": "blocked",
+      "historyIds": [
+        "f4"
+      ],
+      "labelIndex": 0,
+      "expected": {
+        "method": "ramos_2019_manhattan_k1_v2",
+        "k": 1,
+        "status": "blocked",
+        "messages": [
+          "Informe a plataforma do projeto."
+        ],
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "dimensions": [
+          "api:Mongoose",
+          "applicationDomain:Education",
+          "architecture:Client-server",
+          "framework:Angular",
+          "language:TypeScript",
+          "persistence:MongoDB",
+          "task:t6",
+          "task:t7"
+        ],
+        "eligibleCount": 0,
+        "excludedCount": 0,
+        "neighbor": null,
+        "items": []
+      }
+    },
+    {
+      "id": "multi-label-second-pair",
+      "targetId": "multi",
+      "historyIds": [
+        "login",
+        "f4"
+      ],
+      "labelIndex": 1,
+      "expected": {
+        "method": "ramos_2019_manhattan_k1_v2",
+        "k": 1,
+        "status": "completed",
+        "messages": [],
+        "label": {
+          "module": "Authentication",
+          "operation": "Login"
+        },
+        "dimensions": [
+          "api:Mongoose",
+          "applicationDomain:Education",
+          "architecture:Client-server",
+          "framework:Angular",
+          "language:TypeScript",
+          "persistence:MongoDB",
+          "platform:Web",
+          "task:t6",
+          "task:t7"
+        ],
+        "eligibleCount": 1,
+        "excludedCount": 1,
+        "neighbor": {
+          "classificationId": "11",
+          "storyId": "11",
+          "project": "[DEMO] 11",
+          "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+          "similarity": 1,
+          "vector": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "matched": [
+            "api:Mongoose",
+            "applicationDomain:Education",
+            "architecture:Client-server",
+            "framework:Angular",
+            "language:TypeScript",
+            "persistence:MongoDB",
+            "platform:Web",
+            "task:t6",
+            "task:t7"
+          ],
+          "missing": []
+        },
+        "items": [
+          {
+            "type": "Performance",
+            "attribute": "response_time",
+            "sentence": "Synthetic sentence for checking item retrieval.",
+            "key": "ee667bae9d2b7b7e01428462213a0e99d272828664749b1549e5bc12568a3809",
+            "score": 1,
+            "alreadyLinked": true
+          }
+        ]
+      }
+    }
+  ]
+}

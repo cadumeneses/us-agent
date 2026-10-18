@@ -62,7 +62,7 @@ export const api = {
     body.append('file', file);
     return request<{ filename: string; stories: string[] }>('/api/import', { method: 'POST', body });
   },
-  review: (id: string, input: { action: 'approve'; module: string; operation: string; notes?: string } | {
+  review: (id: string, input: { action: 'approve'; labels: Array<{ module: string; operation: string }>; notes?: string } | {
     action: 'taxonomy_gap';
     notes?: string;
   }) =>

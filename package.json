@@ -7,10 +7,29 @@
     "dev": "concurrently -n API,WEB -c cyan,blue \"npm run dev -w @us-agent/api\" \"npm run dev -w @us-agent/web\"",
     "build": "npm run build -w @us-agent/api && npm run build -w @us-agent/web",
     "test": "npm run test -w @us-agent/api && npm run test -w @us-agent/web",
+    "check:nfr-baseline": "tsx scripts/check-nfr-baseline.ts",
+    "check:scientific-index": "node scripts/check-scientific-index.mjs",
+    "evaluate:rnf": "tsx scripts/evaluate-rnf.ts",
+    "check:rnf-evaluation": "node scripts/check-rnf-evaluation.mjs",
+    "check:configured-nfr": "tsx scripts/check-configured-nfr.ts",
+    "check:testrec-contract": "tsx scripts/check-testrec-contract.ts",
+    "check:testrec-equations": "tsx scripts/check-testrec-equations.ts",
+    "check:testrec-runs": "node scripts/check-testrec-runs.mjs",
+    "check:test-case-catalogs": "node scripts/check-test-case-catalogs.mjs",
+    "check:recommender-taxonomies": "node scripts/check-recommender-taxonomies.mjs",
+    "check:recommender-definitions": "node scripts/check-recommender-definitions.mjs",
+    "check:recommender-datasets": "node scripts/check-recommender-datasets.mjs",
+    "check:recommendation-runs": "node scripts/check-recommendation-runs.mjs",
+    "check:recommender-browser": "node scripts/check-recommender-browser.mjs",
+    "check:classification-workflow": "node scripts/check-classification-workflow.mjs",
+    "check:python-api": "python -B -m unittest discover -s tests -p test_api_credentials.py",
+    "check:dependencies": "npm audit --audit-level=low",
     "db:up": "docker compose up -d postgres",
     "db:down": "docker compose down",
     "db:migrate": "npm run db:migrate -w @us-agent/api",
-    "db:import": "npm run db:import -w @us-agent/api"
+    "db:import": "npm run db:import -w @us-agent/api",
+    "db:seed:ramos": "node --env-file=.env scripts/seed-ramos-example.mjs",
+    "db:check:ramos": "tsx --env-file=.env scripts/check-ramos-example.ts"
   },
-  "devDependencies": { "concurrently": "^9.2.0" }
+  "devDependencies": { "concurrently": "^9.2.5" }
 }

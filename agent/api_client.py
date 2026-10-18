@@ -21,6 +21,7 @@ class AgentApiClient:
     def load_taxonomy(self) -> tuple[str, dict[str, list[str]], dict[str, str]]:
         response = self.session.get(
             f"{self.base_url}/taxonomy",
+            headers=self._headers(),
             timeout=self.timeout_seconds,
         )
         response.raise_for_status()

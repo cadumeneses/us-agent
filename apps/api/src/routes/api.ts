@@ -1,18 +1,23 @@
-import { timingSafeEqual } from 'node:crypto';
 import { nfrRouter } from './nfr.js';
-import { Router, type Request, type Response } from 'express';
+import { Router } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
 import { addTaxonomyDomain, addTaxonomyOperation, applyFallbackSuggestion, assignStoriesToSprint, createProject, createProjectSprint, createTaxonomyVersion, loadProjects, loadProjectSprints, loadReviewContext, loadStories, loadTaxonomy, updateProjectSprintStatus } from '../repositories/data-repository.js';
 import { classifyPreview, parseImportedStories } from '../services/classifier.js';
-import { classifyWithAi } from '../services/ai-classifier.js';
+import { classifyWithAi, ClassificationConfigurationError } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
 import { query, withTransaction } from '../database/pool.js';
 import { isExecutionModeActive, loadApplicationContext } from '../repositories/application-repository.js';
-import { applySavedTaxonomyFeedback, savePreviewClassifications, saveReview, saveTaxonomyFeedback } from '../services/classification-store.js';
+import { applySavedTaxonomyFeedback, savePreviewClassifications, saveReview, saveTaxonomyFeedback, ReviewValidationError } from '../services/classification-store.js';
 import { importRecord, type HistoricalResult } from '../database/import-jsonl.js';
 import { loadStoryDetails, saveStoryDetails } from '../services/story-details.js';
 import { technologiesSchema, projectResearchProfileSchema, loadProjectResearchProfile, saveProjectResearchProfile } from '../services/research-inputs.js';
+import { isAuthorizedInternalRequest } from './internal-authorization.js';
+import { recommenderTaxonomiesRouter } from './recommender-taxonomies.js';
+import { recommenderDefinitionsRouter } from './recommender-definitions.js';
+import { recommenderDatasetsRouter } from './recommender-datasets.js';
+import { recommendationRunsRouter } from './recommendation-runs.js';
+import { testCaseCatalogsRouter } from './test-case-catalogs.js';
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -26,8 +31,6 @@ const classifyRequest = z.object({
   mode: z.enum(['preview', 'committee']).default('committee'),
   taxonomyVersion: z.string().trim().min(1).max(40).optional()
 });
-
-const projectCreateRequest = z.object({ name: z.string().trim().min(2).max(160) });
 
 const taxonomyFeedbackRequest = z.object({
   proposalType: z.enum(['new_domain', 'new_module', 'new_operation', 'clarify_story']),
@@ -49,12 +52,20 @@ const taxonomyFeedbackRequest = z.object({
   }
 });
 
+const reviewLabel = z.object({
+  module: z.string().trim().min(1).max(120).refine(value => value !== 'n/a', 'Selecione um módulo da taxonomia.'),
+  operation: z.string().trim().min(1).max(180).refine(value => value !== 'n/a', 'Selecione uma operação da taxonomia.')
+});
 const reviewRequest = z.discriminatedUnion('action', [
   z.object({
     action: z.literal('approve'),
-    module: z.string().trim().min(1).max(120).refine(value => value !== 'n/a', 'Select a taxonomy module or mark a gap.'),
-    operation: z.string().trim().min(1).max(180).refine(value => value !== 'n/a', 'Select a taxonomy operation or mark a gap.'),
+    labels: z.array(reviewLabel).min(1).max(8).optional(),
+    module: reviewLabel.shape.module.optional(),
+    operation: reviewLabel.shape.operation.optional(),
     notes: z.string().trim().max(2_000).optional()
+  }).superRefine((input, context) => {
+    if (!input.labels && (!input.module || !input.operation)) context.addIssue({ code: 'custom', message: 'Envie a lista de pares ou um par completo.' });
+    if (input.labels && (input.module !== undefined || input.operation !== undefined)) context.addIssue({ code: 'custom', message: 'Use labels ou o par legado, sem misturá-los.' });
   }),
   z.object({
     action: z.literal('taxonomy_gap'),
@@ -94,38 +105,20 @@ const taxonomyOperationRequest = z.object({ domain: z.string().trim().min(2).max
 const taxonomyDomainRequest = z.object({ domain: z.string().trim().min(2).max(120), description: z.string().trim().min(5).max(1000), version: z.string().trim().min(1).max(40).optional() });
 const taxonomyVersionRequest = z.object({ version: z.string().trim().min(1).max(40) });
 
-function isAuthorizedInternalRequest(req: Request, res: Response) {
-  const configuredKey = process.env.INGEST_API_KEY;
-  if (!configuredKey) {
-    if (process.env.VERCEL) {
-      res.status(503).json({ error: 'INGEST_API_KEY is not configured in the environment.' });
-      return false;
-    }
-    return true;
-  }
-  const suppliedKey = req.header('authorization')?.replace(/^Bearer\s+/i, '') ?? '';
-  const expected = Buffer.from(configuredKey);
-  const supplied = Buffer.from(suppliedKey);
-  if (expected.length !== supplied.length || !timingSafeEqual(expected, supplied)) {
-    res.status(401).json({ error: 'Invalid ingestion credential.' });
-    return false;
-  }
-  return true;
-}
-
 export const apiRouter = Router();
 apiRouter.use(nfrRouter);
+apiRouter.use('/internal/recommender-taxonomies', recommenderTaxonomiesRouter);
+apiRouter.use('/internal/recommender-definitions', recommenderDefinitionsRouter);
+apiRouter.use('/internal/recommender-datasets', recommenderDatasetsRouter);
+apiRouter.use('/internal/recommendation-runs', recommendationRunsRouter);
+apiRouter.use('/internal/test-case-catalogs', testCaseCatalogsRouter);
 
-apiRouter.get('/projects', async (_req, res) => {
-  res.json(await loadProjects());
-});
-
+apiRouter.get('/projects', async (_req, res) => { res.json(await loadProjects()); });
 apiRouter.post('/projects', async (req, res) => {
-  const parsed = projectCreateRequest.safeParse(req.body);
+  const parsed = z.object({ name: z.string().trim().min(2).max(160) }).safeParse(req.body);
   if (!parsed.success) return void res.status(400).json({ error: 'Enter a project name between 2 and 160 characters.' });
-  try {
-    res.status(201).json({ name: await createProject(parsed.data.name) });
-  } catch (reason) {
+  try { res.status(201).json({ name: await createProject(parsed.data.name) }); }
+  catch (reason) {
     if ((reason as { code?: string }).code === '23505') return void res.status(409).json({ error: 'A project with this name already exists.' });
     throw reason;
   }
@@ -301,9 +294,15 @@ apiRouter.post('/classify', async (req, res) => {
   if (taxonomy.version !== taxonomyVersion || !Object.values(taxonomy.modules).some(operations => operations.length)) {
     return void res.status(400).json({ error: 'The selected taxonomy is inactive or has no operations.' });
   }
-  const previews = parsed.data.mode === 'preview'
-    ? parsed.data.stories.map(text => ({ text, ...classifyPreview(text, taxonomy) }))
-    : await Promise.all(parsed.data.stories.map(async text => ({ text, ...await classifyWithAi(text, taxonomy) })));
+  let previews;
+  try {
+    previews = parsed.data.mode === 'preview'
+      ? parsed.data.stories.map(text => ({ text, ...classifyPreview(text, taxonomy) }))
+      : await Promise.all(parsed.data.stories.map(async text => ({ text, ...await classifyWithAi(text, taxonomy) })));
+  } catch (reason) {
+    if (reason instanceof ClassificationConfigurationError) return void res.status(422).json({ error: reason.message });
+    throw reason;
+  }
   res.status(201).json(await savePreviewClassifications(parsed.data.project, parsed.data.sprint, previews, taxonomyVersion, parsed.data.mode));
 });
 
@@ -317,13 +316,19 @@ apiRouter.patch('/classifications/:id/review', async (req, res) => {
     res.status(400).json({ error: 'Invalid review data.', details: parsed.error.issues });
     return;
   }
-  const result = await saveReview({ classificationId: req.params.id, ...parsed.data });
+  let result;
+  try {
+    result = await saveReview({ classificationId: req.params.id, ...parsed.data });
+  } catch (reason) {
+    if (reason instanceof ReviewValidationError) return void res.status(422).json({ error: reason.message });
+    throw reason;
+  }
   if (!result) {
     res.status(404).json({ error: 'Classification not found.' });
     return;
   }
   if ('notReviewable' in result) {
-    res.status(409).json({ error: `The classification is already in the ${result.status} state.` });
+    res.status(409).json({ error: `The classification is already in the ${result.status}.` });
     return;
   }
   res.json(result);

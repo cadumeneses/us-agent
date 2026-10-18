@@ -1,8 +1,8 @@
 # Motor de recomendação de RNFs
 
-Versão: `ramos_2019_manhattan_k1_v1`.
+Versão: `ramos_2019_manhattan_k1_v2`.
 
-## Método reproduzido
+## Núcleo do método reimplementado
 
 Fonte: tese local `2019_FelipeRamos_Recomendação de requisitos não funcionais em projetos ágeis baseados em Scrum.pdf`, seções 5.2 e 5.3, tabelas 5.1–5.7 e equações 5.2–5.4.
 
@@ -31,14 +31,15 @@ vizinho se o mais próximo não tiver RNFs elegíveis.
 A interface permite escolher uma taxonomia ativa no perfil do projeto e confirma a versão
 ao classificar. A versão usada é gravada na execução e em cada classificação. Alterar a
 seleção do projeto afeta classificações futuras; classificações existentes mantêm a versão
-histórica, e a recomendação exige a mesma versão entre alvo e vizinho.
+histórica. A recomendação compara os nomes de módulo/operação e não exige versão da
+taxonomia, inclusive quando ela está ausente em classificações antigas.
 
 Estas são políticas explícitas do US-Agent, não conclusões atribuídas à tese:
 
 - Usar somente a classificação mais recente de cada US, por data e identificador. Classificações anteriores permanecem no histórico, mas não contam como novas US.
 - Excluir a própria US por identidade, mesmo que possua outras classificações.
 - Aceitar classificações com estados `accepted_auto`, `reviewed` e `reclassified`. Revisão pendente, lacunas e necessidade de reescrita bloqueiam o alvo e excluem candidatos.
-- Exigir a mesma versão de taxonomia. Não inferir equivalências entre versões ou nomes alterados; a ausência de histórico compatível é informada.
+- Comparar módulo/operação pelo nome exato, mesmo entre versões diferentes. Nomes alterados entre taxonomias não são tratados como equivalentes.
 - US multi-label: o usuário escolhe um dos pares já classificados. A lista de classificações não é alterada nem fundida. Um candidato é compatível quando possui esse par; seus RNFs estão associados à US inteira, pois o cadastro atual não os separa por par.
 - Campos básicos de perfil (plataforma, domínio de aplicação, objetivo e arquitetura) são necessários. Toda tarefa cadastrada precisa de categoria. Ausência de tarefas é permitida; listas de tecnologias podem estar vazias quando não se aplicam. Campos ausentes não são preenchidos pela IA.
 - Empate no maior score: escolher a classificação com menor identificador numérico. Manter k=1 e informar o desempate no resultado. A equivalência dessa política com o código da NFRec depende de obter o código original.
@@ -71,7 +72,8 @@ Aceitar vincula a sentença recuperada à classificação da US. Rejeitar regist
 decisão sem criar um vínculo. Repetir a mesma decisão é idempotente; uma decisão
 contraditória exige nova execução. Decisões de execuções anteriores não impedem
 avaliações futuras. Antes de aceitar, o backend verifica se a classificação ainda
-é a mais recente, aceita, da mesma versão e com o mesmo par consultado.
+é a mais recente, aceita e com o mesmo par consultado. A versão da taxonomia
+permanece no snapshot para rastreabilidade, sem bloquear o vínculo.
 
 ## Persistência e endpoints
 
@@ -105,7 +107,70 @@ node scripts/check-nfr-recommendations.mjs
 
 Essa validação não reproduz os experimentos científicos da tese. O código original
 da NFRec e a base completa ainda não foram obtidos. A base de testes é reconstruída
-e isolada: não é instalada como histórico real. Categorias de tarefas ainda são
-textuais; a normalização por um catálogo científico depende da obtenção desse
-artefato. Sem histórico compatível com RNFs associados, a execução retorna ausência
-de recomendações com explicação.
+e isolada: não é instalada como histórico real. A interface oferece as 131 categorias
+de tarefas publicadas no apêndice A para o par módulo/operação da história, mas ainda
+permite texto livre; grafias diferentes continuam sendo dimensões diferentes.
+Sem histórico compatível com RNFs associados, a execução retorna ausência de
+recomendações com explicação.
+
+## Material publicado aproveitado
+
+A seção 6.1.3 e a tabela 6.1 descrevem uma base de 13 projetos, 383 RFs/US,
+693 RNFs e 1.127 tarefas. A tese publica somente o resumo agregado dessa base;
+não fornece as linhas completas nem um projeto integral pronto para importação.
+
+- O apêndice A contém 131 categorias de tarefas para 18 pares de módulo/operação.
+  Elas foram extraídas para `apps/web/src/data/ramos-task-catalog.json`, conferidas
+  contra os totais da tabela 4.3 e oferecidas como sugestões na edição de tarefas.
+- O apêndice D contém 46 sentenças de RNF, distribuídas nos três tipos e onze
+  atributos. Foram extraídas para `apps/web/src/data/ramos-nfr-catalog.json` como
+  exemplos opcionais para preenchimento manual. Seus limites e tecnologias devem
+  ser adaptados ao projeto antes do vínculo; o motor não as recomenda sem uma
+  associação prévia no histórico.
+- Os scripts `scripts/extract-ramos-task-catalog.py` e
+  `scripts/extract-ramos-nfr-catalog.py` reproduzem a extração a partir do PDF da
+  tese. O PDF não é necessário em tempo de execução.
+- `scripts/seed-ramos-example.mjs` carrega **somente no banco local** três
+  projetos explicitamente identificados como demonstração: o alvo `fa` e os
+  perfis históricos `f4` e `f5` das tabelas 5.3–5.7. Cada projeto contém só a
+  história ilustrada; os textos das histórias foram reconstruídos, e `t6`/`t7`
+  permanecem identificadores do exemplo porque a tese não os liga a descrições
+  específicas. Não são os projetos completos da base experimental.
+
+```powershell
+npm.cmd run db:migrate
+npm.cmd run db:seed:ramos
+npm.cmd run db:check:ramos
+```
+
+A carga é idempotente e não sobrescreve perfis ou classificações existentes.
+O verificador lê os três registros e confirma `f4` com similaridade 1, `f5`
+com 1/3 e seus RNFs associados.
+
+## Auditoria de fidelidade à tese
+
+**Conclusão: a recomendação não está exatamente igual à NFRec de Felipe Ramos.**
+O núcleo descrito nas seções 5.3.1–5.3.3 coincide: filtro pelo par módulo/operação,
+exclusão de protótipos, vetor binário construído com características do alvo,
+similaridade `1 - distância de Manhattan / n`, `k=1` e recuperação dos RNFs
+associados ao vizinho. A tabela 5.7 foi reproduzida em teste (nove dimensões,
+similaridade de 1/3 para `f5`). Os três tipos e onze atributos aceitos pelo motor
+correspondem ao modelo apresentado na tabela 5.1 e no apêndice D.
+
+As diferenças com efeito potencial no resultado são:
+
+| Ponto | Tese de Felipe | US-Agent atual |
+| --- | --- | --- |
+| Tarefas no vetor | Tarefas estruturadas do requisito, exemplificadas como `t6` e `t7` na tabela 5.7; o apêndice A publica a taxonomia de categorias. | Compara o texto de `category` em cada tarefa. O catálogo do apêndice A agora é sugerido na interface, mas texto livre ainda é aceito e não há identificador estável de categoria. |
+| Histórico | RF alvo de um projeto corrente comparado com RFs da base histórica de projetos passados (seção 5.3.3). | Todas as histórias classificadas disponíveis podem entrar, inclusive outras do projeto corrente. Não há importação da base histórica original. |
+| Tags | Repositório central de tags predefinidas, com novas tags auditadas por especialista (seção 5.2.1). | Há sugestões e entrada livre, sem catálogo central auditado; grafias divergentes deixam de coincidir no vetor. |
+| Elegibilidade | A pré-filtragem explicitada na seção 5.3.3 usa módulo/operação e descarta protótipos. | Também exige classificação aceita/revisada, campos básicos preenchidos e categoria em todas as tarefas. Essas regras podem retirar candidatos que a tese consideraria. A versão da taxonomia não é um filtro. |
+| Identidade de RNF | RNFs estruturados por tipo, atributo e sentença, com associações à US; o apêndice D traz um catálogo inicial de sentenças. | A identidade é calculada por hash dessa tripla normalizada. As 46 sentenças do apêndice D estão disponíveis para edição manual, mas as associações dos 13 projetos não foram publicadas; só RNFs vinculados no banco local são recuperados. |
+
+O desempate pelo menor identificador, a escolha manual de um par em classificações
+multi-label e a seleção da classificação mais recente são decisões de integração
+do US-Agent. A tese não permite verificar se elas equivalem ao comportamento da
+implementação original. O apêndice A lista tarefas, mas não fornece o mapeamento
+dos identificadores `t6`/`t7` do exemplo para descrições específicas. Sem o código, a base histórica
+e um conjunto de entradas/saídas da NFRec, não é possível atestar equivalência exata
+nem reproduzir as métricas experimentais.

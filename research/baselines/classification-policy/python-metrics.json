@@ -1,0 +1,418 @@
+{
+  "schemaVersion": 1,
+  "source": "agent/orchestrator.py::_assess_uncertainty",
+  "sourcePolicyVersion": "uncertainty_v2",
+  "sourceSha256": "6299292a1301c4a3f325f38d1bccdcab53b8ef980fecb44ccb86f04ea6d94879",
+  "thresholds": {
+    "medium": 0.33,
+    "high": 0.66
+  },
+  "scope": "Metric parity only. Does not assert parity of arbitration, reruns or automatic decision guardrails.",
+  "cases": [
+    {
+      "id": "unanimous-multilabel",
+      "votes": [
+        {
+          "provider": "p1",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            },
+            {
+              "module": "Authentication",
+              "operation": "Login"
+            },
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        },
+        {
+          "provider": "p2",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Authentication",
+              "operation": "Login"
+            },
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        }
+      ],
+      "consensusRatio": 1.0,
+      "uncertainty": {
+        "score": 0.025,
+        "band": "low",
+        "disagreementRate": 0.0,
+        "disagreementLevel": "none",
+        "disagreementRisk": 0.0,
+        "hypothesisCount": 1,
+        "labelOverlap": 1.0,
+        "normalizedEntropy": 0.0,
+        "confidenceRisk": 0.1,
+        "entropyRisk": 0.0,
+        "naGapPenalty": 0.0,
+        "naRatio": 0.0,
+        "taxonomyGapRatio": 0.0,
+        "reviewRisk": 0.0
+      }
+    },
+    {
+      "id": "disjoint-tie",
+      "votes": [
+        {
+          "provider": "p1",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        },
+        {
+          "provider": "p2",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Authentication",
+              "operation": "Login"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        }
+      ],
+      "consensusRatio": 0.5,
+      "uncertainty": {
+        "score": 0.35,
+        "band": "medium",
+        "disagreementRate": 0.5,
+        "disagreementLevel": "strong",
+        "disagreementRisk": 0.5,
+        "hypothesisCount": 2,
+        "labelOverlap": 0.0,
+        "normalizedEntropy": 1.0,
+        "confidenceRisk": 0.1,
+        "entropyRisk": 1.0,
+        "naGapPenalty": 0.0,
+        "naRatio": 0.0,
+        "taxonomyGapRatio": 0.0,
+        "reviewRisk": 0.0
+      }
+    },
+    {
+      "id": "partial-overlap-tie",
+      "votes": [
+        {
+          "provider": "p1",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            },
+            {
+              "module": "Authentication",
+              "operation": "Login"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        },
+        {
+          "provider": "p2",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        }
+      ],
+      "consensusRatio": 0.5,
+      "uncertainty": {
+        "score": 0.35,
+        "band": "medium",
+        "disagreementRate": 0.5,
+        "disagreementLevel": "strong",
+        "disagreementRisk": 0.5,
+        "hypothesisCount": 2,
+        "labelOverlap": 0.5,
+        "normalizedEntropy": 1.0,
+        "confidenceRisk": 0.1,
+        "entropyRisk": 1.0,
+        "naGapPenalty": 0.0,
+        "naRatio": 0.0,
+        "taxonomyGapRatio": 0.0,
+        "reviewRisk": 0.0
+      }
+    },
+    {
+      "id": "light-disagreement",
+      "votes": [
+        {
+          "provider": "p1",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            },
+            {
+              "module": "Authentication",
+              "operation": "Login"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        },
+        {
+          "provider": "p2",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Authentication",
+              "operation": "Login"
+            },
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        },
+        {
+          "provider": "p3",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        }
+      ],
+      "consensusRatio": 0.6667,
+      "uncertainty": {
+        "score": 0.2545,
+        "band": "low",
+        "disagreementRate": 0.3333,
+        "disagreementLevel": "light",
+        "disagreementRisk": 0.1833,
+        "hypothesisCount": 2,
+        "labelOverlap": 0.6667,
+        "normalizedEntropy": 0.9183,
+        "confidenceRisk": 0.1,
+        "entropyRisk": 0.9183,
+        "naGapPenalty": 0.0,
+        "naRatio": 0.0,
+        "taxonomyGapRatio": 0.0,
+        "reviewRisk": 0.0
+      }
+    },
+    {
+      "id": "one-failure",
+      "votes": [
+        {
+          "provider": "p1",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        },
+        {
+          "provider": "p2",
+          "status": "success",
+          "confidence": 0.9,
+          "rows": [
+            {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            }
+          ],
+          "needsReview": false,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        },
+        {
+          "provider": "p3",
+          "status": "error",
+          "confidence": 0.9,
+          "rows": [],
+          "needsReview": true,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        }
+      ],
+      "consensusRatio": 1.0,
+      "uncertainty": {
+        "score": 0.025,
+        "band": "low",
+        "disagreementRate": 0.0,
+        "disagreementLevel": "none",
+        "disagreementRisk": 0.0,
+        "hypothesisCount": 1,
+        "labelOverlap": 1.0,
+        "normalizedEntropy": 0.0,
+        "confidenceRisk": 0.1,
+        "entropyRisk": 0.0,
+        "naGapPenalty": 0.0,
+        "naRatio": 0.0,
+        "taxonomyGapRatio": 0.0,
+        "reviewRisk": 0.0
+      }
+    },
+    {
+      "id": "taxonomy-gap",
+      "votes": [
+        {
+          "provider": "p1",
+          "status": "success",
+          "confidence": 0.4,
+          "rows": [
+            {
+              "module": "n/a",
+              "operation": "n/a"
+            }
+          ],
+          "needsReview": true,
+          "evidence": [],
+          "issues": [
+            "taxonomy_gap"
+          ],
+          "suggestedQuestions": []
+        },
+        {
+          "provider": "p2",
+          "status": "success",
+          "confidence": 0.4,
+          "rows": [
+            {
+              "module": "n/a",
+              "operation": "n/a"
+            }
+          ],
+          "needsReview": true,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        }
+      ],
+      "consensusRatio": 1.0,
+      "uncertainty": {
+        "score": 0.4275,
+        "band": "medium",
+        "disagreementRate": 0.0,
+        "disagreementLevel": "none",
+        "disagreementRisk": 0.0,
+        "hypothesisCount": 1,
+        "labelOverlap": 1.0,
+        "normalizedEntropy": 0.0,
+        "confidenceRisk": 0.6,
+        "entropyRisk": 0.0,
+        "naGapPenalty": 0.85,
+        "naRatio": 1.0,
+        "taxonomyGapRatio": 0.5,
+        "reviewRisk": 1.0
+      }
+    },
+    {
+      "id": "total-failure",
+      "votes": [
+        {
+          "provider": "p1",
+          "status": "error",
+          "confidence": 0.9,
+          "rows": [],
+          "needsReview": true,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        },
+        {
+          "provider": "p2",
+          "status": "error",
+          "confidence": 0.9,
+          "rows": [],
+          "needsReview": true,
+          "evidence": [],
+          "issues": [],
+          "suggestedQuestions": []
+        }
+      ],
+      "consensusRatio": 0.0,
+      "uncertainty": {
+        "score": 0.65,
+        "band": "medium",
+        "disagreementRate": 1.0,
+        "disagreementLevel": "strong",
+        "disagreementRisk": 1.0,
+        "hypothesisCount": 0,
+        "labelOverlap": 1.0,
+        "normalizedEntropy": 0.0,
+        "confidenceRisk": 1.0,
+        "entropyRisk": 0.0,
+        "naGapPenalty": 0.0,
+        "naRatio": 0.0,
+        "taxonomyGapRatio": 0.0,
+        "reviewRisk": 1.0
+      }
+    }
+  ]
+}

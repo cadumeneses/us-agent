@@ -27,7 +27,8 @@ try {
   for (const project of projects) {
     const { rows: [sprint] } = await pool.query("INSERT INTO project_sprints (project_id, name) VALUES ($1, 'Backlog') RETURNING id", [project.id]);
     const { rows: [story] } = await pool.query("INSERT INTO stories (project_id, sprint_id, external_id, content) VALUES ($1, $2, 'US-1', 'Retrieve educational records') RETURNING id", [project.id, sprint.id]);
-    const { rows: [c] } = await pool.query("INSERT INTO classifications (story_id, review_status, taxonomy_version) VALUES ($1, 'reviewed', 'test-v1') RETURNING id::text", [story.id]);
+    const taxonomyVersion = ids.length ? 'test-v2' : null;
+    const { rows: [c] } = await pool.query("INSERT INTO classifications (story_id, review_status, taxonomy_version) VALUES ($1, 'reviewed', $2) RETURNING id::text", [story.id, taxonomyVersion]);
     await pool.query("INSERT INTO classification_labels (classification_id, module, operation) VALUES ($1, 'Registry', 'Retrieve data')", [c.id]);
     ids.push(c.id);
   }
@@ -48,6 +49,7 @@ try {
   await request(`/classifications/${ids[0]}/nfr-runs`, { labelIndex: -1 }, 400);
   const context = await request(`/classifications/${ids[0]}/nfr-context`);
   assert.equal(context.issues.length, 0);
+  assert.equal(context.target.taxonomyVersion, '');
   const run = await request(`/classifications/${ids[0]}/nfr-runs`, { labelIndex: 0 }, 201);
   assert.equal(run.status, 'completed');
   assert.equal(run.items.length, 1);

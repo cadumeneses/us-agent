@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "reconstructed_source_illustration",
+  "source": {
+    "reference": "E21",
+    "sha256": "f69cd99f2a68b2cc349bcb294f0873439d31c0a93a50272c3d6668740a1eee53",
+    "profilePages": { "printed": [55, 56], "pdf": [69, 70] },
+    "tables": ["4.5", "4.6"],
+    "notes": [
+      "These are illustrative profiles, not the original evaluation dataset.",
+      "Numeric criterion and NFR identifiers are preserved as strings; their complete catalogs are unavailable.",
+      "Test-case associations are absent in table 4.5. Missing output is intentionally not replaced with an empty association list.",
+      "Application-scope domain labels Fabrica/Gestor/Suporte are kept as printed; this does not identify original companies or projects."
+    ]
+  },
+  "targetId": "e5",
+  "candidateIds": ["e1", "e2", "e3", "e4"],
+  "dataset": {
+    "id": "testrec-table-4-5",
+    "version": "1",
+    "source": "E21 tables 4.5–4.6: reconstructed illustration; test associations not supplied",
+    "records": [
+      { "id": "e1", "provenance": { "source": "E21 table 4.5", "sourceRecordId": "e1" }, "values": { "story_id": "e1", "module": "Cadastro", "operation": "modificar_inserção_de_dados", "platforms": ["Web"], "application_domain": "Suporte", "acceptance_criteria": ["8", "9", "10", "11", "12", "13", "14"], "nfrs": ["1", "2"] } },
+      { "id": "e2", "provenance": { "source": "E21 table 4.5", "sourceRecordId": "e2" }, "values": { "story_id": "e2", "module": "Cadastro", "operation": "inserir_dados", "platforms": ["Web"], "application_domain": "Fábrica", "acceptance_criteria": ["1", "2", "3", "6", "43"], "nfrs": ["1", "2"] } },
+      { "id": "e3", "provenance": { "source": "E21 table 4.5", "sourceRecordId": "e3" }, "values": { "story_id": "e3", "module": "Cadastro", "operation": "recuperar_dados", "platforms": ["Web"], "application_domain": "Fábrica", "acceptance_criteria": ["15", "17", "20", "21", "57"], "nfrs": ["1", "2"] } },
+      { "id": "e4", "provenance": { "source": "E21 table 4.5", "sourceRecordId": "e4" }, "values": { "story_id": "e4", "module": "Autenticação", "operation": "fazer_login_com_usuário_e_senha", "platforms": ["Web"], "application_domain": "Fábrica", "acceptance_criteria": ["25"], "nfrs": ["1", "2"] } },
+      { "id": "e5", "provenance": { "source": "E21 table 4.5", "sourceRecordId": "e5" }, "values": { "story_id": "e5", "module": "Cadastro", "operation": "remover_dados", "platforms": ["Web"], "application_domain": "Gestor", "acceptance_criteria": ["49", "50"], "nfrs": ["1", "2"] } }
+    ]
+  },
+  "expected": {
+    "dimensions": ["module", "operation", "platforms:Web", "application_domain", "acceptance_criteria:49", "acceptance_criteria:50", "nfrs:1", "nfrs:2"],
+    "targetVector": [1, 1, 1, 1, 1, 1, 1, 1],
+    "candidateVectors": { "e1": [1, 0, 1, 0, 0, 0, 1, 1], "e2": [1, 0, 1, 0, 0, 0, 1, 1], "e3": [1, 0, 1, 0, 0, 0, 1, 1], "e4": [0, 0, 1, 0, 0, 0, 1, 1] }
+  }
+}

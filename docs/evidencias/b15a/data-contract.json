@@ -1,0 +1,865 @@
+{
+  "format": "us-agent-json-v1",
+  "sha256": "d1047f0559375b6a0d0489e51ccc34d7e73c62b68ab8250505d2d9af57ba3088",
+  "content": {
+    "catalog": {
+      "content": {
+        "id": "testrec-synthetic-catalog",
+        "items": [
+          {
+            "executionMode": "manual",
+            "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+            "id": "demo-create",
+            "metadata": {
+              "fixture": true
+            },
+            "purpose": "Verificar um fluxo sintético de cadastro",
+            "title": "Criar registro sintético"
+          },
+          {
+            "executionMode": "unspecified",
+            "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+            "id": "demo-required",
+            "metadata": {
+              "extraSourceField": "Preserve without inventing scientific meaning",
+              "fixture": true
+            },
+            "title": "Validar campos obrigatórios"
+          }
+        ],
+        "schemaVersion": 1,
+        "source": {
+          "kind": "synthetic",
+          "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+        },
+        "version": "1"
+      },
+      "format": "us-agent-json-v1",
+      "sha256": "92ac324a773d2fcd846ff9203083f84e2691b4021ced4f89af429aa8aa0dada8"
+    },
+    "contract": {
+      "content": {
+        "canRecommend": false,
+        "catalog": null,
+        "dataset": {
+          "content": {
+            "id": "testrec-table-4-5",
+            "records": [
+              {
+                "id": "e1",
+                "provenance": {
+                  "source": "E21 table 4.5",
+                  "sourceRecordId": "e1"
+                },
+                "values": {
+                  "acceptance_criteria": [
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14"
+                  ],
+                  "application_domain": "Suporte",
+                  "module": "Cadastro",
+                  "nfrs": [
+                    "1",
+                    "2"
+                  ],
+                  "operation": "modificar_inserção_de_dados",
+                  "platforms": [
+                    "Web"
+                  ],
+                  "story_id": "e1"
+                }
+              },
+              {
+                "id": "e2",
+                "provenance": {
+                  "source": "E21 table 4.5",
+                  "sourceRecordId": "e2"
+                },
+                "values": {
+                  "acceptance_criteria": [
+                    "1",
+                    "2",
+                    "3",
+                    "6",
+                    "43"
+                  ],
+                  "application_domain": "Fábrica",
+                  "module": "Cadastro",
+                  "nfrs": [
+                    "1",
+                    "2"
+                  ],
+                  "operation": "inserir_dados",
+                  "platforms": [
+                    "Web"
+                  ],
+                  "story_id": "e2"
+                }
+              },
+              {
+                "id": "e3",
+                "provenance": {
+                  "source": "E21 table 4.5",
+                  "sourceRecordId": "e3"
+                },
+                "values": {
+                  "acceptance_criteria": [
+                    "15",
+                    "17",
+                    "20",
+                    "21",
+                    "57"
+                  ],
+                  "application_domain": "Fábrica",
+                  "module": "Cadastro",
+                  "nfrs": [
+                    "1",
+                    "2"
+                  ],
+                  "operation": "recuperar_dados",
+                  "platforms": [
+                    "Web"
+                  ],
+                  "story_id": "e3"
+                }
+              },
+              {
+                "id": "e4",
+                "provenance": {
+                  "source": "E21 table 4.5",
+                  "sourceRecordId": "e4"
+                },
+                "values": {
+                  "acceptance_criteria": [
+                    "25"
+                  ],
+                  "application_domain": "Fábrica",
+                  "module": "Autenticação",
+                  "nfrs": [
+                    "1",
+                    "2"
+                  ],
+                  "operation": "fazer_login_com_usuário_e_senha",
+                  "platforms": [
+                    "Web"
+                  ],
+                  "story_id": "e4"
+                }
+              }
+            ],
+            "source": "E21 tables 4.5–4.6: reconstructed illustration; test associations not supplied",
+            "version": "1"
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "f53c6ae3a39b6240f70eda57a5facdd1a7276f25495146682cc4de4783552c26"
+        },
+        "definition": {
+          "content": {
+            "attributes": [
+              {
+                "cardinality": "single",
+                "id": "story_id",
+                "name": "Identificador da história na fonte",
+                "representation": "none",
+                "required": true,
+                "role": "context",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "module",
+                "name": "Módulo",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "operation",
+                "name": "Operação",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "platforms",
+                "name": "Plataformas",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "application_domain",
+                "name": "Domínio da aplicação",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "acceptance_criteria",
+                "name": "IDs de critérios de aceitação",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "nfrs",
+                "name": "IDs de RNFs de contexto",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "test_case_ids",
+                "name": "IDs de casos de teste associados",
+                "representation": "none",
+                "required": false,
+                "role": "output",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "category"
+                }
+              }
+            ],
+            "id": "testrec-ednaldo-e21",
+            "method": {
+              "bindings": {
+                "acceptance_criteria": "acceptance_criteria",
+                "application_domain": "application_domain",
+                "module": "module",
+                "nfrs": "nfrs",
+                "operation": "operation",
+                "platforms": "platforms",
+                "story_id": "story_id",
+                "test_case_ids": "test_case_ids"
+              },
+              "id": "testrec_e21_data_contract_v1",
+              "parameters": {
+                "aggregation": "pending_Q02",
+                "k": 3,
+                "reference": "E21",
+                "representation": "target_binary_presence",
+                "similarity": "pending_Q01",
+                "status": "data_contract_only"
+              },
+              "version": "contract.1"
+            },
+            "name": "Casos de teste — contrato de dados da tese de Ednaldo (2021)",
+            "schemaVersion": 1,
+            "state": "draft",
+            "version": "contract.1"
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "c6997bf37a001038d011fabd28f5ea490476bbe7b657875c9bba02c60db28474"
+        },
+        "mode": "data_contract_only",
+        "pending": [
+          "Q01_similarity",
+          "Q02_aggregation",
+          "original_associations_and_catalogs",
+          "execution_policy_not_implemented"
+        ],
+        "representation": {
+          "candidates": [
+            {
+              "recordId": "e1",
+              "sameStory": false,
+              "tests": {
+                "ids": null,
+                "state": "not_provided"
+              },
+              "vector": [
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "recordId": "e2",
+              "sameStory": false,
+              "tests": {
+                "ids": null,
+                "state": "not_provided"
+              },
+              "vector": [
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "recordId": "e3",
+              "sameStory": false,
+              "tests": {
+                "ids": null,
+                "state": "not_provided"
+              },
+              "vector": [
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "recordId": "e4",
+              "sameStory": false,
+              "tests": {
+                "ids": null,
+                "state": "not_provided"
+              },
+              "vector": [
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ],
+          "dimensions": [
+            {
+              "label": "module",
+              "slot": "module",
+              "value": "Cadastro"
+            },
+            {
+              "label": "operation",
+              "slot": "operation",
+              "value": "remover_dados"
+            },
+            {
+              "label": "platforms:Web",
+              "slot": "platforms",
+              "value": "Web"
+            },
+            {
+              "label": "application_domain",
+              "slot": "application_domain",
+              "value": "Gestor"
+            },
+            {
+              "label": "acceptance_criteria:49",
+              "slot": "acceptance_criteria",
+              "value": "49"
+            },
+            {
+              "label": "acceptance_criteria:50",
+              "slot": "acceptance_criteria",
+              "value": "50"
+            },
+            {
+              "label": "nfrs:1",
+              "slot": "nfrs",
+              "value": "1"
+            },
+            {
+              "label": "nfrs:2",
+              "slot": "nfrs",
+              "value": "2"
+            }
+          ],
+          "targetVector": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "schemaVersion": 1,
+        "target": {
+          "content": {
+            "id": "e5",
+            "provenance": {
+              "source": "E21 table 4.5",
+              "sourceRecordId": "e5"
+            },
+            "values": {
+              "acceptance_criteria": [
+                "49",
+                "50"
+              ],
+              "application_domain": "Gestor",
+              "module": "Cadastro",
+              "nfrs": [
+                "1",
+                "2"
+              ],
+              "operation": "remover_dados",
+              "platforms": [
+                "Web"
+              ],
+              "story_id": "e5"
+            }
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "f6d4a50063f5f470466853db7784c68df79c3f7bd1472030f7df1fd10ab2db23"
+        },
+        "taxonomies": {
+          "content": [],
+          "format": "us-agent-json-v1",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "format": "us-agent-json-v1",
+      "sha256": "2062b47c34aca6d9b4a685327e6e19a99535cd3dddaa384d860ab7b5975fc230"
+    },
+    "definition": {
+      "content": {
+        "attributes": [
+          {
+            "cardinality": "single",
+            "id": "story_id",
+            "name": "Identificador da história na fonte",
+            "representation": "none",
+            "required": true,
+            "role": "context",
+            "scope": "artifact",
+            "valueType": {
+              "type": "text"
+            }
+          },
+          {
+            "cardinality": "single",
+            "id": "module",
+            "name": "Módulo",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "artifact",
+            "valueType": {
+              "type": "category"
+            }
+          },
+          {
+            "cardinality": "single",
+            "id": "operation",
+            "name": "Operação",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "artifact",
+            "valueType": {
+              "type": "category"
+            }
+          },
+          {
+            "cardinality": "many",
+            "id": "platforms",
+            "name": "Plataformas",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "project",
+            "valueType": {
+              "type": "category"
+            }
+          },
+          {
+            "cardinality": "single",
+            "id": "application_domain",
+            "name": "Domínio da aplicação",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "project",
+            "valueType": {
+              "type": "category"
+            }
+          },
+          {
+            "cardinality": "many",
+            "id": "acceptance_criteria",
+            "name": "IDs de critérios de aceitação",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "artifact",
+            "valueType": {
+              "type": "category"
+            }
+          },
+          {
+            "cardinality": "many",
+            "id": "nfrs",
+            "name": "IDs de RNFs de contexto",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "project",
+            "valueType": {
+              "type": "category"
+            }
+          },
+          {
+            "cardinality": "many",
+            "id": "test_case_ids",
+            "name": "IDs de casos de teste associados",
+            "representation": "none",
+            "required": false,
+            "role": "output",
+            "scope": "artifact",
+            "valueType": {
+              "type": "category"
+            }
+          }
+        ],
+        "id": "testrec-ednaldo-e21",
+        "method": {
+          "bindings": {
+            "acceptance_criteria": "acceptance_criteria",
+            "application_domain": "application_domain",
+            "module": "module",
+            "nfrs": "nfrs",
+            "operation": "operation",
+            "platforms": "platforms",
+            "story_id": "story_id",
+            "test_case_ids": "test_case_ids"
+          },
+          "id": "testrec_e21_data_contract_v1",
+          "parameters": {
+            "aggregation": "pending_Q02",
+            "k": 3,
+            "reference": "E21",
+            "representation": "target_binary_presence",
+            "similarity": "pending_Q01",
+            "status": "data_contract_only"
+          },
+          "version": "contract.1"
+        },
+        "name": "Casos de teste — contrato de dados da tese de Ednaldo (2021)",
+        "schemaVersion": 1,
+        "state": "draft",
+        "version": "contract.1"
+      },
+      "format": "us-agent-json-v1",
+      "sha256": "c6997bf37a001038d011fabd28f5ea490476bbe7b657875c9bba02c60db28474"
+    },
+    "illustration": {
+      "content": {
+        "candidateIds": [
+          "e1",
+          "e2",
+          "e3",
+          "e4"
+        ],
+        "dataset": {
+          "id": "testrec-table-4-5",
+          "records": [
+            {
+              "id": "e1",
+              "provenance": {
+                "source": "E21 table 4.5",
+                "sourceRecordId": "e1"
+              },
+              "values": {
+                "acceptance_criteria": [
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12",
+                  "13",
+                  "14"
+                ],
+                "application_domain": "Suporte",
+                "module": "Cadastro",
+                "nfrs": [
+                  "1",
+                  "2"
+                ],
+                "operation": "modificar_inserção_de_dados",
+                "platforms": [
+                  "Web"
+                ],
+                "story_id": "e1"
+              }
+            },
+            {
+              "id": "e2",
+              "provenance": {
+                "source": "E21 table 4.5",
+                "sourceRecordId": "e2"
+              },
+              "values": {
+                "acceptance_criteria": [
+                  "1",
+                  "2",
+                  "3",
+                  "6",
+                  "43"
+                ],
+                "application_domain": "Fábrica",
+                "module": "Cadastro",
+                "nfrs": [
+                  "1",
+                  "2"
+                ],
+                "operation": "inserir_dados",
+                "platforms": [
+                  "Web"
+                ],
+                "story_id": "e2"
+              }
+            },
+            {
+              "id": "e3",
+              "provenance": {
+                "source": "E21 table 4.5",
+                "sourceRecordId": "e3"
+              },
+              "values": {
+                "acceptance_criteria": [
+                  "15",
+                  "17",
+                  "20",
+                  "21",
+                  "57"
+                ],
+                "application_domain": "Fábrica",
+                "module": "Cadastro",
+                "nfrs": [
+                  "1",
+                  "2"
+                ],
+                "operation": "recuperar_dados",
+                "platforms": [
+                  "Web"
+                ],
+                "story_id": "e3"
+              }
+            },
+            {
+              "id": "e4",
+              "provenance": {
+                "source": "E21 table 4.5",
+                "sourceRecordId": "e4"
+              },
+              "values": {
+                "acceptance_criteria": [
+                  "25"
+                ],
+                "application_domain": "Fábrica",
+                "module": "Autenticação",
+                "nfrs": [
+                  "1",
+                  "2"
+                ],
+                "operation": "fazer_login_com_usuário_e_senha",
+                "platforms": [
+                  "Web"
+                ],
+                "story_id": "e4"
+              }
+            },
+            {
+              "id": "e5",
+              "provenance": {
+                "source": "E21 table 4.5",
+                "sourceRecordId": "e5"
+              },
+              "values": {
+                "acceptance_criteria": [
+                  "49",
+                  "50"
+                ],
+                "application_domain": "Gestor",
+                "module": "Cadastro",
+                "nfrs": [
+                  "1",
+                  "2"
+                ],
+                "operation": "remover_dados",
+                "platforms": [
+                  "Web"
+                ],
+                "story_id": "e5"
+              }
+            }
+          ],
+          "source": "E21 tables 4.5–4.6: reconstructed illustration; test associations not supplied",
+          "version": "1"
+        },
+        "expected": {
+          "candidateVectors": {
+            "e1": [
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            "e2": [
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            "e3": [
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            "e4": [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ]
+          },
+          "dimensions": [
+            "module",
+            "operation",
+            "platforms:Web",
+            "application_domain",
+            "acceptance_criteria:49",
+            "acceptance_criteria:50",
+            "nfrs:1",
+            "nfrs:2"
+          ],
+          "targetVector": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "kind": "reconstructed_source_illustration",
+        "schemaVersion": 1,
+        "source": {
+          "notes": [
+            "These are illustrative profiles, not the original evaluation dataset.",
+            "Numeric criterion and NFR identifiers are preserved as strings; their complete catalogs are unavailable.",
+            "Test-case associations are absent in table 4.5. Missing output is intentionally not replaced with an empty association list.",
+            "Application-scope domain labels Fabrica/Gestor/Suporte are kept as printed; this does not identify original companies or projects."
+          ],
+          "profilePages": {
+            "pdf": [
+              69,
+              70
+            ],
+            "printed": [
+              55,
+              56
+            ]
+          },
+          "reference": "E21",
+          "sha256": "f69cd99f2a68b2cc349bcb294f0873439d31c0a93a50272c3d6668740a1eee53",
+          "tables": [
+            "4.5",
+            "4.6"
+          ]
+        },
+        "targetId": "e5"
+      },
+      "format": "us-agent-json-v1",
+      "sha256": "9f741b1c0a0d3dfe4b9c7d5942af5820f2149073c0a8f351a6e7a77d73f6a168"
+    },
+    "schemaVersion": 1,
+    "scope": "Data contract and table 4.6 representation only; no TestRec ranking, scores, original associations or empirical evaluation.",
+    "source": {
+      "notes": [
+        "These are illustrative profiles, not the original evaluation dataset.",
+        "Numeric criterion and NFR identifiers are preserved as strings; their complete catalogs are unavailable.",
+        "Test-case associations are absent in table 4.5. Missing output is intentionally not replaced with an empty association list.",
+        "Application-scope domain labels Fabrica/Gestor/Suporte are kept as printed; this does not identify original companies or projects."
+      ],
+      "profilePages": {
+        "pdf": [
+          69,
+          70
+        ],
+        "printed": [
+          55,
+          56
+        ]
+      },
+      "reference": "E21",
+      "sha256": "f69cd99f2a68b2cc349bcb294f0873439d31c0a93a50272c3d6668740a1eee53",
+      "tables": [
+        "4.5",
+        "4.6"
+      ]
+    },
+    "sourceSha256": "f69cd99f2a68b2cc349bcb294f0873439d31c0a93a50272c3d6668740a1eee53",
+    "sourceVerified": true
+  }
+}

@@ -1,3 +1,13 @@
+export type ClassificationLabel = { module: string; operation: string };
+export type ClassificationProvenance = {
+  engine: string; policyVersion: string; promptVersion: string | null;
+  taxonomy: { version: string; sha256: string };
+  execution: { arbitration: boolean; reruns: number };
+  decision: { labels: ClassificationLabel[]; confidence: number; needsReview: boolean;
+    consensusRatio: number | null; uncertainty: { score: number; band: string } | null;
+    reviewReasons: string[]; reason: string; providerHealth: { total: number; successful: number; failed: number } };
+};
+
 export type Story = {
   id: string;
   text: string;
@@ -5,6 +15,8 @@ export type Story = {
   sprint: string;
   module: string;
   operation: string;
+  labels: ClassificationLabel[];
+  metricsSource: 'committee' | 'rules' | 'legacy';
   confidence: number;
   uncertainty: number;
   consensus: number;
@@ -42,6 +54,7 @@ export type Classification = {
   text: string;
   module: string;
   operation: string;
+  labels: ClassificationLabel[];
   confidence: number;
   needsReview: boolean;
 };
@@ -61,6 +74,10 @@ export type FallbackSuggestion = {
 };
 
 export type ReviewContext = {
+  labels: ClassificationLabel[];
+  provenance: ClassificationProvenance | null;
+  reviews: Array<{ id: string; reviewer: string; action: string; notes: string | null; reviewedAt: string;
+    before: { labels?: ClassificationLabel[] } | null; after: { labels?: ClassificationLabel[] } | null }>;
   final: {
     reason?: string;
     notesForHuman?: string;
@@ -82,6 +99,8 @@ export type ReviewContext = {
   }>;
   votes: Array<{
     provider: string;
+    model?: string;
+    requestedModel?: string;
     status: string;
     error?: string;
     confidence?: number;

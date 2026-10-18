@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Edg/155.0.4283.45",
+    "revision": "@50f24ef2aa5369a074b8888b7db82d9c0652d642",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+    "jsVersion": "15.5.9.4"
+  },
+  "runId": "d6657eaa-994e-49d5-be4c-d88768d9fa7c",
+  "rawRunSha256": "1599e2acc434d6ca57f616b7627fa400b8c628804c0eae7ca8d1706aa064e2a3",
+  "observations": {
+    "desktop": {
+      "width": 1440,
+      "documentWidth": 1425,
+      "unlabelledControls": 0
+    },
+    "mobile": {
+      "width": 390,
+      "documentWidth": 390,
+      "unlabelledControls": 0
+    }
+  },
+  "verified": [
+    "taxonomy-publication",
+    "definition-context",
+    "import-preview-publication",
+    "dynamic-input",
+    "explicit-destination",
+    "accept-reject",
+    "persisted-history",
+    "replay",
+    "project-first-routing",
+    "create-empty-project",
+    "english-presentation",
+    "scientific-disclaimer"
+  ],
+  "scope": "Synthetic local browser verification; not an empirical article reproduction."
+}

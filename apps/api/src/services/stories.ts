@@ -7,13 +7,13 @@ export function filterStories(stories: Story[], status = '', search = '', limit 
   const term = search.trim().toLowerCase();
   return stories
     .filter(story => !status || story.status === status)
-    .filter(story => !term || `${story.text} ${story.module} ${story.operation}`.toLowerCase().includes(term))
+    .filter(story => !term || `${story.text} ${story.labels.map(label => `${label.module} ${label.operation}`).join(' ')}`.toLowerCase().includes(term))
     .slice(0, limit);
 }
 
 export function buildDashboard(stories: Story[]): Dashboard {
   const moduleCounts = stories.reduce<Record<string, number>>((counts, story) => {
-    counts[story.module] = (counts[story.module] ?? 0) + 1;
+    for (const module of new Set(story.labels.map(label => label.module))) counts[module] = (counts[module] ?? 0) + 1;
     return counts;
   }, {});
 

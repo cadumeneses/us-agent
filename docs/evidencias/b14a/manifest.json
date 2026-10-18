@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-18T02:55:10.171Z",
+  "timeZone": "America/Sao_Paulo",
+  "kind": "synthetic_technical_pilot",
+  "protocol": {
+    "version": "rnf-evaluation-v1",
+    "method": "ramos_2019_manhattan_k1_v2",
+    "repetitions": 2,
+    "partition": "explicit_cases_record_holdout_for_relevance",
+    "matching": "normalized_nfr_key",
+    "undefinedRatio": "null",
+    "failurePolicy": "empty_prediction_with_failure_status",
+    "classification": "reference_labels_no_llm",
+    "tuning": "none",
+    "configurationStudy": "not_performed"
+  },
+  "git": {
+    "head": "9ddbcb3594bcc392f89f85f805f6cf71e3850577",
+    "dirty": true
+  },
+  "environment": {
+    "node": "v24.11.1",
+    "icu": "77.1",
+    "locale": "pt-BR",
+    "platform": "win32",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz",
+    "logicalCpus": 8
+  },
+  "sources": {
+    "scripts/evaluate-rnf.ts": "1f8f944082033d912efabf9eb1cce89115d730c8365f25b945010fa6c2748b93",
+    "apps/api/src/evaluation/rnf-evaluation.ts": "9691bca57d6f739f91f45bd3504c4e10180c92787acac73fd8f6b5341e824c6b",
+    "apps/api/src/evaluation/rnf-pilot.ts": "e5ba931858d497f665f0b303f4fa91a0b32808c6eb9fe10b10e300d4d8631412",
+    "apps/api/src/evaluation/recommendation-metrics.ts": "d9965ae4cecc56475cf216f20f86ce420a28b8ad433831d5cb462187498bc94a",
+    "apps/api/src/domain/content-snapshot.ts": "43d0a3570567b4d3bfe5efbff3c2e225d093de4193b4fd1d26fe996c4c781d8a",
+    "apps/api/src/domain/dataset-import.ts": "9c1a197111c81f170a301094497fb683ad8a318414dea257b6f49732241edc2d",
+    "apps/api/src/domain/import-formats.ts": "cb9d5ea48c69d6e7f2616efb150f2b1ec362be9876f9f485468da92e17ef9745",
+    "apps/api/src/domain/dataset-publication.ts": "40b65f17062376bf51d494f389ae5ce5bf1c1d8fcd6526828986123dd363c9fa",
+    "apps/api/src/domain/definition-publication.ts": "4ce1bf96e7cdd087a0b67db71e2214c0ffac7b0ed1478d4183e5f29308bb7759",
+    "apps/api/src/domain/recommender-definition.ts": "63a98fff7644ac27fb8456dd6bdce5d1d843d13b13450cfb75d8e6198bfa7e81",
+    "apps/api/src/domain/recommender-taxonomy.ts": "19de6d6eb3f9e6f99f517e6a95e65e7339189e09c144da302de21dd5089a3575",
+    "apps/api/src/services/recommendation-execution.ts": "f5ed2f39f24eff0b4e611a67880383b973d7a8d43442d58f95d804773d75060f",
+    "apps/api/src/services/configured-nfr.ts": "f9180a52f41d63e04581913db7930c248070c8bb406c8ceb964217312a1b1ad3",
+    "apps/api/src/services/rnf-policy.ts": "324aa54633dfc6459d795d319ca27c8544de652f606b3ce9e128bc8715720677",
+    "apps/api/src/services/knn.ts": "9bef8809c5d17c9d7701bd17fb539efc2664e2188439be5368cb421b3d65acc5",
+    "apps/api/src/services/nfr-engine.ts": "a0fe36c52a5d93602926d9453076fb699110bda29a15992d9006cc3612eb1b34",
+    "apps/api/src/evaluation/nfr-baseline.ts": "ac88e75a88240e9c11d55c9301d77dd63599473b6d3c9503f8120ce6a318b2d2",
+    "config/recommenders/rnf-v2.draft.json": "c531fc216da54215aac897e2c6553f3dfd0ce9fcc4c9fb945cbbdc6953676e0e",
+    "research/baselines/rnf-v2/reference.json": "62a8059a6d11ab6026deade7c010b0682714bcc7e77f9132aac6c840792e1510",
+    "research/baselines/rnf-v2/manifest.json": "28724e16ef97f0b7c4f78f687fe48c98d7ded5d1b07d6da583b8ca6037dfb7ce",
+    "research/pilots/rnf-v1/annotations.json": "7bd62c51afc1e8e9377cbdc5b079060264cc507f431d79d1da33b9afd798de78",
+    "research/pilots/rnf-v1/protocol.md": "481bf49082dbeb38d1e02b16c6dbcd0d7e4af40da2f2513253cbcd5aa57062c6",
+    "package-lock.json": "f1a6ea761d579e0368fbb4a3ed5a4e98c8caf076c18e8ca66fe8a042b71faed4"
+  },
+  "artifacts": {
+    "bundle.json": "8b5b2c91194f0552e7dcfabc61adcfa45e5bf2c9fd715e6dd3dc5ceaa2597338",
+    "report.json": "91e1e36763e44b607e69a2c7eba658201aea694580a8f7ea27678ee52dfd9f8f",
+    "targets.csv": "49a4f27c64614190bdd3dd4b25625eca3836c66972042fcd398909fdf7a7fd33"
+  },
+  "technicalGatePassed": true,
+  "limitations": [
+    "Synthetic fixtures; no empirical quality claim.",
+    "No classification, configuration/usability study, HTTP/database benchmark or author dataset.",
+    "No inference from measured durations."
+  ]
+}

@@ -1,5 +1,43 @@
 ﻿# WIS User Story Classifier
 
+## Planejamento de evolução
+
+O [plano de evolução](docs/plano-evolucao-us-agent.md) organiza a ampliação para recomendadores configuráveis, preservando classificação, incerteza e revisão humana. O [workflow com backlog](docs/workflow-evolucao-us-agent.md) define as implementações e revisões; a [matriz de fidelidade](docs/referencias-e-fidelidade.md) acompanha as referências de Felipe, Ednaldo e o caso sem US. A [primeira entrega](docs/entregas/001-referencia-e-politica.md) preserva a referência RNF; a [segunda entrega](docs/entregas/002-classificacao-multilabel.md) integra múltiplos rótulos, métricas reais e proveniência à classificação e revisão web.
+
+`npm.cmd run check:nfr-baseline` confere os oito cenários congelados do RNF v2 sem banco ou provedores LLM. A ampliação funcional segue o workflow; o funcionamento atual está documentado abaixo.
+
+A [terceira entrega](docs/entregas/003-verificacao-e-contratos-configuraveis.md) reverifica o plano e implementa [definições e atributos configuráveis em memória](docs/recomendadores-configuraveis.md). `npm.cmd run check:configured-nfr` executa a configuração RNF e compara os oito resultados completos com a referência. Publicação e interface de configuração seguem nos próximos incrementos.
+
+A [quarta entrega](docs/entregas/004-taxonomias-e-pendencias.md) acrescenta [taxonomias independentes por API](docs/taxonomias-independentes.md), com versões imutáveis e vínculos por ID/versão/hash. Após o build, `npm.cmd run check:recommender-taxonomies` verifica publicação e compatibilidade em um schema temporário local. A [lista de pendências](docs/pendencias-e-proximos-passos.md) acompanha o que falta para completar a plataforma e os três exemplos científicos.
+
+A [quinta entrega](docs/entregas/005-publicacao-definicoes.md) implementa [publicação de definições](docs/publicacao-definicoes.md) com dependências imutáveis. Após o build, `npm.cmd run check:recommender-definitions` verifica integridade, rollback e concorrência no PostgreSQL local. A importação da base está na entrega seguinte; sua seleção explícita na execução continua em B11.
+
+A [sexta entrega](docs/entregas/006-importacao-bases.md) acrescenta [importação CSV/JSON de bases rotuladas](docs/importacao-bases.md), com arquivo original, prévia, relatório e publicação versionada. Após o build, `npm.cmd run check:recommender-datasets` verifica o fluxo em um schema local descartável. A seleção da base na execução está na entrega seguinte, e a interface segue em B12.
+
+A [sétima entrega](docs/entregas/007-execucao-base-explicita.md) implementa [execuções com base explícita](docs/execucoes-configuraveis.md), política RNF separada, mapeamento de IDs e replay. Após o build, `npm.cmd run check:recommendation-runs` verifica o fluxo completo pelo backend e as oito comparações com o legado.
+
+A [oitava entrega](docs/entregas/008-execucao-configuravel-web.md) acrescenta **Bases publicadas** (`/configured-recommendations`): seleção de versões, formulário por atributos, execução, explicação, histórico e replay.
+
+A [nona entrega](docs/entregas/009-configuracao-importacao-web.md) integra **Configurar e importar bases** (`/recommender-setup`), com editores, publicação revisada por hash e importação CSV/JSON com prévia e exclusões.
+
+A [décima entrega](docs/entregas/010-avaliacoes-e-vertical-rnf.md) acrescenta [avaliações persistidas e destinos explícitos](docs/avaliacoes-configuraveis.md), sem alterar o resultado original. O vertical RNF foi verificado no Edge headless em desktop/mobile. Após o build, `npm.cmd run check:recommendation-runs` verifica também as decisões; `npm.cmd run check:recommender-browser` percorre a interface completa com PostgreSQL local isolado. O [roteiro web](docs/recomendadores-web.md) descreve acesso e limites.
+
+A [entrega 011](docs/entregas/011-perimetro-e-dependencias.md), B13a, acrescenta [proteção central da API](docs/seguranca-acesso.md) e [correções das dependências](docs/dependencias-e-triagem.md). Acesso sem chave fica restrito ao desenvolvimento local direto; em ambiente protegido a interface aguarda o login pessoal de B13b. Não distribuir a chave de integração no navegador. B13 continua com pessoas/sessões/permissões/autoria e isolamento entre organizações. `npm.cmd run check:python-api` verifica as credenciais das integrações e `npm.cmd run check:dependencies` repete a consulta npm.
+
+O [contrato da classificação web](docs/classificacao-web.md) descreve a política efetiva e a revisão. Aplique as migrations antes de iniciar a API nova em outro ambiente. `npm.cmd run check:classification-workflow` verifica o fluxo em um schema temporário do PostgreSQL local, com respostas de modelos simuladas.
+
+A [entrega 012](docs/entregas/012-avaliacao-rnf-reproduzivel.md), B14a, acrescenta [avaliação RNF com protocolo, exportação e replay](docs/avaliacao-rnf.md). `npm.cmd run evaluate:rnf` executa 13 cenários sintéticos pelo executor de publicações e exporta resultados por alvo; `npm.cmd run check:rnf-evaluation` verifica o fluxo de arquivos. Compatibilidade e relevância sintética são separadas; a avaliação empírica de Felipe e o segundo exemplo de Ednaldo continuam pendentes. Este incremento segue a [prioridade científica corrigida](docs/revisao-de-escopo.md).
+
+A [entrega 013](docs/entregas/013-contrato-ednaldo-e-aderencia.md), B15a, inicia o [contrato de dados de Ednaldo](docs/testrec-contrato-dados.md), reutilizando atributos/taxonomias e verificando quatro vetores da tabela 4.6 da tese. `npm.cmd run check:testrec-contract` confere essa representação e o catálogo local sintético. O TestRec ainda não calcula recomendações; similaridade/agregação e dados originais continuam pendentes. A [revisão de aderência](docs/aderencia-demandas-professor.md) distingue os pedidos já demonstrados daqueles que ainda exigem outro vertical e avaliação empírica.
+
+A [entrega 014](docs/entregas/014-equacoes-ednaldo.md), B16a, acrescenta uma [demonstração local das equações E21](docs/testrec-equacoes-demonstracao.md): KNN compartilhado, três vizinhos, heurística, ranking, contribuições e catálogo preservado com associações sintéticas separadas. `npm.cmd run check:testrec-equations` verifica os cálculos; `--replay docs/evidencias/b16a/equations-demo.json` confere o pacote. Não é reprodução da configuração Euclidiana ou integração TestRec na API/interface; Q01/Q02 e dados originais continuam pendentes.
+
+A [entrega 015](docs/entregas/015-catalogos-testes-publicados.md), B15b, implementa [catálogos de testes publicados por API](docs/catalogos-casos-teste.md), com JSON original recuperável, declaração de uso, versões imutáveis e retirada. Após compilar a API, `npm.cmd run check:test-case-catalogs` verifica o fluxo em schema PostgreSQL local descartável. Aplique a migration 022 em outros ambientes antes de usar as novas rotas. O vínculo catálogo/base/execução do segundo método e sua interface continuam pendentes.
+
+A [entrega 016](docs/entregas/016-rebase-idioma-e-preservacao.md) integra as alterações remotas de idioma e projetos com os recomendadores configuráveis, preservando os snapshots científicos. O `.gitattributes` conserva os bytes das fontes/artefatos inventariados; mensagens históricas são traduzidas apenas na apresentação. Os fluxos de projetos, configuração, revisão e recomendação foram reverificados após o rebase.
+
+Antes de commitar as adições científicas, `npm.cmd run check:scientific-index` confere os hashes das fontes/artefatos e as regras de finais de linha diretamente no stage, sem alterar o índice ou os arquivos.
+
 ## Aplicação web (MVP)
 
 O repositório inclui uma plataforma responsiva com React + TypeScript no frontend, Node.js + Express no backend e PostgreSQL para persistência. Dashboard, histórico e taxonomia da API consultam exclusivamente o banco.
@@ -71,6 +109,8 @@ O fluxo combina comite de modelos, arbitragem, rerun para incerteza media e revi
 - Evolucao de taxonomia: o revisor pode registrar feedback de taxonomia durante a revisao.
 - Taxonomia externa: carregada de arquivo JSON versionavel.
 
+A [entrega 017](docs/entregas/017-testes-no-executor-comum.md), B15c/B16b, liga a demonstração E21 a [definições, importações, bases e execuções nos endpoints comuns](docs/testrec-execucoes-publicadas.md), com catálogo fixado e replay. Requer a migration 023. `npm.cmd run check:testrec-runs` verifica HTTP/PostgreSQL local; `--replay docs/evidencias/b16b/published-runs.json` verifica o pacote offline. Restrita a dados sintéticos e equações Manhattan; Q01/Q02, interface de testes e avaliação empírica permanecem pendentes. Seletores RNF identificam métodos API-only.
+
 ## Estrutura
 - `apps/api/`: backend Express isolado da interface web.
   - `src/database/`: pool PostgreSQL, migrations e importação histórica.
@@ -124,7 +164,7 @@ GROQ_MODEL=llama-3.1-8b-instant
 
 # API SQL usada pelo worker Python
 US_AGENT_API_URL=http://localhost:3333/api
-# Obrigatória na Vercel e deve ter o mesmo valor na API e no worker
+# Obrigatória fora do desenvolvimento local; mesmo valor na API e no worker
 INGEST_API_KEY=troque-por-um-segredo-forte
 
 # Politica de incerteza

@@ -9,6 +9,8 @@ type StoryRow = {
   sprint: string;
   module: string;
   operation: string;
+  labels: Story['labels'];
+  metricsSource: Story['metricsSource'];
   confidence: number;
   uncertainty: number;
   consensus: number;
@@ -35,12 +37,17 @@ export async function loadStories(): Promise<Story[]> {
       sprint.name AS sprint,
       COALESCE(label.module, 'n/a') AS module,
       COALESCE(label.operation, 'n/a') AS operation,
+      COALESCE((SELECT jsonb_agg(jsonb_build_object('module', module, 'operation', operation) ORDER BY position, id)
+        FROM classification_labels WHERE classification_id = classification.id), '[]'::jsonb) AS labels,
+      CASE provenance.payload->>'engine' WHEN 'web_committee_v2' THEN 'committee'
+        WHEN 'web_preview_rules_v1' THEN 'rules' ELSE 'legacy' END AS "metricsSource",
       classification.final_confidence AS confidence,
       classification.uncertainty_score AS uncertainty,
       classification.consensus_ratio AS consensus,
       classification.review_status AS status,
       COALESCE(classification.taxonomy_version, '') AS "taxonomyVersion"
     FROM classifications classification
+    LEFT JOIN classification_provenance provenance ON provenance.classification_id = classification.id
     JOIN stories story ON story.id = classification.story_id
     JOIN projects project ON project.id = story.project_id
     JOIN project_sprints sprint ON sprint.id = story.sprint_id
@@ -124,6 +131,12 @@ export async function assignStoriesToSprint(sprintId: string, classificationIds:
 }
 
 export async function loadReviewContext(classificationId: string): Promise<ReviewContext | null> {
+  const [labels, provenance, reviews] = await Promise.all([
+    query<Story['labels'][number]>('SELECT module, operation FROM classification_labels WHERE classification_id = $1 ORDER BY position, id', [classificationId]),
+    query<{ payload: ReviewContext['provenance'] }>('SELECT payload FROM classification_provenance WHERE classification_id = $1', [classificationId]),
+    query<ReviewContext['reviews'][number]>(`SELECT id::text, reviewer, action, notes, reviewed_at::text AS "reviewedAt",
+      before_snapshot AS before, after_snapshot AS after FROM review_decisions WHERE classification_id = $1 ORDER BY reviewed_at, id`, [classificationId])
+  ]);
   const classification = await query<{
     final_reason: string | null;
     notes_for_human: string | null;
@@ -143,13 +156,17 @@ export async function loadReviewContext(classificationId: string): Promise<Revie
     confidence: number | null;
     rationale: string | null;
     needs_review: boolean;
+    requested_model: string | null;
+    model: string | null;
   }>(`
-    SELECT id::text, provider, status, error, confidence, rationale, needs_review
+    SELECT id::text, provider, status, error, confidence, rationale, needs_review, requested_model, model
     FROM provider_votes WHERE classification_id = $1 ORDER BY position, id
   `, [classificationId]);
   const voteIds = voteResult.rows.map(row => row.id);
   const votesById = new Map<string, ProviderVote>(voteResult.rows.map(row => [row.id, {
     provider: row.provider,
+    requestedModel: row.requested_model ?? undefined,
+    model: row.model ?? undefined,
     status: row.status,
     error: row.error ?? undefined,
     confidence: row.confidence === null ? undefined : Number(row.confidence),
@@ -236,6 +253,9 @@ export async function loadReviewContext(classificationId: string): Promise<Revie
   `, [classificationId]);
 
   return {
+    labels: labels.rows,
+    provenance: provenance.rows[0]?.payload ?? null,
+    reviews: reviews.rows,
     final: {
       reason: classification.rows[0].final_reason ?? undefined,
       notesForHuman: classification.rows[0].notes_for_human ?? undefined,

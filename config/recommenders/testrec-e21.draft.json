@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "testrec-ednaldo-e21",
+  "version": "contract.1",
+  "name": "Casos de teste — contrato de dados da tese de Ednaldo (2021)",
+  "state": "draft",
+  "attributes": [
+    { "id": "story_id", "name": "Identificador da história na fonte", "valueType": { "type": "text" }, "scope": "artifact", "cardinality": "single", "required": true, "role": "context", "representation": "none" },
+    { "id": "module", "name": "Módulo", "valueType": { "type": "category" }, "scope": "artifact", "cardinality": "single", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "operation", "name": "Operação", "valueType": { "type": "category" }, "scope": "artifact", "cardinality": "single", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "platforms", "name": "Plataformas", "valueType": { "type": "category" }, "scope": "project", "cardinality": "many", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "application_domain", "name": "Domínio da aplicação", "valueType": { "type": "category" }, "scope": "project", "cardinality": "single", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "acceptance_criteria", "name": "IDs de critérios de aceitação", "valueType": { "type": "category" }, "scope": "artifact", "cardinality": "many", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "nfrs", "name": "IDs de RNFs de contexto", "valueType": { "type": "category" }, "scope": "project", "cardinality": "many", "required": true, "role": "feature", "representation": "presence" },
+    { "id": "test_case_ids", "name": "IDs de casos de teste associados", "valueType": { "type": "category" }, "scope": "artifact", "cardinality": "many", "required": false, "role": "output", "representation": "none" }
+  ],
+  "method": {
+    "id": "testrec_e21_data_contract_v1",
+    "version": "contract.1",
+    "parameters": {
+      "status": "data_contract_only",
+      "reference": "E21",
+      "representation": "target_binary_presence",
+      "k": 3,
+      "similarity": "pending_Q01",
+      "aggregation": "pending_Q02"
+    },
+    "bindings": {
+      "story_id": "story_id", "module": "module", "operation": "operation", "platforms": "platforms",
+      "application_domain": "application_domain", "acceptance_criteria": "acceptance_criteria", "nfrs": "nfrs", "test_case_ids": "test_case_ids"
+    }
+  }
+}

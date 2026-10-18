@@ -1,3 +1,5 @@
+import type { ClassificationLabel, ClassificationProvenance } from './classification.js';
+
 export type Story = {
   id: string;
   text: string;
@@ -5,6 +7,8 @@ export type Story = {
   sprint: string;
   module: string;
   operation: string;
+  labels: ClassificationLabel[];
+  metricsSource: 'committee' | 'rules' | 'legacy';
   confidence: number;
   uncertainty: number;
   status: string;
@@ -38,6 +42,8 @@ export type FallbackSuggestion = {
 
 export type ProviderVote = {
   provider: string;
+  model?: string;
+  requestedModel?: string;
   status: string;
   error?: string;
   confidence?: number;
@@ -50,6 +56,10 @@ export type ProviderVote = {
 };
 
 export type ReviewContext = {
+  labels: ClassificationLabel[];
+  provenance: ClassificationProvenance | null;
+  reviews: Array<{ id: string; reviewer: string; action: string; notes: string | null; reviewedAt: string;
+    before: unknown; after: unknown }>;
   final: {
     reason?: string;
     notesForHuman?: string;

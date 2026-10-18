@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-17",
+  "node": "v24.11.1",
+  "scope": "Selected packages flagged by npm; resolved versions from lockfile, not a complete SBOM",
+  "packages": {
+    "@vitest/mocker": {
+      "before": "3.2.7",
+      "after": "4.1.12"
+    },
+    "baseline-browser-mapping": {
+      "before": "2.10.44",
+      "after": "2.11.29"
+    },
+    "browserslist": {
+      "before": "4.28.6",
+      "after": "4.29.3"
+    },
+    "concurrently": {
+      "before": "9.2.4",
+      "after": "9.2.5"
+    },
+    "multer": {
+      "before": "2.2.0",
+      "after": "2.4.0"
+    },
+    "nanoid": {
+      "before": "3.3.16",
+      "after": "3.3.20"
+    },
+    "postcss": {
+      "before": "8.5.21",
+      "after": "8.5.30"
+    },
+    "proxy-addr": {
+      "before": "2.0.7",
+      "after": "2.0.8"
+    },
+    "qs": {
+      "before": "6.15.3",
+      "after": "6.16.1"
+    },
+    "react-router": {
+      "before": "7.18.1",
+      "after": "7.18.4"
+    },
+    "react-router-dom": {
+      "before": "7.18.1",
+      "after": "7.18.4"
+    },
+    "shell-quote": {
+      "before": "1.9.0",
+      "after": "1.12.0"
+    },
+    "source-map-js": {
+      "before": "1.2.1",
+      "after": "1.2.2"
+    },
+    "tinypool": {
+      "before": "1.1.1",
+      "after": null
+    },
+    "vitest": {
+      "before": "3.2.7",
+      "after": "4.1.12"
+    }
+  }
+}

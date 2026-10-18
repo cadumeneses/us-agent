@@ -18,7 +18,9 @@ def main() -> None:
     load_dotenv()
     args = parse_args()
     base_url = os.getenv("US_AGENT_API_URL", "http://localhost:3333/api").rstrip("/")
-    response = requests.get(f"{base_url}/stories", params={"limit": 10_000}, timeout=30)
+    credential = os.getenv("INGEST_API_KEY", "")
+    headers = {"Authorization": f"Bearer {credential}"} if credential else {}
+    response = requests.get(f"{base_url}/stories", params={"limit": 10_000}, headers=headers, timeout=30)
     response.raise_for_status()
     stories = response.json()
     if args.project:

@@ -51,7 +51,7 @@ async function requireTarget(client: Pick<PoolClient, 'query'>, profiles: NfrPro
   const target = profiles.find(profile => profile.classificationId === id);
   if (target) return target;
   const exists = await client.query('SELECT 1 FROM classifications WHERE id = $1', [id]);
-  throw new NfrRequestError(exists.rowCount ? 409 : 404, exists.rowCount ? 'Select the latest classification for this user story before recommending NFRs.' : 'Classification not found.');
+  throw new NfrRequestError(exists.rowCount ? 409 : 404, exists.rowCount ? 'Selecione a classificação mais recente desta US para recomendar RNFs.' : 'Classificação não encontrada.');
 }
 
 export async function nfrContext(classificationId: string) {
@@ -90,28 +90,28 @@ export async function decideNfr(runId: string, itemKey: string, decision: 'accep
     const runs = await client.query<{ classification_id: string | null; result: NfrResult; input_snapshot: { target: NfrProfile } }>(
       'SELECT classification_id::text, result, input_snapshot FROM nfr_recommendation_runs WHERE id = $1 FOR UPDATE', [runId]);
     const run = runs.rows[0];
-    if (!run) throw new NfrRequestError(404, 'Run not found.');
+    if (!run) throw new NfrRequestError(404, 'Execução não encontrada.');
     const item = run.result.items.find(value => value.key === itemKey);
-    if (!item) throw new NfrRequestError(404, 'NFR not found in this run.');
+    if (!item) throw new NfrRequestError(404, 'RNF não encontrado nesta execução.');
     const previous = await client.query<{ decision: string }>('SELECT decision FROM nfr_recommendation_decisions WHERE run_id = $1 AND item_key = $2', [runId, itemKey]);
     if (previous.rows[0]) {
-      if (previous.rows[0].decision !== decision) throw new NfrRequestError(409, 'This NFR has already been assessed. Start a new run to assess it again.');
+      if (previous.rows[0].decision !== decision) throw new NfrRequestError(409, 'Este RNF já foi avaliado. Uma nova execução permite nova avaliação.');
       return { decision, alreadyRecorded: true };
     }
     if (decision === 'accepted') {
-      if (!run.classification_id) throw new NfrRequestError(409, 'The source classification was removed.');
+      if (!run.classification_id) throw new NfrRequestError(409, 'A classificação de origem foi removida.');
       // Same lock as manual detail editing: parallel acceptance cannot duplicate a link.
-      const current = await client.query<{ taxonomy_version: string; review_status: string; latest: boolean }>(`
-        SELECT c.taxonomy_version, c.review_status,
+      const current = await client.query<{ review_status: string; latest: boolean }>(`
+        SELECT c.review_status,
           c.id = (SELECT id FROM classifications WHERE story_id = c.story_id ORDER BY created_at DESC, id DESC LIMIT 1) AS latest
         FROM classifications c WHERE c.id = $1 FOR UPDATE
       `, [run.classification_id]);
       const c = current.rows[0];
       const labels = await client.query<{ module: string; operation: string }>('SELECT module, operation FROM classification_labels WHERE classification_id = $1', [run.classification_id]);
-      if (!c || !c.latest || c.taxonomy_version !== run.input_snapshot.target.taxonomyVersion ||
+      if (!c || !c.latest ||
           !usableClassification({ ...run.input_snapshot.target, reviewStatus: c.review_status }) ||
           !labels.rows.some(label => label.module === run.result.label?.module && label.operation === run.result.label?.operation)) {
-        throw new NfrRequestError(409, 'The classification changed. Generate a new recommendation before linking this NFR.');
+        throw new NfrRequestError(409, 'A classificação mudou. Gere uma nova recomendação antes de vincular este RNF.');
       }
       const existing = await client.query<Nfr>('SELECT nfr_type AS type, metric AS attribute, description AS sentence FROM story_non_functional_requirements WHERE classification_id = $1', [run.classification_id]);
       if (!existing.rows.some(nfr => nfrKey(nfr) === itemKey)) {

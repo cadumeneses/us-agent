@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "technology-demo",
+  "version": "1",
+  "name": "Linguagens de demonstração",
+  "kind": "list",
+  "selection": "any",
+  "source": "Exemplo sintético de infraestrutura; não representa uma base dos autores.",
+  "nodes": [
+    { "id": "typescript", "name": "TypeScript", "description": "Linguagem ilustrativa", "parentId": null }
+  ]
+}

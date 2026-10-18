@@ -1,0 +1,148 @@
+{
+  "format": "us-agent-json-v1",
+  "sha256": "e812b63e1a6b19e9dbe783493fbd46ab672258356aac868b9747b910349794ef",
+  "content": {
+    "checks": {
+      "concurrency": true,
+      "exactReferences": true,
+      "historicalRecovery": true,
+      "immutableVersions": true,
+      "internalAuthorization": true,
+      "originalBytes": true,
+      "retirementLock": true,
+      "rollback": true,
+      "versionedDemoArtifacts": true
+    },
+    "kind": "synthetic_catalog_integration",
+    "limitations": [
+      "no_original_author_data",
+      "no_persisted_TestRec_run",
+      "no_UI",
+      "not_an_empirical_evaluation"
+    ],
+    "publications": [
+      {
+        "content": {
+          "authorization": {
+            "basis": "synthetic",
+            "reference": "US-Agent authored synthetic catalog for local integration verification"
+          },
+          "catalog": {
+            "content": {
+              "id": "testrec-synthetic-catalog",
+              "items": [
+                {
+                  "executionMode": "manual",
+                  "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                  "id": "demo-create",
+                  "metadata": {
+                    "fixture": true
+                  },
+                  "purpose": "Verificar um fluxo sintético de cadastro",
+                  "title": "Criar registro sintético"
+                },
+                {
+                  "executionMode": "unspecified",
+                  "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                  "id": "demo-required",
+                  "metadata": {
+                    "extraSourceField": "Preserve without inventing scientific meaning",
+                    "fixture": true
+                  },
+                  "title": "Validar campos obrigatórios"
+                }
+              ],
+              "schemaVersion": 1,
+              "source": {
+                "kind": "synthetic",
+                "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+              },
+              "version": "1"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "92ac324a773d2fcd846ff9203083f84e2691b4021ced4f89af429aa8aa0dada8"
+          },
+          "file": {
+            "bom": true,
+            "byteLength": 1037,
+            "encoding": "utf-8",
+            "name": "synthetic-catalog.json",
+            "sha256": "b681c7807f343f6067799ad6d0521a54a2e34eb0d2b03f8c1c776f6ea08ae087"
+          },
+          "id": "testrec-synthetic-catalog",
+          "importerVersion": "test-case-json-v1",
+          "schemaVersion": 1,
+          "version": "1"
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "39bd2be0774078f760d746160b334d989d0a1110cd5145516bee98fc52a74bea"
+      },
+      {
+        "content": {
+          "authorization": {
+            "basis": "synthetic",
+            "reference": "US-Agent authored synthetic catalog for local integration verification"
+          },
+          "catalog": {
+            "content": {
+              "id": "testrec-synthetic-catalog",
+              "items": [
+                {
+                  "executionMode": "manual",
+                  "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação\nE um passo sintético alterado",
+                  "id": "demo-create",
+                  "metadata": {
+                    "fixture": true
+                  },
+                  "purpose": "Verificar um fluxo sintético de cadastro",
+                  "title": "Criar registro sintético"
+                },
+                {
+                  "executionMode": "unspecified",
+                  "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                  "id": "demo-required",
+                  "metadata": {
+                    "extraSourceField": "Preserve without inventing scientific meaning",
+                    "fixture": true
+                  },
+                  "title": "Validar campos obrigatórios"
+                }
+              ],
+              "schemaVersion": 1,
+              "source": {
+                "kind": "synthetic",
+                "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+              },
+              "version": "2"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "5f26f66472a33190fe91f5b3be9287cb9b02e22234e85e978c099e4785b0bcfd"
+          },
+          "file": {
+            "bom": false,
+            "byteLength": 845,
+            "encoding": "utf-8",
+            "name": "synthetic-catalog.json",
+            "sha256": "3c2f576ce235e070bd25e730ac20749c18bc6b23630044647a00a41f78cc6627"
+          },
+          "id": "testrec-synthetic-catalog",
+          "importerVersion": "test-case-json-v1",
+          "schemaVersion": 1,
+          "version": "2"
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "138958e18cd897910a48707c2a6d146d54c9e4c7c13233101d2ec61f45023e6b"
+      }
+    ],
+    "schema": "test_case_check_a464427837fd49c4bacf675300cfd092",
+    "schemaVersion": 1,
+    "sourceHashes": {
+      "apps/api/src/domain/test-case-publication.ts": "9a7627e4c68049e253a477004ee3fe7ad39b16257ddf0554b210489d28d28edf",
+      "apps/api/src/routes/api.ts": "130463db116662d6ffad7cf85e9ca1b41bbae5dfc36a2b3948f42872eb8a7c6d",
+      "apps/api/src/routes/test-case-catalogs.ts": "9937a838847d3e6c054af0ee081648e86717dc4a420e2adabba31c34676e1cdc",
+      "apps/api/src/services/test-case-catalogs.ts": "7c5691a7c823ea2856bf939f666c1e6917b8d9a93c9bcfeb12c03aca4f30ab4e",
+      "database/migrations/022_test_case_catalogs.sql": "01e4aee53aa07d693e19dc81f26b717427633117cd56fe950a4e9b32d256c178",
+      "scripts/check-test-case-catalogs.mjs": "941fec1504abf160af3a9a4d6be70f8f8b2b569ab9164fbff4647758ef39cbaa"
+    }
+  }
+}
