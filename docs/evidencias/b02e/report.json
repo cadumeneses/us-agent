@@ -1,0 +1,277 @@
+{
+  "format": "us-agent-json-v1",
+  "sha256": "2f35ea418e8a31b157d76bd5d572f88b93bb9c49490281367f77473a94fb2351",
+  "content": {
+    "after": {
+      "acceptedRecords": null,
+      "excludedRecords": 0,
+      "parseableInIsolation": 1312,
+      "physicalUnits": 1363,
+      "recoveredRecords": null,
+      "repairedCells": 0,
+      "requiringReview": 51
+    },
+    "authorIntentConfirmed": false,
+    "before": {
+      "acceptedRecords": null,
+      "excludedRecords": 0,
+      "parseableInIsolation": 1306,
+      "physicalUnits": 1363,
+      "recoveredRecords": null,
+      "repairedCells": 0,
+      "requiringReview": 57
+    },
+    "changes": {
+      "encodedTitleCells": 6,
+      "excludedRecords": 0,
+      "identityAliasesApplied": 0,
+      "sourceCellCharactersChanged": 0
+    },
+    "limits": [
+      "literal_cells_are_a_declared_local_convention",
+      "no_semantic_repair_of_odd_or_duplicated_text",
+      "remaining_spans_profiles_aliases_and_subset_unresolved",
+      "Q01_Q02_Q03_open",
+      "no_operational_import"
+    ],
+    "logicalRecordBoundariesConfirmed": false,
+    "outputBytes": 132768,
+    "outputSha256": "ff144ec0730363bd0591722132fb01f927628ef2cda14ef4fff810687cdf22e4",
+    "patches": [
+      {
+        "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0MzsyOTE7Ik1hcmNhciBjb252aWRhZG9zIGxpc3RhZG9zIG5hIHBlc3F1aXNhIGNvbW8gIiJjb252aXRlIGVudmlhZG8iIiAiIkV2ZW50IERyaXZlbiBTeXN0ZW0gZm9yIEJ1c2luZXNzIFNlcnZpY2VzIEludGVncmF0aW9uIjsyMQo=",
+        "afterSha256": "45aad75f5725b10bbce9e50b8193058cac7bf147a81b31b455685f3aafbec468",
+        "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0MzsyOTE7TWFyY2FyIGNvbnZpZGFkb3MgbGlzdGFkb3MgbmEgcGVzcXVpc2EgY29tbyAiY29udml0ZSBlbnZpYWRvIiAiRXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247MjEK",
+        "beforeCells": [
+          "Event Driven System for Business Services Integration",
+          "#243",
+          "291",
+          "Marcar convidados listados na pesquisa como \"convite enviado\" \"Event Driven System for Business Services Integration",
+          "21"
+        ],
+        "beforeSha256": "9478179fc225f311dba745588ed60be5b3c174261768553994723dd70fb8717e",
+        "operation": "quote_unquoted_title_preserving_literal_characters",
+        "outputEndByteExclusive": 28035,
+        "outputStartByte": 27847,
+        "physicalLine": 292,
+        "sourceEndByteExclusive": 28030,
+        "sourceStartByte": 27847
+      },
+      {
+        "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI1My0yOzMwNzsiQ3JpYXIgIiIiIk91dHJvcyBMaW5rcyIiIGNvbSBub21lIGrDoSBhZGljaW9uYWRvIGVtIG91dHJvIGxpbmsgbm8gbWVzbW8gZXZlbnRvIGVzcGVjw61maWNvLiI7MyAgICAK",
+        "afterSha256": "2940834f1bac57c018350e679e9d62a6d3305d2ccd7c33905144f10436c13bb7",
+        "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI1My0yOzMwNztDcmlhciAiIk91dHJvcyBMaW5rcyIgY29tIG5vbWUgasOhIGFkaWNpb25hZG8gZW0gb3V0cm8gbGluayBubyBtZXNtbyBldmVudG8gZXNwZWPDrWZpY28uOzMgICAgCg==",
+        "beforeCells": [
+          "Event Driven System for Business Services Integration",
+          "#253-2",
+          "307",
+          "Criar \"\"Outros Links\" com nome já adicionado em outro link no mesmo evento específico.",
+          "3    "
+        ],
+        "beforeSha256": "14104a62ccbf54d6c10e2e0920381791026988dc752eac4ca704004671a5b050",
+        "operation": "quote_unquoted_title_preserving_literal_characters",
+        "outputEndByteExclusive": 29895,
+        "outputStartByte": 29730,
+        "physicalLine": 308,
+        "sourceEndByteExclusive": 29885,
+        "sourceStartByte": 29725
+      },
+      {
+        "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI1My0yOzMxMTsiVmFsaWRhw6fDtWVzIGRlIGNhbXBvcyBkdXJhbnRlIGEgY3JpYcOnw6NvIGRlICIiT3V0cm9zIExpbmtzIiIgZXZlbnRvIGVzcGVjw61maWNvIjszNCAgICAgICAgICAgICAK",
+        "afterSha256": "163e1d17427490916bbf7aa187c03aaa8057707a3a4e935de4bbc4d0743a63bc",
+        "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI1My0yOzMxMTtWYWxpZGHDp8O1ZXMgZGUgY2FtcG9zIGR1cmFudGUgYSBjcmlhw6fDo28gZGUgIk91dHJvcyBMaW5rcyIgZXZlbnRvIGVzcGVjw61maWNvOzM0ICAgICAgICAgICAgIAo=",
+        "beforeCells": [
+          "Event Driven System for Business Services Integration",
+          "#253-2",
+          "311",
+          "Validações de campos durante a criação de \"Outros Links\" evento específico",
+          "34             "
+        ],
+        "beforeSha256": "0d694139ef77621083a8ce19db62ccfdfa6a87b5d61f2cffeeffe0abc45d8968",
+        "operation": "quote_unquoted_title_preserving_literal_characters",
+        "outputEndByteExclusive": 30494,
+        "outputStartByte": 30329,
+        "physicalLine": 312,
+        "sourceEndByteExclusive": 30480,
+        "sourceStartByte": 30319
+      },
+      {
+        "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI2MzszMjM7IlZhbGlkYcOnw6NvIGRhIHNlw6fDo28gIiJQYXJ0aWNpcGHDp8OjbyBlbSBFdmVudG9zIiIgIiJFdmVudCBEcml2ZW4gU3lzdGVtIGZvciBCdXNpbmVzcyBTZXJ2aWNlcyBJbnRlZ3JhdGlvbiI7MzQK",
+        "afterSha256": "097d0626b1b39e35fdbf6e9aafbf2651bc57d1b8dbf50e4d52d1015b12b7b24b",
+        "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI2MzszMjM7VmFsaWRhw6fDo28gZGEgc2XDp8OjbyAiUGFydGljaXBhw6fDo28gZW0gRXZlbnRvcyIgIkV2ZW50IERyaXZlbiBTeXN0ZW0gZm9yIEJ1c2luZXNzIFNlcnZpY2VzIEludGVncmF0aW9uOzM0Cg==",
+        "beforeCells": [
+          "Event Driven System for Business Services Integration",
+          "#263",
+          "323",
+          "Validação da seção \"Participação em Eventos\" \"Event Driven System for Business Services Integration",
+          "34"
+        ],
+        "beforeSha256": "0e12b64aef59c0ea96a7c97a8980655e917ada0de560031bf6e27d9cf92cd0f0",
+        "operation": "quote_unquoted_title_preserving_literal_characters",
+        "outputEndByteExclusive": 32046,
+        "outputStartByte": 31869,
+        "physicalLine": 324,
+        "sourceEndByteExclusive": 32027,
+        "sourceStartByte": 31855
+      },
+      {
+        "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0Mi0zOzMzMTsiVmFsaWRhdGUgcmVzZXQgZnVuY3Rpb24gaW4gdGhlICIiZmllbGQiIiIiUmVzZXQiIiBBbGwgIiJDb3VudGVycyIiIiIiIiBpbiBkZXZpY2UgVHJhbnNwb25kZXIgIiJFdmVudCBEcml2ZW4gU3lzdGVtIGZvciBCdXNpbmVzcyBTZXJ2aWNlcyBJbnRlZ3JhdGlvbiI7Ngo=",
+        "afterSha256": "2bb431605713faad089cfb4f36a85e02f16fb3409c1fbaacb51fac7ade5edc6d",
+        "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0Mi0zOzMzMTtWYWxpZGF0ZSByZXNldCBmdW5jdGlvbiBpbiB0aGUgImZpZWxkIiJSZXNldCIgQWxsICJDb3VudGVycyIiIiBpbiBkZXZpY2UgVHJhbnNwb25kZXIgIkV2ZW50IERyaXZlbiBTeXN0ZW0gZm9yIEJ1c2luZXNzIFNlcnZpY2VzIEludGVncmF0aW9uOzYK",
+        "beforeCells": [
+          "Event Driven System for Business Services Integration",
+          "#242-3",
+          "331",
+          "Validate reset function in the \"field\"\"Reset\" All \"Counters\"\"\" in device Transponder \"Event Driven System for Business Services Integration",
+          "6"
+        ],
+        "beforeSha256": "3a971e1a4672c27c8ebd2b136e3b5f6cb0549843d6dbe19f523ccbcdf8420a2d",
+        "operation": "quote_unquoted_title_preserving_literal_characters",
+        "outputEndByteExclusive": 33248,
+        "outputStartByte": 33030,
+        "physicalLine": 332,
+        "sourceEndByteExclusive": 33218,
+        "sourceStartByte": 33011
+      },
+      {
+        "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI2NTszMzc7IkFjdGlvbiB0aGUgb2YgIiIiIkNsb3NlIiIgYnV0dG9uIGluIGFsbCBzY3JlZW5zIHRvIERldmljZSBTZXRVcCI7MzQgICAgCg==",
+        "afterSha256": "fbd23eb398e9830db018759031e785871cbf90f72dd9d4d16581915bbb04b6d4",
+        "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI2NTszMzc7QWN0aW9uIHRoZSBvZiAiIkNsb3NlIiBidXR0b24gaW4gYWxsIHNjcmVlbnMgdG8gRGV2aWNlIFNldFVwOzM0ICAgIAo=",
+        "beforeCells": [
+          "Event Driven System for Business Services Integration",
+          "#265",
+          "337",
+          "Action the of \"\"Close\" button in all screens to Device SetUp",
+          "34    "
+        ],
+        "beforeSha256": "4d2c733efe305f6dbf3f20627cd22d0b53e286701c63c6751e36f5aeffd56b4b",
+        "operation": "quote_unquoted_title_preserving_literal_characters",
+        "outputEndByteExclusive": 33952,
+        "outputStartByte": 33816,
+        "physicalLine": 338,
+        "sourceEndByteExclusive": 33917,
+        "sourceStartByte": 33786
+      }
+    ],
+    "plan": {
+      "content": {
+        "decisions": [
+          {
+            "beforeCells": [
+              "Event Driven System for Business Services Integration",
+              "#243",
+              "291",
+              "Marcar convidados listados na pesquisa como \"convite enviado\" \"Event Driven System for Business Services Integration",
+              "21"
+            ],
+            "nextSpanSha256": "b6a322392a1b4b838f5618b50dceb0e4c25ec0287bbeb53d8005f12e37c33665",
+            "operation": "quote_unquoted_title_preserving_literal_characters",
+            "physicalLine": 292,
+            "previousSpanSha256": "8f05b26120389e923b214ea85901826d3547e340e24ed2cfa803a3175397a56a",
+            "spanSha256": "9478179fc225f311dba745588ed60be5b3c174261768553994723dd70fb8717e"
+          },
+          {
+            "beforeCells": [
+              "Event Driven System for Business Services Integration",
+              "#253-2",
+              "307",
+              "Criar \"\"Outros Links\" com nome já adicionado em outro link no mesmo evento específico.",
+              "3    "
+            ],
+            "nextSpanSha256": "062efce80681b8ca4e516b2b065889f4c1443787949db53177362a07e953531b",
+            "operation": "quote_unquoted_title_preserving_literal_characters",
+            "physicalLine": 308,
+            "previousSpanSha256": "4cd82157cc57b6287e412362084b409e9a963dc638b25e5c35983067b0153781",
+            "spanSha256": "14104a62ccbf54d6c10e2e0920381791026988dc752eac4ca704004671a5b050"
+          },
+          {
+            "beforeCells": [
+              "Event Driven System for Business Services Integration",
+              "#253-2",
+              "311",
+              "Validações de campos durante a criação de \"Outros Links\" evento específico",
+              "34             "
+            ],
+            "nextSpanSha256": "213416b31da4a24d87783e7fd681f1251e02157f4c76e4cf0e36844d9e6915af",
+            "operation": "quote_unquoted_title_preserving_literal_characters",
+            "physicalLine": 312,
+            "previousSpanSha256": "c804eeb4380d08ce79d08f648929c97cd9d4503641ab7a40be6c4de8b25044cc",
+            "spanSha256": "0d694139ef77621083a8ce19db62ccfdfa6a87b5d61f2cffeeffe0abc45d8968"
+          },
+          {
+            "beforeCells": [
+              "Event Driven System for Business Services Integration",
+              "#263",
+              "323",
+              "Validação da seção \"Participação em Eventos\" \"Event Driven System for Business Services Integration",
+              "34"
+            ],
+            "nextSpanSha256": "68ad9b4a7698407af277d6a05331cfe439d24b60829efdd2a66f9c3e791263b0",
+            "operation": "quote_unquoted_title_preserving_literal_characters",
+            "physicalLine": 324,
+            "previousSpanSha256": "f54ec9f162a35e5fa95d014b457f47b1616c4d32763ac6035931a70077b8ea0a",
+            "spanSha256": "0e12b64aef59c0ea96a7c97a8980655e917ada0de560031bf6e27d9cf92cd0f0"
+          },
+          {
+            "beforeCells": [
+              "Event Driven System for Business Services Integration",
+              "#242-3",
+              "331",
+              "Validate reset function in the \"field\"\"Reset\" All \"Counters\"\"\" in device Transponder \"Event Driven System for Business Services Integration",
+              "6"
+            ],
+            "nextSpanSha256": "3de34918e1326d1a054259251caf8f5a0bdce35e4d3b8001f5145e4de0b15878",
+            "operation": "quote_unquoted_title_preserving_literal_characters",
+            "physicalLine": 332,
+            "previousSpanSha256": "679fd41abd597f5854423c6c3ec2fcb6d3198b3cdda75e276a9032b539fb714a",
+            "spanSha256": "3a971e1a4672c27c8ebd2b136e3b5f6cb0549843d6dbe19f523ccbcdf8420a2d"
+          },
+          {
+            "beforeCells": [
+              "Event Driven System for Business Services Integration",
+              "#265",
+              "337",
+              "Action the of \"\"Close\" button in all screens to Device SetUp",
+              "34    "
+            ],
+            "nextSpanSha256": "c5d0d9b8b8864e627aa1b1fc42e362bdce73520f09e696b622b40fdd20a5638c",
+            "operation": "quote_unquoted_title_preserving_literal_characters",
+            "physicalLine": 338,
+            "previousSpanSha256": "40b8c9004a0102624ca54fa649021b19a0904ce1bfe01c2269d558d5613ff7d1",
+            "spanSha256": "4d2c733efe305f6dbf3f20627cd22d0b53e286701c63c6751e36f5aeffd56b4b"
+          }
+        ],
+        "id": "e26-six-isolated-literal-titles",
+        "review": {
+          "actor": "codex_technical_review",
+          "basis": "explicit_literal_cells_transport_convention",
+          "date": "2026-10-18",
+          "validation": "not_author_or_supervisor_validation"
+        },
+        "schemaVersion": 1,
+        "source": {
+          "bytes": 132733,
+          "file": "test_cases_for_user_stories.csv",
+          "sha256": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a"
+        },
+        "version": "e26-literal-title-encoding-v1"
+      },
+      "format": "us-agent-json-v1",
+      "sha256": "8ae9ee5f3d710aac5e808c6c2191724e710567b68f30ac8b6632704054734117"
+    },
+    "readyForScientificExecution": false,
+    "schemaVersion": 1,
+    "scientificReproduction": false,
+    "scope": "literal_cells_transport_normalization_only",
+    "sourceBytes": 132733,
+    "sourceSha256": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a",
+    "version": "e26-literal-title-encoding-v1",
+    "wholeFileAfter": {
+      "error": {
+        "line": 86,
+        "message": "Aspas ou conteúdo após aspas inválidos no CSV."
+      },
+      "state": "blocked"
+    }
+  }
+}

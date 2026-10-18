@@ -1,0 +1,4260 @@
+{
+  "format": "us-agent-json-v1",
+  "sha256": "ea1057d7202f5751ff263a792eab9a01f91a8eddb4aa2a8ecc7b66194d8227bb",
+  "content": {
+    "auditOfExplicitDerivedCombination": {
+      "content": {
+        "catalog": {
+          "acceptanceCriteria": 59,
+          "distinctAcceptanceCriterionIds": 59,
+          "nonemptyStandardTestIds": 64,
+          "standardTestIdsAreCatalogContents": false
+        },
+        "comparisonPolicy": "trim_headers_and_values_remove_single_leading_hash_for_story_identity_no_other_alias_resolution",
+        "files": [
+          {
+            "blankValues": {
+              "Descrição": 0,
+              "ID": 0
+            },
+            "comparisonHeaders": [
+              "ID",
+              "Descrição"
+            ],
+            "formatError": null,
+            "headers": [
+              "ID",
+              "Descrição"
+            ],
+            "malformedRows": [],
+            "missingIdentityRows": null,
+            "name": "acceptance_criteria_data.csv",
+            "rows": 59,
+            "uniqueProjects": 0,
+            "uniqueStoryKeys": 0,
+            "validRows": 59
+          },
+          {
+            "blankValues": {
+              "DESC_Task": 276,
+              "DESC_US": 0,
+              "ID (mapeamento)": 90,
+              "ID_Task": 468,
+              "ID_US": 0,
+              "Mapeado? (SIM ou NAO)": 210,
+              "Módulo": 200,
+              "Operação": 203,
+              "Origem": 280,
+              "Plataforma": 287,
+              "Projeto": 0,
+              "Tarefa": 473,
+              "Tipo": 213
+            },
+            "comparisonHeaders": [
+              "Módulo",
+              "Operação",
+              "Tarefa",
+              "ID (mapeamento)",
+              "Projeto",
+              "ID_US",
+              "DESC_US",
+              "Plataforma",
+              "ID_Task",
+              "DESC_Task",
+              "Tipo",
+              "Mapeado? (SIM ou NAO)",
+              "Origem"
+            ],
+            "formatError": null,
+            "headers": [
+              "Módulo",
+              "Operação",
+              "Tarefa",
+              "ID (mapeamento)",
+              "Projeto",
+              "ID_US",
+              "DESC_US",
+              "Plataforma",
+              "ID_Task",
+              "DESC_Task",
+              "Tipo",
+              "Mapeado? (SIM ou NAO)",
+              "Origem"
+            ],
+            "malformedRows": [],
+            "missingIdentityRows": 0,
+            "name": "categorized_user_stories.csv",
+            "rows": 568,
+            "uniqueProjects": 17,
+            "uniqueStoryKeys": 304,
+            "validRows": 568
+          },
+          {
+            "blankValues": {
+              "ID": 0,
+              "ID_STD_TC": 76,
+              "ID_TC": 0,
+              "ID_US": 0,
+              "Projeto": 0
+            },
+            "comparisonHeaders": [
+              "Projeto",
+              "ID_US",
+              "ID",
+              "ID_TC",
+              "ID_STD_TC"
+            ],
+            "formatError": null,
+            "headers": [
+              "Projeto",
+              "ID_US",
+              "ID",
+              "ID_TC",
+              "ID_STD_TC                            "
+            ],
+            "malformedRows": [],
+            "missingIdentityRows": 0,
+            "name": "test_cases_for_user_stories.csv",
+            "rows": 1354,
+            "uniqueProjects": 17,
+            "uniqueStoryKeys": 249,
+            "validRows": 1354
+          },
+          {
+            "blankValues": {
+              "CA": 24,
+              "ID_STD_AC": 8,
+              "ID_TC": 152,
+              "ID_US": 0,
+              "Projeto": 0,
+              "RNFs": 0
+            },
+            "comparisonHeaders": [
+              "Projeto",
+              "ID_US",
+              "ID_TC",
+              "CA",
+              "RNFs",
+              "ID_STD_AC"
+            ],
+            "formatError": null,
+            "headers": [
+              "Projeto",
+              "ID_US",
+              "ID_TC",
+              "CA",
+              "RNFs",
+              "ID_STD_AC"
+            ],
+            "malformedRows": [],
+            "missingIdentityRows": 0,
+            "name": "user_stories_test_cases.csv",
+            "rows": 690,
+            "uniqueProjects": 10,
+            "uniqueStoryKeys": 130,
+            "validRows": 690
+          }
+        ],
+        "imported": false,
+        "joins": [
+          {
+            "absentFromCategorized": 0,
+            "categorizedAbsentFromFile": 0,
+            "file": "categorized_user_stories.csv",
+            "matchingCategorizedStoryKeys": 304
+          },
+          {
+            "absentFromCategorized": 34,
+            "categorizedAbsentFromFile": 89,
+            "file": "test_cases_for_user_stories.csv",
+            "matchingCategorizedStoryKeys": 215
+          },
+          {
+            "absentFromCategorized": 2,
+            "categorizedAbsentFromFile": 176,
+            "file": "user_stories_test_cases.csv",
+            "matchingCategorizedStoryKeys": 128
+          }
+        ],
+        "paperComparison": {
+          "reason": "Source files include different row granularities and populations; no selection manifest/folds/code located in this record.",
+          "reportedOffline": {
+            "distinctTestCases": 1077,
+            "projects": 13,
+            "stories": 217
+          },
+          "sourceSubsetConfirmed": false
+        },
+        "profile": {
+          "applicationDomainColumnPresent": false,
+          "conflictingStories": 13,
+          "gherkinColumnPresent": false,
+          "incompleteStories": 51,
+          "storiesWithAllRequiredProfileColumns": 253,
+          "uniqueStoryKeys": 304
+        },
+        "readiness": {
+          "blockers": [
+            "confirm_exact_experimental_subset_and_folds",
+            "review_malformed_rows_and_missing_fields_without_silent_exclusions",
+            "resolve_profile_conflicts_and_cross_file_identities",
+            "obtain_domain_values_and_complete_test_artifacts",
+            "confirm_Euclidean_similarity_and_item_associations",
+            "confirm_per_target_counts_and_metric_aggregation"
+          ],
+          "readyForScientificExecution": false
+        },
+        "scientificReproduction": false,
+        "version": "e26-source-audit-v1"
+      },
+      "format": "us-agent-json-v1",
+      "sha256": "6846447c43aa3b8a5e11bb82f80115777324b2562f88e920e3c1e4a483867456"
+    },
+    "derivation": {
+      "content": {
+        "authorIntentConfirmed": false,
+        "headers": [
+          "Projeto",
+          "ID_US",
+          "ID",
+          "ID_TC",
+          "ID_STD_TC                            "
+        ],
+        "limits": [
+          "candidate_cross_version_derivation_not_an_original_author_dataset",
+          "earlier_source_cells_adopted_only_at_explicit_reviewed_spans",
+          "unmodified_latest_bytes_preserved_outside_patches",
+          "literal_title_convention_does_not_confirm_author_intent",
+          "no_profile_domain_catalog_completion_or_alias_resolution",
+          "experimental_subset_folds_and_Q01_Q03_unconfirmed",
+          "not_an_empirical_evaluation"
+        ],
+        "missingStandardTestIdRows": [
+          {
+            "ordinal": 1,
+            "physicalLine": 2,
+            "sourceRecordId": "1"
+          },
+          {
+            "ordinal": 2,
+            "physicalLine": 3,
+            "sourceRecordId": "2"
+          },
+          {
+            "ordinal": 3,
+            "physicalLine": 4,
+            "sourceRecordId": "3"
+          },
+          {
+            "ordinal": 4,
+            "physicalLine": 5,
+            "sourceRecordId": "4"
+          },
+          {
+            "ordinal": 5,
+            "physicalLine": 6,
+            "sourceRecordId": "5"
+          },
+          {
+            "ordinal": 6,
+            "physicalLine": 7,
+            "sourceRecordId": "6"
+          },
+          {
+            "ordinal": 7,
+            "physicalLine": 8,
+            "sourceRecordId": "7"
+          },
+          {
+            "ordinal": 8,
+            "physicalLine": 9,
+            "sourceRecordId": "8"
+          },
+          {
+            "ordinal": 9,
+            "physicalLine": 10,
+            "sourceRecordId": "9"
+          },
+          {
+            "ordinal": 10,
+            "physicalLine": 11,
+            "sourceRecordId": "10"
+          },
+          {
+            "ordinal": 11,
+            "physicalLine": 12,
+            "sourceRecordId": "11"
+          },
+          {
+            "ordinal": 12,
+            "physicalLine": 13,
+            "sourceRecordId": "12"
+          },
+          {
+            "ordinal": 13,
+            "physicalLine": 14,
+            "sourceRecordId": "13"
+          },
+          {
+            "ordinal": 14,
+            "physicalLine": 15,
+            "sourceRecordId": "14"
+          },
+          {
+            "ordinal": 15,
+            "physicalLine": 16,
+            "sourceRecordId": "15"
+          },
+          {
+            "ordinal": 16,
+            "physicalLine": 17,
+            "sourceRecordId": "16"
+          },
+          {
+            "ordinal": 17,
+            "physicalLine": 18,
+            "sourceRecordId": "17"
+          },
+          {
+            "ordinal": 18,
+            "physicalLine": 19,
+            "sourceRecordId": "18"
+          },
+          {
+            "ordinal": 19,
+            "physicalLine": 20,
+            "sourceRecordId": "19"
+          },
+          {
+            "ordinal": 20,
+            "physicalLine": 21,
+            "sourceRecordId": "20"
+          },
+          {
+            "ordinal": 21,
+            "physicalLine": 22,
+            "sourceRecordId": "21"
+          },
+          {
+            "ordinal": 22,
+            "physicalLine": 23,
+            "sourceRecordId": "22"
+          },
+          {
+            "ordinal": 23,
+            "physicalLine": 24,
+            "sourceRecordId": "23"
+          },
+          {
+            "ordinal": 24,
+            "physicalLine": 25,
+            "sourceRecordId": "24"
+          },
+          {
+            "ordinal": 25,
+            "physicalLine": 26,
+            "sourceRecordId": "25"
+          },
+          {
+            "ordinal": 26,
+            "physicalLine": 27,
+            "sourceRecordId": "26"
+          },
+          {
+            "ordinal": 27,
+            "physicalLine": 28,
+            "sourceRecordId": "27"
+          },
+          {
+            "ordinal": 28,
+            "physicalLine": 29,
+            "sourceRecordId": "28"
+          },
+          {
+            "ordinal": 29,
+            "physicalLine": 30,
+            "sourceRecordId": "29"
+          },
+          {
+            "ordinal": 30,
+            "physicalLine": 31,
+            "sourceRecordId": "30"
+          },
+          {
+            "ordinal": 31,
+            "physicalLine": 32,
+            "sourceRecordId": "31"
+          },
+          {
+            "ordinal": 32,
+            "physicalLine": 33,
+            "sourceRecordId": "32"
+          },
+          {
+            "ordinal": 33,
+            "physicalLine": 34,
+            "sourceRecordId": "33"
+          },
+          {
+            "ordinal": 34,
+            "physicalLine": 35,
+            "sourceRecordId": "34"
+          },
+          {
+            "ordinal": 35,
+            "physicalLine": 36,
+            "sourceRecordId": "35"
+          },
+          {
+            "ordinal": 36,
+            "physicalLine": 37,
+            "sourceRecordId": "36"
+          },
+          {
+            "ordinal": 37,
+            "physicalLine": 38,
+            "sourceRecordId": "37"
+          },
+          {
+            "ordinal": 38,
+            "physicalLine": 39,
+            "sourceRecordId": "38"
+          },
+          {
+            "ordinal": 39,
+            "physicalLine": 40,
+            "sourceRecordId": "39"
+          },
+          {
+            "ordinal": 40,
+            "physicalLine": 41,
+            "sourceRecordId": "40"
+          },
+          {
+            "ordinal": 41,
+            "physicalLine": 42,
+            "sourceRecordId": "41"
+          },
+          {
+            "ordinal": 42,
+            "physicalLine": 43,
+            "sourceRecordId": "42"
+          },
+          {
+            "ordinal": 43,
+            "physicalLine": 44,
+            "sourceRecordId": "43"
+          },
+          {
+            "ordinal": 44,
+            "physicalLine": 45,
+            "sourceRecordId": "44"
+          },
+          {
+            "ordinal": 45,
+            "physicalLine": 46,
+            "sourceRecordId": "45"
+          },
+          {
+            "ordinal": 46,
+            "physicalLine": 47,
+            "sourceRecordId": "46"
+          },
+          {
+            "ordinal": 47,
+            "physicalLine": 48,
+            "sourceRecordId": "47"
+          },
+          {
+            "ordinal": 48,
+            "physicalLine": 49,
+            "sourceRecordId": "48"
+          },
+          {
+            "ordinal": 49,
+            "physicalLine": 50,
+            "sourceRecordId": "49"
+          },
+          {
+            "ordinal": 50,
+            "physicalLine": 51,
+            "sourceRecordId": "50"
+          },
+          {
+            "ordinal": 51,
+            "physicalLine": 52,
+            "sourceRecordId": "51"
+          },
+          {
+            "ordinal": 52,
+            "physicalLine": 53,
+            "sourceRecordId": "52"
+          },
+          {
+            "ordinal": 53,
+            "physicalLine": 54,
+            "sourceRecordId": "53"
+          },
+          {
+            "ordinal": 54,
+            "physicalLine": 55,
+            "sourceRecordId": "54"
+          },
+          {
+            "ordinal": 55,
+            "physicalLine": 56,
+            "sourceRecordId": "55"
+          },
+          {
+            "ordinal": 56,
+            "physicalLine": 57,
+            "sourceRecordId": "56"
+          },
+          {
+            "ordinal": 57,
+            "physicalLine": 58,
+            "sourceRecordId": "57"
+          },
+          {
+            "ordinal": 58,
+            "physicalLine": 59,
+            "sourceRecordId": "58"
+          },
+          {
+            "ordinal": 59,
+            "physicalLine": 60,
+            "sourceRecordId": "59"
+          },
+          {
+            "ordinal": 60,
+            "physicalLine": 61,
+            "sourceRecordId": "60"
+          },
+          {
+            "ordinal": 61,
+            "physicalLine": 62,
+            "sourceRecordId": "61"
+          },
+          {
+            "ordinal": 62,
+            "physicalLine": 63,
+            "sourceRecordId": "62"
+          },
+          {
+            "ordinal": 63,
+            "physicalLine": 64,
+            "sourceRecordId": "63"
+          },
+          {
+            "ordinal": 64,
+            "physicalLine": 65,
+            "sourceRecordId": "64"
+          },
+          {
+            "ordinal": 65,
+            "physicalLine": 66,
+            "sourceRecordId": "65"
+          },
+          {
+            "ordinal": 66,
+            "physicalLine": 67,
+            "sourceRecordId": "66"
+          },
+          {
+            "ordinal": 67,
+            "physicalLine": 68,
+            "sourceRecordId": "67"
+          },
+          {
+            "ordinal": 87,
+            "physicalLine": 88,
+            "sourceRecordId": "87"
+          },
+          {
+            "ordinal": 94,
+            "physicalLine": 95,
+            "sourceRecordId": "94"
+          },
+          {
+            "ordinal": 326,
+            "physicalLine": 327,
+            "sourceRecordId": "326"
+          },
+          {
+            "ordinal": 575,
+            "physicalLine": 576,
+            "sourceRecordId": "575"
+          },
+          {
+            "ordinal": 599,
+            "physicalLine": 600,
+            "sourceRecordId": "599"
+          },
+          {
+            "ordinal": 649,
+            "physicalLine": 650,
+            "sourceRecordId": "649"
+          },
+          {
+            "ordinal": 1298,
+            "physicalLine": 1308,
+            "sourceRecordId": "1298"
+          },
+          {
+            "ordinal": 1313,
+            "physicalLine": 1323,
+            "sourceRecordId": "1313"
+          },
+          {
+            "ordinal": 1333,
+            "physicalLine": 1343,
+            "sourceRecordId": "1333"
+          }
+        ],
+        "operationalImport": false,
+        "outputBytes": 131503,
+        "outputSha256": "9fc294d935437bd87928882c309e22b44d09a8dca08575d61b93aa3c253d6444",
+        "patches": [
+          {
+            "afterBase64": "UkNQOyMyMzkyOzg1OyJIV0xMLTQyOltUQ10gVmVyaWZpY2FyIHByZXNlbsOnYSBkbyBib3TDo28gIiJDYW5jZWxhciIiIjsxNgo=",
+            "afterCells": [
+              "RCP",
+              "#2392",
+              "85",
+              "HWLL-42:[TC] Verificar presença do botão \"Cancelar\"",
+              "16"
+            ],
+            "afterSha256": "ced8d4a0f06a1a9763de3093843e6a5a35767872d1ea2e474535c652daee0b3b",
+            "beforeBase64": "UkNQOyMyMzkyOzg1O0hXTEwtNDI6W1RDXSBWZXJpZmljYXIgcHJlc2Vuw6dhIGRvIGJvdMOjbyAiIiJDYW5jZWxhciIiOzE2IiAgICAgICAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 7201,
+            "outputStartByte": 7127,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 5235,
+              "endPhysicalLine": 86,
+              "sha256": "bd04a99cfdcf32b247090229a6253c85beced85237a74ea5e97ad43f53e55d0c",
+              "startByte": 5165,
+              "startPhysicalLine": 86
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 7224,
+              "endPhysicalLine": 86,
+              "sha256": "71b01f474a8409cb5e387a338c1f589b8802b20d828f62071ec80b7f1ed8ba11",
+              "startByte": 7127,
+              "startPhysicalLine": 86
+            }
+          },
+          {
+            "afterBase64": "U1NQSTsjMjU3MC0yOzE2NjsiRU5FUlNILTI0MTpbVENdIFZlcmlmaWNhciBwcmVzZW7Dp2EgZG8gYm90w6NvICIiQ2FuY2VsYXIiIiI7MTYK",
+            "afterCells": [
+              "SSPI",
+              "#2570-2",
+              "166",
+              "ENERSH-241:[TC] Verificar presença do botão \"Cancelar\"",
+              "16"
+            ],
+            "afterSha256": "135f4ed5af08af6e9b815e694bce5dedc3a04a027ff00156116d3fe86801430b",
+            "beforeBase64": "U1NQSTsjMjU3MC0yOzE2NjtFTkVSU0gtMjQxOltUQ10gVmVyaWZpY2FyIHByZXNlbsOnYSBkbyBib3TDo28gIiIiQ2FuY2VsYXIiIjsxNiIgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 15089,
+            "outputStartByte": 15008,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 11401,
+              "endPhysicalLine": 167,
+              "sha256": "f1b75583c137a7c75d881f60ae629cbbdecda06f2a42ff80e73dcccacb0a45a7",
+              "startByte": 11324,
+              "startPhysicalLine": 167
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 15135,
+              "endPhysicalLine": 167,
+              "sha256": "3f1a49d16b683ceec22c2fc847b1cf3d809610e5d585130962aea188043541bf",
+              "startByte": 15031,
+              "startPhysicalLine": 167
+            }
+          },
+          {
+            "afterBase64": "U1NQSTsjMjI3OTsxNzk7IkVORVJTSC04MjpbVENdIFZhbGlkYXIgcHJlc2Vuw6dhIGRvIGJvdMOjbyAiIlNhaXIiIiI7MTYK",
+            "afterCells": [
+              "SSPI",
+              "#2279",
+              "179",
+              "ENERSH-82:[TC] Validar presença do botão \"Sair\"",
+              "16"
+            ],
+            "afterSha256": "43070eda987530058759f3de360115732a266a150793264d6dd83f82a8aaeca3",
+            "beforeBase64": "U1NQSTsjMjI3OTsxNzk7RU5FUlNILTgyOltUQ10gVmFsaWRhciBwcmVzZW7Dp2EgZG8gYm90w6NvICIiIlNhaXIiIjsxNiIgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 16413,
+            "outputStartByte": 16341,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 12469,
+              "endPhysicalLine": 180,
+              "sha256": "cea87b416a088a09610a482c631133b2c4366ed8fe7a9cafeb22cb69db4b4fe5",
+              "startByte": 12401,
+              "startPhysicalLine": 180
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 16482,
+              "endPhysicalLine": 180,
+              "sha256": "5a532614b657c7ac46a9c83427257b7a8150d01e819bb6701b413fae0faa0df7",
+              "startByte": 16387,
+              "startPhysicalLine": 180
+            }
+          },
+          {
+            "afterBase64": "U1NQSTsjMjI3NzsyMDg7IkVORVJTSC03MzpbVENdIFZlcmlmaWNhciBwcmVzZW7Dp2EgZG8gYm90w6NvICIiQ2FuY2VsYXIiIiI7MTYK",
+            "afterCells": [
+              "SSPI",
+              "#2277",
+              "208",
+              "ENERSH-73:[TC] Verificar presença do botão \"Cancelar\"",
+              "16"
+            ],
+            "afterSha256": "b8d137febb382f75bc0efbbb8ee15d2b8e0fb4934ca16055f2725dfe6869595a",
+            "beforeBase64": "U1NQSTsjMjI3NzsyMDg7RU5FUlNILTczOltUQ10gVmVyaWZpY2FyIHByZXNlbsOnYSBkbyBib3TDo28gIiIiQ2FuY2VsYXIiIjsxNiIgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 19521,
+            "outputStartByte": 19443,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 15017,
+              "endPhysicalLine": 209,
+              "sha256": "df5b6a2d3d64bbee5efd7d20c8668e9cb30166e58dd750483e78de37e5babbf3",
+              "startByte": 14943,
+              "startPhysicalLine": 209
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 19613,
+              "endPhysicalLine": 209,
+              "sha256": "5ea1ecd72e14834f97c4379a6f2685c92810b20a0655ee600a586160fbb405ce",
+              "startByte": 19512,
+              "startPhysicalLine": 209
+            }
+          },
+          {
+            "afterBase64": "U1NQSTsjMjU4OS0xOzIyNDsiRU5FUlNILTk4OltUQ10gVmVyaWZpY2FyIHByZXNlbsOnYSBkbyBib3TDo28gIiJDYW5jZWxhciIiIjsxNgo=",
+            "afterCells": [
+              "SSPI",
+              "#2589-1",
+              "224",
+              "ENERSH-98:[TC] Verificar presença do botão \"Cancelar\"",
+              "16"
+            ],
+            "afterSha256": "f0f585e2e339f5599d4d2151aab84cb7caf9c1066a7c3f5a6ddc3e25b0a16573",
+            "beforeBase64": "U1NQSTsjMjU4OS0xOzIyNDtFTkVSU0gtOTg6W1RDXSBWZXJpZmljYXIgcHJlc2Vuw6dhIGRvIGJvdMOjbyAiIiJDYW5jZWxhciIiOzE2IiAgICAgICAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 21273,
+            "outputStartByte": 21193,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 16477,
+              "endPhysicalLine": 225,
+              "sha256": "b6179ddc177d4829405ff3ee8652be3fda799c598ce35878f6549ae4faa55b0e",
+              "startByte": 16401,
+              "startPhysicalLine": 225
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 21388,
+              "endPhysicalLine": 225,
+              "sha256": "6b47e3bff175805eb8fc833b22ff887ba210860fb00b79d9341b2e993d1e22b1",
+              "startByte": 21285,
+              "startPhysicalLine": 225
+            }
+          },
+          {
+            "afterBase64": "U1NQSTsjMjU5OC0yOzI1MTsiRU5FUlNILTEyNTpbVENdIFZlcmlmaWNhciBwcmVzZW7Dp2EgZG8gYm90w6NvICIiQ2FuY2VsYXIiIiI7MTYK",
+            "afterCells": [
+              "SSPI",
+              "#2598-2",
+              "251",
+              "ENERSH-125:[TC] Verificar presença do botão \"Cancelar\"",
+              "16"
+            ],
+            "afterSha256": "6984cb07c7fb0e6214299100eddfc3014c0085e4704886b755961514e54d3473",
+            "beforeBase64": "U1NQSTsjMjU5OC0yOzI1MTtFTkVSU0gtMTI1OltUQ10gVmVyaWZpY2FyIHByZXNlbsOnYSBkbyBib3TDo28gIiIiQ2FuY2VsYXIiIjsxNiIgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 24273,
+            "outputStartByte": 24192,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 18979,
+              "endPhysicalLine": 252,
+              "sha256": "e2adb254ac6b3bca2a1eac6de10b02eda058d90436fca1d83ce6de7dd8d1e65f",
+              "startByte": 18902,
+              "startPhysicalLine": 252
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 24411,
+              "endPhysicalLine": 252,
+              "sha256": "e7e6a4d1ae6c4bfb3146c8b471625dd64e10da2b0c9a31b60ed2027caedb9b84",
+              "startByte": 24307,
+              "startPhysicalLine": 252
+            }
+          },
+          {
+            "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0MzsyOTE7Ik1hcmNhciBjb252aWRhZG9zIGxpc3RhZG9zIG5hIHBlc3F1aXNhIGNvbW8gIiJjb252aXRlIGVudmlhZG8iIiAiIkV2ZW50IERyaXZlbiBTeXN0ZW0gZm9yIEJ1c2luZXNzIFNlcnZpY2VzIEludGVncmF0aW9uIjsyMQo=",
+            "afterCells": [
+              "Event Driven System for Business Services Integration",
+              "#243",
+              "291",
+              "Marcar convidados listados na pesquisa como \"convite enviado\" \"Event Driven System for Business Services Integration",
+              "21"
+            ],
+            "afterSha256": "45aad75f5725b10bbce9e50b8193058cac7bf147a81b31b455685f3aafbec468",
+            "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0MzsyOTE7TWFyY2FyIGNvbnZpZGFkb3MgbGlzdGFkb3MgbmEgcGVzcXVpc2EgY29tbyAiY29udml0ZSBlbnZpYWRvIiAiRXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247MjEK",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "encode_latest_literal_title",
+            "outputEndByteExclusive": 27897,
+            "outputStartByte": 27709,
+            "projectQuoteDifference": false,
+            "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+            "supporting": {
+              "endByteExclusive": 28030,
+              "endPhysicalLine": 292,
+              "sha256": "9478179fc225f311dba745588ed60be5b3c174261768553994723dd70fb8717e",
+              "startByte": 27847,
+              "startPhysicalLine": 292
+            },
+            "supportingSource": "latest",
+            "target": {
+              "endByteExclusive": 28030,
+              "endPhysicalLine": 292,
+              "sha256": "9478179fc225f311dba745588ed60be5b3c174261768553994723dd70fb8717e",
+              "startByte": 27847,
+              "startPhysicalLine": 292
+            }
+          },
+          {
+            "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI1My0yOzMwNzsiQ3JpYXIgIiIiIk91dHJvcyBMaW5rcyIiIGNvbSBub21lIGrDoSBhZGljaW9uYWRvIGVtIG91dHJvIGxpbmsgbm8gbWVzbW8gZXZlbnRvIGVzcGVjw61maWNvLiI7MyAgICAK",
+            "afterCells": [
+              "Event Driven System for Business Services Integration",
+              "#253-2",
+              "307",
+              "Criar \"\"Outros Links\" com nome já adicionado em outro link no mesmo evento específico.",
+              "3    "
+            ],
+            "afterSha256": "2940834f1bac57c018350e679e9d62a6d3305d2ccd7c33905144f10436c13bb7",
+            "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI1My0yOzMwNztDcmlhciAiIk91dHJvcyBMaW5rcyIgY29tIG5vbWUgasOhIGFkaWNpb25hZG8gZW0gb3V0cm8gbGluayBubyBtZXNtbyBldmVudG8gZXNwZWPDrWZpY28uOzMgICAgCg==",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "encode_latest_literal_title",
+            "outputEndByteExclusive": 29757,
+            "outputStartByte": 29592,
+            "projectQuoteDifference": false,
+            "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+            "supporting": {
+              "endByteExclusive": 29885,
+              "endPhysicalLine": 308,
+              "sha256": "14104a62ccbf54d6c10e2e0920381791026988dc752eac4ca704004671a5b050",
+              "startByte": 29725,
+              "startPhysicalLine": 308
+            },
+            "supportingSource": "latest",
+            "target": {
+              "endByteExclusive": 29885,
+              "endPhysicalLine": 308,
+              "sha256": "14104a62ccbf54d6c10e2e0920381791026988dc752eac4ca704004671a5b050",
+              "startByte": 29725,
+              "startPhysicalLine": 308
+            }
+          },
+          {
+            "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI1My0yOzMxMTsiVmFsaWRhw6fDtWVzIGRlIGNhbXBvcyBkdXJhbnRlIGEgY3JpYcOnw6NvIGRlICIiT3V0cm9zIExpbmtzIiIgZXZlbnRvIGVzcGVjw61maWNvIjszNCAgICAgICAgICAgICAK",
+            "afterCells": [
+              "Event Driven System for Business Services Integration",
+              "#253-2",
+              "311",
+              "Validações de campos durante a criação de \"Outros Links\" evento específico",
+              "34             "
+            ],
+            "afterSha256": "163e1d17427490916bbf7aa187c03aaa8057707a3a4e935de4bbc4d0743a63bc",
+            "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI1My0yOzMxMTtWYWxpZGHDp8O1ZXMgZGUgY2FtcG9zIGR1cmFudGUgYSBjcmlhw6fDo28gZGUgIk91dHJvcyBMaW5rcyIgZXZlbnRvIGVzcGVjw61maWNvOzM0ICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "encode_latest_literal_title",
+            "outputEndByteExclusive": 30356,
+            "outputStartByte": 30191,
+            "projectQuoteDifference": false,
+            "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+            "supporting": {
+              "endByteExclusive": 30480,
+              "endPhysicalLine": 312,
+              "sha256": "0d694139ef77621083a8ce19db62ccfdfa6a87b5d61f2cffeeffe0abc45d8968",
+              "startByte": 30319,
+              "startPhysicalLine": 312
+            },
+            "supportingSource": "latest",
+            "target": {
+              "endByteExclusive": 30480,
+              "endPhysicalLine": 312,
+              "sha256": "0d694139ef77621083a8ce19db62ccfdfa6a87b5d61f2cffeeffe0abc45d8968",
+              "startByte": 30319,
+              "startPhysicalLine": 312
+            }
+          },
+          {
+            "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI2MzszMjM7IlZhbGlkYcOnw6NvIGRhIHNlw6fDo28gIiJQYXJ0aWNpcGHDp8OjbyBlbSBFdmVudG9zIiIgIiJFdmVudCBEcml2ZW4gU3lzdGVtIGZvciBCdXNpbmVzcyBTZXJ2aWNlcyBJbnRlZ3JhdGlvbiI7MzQK",
+            "afterCells": [
+              "Event Driven System for Business Services Integration",
+              "#263",
+              "323",
+              "Validação da seção \"Participação em Eventos\" \"Event Driven System for Business Services Integration",
+              "34"
+            ],
+            "afterSha256": "097d0626b1b39e35fdbf6e9aafbf2651bc57d1b8dbf50e4d52d1015b12b7b24b",
+            "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI2MzszMjM7VmFsaWRhw6fDo28gZGEgc2XDp8OjbyAiUGFydGljaXBhw6fDo28gZW0gRXZlbnRvcyIgIkV2ZW50IERyaXZlbiBTeXN0ZW0gZm9yIEJ1c2luZXNzIFNlcnZpY2VzIEludGVncmF0aW9uOzM0Cg==",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "encode_latest_literal_title",
+            "outputEndByteExclusive": 31908,
+            "outputStartByte": 31731,
+            "projectQuoteDifference": false,
+            "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+            "supporting": {
+              "endByteExclusive": 32027,
+              "endPhysicalLine": 324,
+              "sha256": "0e12b64aef59c0ea96a7c97a8980655e917ada0de560031bf6e27d9cf92cd0f0",
+              "startByte": 31855,
+              "startPhysicalLine": 324
+            },
+            "supportingSource": "latest",
+            "target": {
+              "endByteExclusive": 32027,
+              "endPhysicalLine": 324,
+              "sha256": "0e12b64aef59c0ea96a7c97a8980655e917ada0de560031bf6e27d9cf92cd0f0",
+              "startByte": 31855,
+              "startPhysicalLine": 324
+            }
+          },
+          {
+            "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0MjszMjc7IkFjdGlvbiBvZiB0aGUgIiJ0b3Agb2YgcGFnZSIiIGJ1dHRvbiBvbiB0aGUgIiJDb3ZlciB0aW1lbGluZSIiIHNjcmVlbiI7MzQK",
+            "afterCells": [
+              "Event Driven System for Business Services Integration",
+              "#242",
+              "327",
+              "Action of the \"top of page\" button on the \"Cover timeline\" screen",
+              "34"
+            ],
+            "afterSha256": "3bf1ca4c299b622b44b09d33d9afd821e98f6c9fcee5c84d78fb8b5ed3cc50e5",
+            "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0MjszMjc7QWN0aW9uIG9mIHRoZSAiInRvcCBvZiBwYWdlIiBidXR0b24gb24gdGhlICJDb3ZlciB0aW1lbGluZSIgc2NyZWVuOzM0ICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 32396,
+            "outputStartByte": 32258,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 25964,
+              "endPhysicalLine": 328,
+              "sha256": "b30ea706adf61d83745198116dc7cdf22584006ada1f6c9d27d79955523f66d6",
+              "startByte": 25832,
+              "startPhysicalLine": 328
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 32523,
+              "endPhysicalLine": 328,
+              "sha256": "c0018fe0eb603a2e5fd26c1a257f893c71658c45aaf10e1fbea9b875c34cc421",
+              "startByte": 32377,
+              "startPhysicalLine": 328
+            }
+          },
+          {
+            "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0MjszMjg7IlNjcm9sbGluZyBhY3Rpb24gb24gdGhlIHRpbWVsaW5lIG9uIHRoZSAiIkNvdmVyIFRpbWVsaW5lIiIgc2NyZWVuIjszNAo=",
+            "afterCells": [
+              "Event Driven System for Business Services Integration",
+              "#242",
+              "328",
+              "Scrolling action on the timeline on the \"Cover Timeline\" screen",
+              "34"
+            ],
+            "afterSha256": "d9b1238eb08c917f0e1f14b2442b296b6ec911f4a94a1142d075761212e91d4b",
+            "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0MjszMjg7U2Nyb2xsaW5nIGFjdGlvbiBvbiB0aGUgdGltZWxpbmUgb24gdGhlICJDb3ZlciBUaW1lbGluZSIgc2NyZWVuOzM0ICAgICAgICAgICAgICAK",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 32530,
+            "outputStartByte": 32396,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 26094,
+              "endPhysicalLine": 329,
+              "sha256": "e2f1de2b816379635f2f5584875c1664aad729a609893864020cbb2bfb6ca462",
+              "startByte": 25964,
+              "startPhysicalLine": 329
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 32667,
+              "endPhysicalLine": 329,
+              "sha256": "793695b97d35a5774e9f7ae9746c56be6ba2c642fa4b41cc546aec2a37e7b19f",
+              "startByte": 32523,
+              "startPhysicalLine": 329
+            }
+          },
+          {
+            "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0Mi0zOzMzMTsiVmFsaWRhdGUgcmVzZXQgZnVuY3Rpb24gaW4gdGhlICIiZmllbGQiIiIiUmVzZXQiIiBBbGwgIiJDb3VudGVycyIiIiIiIiBpbiBkZXZpY2UgVHJhbnNwb25kZXIgIiJFdmVudCBEcml2ZW4gU3lzdGVtIGZvciBCdXNpbmVzcyBTZXJ2aWNlcyBJbnRlZ3JhdGlvbiI7Ngo=",
+            "afterCells": [
+              "Event Driven System for Business Services Integration",
+              "#242-3",
+              "331",
+              "Validate reset function in the \"field\"\"Reset\" All \"Counters\"\"\" in device Transponder \"Event Driven System for Business Services Integration",
+              "6"
+            ],
+            "afterSha256": "2bb431605713faad089cfb4f36a85e02f16fb3409c1fbaacb51fac7ade5edc6d",
+            "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI0Mi0zOzMzMTtWYWxpZGF0ZSByZXNldCBmdW5jdGlvbiBpbiB0aGUgImZpZWxkIiJSZXNldCIgQWxsICJDb3VudGVycyIiIiBpbiBkZXZpY2UgVHJhbnNwb25kZXIgIkV2ZW50IERyaXZlbiBTeXN0ZW0gZm9yIEJ1c2luZXNzIFNlcnZpY2VzIEludGVncmF0aW9uOzYK",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "encode_latest_literal_title",
+            "outputEndByteExclusive": 33092,
+            "outputStartByte": 32874,
+            "projectQuoteDifference": false,
+            "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+            "supporting": {
+              "endByteExclusive": 33218,
+              "endPhysicalLine": 332,
+              "sha256": "3a971e1a4672c27c8ebd2b136e3b5f6cb0549843d6dbe19f523ccbcdf8420a2d",
+              "startByte": 33011,
+              "startPhysicalLine": 332
+            },
+            "supportingSource": "latest",
+            "target": {
+              "endByteExclusive": 33218,
+              "endPhysicalLine": 332,
+              "sha256": "3a971e1a4672c27c8ebd2b136e3b5f6cb0549843d6dbe19f523ccbcdf8420a2d",
+              "startByte": 33011,
+              "startPhysicalLine": 332
+            }
+          },
+          {
+            "afterBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI2NTszMzc7IkFjdGlvbiB0aGUgb2YgIiIiIkNsb3NlIiIgYnV0dG9uIGluIGFsbCBzY3JlZW5zIHRvIERldmljZSBTZXRVcCI7MzQgICAgCg==",
+            "afterCells": [
+              "Event Driven System for Business Services Integration",
+              "#265",
+              "337",
+              "Action the of \"\"Close\" button in all screens to Device SetUp",
+              "34    "
+            ],
+            "afterSha256": "fbd23eb398e9830db018759031e785871cbf90f72dd9d4d16581915bbb04b6d4",
+            "beforeBase64": "RXZlbnQgRHJpdmVuIFN5c3RlbSBmb3IgQnVzaW5lc3MgU2VydmljZXMgSW50ZWdyYXRpb247IzI2NTszMzc7QWN0aW9uIHRoZSBvZiAiIkNsb3NlIiBidXR0b24gaW4gYWxsIHNjcmVlbnMgdG8gRGV2aWNlIFNldFVwOzM0ICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "encode_latest_literal_title",
+            "outputEndByteExclusive": 33796,
+            "outputStartByte": 33660,
+            "projectQuoteDifference": false,
+            "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+            "supporting": {
+              "endByteExclusive": 33917,
+              "endPhysicalLine": 338,
+              "sha256": "4d2c733efe305f6dbf3f20627cd22d0b53e286701c63c6751e36f5aeffd56b4b",
+              "startByte": 33786,
+              "startPhysicalLine": 338
+            },
+            "supportingSource": "latest",
+            "target": {
+              "endByteExclusive": 33917,
+              "endPhysicalLine": 338,
+              "sha256": "4d2c733efe305f6dbf3f20627cd22d0b53e286701c63c6751e36f5aeffd56b4b",
+              "startByte": 33786,
+              "startPhysicalLine": 338
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNjEwLTM7MzkxOyJUVkQtNTQ6W1RDXSBWZXJpZmljYXIgcHJlc2Vuw6dhIGRvIGJvdMOjbyAiIkNhbmNlbGFyIiIiOzE2Cg==",
+            "afterCells": [
+              "TVD II",
+              "#1610-3",
+              "391",
+              "TVD-54:[TC] Verificar presença do botão \"Cancelar\"",
+              "16"
+            ],
+            "afterSha256": "13d42369a55c1316fe9ed56c056766beec8ebe7260b42dea99cfa103421e9abe",
+            "beforeBase64": "VFZEIElJOyMxNjEwLTM7MzkxO1RWRC01NDpbVENdIFZlcmlmaWNhciBwcmVzZW7Dp2EgZG8gYm90w6NvICIiIkNhbmNlbGFyIiI7MTYiICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 39500,
+            "outputStartByte": 39421,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 31976,
+              "endPhysicalLine": 392,
+              "sha256": "a5904b1d042ebf290a775e64d9b55d84ae734909794793afbb9bea442b29d573",
+              "startByte": 31901,
+              "startPhysicalLine": 392
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 39643,
+              "endPhysicalLine": 392,
+              "sha256": "b6e64fd4b6b4f4495daf7f52f0b83a6dc3232514ad0736e32a85632538faf3f0",
+              "startByte": 39542,
+              "startPhysicalLine": 392
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNTk0OzQwNjsiVFZELTIzODpbVENdIFZhbGlkYXIgcmVkaXJlY2lvbmFtZW50byDDoCBww6FnaW5hIGRlIGxvZ2luIHF1YW5kbyBvIHVzdcOhcmlvIGNsaWNhciBubyBib3TDo28gIiJTYWlyIiIiOzM1Cg==",
+            "afterCells": [
+              "TVD II",
+              "#1594",
+              "406",
+              "TVD-238:[TC] Validar redirecionamento à página de login quando o usuário clicar no botão \"Sair\"",
+              "35"
+            ],
+            "afterSha256": "500dd0031e05e95594f1b91b84b45f16e76e84f001aa5ac76c998a8b02be75e0",
+            "beforeBase64": "VFZEIElJOyMxNTk0OzQwNjtUVkQtMjM4OltUQ10gVmFsaWRhciByZWRpcmVjaW9uYW1lbnRvIMOgIHDDoWdpbmEgZGUgbG9naW4gcXVhbmRvIG8gdXN1w6FyaW8gY2xpY2FyIG5vIGJvdMOjbyAiIiJTYWlyIiI7MzUiICAgICAgICAgICAgICAK",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 41039,
+            "outputStartByte": 40915,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 33224,
+              "endPhysicalLine": 407,
+              "sha256": "cd862617da066f6f5ad842ddd9a9412d408a641927b6ecff406f9b58ab4bc359",
+              "startByte": 33104,
+              "startPhysicalLine": 407
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 41196,
+              "endPhysicalLine": 407,
+              "sha256": "f75c69b443c66604d60cd4932699a3f3559fc58c2b0ae9e14e8e8c96d561778b",
+              "startByte": 41058,
+              "startPhysicalLine": 407
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNjA0OzQxNTsiVFZELTE3OltTUEVDXSBWYWxpZGFyIGNhbXBvICIiTm9tZSIiIjszNAo=",
+            "afterCells": [
+              "TVD II",
+              "#1604",
+              "415",
+              "TVD-17:[SPEC] Validar campo \"Nome\"",
+              "34"
+            ],
+            "afterSha256": "6ba2a0f97f53561a193ed7d15fa07f8e8669d9b0a6d9f56495c3ef248901f874",
+            "beforeBase64": "VFZEIElJOyMxNjA0OzQxNTtUVkQtMTc6W1NQRUNdIFZhbGlkYXIgY2FtcG8gIiIiTm9tZSIiOzM0IiAgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 41949,
+            "outputStartByte": 41890,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 33989,
+              "endPhysicalLine": 416,
+              "sha256": "7a0db7c45509e06c7c2911eb445fc331255035666e41777403c6424260f75116",
+              "startByte": 33934,
+              "startPhysicalLine": 416
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 42130,
+              "endPhysicalLine": 416,
+              "sha256": "d416a82172a9f23b4d9b0fb8e8fd5cb07b3c7ad72bac37955f9a181b5fea23d8",
+              "startByte": 42047,
+              "startPhysicalLine": 416
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNjA0OzQxNjsiVFZELTQ4OltTUEVDXSBWYWxpZGFyIGNhbXBvICIiRGVzY3Jpw6fDo28iIiI7MzQK",
+            "afterCells": [
+              "TVD II",
+              "#1604",
+              "416",
+              "TVD-48:[SPEC] Validar campo \"Descrição\"",
+              "34"
+            ],
+            "afterSha256": "a84e0a5f27e243945c8b7ed24e33cb3b0f9782f62fd2fd76c39f9314951e7178",
+            "beforeBase64": "VFZEIElJOyMxNjA0OzQxNjtUVkQtNDg6W1NQRUNdIFZhbGlkYXIgY2FtcG8gIiIiRGVzY3Jpw6fDo28iIjszNCIgICAgICAgICAgICAgICAgICAgICAgICAK",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 42015,
+            "outputStartByte": 41949,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 34051,
+              "endPhysicalLine": 417,
+              "sha256": "1efc0e0cc4f73757c96777e8f045d7aeedf65e7eae24355efb891566b7ebdf71",
+              "startByte": 33989,
+              "startPhysicalLine": 417
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 42220,
+              "endPhysicalLine": 417,
+              "sha256": "060cf6c96ca6cebd37797864794344d8f6df2c1c47e21469f4945bd0a119b639",
+              "startByte": 42130,
+              "startPhysicalLine": 417
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNjAzOzQzNjsiVFZELTg5OltUQ10gVmVyaWZpY2FyIHNlIGNhbXBvIMOpICIiY2FzZSBzZW5zaXRpdmUiIiI7MzQK",
+            "afterCells": [
+              "TVD II",
+              "#1603",
+              "436",
+              "TVD-89:[TC] Verificar se campo é \"case sensitive\"",
+              "34"
+            ],
+            "afterSha256": "dbaa9fe702059149ffc3107ce9e5c0b4a0fdb4b76acccf2b15f45ef16ce8f9a2",
+            "beforeBase64": "VFZEIElJOyMxNjAzOzQzNjtUVkQtODk6W1RDXSBWZXJpZmljYXIgc2UgY2FtcG8gw6kgIiIiY2FzZSIgInNlbnNpdGl2ZSIiOzM0IiAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 44086,
+            "outputStartByte": 44011,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 35741,
+              "endPhysicalLine": 437,
+              "sha256": "c1bf6a50c3effdf270b6449786333b9b8397e91cd59df24691cf1590ce27e9e3",
+              "startByte": 35670,
+              "startPhysicalLine": 437
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 44314,
+              "endPhysicalLine": 437,
+              "sha256": "b170851d060de478866654936bd42dd4a5092c79105d7fc6db7276c4b7c38338",
+              "startByte": 44216,
+              "startPhysicalLine": 437
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNjE5OzQ4MjsiVFZELTI5MjpbU1BFQ10gVmFsaWRhw6fDtWVzIGRlIGHDp8OjbyBkbyBib3TDo28gIiJWaXN1YWxpemFyIiIiOzM0Cg==",
+            "afterCells": [
+              "TVD II",
+              "#1619",
+              "482",
+              "TVD-292:[SPEC] Validações de ação do botão \"Visualizar\"",
+              "34"
+            ],
+            "afterSha256": "f8422d19a43529e69bb3fa3a6ccabe0588bd52feabcdc019dae2d2006f3f3c25",
+            "beforeBase64": "VFZEIElJOyMxNjE5OzQ4MjtUVkQtMjkyOltTUEVDXSBWYWxpZGHDp8O1ZXMgZGUgYcOnw6NvIGRvIGJvdMOjbyAiIiJWaXN1YWxpemFyIiI7MzQiICAgICAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 49109,
+            "outputStartByte": 49024,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 39934,
+              "endPhysicalLine": 483,
+              "sha256": "3180fb198b75a72a0bdf3415c671b9a894ce7bd8b71f4cec887612031457388f",
+              "startByte": 39853,
+              "startPhysicalLine": 483
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 49358,
+              "endPhysicalLine": 483,
+              "sha256": "06c6c984ce96f9bd25c28694e66b4bf1457aa258f240549d7986718ecbdc92db",
+              "startByte": 49252,
+              "startPhysicalLine": 483
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNjI3OzUwNzsiVFZELTMzODpbVENdIFZlcmlmaWNhciBwcmVzZW7Dp2EgZG8gYm90w6NvICIiQ2FuY2VsYXIiIiI7MTYK",
+            "afterCells": [
+              "TVD II",
+              "#1627",
+              "507",
+              "TVD-338:[TC] Verificar presença do botão \"Cancelar\"",
+              "16"
+            ],
+            "afterSha256": "87526de342ac22065d4516d516e741381ad9967a4cbbca8037c54951a8efbe29",
+            "beforeBase64": "VFZEIElJOyMxNjI3OzUwNztUVkQtMzM4OltUQ10gVmVyaWZpY2FyIHByZXNlbsOnYSBkbyBib3TDo28gIiIiQ2FuY2VsYXIiIjsxNiIgICAgICAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 51803,
+            "outputStartByte": 51725,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 42160,
+              "endPhysicalLine": 508,
+              "sha256": "ee55c664421d5c6b5c5472cdea98258dfcc325883a6a91ab5900c50f0f4774c8",
+              "startByte": 42086,
+              "startPhysicalLine": 508
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 52074,
+              "endPhysicalLine": 508,
+              "sha256": "9eef1250cd09203b6f4e219259a26df89a94ac67b45e1204affb2b5332b9cc00",
+              "startByte": 51974,
+              "startPhysicalLine": 508
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNjI5OzUyNzsiVFZELTM0OTpbVENdIFZlcmlmaWNhciBwcmVzZW7Dp2EgZG8gYm90w6NvICIiQ2FuY2VsYXIiIiI7MTYK",
+            "afterCells": [
+              "TVD II",
+              "#1629",
+              "527",
+              "TVD-349:[TC] Verificar presença do botão \"Cancelar\"",
+              "16"
+            ],
+            "afterSha256": "c4e4c381ecfaa9466a64069d53c0841c7bbb15d1a8258b3f8f253de2b498f954",
+            "beforeBase64": "VFZEIElJOyMxNjI5OzUyNztUVkQtMzQ5OltUQ10gVmVyaWZpY2FyIHByZXNlbsOnYSBkbyBib3TDo28gIiIiQ2FuY2VsYXIiIjsxNiIgICAgICAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 53804,
+            "outputStartByte": 53726,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 43761,
+              "endPhysicalLine": 528,
+              "sha256": "5df7c2aca81153fd0321b7132f46c89e38e10c5bad2a20ce41bd9681fc7b90ec",
+              "startByte": 43687,
+              "startPhysicalLine": 528
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 54097,
+              "endPhysicalLine": 528,
+              "sha256": "a27dccaef49143586a641bc2476e50cedae19371159172e37493545dca83d651",
+              "startByte": 53997,
+              "startPhysicalLine": 528
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNTMyLTE7NTQ5OyJUVkQtNDI5OltUQ10gVmFsaWRhciBjb21wb3J0YW1lbnRvIGRvIFNlbGVjdGJveCAiIk5pdmVsIGRlIFBlc3F1aXNhIiIiOzM0Cg==",
+            "afterCells": [
+              "TVD II",
+              "#1532-1",
+              "549",
+              "TVD-429:[TC] Validar comportamento do Selectbox \"Nivel de Pesquisa\"",
+              "34"
+            ],
+            "afterSha256": "4e24025a8e8adc4e6829405132c6e5a3473daecd7e187c462f139e46d22685b4",
+            "beforeBase64": "VFZEIElJOyMxNTMyLTE7NTQ5O1RWRC00Mjk6W1RDXSBWYWxpZGFyIGNvbXBvcnRhbWVudG8gZG8gU2VsZWN0Ym94ICIiIk5pdmVsIiBkZSAiUGVzcXVpc2EiIjszNCIgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 56132,
+            "outputStartByte": 56038,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 45682,
+              "endPhysicalLine": 550,
+              "sha256": "83892200be235b650f0e74c5e9257f04c77f2719c83c8bb52d0741088996b0de",
+              "startByte": 45592,
+              "startPhysicalLine": 550
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 56447,
+              "endPhysicalLine": 550,
+              "sha256": "6019441ad38ed416b3e37f02b909eea0e6127134ba6d00cce3995127981ea1ca",
+              "startByte": 56331,
+              "startPhysicalLine": 550
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNTMyLTE7NTUwOyJUVkQtNDM0OltUQ10gVmFsaWRhciBjb21wb3J0YW1lbnRvIGRvIFNlbGVjdGJveCAiIkVxdWlwYW1lbnRvIFVzYWRvIiIiOzM0Cg==",
+            "afterCells": [
+              "TVD II",
+              "#1532-1",
+              "550",
+              "TVD-434:[TC] Validar comportamento do Selectbox \"Equipamento Usado\"",
+              "34"
+            ],
+            "afterSha256": "5caaac3df1b9f1ce072f7fa9631d733176f0f0940ebae12d1632225f48c2b518",
+            "beforeBase64": "VFZEIElJOyMxNTMyLTE7NTUwO1RWRC00MzQ6W1RDXSBWYWxpZGFyIGNvbXBvcnRhbWVudG8gZG8gU2VsZWN0Ym94ICIiIkVxdWlwYW1lbnRvIiAiVXNhZG8iIjszNCIgICAgICAgICAgICAgICAgICAgICAK",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 56226,
+            "outputStartByte": 56132,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 45772,
+              "endPhysicalLine": 551,
+              "sha256": "32711d5f4940c21046bc953af078e7b3d293f5e3a761bfbae889852c078fe8dd",
+              "startByte": 45682,
+              "startPhysicalLine": 551
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 56564,
+              "endPhysicalLine": 551,
+              "sha256": "935e07def46e4c9e04a3571572233d9b19064eb428c0e5857d38d708ad0c494e",
+              "startByte": 56447,
+              "startPhysicalLine": 551
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNTMyLTM7NTY5OyJUVkQtNDQ5OltUQ10gVmFsaWRhciBjb21wb3J0YW1lbnRvIGRvIFNlbGVjdGJveCAiIk5pdmVsIGRlIFBlc3F1aXNhIiIiOzM0Cg==",
+            "afterCells": [
+              "TVD II",
+              "#1532-3",
+              "569",
+              "TVD-449:[TC] Validar comportamento do Selectbox \"Nivel de Pesquisa\"",
+              "34"
+            ],
+            "afterSha256": "e2096f3d12681b919ea87bee22a85cd06df86fa8cc615529eb8c3aadb9d6569a",
+            "beforeBase64": "VFZEIElJOyMxNTMyLTM7NTY5O1RWRC00NDk6W1RDXSBWYWxpZGFyIGNvbXBvcnRhbWVudG8gZG8gU2VsZWN0Ym94ICIiIk5pdmVsIiBkZSAiUGVzcXVpc2EiIjszNCIgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 58094,
+            "outputStartByte": 58000,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 47254,
+              "endPhysicalLine": 570,
+              "sha256": "5d5cdd5907ee08f07d225b49e006c997ae6b067bfb508f9fb40c09554af4a45b",
+              "startByte": 47164,
+              "startPhysicalLine": 570
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 58454,
+              "endPhysicalLine": 570,
+              "sha256": "fc733ad95efe8a8306f347058cb9772620a6efd95f2e83cdeb32b78c9e483ecb",
+              "startByte": 58338,
+              "startPhysicalLine": 570
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNTMyLTM7NTcwOyJUVkQtNDU4OltUQ10gVmFsaWRhciBjb21wb3J0YW1lbnRvIGRvIFNlbGVjdGJveCAiIkVxdWlwYW1lbnRvIFVzYWRvIiIiOzM0Cg==",
+            "afterCells": [
+              "TVD II",
+              "#1532-3",
+              "570",
+              "TVD-458:[TC] Validar comportamento do Selectbox \"Equipamento Usado\"",
+              "34"
+            ],
+            "afterSha256": "ab7fcd0db19358b659b13454f76fcc0da8d6f4062be0d56ef5ce6bf9bee70c01",
+            "beforeBase64": "VFZEIElJOyMxNTMyLTM7NTcwO1RWRC00NTg6W1RDXSBWYWxpZGFyIGNvbXBvcnRhbWVudG8gZG8gU2VsZWN0Ym94ICIiIkVxdWlwYW1lbnRvIiAiVXNhZG8iIjszNCIgICAgICAgICAgICAgICAgICAgICAK",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 58188,
+            "outputStartByte": 58094,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 47344,
+              "endPhysicalLine": 571,
+              "sha256": "bae1055ffbb4e000e3950ed34883726ab9bab28eb7fea4590ae85117d379b788",
+              "startByte": 47254,
+              "startPhysicalLine": 571
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 58571,
+              "endPhysicalLine": 571,
+              "sha256": "cd7f89c11747a5604a979d923c32183f68e05fafbf4eeb57573329b3a74ad24c",
+              "startByte": 58454,
+              "startPhysicalLine": 571
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNTc4OzU4OTsiVFZELTM2NjpbVENdIFZhbGlkYXIgcHJlc2Vuw6dhIGRvIGJvdMOjbyAiIlNhaXIiIiI7MTYK",
+            "afterCells": [
+              "TVD II",
+              "#1578",
+              "589",
+              "TVD-366:[TC] Validar presença do botão \"Sair\"",
+              "16"
+            ],
+            "afterSha256": "6b0b6f861ced1c9fc8c420af91090cdc986da088f58550a72502961ae8d59aca",
+            "beforeBase64": "VFZEIElJOyMxNTc4OzU4OTtUVkQtMzY2OltUQ10gVmFsaWRhciBwcmVzZW7Dp2EgZG8gYm90w6NvICIiIlNhaXIiIjsxNiIgICAgICAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 60100,
+            "outputStartByte": 60028,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 48896,
+              "endPhysicalLine": 590,
+              "sha256": "f04f5f29e2c2ad3beda3928636f298bff905aea24c276fea3cc7e65f89622d33",
+              "startByte": 48828,
+              "startPhysicalLine": 590
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 60505,
+              "endPhysicalLine": 590,
+              "sha256": "6719dc3b04248694fce19771f69dc045c2a8553d3c59399ba8e134fea349fe0d",
+              "startByte": 60411,
+              "startPhysicalLine": 590
+            }
+          },
+          {
+            "afterBase64": "VFZEIElJOyMxNTc4OzU5MDsiVFZELTM2MTpbVENdIFZhbGlkYXIgcmVkaXJlY2lvbmFtZW50byDDoCBww6FnaW5hIGRlIGxvZ2luIHF1YW5kbyBvIHVzdcOhcmlvIGNsaWNhciBubyBib3TDo28gIiJTYWlyIiIiOzM1Cg==",
+            "afterCells": [
+              "TVD II",
+              "#1578",
+              "590",
+              "TVD-361:[TC] Validar redirecionamento à página de login quando o usuário clicar no botão \"Sair\"",
+              "35"
+            ],
+            "afterSha256": "796dfede49dbddb0095df9de6425f44851ac8f38be765e3203645d88544fdbbc",
+            "beforeBase64": "VFZEIElJOyMxNTc4OzU5MDtUVkQtMzYxOltUQ10gVmFsaWRhciByZWRpcmVjaW9uYW1lbnRvIMOgIHDDoWdpbmEgZGUgbG9naW4gcXVhbmRvIG8gdXN1w6FyaW8gY2xpY2FyIG5vIGJvdMOjbyAiIiJTYWlyIiI7MzUiICAgICAgICAgICAgICAK",
+            "decoding": "declared_literal_unquoted_title",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 60224,
+            "outputStartByte": 60100,
+            "projectQuoteDifference": false,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 49016,
+              "endPhysicalLine": 591,
+              "sha256": "784890fde4d5e6353fbe08eae08ec82694d0f0f432e05b1f27d5f9ad8b4e8ed0",
+              "startByte": 48896,
+              "startPhysicalLine": 591
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 60643,
+              "endPhysicalLine": 591,
+              "sha256": "983f1351ffa172687a4f108c89ea5edb1aae3c1352ac1ce8bc094cd287d6c082",
+              "startByte": 60505,
+              "startPhysicalLine": 591
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMTk7NjY3O2dlc3Rhby1jYXBhY2l0YS0yMzogQXR1YWxpemHDp8OjbyBkZSBEYWRvcyw7Ngo=",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US19",
+              "667",
+              "gestao-capacita-23: Atualização de Dados,",
+              "6"
+            ],
+            "afterSha256": "c67d6bd8cba15b3f30c0d7feb8dd569be21b294adf6f9d415c75044d2617b63d",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzE5OzY2NzsiImdlc3Rhby1jYXBhY2l0YS0yMzoiIEF0dWFsaXphw6fDo28gZGUgIkRhZG9zLCIiOzYiICAgICAgICAgICAgICAgICAgICAgICAK",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 68326,
+            "outputStartByte": 68246,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 55570,
+              "endPhysicalLine": 668,
+              "sha256": "f542960c731449976cc3ac1a90a5f04af1c970187b5c9f889b2e77ae9c01cb35",
+              "startByte": 55488,
+              "startPhysicalLine": 668
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 68776,
+              "endPhysicalLine": 668,
+              "sha256": "630faf206739362382609957d8164e7e470563c3af06292ce31af0a67602ecae",
+              "startByte": 68665,
+              "startPhysicalLine": 668
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMjA7NjcwO2dlc3Rhby1jYXBhY2l0YS0zNzogQ2FkYXN0cmFyIGhvcsOhcmlvcywgY29tIG1lbm9zIGRlIGR1YXMgaG9yYXMgZGnDoXJpYXMsIG5hIGFnZW5kYS47NDkK",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US20",
+              "670",
+              "gestao-capacita-37: Cadastrar horários, com menos de duas horas diárias, na agenda.",
+              "49"
+            ],
+            "afterSha256": "985d312e9245b1dc028a736697b9c9a12795c5f2e667c17652cd9fa838f96b80",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzIwOzY3MDsiImdlc3Rhby1jYXBhY2l0YS0zNzoiIENhZGFzdHJhciBob3LDoXJpb3MsIGNvbSBtZW5vcyBkZSBkdWFzIGhvcmFzIGRpw6FyaWFzLCBuYSAiYWdlbmRhLiIiOzQ5IiAgICAgICAgICAgICAgICAK",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 68672,
+            "outputStartByte": 68549,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 55876,
+              "endPhysicalLine": 671,
+              "sha256": "3d6a57bc8a56bcf743b36ce29381cae6492efabdedf825d050f598c3831b5e25",
+              "startByte": 55751,
+              "startPhysicalLine": 671
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 69146,
+              "endPhysicalLine": 671,
+              "sha256": "489b74964aec036f497d8ad25b431fcf845c662349e2ec10ea5eab5164472fb0",
+              "startByte": 68999,
+              "startPhysicalLine": 671
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMjA7NjcxO2dlc3Rhby1jYXBhY2l0YS0zODogQ2FkYXN0cmFyIGhvcsOhcmlvcywgY29tIG1haXMgZGUgcXVhdHJvIGhvcmFzIGRpw6FyaWFzLCBuYSBhZ2VuZGEuOzQ5Cg==",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US20",
+              "671",
+              "gestao-capacita-38: Cadastrar horários, com mais de quatro horas diárias, na agenda.",
+              "49"
+            ],
+            "afterSha256": "ad819e2ea4f192a9585b9a5016d59134ee6c1b78204a15ce7263c203efcc9c24",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzIwOzY3MTsiImdlc3Rhby1jYXBhY2l0YS0zODoiIENhZGFzdHJhciBob3LDoXJpb3MsIGNvbSBtYWlzIGRlIHF1YXRybyBob3JhcyBkacOhcmlhcywgbmEgImFnZW5kYS4iIjs0OSIgICAgICAgICAgICAgICAgCg==",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 68796,
+            "outputStartByte": 68672,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 56002,
+              "endPhysicalLine": 672,
+              "sha256": "916aaa4afd7f62de7f68f722e4310fb0f74e6176d21ccee3c14a3da743f9fca4",
+              "startByte": 55876,
+              "startPhysicalLine": 672
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 69294,
+              "endPhysicalLine": 672,
+              "sha256": "7efb8984d1a60d0654fe5b529e7205997a19bea70ea09cb798332caeab2e7737",
+              "startByte": 69146,
+              "startPhysicalLine": 672
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMjA7NjcyO2dlc3Rhby1jYXBhY2l0YS0zOTogQ2FkYXN0cmFyIGhvcsOhcmlvcywgY29tIG1lbm9zIGRlIHZpbnRlcyBob3JhcyBzZW1hbmFpcywgbmEgYWdlbmRhLjs0OQo=",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US20",
+              "672",
+              "gestao-capacita-39: Cadastrar horários, com menos de vintes horas semanais, na agenda.",
+              "49"
+            ],
+            "afterSha256": "442bdce4bfe8795c91993f0b30f2b68ab6e05f68bab32a269b7e1ed98aae0069",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzIwOzY3MjsiImdlc3Rhby1jYXBhY2l0YS0zOToiIENhZGFzdHJhciBob3LDoXJpb3MsIGNvbSBtZW5vcyBkZSB2aW50ZXMgaG9yYXMgc2VtYW5haXMsIG5hICJhZ2VuZGEuIiI7NDkiICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 68921,
+            "outputStartByte": 68796,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 56129,
+              "endPhysicalLine": 673,
+              "sha256": "91807700535efa133572a0c6a5017947649662b2486d02d1082b87b9d220b456",
+              "startByte": 56002,
+              "startPhysicalLine": 673
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 69443,
+              "endPhysicalLine": 673,
+              "sha256": "921fbb158ea283b6836ea6707dd3f7ae0d6c57d925f5cd3dbc8ea902923e0c38",
+              "startByte": 69294,
+              "startPhysicalLine": 673
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMjA7NjczO2dlc3Rhby1jYXBhY2l0YS00MDogQ2FkYXN0cmFyIGhvcsOhcmlvcywgY29tIG1haXMgZGUgdmludGVzIGhvcmFzIHNlbWFuYWlzLCBuYSBhZ2VuZGEuOzQ5Cg==",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US20",
+              "673",
+              "gestao-capacita-40: Cadastrar horários, com mais de vintes horas semanais, na agenda.",
+              "49"
+            ],
+            "afterSha256": "19775b2afbf1e70796ecc2519ed25d2bbbaf32bbe3d5165595bc3e2ed0b65d3e",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzIwOzY3MzsiImdlc3Rhby1jYXBhY2l0YS00MDoiIENhZGFzdHJhciBob3LDoXJpb3MsIGNvbSBtYWlzIGRlIHZpbnRlcyBob3JhcyBzZW1hbmFpcywgbmEgImFnZW5kYS4iIjs0OSIgICAgICAgICAgICAgICAgCg==",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 69045,
+            "outputStartByte": 68921,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 56255,
+              "endPhysicalLine": 674,
+              "sha256": "5addeedde22c8b4740a6d8e5709b15cb2412104bc5fe79e9b9fbe829f82ffbfc",
+              "startByte": 56129,
+              "startPhysicalLine": 674
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 69591,
+              "endPhysicalLine": 674,
+              "sha256": "416140908d9cd723441de9aeda3b823c82a73965baf8c07b14b48bfe20cda9f3",
+              "startByte": 69443,
+              "startPhysicalLine": 674
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMzU7Njk2O2dlc3Rhby1jYXBhY2l0YS0zNzpDYWRhc3RyYXIgaG9yw6FyaW9zLCBjb20gbWVub3MgZGUgZHVhcyBob3JhcyBkacOhcmlhcywgbmEgYWdlbmRhLjs0OQo=",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US35",
+              "696",
+              "gestao-capacita-37:Cadastrar horários, com menos de duas horas diárias, na agenda.",
+              "49"
+            ],
+            "afterSha256": "a1b1e54847ce8b25649a9c8550619eba23b29c54e86f2dfacdde379a5fed1837",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzM1OzY5NjsiImdlc3Rhby1jYXBhY2l0YS0zNzpDYWRhc3RyYXIiIGhvcsOhcmlvcywgY29tIG1lbm9zIGRlIGR1YXMgaG9yYXMgZGnDoXJpYXMsIG5hICJhZ2VuZGEuIiI7NDkiICAgICAgICAgICAgICAgICAK",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 71704,
+            "outputStartByte": 71582,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 58464,
+              "endPhysicalLine": 697,
+              "sha256": "1d5a35ccb46f992322240ebcb347ce3a9acb0c340d358e73b6fa04d0a3ce9e36",
+              "startByte": 58340,
+              "startPhysicalLine": 697
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 72275,
+              "endPhysicalLine": 697,
+              "sha256": "2a309fd683a0f803866daa663d355d510ca51d030749ce04d5cd45a45c7a190b",
+              "startByte": 72128,
+              "startPhysicalLine": 697
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMzU7Njk3O2dlc3Rhby1jYXBhY2l0YS0zODpDYWRhc3RyYXIgaG9yw6FyaW9zLCBjb20gbWFpcyBkZSBxdWF0cm8gaG9yYXMgZGnDoXJpYXMsIG5hIGFnZW5kYS47NDkK",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US35",
+              "697",
+              "gestao-capacita-38:Cadastrar horários, com mais de quatro horas diárias, na agenda.",
+              "49"
+            ],
+            "afterSha256": "c5cd69360523efd2257f2cb29b6d0d579136b95178e72d6434e79644e499ed94",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzM1OzY5NzsiImdlc3Rhby1jYXBhY2l0YS0zODpDYWRhc3RyYXIiIGhvcsOhcmlvcywgY29tIG1haXMgZGUgcXVhdHJvIGhvcmFzIGRpw6FyaWFzLCBuYSAiYWdlbmRhLiIiOzQ5IiAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 71827,
+            "outputStartByte": 71704,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 58589,
+              "endPhysicalLine": 698,
+              "sha256": "304f58e9f267fed04c288ed4b262b9f8c1c116f5413d5ab5ce11a34e15b43b52",
+              "startByte": 58464,
+              "startPhysicalLine": 698
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 72423,
+              "endPhysicalLine": 698,
+              "sha256": "934fad518ec2d1d3ccb95fa32e48fe914aaa8249908aa387cb5736c0afde2120",
+              "startByte": 72275,
+              "startPhysicalLine": 698
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMzU7Njk4O2dlc3Rhby1jYXBhY2l0YS0zOTpDYWRhc3RyYXIgaG9yw6FyaW9zLCBjb20gbWVub3MgZGUgdmludGVzIGhvcmFzIHNlbWFuYWlzLCBuYSBhZ2VuZGEuOzQ5Cg==",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US35",
+              "698",
+              "gestao-capacita-39:Cadastrar horários, com menos de vintes horas semanais, na agenda.",
+              "49"
+            ],
+            "afterSha256": "e8ef5be6cefd73f9545bc21191f5d64dc39e1776572a6ea516f1bb576c5ba802",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzM1OzY5ODsiImdlc3Rhby1jYXBhY2l0YS0zOTpDYWRhc3RyYXIiIGhvcsOhcmlvcywgY29tIG1lbm9zIGRlIHZpbnRlcyBob3JhcyBzZW1hbmFpcywgbmEgImFnZW5kYS4iIjs0OSIgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 71951,
+            "outputStartByte": 71827,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 58715,
+              "endPhysicalLine": 699,
+              "sha256": "8f9dec3c3efce26dbc2ebb887107d02425c621e292e209946b91e62ef344904c",
+              "startByte": 58589,
+              "startPhysicalLine": 699
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 72572,
+              "endPhysicalLine": 699,
+              "sha256": "8f540a7737fcc497c5b46d5bbd135a1dec25147cdca11afb4c3fe7ecc6c16fdc",
+              "startByte": 72423,
+              "startPhysicalLine": 699
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMzU7Njk5O2dlc3Rhby1jYXBhY2l0YS00MDpDYWRhc3RyYXIgaG9yw6FyaW9zLCBjb20gbWFpcyBkZSB2aW50ZXMgaG9yYXMgc2VtYW5haXMsIG5hIGFnZW5kYS47NDkK",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US35",
+              "699",
+              "gestao-capacita-40:Cadastrar horários, com mais de vintes horas semanais, na agenda.",
+              "49"
+            ],
+            "afterSha256": "a745847e89abb68da8d29b07a460b7d7e533ac84e4d98dbf75930d8c8afa34e8",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzM1OzY5OTsiImdlc3Rhby1jYXBhY2l0YS00MDpDYWRhc3RyYXIiIGhvcsOhcmlvcywgY29tIG1haXMgZGUgdmludGVzIGhvcmFzIHNlbWFuYWlzLCBuYSAiYWdlbmRhLiIiOzQ5IiAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 72074,
+            "outputStartByte": 71951,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 58840,
+              "endPhysicalLine": 700,
+              "sha256": "fb5bb06dff7b642fcc13b756fb82699c61a8de915416e87788ba5c5e13af8f03",
+              "startByte": 58715,
+              "startPhysicalLine": 700
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 72720,
+              "endPhysicalLine": 700,
+              "sha256": "bd46ae1c4243a9565a974c9623d76a817d77ec554d37f778a3dd24297f33b669",
+              "startByte": 72572,
+              "startPhysicalLine": 700
+            }
+          },
+          {
+            "afterBase64": "R2VzdMOjbyBkYSBDYXBhY2l0YcOnw6NvO1VTMzU7NzAwO2dlc3Rhby1jYXBhY2l0YS02ODpDYWRhc3RyYXIgaG9yw6FyaW9zIGlycmVndWxhcmVzLCBjb20gcGVybWlzc8OjbyBkbyBjb2FjaDsxCg==",
+            "afterCells": [
+              "Gestão da Capacitação",
+              "US35",
+              "700",
+              "gestao-capacita-68:Cadastrar horários irregulares, com permissão do coach",
+              "1"
+            ],
+            "afterSha256": "6a482332d307b59abe7869fdc91e487361c673a5b9cff1f68f34918876dac14e",
+            "beforeBase64": "R2VzdMOjbyBkYSAiQ2FwYWNpdGHDp8OjbztVUzM1OzcwMDsiImdlc3Rhby1jYXBhY2l0YS02ODpDYWRhc3RyYXIiIGhvcsOhcmlvcyBpcnJlZ3VsYXJlcywgY29tIHBlcm1pc3PDo28gZG8gImNvYWNoIiI7MSIgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 72186,
+            "outputStartByte": 72074,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 58954,
+              "endPhysicalLine": 701,
+              "sha256": "2ecd67c259979c967e36b6d01c8ad1843997b215e40d2d0ebb1d17f7c41c48ea",
+              "startByte": 58840,
+              "startPhysicalLine": 701
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 72860,
+              "endPhysicalLine": 701,
+              "sha256": "b38b373d73789ee340979abf19932a018eff772f3280a80dd228881ca9d43946",
+              "startByte": 72720,
+              "startPhysicalLine": 701
+            }
+          },
+          {
+            "afterBase64": "U0dDb25kO1NHQy1VUzA0Ozg3NTsiQ2FuY2VsYXIgZXhjbHVzw6NvIGRhIGVudGlkYWRlCiI7MjcK",
+            "afterCells": [
+              "SGCond",
+              "SGC-US04",
+              "875",
+              "Cancelar exclusão da entidade\n",
+              "27"
+            ],
+            "afterSha256": "74ea0d1d26d17bddc73279c076db4d4249b6e1021d4f88ea3f1cc055ae77015d",
+            "beforeBase64": "IlNHQ29uZDtTR0MtVVMwNDs4NzU7IiJDYW5jZWxhciIgZXhjbHVzw6NvIGRhIGVudGlkYWRlICAgICAgICAgICAgICAgICAgICAgICAgIAoiIiI7MjciICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 88030,
+            "outputStartByte": 87973,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 70889,
+              "endPhysicalLine": 877,
+              "sha256": "74ea0d1d26d17bddc73279c076db4d4249b6e1021d4f88ea3f1cc055ae77015d",
+              "startByte": 70832,
+              "startPhysicalLine": 876
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 88763,
+              "endPhysicalLine": 877,
+              "sha256": "242aa13f34cf29d46d0734d3af401fc0e4bbc97ed71d8382feeb0ca1118e8b50",
+              "startByte": 88647,
+              "startPhysicalLine": 876
+            }
+          },
+          {
+            "afterBase64": "U0dDb25kO1NHQy1VUzE3Ozk3MTsiQ2FuY2VsYXIgZXhjbHVzw6NvIGRhIGVudGlkYWRlCiI7MjcK",
+            "afterCells": [
+              "SGCond",
+              "SGC-US17",
+              "971",
+              "Cancelar exclusão da entidade\n",
+              "27"
+            ],
+            "afterSha256": "f212efeb2e3e0fc74490f6c10bb26003d3e09805ea876307243d3f105b6087f5",
+            "beforeBase64": "IlNHQ29uZDtTR0MtVVMxNzs5NzE7IiJDYW5jZWxhciIgZXhjbHVzw6NvIGRhIGVudGlkYWRlICAgICAgICAgICAgICAgICAgICAgICAgIAoiIiI7MjciICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 96557,
+            "outputStartByte": 96500,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 77250,
+              "endPhysicalLine": 974,
+              "sha256": "f212efeb2e3e0fc74490f6c10bb26003d3e09805ea876307243d3f105b6087f5",
+              "startByte": 77193,
+              "startPhysicalLine": 973
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 97349,
+              "endPhysicalLine": 974,
+              "sha256": "2748a1db9578263cff1ddcb772345420be02b645e59749b3666f3ecf52413ca6",
+              "startByte": 97233,
+              "startPhysicalLine": 973
+            }
+          },
+          {
+            "afterBase64": "U0dDb25kO1NHQy1VUzE4Ozk3OTsiUmVzZXJ2YXIgw6FyZWEgZW0gZGF0YSBqw6EgcmVzZXJ2YWRhCiI7Mwo=",
+            "afterCells": [
+              "SGCond",
+              "SGC-US18",
+              "979",
+              "Reservar área em data já reservada\n",
+              "3"
+            ],
+            "afterSha256": "b3a2a802acea2e0826eb430a966a7266e6227286460c9b4ecb16fd250615099b",
+            "beforeBase64": "IlNHQ29uZDtTR0MtVVMxODs5Nzk7IiJSZXNlcnZhciIgw6FyZWEgZW0gZGF0YSBqw6EgcmVzZXJ2YWRhICAgICAgICAgICAgICAgICAgICAgICAKIiIiOzMiICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 97211,
+            "outputStartByte": 97149,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 77746,
+              "endPhysicalLine": 983,
+              "sha256": "b3a2a802acea2e0826eb430a966a7266e6227286460c9b4ecb16fd250615099b",
+              "startByte": 77684,
+              "startPhysicalLine": 982
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 98060,
+              "endPhysicalLine": 983,
+              "sha256": "2064d7ea2418108ca9b4707573f2f6cfe5464a13de1f4b3012c83f4f2906f30b",
+              "startByte": 97941,
+              "startPhysicalLine": 982
+            }
+          },
+          {
+            "afterBase64": "U0dDb25kO1NHQy1VUzIwOzk5NDsiQ2FuY2VsYXIgZXhjbHVzw6NvIGRhIGVudGlkYWRlCiI7MjcK",
+            "afterCells": [
+              "SGCond",
+              "SGC-US20",
+              "994",
+              "Cancelar exclusão da entidade\n",
+              "27"
+            ],
+            "afterSha256": "6e7b681fbb4797bcb409d02046548140702389470fcbc52b5924e0cd5332401e",
+            "beforeBase64": "IlNHQ29uZDtTR0MtVVMyMDs5OTQ7IiJDYW5jZWxhciIgZXhjbHVzw6NvIGRhIGVudGlkYWRlICAgICAgICAgICAgICAgICAgICAgICAgIAoiIiI7MjciICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 98537,
+            "outputStartByte": 98480,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 78756,
+              "endPhysicalLine": 999,
+              "sha256": "6e7b681fbb4797bcb409d02046548140702389470fcbc52b5924e0cd5332401e",
+              "startByte": 78699,
+              "startPhysicalLine": 998
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 99445,
+              "endPhysicalLine": 999,
+              "sha256": "f95971418a7d66481beb48a6550677779fcbce0489abe249304b11b0ad5110f3",
+              "startByte": 99329,
+              "startPhysicalLine": 998
+            }
+          },
+          {
+            "afterBase64": "U0dDb25kO1NHQy1VUzIyOzEwMTA7IkNhZGFzdHJhciB1c3XDoXJpbyBjb20gZS1tYWlsIGrDoSBjYWRhc3RyYWRvCiI7Mwo=",
+            "afterCells": [
+              "SGCond",
+              "SGC-US22",
+              "1010",
+              "Cadastrar usuário com e-mail já cadastrado\n",
+              "3"
+            ],
+            "afterSha256": "145a5707d5b8a85f77ff965f543be10aa506c4b184d22a2f52d1f80a6b555b90",
+            "beforeBase64": "IlNHQ29uZDtTR0MtVVMyMjsxMDEwOyIiQ2FkYXN0cmFyIiB1c3XDoXJpbyBjb20gZS1tYWlsIGrDoSBjYWRhc3RyYWRvICAgICAgICAgICAgICAgICAgICAgICAKIiIiOzMiICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 99861,
+            "outputStartByte": 99790,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 79726,
+              "endPhysicalLine": 1016,
+              "sha256": "145a5707d5b8a85f77ff965f543be10aa506c4b184d22a2f52d1f80a6b555b90",
+              "startByte": 79655,
+              "startPhysicalLine": 1015
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 100826,
+              "endPhysicalLine": 1016,
+              "sha256": "0bc1615f09fb8e5621b1b32b2867e254dc474c90aa39df01303ebba15c512546",
+              "startByte": 100698,
+              "startPhysicalLine": 1015
+            }
+          },
+          {
+            "afterBase64": "U0dDb25kO1NHQy1VUzI0OzEwMjI7IlJlY3VwZXJhciBzZW5oYSBjb20gZS1tYWlsIGludsOhbGlkbwoiOzU3Cg==",
+            "afterCells": [
+              "SGCond",
+              "SGC-US24",
+              "1022",
+              "Recuperar senha com e-mail inválido\n",
+              "57"
+            ],
+            "afterSha256": "6cbffa304857a39c5fe42a240e63d217891d1f8025dccf639b5562563b77a4ab",
+            "beforeBase64": "IlNHQ29uZDtTR0MtVVMyNDsxMDIyOyIiUmVjdXBlcmFyIiBzZW5oYSBjb20gZS1tYWlsIGludsOhbGlkbyAgICAgICAgICAgICAgICAgICAgICAgIAoiIiI7NTciICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 101000,
+            "outputStartByte": 100936,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 80623,
+              "endPhysicalLine": 1029,
+              "sha256": "6cbffa304857a39c5fe42a240e63d217891d1f8025dccf639b5562563b77a4ab",
+              "startByte": 80559,
+              "startPhysicalLine": 1028
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 102023,
+              "endPhysicalLine": 1029,
+              "sha256": "a97912dea6599217bf7aab62c5bd9f3b4374f5b1066c486c831b663630a929c3",
+              "startByte": 101901,
+              "startPhysicalLine": 1028
+            }
+          },
+          {
+            "afterBase64": "U0dDb25kO1NHQy1VUzI4OzEwNDg7IkNhbmNlbGFyIGV4Y2x1c8OjbyBkYSBlbnRpZGFkZQoiOzI3Cg==",
+            "afterCells": [
+              "SGCond",
+              "SGC-US28",
+              "1048",
+              "Cancelar exclusão da entidade\n",
+              "27"
+            ],
+            "afterSha256": "7e1e1de5dd96362c769395cf5e754fae78d11c3d56aeae6f0c5a39cd52cb84e4",
+            "beforeBase64": "IlNHQ29uZDtTR0MtVVMyODsxMDQ4OyIiQ2FuY2VsYXIiIGV4Y2x1c8OjbyBkYSBlbnRpZGFkZSAgICAgICAgICAgICAgICAgICAgICAgICAKIiIiOzI3IiAgICAgICAgICAgICAgICAgICAgICAgICAgICAK",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 103261,
+            "outputStartByte": 103203,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 82304,
+              "endPhysicalLine": 1056,
+              "sha256": "7e1e1de5dd96362c769395cf5e754fae78d11c3d56aeae6f0c5a39cd52cb84e4",
+              "startByte": 82246,
+              "startPhysicalLine": 1055
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 104343,
+              "endPhysicalLine": 1056,
+              "sha256": "33d292160a372667fe105061a3a15464b24de85ffe7226488021d5197815706f",
+              "startByte": 104226,
+              "startPhysicalLine": 1055
+            }
+          },
+          {
+            "afterBase64": "TXlQb2NrZXQ7TVBULVVTMDY7MTA4NTsiQ2FuY2VsYXIgZXhjbHVzw6NvIGRhIGVudGlkYWRlCiI7MjcK",
+            "afterCells": [
+              "MyPocket",
+              "MPT-US06",
+              "1085",
+              "Cancelar exclusão da entidade\n",
+              "27"
+            ],
+            "afterSha256": "1a700210368b667b4747dad6bbdae51a986224aaa26ab641d34c4a52aa000023",
+            "beforeBase64": "Ik15UG9ja2V0O01QVC1VUzA2OzEwODU7IiJDYW5jZWxhciIgZXhjbHVzw6NvIGRhIGVudGlkYWRlICAgICAgICAgICAgICAgICAgICAgICAgIAoiIiI7MjciICAgICAgICAgICAgICAgICAgICAgICAgICAgIAo=",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 106637,
+            "outputStartByte": 106577,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 84862,
+              "endPhysicalLine": 1094,
+              "sha256": "1a700210368b667b4747dad6bbdae51a986224aaa26ab641d34c4a52aa000023",
+              "startByte": 84802,
+              "startPhysicalLine": 1093
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 107778,
+              "endPhysicalLine": 1094,
+              "sha256": "a83b8ad9ade37bc96e9aa949a7d3197a9ae0db48744056e2e538cf1ac43b01e2",
+              "startByte": 107659,
+              "startPhysicalLine": 1093
+            }
+          },
+          {
+            "afterBase64": "TXlQb2NrZXQ7TVBULVVTMTA7MTExMDsiUmVjdXBlcmFyIHNlbmhhIGNvbSBlLW1haWwgaW52w6FsaWRvCiI7NTcK",
+            "afterCells": [
+              "MyPocket",
+              "MPT-US10",
+              "1110",
+              "Recuperar senha com e-mail inválido\n",
+              "57"
+            ],
+            "afterSha256": "5ac512da1795eb0f1318e373e6e624f3ea3add3e1bfdde72f31490bb1fb551da",
+            "beforeBase64": "Ik15UG9ja2V0O01QVC1VUzEwOzExMTA7IiJSZWN1cGVyYXIiIHNlbmhhIGNvbSBlLW1haWwgaW52w6FsaWRvICAgICAgICAgICAgICAgICAgICAgICAgCiIiIjs1NyIgICAgICAgICAgICAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 108865,
+            "outputStartByte": 108799,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 86534,
+              "endPhysicalLine": 1120,
+              "sha256": "5ac512da1795eb0f1318e373e6e624f3ea3add3e1bfdde72f31490bb1fb551da",
+              "startByte": 86468,
+              "startPhysicalLine": 1119
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 110064,
+              "endPhysicalLine": 1120,
+              "sha256": "e01e6d964209c233868ce5ad436805f3d6a8e20912cbd6cb7c3b9b9be610171e",
+              "startByte": 109940,
+              "startPhysicalLine": 1119
+            }
+          },
+          {
+            "afterBase64": "VGVzdFJlYztUUi0yOTIxMjsxMjM4O0NhZGFzdHJhciBub3ZvIGNyaXTDqXJpbywgYWRpY2lvbmFyIGUgc2FsdmFyOzYK",
+            "afterCells": [
+              "TestRec",
+              "TR-29212",
+              "1238",
+              "Cadastrar novo critério, adicionar e salvar",
+              "6"
+            ],
+            "afterSha256": "0b8d48ab2befdb494193a21564c7a5d9923dadb644606fbad29df4c86edf3766",
+            "beforeBase64": "IlRlc3RSZWM7VFItMjkyMTI7MTIzODsiIkNhZGFzdHJhciIgbm92byBjcml0w6lyaW8sIGFkaWNpb25hciBlICJzYWx2YXIiIjs2IiAgICAgICAgICAgICAgICAgICAgICAgCg==",
+            "decoding": "strict_csv",
+            "operation": "adopt_explicit_earlier_record",
+            "outputEndByteExclusive": 120407,
+            "outputStartByte": 120338,
+            "projectQuoteDifference": true,
+            "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+            "supporting": {
+              "endByteExclusive": 95147,
+              "endPhysicalLine": 1248,
+              "sha256": "887437115fcfa6b320dacbf94e4f5a9b1052a76e88b75d3f8492bcb878ca6c63",
+              "startByte": 95076,
+              "startPhysicalLine": 1248
+            },
+            "supportingSource": "earlier",
+            "target": {
+              "endByteExclusive": 121637,
+              "endPhysicalLine": 1248,
+              "sha256": "f179ea721bcfd766767de3181c310a996b7b249ae6505e7af3d54b7c73488257",
+              "startByte": 121537,
+              "startPhysicalLine": 1248
+            }
+          }
+        ],
+        "plan": {
+          "content": {
+            "decisions": [
+              {
+                "afterCells": [
+                  "RCP",
+                  "#2392",
+                  "85",
+                  "HWLL-42:[TC] Verificar presença do botão \"Cancelar\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 5235,
+                  "endPhysicalLine": 86,
+                  "sha256": "bd04a99cfdcf32b247090229a6253c85beced85237a74ea5e97ad43f53e55d0c",
+                  "startByte": 5165,
+                  "startPhysicalLine": 86
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 7224,
+                  "endPhysicalLine": 86,
+                  "sha256": "71b01f474a8409cb5e387a338c1f589b8802b20d828f62071ec80b7f1ed8ba11",
+                  "startByte": 7127,
+                  "startPhysicalLine": 86
+                }
+              },
+              {
+                "afterCells": [
+                  "SSPI",
+                  "#2570-2",
+                  "166",
+                  "ENERSH-241:[TC] Verificar presença do botão \"Cancelar\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 11401,
+                  "endPhysicalLine": 167,
+                  "sha256": "f1b75583c137a7c75d881f60ae629cbbdecda06f2a42ff80e73dcccacb0a45a7",
+                  "startByte": 11324,
+                  "startPhysicalLine": 167
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 15135,
+                  "endPhysicalLine": 167,
+                  "sha256": "3f1a49d16b683ceec22c2fc847b1cf3d809610e5d585130962aea188043541bf",
+                  "startByte": 15031,
+                  "startPhysicalLine": 167
+                }
+              },
+              {
+                "afterCells": [
+                  "SSPI",
+                  "#2279",
+                  "179",
+                  "ENERSH-82:[TC] Validar presença do botão \"Sair\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 12469,
+                  "endPhysicalLine": 180,
+                  "sha256": "cea87b416a088a09610a482c631133b2c4366ed8fe7a9cafeb22cb69db4b4fe5",
+                  "startByte": 12401,
+                  "startPhysicalLine": 180
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 16482,
+                  "endPhysicalLine": 180,
+                  "sha256": "5a532614b657c7ac46a9c83427257b7a8150d01e819bb6701b413fae0faa0df7",
+                  "startByte": 16387,
+                  "startPhysicalLine": 180
+                }
+              },
+              {
+                "afterCells": [
+                  "SSPI",
+                  "#2277",
+                  "208",
+                  "ENERSH-73:[TC] Verificar presença do botão \"Cancelar\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 15017,
+                  "endPhysicalLine": 209,
+                  "sha256": "df5b6a2d3d64bbee5efd7d20c8668e9cb30166e58dd750483e78de37e5babbf3",
+                  "startByte": 14943,
+                  "startPhysicalLine": 209
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 19613,
+                  "endPhysicalLine": 209,
+                  "sha256": "5ea1ecd72e14834f97c4379a6f2685c92810b20a0655ee600a586160fbb405ce",
+                  "startByte": 19512,
+                  "startPhysicalLine": 209
+                }
+              },
+              {
+                "afterCells": [
+                  "SSPI",
+                  "#2589-1",
+                  "224",
+                  "ENERSH-98:[TC] Verificar presença do botão \"Cancelar\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 16477,
+                  "endPhysicalLine": 225,
+                  "sha256": "b6179ddc177d4829405ff3ee8652be3fda799c598ce35878f6549ae4faa55b0e",
+                  "startByte": 16401,
+                  "startPhysicalLine": 225
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 21388,
+                  "endPhysicalLine": 225,
+                  "sha256": "6b47e3bff175805eb8fc833b22ff887ba210860fb00b79d9341b2e993d1e22b1",
+                  "startByte": 21285,
+                  "startPhysicalLine": 225
+                }
+              },
+              {
+                "afterCells": [
+                  "SSPI",
+                  "#2598-2",
+                  "251",
+                  "ENERSH-125:[TC] Verificar presença do botão \"Cancelar\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 18979,
+                  "endPhysicalLine": 252,
+                  "sha256": "e2adb254ac6b3bca2a1eac6de10b02eda058d90436fca1d83ce6de7dd8d1e65f",
+                  "startByte": 18902,
+                  "startPhysicalLine": 252
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 24411,
+                  "endPhysicalLine": 252,
+                  "sha256": "e7e6a4d1ae6c4bfb3146c8b471625dd64e10da2b0c9a31b60ed2027caedb9b84",
+                  "startByte": 24307,
+                  "startPhysicalLine": 252
+                }
+              },
+              {
+                "afterCells": [
+                  "Event Driven System for Business Services Integration",
+                  "#243",
+                  "291",
+                  "Marcar convidados listados na pesquisa como \"convite enviado\" \"Event Driven System for Business Services Integration",
+                  "21"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "encode_latest_literal_title",
+                "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+                "supporting": {
+                  "endByteExclusive": 28030,
+                  "endPhysicalLine": 292,
+                  "sha256": "9478179fc225f311dba745588ed60be5b3c174261768553994723dd70fb8717e",
+                  "startByte": 27847,
+                  "startPhysicalLine": 292
+                },
+                "supportingSource": "latest",
+                "target": {
+                  "endByteExclusive": 28030,
+                  "endPhysicalLine": 292,
+                  "sha256": "9478179fc225f311dba745588ed60be5b3c174261768553994723dd70fb8717e",
+                  "startByte": 27847,
+                  "startPhysicalLine": 292
+                }
+              },
+              {
+                "afterCells": [
+                  "Event Driven System for Business Services Integration",
+                  "#253-2",
+                  "307",
+                  "Criar \"\"Outros Links\" com nome já adicionado em outro link no mesmo evento específico.",
+                  "3    "
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "encode_latest_literal_title",
+                "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+                "supporting": {
+                  "endByteExclusive": 29885,
+                  "endPhysicalLine": 308,
+                  "sha256": "14104a62ccbf54d6c10e2e0920381791026988dc752eac4ca704004671a5b050",
+                  "startByte": 29725,
+                  "startPhysicalLine": 308
+                },
+                "supportingSource": "latest",
+                "target": {
+                  "endByteExclusive": 29885,
+                  "endPhysicalLine": 308,
+                  "sha256": "14104a62ccbf54d6c10e2e0920381791026988dc752eac4ca704004671a5b050",
+                  "startByte": 29725,
+                  "startPhysicalLine": 308
+                }
+              },
+              {
+                "afterCells": [
+                  "Event Driven System for Business Services Integration",
+                  "#253-2",
+                  "311",
+                  "Validações de campos durante a criação de \"Outros Links\" evento específico",
+                  "34             "
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "encode_latest_literal_title",
+                "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+                "supporting": {
+                  "endByteExclusive": 30480,
+                  "endPhysicalLine": 312,
+                  "sha256": "0d694139ef77621083a8ce19db62ccfdfa6a87b5d61f2cffeeffe0abc45d8968",
+                  "startByte": 30319,
+                  "startPhysicalLine": 312
+                },
+                "supportingSource": "latest",
+                "target": {
+                  "endByteExclusive": 30480,
+                  "endPhysicalLine": 312,
+                  "sha256": "0d694139ef77621083a8ce19db62ccfdfa6a87b5d61f2cffeeffe0abc45d8968",
+                  "startByte": 30319,
+                  "startPhysicalLine": 312
+                }
+              },
+              {
+                "afterCells": [
+                  "Event Driven System for Business Services Integration",
+                  "#263",
+                  "323",
+                  "Validação da seção \"Participação em Eventos\" \"Event Driven System for Business Services Integration",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "encode_latest_literal_title",
+                "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+                "supporting": {
+                  "endByteExclusive": 32027,
+                  "endPhysicalLine": 324,
+                  "sha256": "0e12b64aef59c0ea96a7c97a8980655e917ada0de560031bf6e27d9cf92cd0f0",
+                  "startByte": 31855,
+                  "startPhysicalLine": 324
+                },
+                "supportingSource": "latest",
+                "target": {
+                  "endByteExclusive": 32027,
+                  "endPhysicalLine": 324,
+                  "sha256": "0e12b64aef59c0ea96a7c97a8980655e917ada0de560031bf6e27d9cf92cd0f0",
+                  "startByte": 31855,
+                  "startPhysicalLine": 324
+                }
+              },
+              {
+                "afterCells": [
+                  "Event Driven System for Business Services Integration",
+                  "#242",
+                  "327",
+                  "Action of the \"top of page\" button on the \"Cover timeline\" screen",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 25964,
+                  "endPhysicalLine": 328,
+                  "sha256": "b30ea706adf61d83745198116dc7cdf22584006ada1f6c9d27d79955523f66d6",
+                  "startByte": 25832,
+                  "startPhysicalLine": 328
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 32523,
+                  "endPhysicalLine": 328,
+                  "sha256": "c0018fe0eb603a2e5fd26c1a257f893c71658c45aaf10e1fbea9b875c34cc421",
+                  "startByte": 32377,
+                  "startPhysicalLine": 328
+                }
+              },
+              {
+                "afterCells": [
+                  "Event Driven System for Business Services Integration",
+                  "#242",
+                  "328",
+                  "Scrolling action on the timeline on the \"Cover Timeline\" screen",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 26094,
+                  "endPhysicalLine": 329,
+                  "sha256": "e2f1de2b816379635f2f5584875c1664aad729a609893864020cbb2bfb6ca462",
+                  "startByte": 25964,
+                  "startPhysicalLine": 329
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 32667,
+                  "endPhysicalLine": 329,
+                  "sha256": "793695b97d35a5774e9f7ae9746c56be6ba2c642fa4b41cc546aec2a37e7b19f",
+                  "startByte": 32523,
+                  "startPhysicalLine": 329
+                }
+              },
+              {
+                "afterCells": [
+                  "Event Driven System for Business Services Integration",
+                  "#242-3",
+                  "331",
+                  "Validate reset function in the \"field\"\"Reset\" All \"Counters\"\"\" in device Transponder \"Event Driven System for Business Services Integration",
+                  "6"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "encode_latest_literal_title",
+                "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+                "supporting": {
+                  "endByteExclusive": 33218,
+                  "endPhysicalLine": 332,
+                  "sha256": "3a971e1a4672c27c8ebd2b136e3b5f6cb0549843d6dbe19f523ccbcdf8420a2d",
+                  "startByte": 33011,
+                  "startPhysicalLine": 332
+                },
+                "supportingSource": "latest",
+                "target": {
+                  "endByteExclusive": 33218,
+                  "endPhysicalLine": 332,
+                  "sha256": "3a971e1a4672c27c8ebd2b136e3b5f6cb0549843d6dbe19f523ccbcdf8420a2d",
+                  "startByte": 33011,
+                  "startPhysicalLine": 332
+                }
+              },
+              {
+                "afterCells": [
+                  "Event Driven System for Business Services Integration",
+                  "#265",
+                  "337",
+                  "Action the of \"\"Close\" button in all screens to Device SetUp",
+                  "34    "
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "encode_latest_literal_title",
+                "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e.",
+                "supporting": {
+                  "endByteExclusive": 33917,
+                  "endPhysicalLine": 338,
+                  "sha256": "4d2c733efe305f6dbf3f20627cd22d0b53e286701c63c6751e36f5aeffd56b4b",
+                  "startByte": 33786,
+                  "startPhysicalLine": 338
+                },
+                "supportingSource": "latest",
+                "target": {
+                  "endByteExclusive": 33917,
+                  "endPhysicalLine": 338,
+                  "sha256": "4d2c733efe305f6dbf3f20627cd22d0b53e286701c63c6751e36f5aeffd56b4b",
+                  "startByte": 33786,
+                  "startPhysicalLine": 338
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1610-3",
+                  "391",
+                  "TVD-54:[TC] Verificar presença do botão \"Cancelar\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 31976,
+                  "endPhysicalLine": 392,
+                  "sha256": "a5904b1d042ebf290a775e64d9b55d84ae734909794793afbb9bea442b29d573",
+                  "startByte": 31901,
+                  "startPhysicalLine": 392
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 39643,
+                  "endPhysicalLine": 392,
+                  "sha256": "b6e64fd4b6b4f4495daf7f52f0b83a6dc3232514ad0736e32a85632538faf3f0",
+                  "startByte": 39542,
+                  "startPhysicalLine": 392
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1594",
+                  "406",
+                  "TVD-238:[TC] Validar redirecionamento à página de login quando o usuário clicar no botão \"Sair\"",
+                  "35"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 33224,
+                  "endPhysicalLine": 407,
+                  "sha256": "cd862617da066f6f5ad842ddd9a9412d408a641927b6ecff406f9b58ab4bc359",
+                  "startByte": 33104,
+                  "startPhysicalLine": 407
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 41196,
+                  "endPhysicalLine": 407,
+                  "sha256": "f75c69b443c66604d60cd4932699a3f3559fc58c2b0ae9e14e8e8c96d561778b",
+                  "startByte": 41058,
+                  "startPhysicalLine": 407
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1604",
+                  "415",
+                  "TVD-17:[SPEC] Validar campo \"Nome\"",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 33989,
+                  "endPhysicalLine": 416,
+                  "sha256": "7a0db7c45509e06c7c2911eb445fc331255035666e41777403c6424260f75116",
+                  "startByte": 33934,
+                  "startPhysicalLine": 416
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 42130,
+                  "endPhysicalLine": 416,
+                  "sha256": "d416a82172a9f23b4d9b0fb8e8fd5cb07b3c7ad72bac37955f9a181b5fea23d8",
+                  "startByte": 42047,
+                  "startPhysicalLine": 416
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1604",
+                  "416",
+                  "TVD-48:[SPEC] Validar campo \"Descrição\"",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 34051,
+                  "endPhysicalLine": 417,
+                  "sha256": "1efc0e0cc4f73757c96777e8f045d7aeedf65e7eae24355efb891566b7ebdf71",
+                  "startByte": 33989,
+                  "startPhysicalLine": 417
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 42220,
+                  "endPhysicalLine": 417,
+                  "sha256": "060cf6c96ca6cebd37797864794344d8f6df2c1c47e21469f4945bd0a119b639",
+                  "startByte": 42130,
+                  "startPhysicalLine": 417
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1603",
+                  "436",
+                  "TVD-89:[TC] Verificar se campo é \"case sensitive\"",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 35741,
+                  "endPhysicalLine": 437,
+                  "sha256": "c1bf6a50c3effdf270b6449786333b9b8397e91cd59df24691cf1590ce27e9e3",
+                  "startByte": 35670,
+                  "startPhysicalLine": 437
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 44314,
+                  "endPhysicalLine": 437,
+                  "sha256": "b170851d060de478866654936bd42dd4a5092c79105d7fc6db7276c4b7c38338",
+                  "startByte": 44216,
+                  "startPhysicalLine": 437
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1619",
+                  "482",
+                  "TVD-292:[SPEC] Validações de ação do botão \"Visualizar\"",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 39934,
+                  "endPhysicalLine": 483,
+                  "sha256": "3180fb198b75a72a0bdf3415c671b9a894ce7bd8b71f4cec887612031457388f",
+                  "startByte": 39853,
+                  "startPhysicalLine": 483
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 49358,
+                  "endPhysicalLine": 483,
+                  "sha256": "06c6c984ce96f9bd25c28694e66b4bf1457aa258f240549d7986718ecbdc92db",
+                  "startByte": 49252,
+                  "startPhysicalLine": 483
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1627",
+                  "507",
+                  "TVD-338:[TC] Verificar presença do botão \"Cancelar\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 42160,
+                  "endPhysicalLine": 508,
+                  "sha256": "ee55c664421d5c6b5c5472cdea98258dfcc325883a6a91ab5900c50f0f4774c8",
+                  "startByte": 42086,
+                  "startPhysicalLine": 508
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 52074,
+                  "endPhysicalLine": 508,
+                  "sha256": "9eef1250cd09203b6f4e219259a26df89a94ac67b45e1204affb2b5332b9cc00",
+                  "startByte": 51974,
+                  "startPhysicalLine": 508
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1629",
+                  "527",
+                  "TVD-349:[TC] Verificar presença do botão \"Cancelar\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 43761,
+                  "endPhysicalLine": 528,
+                  "sha256": "5df7c2aca81153fd0321b7132f46c89e38e10c5bad2a20ce41bd9681fc7b90ec",
+                  "startByte": 43687,
+                  "startPhysicalLine": 528
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 54097,
+                  "endPhysicalLine": 528,
+                  "sha256": "a27dccaef49143586a641bc2476e50cedae19371159172e37493545dca83d651",
+                  "startByte": 53997,
+                  "startPhysicalLine": 528
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1532-1",
+                  "549",
+                  "TVD-429:[TC] Validar comportamento do Selectbox \"Nivel de Pesquisa\"",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 45682,
+                  "endPhysicalLine": 550,
+                  "sha256": "83892200be235b650f0e74c5e9257f04c77f2719c83c8bb52d0741088996b0de",
+                  "startByte": 45592,
+                  "startPhysicalLine": 550
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 56447,
+                  "endPhysicalLine": 550,
+                  "sha256": "6019441ad38ed416b3e37f02b909eea0e6127134ba6d00cce3995127981ea1ca",
+                  "startByte": 56331,
+                  "startPhysicalLine": 550
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1532-1",
+                  "550",
+                  "TVD-434:[TC] Validar comportamento do Selectbox \"Equipamento Usado\"",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 45772,
+                  "endPhysicalLine": 551,
+                  "sha256": "32711d5f4940c21046bc953af078e7b3d293f5e3a761bfbae889852c078fe8dd",
+                  "startByte": 45682,
+                  "startPhysicalLine": 551
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 56564,
+                  "endPhysicalLine": 551,
+                  "sha256": "935e07def46e4c9e04a3571572233d9b19064eb428c0e5857d38d708ad0c494e",
+                  "startByte": 56447,
+                  "startPhysicalLine": 551
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1532-3",
+                  "569",
+                  "TVD-449:[TC] Validar comportamento do Selectbox \"Nivel de Pesquisa\"",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 47254,
+                  "endPhysicalLine": 570,
+                  "sha256": "5d5cdd5907ee08f07d225b49e006c997ae6b067bfb508f9fb40c09554af4a45b",
+                  "startByte": 47164,
+                  "startPhysicalLine": 570
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 58454,
+                  "endPhysicalLine": 570,
+                  "sha256": "fc733ad95efe8a8306f347058cb9772620a6efd95f2e83cdeb32b78c9e483ecb",
+                  "startByte": 58338,
+                  "startPhysicalLine": 570
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1532-3",
+                  "570",
+                  "TVD-458:[TC] Validar comportamento do Selectbox \"Equipamento Usado\"",
+                  "34"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 47344,
+                  "endPhysicalLine": 571,
+                  "sha256": "bae1055ffbb4e000e3950ed34883726ab9bab28eb7fea4590ae85117d379b788",
+                  "startByte": 47254,
+                  "startPhysicalLine": 571
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 58571,
+                  "endPhysicalLine": 571,
+                  "sha256": "cd7f89c11747a5604a979d923c32183f68e05fafbf4eeb57573329b3a74ad24c",
+                  "startByte": 58454,
+                  "startPhysicalLine": 571
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1578",
+                  "589",
+                  "TVD-366:[TC] Validar presença do botão \"Sair\"",
+                  "16"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 48896,
+                  "endPhysicalLine": 590,
+                  "sha256": "f04f5f29e2c2ad3beda3928636f298bff905aea24c276fea3cc7e65f89622d33",
+                  "startByte": 48828,
+                  "startPhysicalLine": 590
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 60505,
+                  "endPhysicalLine": 590,
+                  "sha256": "6719dc3b04248694fce19771f69dc045c2a8553d3c59399ba8e134fea349fe0d",
+                  "startByte": 60411,
+                  "startPhysicalLine": 590
+                }
+              },
+              {
+                "afterCells": [
+                  "TVD II",
+                  "#1578",
+                  "590",
+                  "TVD-361:[TC] Validar redirecionamento à página de login quando o usuário clicar no botão \"Sair\"",
+                  "35"
+                ],
+                "decoding": "declared_literal_unquoted_title",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 49016,
+                  "endPhysicalLine": 591,
+                  "sha256": "784890fde4d5e6353fbe08eae08ec82694d0f0f432e05b1f27d5f9ad8b4e8ed0",
+                  "startByte": 48896,
+                  "startPhysicalLine": 591
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 60643,
+                  "endPhysicalLine": 591,
+                  "sha256": "983f1351ffa172687a4f108c89ea5edb1aae3c1352ac1ce8bc094cd287d6c082",
+                  "startByte": 60505,
+                  "startPhysicalLine": 591
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US19",
+                  "667",
+                  "gestao-capacita-23: Atualização de Dados,",
+                  "6"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 55570,
+                  "endPhysicalLine": 668,
+                  "sha256": "f542960c731449976cc3ac1a90a5f04af1c970187b5c9f889b2e77ae9c01cb35",
+                  "startByte": 55488,
+                  "startPhysicalLine": 668
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 68776,
+                  "endPhysicalLine": 668,
+                  "sha256": "630faf206739362382609957d8164e7e470563c3af06292ce31af0a67602ecae",
+                  "startByte": 68665,
+                  "startPhysicalLine": 668
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US20",
+                  "670",
+                  "gestao-capacita-37: Cadastrar horários, com menos de duas horas diárias, na agenda.",
+                  "49"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 55876,
+                  "endPhysicalLine": 671,
+                  "sha256": "3d6a57bc8a56bcf743b36ce29381cae6492efabdedf825d050f598c3831b5e25",
+                  "startByte": 55751,
+                  "startPhysicalLine": 671
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 69146,
+                  "endPhysicalLine": 671,
+                  "sha256": "489b74964aec036f497d8ad25b431fcf845c662349e2ec10ea5eab5164472fb0",
+                  "startByte": 68999,
+                  "startPhysicalLine": 671
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US20",
+                  "671",
+                  "gestao-capacita-38: Cadastrar horários, com mais de quatro horas diárias, na agenda.",
+                  "49"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 56002,
+                  "endPhysicalLine": 672,
+                  "sha256": "916aaa4afd7f62de7f68f722e4310fb0f74e6176d21ccee3c14a3da743f9fca4",
+                  "startByte": 55876,
+                  "startPhysicalLine": 672
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 69294,
+                  "endPhysicalLine": 672,
+                  "sha256": "7efb8984d1a60d0654fe5b529e7205997a19bea70ea09cb798332caeab2e7737",
+                  "startByte": 69146,
+                  "startPhysicalLine": 672
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US20",
+                  "672",
+                  "gestao-capacita-39: Cadastrar horários, com menos de vintes horas semanais, na agenda.",
+                  "49"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 56129,
+                  "endPhysicalLine": 673,
+                  "sha256": "91807700535efa133572a0c6a5017947649662b2486d02d1082b87b9d220b456",
+                  "startByte": 56002,
+                  "startPhysicalLine": 673
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 69443,
+                  "endPhysicalLine": 673,
+                  "sha256": "921fbb158ea283b6836ea6707dd3f7ae0d6c57d925f5cd3dbc8ea902923e0c38",
+                  "startByte": 69294,
+                  "startPhysicalLine": 673
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US20",
+                  "673",
+                  "gestao-capacita-40: Cadastrar horários, com mais de vintes horas semanais, na agenda.",
+                  "49"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 56255,
+                  "endPhysicalLine": 674,
+                  "sha256": "5addeedde22c8b4740a6d8e5709b15cb2412104bc5fe79e9b9fbe829f82ffbfc",
+                  "startByte": 56129,
+                  "startPhysicalLine": 674
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 69591,
+                  "endPhysicalLine": 674,
+                  "sha256": "416140908d9cd723441de9aeda3b823c82a73965baf8c07b14b48bfe20cda9f3",
+                  "startByte": 69443,
+                  "startPhysicalLine": 674
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US35",
+                  "696",
+                  "gestao-capacita-37:Cadastrar horários, com menos de duas horas diárias, na agenda.",
+                  "49"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 58464,
+                  "endPhysicalLine": 697,
+                  "sha256": "1d5a35ccb46f992322240ebcb347ce3a9acb0c340d358e73b6fa04d0a3ce9e36",
+                  "startByte": 58340,
+                  "startPhysicalLine": 697
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 72275,
+                  "endPhysicalLine": 697,
+                  "sha256": "2a309fd683a0f803866daa663d355d510ca51d030749ce04d5cd45a45c7a190b",
+                  "startByte": 72128,
+                  "startPhysicalLine": 697
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US35",
+                  "697",
+                  "gestao-capacita-38:Cadastrar horários, com mais de quatro horas diárias, na agenda.",
+                  "49"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 58589,
+                  "endPhysicalLine": 698,
+                  "sha256": "304f58e9f267fed04c288ed4b262b9f8c1c116f5413d5ab5ce11a34e15b43b52",
+                  "startByte": 58464,
+                  "startPhysicalLine": 698
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 72423,
+                  "endPhysicalLine": 698,
+                  "sha256": "934fad518ec2d1d3ccb95fa32e48fe914aaa8249908aa387cb5736c0afde2120",
+                  "startByte": 72275,
+                  "startPhysicalLine": 698
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US35",
+                  "698",
+                  "gestao-capacita-39:Cadastrar horários, com menos de vintes horas semanais, na agenda.",
+                  "49"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 58715,
+                  "endPhysicalLine": 699,
+                  "sha256": "8f9dec3c3efce26dbc2ebb887107d02425c621e292e209946b91e62ef344904c",
+                  "startByte": 58589,
+                  "startPhysicalLine": 699
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 72572,
+                  "endPhysicalLine": 699,
+                  "sha256": "8f540a7737fcc497c5b46d5bbd135a1dec25147cdca11afb4c3fe7ecc6c16fdc",
+                  "startByte": 72423,
+                  "startPhysicalLine": 699
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US35",
+                  "699",
+                  "gestao-capacita-40:Cadastrar horários, com mais de vintes horas semanais, na agenda.",
+                  "49"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 58840,
+                  "endPhysicalLine": 700,
+                  "sha256": "fb5bb06dff7b642fcc13b756fb82699c61a8de915416e87788ba5c5e13af8f03",
+                  "startByte": 58715,
+                  "startPhysicalLine": 700
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 72720,
+                  "endPhysicalLine": 700,
+                  "sha256": "bd46ae1c4243a9565a974c9623d76a817d77ec554d37f778a3dd24297f33b669",
+                  "startByte": 72572,
+                  "startPhysicalLine": 700
+                }
+              },
+              {
+                "afterCells": [
+                  "Gestão da Capacitação",
+                  "US35",
+                  "700",
+                  "gestao-capacita-68:Cadastrar horários irregulares, com permissão do coach",
+                  "1"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 58954,
+                  "endPhysicalLine": 701,
+                  "sha256": "2ecd67c259979c967e36b6d01c8ad1843997b215e40d2d0ebb1d17f7c41c48ea",
+                  "startByte": 58840,
+                  "startPhysicalLine": 701
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 72860,
+                  "endPhysicalLine": 701,
+                  "sha256": "b38b373d73789ee340979abf19932a018eff772f3280a80dd228881ca9d43946",
+                  "startByte": 72720,
+                  "startPhysicalLine": 701
+                }
+              },
+              {
+                "afterCells": [
+                  "SGCond",
+                  "SGC-US04",
+                  "875",
+                  "Cancelar exclusão da entidade\n",
+                  "27"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 70889,
+                  "endPhysicalLine": 877,
+                  "sha256": "74ea0d1d26d17bddc73279c076db4d4249b6e1021d4f88ea3f1cc055ae77015d",
+                  "startByte": 70832,
+                  "startPhysicalLine": 876
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 88763,
+                  "endPhysicalLine": 877,
+                  "sha256": "242aa13f34cf29d46d0734d3af401fc0e4bbc97ed71d8382feeb0ca1118e8b50",
+                  "startByte": 88647,
+                  "startPhysicalLine": 876
+                }
+              },
+              {
+                "afterCells": [
+                  "SGCond",
+                  "SGC-US17",
+                  "971",
+                  "Cancelar exclusão da entidade\n",
+                  "27"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 77250,
+                  "endPhysicalLine": 974,
+                  "sha256": "f212efeb2e3e0fc74490f6c10bb26003d3e09805ea876307243d3f105b6087f5",
+                  "startByte": 77193,
+                  "startPhysicalLine": 973
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 97349,
+                  "endPhysicalLine": 974,
+                  "sha256": "2748a1db9578263cff1ddcb772345420be02b645e59749b3666f3ecf52413ca6",
+                  "startByte": 97233,
+                  "startPhysicalLine": 973
+                }
+              },
+              {
+                "afterCells": [
+                  "SGCond",
+                  "SGC-US18",
+                  "979",
+                  "Reservar área em data já reservada\n",
+                  "3"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 77746,
+                  "endPhysicalLine": 983,
+                  "sha256": "b3a2a802acea2e0826eb430a966a7266e6227286460c9b4ecb16fd250615099b",
+                  "startByte": 77684,
+                  "startPhysicalLine": 982
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 98060,
+                  "endPhysicalLine": 983,
+                  "sha256": "2064d7ea2418108ca9b4707573f2f6cfe5464a13de1f4b3012c83f4f2906f30b",
+                  "startByte": 97941,
+                  "startPhysicalLine": 982
+                }
+              },
+              {
+                "afterCells": [
+                  "SGCond",
+                  "SGC-US20",
+                  "994",
+                  "Cancelar exclusão da entidade\n",
+                  "27"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 78756,
+                  "endPhysicalLine": 999,
+                  "sha256": "6e7b681fbb4797bcb409d02046548140702389470fcbc52b5924e0cd5332401e",
+                  "startByte": 78699,
+                  "startPhysicalLine": 998
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 99445,
+                  "endPhysicalLine": 999,
+                  "sha256": "f95971418a7d66481beb48a6550677779fcbce0489abe249304b11b0ad5110f3",
+                  "startByte": 99329,
+                  "startPhysicalLine": 998
+                }
+              },
+              {
+                "afterCells": [
+                  "SGCond",
+                  "SGC-US22",
+                  "1010",
+                  "Cadastrar usuário com e-mail já cadastrado\n",
+                  "3"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 79726,
+                  "endPhysicalLine": 1016,
+                  "sha256": "145a5707d5b8a85f77ff965f543be10aa506c4b184d22a2f52d1f80a6b555b90",
+                  "startByte": 79655,
+                  "startPhysicalLine": 1015
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 100826,
+                  "endPhysicalLine": 1016,
+                  "sha256": "0bc1615f09fb8e5621b1b32b2867e254dc474c90aa39df01303ebba15c512546",
+                  "startByte": 100698,
+                  "startPhysicalLine": 1015
+                }
+              },
+              {
+                "afterCells": [
+                  "SGCond",
+                  "SGC-US24",
+                  "1022",
+                  "Recuperar senha com e-mail inválido\n",
+                  "57"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 80623,
+                  "endPhysicalLine": 1029,
+                  "sha256": "6cbffa304857a39c5fe42a240e63d217891d1f8025dccf639b5562563b77a4ab",
+                  "startByte": 80559,
+                  "startPhysicalLine": 1028
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 102023,
+                  "endPhysicalLine": 1029,
+                  "sha256": "a97912dea6599217bf7aab62c5bd9f3b4374f5b1066c486c831b663630a929c3",
+                  "startByte": 101901,
+                  "startPhysicalLine": 1028
+                }
+              },
+              {
+                "afterCells": [
+                  "SGCond",
+                  "SGC-US28",
+                  "1048",
+                  "Cancelar exclusão da entidade\n",
+                  "27"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 82304,
+                  "endPhysicalLine": 1056,
+                  "sha256": "7e1e1de5dd96362c769395cf5e754fae78d11c3d56aeae6f0c5a39cd52cb84e4",
+                  "startByte": 82246,
+                  "startPhysicalLine": 1055
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 104343,
+                  "endPhysicalLine": 1056,
+                  "sha256": "33d292160a372667fe105061a3a15464b24de85ffe7226488021d5197815706f",
+                  "startByte": 104226,
+                  "startPhysicalLine": 1055
+                }
+              },
+              {
+                "afterCells": [
+                  "MyPocket",
+                  "MPT-US06",
+                  "1085",
+                  "Cancelar exclusão da entidade\n",
+                  "27"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 84862,
+                  "endPhysicalLine": 1094,
+                  "sha256": "1a700210368b667b4747dad6bbdae51a986224aaa26ab641d34c4a52aa000023",
+                  "startByte": 84802,
+                  "startPhysicalLine": 1093
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 107778,
+                  "endPhysicalLine": 1094,
+                  "sha256": "a83b8ad9ade37bc96e9aa949a7d3197a9ae0db48744056e2e538cf1ac43b01e2",
+                  "startByte": 107659,
+                  "startPhysicalLine": 1093
+                }
+              },
+              {
+                "afterCells": [
+                  "MyPocket",
+                  "MPT-US10",
+                  "1110",
+                  "Recuperar senha com e-mail inválido\n",
+                  "57"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 86534,
+                  "endPhysicalLine": 1120,
+                  "sha256": "5ac512da1795eb0f1318e373e6e624f3ea3add3e1bfdde72f31490bb1fb551da",
+                  "startByte": 86468,
+                  "startPhysicalLine": 1119
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 110064,
+                  "endPhysicalLine": 1120,
+                  "sha256": "e01e6d964209c233868ce5ad436805f3d6a8e20912cbd6cb7c3b9b9be610171e",
+                  "startByte": 109940,
+                  "startPhysicalLine": 1119
+                }
+              },
+              {
+                "afterCells": [
+                  "TestRec",
+                  "TR-29212",
+                  "1238",
+                  "Cadastrar novo critério, adicionar e salvar",
+                  "6"
+                ],
+                "decoding": "strict_csv",
+                "operation": "adopt_explicit_earlier_record",
+                "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation.",
+                "supporting": {
+                  "endByteExclusive": 95147,
+                  "endPhysicalLine": 1248,
+                  "sha256": "887437115fcfa6b320dacbf94e4f5a9b1052a76e88b75d3f8492bcb878ca6c63",
+                  "startByte": 95076,
+                  "startPhysicalLine": 1248
+                },
+                "supportingSource": "earlier",
+                "target": {
+                  "endByteExclusive": 121637,
+                  "endPhysicalLine": 1248,
+                  "sha256": "f179ea721bcfd766767de3181c310a996b7b249ae6505e7af3d54b7c73488257",
+                  "startByte": 121537,
+                  "startPhysicalLine": 1248
+                }
+              }
+            ],
+            "id": "e26-reviewed-associations-v1",
+            "review": {
+              "actor": "codex_technical_review",
+              "date": "2026-10-18",
+              "validation": "not_author_or_supervisor_validation"
+            },
+            "schemaVersion": 1,
+            "sourcePolicy": "latest_with_explicit_earlier_record_substitutions",
+            "sources": {
+              "earlier": {
+                "bytes": 103563,
+                "path": "research/sources/testrec-e26/zenodo-16133229/tcs.csv",
+                "sha256": "8886b3db9378a5167aa7f98f17ca2a2bc86c4e219135bd4d82459c97fa58fa2f"
+              },
+              "latest": {
+                "bytes": 132733,
+                "path": "research/sources/testrec-e26/zenodo-16133793/test_cases_for_user_stories.csv",
+                "sha256": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a"
+              }
+            },
+            "status": "candidate_local_derivation"
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "12fd1e5c5e803d96453caa259cd36f17836ed98b806dbfb27d03719f6e60399f"
+        },
+        "readyForScientificExecution": false,
+        "schemaVersion": 1,
+        "scientificReproduction": false,
+        "sourceBytes": 132733,
+        "sourcePolicy": "latest_with_explicit_earlier_record_substitutions",
+        "sourceSha256": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a",
+        "status": "candidate_local_derivation",
+        "summary": {
+          "distinctNonemptyStandardTestIds": 64,
+          "earlierMultilineRecords": 9,
+          "earlierRecordSubstitutions": 42,
+          "inferredFieldValues": 0,
+          "latestLiteralTitleEncodings": 6,
+          "logicalRecords": 1354,
+          "missingStandardTestIdRows": 76,
+          "pendingSyntaxUnitsInThisDerivation": 0,
+          "projectAliasesApplied": 0,
+          "projects": 17,
+          "reviewedPhysicalUnits": 57,
+          "sourceRecordsExcluded": 0,
+          "storyKeys": 249,
+          "titlesConvertedToGherkin": 0
+        },
+        "version": "e26-reviewed-associations-v1"
+      },
+      "format": "us-agent-json-v1",
+      "sha256": "cca8ed3c053c074db8a8c276f43c98bda72280717854f6e68a18151db1de97bd"
+    },
+    "figureReview": {
+      "content": {
+        "cases": [
+          {
+            "figure": "4.8",
+            "id": "e21-figure-4-8",
+            "items": [
+              {
+                "contributions": [
+                  {
+                    "recordId": "e5",
+                    "similarity": 0.87
+                  },
+                  {
+                    "recordId": "e6",
+                    "similarity": 0.75
+                  },
+                  {
+                    "recordId": "e1",
+                    "similarity": 0.5
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 2.12,
+                "reportedScore": 0.71,
+                "roundedScore": 0.71,
+                "score": 0.7066666666666667,
+                "support": 3,
+                "testCaseId": "CT03"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "e5",
+                    "similarity": 0.87
+                  },
+                  {
+                    "recordId": "e6",
+                    "similarity": 0.75
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 1.62,
+                "reportedScore": 0.54,
+                "roundedScore": 0.54,
+                "score": 0.54,
+                "support": 2,
+                "testCaseId": "CT04"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "e6",
+                    "similarity": 0.75
+                  },
+                  {
+                    "recordId": "e1",
+                    "similarity": 0.5
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 1.25,
+                "reportedScore": 0.42,
+                "roundedScore": 0.42,
+                "score": 0.4166666666666667,
+                "support": 2,
+                "testCaseId": "CT01"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "e5",
+                    "similarity": 0.87
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": false,
+                "numerator": 0.87,
+                "reportedScore": 0.25,
+                "roundedScore": 0.29,
+                "score": 0.29,
+                "support": 1,
+                "testCaseId": "CT05"
+              }
+            ],
+            "neighbors": [
+              {
+                "recordId": "e5",
+                "similarity": 0.87,
+                "testCaseIds": [
+                  "CT03",
+                  "CT04",
+                  "CT05"
+                ]
+              },
+              {
+                "recordId": "e6",
+                "similarity": 0.75,
+                "testCaseIds": [
+                  "CT01",
+                  "CT03",
+                  "CT04"
+                ]
+              },
+              {
+                "recordId": "e1",
+                "similarity": 0.5,
+                "testCaseIds": [
+                  "CT01",
+                  "CT03"
+                ]
+              }
+            ],
+            "pdfPage": 71,
+            "reference": "E21"
+          },
+          {
+            "figure": "4.9",
+            "id": "e21-figure-4-9",
+            "items": [
+              {
+                "contributions": [
+                  {
+                    "recordId": "e5",
+                    "similarity": 0.87
+                  },
+                  {
+                    "recordId": "e6",
+                    "similarity": 0.75
+                  },
+                  {
+                    "recordId": "e3",
+                    "similarity": 0.5
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 2.12,
+                "reportedScore": 0.71,
+                "roundedScore": 0.71,
+                "score": 0.7066666666666667,
+                "support": 3,
+                "testCaseId": "CT04"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "e5",
+                    "similarity": 0.87
+                  },
+                  {
+                    "recordId": "e6",
+                    "similarity": 0.75
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 1.62,
+                "reportedScore": 0.54,
+                "roundedScore": 0.54,
+                "score": 0.54,
+                "support": 2,
+                "testCaseId": "CT03"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "e6",
+                    "similarity": 0.75
+                  },
+                  {
+                    "recordId": "e3",
+                    "similarity": 0.5
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 1.25,
+                "reportedScore": 0.42,
+                "roundedScore": 0.42,
+                "score": 0.4166666666666667,
+                "support": 2,
+                "testCaseId": "CT01"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "e5",
+                    "similarity": 0.87
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 0.87,
+                "reportedScore": 0.29,
+                "roundedScore": 0.29,
+                "score": 0.29,
+                "support": 1,
+                "testCaseId": "CT05"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "e3",
+                    "similarity": 0.5
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 0.5,
+                "reportedScore": 0.17,
+                "roundedScore": 0.17,
+                "score": 0.16666666666666666,
+                "support": 1,
+                "testCaseId": "CT02"
+              }
+            ],
+            "neighbors": [
+              {
+                "recordId": "e5",
+                "similarity": 0.87,
+                "testCaseIds": [
+                  "CT03",
+                  "CT04",
+                  "CT05"
+                ]
+              },
+              {
+                "recordId": "e6",
+                "similarity": 0.75,
+                "testCaseIds": [
+                  "CT01",
+                  "CT03",
+                  "CT04"
+                ]
+              },
+              {
+                "recordId": "e3",
+                "similarity": 0.5,
+                "testCaseIds": [
+                  "CT01",
+                  "CT02",
+                  "CT04"
+                ]
+              }
+            ],
+            "pdfPage": 74,
+            "reference": "E21"
+          },
+          {
+            "figure": "3",
+            "id": "e26-figure-3",
+            "items": [
+              {
+                "contributions": [
+                  {
+                    "recordId": "u5",
+                    "similarity": 0.87
+                  },
+                  {
+                    "recordId": "u6",
+                    "similarity": 0.75
+                  },
+                  {
+                    "recordId": "u3",
+                    "similarity": 0.5
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 2.12,
+                "reportedScore": 0.71,
+                "roundedScore": 0.71,
+                "score": 0.7066666666666667,
+                "support": 3,
+                "testCaseId": "TC04"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "u5",
+                    "similarity": 0.87
+                  },
+                  {
+                    "recordId": "u6",
+                    "similarity": 0.75
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 1.62,
+                "reportedScore": 0.54,
+                "roundedScore": 0.54,
+                "score": 0.54,
+                "support": 2,
+                "testCaseId": "TC03"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "u6",
+                    "similarity": 0.75
+                  },
+                  {
+                    "recordId": "u3",
+                    "similarity": 0.5
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 1.25,
+                "reportedScore": 0.42,
+                "roundedScore": 0.42,
+                "score": 0.4166666666666667,
+                "support": 2,
+                "testCaseId": "TC01"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "u5",
+                    "similarity": 0.87
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 0.87,
+                "reportedScore": 0.29,
+                "roundedScore": 0.29,
+                "score": 0.29,
+                "support": 1,
+                "testCaseId": "TC05"
+              },
+              {
+                "contributions": [
+                  {
+                    "recordId": "u3",
+                    "similarity": 0.5
+                  }
+                ],
+                "denominator": 3,
+                "matchesAtReportedPrecision": true,
+                "numerator": 0.5,
+                "reportedScore": 0.17,
+                "roundedScore": 0.17,
+                "score": 0.16666666666666666,
+                "support": 1,
+                "testCaseId": "TC02"
+              }
+            ],
+            "neighbors": [
+              {
+                "recordId": "u5",
+                "similarity": 0.87,
+                "testCaseIds": [
+                  "TC03",
+                  "TC04",
+                  "TC05"
+                ]
+              },
+              {
+                "recordId": "u6",
+                "similarity": 0.75,
+                "testCaseIds": [
+                  "TC01",
+                  "TC03",
+                  "TC04"
+                ]
+              },
+              {
+                "recordId": "u3",
+                "similarity": 0.5,
+                "testCaseIds": [
+                  "TC01",
+                  "TC02",
+                  "TC04"
+                ]
+              }
+            ],
+            "pdfPage": 4,
+            "reference": "E26"
+          }
+        ],
+        "distanceMethodConfirmed": false,
+        "empiricalEvaluation": false,
+        "fixture": {
+          "content": {
+            "cases": [
+              {
+                "candidates": [
+                  {
+                    "recordId": "e1",
+                    "similarity": 0.5,
+                    "testCaseIds": [
+                      "CT01",
+                      "CT03"
+                    ]
+                  },
+                  {
+                    "recordId": "e2",
+                    "similarity": 0.5,
+                    "testCaseIds": [
+                      "CT03",
+                      "CT04"
+                    ]
+                  },
+                  {
+                    "recordId": "e3",
+                    "similarity": 0.5,
+                    "testCaseIds": [
+                      "CT01",
+                      "CT02",
+                      "CT04"
+                    ]
+                  },
+                  {
+                    "recordId": "e4",
+                    "similarity": 0.37,
+                    "testCaseIds": [
+                      "CT02",
+                      "CT03",
+                      "CT04"
+                    ]
+                  },
+                  {
+                    "recordId": "e5",
+                    "similarity": 0.87,
+                    "testCaseIds": [
+                      "CT03",
+                      "CT04",
+                      "CT05"
+                    ]
+                  },
+                  {
+                    "recordId": "e6",
+                    "similarity": 0.75,
+                    "testCaseIds": [
+                      "CT01",
+                      "CT03",
+                      "CT04"
+                    ]
+                  }
+                ],
+                "figure": "4.8",
+                "id": "e21-figure-4-8",
+                "k": 3,
+                "pdfPage": 71,
+                "reference": "E21",
+                "reportedRanking": [
+                  {
+                    "id": "CT03",
+                    "score": 0.71
+                  },
+                  {
+                    "id": "CT04",
+                    "score": 0.54
+                  },
+                  {
+                    "id": "CT01",
+                    "score": 0.42
+                  },
+                  {
+                    "id": "CT05",
+                    "score": 0.25
+                  }
+                ],
+                "selectedSourceIds": [
+                  "e1",
+                  "e5",
+                  "e6"
+                ],
+                "tiePolicy": "source_order"
+              },
+              {
+                "candidates": [
+                  {
+                    "recordId": "e1",
+                    "similarity": 0.5,
+                    "testCaseIds": [
+                      "CT01",
+                      "CT03"
+                    ]
+                  },
+                  {
+                    "recordId": "e2",
+                    "similarity": 0.5,
+                    "testCaseIds": [
+                      "CT03",
+                      "CT04"
+                    ]
+                  },
+                  {
+                    "recordId": "e3",
+                    "similarity": 0.5,
+                    "testCaseIds": [
+                      "CT01",
+                      "CT02",
+                      "CT04"
+                    ]
+                  },
+                  {
+                    "recordId": "e4",
+                    "similarity": 0.37,
+                    "testCaseIds": [
+                      "CT02",
+                      "CT03",
+                      "CT04"
+                    ]
+                  },
+                  {
+                    "recordId": "e5",
+                    "similarity": 0.87,
+                    "testCaseIds": [
+                      "CT03",
+                      "CT04",
+                      "CT05"
+                    ]
+                  },
+                  {
+                    "recordId": "e6",
+                    "similarity": 0.75,
+                    "testCaseIds": [
+                      "CT01",
+                      "CT03",
+                      "CT04"
+                    ]
+                  }
+                ],
+                "figure": "4.9",
+                "id": "e21-figure-4-9",
+                "k": 3,
+                "pdfPage": 74,
+                "reference": "E21",
+                "reportedRanking": [
+                  {
+                    "id": "CT04",
+                    "score": 0.71
+                  },
+                  {
+                    "id": "CT03",
+                    "score": 0.54
+                  },
+                  {
+                    "id": "CT01",
+                    "score": 0.42
+                  },
+                  {
+                    "id": "CT05",
+                    "score": 0.29
+                  },
+                  {
+                    "id": "CT02",
+                    "score": 0.17
+                  }
+                ],
+                "selectedSourceIds": [
+                  "e3",
+                  "e5",
+                  "e6"
+                ],
+                "tiePolicy": "more_associated_tests_then_source_order"
+              },
+              {
+                "candidates": [
+                  {
+                    "recordId": "u1",
+                    "similarity": 0.5,
+                    "testCaseIds": [
+                      "TC01",
+                      "TC03"
+                    ]
+                  },
+                  {
+                    "recordId": "u2",
+                    "similarity": 0.5,
+                    "testCaseIds": [
+                      "TC03",
+                      "TC04"
+                    ]
+                  },
+                  {
+                    "recordId": "u3",
+                    "similarity": 0.5,
+                    "testCaseIds": [
+                      "TC01",
+                      "TC02",
+                      "TC04"
+                    ]
+                  },
+                  {
+                    "recordId": "u4",
+                    "similarity": 0.37,
+                    "testCaseIds": [
+                      "TC02",
+                      "TC03",
+                      "TC04"
+                    ]
+                  },
+                  {
+                    "recordId": "u5",
+                    "similarity": 0.87,
+                    "testCaseIds": [
+                      "TC03",
+                      "TC04",
+                      "TC05"
+                    ]
+                  },
+                  {
+                    "recordId": "u6",
+                    "similarity": 0.75,
+                    "testCaseIds": [
+                      "TC01",
+                      "TC03",
+                      "TC04"
+                    ]
+                  }
+                ],
+                "figure": "3",
+                "id": "e26-figure-3",
+                "k": 3,
+                "pdfPage": 4,
+                "reference": "E26",
+                "reportedRanking": [
+                  {
+                    "id": "TC04",
+                    "score": 0.71
+                  },
+                  {
+                    "id": "TC03",
+                    "score": 0.54
+                  },
+                  {
+                    "id": "TC01",
+                    "score": 0.42
+                  },
+                  {
+                    "id": "TC05",
+                    "score": 0.29
+                  },
+                  {
+                    "id": "TC02",
+                    "score": 0.17
+                  }
+                ],
+                "selectedSourceIds": [
+                  "u3",
+                  "u5",
+                  "u6"
+                ],
+                "tiePolicy": "more_associated_tests_then_source_order"
+              }
+            ],
+            "limits": [
+              "visual_transcription_of_illustrations_only",
+              "not_original_dataset_or_full_TestRec_execution",
+              "Q01_Euclidean_transformation_and_Q03_empirical_aggregation_remain_open",
+              "E21_page58_text_omits_the_CT01_edge_from_e1_in_figure4_8",
+              "E21_figure4_8_reports_CT05_0.25_while_displayed_weights_and_equation_give_0.29",
+              "E26_figure3_and_E21_figure4_9_agree_under_the_heuristic_with_distinct_source_namespaces"
+            ],
+            "review": {
+              "actor": "codex_visual_source_review",
+              "date": "2026-10-18",
+              "validation": "not_author_or_supervisor_validation"
+            },
+            "schemaVersion": 1,
+            "sources": {
+              "E21": {
+                "reference": "2021 thesis, PDF pp.71-72 and 74, printed pp.57-58 and 60",
+                "sha256": "f69cd99f2a68b2cc349bcb294f0873439d31c0a93a50272c3d6668740a1eee53"
+              },
+              "E26": {
+                "reference": "10.1145/3748522.3779891, PDF p.4, figure 3 and equations 3-4",
+                "sha256": "cc895b9d7cbc49af9c63f0466f1050b82b432450bf0798307229c5a0cf23f445"
+              }
+            },
+            "version": "testrec-figure-associations-v1",
+            "weightBasis": "displayed_two_decimal_illustrative_similarities_not_recomputed_distances"
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "3311164a83c6e92ab05e93672f50c05a98f11b3bea586590b36cc7f29875ab77"
+        },
+        "kind": "testrec_visual_figure_arithmetic_review",
+        "mismatches": [
+          {
+            "calculatedRounded": 0.29,
+            "caseId": "e21-figure-4-8",
+            "reported": 0.25,
+            "testCaseId": "CT05"
+          }
+        ],
+        "schemaVersion": 1,
+        "scientificReproduction": false
+      },
+      "format": "us-agent-json-v1",
+      "sha256": "810b005a7c7dbb2bf40f4646e91e646b15073c9e5b4ed7d0e273635e4b953a8e"
+    },
+    "kind": "e26_reviewed_associations_candidate",
+    "schemaVersion": 1,
+    "scientificReproduction": false
+  }
+}

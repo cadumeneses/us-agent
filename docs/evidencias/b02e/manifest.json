@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "kind": "e26_literal_cells_transport_view",
+  "recordedAt": "2026-10-18T11:30:39.607Z",
+  "scientificReproduction": false,
+  "originalRoundTripExact": true,
+  "reportSha256": "2f35ea418e8a31b157d76bd5d572f88b93bb9c49490281367f77473a94fb2351",
+  "sources": {
+    "apps/api/src/domain/content-snapshot.ts": "43d0a3570567b4d3bfe5efbff3c2e225d093de4193b4fd1d26fe996c4c781d8a",
+    "apps/api/src/domain/import-formats.ts": "cb9d5ea48c69d6e7f2616efb150f2b1ec362be9876f9f485468da92e17ef9745",
+    "apps/api/src/domain/recommender-taxonomy.ts": "19de6d6eb3f9e6f99f517e6a95e65e7339189e09c144da302de21dd5089a3575",
+    "apps/api/src/evaluation/testrec-source-audit.ts": "7ab241c46b1999cc86cce17370f9ec75313548e3f882208d88ad744d7cf85d41",
+    "apps/api/src/evaluation/testrec-source-preparation.ts": "c6d89924c640126121d28f0e42c8598e51e58d3cba7b98ef6446110ed8fb79b8",
+    "apps/api/src/evaluation/testrec-source-transport.ts": "f6e88b54c528bcfe68e1c6399fc11592b76dfa493dbf236da1a18c2e9b049bb2",
+    "docs/evidencias/b02c/source-audit.json": "444e783f084ebb74f1c6bcc08311b52473310d6f0905a060e8cb1a95c5c15e02",
+    "docs/evidencias/b02d/manifest.json": "6c20f91780730d863afa03207b262dfa08da5e2061c8225c2ad830a02bd8b111",
+    "docs/evidencias/b02d/report.json": "e3c1921a5d9db2aae2a74d1326740c2ec59931d0a80779e589c0e310a17ac688",
+    "package-lock.json": "f1a6ea761d579e0368fbb4a3ed5a4e98c8caf076c18e8ca66fe8a042b71faed4",
+    "research/preparations/testrec-e26-v1/protocol.md": "7cded6c7b683d8f9342461fd5be849392b70c8ad0a65f8da8d28a5fc6fe194ce",
+    "research/sources/testrec-e26/zenodo-16133793/acceptance_criteria_data.csv": "9af26e760b59a98aeabc469867f61123a9753424eaa8240c94bbd5ccc7de2afe",
+    "research/sources/testrec-e26/zenodo-16133793/categorized_user_stories.csv": "9203db6b6e3b85df5d0752e3a429c4c1ed5636c51b46dab5a856970113a4e0a4",
+    "research/sources/testrec-e26/zenodo-16133793/inventory.json": "95d402949197ce31e79edec5f1d2673b65a2f622d1b7ad95f0413fd1d755e582",
+    "research/sources/testrec-e26/zenodo-16133793/record-metadata.json": "3a1cae165ed8bd95c6c61ac62f74110ac93ecb383f50b435246f29749d57cb93",
+    "research/sources/testrec-e26/zenodo-16133793/test_cases_for_user_stories.csv": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a",
+    "research/sources/testrec-e26/zenodo-16133793/user_stories_test_cases.csv": "5ee242a804b4c355233aec151978e00e501bf3328e2207bdca7f3f2bcc3d47a1",
+    "research/transformations/testrec-e26-v1/encoding-plan.json": "605ab9e74888295f932a626034599b281192e30fdf6c4620a20478e921cce1dc",
+    "research/transformations/testrec-e26-v1/protocol.md": "fb195557e32c2fbc70ec1426c1f092726f22ac32d398fa4b492ce756e6934ea9",
+    "scripts/audit-testrec-source.ts": "5522fe92e62870d382b693020d5797009d4675eef0b3b3d7f7967b11057d4046",
+    "scripts/prepare-testrec-source.ts": "62d79c4ffad9058cc6394b9240339b725a13fdb02eb19d93bce452e888854285",
+    "scripts/transform-testrec-source.ts": "1a07c16d5b5a37d7e0387ca81eaaaf0a2d26ba09555ce585f36c2ed9c79a6562"
+  },
+  "artifacts": {
+    "report.json": "d4afe2c7b152f338892c05ec6792ec86e5e373d59a20bd14ae92e9f64170bbd0",
+    "test-cases.transport-view.csv": "ff144ec0730363bd0591722132fb01f927628ef2cda14ef4fff810687cdf22e4"
+  },
+  "limitations": [
+    "literal_cells_are_a_declared_local_convention",
+    "no_semantic_repair_of_odd_or_duplicated_text",
+    "remaining_spans_profiles_aliases_and_subset_unresolved",
+    "Q01_Q02_Q03_open",
+    "no_operational_import"
+  ]
+}

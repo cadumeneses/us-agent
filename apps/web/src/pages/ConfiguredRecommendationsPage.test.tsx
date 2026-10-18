@@ -13,8 +13,9 @@ import type { NfrProfile } from '../../../api/src/services/nfr-engine';
 import { recommenderApi } from '../services/recommender-api';
 import type { ConfiguredDefinition, ConfiguredInput, ConfiguredRun, DatasetSummary, DefinitionRecord, DefinitionSummary, JsonValue, RecommendationRequest, RunSummary } from '../types/configurable-recommendations';
 import { ConfiguredRecommendationsPage } from './ConfiguredRecommendationsPage';
+import { testCaseFixture } from '../test-fixtures/test-case';
 
-vi.mock('../services/recommender-api', async importOriginal => ({ ...await importOriginal<typeof import('../services/recommender-api')>(), recommenderApi: { pageSize: 50, definitions: vi.fn(), definition: vi.fn(), datasets: vi.fn(), runs: vi.fn(), run: vi.fn(), execute: vi.fn(), replay: vi.fn(), review: vi.fn() } }));
+vi.mock('../services/recommender-api', async importOriginal => ({ ...await importOriginal<typeof import('../services/recommender-api')>(), recommenderApi: { pageSize: 50, definitions: vi.fn(), definition: vi.fn(), datasets: vi.fn(), runs: vi.fn(), run: vi.fn(), publishedRun: vi.fn(), execute: vi.fn(), executeTestCases: vi.fn(), testCaseCatalogs: vi.fn(), replay: vi.fn(), review: vi.fn(), testReview: vi.fn() } }));
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
 // Use the actual published executor to check the web/API boundary, rather than inventing a result shape.
@@ -49,6 +50,9 @@ beforeEach(() => {
   vi.mocked(recommenderApi.runs).mockResolvedValue([]);
   vi.mocked(recommenderApi.execute).mockImplementation(async body => f.run(body));
   vi.mocked(recommenderApi.run).mockImplementation(async () => f.run());
+  vi.mocked(recommenderApi.publishedRun).mockImplementation((id, signal) => recommenderApi.run(id, signal));
+  vi.mocked(recommenderApi.testCaseCatalogs).mockResolvedValue([]);
+  vi.mocked(recommenderApi.testReview).mockImplementation(async id => ({ runId: id, runSha256: (await recommenderApi.publishedRun(id)).snapshot.sha256, target: null }));
   vi.mocked(recommenderApi.review).mockImplementation(async id => ({ runId: id, runSha256: (await recommenderApi.run(id)).snapshot.sha256, target: null, decisions: [] }));
   vi.mocked(recommenderApi.replay).mockResolvedValue({ id: f.request.id, originalSha256: f.run().snapshot.sha256, verified: true, resultMatches: true, explanationMatches: true, projectionMatches: true });
   container = document.createElement('div'); document.body.append(container); root = createRoot(container);
@@ -75,12 +79,64 @@ async function change(target: HTMLInputElement | HTMLSelectElement, value: strin
 }
 async function click(target: HTMLElement) { await act(async () => target.click()); }
 async function chooseDefinition(summary = f.summary) { await change(control("Definition and version"), JSON.stringify([summary.id, summary.version])); }
-test('test-case definitions remain visible as API-only without entering the RNF form', async () => {
-  vi.mocked(recommenderApi.definitions).mockResolvedValue([f.summary, { ...f.summary, id: 'testrec', name: 'Equation demonstration', method: 'us_agent_e21_equations_demo_v1' }]);
+test('unimplemented methods remain visible as API-only without entering a supported form', async () => {
+  vi.mocked(recommenderApi.definitions).mockResolvedValue([f.summary, { ...f.summary, id: 'testrec', name: 'Unimplemented method', method: 'testrec_e21_data_contract_v1' }]);
   await render();
-  const option = [...container.querySelectorAll('option')].find(item => item.textContent?.includes('Equation demonstration'))!;
+  const option = [...container.querySelectorAll('option')].find(item => item.textContent?.includes('Unimplemented method'))!;
   expect(option.disabled).toBe(true); expect(option.textContent).toContain('API only');
   expect(recommenderApi.definition).not.toHaveBeenCalled();
+});
+
+async function testReady() {
+  const t = testCaseFixture();
+  vi.mocked(recommenderApi.definitions).mockResolvedValue([f.summary, t.summary]);
+  vi.mocked(recommenderApi.definition).mockResolvedValue(t.definition);
+  vi.mocked(recommenderApi.datasets).mockResolvedValue([t.datasetSummary, { ...t.datasetSummary, id: 'wrong-hash', definition: { ...t.datasetSummary.definition, sha256: '0'.repeat(64) } }]);
+  vi.mocked(recommenderApi.testCaseCatalogs).mockResolvedValue([t.catalogSummary, { ...t.catalogSummary, version: 'other', snapshot: { ...t.catalogSummary.snapshot, sha256: '0'.repeat(64) } }]);
+  vi.mocked(recommenderApi.executeTestCases).mockImplementation(async body => t.run(body));
+  vi.mocked(recommenderApi.publishedRun).mockImplementation(async () => t.run(vi.mocked(recommenderApi.executeTestCases).mock.calls.at(-1)![0]));
+  await render(); await chooseDefinition(t.summary);
+  await change(control('Dataset and version'), JSON.stringify([t.datasetSummary.id, t.datasetSummary.version]));
+  expect(button('Run recommendation').disabled).toBe(true);
+  await change(control('Catalog and version'), JSON.stringify([t.catalogSummary.id, t.catalogSummary.version]));
+  await fillInput(t.request.input, t.draft);
+  return t;
+}
+test('test-case execution pins the dataset catalog, withholds outputs and shows actual equations/artifacts without RNF review', async () => {
+  const t = await testReady();
+  expect(container.querySelector('[aria-label="Test-case execution"]')).not.toBeNull();
+  expect([...container.querySelectorAll('option')].some(option => option.textContent?.includes('wrong-hash'))).toBe(false);
+  expect([...container.querySelectorAll('option')].some(option => option.textContent?.includes(' · other'))).toBe(false);
+  expect([...container.querySelectorAll('label')].some(label => label.textContent?.includes('pair for this run'))).toBe(false);
+  expect(container.querySelector('[aria-label="Test-case execution"]')?.textContent).not.toContain('Enter Associated test IDs');
+  await click(button('Run recommendation'));
+  const body = vi.mocked(recommenderApi.executeTestCases).mock.calls[0][0];
+  expect(body.catalog).toEqual(t.request.catalog); expect(body).not.toHaveProperty('selection');
+  expect(body.input.values).not.toHaveProperty(t.draft.method.bindings.test_case_ids);
+  expect(container.textContent).toContain('Test suggestions found');
+  expect(container.textContent).toContain('0.9166666666666666');
+  expect(container.textContent).toContain(t.original.snapshot.content.result.content.items[0].artifact.gherkin);
+  expect(container.textContent).toContain('Q01/Q02 remain open');
+  expect(recommenderApi.review).not.toHaveBeenCalled(); expect(recommenderApi.execute).not.toHaveBeenCalled();
+});
+test('test-case network retry preserves its UUID and changing the input uses another UUID', async () => {
+  await testReady(); vi.mocked(recommenderApi.executeTestCases).mockRejectedValue(new Error('Network unavailable'));
+  await click(button('Run recommendation')); await click(button('Run recommendation'));
+  const calls = vi.mocked(recommenderApi.executeTestCases).mock.calls;
+  expect(calls[1][0]).toEqual(calls[0][0]);
+  await change(control('Input identifier'), 'new-target'); await click(button('Run recommendation'));
+  expect(vi.mocked(recommenderApi.executeTestCases).mock.calls[2][0].id).not.toBe(calls[0][0].id);
+});
+test.each([0, 2, 3])('historical test run %s opens and replays without active dependencies', async index => {
+  const published = await import('../../../../docs/evidencias/b16b/published-runs.json');
+  const run = published.default.content.runs[index] as import('../types/test-case-recommendations').TestCaseRun;
+  vi.mocked(recommenderApi.definitions).mockResolvedValue([]); vi.mocked(recommenderApi.datasets).mockResolvedValue([]);
+  vi.mocked(recommenderApi.publishedRun).mockResolvedValue(run);
+  await render(`/configured-recommendations?runId=${run.id}`); await click(button('Verify replay'));
+  expect(container.textContent).toContain('Replay verified'); expect(container.textContent).toContain('Synthetic E21 equation demonstration');
+  if (index === 2) expect(container.textContent).toContain('Selected neighbors have no associated tests');
+  if (index === 3) expect(container.textContent).toContain('At least three eligible candidates are required');
+  expect(recommenderApi.review).not.toHaveBeenCalled();
 });
 async function fillInput(input: ConfiguredInput = f.input, definition: ConfiguredDefinition = f.draft) {
   await change(control("Input identifier"), input.id);
@@ -102,7 +158,7 @@ async function fillInput(input: ConfiguredInput = f.input, definition: Configure
       }
     } else await scalar(attribute.name, value, section);
   }
-  await change(control("Module/operation pair for this run"), '1');
+  if (definition.method.bindings.labels) await change(control("Module/operation pair for this run"), '1');
 }
 async function ready() { await render(); await chooseDefinition(); await change(control("Dataset and version"), JSON.stringify([f.datasetSummary.id, f.datasetSummary.version])); await fillInput(); }
 
@@ -181,7 +237,7 @@ test('replay divergence preserves the original result and shows the individual c
   await render(`/configured-recommendations?runId=${f.request.id}`);
   const original = container.querySelector('.nfr-item')?.textContent;
   await click(button("Verify replay"));
-  expect(container.textContent).toContain("Replay differs: the original evidence was preserved."); expect(container.textContent).toContain('Explanation: diverge');
+  expect(container.textContent).toContain("Replay differs: the original evidence was preserved."); expect(container.textContent).toContain('Explanation: differs');
   expect(container.querySelector('.nfr-item')?.textContent).toBe(original);
 });
 

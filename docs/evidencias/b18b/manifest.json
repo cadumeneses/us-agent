@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "kind": "configuration_effort_instrument",
+  "recordedAt": "2026-10-18T12:43:54.314Z",
+  "inputKind": "synthetic_rehearsal",
+  "empiricalClaim": false,
+  "sources": {
+    "apps/api/src/domain/content-snapshot.ts": "43d0a3570567b4d3bfe5efbff3c2e225d093de4193b4fd1d26fe996c4c781d8a",
+    "apps/api/src/domain/import-formats.ts": "cb9d5ea48c69d6e7f2616efb150f2b1ec362be9876f9f485468da92e17ef9745",
+    "apps/api/src/evaluation/configuration-effort.ts": "86dc71d324f68012fb9f9f6d84ed0fb30c7ea0d97112f7ce7e5ba27630d6b78a",
+    "config/recommenders/rnf-v2.draft.json": "c531fc216da54215aac897e2c6553f3dfd0ce9fcc4c9fb945cbbdc6953676e0e",
+    "config/recommenders/testrec-equations.draft.json": "4b9cd23901730938f374aaf523ae184282668d7c8b2bba8b14f2ead818bf76e2",
+    "research/baselines/rnf-v2/reference.json": "62a8059a6d11ab6026deade7c010b0682714bcc7e77f9132aac6c840792e1510",
+    "research/configuration-effort-v1/materials.json": "c09f14616b46b64fd76c24c8449b4c37ce73a85e85885440345ebc3cc8be7a1a",
+    "research/configuration-effort-v1/protocol.md": "62b07cc2ed3203a2a6be37f67017f3f4cda80a23249bcd0986bb88c33da54fb1",
+    "research/configuration-effort-v1/rehearsal.json": "a348935c13db4f4b486c00965db196971c6afd1b90b0cb5ca36af3e08aec429a",
+    "research/examples/testrec-e21/equations-synthetic.json": "e4850176fe374069fee5243ee757f8ba1118bcc54609de402e4d28d14e5c6945",
+    "research/examples/testrec-e21/synthetic-catalog.json": "d5d2f2b3ee1baa8c496effe6e233dd25f5fa4ea1489836f5a3e47ce1e3803b6e",
+    "scripts/check-configuration-effort.mjs": "aca0bb508a3232035d132101c48f9a11b99ad66d9b3609ef987294d3f3389b05",
+    "scripts/measure-configuration.ts": "a8a1a8b69cab95bac20add7a4a5594e2d645220f29c6e243c04756d0bd63d7ed"
+  },
+  "artifacts": {
+    "input.json": "a348935c13db4f4b486c00965db196971c6afd1b90b0cb5ca36af3e08aec429a",
+    "report.json": "9fab4ff3f8443236fbcf6bb2aca256ce659ffb6592b37c656f374b4dfc6ae3be",
+    "sessions.csv": "f8d158932ca7ca8ba58e23926364cf8de3a62248771b53a10cd63550756cfad4"
+  },
+  "reportSha256": "c03ed6d03a118549809466cedbe67ea6133a5f92f1030a92dd727216552c52f4",
+  "limitations": [
+    "declared_observations_not_automatic_telemetry",
+    "artifact_and_software_references_not_independently_verified",
+    "no_participant_study_or_recommendation_quality_claim",
+    "only_declared_attempts_are_in_the_denominators",
+    "third_example_not_included"
+  ]
+}

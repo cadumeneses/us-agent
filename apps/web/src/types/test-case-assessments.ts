@@ -1,0 +1,10 @@
+import type { TestTargetContent, TestDecisionContent, TestCopyContent } from '../../../api/src/domain/test-case-review';
+import type { Snapshot } from './configurable-recommendations';
+export type TestTargetRecord = { snapshot: Snapshot<TestTargetContent>; createdBy: string; createdAt: string };
+export type TestDecisionRecord = { id: string; snapshot: Snapshot<TestDecisionContent>; createdBy: string; createdAt: string };
+export type TestCopyRecord = { id: string; snapshot: Snapshot<TestCopyContent>; createdBy: string; createdAt: string };
+export type TestReview = { runId: string; runSha256: string; target: TestTargetRecord | null };
+export type TestItemReview = { runId: string; runSha256: string; itemKey: string; decision: TestDecisionRecord | null;
+  copies: TestCopyRecord[]; page: { limit: number; offset: number; total: number } };
+export type TestDecisionRequest = TestDecisionContent['request']['content'];
+export type TestCopyRequest = TestCopyContent['request']['content'];

@@ -1,0 +1,60 @@
+ID;Descrição
+1;Inserção com dados corretos
+2;Inserção com campos obrigatórios não preenchidos
+3;Ao informar <campo> inválido o sistema deverá exibir mensagem de campo inválido
+4;Inserção sem autenticação
+5;Inserção sem autorização
+6;Ao tentar inserir uma <entidade> cujo identificador já esteja cadastrado no sistema o mesmo deverá exibir mensagem
+7;Inserção com senha diferente da confirmação
+8;Ao alterar campos da <entidade> e clicar em salvar a <entidade> deve ser atualizada
+9;Alteração com campos obrigatórios não preenchidos
+10;Alteração com campos inválidos
+11;Alteração sem autenticação
+12;Alteração sem autorização
+13;Ao alterar <entidade> com identificador existente, mensagem deve ser exibida
+14;Alteração com senha diferente da confirmação
+15;Listagem de dados
+16;Listagem sem dados cadastrados
+17;No resultado da busca, a página deve exibir no máximo <x> valores
+18;Listagem com valor do filtro cadastrado
+19;Listagem com valor do filtro não cadastrado
+20;Listagem sem autenticação
+21;Listagem sem autorização
+22;Listagem ordenar dados
+23;Fazer primeiro login
+24;Fazer primeiro login nome de usuário inválido
+25;Alteração senha do usuário
+26;Alteração senha do usuário senha antiga inválida
+27;Alteração senha do usuário nova senha inválida
+28;Recuperação senha do usuário
+29;Recuperação senha do usuário nome de usuário inválido
+30;Recuperação senha do usuário senha nova inválida
+31;Exclusão de dados
+32;Exclusão de dados sem autenticação
+33;Exclusão de dados sem autorização
+34;Buscar dados de um item
+35;Buscar dados de um item inexistente
+36;Buscar dados de um item sem autenticação
+37;Buscar dados de um item sem autorização
+38;Fazer logout
+39;Atualizar dados com cartateres especiais
+40;Ao informar login cadastro e senha incorreta o sistema deve exibir mensagem de senha incorreta.
+41;Ao informar login e senha não cadastrada o sistema deverá exibir mensagem de login incorreto.
+42;Ao não informar o login ou a senha o sistema deve exibir mensagem login e senha devem ser informados.
+43;Ao acessar <entidade> os dados da mesma devem estar preenchidos
+44;Ao inserir um link de um <entidade> inexistente um erro 404 deve ser exibido
+45;Ao selecionar um usuário e informar os campos obrigatórios e não informar a senha, a senha do usuário sendo atualizado não deve ser alterada.
+46;Ao fazer login com nome de usuário e senha correta, porém o usuário esteja inválido ou inativo, não deve ser permitido o sucesso do login
+47;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>
+48;Só será possível haver um usuário com papel administrador
+49;Ao clicar no botão editar, tela de edição deve ser exibida e preenchida com os dados da <entidade>
+50;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a <entidade> deve ser excluída
+51;Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos
+52;Os ícones excluir e alterar deve ser exibido apenas para usuários ativos
+53;Ao clicar em removidos os usuários removidos devem ser exibidos
+54;Ao exibir tela de edição, identificador não deve poder ser alterado
+55;Caso o usuário esteja logado o sistema deve redirecionar para tela de login
+56;O conteúdo deve ser exibido nos principais browsers (IE, Chrome, Firefox)
+57;Ao clicar no ícone desativar a <entidade> ativa deverá ser desativada.
+58;Ao clicar no ícone ativar a <entidade> inativa deverá ser ativada.
+59;Ao carregar o arquivo com os dados, os mesmo devem ser registrados no sistema

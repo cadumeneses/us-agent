@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "version": "testrec-figure-associations-v1",
+  "review": { "actor": "codex_visual_source_review", "date": "2026-10-18", "validation": "not_author_or_supervisor_validation" },
+  "sources": {
+    "E21": { "sha256": "f69cd99f2a68b2cc349bcb294f0873439d31c0a93a50272c3d6668740a1eee53", "reference": "2021 thesis, PDF pp.71-72 and 74, printed pp.57-58 and 60" },
+    "E26": { "sha256": "cc895b9d7cbc49af9c63f0466f1050b82b432450bf0798307229c5a0cf23f445", "reference": "10.1145/3748522.3779891, PDF p.4, figure 3 and equations 3-4" }
+  },
+  "weightBasis": "displayed_two_decimal_illustrative_similarities_not_recomputed_distances",
+  "cases": [
+    {
+      "id": "e21-figure-4-8", "reference": "E21", "pdfPage": 71, "figure": "4.8", "tiePolicy": "source_order", "k": 3,
+      "candidates": [
+        { "recordId": "e1", "similarity": 0.50, "testCaseIds": ["CT01", "CT03"] },
+        { "recordId": "e2", "similarity": 0.50, "testCaseIds": ["CT03", "CT04"] },
+        { "recordId": "e3", "similarity": 0.50, "testCaseIds": ["CT01", "CT02", "CT04"] },
+        { "recordId": "e4", "similarity": 0.37, "testCaseIds": ["CT02", "CT03", "CT04"] },
+        { "recordId": "e5", "similarity": 0.87, "testCaseIds": ["CT03", "CT04", "CT05"] },
+        { "recordId": "e6", "similarity": 0.75, "testCaseIds": ["CT01", "CT03", "CT04"] }
+      ],
+      "selectedSourceIds": ["e1", "e5", "e6"],
+      "reportedRanking": [{"id":"CT03","score":0.71},{"id":"CT04","score":0.54},{"id":"CT01","score":0.42},{"id":"CT05","score":0.25}]
+    },
+    {
+      "id": "e21-figure-4-9", "reference": "E21", "pdfPage": 74, "figure": "4.9", "tiePolicy": "more_associated_tests_then_source_order", "k": 3,
+      "candidates": [
+        { "recordId": "e1", "similarity": 0.50, "testCaseIds": ["CT01", "CT03"] },
+        { "recordId": "e2", "similarity": 0.50, "testCaseIds": ["CT03", "CT04"] },
+        { "recordId": "e3", "similarity": 0.50, "testCaseIds": ["CT01", "CT02", "CT04"] },
+        { "recordId": "e4", "similarity": 0.37, "testCaseIds": ["CT02", "CT03", "CT04"] },
+        { "recordId": "e5", "similarity": 0.87, "testCaseIds": ["CT03", "CT04", "CT05"] },
+        { "recordId": "e6", "similarity": 0.75, "testCaseIds": ["CT01", "CT03", "CT04"] }
+      ],
+      "selectedSourceIds": ["e3", "e5", "e6"],
+      "reportedRanking": [{"id":"CT04","score":0.71},{"id":"CT03","score":0.54},{"id":"CT01","score":0.42},{"id":"CT05","score":0.29},{"id":"CT02","score":0.17}]
+    },
+    {
+      "id": "e26-figure-3", "reference": "E26", "pdfPage": 4, "figure": "3", "tiePolicy": "more_associated_tests_then_source_order", "k": 3,
+      "candidates": [
+        { "recordId": "u1", "similarity": 0.50, "testCaseIds": ["TC01", "TC03"] },
+        { "recordId": "u2", "similarity": 0.50, "testCaseIds": ["TC03", "TC04"] },
+        { "recordId": "u3", "similarity": 0.50, "testCaseIds": ["TC01", "TC02", "TC04"] },
+        { "recordId": "u4", "similarity": 0.37, "testCaseIds": ["TC02", "TC03", "TC04"] },
+        { "recordId": "u5", "similarity": 0.87, "testCaseIds": ["TC03", "TC04", "TC05"] },
+        { "recordId": "u6", "similarity": 0.75, "testCaseIds": ["TC01", "TC03", "TC04"] }
+      ],
+      "selectedSourceIds": ["u3", "u5", "u6"],
+      "reportedRanking": [{"id":"TC04","score":0.71},{"id":"TC03","score":0.54},{"id":"TC01","score":0.42},{"id":"TC05","score":0.29},{"id":"TC02","score":0.17}]
+    }
+  ],
+  "limits": ["visual_transcription_of_illustrations_only", "not_original_dataset_or_full_TestRec_execution", "Q01_Euclidean_transformation_and_Q03_empirical_aggregation_remain_open", "E21_page58_text_omits_the_CT01_edge_from_e1_in_figure4_8", "E21_figure4_8_reports_CT05_0.25_while_displayed_weights_and_equation_give_0.29", "E26_figure3_and_E21_figure4_9_agree_under_the_heuristic_with_distinct_source_namespaces"]
+}

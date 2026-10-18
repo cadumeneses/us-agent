@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Edg/155.0.4283.45",
+    "revision": "@50f24ef2aa5369a074b8888b7db82d9c0652d642",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+    "jsVersion": "15.5.9.4"
+  },
+  "runId": "62d5ffda-312d-43ad-b046-6cbc288dc3fa",
+  "rawRunSha256": "0b21091243afe911e6889ca47ca386c03f7a4b03bcf5092e02246883c40c498a",
+  "observations": {
+    "desktop": {
+      "width": 1440,
+      "documentWidth": 1425,
+      "unlabelledControls": 0
+    },
+    "mobile": {
+      "width": 390,
+      "documentWidth": 390,
+      "unlabelledControls": 0
+    }
+  },
+  "verified": [
+    "catalog-review-publication-original-bytes",
+    "independent-criteria-taxonomy",
+    "test-definition-template",
+    "catalog-bound-import",
+    "explicit-exclusion",
+    "explicit-dataset-catalog",
+    "target-output-withheld",
+    "three-neighbors-contributions-artifacts",
+    "no-rnf-assessment",
+    "evidence-download",
+    "input-destination-accept-reject",
+    "adapted-copy-revisions-original-preserved",
+    "assessment-evidence-download",
+    "retired-history-assessment-replay"
+  ],
+  "scope": "Synthetic E21 Manhattan equation demonstration; not original Euclidean reproduction or empirical accuracy."
+}

@@ -18,11 +18,31 @@ const baseline = json('research/baselines/rnf-v2/manifest.json');
 const pilot = json('docs/evidencias/b14a/manifest.json');
 const equations = json('docs/evidencias/b16a/equations-demo.json');
 const publishedEquations = json('docs/evidencias/b16b/published-runs.json');
-for (const inventory of [baseline.sourceHashes, pilot.sources, equations.content.sourceHashes, publishedEquations.content.sourceHashes]) {
+const assessments = json('docs/evidencias/b17b/assessment-integration.json');
+const testPilot = json('docs/evidencias/b18a/manifest.json');
+const sourceAudit = json('docs/evidencias/b02c/source-audit.json');
+const sourceAuditManifest = json('docs/evidencias/b02c/manifest.json');
+const sourcePreparation = json('docs/evidencias/b02d/manifest.json');
+const sourceTransport = json('docs/evidencias/b02e/manifest.json');
+const sourceVersions = json('docs/evidencias/b02f/manifest.json');
+const reviewedAssociations = json('docs/evidencias/b02g/manifest.json');
+const reconciledData = json('docs/evidencias/b02h/manifest.json');
+const configurationEffort = json('docs/evidencias/b18b/manifest.json');
+const configurationTasks = json('docs/evidencias/b18c/manifest.json');
+for (const inventory of [baseline.sourceHashes, pilot.sources, equations.content.sourceHashes, publishedEquations.content.sourceHashes, assessments.content.sourceHashes, testPilot.sources, sourceAudit.content.sourceHashes, sourcePreparation.sources, sourceTransport.sources, sourceVersions.sources, reviewedAssociations.sources, reconciledData.sources, configurationEffort.sources, configurationTasks.sources]) {
   for (const [path, sha256] of Object.entries(inventory)) add(path, sha256);
 }
 const sourceCount = expected.size;
 for (const [name, sha256] of Object.entries(pilot.artifacts)) add(`docs/evidencias/b14a/${name}`, sha256);
+for (const [name, sha256] of Object.entries(testPilot.artifacts)) add(`docs/evidencias/b18a/${name}`, sha256);
+for (const [name, sha256] of Object.entries(sourceAuditManifest.artifacts)) add(`docs/evidencias/b02c/${name}`, sha256);
+for (const [name, sha256] of Object.entries(sourcePreparation.artifacts)) add(`docs/evidencias/b02d/${name}`, sha256);
+for (const [name, sha256] of Object.entries(sourceTransport.artifacts)) add(`docs/evidencias/b02e/${name}`, sha256);
+for (const [name, sha256] of Object.entries(sourceVersions.artifacts)) add(`docs/evidencias/b02f/${name}`, sha256);
+for (const [name, sha256] of Object.entries(reviewedAssociations.artifacts)) add(`docs/evidencias/b02g/${name}`, sha256);
+for (const [name, sha256] of Object.entries(reconciledData.artifacts)) add(`docs/evidencias/b02h/${name}`, sha256);
+for (const [name, sha256] of Object.entries(configurationEffort.artifacts)) add(`docs/evidencias/b18b/${name}`, sha256);
+for (const [name, sha256] of Object.entries(configurationTasks.artifacts)) add(`docs/evidencias/b18c/${name}`, sha256);
 for (const [path, sha256] of expected) {
   assert.equal(createHash('sha256').update(read(path)).digest('hex'), sha256, `Staged scientific bytes differ: ${path}`);
 }

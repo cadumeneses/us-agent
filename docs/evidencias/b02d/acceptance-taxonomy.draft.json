@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 1,
+  "id": "ednaldo-acceptance-criteria",
+  "version": "zenodo-16133793.1",
+  "name": "E26 — Acceptance criteria, Zenodo 16133793",
+  "kind": "list",
+  "selection": "any",
+  "source": "Zenodo 10.5281/zenodo.16133793; acceptance_criteria_data.csv; SHA-256 9af26e760b59a98aeabc469867f61123a9753424eaa8240c94bbd5ccc7de2afe; CC BY 4.0; local node IDs ca_<literal source ID>; unchanged descriptions; draft, not published.",
+  "nodes": [
+    {
+      "id": "ca_1",
+      "name": "Inserção com dados corretos",
+      "description": "Inserção com dados corretos",
+      "parentId": null
+    },
+    {
+      "id": "ca_2",
+      "name": "Inserção com campos obrigatórios não preenchidos",
+      "description": "Inserção com campos obrigatórios não preenchidos",
+      "parentId": null
+    },
+    {
+      "id": "ca_3",
+      "name": "Ao informar <campo> inválido o sistema deverá exibir mensagem de campo inválido",
+      "description": "Ao informar <campo> inválido o sistema deverá exibir mensagem de campo inválido",
+      "parentId": null
+    },
+    {
+      "id": "ca_4",
+      "name": "Inserção sem autenticação",
+      "description": "Inserção sem autenticação",
+      "parentId": null
+    },
+    {
+      "id": "ca_5",
+      "name": "Inserção sem autorização",
+      "description": "Inserção sem autorização",
+      "parentId": null
+    },
+    {
+      "id": "ca_6",
+      "name": "Ao tentar inserir uma <entidade> cujo identificador já esteja cadastrado no sistema o mesmo deverá exibir mensagem",
+      "description": "Ao tentar inserir uma <entidade> cujo identificador já esteja cadastrado no sistema o mesmo deverá exibir mensagem",
+      "parentId": null
+    },
+    {
+      "id": "ca_7",
+      "name": "Inserção com senha diferente da confirmação",
+      "description": "Inserção com senha diferente da confirmação",
+      "parentId": null
+    },
+    {
+      "id": "ca_8",
+      "name": "Ao alterar campos da <entidade> e clicar em salvar a <entidade> deve ser atualizada",
+      "description": "Ao alterar campos da <entidade> e clicar em salvar a <entidade> deve ser atualizada",
+      "parentId": null
+    },
+    {
+      "id": "ca_9",
+      "name": "Alteração com campos obrigatórios não preenchidos",
+      "description": "Alteração com campos obrigatórios não preenchidos",
+      "parentId": null
+    },
+    {
+      "id": "ca_10",
+      "name": "Alteração com campos inválidos",
+      "description": "Alteração com campos inválidos",
+      "parentId": null
+    },
+    {
+      "id": "ca_11",
+      "name": "Alteração sem autenticação",
+      "description": "Alteração sem autenticação",
+      "parentId": null
+    },
+    {
+      "id": "ca_12",
+      "name": "Alteração sem autorização",
+      "description": "Alteração sem autorização",
+      "parentId": null
+    },
+    {
+      "id": "ca_13",
+      "name": "Ao alterar <entidade> com identificador existente, mensagem deve ser exibida",
+      "description": "Ao alterar <entidade> com identificador existente, mensagem deve ser exibida",
+      "parentId": null
+    },
+    {
+      "id": "ca_14",
+      "name": "Alteração com senha diferente da confirmação",
+      "description": "Alteração com senha diferente da confirmação",
+      "parentId": null
+    },
+    {
+      "id": "ca_15",
+      "name": "Listagem de dados",
+      "description": "Listagem de dados",
+      "parentId": null
+    },
+    {
+      "id": "ca_16",
+      "name": "Listagem sem dados cadastrados",
+      "description": "Listagem sem dados cadastrados",
+      "parentId": null
+    },
+    {
+      "id": "ca_17",
+      "name": "No resultado da busca, a página deve exibir no máximo <x> valores",
+      "description": "No resultado da busca, a página deve exibir no máximo <x> valores",
+      "parentId": null
+    },
+    {
+      "id": "ca_18",
+      "name": "Listagem com valor do filtro cadastrado",
+      "description": "Listagem com valor do filtro cadastrado",
+      "parentId": null
+    },
+    {
+      "id": "ca_19",
+      "name": "Listagem com valor do filtro não cadastrado",
+      "description": "Listagem com valor do filtro não cadastrado",
+      "parentId": null
+    },
+    {
+      "id": "ca_20",
+      "name": "Listagem sem autenticação",
+      "description": "Listagem sem autenticação",
+      "parentId": null
+    },
+    {
+      "id": "ca_21",
+      "name": "Listagem sem autorização",
+      "description": "Listagem sem autorização",
+      "parentId": null
+    },
+    {
+      "id": "ca_22",
+      "name": "Listagem ordenar dados",
+      "description": "Listagem ordenar dados",
+      "parentId": null
+    },
+    {
+      "id": "ca_23",
+      "name": "Fazer primeiro login",
+      "description": "Fazer primeiro login",
+      "parentId": null
+    },
+    {
+      "id": "ca_24",
+      "name": "Fazer primeiro login nome de usuário inválido",
+      "description": "Fazer primeiro login nome de usuário inválido",
+      "parentId": null
+    },
+    {
+      "id": "ca_25",
+      "name": "Alteração senha do usuário",
+      "description": "Alteração senha do usuário",
+      "parentId": null
+    },
+    {
+      "id": "ca_26",
+      "name": "Alteração senha do usuário senha antiga inválida",
+      "description": "Alteração senha do usuário senha antiga inválida",
+      "parentId": null
+    },
+    {
+      "id": "ca_27",
+      "name": "Alteração senha do usuário nova senha inválida",
+      "description": "Alteração senha do usuário nova senha inválida",
+      "parentId": null
+    },
+    {
+      "id": "ca_28",
+      "name": "Recuperação senha do usuário",
+      "description": "Recuperação senha do usuário",
+      "parentId": null
+    },
+    {
+      "id": "ca_29",
+      "name": "Recuperação senha do usuário nome de usuário inválido",
+      "description": "Recuperação senha do usuário nome de usuário inválido",
+      "parentId": null
+    },
+    {
+      "id": "ca_30",
+      "name": "Recuperação senha do usuário senha nova inválida",
+      "description": "Recuperação senha do usuário senha nova inválida",
+      "parentId": null
+    },
+    {
+      "id": "ca_31",
+      "name": "Exclusão de dados",
+      "description": "Exclusão de dados",
+      "parentId": null
+    },
+    {
+      "id": "ca_32",
+      "name": "Exclusão de dados sem autenticação",
+      "description": "Exclusão de dados sem autenticação",
+      "parentId": null
+    },
+    {
+      "id": "ca_33",
+      "name": "Exclusão de dados sem autorização",
+      "description": "Exclusão de dados sem autorização",
+      "parentId": null
+    },
+    {
+      "id": "ca_34",
+      "name": "Buscar dados de um item",
+      "description": "Buscar dados de um item",
+      "parentId": null
+    },
+    {
+      "id": "ca_35",
+      "name": "Buscar dados de um item inexistente",
+      "description": "Buscar dados de um item inexistente",
+      "parentId": null
+    },
+    {
+      "id": "ca_36",
+      "name": "Buscar dados de um item sem autenticação",
+      "description": "Buscar dados de um item sem autenticação",
+      "parentId": null
+    },
+    {
+      "id": "ca_37",
+      "name": "Buscar dados de um item sem autorização",
+      "description": "Buscar dados de um item sem autorização",
+      "parentId": null
+    },
+    {
+      "id": "ca_38",
+      "name": "Fazer logout",
+      "description": "Fazer logout",
+      "parentId": null
+    },
+    {
+      "id": "ca_39",
+      "name": "Atualizar dados com cartateres especiais",
+      "description": "Atualizar dados com cartateres especiais",
+      "parentId": null
+    },
+    {
+      "id": "ca_40",
+      "name": "Ao informar login cadastro e senha incorreta o sistema deve exibir mensagem de senha incorreta.",
+      "description": "Ao informar login cadastro e senha incorreta o sistema deve exibir mensagem de senha incorreta.",
+      "parentId": null
+    },
+    {
+      "id": "ca_41",
+      "name": "Ao informar login e senha não cadastrada o sistema deverá exibir mensagem de login incorreto.",
+      "description": "Ao informar login e senha não cadastrada o sistema deverá exibir mensagem de login incorreto.",
+      "parentId": null
+    },
+    {
+      "id": "ca_42",
+      "name": "Ao não informar o login ou a senha o sistema deve exibir mensagem login e senha devem ser informados.",
+      "description": "Ao não informar o login ou a senha o sistema deve exibir mensagem login e senha devem ser informados.",
+      "parentId": null
+    },
+    {
+      "id": "ca_43",
+      "name": "Ao acessar <entidade> os dados da mesma devem estar preenchidos",
+      "description": "Ao acessar <entidade> os dados da mesma devem estar preenchidos",
+      "parentId": null
+    },
+    {
+      "id": "ca_44",
+      "name": "Ao inserir um link de um <entidade> inexistente um erro 404 deve ser exibido",
+      "description": "Ao inserir um link de um <entidade> inexistente um erro 404 deve ser exibido",
+      "parentId": null
+    },
+    {
+      "id": "ca_45",
+      "name": "Ao selecionar um usuário e informar os campos obrigatórios e não informar a senha, a senha do usuário sendo atualizado não deve ser alterada.",
+      "description": "Ao selecionar um usuário e informar os campos obrigatórios e não informar a senha, a senha do usuário sendo atualizado não deve ser alterada.",
+      "parentId": null
+    },
+    {
+      "id": "ca_46",
+      "name": "Ao fazer login com nome de usuário e senha correta, porém o usuário esteja inválido ou inativo, não deve ser permitido o sucesso do login",
+      "description": "Ao fazer login com nome de usuário e senha correta, porém o usuário esteja inválido ou inativo, não deve ser permitido o sucesso do login",
+      "parentId": null
+    },
+    {
+      "id": "ca_47",
+      "name": "Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>",
+      "description": "Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>",
+      "parentId": null
+    },
+    {
+      "id": "ca_48",
+      "name": "Só será possível haver um usuário com papel administrador",
+      "description": "Só será possível haver um usuário com papel administrador",
+      "parentId": null
+    },
+    {
+      "id": "ca_49",
+      "name": "Ao clicar no botão editar, tela de edição deve ser exibida e preenchida com os dados da <entidade>",
+      "description": "Ao clicar no botão editar, tela de edição deve ser exibida e preenchida com os dados da <entidade>",
+      "parentId": null
+    },
+    {
+      "id": "ca_50",
+      "name": "Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a <entidade> deve ser excluída",
+      "description": "Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a <entidade> deve ser excluída",
+      "parentId": null
+    },
+    {
+      "id": "ca_51",
+      "name": "Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos",
+      "description": "Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos",
+      "parentId": null
+    },
+    {
+      "id": "ca_52",
+      "name": "Os ícones excluir e alterar deve ser exibido apenas para usuários ativos",
+      "description": "Os ícones excluir e alterar deve ser exibido apenas para usuários ativos",
+      "parentId": null
+    },
+    {
+      "id": "ca_53",
+      "name": "Ao clicar em removidos os usuários removidos devem ser exibidos",
+      "description": "Ao clicar em removidos os usuários removidos devem ser exibidos",
+      "parentId": null
+    },
+    {
+      "id": "ca_54",
+      "name": "Ao exibir tela de edição, identificador não deve poder ser alterado",
+      "description": "Ao exibir tela de edição, identificador não deve poder ser alterado",
+      "parentId": null
+    },
+    {
+      "id": "ca_55",
+      "name": "Caso o usuário esteja logado o sistema deve redirecionar para tela de login",
+      "description": "Caso o usuário esteja logado o sistema deve redirecionar para tela de login",
+      "parentId": null
+    },
+    {
+      "id": "ca_56",
+      "name": "O conteúdo deve ser exibido nos principais browsers (IE, Chrome, Firefox)",
+      "description": "O conteúdo deve ser exibido nos principais browsers (IE, Chrome, Firefox)",
+      "parentId": null
+    },
+    {
+      "id": "ca_57",
+      "name": "Ao clicar no ícone desativar a <entidade> ativa deverá ser desativada.",
+      "description": "Ao clicar no ícone desativar a <entidade> ativa deverá ser desativada.",
+      "parentId": null
+    },
+    {
+      "id": "ca_58",
+      "name": "Ao clicar no ícone ativar a <entidade> inativa deverá ser ativada.",
+      "description": "Ao clicar no ícone ativar a <entidade> inativa deverá ser ativada.",
+      "parentId": null
+    },
+    {
+      "id": "ca_59",
+      "name": "Ao carregar o arquivo com os dados, os mesmo devem ser registrados no sistema",
+      "description": "Ao carregar o arquivo com os dados, os mesmo devem ser registrados no sistema",
+      "parentId": null
+    }
+  ]
+}

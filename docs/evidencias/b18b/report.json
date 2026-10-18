@@ -1,0 +1,284 @@
+{
+  "format": "us-agent-json-v1",
+  "sha256": "c03ed6d03a118549809466cedbe67ea6133a5f92f1030a92dd727216552c52f4",
+  "content": {
+    "artifactVerification": "references_declared_not_fetched",
+    "empiricalClaim": false,
+    "independentSessions": false,
+    "inputSha256": "9f7a3ae36626a66bba3b7aaa0cc658d02201de441c4cddf21c8987c029ba7fe5",
+    "kind": "synthetic_rehearsal",
+    "materials": {
+      "id": "configuration-materials",
+      "sha256": "c09f14616b46b64fd76c24c8449b4c37ce73a85e85885440345ebc3cc8be7a1a",
+      "version": "1"
+    },
+    "protocol": {
+      "sha256": "62b07cc2ed3203a2a6be37f67017f3f4cda80a23249bcd0986bb88c33da54fb1",
+      "version": "configuration-effort-v1"
+    },
+    "results": [
+      {
+        "activeMs": 120000,
+        "applicationCodeChanges": 0,
+        "attempt": 1,
+        "checkpoints": {
+          "dataset": {
+            "activeAtMs": 70000,
+            "elapsedAtMs": 100000,
+            "reference": {
+              "id": "synthetic-rnf-dataset",
+              "sha256": "5e71d49fe29a475400a59222383123887b3ba011802ae2ea45ba4061f9057a60",
+              "version": "synthetic.1"
+            }
+          },
+          "definition": {
+            "activeAtMs": 10000,
+            "elapsedAtMs": 10000,
+            "reference": {
+              "id": "synthetic-rnf-definition",
+              "sha256": "461f3709e87486e6391b6ff182c575ef0b7d1fc424edfea3095ce5620cb4ce14",
+              "version": "synthetic.1"
+            }
+          },
+          "replay": {
+            "activeAtMs": 115000,
+            "elapsedAtMs": 145000,
+            "reference": {
+              "id": "synthetic-rnf-replay",
+              "sha256": "6511e2ed021702be06b9c36748506620252caa9e00da09f49f9c30eb5aad8588",
+              "version": "synthetic.1"
+            }
+          },
+          "run": {
+            "activeAtMs": 100000,
+            "elapsedAtMs": 130000,
+            "reference": {
+              "id": "synthetic-rnf-run",
+              "sha256": "c2b716ef26a39e6e8c3eb48c7d17363641d0b1b965a3310ef6db2302a822c13b",
+              "version": "synthetic.1"
+            }
+          },
+          "taxonomy": {
+            "activeAtMs": 40000,
+            "elapsedAtMs": 70000,
+            "reference": {
+              "id": "synthetic-rnf-taxonomy",
+              "sha256": "dd27b0fd01d6fbe660f6a78e891c7ad5da3865dfa5e8760078787e7b10800735",
+              "version": "synthetic.1"
+            }
+          }
+        },
+        "completion": "reported_by_observer_not_independently_verified",
+        "configurationChanges": 1,
+        "elapsedMs": 150000,
+        "environment": {
+          "experience": "not_recorded",
+          "interfaceLanguage": "en",
+          "softwareRevision": "1ee923ff85bf0d4b06658a77139287ac239e2e1a",
+          "softwareSnapshotSha256": "c65701fa3bc065f0e8b653bf0a2e8055668af5d2636087a860b2bc0c7b90642c",
+          "startingState": "provided_materials_new_namespace",
+          "workspaceState": "modified"
+        },
+        "errors": 1,
+        "errorsByCode": {
+          "taxonomy_reference": 1
+        },
+        "helpByKind": {
+          "conceptual": 0,
+          "procedural": 1,
+          "technical": 0
+        },
+        "helpRequests": 1,
+        "method": "ramos_2019_manhattan_k1_v2",
+        "missingCheckpoints": [],
+        "order": 1,
+        "outcome": "completed",
+        "participantCode": "synthetic-a",
+        "pausedMs": 30000,
+        "sessionId": "synthetic-a-rnf"
+      },
+      {
+        "activeMs": 210000,
+        "applicationCodeChanges": 1,
+        "attempt": 1,
+        "checkpoints": {
+          "catalog": {
+            "activeAtMs": 60000,
+            "elapsedAtMs": 60000,
+            "reference": {
+              "id": "synthetic-testrec-catalog",
+              "sha256": "18619adea154d191cfbd0148a7c035587d2c0e7d63e3c7813f252b43d562a1ba",
+              "version": "synthetic.1"
+            }
+          },
+          "dataset": {
+            "activeAtMs": 100000,
+            "elapsedAtMs": 100000,
+            "reference": {
+              "id": "synthetic-testrec-dataset",
+              "sha256": "bdb78bda89216ef5c2d92a8c063e4e525dbd643c68e3f22bc1bbfab571274db1",
+              "version": "synthetic.1"
+            }
+          },
+          "definition": {
+            "activeAtMs": 30000,
+            "elapsedAtMs": 30000,
+            "reference": {
+              "id": "synthetic-testrec-definition",
+              "sha256": "e7f76aaed7a2f51b156e30d578ec2a41733be7f3e5bce8ca69cb24f0cd822e26",
+              "version": "synthetic.1"
+            }
+          },
+          "replay": {
+            "activeAtMs": 200000,
+            "elapsedAtMs": 200000,
+            "reference": {
+              "id": "synthetic-testrec-replay",
+              "sha256": "bc9caf9ba7c43835f7813f31362f4167d1a459a65ea1159f3f18eb0ce0853747",
+              "version": "synthetic.1"
+            }
+          },
+          "run": {
+            "activeAtMs": 180000,
+            "elapsedAtMs": 180000,
+            "reference": {
+              "id": "synthetic-testrec-run",
+              "sha256": "0c9872ec40b6a52acfc6fed5184ac61fad694dff498cf79ccab7ceacf582b517",
+              "version": "synthetic.1"
+            }
+          },
+          "taxonomy": {
+            "activeAtMs": 10000,
+            "elapsedAtMs": 10000,
+            "reference": {
+              "id": "synthetic-testrec-taxonomy",
+              "sha256": "ce92f2bb755fe1ddfb4c65ba1d31c63fa775433c04715a252b23c0cd8dcb6c6b",
+              "version": "synthetic.1"
+            }
+          }
+        },
+        "completion": "reported_by_observer_not_independently_verified",
+        "configurationChanges": 0,
+        "elapsedMs": 210000,
+        "environment": {
+          "experience": "not_recorded",
+          "interfaceLanguage": "en",
+          "softwareRevision": "1ee923ff85bf0d4b06658a77139287ac239e2e1a",
+          "softwareSnapshotSha256": "c65701fa3bc065f0e8b653bf0a2e8055668af5d2636087a860b2bc0c7b90642c",
+          "startingState": "provided_materials_new_namespace",
+          "workspaceState": "modified"
+        },
+        "errors": 0,
+        "errorsByCode": {},
+        "helpByKind": {
+          "conceptual": 0,
+          "procedural": 0,
+          "technical": 0
+        },
+        "helpRequests": 0,
+        "method": "us_agent_e21_equations_demo_v1",
+        "missingCheckpoints": [],
+        "order": 2,
+        "outcome": "completed",
+        "participantCode": "synthetic-a",
+        "pausedMs": 0,
+        "sessionId": "synthetic-a-testrec"
+      },
+      {
+        "activeMs": 50000,
+        "applicationCodeChanges": 0,
+        "attempt": 1,
+        "checkpoints": {
+          "definition": {
+            "activeAtMs": 20000,
+            "elapsedAtMs": 20000,
+            "reference": {
+              "id": "synthetic-abandoned-definition",
+              "sha256": "09243797192ee3ab4f01ac3c0b10b7dfbcd9c7d0b6a546378ab8bb5ec4849d6a",
+              "version": "synthetic.1"
+            }
+          }
+        },
+        "completion": "reported_by_observer_not_independently_verified",
+        "configurationChanges": 0,
+        "elapsedMs": 90000,
+        "environment": {
+          "experience": "not_recorded",
+          "interfaceLanguage": "en",
+          "softwareRevision": "1ee923ff85bf0d4b06658a77139287ac239e2e1a",
+          "softwareSnapshotSha256": "c65701fa3bc065f0e8b653bf0a2e8055668af5d2636087a860b2bc0c7b90642c",
+          "startingState": "provided_materials_new_namespace",
+          "workspaceState": "modified"
+        },
+        "errors": 1,
+        "errorsByCode": {
+          "catalog_import": 1
+        },
+        "helpByKind": {
+          "conceptual": 0,
+          "procedural": 0,
+          "technical": 1
+        },
+        "helpRequests": 1,
+        "method": "us_agent_e21_equations_demo_v1",
+        "missingCheckpoints": [
+          "taxonomy",
+          "dataset",
+          "run",
+          "replay",
+          "catalog"
+        ],
+        "order": 1,
+        "outcome": "abandoned",
+        "participantCode": "synthetic-b",
+        "pausedMs": 40000,
+        "sessionId": "synthetic-b-testrec"
+      }
+    ],
+    "summary": {
+      "byMethod": [
+        {
+          "completedTimingDenominator": 1,
+          "completedWithApplicationCodeChanges": 0,
+          "completedWithHelp": 1,
+          "completedWithoutRecordedHelpOrCodeChanges": 0,
+          "errorsAllSessions": 1,
+          "helpRequestsAllSessions": 1,
+          "medianActiveMsCompleted": 120000,
+          "medianElapsedMsCompleted": 150000,
+          "method": "ramos_2019_manhattan_k1_v2",
+          "outcomes": {
+            "abandoned": 0,
+            "completed": 1,
+            "incomplete": 0
+          },
+          "participantCodes": 1,
+          "reportedCompletionRatio": 1,
+          "sessions": 1
+        },
+        {
+          "completedTimingDenominator": 1,
+          "completedWithApplicationCodeChanges": 1,
+          "completedWithHelp": 0,
+          "completedWithoutRecordedHelpOrCodeChanges": 0,
+          "errorsAllSessions": 1,
+          "helpRequestsAllSessions": 1,
+          "medianActiveMsCompleted": 210000,
+          "medianElapsedMsCompleted": 210000,
+          "method": "us_agent_e21_equations_demo_v1",
+          "outcomes": {
+            "abandoned": 1,
+            "completed": 1,
+            "incomplete": 0
+          },
+          "participantCodes": 2,
+          "reportedCompletionRatio": 0.5,
+          "sessions": 2
+        }
+      ],
+      "participantCodes": 2,
+      "sessions": 3
+    },
+    "version": "configuration-effort-v1"
+  }
+}

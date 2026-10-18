@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "id": "configuration-task-materials",
+  "version": "configuration-task-pack-v1",
+  "namespace": "study-review-001",
+  "status": "proposal_for_methodological_review",
+  "participantStudyPerformed": false,
+  "collectionReadiness": "requires_final_study_protocol_and_instrument_binding",
+  "instrumentProtocolSeed": {
+    "version": "configuration-effort-v1",
+    "sha256": "62b07cc2ed3203a2a6be37f67017f3f4cda80a23249bcd0986bb88c33da54fb1"
+  },
+  "files": [
+    {
+      "path": "participant/rnf/dataset.json",
+      "sha256": "a5fda35cb59093921689805459675171a820559f8a76e7bfbe982ca85ac86c96",
+      "audience": "participant"
+    },
+    {
+      "path": "participant/rnf/target.json",
+      "sha256": "0ca56a25a49243facded3b585134424d728608de9c938c6eb4a3c03f4b14a232",
+      "audience": "participant"
+    },
+    {
+      "path": "participant/rnf/settings.json",
+      "sha256": "8977e75a394e867def2d6e7cc22aa98564f43cf357d5c78c091277c564e4a2c2",
+      "audience": "participant"
+    },
+    {
+      "path": "participant/tests/dataset.json",
+      "sha256": "08ee74849dbff592affa1e9e227dc6eb8605fcf91bc36494b0a1b91af6a58c9f",
+      "audience": "participant"
+    },
+    {
+      "path": "participant/tests/target.json",
+      "sha256": "5d7c67c6835bd5402104e2c89be26e010b4fe407c72267f55b15cbf56b5ba0e0",
+      "audience": "participant"
+    },
+    {
+      "path": "participant/tests/settings.json",
+      "sha256": "2646a8913769a84d1762f6a93635f9c6b0cbdb6dd29f3708e2874043c0883e3b",
+      "audience": "participant"
+    },
+    {
+      "path": "facilitator/answer-key.json",
+      "sha256": "064aa349433539393281b0b1bbecdddb12aaa475ea4cacf434d99423dd18c784",
+      "audience": "facilitator"
+    },
+    {
+      "path": "participant/tests/catalog.json",
+      "sha256": "7b9bbec34b70d9ae27339d80effc5227ad01789ee86e16df2904e9b6df7a5d8d",
+      "audience": "participant"
+    },
+    {
+      "path": "facilitator/checkpoints.csv",
+      "sha256": "91ffe6576a6bc588c5bfc719a0e7e0d357130fcd836c744c7176d0630b5477a9",
+      "audience": "facilitator"
+    },
+    {
+      "path": "facilitator/attempt-register.csv",
+      "sha256": "8066ad1314affc37df1de8dd2e1b6670346f261f69936432c9b8c9f81b9f058e",
+      "audience": "facilitator"
+    },
+    {
+      "path": "participant/rnf.md",
+      "sha256": "1b08029aebb7067a9e5ae2bfd7b9acb482a1c5e0ad04a9fc4b3fab5749916e99",
+      "audience": "participant"
+    },
+    {
+      "path": "participant/tests.md",
+      "sha256": "43418ba1d5b9006eaf8cca997b18d4b0595c2c048ca4c4da770e1c2011534bae",
+      "audience": "participant"
+    },
+    {
+      "path": "facilitator/guide.md",
+      "sha256": "aee3b512f8264498e687deee2d2dbfc41d4659c3ed745ccbdcd1e9752d43f46a",
+      "audience": "facilitator"
+    },
+    {
+      "path": "verification.json",
+      "sha256": "649db0c3675d2087e4f2be70c439d7dc38d6f7f4864f2e6be45cd47880f89c88",
+      "audience": "facilitator"
+    }
+  ]
+}

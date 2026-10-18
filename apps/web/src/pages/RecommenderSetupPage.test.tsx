@@ -15,8 +15,11 @@ import type { NfrProfile } from '../../../api/src/services/nfr-engine';
 import { recommenderApi } from '../services/recommender-api';
 import type { ConfiguredDefinition, DefinitionRecord, DefinitionSummary, ImportRecord } from '../types/configurable-recommendations';
 import { RecommenderSetupPage } from './RecommenderSetupPage';
+import { testCaseFixture } from '../test-fixtures/test-case';
+import { buildTestCaseImportPreview } from '../../../api/src/domain/test-case-dataset';
+import { validateImplementedDefinition } from '../../../api/src/services/recommender-methods';
 
-vi.mock('../services/recommender-api', async importOriginal => ({ ...await importOriginal<typeof import('../services/recommender-api')>(), recommenderApi: { pageSize: 50, definitions: vi.fn(), definitionVersions: vi.fn(), definition: vi.fn(), saveDefinition: vi.fn(), publishDefinition: vi.fn(), taxonomyVersions: vi.fn(), taxonomyVersion: vi.fn(), saveTaxonomy: vi.fn(), publishTaxonomy: vi.fn(), previewDataset: vi.fn(), publishDataset: vi.fn(), datasetImport: vi.fn() } }));
+vi.mock('../services/recommender-api', async importOriginal => ({ ...await importOriginal<typeof import('../services/recommender-api')>(), recommenderApi: { pageSize: 50, definitions: vi.fn(), definitionVersions: vi.fn(), definition: vi.fn(), saveDefinition: vi.fn(), publishDefinition: vi.fn(), taxonomyVersions: vi.fn(), taxonomyVersion: vi.fn(), saveTaxonomy: vi.fn(), publishTaxonomy: vi.fn(), previewDataset: vi.fn(), publishDataset: vi.fn(), datasetImport: vi.fn(), testCaseCatalogs: vi.fn(), testCaseCatalog: vi.fn(), publishTestCaseCatalog: vi.fn() } }));
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 const draft = () => parseRecommenderDefinition({ ...structuredClone(template), version: 'ui-setup' });
 function publication(definition = draft()): DefinitionRecord {
@@ -34,6 +37,7 @@ beforeEach(() => {
   vi.mocked(recommenderApi.definitions).mockResolvedValue([summary]);
   vi.mocked(recommenderApi.definitionVersions).mockResolvedValue([summary]);
   vi.mocked(recommenderApi.taxonomyVersions).mockResolvedValue([]);
+  vi.mocked(recommenderApi.testCaseCatalogs).mockResolvedValue([]);
   vi.mocked(recommenderApi.definition).mockResolvedValue(published);
   vi.mocked(recommenderApi.saveDefinition).mockImplementation(async value => {
     currentDefinition = parseRecommenderDefinition(value);
@@ -111,6 +115,51 @@ test('published definitions are read-only and cloning requires an explicitly ent
   await change(control("Version", scope), 'ui-clone'); await click(button("Save definition draft"));
   expect(currentDefinition.version).toBe('ui-clone'); expect(published.definition.version).toBe('ui-setup');
   expect(recommenderApi.publishDefinition).not.toHaveBeenCalled();
+});
+
+test('test-case template publishes the explicit synthetic method with its own adapter and no RNF mappings', async () => {
+  vi.mocked(recommenderApi.publishDefinition).mockImplementation(async (_id, _version, hash) => {
+    expect(hash).toBe(snapshotContent(currentDefinition).sha256);
+    const implementation = validateImplementedDefinition(currentDefinition);
+    const definition = { ...currentDefinition, state: 'published' as const };
+    return { state: 'published', definition, snapshot: snapshotContent({ schemaVersion: 1, definition, taxonomies: [], implementation: { methodId: definition.method.id, adapterVersion: implementation.adapterVersion } }) };
+  });
+  await render(); const scope = editor('Definition editor'); await click(button('New test-case demonstration'));
+  expect(scope.textContent).toContain('Q01/Q02 remain pending'); expect(scope.textContent).not.toContain('Map IDs to scientific names');
+  await change(control('Version', scope), 'web-demo'); await click(button('Save definition draft')); await click(button('Publish reviewed definition'));
+  expect(currentDefinition.method.id).toBe('us_agent_e21_equations_demo_v1'); expect(currentDefinition.method.parameters.scientific_reproduction).toBe(false);
+  expect(currentDefinition.attributes).toHaveLength(8); expect(scope.textContent).toContain('Definition published with immutable dependencies');
+});
+
+test('test import fixes the catalog, requires explicit missing-association exclusion and invalidates preview on catalog change', async () => {
+  const t = testCaseFixture();
+  vi.mocked(recommenderApi.definitions).mockResolvedValue([t.summary]); vi.mocked(recommenderApi.definition).mockResolvedValue(t.definition);
+  vi.mocked(recommenderApi.testCaseCatalogs).mockResolvedValue([t.catalogSummary, { ...t.catalogSummary, version: '2', snapshot: { ...t.catalogSummary.snapshot, sha256: 'f'.repeat(64) } }]);
+  let imported!: Awaited<ReturnType<typeof recommenderApi.previewDataset>>;
+  vi.mocked(recommenderApi.previewDataset).mockImplementation(async (spec, file) => {
+    expect(spec.schemaVersion).toBe(2); expect('catalog' in spec && spec.catalog).toEqual(t.request.catalog);
+    const bytes = await new Promise<ArrayBuffer>(resolve => { const reader = new FileReader(); reader.onload = () => resolve(reader.result as ArrayBuffer); reader.readAsArrayBuffer(file); });
+    const content = buildTestCaseImportPreview(spec, Buffer.from(bytes), file.name, t.definition.snapshot!.content, t.catalog.snapshot.content);
+    imported = { id: crypto.randomUUID(), snapshot: snapshotContent({ ...content, definition: { ...content.definition, content: parseDefinitionPublication(content.definition.content) }, catalog: t.catalog.snapshot }), createdBy: 'local-development', createdAt: t.original.createdAt };
+    return imported;
+  });
+  vi.mocked(recommenderApi.publishDataset).mockResolvedValue({ state: 'published', snapshot: t.original.snapshot.content.dataset });
+  await render(); await click(button('Import dataset')); await change(control('Import definition'), JSON.stringify([t.summary.id, t.summary.version])); await click(button('Load dataset schema'));
+  await change(control('Dataset ID'), 'web-tests'); await change(control('Dataset version'), '1'); await change(control('Source description'), 'Synthetic profiles');
+  await change(control('Use declaration'), 'synthetic'); await change(control('Authorization reference'), 'Authored fixture');
+  await click(button('Use US-Agent record mapping'));
+  const valid = t.original.snapshot.content.dataset.content.records[0], missing = structuredClone(valid); missing.id = 'unknown-output'; missing.values.story_id = 'unknown-output-story'; delete missing.values.test_case_ids;
+  await upload(JSON.stringify([valid, missing])); await click(button('Generate import preview'));
+  expect(recommenderApi.previewDataset).not.toHaveBeenCalled(); expect(container.textContent).toContain('Choose a published synthetic catalog');
+  await change(control('Catalog and version'), JSON.stringify([t.catalogSummary.id, t.catalogSummary.version])); await click(button('Generate import preview'));
+  expect(imported.snapshot.content.report.invalid).toBe(1); expect(button('Publish reviewed dataset').disabled).toBe(true);
+  expect(container.textContent).toContain('Catalog preserved in preview');
+  await click(container.querySelector('[aria-label="Exclude record 2"]') as HTMLElement); await click(button('Publish reviewed dataset'));
+  expect(recommenderApi.publishDataset).toHaveBeenCalledWith('web-tests', '1', imported.id, imported.snapshot.sha256, [2]);
+  await change(control('Catalog and version'), JSON.stringify([t.catalogSummary.id, '2'])); expect(container.querySelector('.configured-import-preview')).toBeNull();
+  vi.mocked(recommenderApi.datasetImport).mockResolvedValue(imported);
+  await change(control('Preview ID'), imported.id); await click(button('Load preview'));
+  expect(container.textContent).toContain('Catalog preserved in preview');
 });
 
 test('a publication conflict keeps the reviewed draft and reports that it must be reloaded', async () => {

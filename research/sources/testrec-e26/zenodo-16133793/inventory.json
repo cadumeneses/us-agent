@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "paper": {
+    "id": "E26",
+    "doi": "10.1145/3748522.3779891",
+    "localPdfSha256": "cc895b9d7cbc49af9c63f0466f1050b82b432450bf0798307229c5a0cf23f445",
+    "pages": 9
+  },
+  "conceptDoi": "10.5281/zenodo.16131516",
+  "versionDoi": "10.5281/zenodo.16133793",
+  "recordId": 16133793,
+  "title": "Trainning dataset",
+  "creators": [
+    {
+      "name": "Anonymous, Anonymous",
+      "affiliation": null,
+      "orcid": "0000-0001-8416-8385"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "metadataSha256": "3a1cae165ed8bd95c6c61ac62f74110ac93ecb383f50b435246f29749d57cb93",
+  "files": {
+    "test_cases_for_user_stories.csv": {
+      "bytes": 132733,
+      "md5": "7c07917ff126c13da2e5a9bb1d59a005",
+      "sha256": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a",
+      "url": "https://zenodo.org/api/records/16133793/files/test_cases_for_user_stories.csv/content"
+    },
+    "acceptance_criteria_data.csv": {
+      "bytes": 3672,
+      "md5": "dddfce3a4a9fccb817cbdbc345222cd3",
+      "sha256": "9af26e760b59a98aeabc469867f61123a9753424eaa8240c94bbd5ccc7de2afe",
+      "url": "https://zenodo.org/api/records/16133793/files/acceptance_criteria_data.csv/content"
+    },
+    "categorized_user_stories.csv": {
+      "bytes": 68242,
+      "md5": "ae3e1b7fa05b0e3fe5c76c9288a227ed",
+      "sha256": "9203db6b6e3b85df5d0752e3a429c4c1ed5636c51b46dab5a856970113a4e0a4",
+      "url": "https://zenodo.org/api/records/16133793/files/categorized_user_stories.csv/content"
+    },
+    "user_stories_test_cases.csv": {
+      "bytes": 68626,
+      "md5": "5e37627879cb8bf2d9f589a0c96030ac",
+      "sha256": "5ee242a804b4c355233aec151978e00e501bf3328e2207bdca7f3f2bcc3d47a1",
+      "url": "https://zenodo.org/api/records/16133793/files/user_stories_test_cases.csv/content"
+    }
+  },
+  "scope": "Public source audit only; original bytes; not published into the synthetic demonstration or operational database."
+}

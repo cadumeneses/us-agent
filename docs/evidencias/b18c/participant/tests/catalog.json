@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "study-review-001-catalog",
+  "version": "1",
+  "source": {
+    "kind": "synthetic",
+    "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+  },
+  "items": [
+    {
+      "id": "demo-create",
+      "title": "Criar registro sintético",
+      "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+      "purpose": "Verificar um fluxo sintético de cadastro",
+      "executionMode": "manual",
+      "metadata": {
+        "fixture": true
+      }
+    },
+    {
+      "id": "demo-required",
+      "title": "Validar campos obrigatórios",
+      "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+      "executionMode": "unspecified",
+      "metadata": {
+        "fixture": true,
+        "extraSourceField": "Preserve without inventing scientific meaning"
+      }
+    }
+  ]
+}

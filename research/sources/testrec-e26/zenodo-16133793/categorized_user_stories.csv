@@ -1,0 +1,576 @@
+Módulo;Operação;Tarefa;ID (mapeamento);Projeto;ID_US;DESC_US;Plataforma;ID_Task;DESC_Task;Tipo;Mapeado? (SIM ou NAO);Origem
+Cadastro;Atualizar_dados;Criar tela alteração;409;SPGEC;#16759;Check-In no Refrigerador;;#42902;Editar lotes;Negocio;Sim;Virtus
+Cadastro;Atualizar_dados;Validar Dados no Servidor;410;SPGEC;#16759;Check-In no Refrigerador;;#42901;Enviar dados dos lotes para o servidor;Negocio;Sim;Virtus
+X;X;X;411;SPGEC;#16759;Check-In no Refrigerador;;#43091;Montagem do lote;Negocio;Nao;Virtus
+X;X;X;412;SPGEC;#15056;Estabilização;;#43520;Data no formato do SO. (corrigir conforme idioma do sistema - SI2);Negocio;Nao;Virtus
+X;X;X;413;SPGEC;#15056;Estabilização;;#43530;Correção de bugs;Tecnica;Nao;Virtus
+X;X;X;414;SPGEC;#15056;Estabilização;;#43600;Correção de bugs no fluxo do checkin;Tecnica;Nao;Virtus
+X;X;X;415;SPGEC;#15056;Estabilização;;#43709;Scrap de um insumo;Negocio;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar tela inserção;416;SPGEC;#15056;Estabilização;;#43094;[Check-In] Correções de layout;Negocio;Sim;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar validação de dados no cliente;417;SPGEC;#15056;Estabilização;;#43096;[Tela de detalhes] Corrigir o calculo da hora;Negocio;Sim;Virtus
+X;X;X;418;SPGEC;#15056;Estabilização;;#43099;[web] Aba pasta de solda e cola;Negocio;Nao;Virtus
+X;X;X;419;SPGEC;#15056;Estabilização;;#43100;[Web] Histórico;Negocio;Nao;Virtus
+X;X;X;420;SPGEC;#15056;Estabilização;;#43101;[Web] Equipamento;Negocio;Nao;Virtus
+X;X;X;421;SPGEC;#15056;Estabilização;;#43103;[Web] Configuração de insumo;Negocio;Nao;Virtus
+X;X;X;422;SPGEC;#15056;Estabilização;;#43104;[Web] Configuração de cliente;Negocio;Nao;Virtus
+X;X;X;423;SPGEC;#15056;Estabilização;;#43167;Correção de bugs;Tecnica;Nao;Virtus
+X;X;X;424;SPGEC;#15056;Estabilização;;#43266;[Web] Criar parâmetros para total de dias limite após retirada do refrigerador e total de horas para uso do insumo após aberto o pote;Negocio;Nao;Virtus
+X;X;X;425;SPGEC;#15056;Estabilização;;#43329;Criar ids no frontend para testes de UI;Negocio;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar entidade no banco de dados;426;SPGEC;#16806;Check-in na máquina de descanso ou skip;;#43107;Modificar o estado após check-out no refrigerador;Negocio;Sim;Virtus
+X;X;X;427;SPGEC;#16806;Check-in na máquina de descanso ou skip;;#43109;[web] Check-out na máquina de descanso;Negocio;Nao;Virtus
+X;X;X;428;SPGEC;#16806;Check-in na máquina de descanso ou skip;;#43110;Estabilização;Tecnica;Nao;Virtus
+X;X;X;429;SPGEC;#16806;Check-in na máquina de descanso ou skip;;#43799;[web]  Check-in na máquina de descanso. Fluxos alternativos.;Negocio;Nao;Virtus
+X;X;X;430;SPGEC;#16806;Check-in na máquina de descanso ou skip;;#43108;[web]  Check-in na máquina de descanso. Caminho feliz.;Negocio;Nao;Virtus
+X;X;X;431;SPGEC;#15051;Calcular o vencimento dos insumos;;#43119;Calcular o vencimento após mudança de estado;Negocio;Nao;Virtus
+X;X;X;432;SPGEC;#15051;Calcular o vencimento dos insumos;;#43121;Criar job para alerta de vencimento do fabricante;Negocio;Nao;Virtus
+X;X;X;433;SPGEC;#15051;Calcular o vencimento dos insumos;;#43122;Cadastrar variáveis globais para alerta de vencimento;Negocio;Nao;Virtus
+X;X;X;434;SPGEC;#15051;Calcular o vencimento dos insumos;;#43171;Criar job para alerta de vencimento após check-out no refrigerador;Negocio;Nao;Virtus
+X;X;X;435;SPGEC;#15051;Calcular o vencimento dos insumos;;#43172;Criar job para alerta de vencimento após abertura do insumo;Negocio;Nao;Virtus
+X;X;X;436;SPGEC;#15051;Calcular o vencimento dos insumos;;#15046;Atualizar a documentação de requisitos;Tecnica;Nao;Virtus
+X;X;X;437;SPGEC;#15051;Calcular o vencimento dos insumos;;#43120;Criar Job para verificação de vencimento;Negocio;Nao;Virtus
+X;X;X;438;SPGEC;#15051;Calcular o vencimento dos insumos;;#43113;Implementar estrutura base para os Jobs;Negocio;Nao;Virtus
+X;X;X;439;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#42237;Ajustar o cálculo de pontuação geral e por cliente para considerar as Step exceptions;Negocio;Nao;Virtus
+X;X;X;440;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#44389;Code Review;Tecnica;Nao;Virtus
+X;X;X;441;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#44737;Implementar solução para tratar caso onde o usuário altera o campo Product Type após a inserção de um SKU Exception / tratar comportamento do autocomplete quando é habilitado por múltiplos componentes;Negocio;Nao;Virtus
+X;X;X;442;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#44900;Testes de integração;Tecnica;Nao;Virtus
+X;X;X;443;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#44390;Testes de unidade;Tecnica;Nao;Virtus
+Cadastro;Inserir_dados;Criar tela inserção;444;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#42233;Criação de tela para gerenciamento de 'Step Exceptions';Negocio;Sim;Virtus
+Cadastro;Inserir_dados;Persistir dados banco de dados;445;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#44381;Ação de adição de registro;Negocio;Sim;Virtus
+Cadastro;Atualizar_dados;Atualizar dados banco de dados;446;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#44382;Ação de atualização de registro;Negocio;Sim;Virtus
+X;X;X;447;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#44384;Modelagem de dados;Tecnica;Nao;Virtus
+Cadastro;Remover_dados;Remover dados banco de dados;448;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#44385;Remoção de registro;Negocio;Sim;Virtus
+X;X;X;449;NewPCS;#16232;[Step Exceptions] Adicionar a possibilidade de adicionar “Productive Stages carrapato” para contabilização adicional;;#44388;Atualização da trigger de delete cascade de PPB Rules;Tecnica;Nao;Virtus
+X;X;X;450;NewPCS;#16988;Adicionar tela de Tax Origin;;#44454;Criar metadata para relatório;Negocio;Nao;Virtus
+X;X;X;451;NewPCS;#16988;Adicionar tela de Tax Origin;;#44455;Implementar método Get e filtros;Negocio;Nao;Virtus
+X;X;X;452;NewPCS;#16988;Adicionar tela de Tax Origin;;#44456;Implementar testes de unidade;Tecnica;Nao;Virtus
+X;X;X;453;NewPCS;#16988;Adicionar tela de Tax Origin;;#44457;Criar tabela no banco de dados;Tecnica;Nao;Virtus
+X;X;X;454;NewPCS;#16988;Adicionar tela de Tax Origin;;#44487;Code Review;Tecnica;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar tela inserção;455;NewPCS;#16989;[PPB Rules] Adicionar suporte a seleção de origin em Prod. Stages;;#44498;"Adicionar componente de seleção origens carregando os dados dinamicamente de ""Tax Origin""";Negocio;Sim;Virtus
+X;X;X;456;NewPCS;#16989;[PPB Rules] Adicionar suporte a seleção de origin em Prod. Stages;;#44490;Salvar/atualizar origens de etapas produtivas;Negocio;Nao;Virtus
+X;X;X;457;NewPCS;#16989;[PPB Rules] Adicionar suporte a seleção de origin em Prod. Stages;;#44491;Testes de unidade e integração;Tecnica;Nao;Virtus
+X;X;X;458;NewPCS;#16989;[PPB Rules] Adicionar suporte a seleção de origin em Prod. Stages;;#44492;Code Review;Tecnica;Nao;Virtus
+X;X;X;459;NewPCS;#16989;[PPB Rules] Adicionar suporte a seleção de origin em Prod. Stages;;#44514;Ajustar cálculos do core para levar em consideração as origens das etapas;Negocio;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar método de inserção;460;NewPCS;#16989;[PPB Rules] Adicionar suporte a seleção de origin em Prod. Stages;;#44488;"Transformar radio buttons de ""score"" em apenas um input com a mesma validação do input associado ao radio";Negocio;Sim;Virtus
+Gerencial;Exportar_relatório_em_XLS;Criar serviço para exportação de relatórios;461;NewPCS;#12525;PPB Score Report;;#38988;Exportação do relatório para excel;Negocio;Sim;Virtus
+X;X;X;462;NewPCS;#12525;PPB Score Report;;#44379;Code Review;Tecnica;Nao;Virtus
+X;X;X;463;NewPCS;#12525;PPB Score Report;;#44380;Testes de unidade e integração;Tecnica;Nao;Virtus
+X;X;X;464;NewPCS;#12525;PPB Score Report;;;Implementação da consulta dos dados referentes ao relatório (Part 2);Negocio;Nao;Virtus
+;;;465;NewPCS;#12525;PPB Score Report;;;"Layout da aba ""PPB Rules""";Tecnica;Nao;Virtus
+;;;466;NewPCS;#12525;PPB Score Report;;;Implementação da consulta dos dados referentes ao relatório (Part 1);Negocio;Nao;Virtus
+;;;467;NewPCS;#12525;PPB Score Report;;;Adicionar suporte ao framework para permitir exportações customizadas e relatórios/formulários sem exportação;Negocio;Nao;Virtus
+;;;468;NewPCS;#12525;PPB Score Report;;;Code Review;Tecnica;Nao;Virtus
+;;;469;NewPCS;#16532;Adicionar link para CFOP nas NFs;;;Adicionar link de CFOP nas NFs de compra\devolução\cancelamento;Negocio;Nao;Virtus
+;;;470;NewPCS;#12519;Manutenção do Core Engine;;;Atualização do job de consolidação para considerar alteração de Part Types atrelados ao Part;Negocio;Nao;Virtus
+;;;471;NewPCS;#12519;Manutenção do Core Engine;;;Validar link de NFs de venda considerando a adição de SKU;Negocio;Nao;Virtus
+;;;472;NewPCS;#12519;Manutenção do Core Engine;;;Verificar link das NFs de venda e compra para considerar adição de Part;Negocio;Nao;Virtus
+;;;473;NewPCS;#12519;Manutenção do Core Engine;;;Verificar link de NFs de compra para considerar adição de Supplier;Negocio;Nao;Virtus
+;;;474;NewPCS;#12519;Manutenção do Core Engine;;;"Atualização do job de link de NFs de venda/compra para considerar atualização da flag ""Subsidized Operations"" em CFOP";Negocio;Nao;Virtus
+;;;475;NewPCS;#12519;Manutenção do Core Engine;;;"Atualização dos job de balanço para considerar atualização de ""score"" de etapas produtivas";Negocio;Nao;Virtus
+;;;476;NewPCS;#12519;Manutenção do Core Engine;;;"Atualização dos job de balanço para considerar atualização de ""surplus"" ou ""resid. diff.""";Negocio;Nao;Virtus
+;;;477;NewPCS;#12519;Manutenção do Core Engine;;;Code Review;Tecnica;Nao;Virtus
+;;;478;NewPCS;#12519;Manutenção do Core Engine;;;Atualizar consolidação de Part Type para considerar Part Types adicionais nos Part Numbers;Negocio;Nao;Virtus
+;;;479;NewPCS;#12519;Manutenção do Core Engine;;;Refatorar projeto do Dapper para ser instalado à partir do nuget;Tecnica;Nao;Virtus
+;;;480;NewPCS;#12519;Manutenção do Core Engine;;;Ajustes em referências desnecessárias do projeto;Tecnica;Nao;Virtus
+;;;481;NewPCS;#12519;Manutenção do Core Engine;;;Code Review;Tecnica;Nao;Virtus
+;;;482;NewPCS;#16984;[Scheduled Job] Tratamento do fechamento da portaria (cálculo de saldo total (crédito/débito) de pontos);;;Code Review;Tecnica;Nao;Virtus
+;;;483;NewPCS;#16984;[Scheduled Job] Tratamento do fechamento da portaria (cálculo de saldo total (crédito/débito) de pontos);;;Testes de unidade;Tecnica;Nao;Virtus
+;;;484;NewPCS;#16984;[Scheduled Job] Tratamento do fechamento da portaria (cálculo de saldo total (crédito/débito) de pontos);;;Ajuste na verificação de reconsolidação do balanço da portaria após implementação da flag indicará essa necessidade;Tecnica;Nao;Virtus
+;;;485;NewPCS;#16984;[Scheduled Job] Tratamento do fechamento da portaria (cálculo de saldo total (crédito/débito) de pontos);;;Persistência do histórico;Negocio;Nao;Virtus
+;;;486;NewPCS;#16984;[Scheduled Job] Tratamento do fechamento da portaria (cálculo de saldo total (crédito/débito) de pontos);;;Cálculo do balanço da portaria;Negocio;Nao;Virtus
+;;;487;NewPCS;#16984;[Scheduled Job] Tratamento do fechamento da portaria (cálculo de saldo total (crédito/débito) de pontos);;;Persistência/gerenciamento do balanço da portaria;Negocio;Nao;Virtus
+;;;488;NewPCS;#16984;[Scheduled Job] Tratamento do fechamento da portaria (cálculo de saldo total (crédito/débito) de pontos);;;Alterar o status da notas ao final do processamento;Negocio;Nao;Virtus
+;;;489;NewPCS;#16984;[Scheduled Job] Tratamento do fechamento da portaria (cálculo de saldo total (crédito/débito) de pontos);;;Code Review;Tecnica;Nao;Virtus
+;;;490;NewPCS;#16986;Suporte a integrações com o Protheus;;;Code Review;Tecnica;Nao;Virtus
+;;;491;NewPCS;#16986;Suporte a integrações com o Protheus;;;Testes de unidade e integração.;Tecnica;Nao;Virtus
+;;;492;NewPCS;#16986;Suporte a integrações com o Protheus;;;"Validar campos ""Required"" das entidades de integração com o Protheus, possibilitando que se algum campo não for enviado, que ele seja identificado na resposta";Negocio;Nao;Virtus
+;;;493;NewPCS;#16986;Suporte a integrações com o Protheus;;;Testes de unidade e integração Part, Supplier, Invoice Purchase e Product Category;Tecnica;Nao;Virtus
+;;;494;NewPCS;#16986;Suporte a integrações com o Protheus;;;Corrigir itens reportados pelo Michael;Tecnica;Nao;Virtus
+;;;495;NewPCS;#16986;Suporte a integrações com o Protheus;;;"Remover serviço de integração ""PartPartType""";Negocio;Nao;Virtus
+;;;496;NewPCS;#16986;Suporte a integrações com o Protheus;;;"Transformar serviço de integração do ""Commercial Name"" em um serviço ""comum""";Negocio;Nao;Virtus
+;;;497;NewPCS;#16986;Suporte a integrações com o Protheus;;;"Transformar serviço de integração do ""NCM"" em um serviço ""comum""";Negocio;Nao;Virtus
+;;;498;NewPCS;#16986;Suporte a integrações com o Protheus;;;Teste Unidade e Integração SKU;Tecnica;Nao;Virtus
+;;;499;NewPCS;#16986;Suporte a integrações com o Protheus;;;Teste Unidade e Integração PART TYPE;Tecnica;Nao;Virtus
+;;;500;NewPCS;#16987;"Remover alteração de ""Product Category"" na tela de Part";;;Remover alteração;Negocio;Nao;Virtus
+;;;501;NewPCS;#16990;Sincronização com o repositório da VNT;;;Sincronização Virtus <-> VNT (2/2);Tecnica;Nao;Virtus
+;;;502;NewPCS;#16990;Sincronização com o repositório da VNT;;;Sincronização Virtus <-> VNT (1/2);Tecnica;Nao;Virtus
+;;;503;NewPCS;#17017;Integração com o PPB Link;;;Criação de endpoint no SMOM de importação de NFs de venda;Negocio;Nao;Virtus
+;;;504;NewPCS;#17017;Integração com o PPB Link;;;"Ajuste nas NFs do MesClient para ""marcar"" as que já foram enviadas ao newPCS com sucesso";Negocio;Nao;Virtus
+;;;505;NewPCS;#17017;Integração com o PPB Link;;;Integração com o newPCS;Tecnica;Nao;Virtus
+;;;506;NewPCS;#17017;Integração com o PPB Link;;;Code Review;Tecnica;Nao;Virtus
+;;;507;NewPCS;#17017;Integração com o PPB Link;;;Testes de integração;Tecnica;Nao;Virtus
+;;;508;NewPCS;#17017;Integração com o PPB Link;;;Criar endPoint no SMOM para validação de notas importadas;Negocio;Nao;Virtus
+;;;509;NewPCS;#17017;Integração com o PPB Link;;;Criação do Form no projeto SMOM e criação da consulta dos dados;Negocio;Nao;Virtus
+;;;510;NewPCS;#17017;Integração com o PPB Link;;;Adicionar as tabelas do PPBLink no EDMX do SMOM.;Negocio;Nao;Virtus
+;;;511;NewPCS;#17017;Integração com o PPB Link;;;Ajuste no Service da integração;Negocio;Nao;Virtus
+;;;512;NewPCS;#17017;Integração com o PPB Link;;;Criação do método de atualização da tabela NFE;Negocio;Nao;Virtus
+;;;513;NewPCS;#17043;"Disponibilizar endpoint com o ""PPB Summary"" de uma dada portaria";;;Coletar dados de sumarização de Etapas Produtivas;Negocio;Nao;Virtus
+;;;514;NewPCS;#17043;"Disponibilizar endpoint com o ""PPB Summary"" de uma dada portaria";;;Code Review;Tecnica;Nao;Virtus
+;;;515;NewPCS;#17043;"Disponibilizar endpoint com o ""PPB Summary"" de uma dada portaria";;;Criação de endpoint e estrutura de dados para o summary;Negocio;Nao;Virtus
+;;;516;NewPCS;#17043;"Disponibilizar endpoint com o ""PPB Summary"" de uma dada portaria";;;Coletar dados de sumarização do Produto/Identificação;Negocio;Nao;Virtus
+;;;517;NewPCS;#17043;"Disponibilizar endpoint com o ""PPB Summary"" de uma dada portaria";;;Coletar dados de sumarização de SKU;Negocio;Nao;Virtus
+;;;518;NewPCS;#17043;"Disponibilizar endpoint com o ""PPB Summary"" de uma dada portaria";;;Code Review;Tecnica;Nao;Virtus
+;;;519;NewPCS;#14890;Reagrupar os itens do menu principal;;;Ajustar agrupamentos;Negocio;Nao;Virtus
+Cadastro;Recuperação_de_dados;Criar ordenação para listagem;520;NewPCS;#14890;Reagrupar os itens do menu principal;;;"Ajustar o ""code generator"" para permitir a ordenação dos itens de menu";Negocio;Sim;Virtus
+;;;521;NewPCS;#14890;Reagrupar os itens do menu principal;;;Code Review;Tecnica;Nao;Virtus
+;;;522;NewPCS;#17062;Geração de Builds;;;Geração da Build v0.15.1;Tecnica;Nao;Virtus
+;;;523;NewPCS;#17519;Ajustes no relatório PPB Score;;#46556;Ajustes de nomenclatura e correções na develop;Tecnica;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar rota de inserção de dados;524;NewPCS;#17519;Ajustes no relatório PPB Score;;#46558;"Adicionar ""Target Score"" na aba ""Customer Balance""";Negocio;Sim;Virtus
+;;;525;NewPCS;#17519;Ajustes no relatório PPB Score;;#46575;"Alterar a coluna ""Balance"" da aba ""PPB Rules"" para informar o ""Previous Balance""";Negocio;Nao;Virtus
+;;;526;NewPCS;#17523;Ajustes em R&D investment;;;"Alterar nome do campo/coluna ""Quantity"" para ""R&D Additional Points""";Negocio;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar validação de dados no cliente;527;NewPCS;#17523;Ajustes em R&D investment;;;"Ajustar precisão do campo ""R&D Additional Points"" para 5 casas decimais";Negocio;Sim;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar validação de dados no cliente;528;NewPCS;#17523;Ajustes em R&D investment;;;Padronizar formatação numérica para utilizar vírgula como separador decimal;Negocio;Sim;Virtus
+;;;529;NewPCS;#17510;Ajustes de nomenclatura;;;Nomenclatura de PPB Rules;Tecnica;Nao;Virtus
+Gerencial;Importar_dados;Processar em Lote;530;NewPCS;#17500;Manutenção do Core (New);;;Importação de notas de venda deve processar as notas logo que são importadas;Negocio;Sim;Virtus
+;;;531;NewPCS;#17500;Manutenção do Core (New);;;"Tratar notas de venda retornadas para determinar as ""notas originais""";Negocio;Nao;Virtus
+;;;532;NewPCS;#17500;Manutenção do Core (New);;;Code Review;Tecnica;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar rota de inserção de dados;533;NewPCS;#17500;Manutenção do Core (New);;;"Ajustar a consolidação de balanço para tratar adição/remoção de part types na lista de ""Productive Steps"" cadastrados";Negocio;Sim;Virtus
+;;;534;NewPCS;#17520;Manutenção do Core Engine;;;Criar serviço para alterar Status das Notas baseado no Status e vigência das portarias vinculadas ao Part alterado;Negocio;Nao;Virtus
+;;;535;NewPCS;#17520;Manutenção do Core Engine;;;"Atualização dos job de balanço para considerar atualização de ""score"" de etapas produtivas";Negocio;Nao;Virtus
+;;;536;NewPCS;#17520;Manutenção do Core Engine;;;Code Review;Tecnica;Nao;Virtus
+;;;537;NewPCS;#17520;Manutenção do Core Engine;;;Ajustes nos serviços de consolidação mensal de party type e finisehd good;Negocio;Nao;Virtus
+;;;538;NewPCS;#17520;Manutenção do Core Engine;;;Ajuste no serviço de consolidação do balance;Negocio;Nao;Virtus
+;;;539;NewPCS;#17520;Manutenção do Core Engine;;;Ajuste no serviço de Part para considerar alteração do vínculo de Part com Part Type;Negocio;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar entidade no banco de dados;540;NewPCS;#17520;Manutenção do Core Engine;;;Ajuste na tabela de Part para incluir coluna de status;Negocio;Sim;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar entidade no banco de dados;541;NewPCS;#17520;Manutenção do Core Engine;;;"Remover as consolidações das tabelas ""PART_TYPE_DAILY_CONSOLID"" e ""PART_TYPE_MONTHLY_CONSOLID""";Negocio;Sim;Virtus
+;;;542;NewPCS;#17520;Manutenção do Core Engine;;;Ajustes de nomenclatura dos métodos;Negocio;Nao;Virtus
+;;;543;NewPCS;#17520;Manutenção do Core Engine;;;Ajustes no cálculo do score de PPB rules;Negocio;Nao;Virtus
+;;;544;NewPCS;#16985;Manutenção no Suporte ao Dapper;;;Validar listas vazias ao utilizar consultas com 'Contains';Negocio;Nao;Virtus
+;;;545;NewPCS;#16985;Manutenção no Suporte ao Dapper;;;Deletes com expressões lambda;Negocio;Nao;Virtus
+;;;546;NewPCS;#16985;Manutenção no Suporte ao Dapper;;;Tratar palavras reservadas no gerador de SQL;Negocio;Nao;Virtus
+;;;547;NewPCS;#16985;Manutenção no Suporte ao Dapper;;;Possibilitar realização de consultas com SQL manualmente;Negocio;Nao;Virtus
+;;;548;NewPCS;#16985;Manutenção no Suporte ao Dapper;;;Adicionar suporte a bulk insert;Negocio;Nao;Virtus
+;;;549;NewPCS;#16985;Manutenção no Suporte ao Dapper;;;Possibilitar realização de consultas com SQL manualmente - Repository support;Negocio;Nao;Virtus
+;;;550;NewPCS;#16985;Manutenção no Suporte ao Dapper;;;Análise de viabilidade do bulk insert;Negocio;Nao;Virtus
+;;;551;NewPCS;#16985;Manutenção no Suporte ao Dapper;;;Implementar api de uso do bulk insert;Negocio;Nao;Virtus
+;;;552;NewPCS;#16985;Manutenção no Suporte ao Dapper;;;"Adicionar suporte a ""Contains"", ""StartsWith"" e ""ToLower"" ao Dapper Repo";Negocio;Nao;Virtus
+;;;553;NewPCS;#17525;Melhoria de performance (Parte 1);;;Melhoria de performance na view de Invoice Details;Tecnica;Nao;Virtus
+;;;554;NewPCS;#17525;Melhoria de performance (Parte 1);;;Melhoria de performance na view de Returned Machines;Tecnica;Nao;Virtus
+;;;555;NewPCS;#17525;Melhoria de performance (Parte 1);;;Code Review;Tecnica;Nao;Virtus
+;;;556;NewPCS;#17525;Melhoria de performance (Parte 1);;;[Melhoria de performance - Invoice Details] Análise de consulta com índices em tabelas com dados para as views;Tecnica;Nao;Virtus
+;;;557;NewPCS;#17525;Melhoria de performance (Parte 1);;;Ajuste nos scripts relacionados a Tax origins e análise de estratégia no ganho de performance das consultas as views;Tecnica;Nao;Virtus
+;;;558;NewPCS;#17525;Melhoria de performance (Parte 1);;;Reescrita dos reports de Invoice Details e Returned Machines para utilização do Dapper;Tecnica;Nao;Virtus
+;;;559;NewPCS;#17502;Documentação;;;Atualizar developer guide ;Tecnica;Nao;Virtus
+;;;560;NewPCS;#17502;Documentação;;;Atualizar developer guide parte 2;Tecnica;Nao;Virtus
+;;;561;NewPCS;#17503;Testes de unidade e integração;;;Ajustar testes de unidade de PPBScore  e ProductiveStage;Tecnica;Nao;Virtus
+;;;562;NewPCS;#17503;Testes de unidade e integração;;;Atualizar testes de unidade (RDInvestmentUnitTest, PPBLicenseUnitTest, PartUnitTest);Tecnica;Nao;Virtus
+;;;563;NewPCS;#17503;Testes de unidade e integração;;;Atualizar testes de integração (BrandName, CancelledInvoice, Customer, Invoice Purchase, Product Category, Sku e Supplier);Tecnica;Nao;Virtus
+;;;564;NewPCS;#17503;Testes de unidade e integração;;;Atualizar testes de unidade (GovernmentReportUnitTest, ProdStageUnitTest e PPBRulesUnitTest);Tecnica;Nao;Virtus
+;;;565;NewPCS;#17503;Testes de unidade e integração;;;Atualizar testes de integração (Part, Part Type e CFOP);Tecnica;Nao;Virtus
+;;;566;NewPCS;#17503;Testes de unidade e integração;;;Ajustar teste de User;Tecnica;Nao;Virtus
+;;;567;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;568;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;569;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;570;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;571;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;572;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;573;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;574;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;575;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;576;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;577;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;578;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;579;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;580;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;581;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;582;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;583;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;584;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;585;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;586;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;587;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;588;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;589;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;590;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;591;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;592;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;593;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;594;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;595;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;596;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;597;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;598;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;599;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;600;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;601;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;602;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;603;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;604;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;605;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;606;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;607;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;608;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;609;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;610;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;611;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;612;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;613;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;614;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+;;;615;NewPCS;#16236;Bug fixing;;;Bug fixing;Tecnica;Nao;Virtus
+Autenticação;;;616;SPGec;#17481;Estabilização;;;[Web] Adicionar loading nas requisições;Negocio;Nao;Virtus
+Cadastro;Inserir_dados;Validar dados inserção no servidor;617;SPGec;#17481;Estabilização;;;[Web] Não permitir cadastro do tempo de mistura igual a zero ou nulo ;Negocio;Sim;Virtus
+Gerencial;Auditoria;Registrar Log;618;SPGec;#17481;Estabilização;;;[Web] Informar o que foi alterado no log de ações do usuário;Negocio;Sim;Virtus
+Gerencial;Auditoria;Visualizar Log;619;SPGec;#17481;Estabilização;;;[Web] Visualizar cliente na tela de log de insumos e na planilha;Negocio;Sim;Virtus
+Autenticação;;;620;SPGec;#17481;Estabilização;;;[Web] Corrigir o status errado após o checkout na máquina de descanso (Log de cola);Tecnica;Nao;Virtus
+Gerencial;Notificar_via_email;Criar serviço de envio de e-mail;621;SPGec;#17481;Estabilização;;;Envio de e-mail de notificação;Negocio;Sim;Virtus
+Gerencial;Exportar_relatório_em_XLS;Criar serviço para exportação de relatórios;622;SPGec;#17459;Exportar para excel (log de insumos e Aba pasta de solda e cola);;;Exportar para excel (Aba Pasta de solda e cola);Negocio;Sim;Virtus
+Gerencial;Exportar_relatório_em_XLS;Criar serviço para exportação de relatórios;623;SPGec;#17459;Exportar para excel (log de insumos e Aba pasta de solda e cola);;;Exportar para excel (log de insumos e Aba pasta de solda e cola);Negocio;Sim;Virtus
+;;;624;SPGec;#17459;Exportar para excel (log de insumos e Aba pasta de solda e cola);;;Smoke Test;Negocio;Nao;Virtus
+;;;625;SPGec;#17459;Exportar para excel (log de insumos e Aba pasta de solda e cola);;;Exportar com filtros Aba de Pasta de Solda ou Cola;Negocio;Nao;Virtus
+;;;626;SPGec;#17459;Exportar para excel (log de insumos e Aba pasta de solda e cola);;;Ajustes para User Guide;Tecnica;Nao;Virtus
+;;;627;SPGec;#17459;Exportar para excel (log de insumos e Aba pasta de solda e cola);;;Bug fixing;Tecnica;Nao;Virtus
+Autenticação;Fazer_login_com_usuário_e_senha;Criar campos Login e Senha;628;SPGec;#17478;Autenticação e permissão ;;;Fazer login;Negocio;Sim;Virtus
+Autenticação;Fazer_login_com_usuário_e_senha;Fazer o roteamento da URL;629;SPGec;#17478;Autenticação e permissão ;;;Roteamento  fluxo de autorização;Negocio;Sim;Virtus
+;;;630;SPGec;#17478;Autenticação e permissão ;;;Smoke Test;Tecnica;Nao;Virtus
+;;;631;SPGec;#17478;Autenticação e permissão ;;;Refatoramento do fluxo de autorização de descarte;Tecnica;Nao;Virtus
+;;;632;SPGec;#17478;Autenticação e permissão ;;;Smoke test;Tecnica;Nao;Virtus
+Cadastro;Recuperação_de_dados;Criar tela listagem;633;SPGec;#17478;Cadastro e ajustes gerais;;;Listar itens adicionados;Negocio;Sim;Virtus
+;;;634;SPGec;#17478;Cadastro e ajustes gerais;;;Recalcular vencimento de insumo;Negocio;Nao;Virtus
+Cadastro;Inserir_dados;Criar método de inserção;635;SPGec;#17478;Cadastro e ajustes gerais;;;Criar serviço para inserir dados gerados;Negocio;Sim;Virtus
+;;;636;SPGec;#17478;Cadastro e ajustes gerais;;;Code review;Tecnica;Nao;Virtus
+Cadastro;Inserir_dados;Validar dados inserção no servidor;637;SPGec;#17478;Cadastro e ajustes gerais;;;Validar campo data para formato correto;Negocio;Sim;Virtus
+Cadastro;Inserir_dados;Criar entidade no banco de dados;638;SPGec;#17478;Cadastro e ajustes gerais;;;Criar tabela no banco de dados;Negocio;Sim;Virtus
+;;;639;SPGec;#17478;Cadastro e ajustes gerais;;;Enviar dados para check-in;Negocio;Nao;Virtus
+;;;640;SPGec;#17478;Cadastro e ajustes gerais;;;Enviar dados para check-out;Negocio;Nao;Virtus
+;;;641;SPGec;#17478;Cadastro e ajustes gerais;;;Smoke Test;Tecnica;Nao;Virtus
+Autenticação;Fazer_login_com_usuário_e_senha;;642;RCP;#2379;Efetuar login no sistema;Web;#2406;Alterar a aplicação para usar o identity para autenticação;Tecnica;Nao;
+Autenticação;Fazer_login_com_usuário_e_senha;;643;RCP;#2379;Efetuar login no sistema;Web;#2407;Testar manualmente;Tecnica;Nao;
+Autenticação;Fazer_login_com_usuário_e_senha;Configurar API;644;RCP;#2379;Efetuar login no sistema;Web;#2461;Configurar OWIN;Tecnica;Sim;
+Autenticação;Fazer_login_com_usuário_e_senha;;645;RCP;#2379;Efetuar login no sistema;Web;#2462;Separar Model e ViewModel para usuário;Negocio;Nao;
+Autenticação;Fazer_login_com_usuário_e_senha;;646;RCP;#2379;Efetuar login no sistema;Web;#2480;Merge branch login com a nova estrutura do projeto;Tecnica;Nao;
+Cadastro;Inserir_dados;;647;RCP;#2376;Cadastro de Usuários;Web;;;;;
+Cadastro;Atualizar_dados;;648;RCP;#2392;Atualização de Usuários;Web;;;;;
+Cadastro;Inserir_dados;;649;RCP;#2384;Cadastrar linhas de produção;Web;;;;;
+Cadastro;Recuperação_de_dados;;650;RCP;#2385;Consultar linhas de produção;Web;;;;;
+Cadastro;Atualizar_dados;;651;RCP;#2450;Atualizar linhas de produção;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;Modificar validação de dados no cliente;652;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48390;Atualização dos campos do cadastro de pallet;Negocio;Sim;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar entidade no banco de dados;653;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48391;Atualização do banco do cadastro de nota;Negocio;Sim;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar método de inserção;654;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48392;Atualização do cadastro de lacre;Negocio;Sim;Virtus
+;;;655;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48393;Atualização do vínculo lacre <-> pallet;Negocio;Nao;Virtus
+;;;656;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48394;Atualização do vínculo pallet <-> nota;Negocio;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar validação de dados no cliente;657;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48395;Atualização do double check;Negocio;Sim;Virtus
+;;;658;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48399;Atualização do cadastro de notas de retorno;Negocio;Nao;Virtus
+;;;659;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48400;Adicionar suporte ao provider SQL Server;Negocio;Nao;Virtus
+;;;660;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48401;"Criar infraestrutura do ""repositório""";Tecnica;Nao;Virtus
+;;;661;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#48600;Criação da base do Old_PPB_Link localmente;Tecnica;Nao;Virtus
+;;;662;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#49016;Ajustes no repositório;Tecnica;Nao;Virtus
+;;;663;NewPCS;#17790;Inserção/atualização/remoção de dados do PPB Link tanto no Oracle quanto no SQL Server;;#49199;Ajustes do Merge Request - SMOM;Tecnica;Nao;Virtus
+;;;664;NewPCS;#17801;Atualização dos testes de unidade;;;Ajustes no teste de PpbScore;Tecnica;Nao;Virtus
+;;;665;NewPCS;#17801;Atualização dos testes de unidade;;;Implementação dos testes de PPB Summary;Tecnica;Nao;Virtus
+;;;666;NewPCS;#17801;Atualização dos testes de unidade;;;Ajustar os Setup de Part e PartType para ser implementado nos testBase;Tecnica;Nao;Virtus
+;;;667;NewPCS;#17801;Atualização dos testes de unidade;;;Ajuste Cenário de Teste de Intrgração Protheus PartType;Tecnica;Nao;Virtus
+;;;668;NewPCS;#17801;Atualização dos testes de unidade;;;Ajustes nos testes de PPBLicense e GovernmentReport;Tecnica;Nao;Virtus
+;;;669;NewPCS;#17801;Atualização dos testes de unidade;;;Ajustes nos testes de P&D Investment;Tecnica;Nao;Virtus
+;;;670;NewPCS;#17801;Atualização dos testes de unidade;;;Corrigir rollback após execução do teste de unidade de GovernmentReport;Tecnica;Nao;Virtus
+;;;671;NewPCS;#17801;Atualização dos testes de unidade;;;Ajustes nos testes de Part;Tecnica;Nao;Virtus
+;;;672;NewPCS;#17801;Atualização dos testes de unidade;;;Ajustes nos testes de Productive Stage;Tecnica;Nao;Virtus
+;;;673;NewPCS;#17799;Suporte ao Dapper;;#48682;Correção de problemas relacionados ao refactoring de performance;Tecnica;Nao;Virtus
+Cadastro;Recuperação_de_dados;Criar ordenação para listagem;674;NewPCS;#17799;Suporte ao Dapper;;#48683;Implementação da consulta OrderByDescending;Negocio;Sim;Virtus
+;;;675;NewPCS;#17799;Suporte ao Dapper;;#48771;Implementação de sobrecarga na especificação de OrderBy para aceitar strings.;Negocio;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar método de inserção;676;NewPCS;#17799;Suporte ao Dapper;;#48771;Modificar metodo de criação do Dapper;Negocio;Sim;Virtus
+;;;677;NewPCS;#17794;Geração de Build;;;Geração da Build v0.17.2;Tecnica;Nao;Virtus
+;;;678;NewPCS;#17794;Geração de Build;;;Geração da Build v0.18.0;Tecnica;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar chamada para tela de inserção;679;NewPCS;#17896;Sale Invoice Management;;#48779;Ajustes no link de NF para descartar PNs não cadastrados;Negocio;Sim;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar tela inserção;680;NewPCS;#17896;Sale Invoice Management;;#48780;Adicionar tela de gerenciamento de NF de venda;Negocio;Sim;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar rota de inserção de dados;681;NewPCS;#17896;Sale Invoice Management;;#48781;Adicionar ação de reimportar NF;Negocio;Sim;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar rota de inserção de dados;682;NewPCS;#17896;Sale Invoice Management;;#48782;Adicionar ação de reprocessar NF;Negocio;Sim;Virtus
+;;;683;NewPCS;#15471;Bug fixing & Support;;;Bugfix#14507 - [Balance] Não é possível deletar Portaria que tem balance consolidado;Tecnica;Nao;Virtus
+;;;684;NewPCS;#15471;Bug fixing & Support;;;Criação da procedure de criação de dados dummy para o relatório de returned machines;Tecnica;Nao;Virtus
+;;;685;NewPCS;#15471;Bug fixing & Support;;;#14547 O sistema não está permitindo reimportar múltiplas notas já processadas ao mesmo tempo;Tecnica;Nao;Virtus
+;;;686;NewPCS;#15471;Bug fixing & Support;;;Refatoração no serviço de consolidação geral;Tecnica;Nao;Virtus
+;;;687;NewPCS;#15471;Bug fixing & Support;;;Bug fix -13966 - [LOG] A descrição do Log de alteração de um JOB não está sendo exibindo corretamente;Tecnica;Nao;Virtus
+;;;688;NewPCS;#15471;Bug fixing & Support;;;BugFix#14024 - [Sales] O Job não está sendo executado corretamente;Tecnica;Nao;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar tela inserção;689;SPGec;#15048;Cadastros gerais;;#39441;Criar coluna variação na tela de equipamentos;Negocio;Sim;Virtus
+Cadastro;Modificar_inserção_de_dados;Modificar tela inserção;690;SPGec;#15048;Cadastros gerais;;#39442;Inserir campo Variação no cadastro de equipamentos;Negocio;Sim;Virtus
+;;;691;SPGec;#15627;Associação do PN ao cliente e às configurações;;#39444;Criar nova configuração de Clientes;Negocio;Nao;Virtus
+Cadastro;Recuperação_de_dados;Criar paginação para listagem;692;SPGec;#15627;Associação do PN ao cliente e às configurações;;#39445;Paginação da tela de Configuração de Clientes;Negocio;Sim;Virtus
+Cadastro;Recuperação_de_dados;Criar filtro para listagem;693;SPGec;#15627;Associação do PN ao cliente e às configurações;;#39446;Filtros da tela de Configuração de Clientes;Negocio;Sim;Virtus
+Cadastro;Inserir_dados;Criar tela inserção;694;SPGec;#15627;Associação do PN ao cliente e às configurações;;#39447;Criar tela de Configuração de Clientes;Negocio;Sim;Virtus
+Cadastro;Atualizar_dados;Criar tela alteração;695;SPGec;#15627;Associação do PN ao cliente e às configurações;;#39956;Editar Configuração de Cliente;Negocio;Sim;Virtus
+;;;696;SPGec;#15631;Impressão de etiquetas;;#39448;Definir layout da etiqueta;Negocio;Nao;Virtus
+;;;697;SPGec;#15631;Impressão de etiquetas;;#39449;Implementar o script da etiqueta;Negocio;Sim;Virtus
+Gerencial;Exportar_relatório_em_PDF;Criar Relatório;698;SPGec;#15631;Impressão de etiquetas;;#39450;Imprimir etiqueta;Negocio;Sim;Virtus
+;;;699;SPGec;#15631;Impressão de etiquetas;;#40145;Implementação de código zpl das etiquetas;Negocio;Nao;Virtus
+Cadastro;Recuperação_de_dados;Criar tela listagem;700;SPGec;#15632;Estabilização;;#39479;Filtragem por equipamento ;Negocio;Sim;Virtus
+;;;701;SPGec;#15632;Estabilização;;#39638;Correções no histórico de insumos;Tecnica;Nao;Virtus
+;;;702;SPGec;#15632;Estabilização;;#39717;Estabilização da máquina de estados;Tecnica;Nao;Virtus
+;;;703;SPGec;#15632;Estabilização;;#39718;Treinamento para realização de testes para qualidade;Tecnica;Nao;Virtus
+;;;704;SPGec;#15632;Estabilização;;#39957;Obter a listagem de equipamentos a partir do backend;Negocio;Sim;Virtus
+;;;705;SPGec;#15632;Estabilização;;#40502;Correções nos serviços;Tecnica;Nao;Virtus
+Cadastro;Recuperação_de_dados;;706;RCP;#2490;Consultar produtos finais;Web;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;707;RCP;#3392;Exibir detalhes de produto final;Web;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;708;RCP;#2377;Consultar ordens de produção;Web;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;709;RCP;#3381;Exibir detalhes da ordem de produção;Web;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;710;RCP;#2383;Consultar BOM (matéria-prima);Web;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;711;RCP;#3390;Exibir detalhes de BOM;Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;712;SSPI;#2277;Edição de Usuários;Desktop;;;Negocio;Sim;
+Cadastro;Inserir_dados;;713;SSPI;#2570;Cadastro das Maquinas;Desktop;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;713;SSPI;#2570-2;Editar Máquinas;Desktop;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;713;SSPI;#2570-3;Listar Máquinas;Desktop;;;Negocio;Sim;
+Cadastro;Remover_dados;;713;SSPI;#2570-4;Excluir Máquinas;Desktop;;;Negocio;Sim;
+Cadastro;Inserir_dados;;714;SSPI;#2589-1;Inclusão dos Tipos de Problemas nas Máquinas;Desktop;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;715;SSPI;#2589-2;Listagem dos Tipos de Problemas nas Máquinas;Desktop;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;716;SSPI;#2589-3;Edição dos Tipos de Problemas nas Máquinas;Desktop;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;717;SSPI;#2598-1;Listagem dos Tipos de Operações;Desktop;;;Negocio;Sim;
+Cadastro;Inserir_dados;;718;SSPI;#2598-2;Inclusão dos Tipos de Operações;Desktop;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;719;SSPI;#2598-3;Edição dos Tipos de Operações;Desktop;;;Negocio;Sim;
+Cadastro;Inserir_dados;;720;RCP;#2831;Registrar separação de BOM (matéria prima);Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;721;RCP;#2484;Cadastrar famílias de produto;Web;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;722;RCP;#2485;Alterar famílias de produto;Web;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;723;RCP;#2486;Listar famílias de produto;Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;724;RCP;#4464;Registrar separação de BOM (matéria prima) Parte II;Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;725;RCP;#2389;Registrar produção de produto final;Web;;;Negocio;Sim;
+;;;726;RCP;#4664;Importar produtos de um arquivo CSV;Web;;;;Nao;
+;;;727;RCP;#4665;Importar ordens de produção de um arquivo CSV;Web;;;;Nao;
+;;;728;RCP;#4666;Importar BOM de um arquivo CSV;Web;;;;Nao;
+Cadastro;Inserir_dados;;729;RCP;#4670;Registrar entrega de BOM (matéria-prima) Parte II;Web;;;Negocio;Sim;
+;;;730;RCP;#4673;Importar família de produtos de um arquivo CSV;Web;;;;Nao;
+Cadastro;Inserir_dados;;731;RCP;#4825;Entrega no retrabalho;Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;732;RCP;#4824;Movimentar para descarte de produto;Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;733;RCP;#4823;Entrega na Expedição;Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;734;RCP;#4822;Liberação de Produto para QoC;Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;735;RCP;#4703;Partes rastreáveis por Produto;Web;;;Negocio;Sim;
+Autenticação;Fazer_login_com_usuário_e_senha;;736;SSPI;#2278;LOGIN app DESKTOP;Desktop;;;Negocio;Sim;
+Autenticação;Fazer_login_com_usuário_e_senha;;737;SSPI;#2279;LOGOUT;Desktop;;;Negocio;Sim;
+Cadastro;Inserir_dados;;738;SSPI;#2276;Inclusão de Usuários;Desktop;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;739;SSPI;#2275;Listagem Básica de Usuários;Desktop;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;740;SSPI;#2252;Visualização de Planejamento Básico da Produção;Desktop;;;Negocio;Sim;
+Cadastro;Remover_dados;;741;SSPI;#2589-4;Edição dos Tipos de Problemas nas Máquinas;Desktop;;;Negocio;Sim;
+Cadastro;Remover_dados;;742;SSPI;#2598-3;Edição dos Tipos de Operações;Desktop;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;743;VRE;#1804;Android - Como usuário assistente, eu gostaria de ver o conteúdo do exame transmitido por um médico assistido.;Mobile;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;744;VRE;#1806;iOS - Como usuário assistente, eu gostaria de ver o conteúdo do exame transmitido por um médico assistido.;Mobile;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;745;VRE;#1809;Web - Como usuário assistente, eu gostaria de ver o conteúdo do exame transmitido por um médico assistido.;Web;;;Negocio;Sim;
+;;;746;VRE;#1814;Android - Como médico assistente ou assistido eu gostaria de conversar em grupo com outros usuários;Mobile;;;Negocio;Nao;
+Autenticação;Fazer_login_com_usuário_e_senha;;747;VRE;#1815;Android - Como usuário eu preciso me autenticar para visualizar um exame.;Mobile;;;Negocio;Sim;
+;;;748;VRE;#1816;iOS - Como médico assistente ou assistido eu gostaria de conversar em grupo com outros usuários;Mobile;;;Negocio;Nao;
+Autenticação;Fazer_login_com_usuário_e_senha;;749;VRE;#1817;iOS - Como usuário eu preciso me autenticar para visualizar um exame.;Mobile;;;Negocio;Sim;
+Autenticação;Fazer_login_com_usuário_e_senha;;750;VRE;#1818;Web - Como usuário eu preciso me autenticar para visualizar um exame.;Web;;;Negocio;Sim;
+;;;751;VRE;#1819;Web - Como médico assistente ou assistido eu gostaria de conversar em grupo com outros usuários;Web;;;Negocio;Nao;
+Cadastro;Recuperação_de_dados;;752;Event Driven System for Business Services Integration;#242-1;CRUD de Categoria Loja - Listagem;Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;753;Event Driven System for Business Services Integration;#242-2;CRUD de Categoria Loja - Criação;Web;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;754;Event Driven System for Business Services Integration;#242-3;CRUD de Categoria Loja - Atualização;Web;;;Negocio;Sim;
+Cadastro;Remover_dados;;755;Event Driven System for Business Services Integration;#242-4;CRUD de Categoria Loja - Remoção;Web;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;756;Event Driven System for Business Services Integration;#243;Ativação e desativação de Categoria Loja;Web;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;757;Event Driven System for Business Services Integration;#253-1;CRUD de Filial - Listagem;Web;;;Negocio;Sim;
+Cadastro;Inserir_dados;;758;Event Driven System for Business Services Integration;#253-2;CRUD de Filial - Criação;Web;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;759;Event Driven System for Business Services Integration;#253-3;CRUD de Filial - Atualização;Web;;;Negocio;Sim;
+Cadastro;Remover_dados;;760;Event Driven System for Business Services Integration;#253-4;CRUD de Filial - Remoção;Web;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;761;Event Driven System for Business Services Integration;#263;Ativação de Loja;Web;;;Negocio;Sim;
+Cadastro;Recuperação_de_dados;;761;Event Driven System for Business Services Integration;#273;Products listing;Web;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;762;Event Driven System for Business Services Integration;#274;Product activation;Web;;;Negocio;Sim;
+Gerencial;Exportar_relatório_em_XLS;;763;Event Driven System for Business Services Integration;#282;Carregamento de produto oriundo do BCA por planilha;Web;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;764;Event Driven System for Business Services Integration;#292;Product deactivation;Web;;;Negocio;Sim;
+;;;765;Event Driven System for Business Services Integration;#3908;[front] Mostrar barra de progresso  na importação de produto filho;Web;;;Tecnica;Nao;Virtus
+Cadastro;Inserir_dados;;766;TVD II;#1611;Cadastro de usuários;Web;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;767;TVD II;#1610;Inativar usuários;Web;;;Negocio;;
+Cadastro;Recuperação_de_dados;;768;TVD II;#1610-2;Listar usuários;Web;;;;;
+Cadastro;Atualizar_dados;;769;TVD II;#1610-3;Editar usuários;Web;;;;;
+Cadastro;Recuperação_de_dados;;770;TVD II;#1612;Pesquisa de usuários;Web;;;;;
+Autenticação;Fazer_login_com_usuário_e_senha;;771;TVD II;#1594;Login no sistema;Web;;;;;
+Cadastro;Inserir_dados;;772;TVD II;#1604;Criar dispositivo;Web;;;;;
+Cadastro;Recuperação_de_dados;;773;TVD II;#1602;Listar dispositivo;Web;;;;;
+Cadastro;Remover_dados;;774;TVD II;#1602-2;Excluir dispositivo;Web;;;;;
+Cadastro;Atualizar_dados;;775;TVD II;#1602-3;Editar dispositivo;Web;;;;;
+Cadastro;Recuperação_de_dados;;776;TVD II;#1603;Pesquisar dispositivo;Web;;;;;
+Cadastro;Recuperação_de_dados;;777;TVD II;#1613-1;Criar itens de avaliação;Web;;;;;
+Cadastro;Remover_dados;;778;TVD II;#1613-2;Deletar itens de avaliação;Web;;;;;
+Cadastro;Recuperação_de_dados;;779;TVD II;#1614;Listar itens de avaliação;Web;;;;;
+Cadastro;Inserir_dados;;780;TVD II;#1615;Criar métricas de avaliação;Web;;;;;
+Cadastro;Recuperação_de_dados;;781;TVD II;#1617;Busca de relatórios;Web;;;;;
+Gerencial;Exportar_relatório_em_PDF;;782;TVD II;#1619;Visualizar relatórios;Web;;;;;
+Cadastro;Recuperação_de_dados;;783;TVD II;#1618;Filtros do sistema;Web;;;;;
+Gerencial;Exportar_relatório_em_PDF;;784;TVD II;#1620;Download de relatórios;Web;;;;;
+Cadastro;Atualizar_dados;;785;TVD II;#1627;Editar usuários;Mobile;;;;;
+Cadastro;Recuperação_de_dados;;786;TVD II;#1626;Pesquisar usuários;Mobile;;;;;
+Cadastro;Inserir_dados;;787;TVD II;#1629;Criar usuários;Mobile;;;;;
+Cadastro;Atualizar_dados;;788;TVD II;#1628;Inativar usuários;Mobile;;;;;
+Cadastro;Inserir_dados;;789;TVD II;#1532-1;Cadastrar testes;Mobile;;;;;
+Cadastro;Recuperação_de_dados;;790;TVD II;#1532-2;Pesquisar testes;Mobile;;;;;
+Cadastro;Atualizar_dados;;791;TVD II;#1532-3;Editar tipos de teste;Mobile;;;;;
+Cadastro;Atualizar_dados;;792;TVD II;#1532-4;Inativar testes;Mobile;;;;;
+Cadastro;Recuperação_de_dados;;793;TVD II;#1532-5;Listar testes;Mobile;;;;;
+Autenticação;Fazer_login_com_usuário_e_senha;;794;TVD II;#1577;Login;Mobile;;;;;
+;;;795;TVD II;#1578;Logout;Mobile;;;;;
+Cadastro;Recuperação_de_dados;;796;TVD II;#1564;Listagem de dispositivos;Mobile;;;;;
+Cadastro;Recuperação_de_dados;;797;TVD II;#1626-2;Listar usuários;Mobile;;;;;
+Cadastro;Inserir_dados;;798;AR Tools Web;#11971;Cadastro de usuários;Web;;;;;
+Cadastro;Atualizar_dados;;799;AR Tools Web;#11971-2;Editar usuários;Web;;;;;
+Cadastro;Recuperação_de_dados;;800;AR Tools Web;#11971-3;Listar usuários;Web;;;;;
+Autenticação;Acessar_pela_primeira_vez_o_sistema;;801;Gestão da Capacitação;US01;Como administrador desejo fazer login para ter o primeiro acesso ao sistema sistema;Web;;;;;
+Autenticação;Atualizar_perfil;;802;Gestão da Capacitação;US02;Como administrador desejo alterar minha senha para atualizá-la quando necessário;Web;;;;;
+Autenticação;Recuperar_senha;;803;Gestão da Capacitação;US03;Como administrador desejo recuperar minha senha	para ter acesso ao sistema novamente;Web;;;;;
+Cadastro;Inserir_dados;;804;Gestão da Capacitação;US04;Como administrador desejo criar um contrato para associar às contas criadas;Web;;;;;
+Autenticação;Criar_conta;;805;Gestão da Capacitação;US05;Como administrador desejo criar conta de gestor para que o gestor tenha acesso ao sistema;Web;;;;;
+Autenticação;Remover_conta;;806;Gestão da Capacitação;US06;Como administrador desejo excluir conta de gestor para remover o gestor do sistema;Web;;;;;
+Cadastro;Recuperação_de_dados;;807;Gestão da Capacitação;US08;Como administrador desejo ordenar a lista de gestores cadastrados para facilitar a visualização das suas informações;Web;;;;;
+Autenticação;Fazer_login_com_usuário_e_senha;;808;Gestão da Capacitação;US09;Como administrador desejo fazer logout do sistema	para sair o sistema;Web;;;;;
+Autenticação;Criar_conta;;809;Gestão da Capacitação;US10;Como administrador desejo criar conta de coach para que o coach tenha acesso ao sistema.;Web;;;;;
+Cadastro;Recuperação_de_dados;;810;Gestão da Capacitação;US13;Como administrador desejo ordenar a lista de coaches cadastrados	para facilitar a visualização das suas informações;Web;;;;;
+Autenticação;Criar_conta;;811;Gestão da Capacitação;US14;Como administrador desejo criar conta de aluno para que o aluni tenha acesso ao sistema;Web;;;;;
+Autenticação;Remover_conta;;812;Gestão da Capacitação;US15;Como administrador desejo excluir conta de aluno para remover o aluno do sistema;Web;;;;;
+Cadastro;Recuperação_de_dados;;813;Gestão da Capacitação;US16;Como administrador desejo expandir as informações de um aluno cadastrado para ter acesso a mais informações de seu perfil;Web;;;;;
+Cadastro;Atualizar_dados;;814;Gestão da Capacitação;US18;Como coach desejo selecionar alunos para criar minha equipe;Web;;;;;
+Autenticação;Atualizar_perfil;;815;Gestão da Capacitação;US19;Como aluno	desejo atualizar meus dados para completar as informações do meu perfil;Web;;;;;
+Cadastro;Inserir_dados;;816;Gestão da Capacitação;US20;Como aluno	desejo cadastrar meus horários para que o coach responsável esteja ciente da minha carga horária;Web;;;;;
+Cadastro;Recuperação_de_dados;;817;Gestão da Capacitação;US21;Como coach	desejo visualizar os horários da minha equipe para saber quando os alunos estarão no laboratório;Web;;;;;
+Cadastro;Inserir_dados;;818;Gestão da Capacitação;US22;Como aluno desejo registrar minha atividade da semana para que o meu coach possa fazer o acompanhamento;Web;;;;;
+Cadastro;Atualizar_dados;;819;Gestão da Capacitação;US23;Como coach	desejo revisar ou validar as atividades semanais do alunos da minha equipe para monito3rar as atividades realizadas;Web;;;;;
+Cadastro;Recuperação_de_dados;;820;Gestão da Capacitação;US24;Como gestor	desejo visualizar os relatórios semanais que foram validados pelos coaches	para ficar 4a par do andamento dos projetos;Web;;;;;
+Cadastro;Atualizar_dados;;821;Gestão da Capacitação;US25;Como coach	desejo desalocar alunos da minha equipe que os alunos possam ser alocados em outra equipe;Web;;;;;
+Cadastro;Recuperação_de_dados;;822;Gestão da Capacitação;US26;Como administrador desejo realizar buscas para ter acesso as suas informações deu um indivíduo específico;Web;;;;;
+Cadastro;Recuperação_de_dados;;823;Gestão da Capacitação;US27;Como gestor	desejo realizar buscas	para ter acesso as suas informações deu um indivíduo específico;Web;;;;;
+Cadastro;Recuperação_de_dados;;824;Gestão da Capacitação;US28;Como coach	desejo realizar buscas	para ter acesso as suas informações deu um indivíduo específico;Web;;;;;
+Cadastro;Recuperação_de_dados;;825;Gestão da Capacitação;US29;Como gestor desejo visualizar os horários dos alunos no laboratório por contrato para exibir os horários de determinado aluno por contrato;Web;;;;;
+Gerencial;Notificar_via_aplicação;;826;Gestão da Capacitação;US30;Como desenvolvedor desejo criar um sistema de notificaçao para que os usarios possam ser notificado quando necessario;Web;;;;;
+Cadastro;Inserir_dados;;827;Gestão da Capacitação;US35;Como aluno desejo cadastrar horarios na agenda fora do horario regular para poder cumprir as 20 horas exigidas no projeto;Web;;;;;
+Cadastro;Recuperação_de_dados;;828;Gestão da Capacitação;US36;Como coach desejo visualizar e gerenciar as informações da minha equipe para que eu possa ver e gerenciar de forma mais centralizada as informaçoes dos membros da minha equipe;Web;;;;;
+Cadastro;Atualizar_dados;;829;Gestão da Capacitação;US39;Como administrador desejo editar usuários já cadastrados no sistema para corrigir inconformidades dos dados cadastrados;Web;;;;;
+Cadastro;Inserir_dados;;830;Kaizen;#9;Como usuário quero me cadastrar no sistema - Frontend;Web;;;;;
+Cadastro;Inserir_dados;;831;Kaizen;#12;Como admin quero criar projetos - Frontend;Web;;;;;
+Cadastro;Atualizar_dados;;832;Kaizen;#14;Como ScrumMaster quero editar a descrição dos projetos - Frontend;Web;;;;;
+Cadastro;Inserir_dados;;833;Kaizen;#16;Como ScrumMaster quero criar uma sprint - Frontend;Web;;;;;
+Cadastro;Atualizar_dados;;834;Kaizen;#22;Como ScrumMaster quero atualizar as lições aprendidas do projeto - Frontend;Web;;;;;
+Cadastro;Atualizar_dados;;835;Kaizen;#24;Como ScrumMaster quero gerenciar os impedimentos do projeto - Frontend;Web;;;;;
+Cadastro;Inserir_dados;;836;NewPCS;#15109;Processamento inicial de NF (Validação de dados);Web;;;;;
+Cadastro;Inserir_dados;;837;NewPCS;#15109;Processamento inicial de NF (Validação de dados);Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;838;NewPCS;#15133;Cálculo de compensação entre insumos;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;839;NewPCS;#15133;Cálculo de compensação entre insumos;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;840;NewPCS;#15134;Ajustes no gerenciamento de Crédito/débito avulso;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;841;NewPCS;#15134;Ajustes no gerenciamento de Crédito/débito avulso;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;842;NewPCS;#15134;Ajustes no gerenciamento de Crédito/débito avulso;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;843;NewPCS;#15134;Ajustes no gerenciamento de Crédito/débito avulso;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;844;NewPCS;#15134;Ajustes no gerenciamento de Crédito/débito avulso;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;845;NewPCS;#15134;Ajustes no gerenciamento de Crédito/débito avulso;Web;;;;;
+Cadastro;Inserir_dados;;846;NewPCS;#14941;Product Category;Web;;;;;
+Cadastro;Remover_dados;;847;NewPCS;#14941-3;Product Category;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;848;NewPCS;#14941-2;Product Category;Web;;;;;
+Cadastro;Inserir_dados;;849;NewPCS;#14329;Investments;Web;;;;;
+Cadastro;Remover_dados;;850;NewPCS;#14329-2;Investments;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;851;NewPCS;#14329-3;Investments;Web;;;;;
+Cadastro;Inserir_dados;;852;NewPCS;#14315;MainTain Detached Record;Web;;;;;
+Cadastro;Remover_dados;;853;NewPCS;#14315-2;MainTain Detached Record;Web;;;;;
+Cadastro;Modificar_inserção_de_dados;;854;NewPCS;#14315-3;MainTain Detached Record;Web;;;;;
+Cadastro;Atualizar_dados;;855;ARTools;#11971-2;[Adm] Eu como Gerente de TI atualizar o Cadastrar um Usuário;Web;;;;;
+Cadastro;Recuperação_de_dados;;856;ARTools;#11971-3;[Adm] Eu como Gerente de TI gostaria de listar Usuários;Web;;;;;
+Autenticação;Criar_conta;;857;ARTools;#11972;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Perfis de Usuário;Web;;;;;
+Cadastro;Atualizar_dados;;858;ARTools;#11972-2;[Adm] Eu como Gerente de TI gostaria de atualizar o cadastro dos Perfis de Usuário;Web;;;;;
+Cadastro;Recuperação_de_dados;;859;ARTools;#11972 -3;[Adm] Eu como GERENTE de TI gostaria de listar os Perfis de Usuário;Web;;;;;
+Cadastro;Recuperação_de_dados;;860;ARTools;#11972-3;[Adm] Eu como Gerente de TI gostaria de Listar os Perfis de Usuário;Web;;;;;
+Autenticação;Criar_conta;;861;ARTools;#11973;[Adm] Eu como Gerente de TI gostaria de criar Permissões do Usuário;Web;;;;;
+Cadastro;Atualizar_dados;;862;ARTools;#11973-2;[Adm] Eu como Gerente de TI gostaria de atualizar as Permissões do Usuário;Web;;;;;
+Cadastro;Recuperação_de_dados;;863;ARTools;#11973-3;[Adm] Eu como Gerente de TI gostaria de listarPermissões do Usuário;Web;;;;;
+Autenticação;Criar_conta;;864;ARTools;#11983;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Planos de SLA;Web;;;;;
+Cadastro;Recuperação_de_dados;;865;ARTools;#11983-2;[Adm] Eu como Gerente de TI gostaria de Listar os Planos de SLA;Web;;;;;
+Autenticação;Criar_conta;;866;ARTools;#11983-1;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Planos de SLA;Web;;;;;
+Cadastro;Atualizar_dados;;867;ARTools;#11983-3;[Adm] Eu como Gerente de TI gostaria de alterar os Planos de SLA;Web;;;;;
+Cadastro;Recuperação_de_dados;;868;ARTools;#11983-2;[Adm] Eu como Gerente de TI gostaria de Visualizar os Planos de SLA;Web;;;;;
+Autenticação;Remover_conta;;869;ARTools;#11983-4;[Adm] Eu como Gerente de TI gostaria de Ativar/Desativar os Planos de SLA;Web;;;;;
+Autenticação;Criar_conta;;870;ARTools;#11984;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Filas de Atendimento;Web;;;;;
+Cadastro;Recuperação_de_dados;;871;ARTools;#11984-2;[Adm] Eu como Gerente de TI gostaria de Listar os Filas de Atendimento;Web;;;;;
+Autenticação;Criar_conta;;872;ARTools;#11984;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Filas de Atendimento;Web;;;;;
+Cadastro;Atualizar_dados;;873;ARTools;#11984-3;[Adm] Eu como Gerente de TI gostaria de Editar as Filas de Atendimento;Web;;;;;
+Cadastro;Recuperação_de_dados;;874;ARTools;#11984-2;[Adm] Eu como Gerente de TI gostaria de Visualizar os Filas de Atendimento;Web;;;;;
+Autenticação;Remover_conta;;875;ARTools;#11984-4;[Adm] Eu como Gerente de TI gostaria de Desativar os Filas de Atendimento;Web;;;;;
+Autenticação;Criar_conta;;876;ARTools;#12216;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Produtos que a EPSON possui.;Web;;;;;
+Cadastro;Recuperação_de_dados;;877;ARTools;#12216-2;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Produtos que a EPSON possui.;Web;;;;;
+Autenticação;Criar_conta;;878;ARTools;#12216;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Produtos que a EPSON possui.;Web;;;;;
+Cadastro;Atualizar_dados;;879;ARTools;#12216-3;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Produtos que a EPSON possui.;Web;;;;;
+Cadastro;Remover_dados;;880;ARTools;#12216-4;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Produtos que a EPSON possui.;Web;;;;;
+Cadastro;Recuperação_de_dados;;881;ARTools;#12216;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Produtos que a EPSON possui.;Web;;;;;
+Cadastro;Recuperação_de_dados;;882;ARTools;#12216-2;[Adm] Eu como Gerente de TI gostaria de Cadastrar os Produtos que a EPSON possui.;Web;;;;;
+Cadastro;Inserir_dados;;;SGCond;SGC-US01;Cadastro de áreas comuns;Web;;;Negocio;Sim;
+Cadastro;Atualizar_dados;;;SGCond;SGC-US02;Alterar áreas comuns;Web;;;;;
+Cadastro;Recuperação_de_dados;;;SGCond;SGC-US03;Listar áreas comuns;Web;;;;;
+Cadastro;Remover_dados;;;SGCond;SGC-US04;Excluir áreas comuns;Web;;;;;
+Cadastro;Inserir_dados;;;SGCond;SGC-US05;"Inserir Morador
+";Web;;;;;
+Cadastro;Atualizar_dados;;;SGCond;SGC-US06;Alterar morador;Web;;;;;
+Cadastro;Recuperação_de_dados;;;SGCond;SGC-US07;Listar moradores;Web;;;;;
+Cadastro;Inserir_dados;;;SGCond;SGC-US08;Cadastrar condomínio;Web;;;;;
+Cadastro;Atualizar_dados;;;SGCond;SGC-US09;"Alterar condomínio
+";Web;;;;;
+Cadastro;Recuperação_de_dados;;;SGCond;SGC-US10;Listar condomínios;Web;;;;;
+Cadastro;Inserir_dados;;;SGCond;SGC-US11;Incluir moradia;Web;;;;;
+Cadastro;Recuperação_de_dados;;;SGCond;SGC-US12;"Listar moradias
+";Web;;;;;
+Cadastro;Atualizar_dados;;;SGCond;SGC-US13;Alterar moradia;Web;;;;;
+Cadastro;Inserir_dados;;;SGCond;SGC-US14;Incluir chamado;Web;;;;;
+Cadastro;Atualizar_dados;;;SGCond;SGC-US15;Alterar chamado;Web;;;;;
+Cadastro;Recuperação_de_dados;;;SGCond;SGC-US16;Listar chamados;Web;;;;;
+Cadastro;Remover_dados;;;SGCond;SGC-US17;Excluir chamados;Web;;;;;
+Cadastro;Inserir_dados;;;SGCond;SGC-US18;Reservar área comum;Web;;;;;
+Cadastro;Atualizar_dados;;;SGCond;SGC-US19;Alterar reserva de área comum;Web;;;;;
+Cadastro;Remover_dados;;;SGCond;SGC-US20;Excluir reserva de área comum;Web;;;;;
+Cadastro;Recuperação_de_dados;;;SGCond;SGC-US21;Consultar reservas de área comum;Web;;;;;
+Cadastro;Inserir_dados;;;SGCond;SGC-US22;"Registar usuário
+";Web;;;;;
+Autenticação;Fazer_login_com_usuário_e_senha;;;SGCond;SGC-US23;Fazer login com usuário e senha;Web;;;;;
+Autenticação;Recuperar_senha;;;SGCond;SGC-US24;Recuperar senha;Web;;;;;
+Cadastro;Inserir_dados;;;SGCond;SGC-US25;Cadastrar enquete;Web;;;;;
+Cadastro;Atualizar_dados;;;SGCond;SGC-US26;Alterar enquete;Web;;;;;
+Cadastro;Recuperação_de_dados;;;SGCond;SGC-US27;Listar enquetes;Web;;;;;
+Cadastro;Remover_dados;;;SGCond;SGC-US28;Excluir enquete;Web;;;;;
+Cadastro;Inserir_dados;;;SGCond;SGC-US29;Votar na enquete;Web;;;;;
+Cadastro;Recuperação_de_dados;;;SGCond;SGC-US31;Exibir enquetes em andamento não votadas;Web;;;;;
+Autenticação;Fazer_login_com_usuário_e_senha;;;MyPocket;MPT-US01;"Fazer login no sistema
+";Web;;;;;
+Autenticação;Fazer_login_com_usuário_e_senha;;;MyPocket;MPT-US02;Fazer logout;Web;;;;;
+Cadastro;Inserir_dados;;;MyPocket;MPT-US03;Cadastrar transações;Web;;;;;
+Cadastro;Atualizar_dados;;;MyPocket;MPT-US04;Alterar transação;Web;;;;;
+Cadastro;Recuperação_de_dados;;;MyPocket;MPT-US05;Listar transações por mês/ano;Web;;;;;
+Cadastro;Remover_dados;;;MyPocket;MPT-US06;Excluir transações;Web;;;;;
+Cadastro;Recuperação_de_dados;;;MyPocket;MPT-US07;"Listar categorias
+";Web;;;;;
+Cadastro;Inserir_dados;;;MyPocket;MPT-US08;Cadastrar categorias;Web;;;;;
+Cadastro;Atualizar_dados;;;MyPocket;MPT-US09;Alterar categorias;Web;;;;;
+Autenticação;Recuperar_senha;;;MyPocket;MPT-US10;Recuperar senha;Web;;;;;
+Gerencial;;;;MyPocket;MPT-US11;Importar arquivo OFX;Web;;;;;
+Cadastro;Inserir_dados;;;MyPocket;MPT-US12;Criar cartão de crédito;Web;;;;;
+Cadastro;Recuperação_de_dados;;;MyPocket;MPT-US13;Listar contas;Web;;;;;
+Cadastro;Inserir_dados;;;MyPocket;MPT-US14;Cadastrar conta;Web;;;;;
+Cadastro;Atualizar_dados;;;MyPocket;MPT-US15;Alterar conta;Web;;;;;
+Cadastro;Inserir_dados;;;MyPocket;MPT-US16;Criar transação pro cartão de crédito;Web;;;;;
+Cadastro;Recuperação_de_dados;;;MyPocket;MPT-US17;Listar orçamento anual;Web;;;;;
+Cadastro;Inserir_dados;;;MyPocket;MPT-US18;Cadastrar orçamento anual;Web;;;;;
+Cadastro;Atualizar_dados;;;MyPocket;MPT-US19;Atualizar orçamento anual;Web;;;;;
+Cadastro;Inserir_dados;;;MyPocket;MPT-US20;Cadastrar meta mensal;Web;;;;;
+Cadastro;Recuperação_de_dados;;;MyPocket;MPT-US21;Listar meta mensal;Web;;;;;
+Cadastro;Atualizar_dados;;;MyPocket;MPT-US22;Alterar meta mensal;Web;;;;;
+Cadastro;Inserir_dados;;;MyPocket;MPT-US23;"Cadastrar investimento
+";Web;;;;;
+Cadastro;Recuperação_de_dados;;;MyPocket;MPT-US24;Listar investimento;Web;;;;;
+Cadastro;Atualizar_dados;;;MyPocket;MPT-US25;Alterar investimento;Web;;;;;
+Cadastro;Remover_dados;;;MyPocket;MPT-US26;Excluir investimento;Web;;;;;
+Cadastro;Inserir_dados;;;MyPocket;MPT-US27;Cadastro de usuário;Web;;;;;
+Autenticação;Fazer_login_com_usuário_e_senha;;;TestRec;TR-22784;User Login;Web;;;;;
+Autenticação;Criar_conta;;;TestRec;TR-27899;User Registration;Web;;;;;
+Cadastro;Atualizar_dados;;;TestRec;TR-27787-E;Projects Registration;Web;;;;;
+Cadastro;Inserir_dados;;;TestRec;TR-27787-C;Projects Registration;Web;;;;;
+Cadastro;Recuperação_de_dados;;;TestRec;TR-27787-L;Projects Registration;Web;;;;;
+Cadastro;Recuperação_de_dados;;;TestRec;TR-27789-L;US Registration;Web;;;;;
+Cadastro;Inserir_dados;;;TestRec;TR-27789-C;US Registration;Web;;;;;
+Cadastro;Atualizar_dados;;;TestRec;TR-27789-E;US Registration;Web;;;;;
+Cadastro;Remover_dados;;;TestRec;TR-27789-X;US Registration;Web;;;;;
+Cadastro;Inserir_dados;;;TestRec;TR-27788-C;Sprints Registration;Web;;;;;
+Cadastro;Atualizar_dados;;;TestRec;TR-27788-E;Sprints Registration;Web;;;;;
+Cadastro;Recuperação_de_dados;;;TestRec;TR-27788-L;Sprints Registration;Web;;;;;
+Cadastro;Recuperação_de_dados;;;TestRec;TR-28652;Backlog Planning;Web;;;;;
+Cadastro;Inserir_dados;;;TestRec;TR-27786-C;Test Case Registration;Web;;;;;
+Cadastro;Atualizar_dados;;;TestRec;TR-27786-E;Test Case Registration;Web;;;;;
+Cadastro;Recuperação_de_dados;;;TestRec;TR-27786-L;Test Case Registration;Web;;;;;
+Cadastro;Atualizar_dados;;;TestRec;TR-29212;Associate USs and Acceptance Criteria;Web;;;;;
+Cadastro;Recuperação_de_dados;;;TestRec;TR-27790;Dashboard view;Web;;;;;
+Cadastro;Inserir_dados;;;TestRec;TR-28363;Copy selected recommendations;Web;;;;;
+Autenticação;Fazer_login_com_usuário_e_senha;;;RiskControl;RC-29386;Login;Web;;;;;
+Cadastro;Atualizar_dados;;;RiskControl;RC-29391-E;Edit project;Web;;;;;
+Cadastro;Recuperação_de_dados;;;RiskControl;RC-29391-L;List projects;Web;;;;;
+Cadastro;Inserir_dados;;;RiskControl;RC-29390;Create project;Web;;;;;
+Cadastro;Inserir_dados;;;RiskControl;RC-30352-C;Register Domains;Web;;;;;
+Cadastro;Atualizar_dados;;;RiskControl;RC-30352-E;Register Domains;Web;;;;;
+Cadastro;Recuperação_de_dados;;;RiskControl;RC-30352-L;Register Domains;Web;;;;;
+Cadastro;Inserir_dados;;;SmartClassroom;SC-29966;Create User;Web;;;;;
+Autenticação;Fazer_login_com_usuário_e_senha;;;SmartClassroom;SC-29048;Login on system;Mobile;;;;;
+Cadastro;Recuperação_de_dados;;;SmartClassroom;SC-29966-L;List Users;Web;;;;;
+Cadastro;Atualizar_dados;;;SmartClassroom;SC-29966-E;Edit Users;Web;;;;;
+Cadastro;Inserir_dados;;;SmartClassroom;SC-29348;Create profile;Web;;;;;
+Cadastro;Atualizar_dados;;;SmartClassroom;SC-29348-E;Edit profile;Web;;;;;
+Cadastro;Recuperação_de_dados;;;SmartClassroom;SC-29348-L;List profiles;Web;;;;;

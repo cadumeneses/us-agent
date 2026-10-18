@@ -62,8 +62,8 @@ Similaridade e utilidade não são probabilidade de correção nem avaliação c
 - **B12b concluído:** editores/publicação e importação CSV/JSON com prévia e exclusões; [entrega 009](entregas/009-configuracao-importacao-web.md).
 - **B12c concluído:** [avaliações persistidas e destinos explícitos](avaliacoes-configuraveis.md), com deduplicação e original preservado.
 - **B12 tecnicamente verificado no recorte RNF:** vertical percorrido em navegador e capturas desktop/mobile inspecionadas; [entrega 010](entregas/010-avaliacoes-e-vertical-rnf.md).
-- **Próximo: B13**, com acesso por pessoa/organização e revisão das dependências. Piloto e questões científicas continuam conforme as [pendências](pendencias-e-proximos-passos.md).
+- **Continuidade atual: preparação B18**, com protocolo/referência e avaliação do segundo exemplo. B17b entregou avaliação/cópias rastreáveis. B13a foi entregue; pessoas/organizações permanecem condicionantes de bases restritas/uso multiusuário protegido, conforme as [pendências](pendencias-e-proximos-passos.md).
 
-## Métodos disponíveis pela API
+## Segundo método na interface
 
-Após B15c/B16b, definições da demonstração de testes também podem aparecer no catálogo. Seus seletores ficam desabilitados com `API only`; o formulário e a revisão atuais continuam específicos do RNF. Recuperar prévia ou execução schema 2 apresenta mensagem de interface pendente, preservando o pacote original. B17 deve entregar formulário, catálogo, artefatos e avaliação próprios, conforme o [contrato E21](testrec-execucoes-publicadas.md).
+B17a habilita a demonstração de testes na configuração/importação/execução e no histórico comum. O [roteiro de testes](testrec-interface.md) descreve catálogo sintético, taxonomia independente, template, base/catálogo explícitos, formulário sem respostas de teste, artefatos/contribuições, replay e download. B17b acrescenta [decisões/cópias de testes](avaliacoes-testes.md), com destino na entrada preservada; o fluxo RNF mantém suas decisões e vínculos próprios. Métodos não suportados continuam desabilitados.

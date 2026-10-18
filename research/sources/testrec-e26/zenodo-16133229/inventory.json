@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "recordId": 16133229,
+  "doi": "10.5281/zenodo.16133229",
+  "conceptDoi": "10.5281/zenodo.16131516",
+  "title": "Trainning dataset",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Anonymous, Anonymous",
+      "affiliation": null,
+      "orcid": "0000-0001-8416-8385"
+    }
+  ],
+  "metadataCapture": "extracted_record_from_versions_response",
+  "metadataSha256": "d2b5ca42f94fb18002a4154c802229e54b55af5c2047bdd7c9769184aa878a5b",
+  "versionsResponseSha256": "93cc3af5f245772dd43b401741a173ee28eac68a83d85e5a0b3685f5c7aa0060",
+  "files": {
+    "uss.csv": {
+      "bytes": 68134,
+      "md5": "6fec11b3d28de8c0ab1832b19d4bf9c7",
+      "sha256": "15b5e4970aa8ac12c91da8df3f5fc33cd1afbd51a168788c0c92828f55a08c7b",
+      "url": "https://zenodo.org/api/records/16133229/files/uss.csv/content"
+    },
+    "usscas.csv": {
+      "bytes": 69652,
+      "md5": "564a32b2f4cb661b6660fd8e022d3034",
+      "sha256": "1b8fd00962a95256a26a98d7a5a68d29995095ca1add9f696d0d1b50021c42bc",
+      "url": "https://zenodo.org/api/records/16133229/files/usscas.csv/content"
+    },
+    "cas2.csv": {
+      "bytes": 3672,
+      "md5": "dddfce3a4a9fccb817cbdbc345222cd3",
+      "sha256": "9af26e760b59a98aeabc469867f61123a9753424eaa8240c94bbd5ccc7de2afe",
+      "url": "https://zenodo.org/api/records/16133229/files/cas2.csv/content"
+    },
+    "tcs.csv": {
+      "bytes": 103563,
+      "md5": "850d45f8c5dd410d379439f0f8bba12b",
+      "sha256": "8886b3db9378a5167aa7f98f17ca2a2bc86c4e219135bd4d82459c97fa58fa2f",
+      "url": "https://zenodo.org/api/records/16133229/files/tcs.csv/content"
+    }
+  },
+  "scope": "Separate earlier public version for comparison; no automatic merge or replacement of the latest source."
+}

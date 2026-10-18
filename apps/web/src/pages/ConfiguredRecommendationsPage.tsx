@@ -7,6 +7,8 @@ import { CatalogState, useCatalog } from '../components/VersionCatalog';
 import { initialValues, inputIssues } from '../services/configured-input';
 import { recommenderApi, supportsWebMethod } from '../services/recommender-api';
 import type { ConfiguredInput, ConfiguredRun, ContentReference, DatasetSummary, DefinitionRecord, DefinitionSummary, RecommendationRequest } from '../types/configurable-recommendations';
+import { TEST_CASE_METHOD, type MethodRun } from '../types/test-case-recommendations';
+import { TestCaseExecutionForm } from '../components/TestCaseExecutionForm';
 
 const identity = (value: { id: string; version: string }) => JSON.stringify([value.id, value.version]);
 const matches = (left: ContentReference, right: ContentReference) => identity(left) === identity(right) && left.format === right.format && left.sha256 === right.sha256;
@@ -24,12 +26,12 @@ export function ConfiguredRecommendationsPage() {
   const history = useCatalog(recommenderApi.runs, refresh);
   useEffect(() => { if (runId) setTab('history'); }, [runId]);
   const openRun = (id: string) => { setParams({ runId: id }); setTab('history'); };
-  function completed(run: ConfiguredRun) { setRefresh(value => value + 1); openRun(run.id); }
+  function completed(run: MethodRun) { setRefresh(value => value + 1); openRun(run.id); }
   return <section className="page configured-page">
     <PageTitle eyebrow="RECOMMENDERS" title="Run with a published dataset">Choose versions, complete the input, and inspect the evidence for each recommendation.</PageTitle>
     <div className="configured-actions configured-tabs" role="group" aria-label="Recommender area"><button aria-pressed={tab === 'execute'} disabled={busy} onClick={() => setTab('execute')}>New run</button><button aria-pressed={tab === 'history'} disabled={busy} onClick={() => setTab('history')}>Run history</button>{!busy && <Link to="/recommender-setup">Configure and import datasets</Link>}<Link to="/recommendations">NFRs by story</Link></div>
     <div hidden={tab !== 'execute'}>
-      <section className="card configured-panel"><h2>1. Published definition</h2><p>The form follows this version's attributes. The current executable policy is Felipe Ramos's NFR method.</p>
+      <section className="card configured-panel"><h2>1. Published definition</h2><p>The form follows the published attributes and method: Felipe Ramos's NFR policy or the synthetic E21 test-case equation demonstration.</p>
         <label>Definition and version<select disabled={busy || definitions.loading} value={selected} onChange={event => setSelected(event.target.value)}><option value="">Select a version</option>{definitions.rows.map(row => <option disabled={!supportsWebMethod(row.method)} key={identity(row)} value={identity(row)}>{row.name} · {row.id} · {row.version}{!supportsWebMethod(row.method) && ' · API only'}</option>)}</select></label>
         {!definitions.loading && !definitions.error && !definitions.rows.length && <p>No published definition is available. Open “Configure and import datasets” to prepare the recommender.</p>}
         <CatalogState catalog={definitions} title="definitions"/>
@@ -52,7 +54,7 @@ export function ConfiguredRecommendationsPage() {
 
 function DefinitionExecution({ summary, datasets, busy, onBusy, onCompleted, children }: {
   summary: DefinitionSummary; datasets: DatasetSummary[]; busy: boolean; onBusy: (value: boolean) => void;
-  onCompleted: (run: ConfiguredRun) => void; children: React.ReactNode;
+  onCompleted: (run: MethodRun) => void; children: React.ReactNode;
 }) {
   const [record, setRecord] = useState<DefinitionRecord>();
   const [error, setError] = useState('');
@@ -69,7 +71,8 @@ function DefinitionExecution({ summary, datasets, busy, onBusy, onCompleted, chi
   }, [summary.id, summary.version, summary.snapshot?.sha256, summary.snapshot?.format, retry]);
   if (error) return <div className="card configured-panel" role="alert"><p>{error}</p><button onClick={() => setRetry(value => value + 1)}>Retry loading definition</button></div>;
   if (!record?.snapshot) return <p role="status">Loading definition attributes and taxonomies…</p>;
-  return <ExecutionForm key={record.snapshot.sha256} record={record as DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }} datasets={datasets} busy={busy} onBusy={onBusy} onCompleted={onCompleted}>{children}</ExecutionForm>;
+  const Form = record.definition.method.id === TEST_CASE_METHOD ? TestCaseExecutionForm : ExecutionForm;
+  return <Form key={record.snapshot.sha256} record={record as DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }} datasets={datasets} busy={busy} onBusy={onBusy} onCompleted={onCompleted}>{children}</Form>;
 }
 
 function ExecutionForm({ record, datasets, busy, onBusy, onCompleted, children }: {

@@ -1,0 +1,1429 @@
+{
+  "format": "us-agent-json-v1",
+  "sha256": "2414c80f8c382fa96f1d4ecc8a4c5220a49bc4a0ecc1193fa85bedc91261beb3",
+  "content": {
+    "checks": [
+      "Explicit input destination; exact run/item hashes; immutable, idempotent accept/reject with concurrent retries",
+      "Accepted-only copies; complete original provenance; immutable revision chain; competing revisions produce one winner; stale-parent rejection and bounded history",
+      "Cross-run reference isolation; forced rollback; SQL update/delete protection on all assessment tables",
+      "Retired dependencies preserve assessment/history/replay; original run unchanged; no RNF materialization; global authorization"
+    ],
+    "copies": [
+      {
+        "createdAt": "2026-10-18T05:06:02.189Z",
+        "createdBy": "local-development",
+        "id": "ee62f34a-ca40-438b-8568-2912eb3dea32",
+        "snapshot": {
+          "content": {
+            "artifact": {
+              "content": {
+                "executionMode": "manual",
+                "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                "id": "demo-create",
+                "metadata": {
+                  "fixture": true
+                },
+                "purpose": "Verificar um fluxo sintético de cadastro",
+                "title": "Criar registro sintético"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "4f22346b2340a83f5c816e6e7bd5aa3d27bdf4238cea756d0b91bc7aad6f4b02"
+            },
+            "catalog": {
+              "format": "us-agent-json-v1",
+              "id": "testrec-synthetic-catalog",
+              "sha256": "855e2b08cf705bd63d67564c00f3715d31fca32ec602b13f8bf4552d3d3ac007",
+              "version": "1"
+            },
+            "changes": [],
+            "decision": {
+              "format": "us-agent-json-v1",
+              "id": "2c8ce675-831e-49d7-8268-84adad7831fd",
+              "sha256": "5cd2662cf34fdf194cb0ac39a59dd9a50bb45aa3aebc823d78ee4f6c3108b6cf"
+            },
+            "originalItem": {
+              "content": {
+                "artifact": {
+                  "executionMode": "manual",
+                  "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                  "id": "demo-create",
+                  "metadata": {
+                    "fixture": true
+                  },
+                  "purpose": "Verificar um fluxo sintético de cadastro",
+                  "title": "Criar registro sintético"
+                },
+                "contributions": [
+                  {
+                    "recordId": "candidate-a",
+                    "similarity": 1
+                  },
+                  {
+                    "recordId": "candidate-c",
+                    "similarity": 0.875
+                  },
+                  {
+                    "recordId": "candidate-d",
+                    "similarity": 0.875
+                  }
+                ],
+                "denominator": 3,
+                "key": "be6b77d94829b1fbcbdeeb90fb1390207a87bfc11e8c4c0c561a9db5a283ab67",
+                "numerator": 2.75,
+                "score": 0.9166666666666666,
+                "support": 3,
+                "testCaseId": "demo-create"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "33217fa26b80ae097314fa0150631617b709b238d5d6de45cbb968e9f28a6efc"
+            },
+            "previous": null,
+            "request": {
+              "content": {
+                "decisionId": "2c8ce675-831e-49d7-8268-84adad7831fd",
+                "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                "id": "ee62f34a-ca40-438b-8568-2912eb3dea32",
+                "itemKey": "be6b77d94829b1fbcbdeeb90fb1390207a87bfc11e8c4c0c561a9db5a283ab67",
+                "previousCopy": null,
+                "reason": "Preserve an unchanged copy for this target",
+                "runSha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd",
+                "targetSha256": "333e3539bb653bb8c1470a02768ddbbccd969d384c37de7743e360ecd3ac22fb",
+                "title": "Criar registro sintético"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "e8abef199125b1efafe6c183688d6124f798eac0ac5898c39b19f03de982c959"
+            },
+            "revision": 1,
+            "run": {
+              "format": "us-agent-json-v1",
+              "id": "6f6fda8b-ca1a-4182-ad98-eef87976267c",
+              "sha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd"
+            },
+            "schemaVersion": 1,
+            "target": {
+              "format": "us-agent-json-v1",
+              "sha256": "333e3539bb653bb8c1470a02768ddbbccd969d384c37de7743e360ecd3ac22fb"
+            }
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "d28cfb05c7c6566d801b92e2c928426ad5520a6257421b47947b7de4247b8d58"
+        }
+      },
+      {
+        "createdAt": "2026-10-18T05:06:02.357Z",
+        "createdBy": "local-development",
+        "id": "43510ade-960b-4c2b-9f7e-1fda2df3bfa9",
+        "snapshot": {
+          "content": {
+            "artifact": {
+              "content": {
+                "executionMode": "manual",
+                "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação\nE verifico o alvo sintético",
+                "id": "demo-create",
+                "metadata": {
+                  "fixture": true
+                },
+                "purpose": "Verificar um fluxo sintético de cadastro",
+                "title": "Explicit adapted title"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "1c0bcbe03cfea8b92ce19319f195f3db67655827f2e66c291ef932ab370d894f"
+            },
+            "catalog": {
+              "format": "us-agent-json-v1",
+              "id": "testrec-synthetic-catalog",
+              "sha256": "855e2b08cf705bd63d67564c00f3715d31fca32ec602b13f8bf4552d3d3ac007",
+              "version": "1"
+            },
+            "changes": [
+              {
+                "after": "Explicit adapted title",
+                "before": "Criar registro sintético",
+                "field": "title"
+              },
+              {
+                "after": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação\nE verifico o alvo sintético",
+                "before": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                "field": "gherkin"
+              }
+            ],
+            "decision": {
+              "format": "us-agent-json-v1",
+              "id": "2c8ce675-831e-49d7-8268-84adad7831fd",
+              "sha256": "5cd2662cf34fdf194cb0ac39a59dd9a50bb45aa3aebc823d78ee4f6c3108b6cf"
+            },
+            "originalItem": {
+              "content": {
+                "artifact": {
+                  "executionMode": "manual",
+                  "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                  "id": "demo-create",
+                  "metadata": {
+                    "fixture": true
+                  },
+                  "purpose": "Verificar um fluxo sintético de cadastro",
+                  "title": "Criar registro sintético"
+                },
+                "contributions": [
+                  {
+                    "recordId": "candidate-a",
+                    "similarity": 1
+                  },
+                  {
+                    "recordId": "candidate-c",
+                    "similarity": 0.875
+                  },
+                  {
+                    "recordId": "candidate-d",
+                    "similarity": 0.875
+                  }
+                ],
+                "denominator": 3,
+                "key": "be6b77d94829b1fbcbdeeb90fb1390207a87bfc11e8c4c0c561a9db5a283ab67",
+                "numerator": 2.75,
+                "score": 0.9166666666666666,
+                "support": 3,
+                "testCaseId": "demo-create"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "33217fa26b80ae097314fa0150631617b709b238d5d6de45cbb968e9f28a6efc"
+            },
+            "previous": {
+              "format": "us-agent-json-v1",
+              "id": "ee62f34a-ca40-438b-8568-2912eb3dea32",
+              "sha256": "d28cfb05c7c6566d801b92e2c928426ad5520a6257421b47947b7de4247b8d58"
+            },
+            "request": {
+              "content": {
+                "decisionId": "2c8ce675-831e-49d7-8268-84adad7831fd",
+                "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação\nE verifico o alvo sintético",
+                "id": "43510ade-960b-4c2b-9f7e-1fda2df3bfa9",
+                "itemKey": "be6b77d94829b1fbcbdeeb90fb1390207a87bfc11e8c4c0c561a9db5a283ab67",
+                "previousCopy": {
+                  "id": "ee62f34a-ca40-438b-8568-2912eb3dea32",
+                  "sha256": "d28cfb05c7c6566d801b92e2c928426ad5520a6257421b47947b7de4247b8d58"
+                },
+                "reason": "Adapted manually for the preserved target",
+                "runSha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd",
+                "targetSha256": "333e3539bb653bb8c1470a02768ddbbccd969d384c37de7743e360ecd3ac22fb",
+                "title": "Explicit adapted title"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "8ba7685a1609282238d18272373b3ddf6a8e6837ab192cb5e61601d05d396648"
+            },
+            "revision": 2,
+            "run": {
+              "format": "us-agent-json-v1",
+              "id": "6f6fda8b-ca1a-4182-ad98-eef87976267c",
+              "sha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd"
+            },
+            "schemaVersion": 1,
+            "target": {
+              "format": "us-agent-json-v1",
+              "sha256": "333e3539bb653bb8c1470a02768ddbbccd969d384c37de7743e360ecd3ac22fb"
+            }
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "54ee72298231706f130dc63cde67f97b2bee1af90c76abc589bf86962c7fd5cb"
+        }
+      }
+    ],
+    "decisions": [
+      {
+        "createdAt": "2026-10-18T05:06:01.866Z",
+        "createdBy": "local-development",
+        "id": "2c8ce675-831e-49d7-8268-84adad7831fd",
+        "snapshot": {
+          "content": {
+            "originalItem": {
+              "content": {
+                "artifact": {
+                  "executionMode": "manual",
+                  "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                  "id": "demo-create",
+                  "metadata": {
+                    "fixture": true
+                  },
+                  "purpose": "Verificar um fluxo sintético de cadastro",
+                  "title": "Criar registro sintético"
+                },
+                "contributions": [
+                  {
+                    "recordId": "candidate-a",
+                    "similarity": 1
+                  },
+                  {
+                    "recordId": "candidate-c",
+                    "similarity": 0.875
+                  },
+                  {
+                    "recordId": "candidate-d",
+                    "similarity": 0.875
+                  }
+                ],
+                "denominator": 3,
+                "key": "be6b77d94829b1fbcbdeeb90fb1390207a87bfc11e8c4c0c561a9db5a283ab67",
+                "numerator": 2.75,
+                "score": 0.9166666666666666,
+                "support": 3,
+                "testCaseId": "demo-create"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "33217fa26b80ae097314fa0150631617b709b238d5d6de45cbb968e9f28a6efc"
+            },
+            "request": {
+              "content": {
+                "decision": "accepted",
+                "id": "2c8ce675-831e-49d7-8268-84adad7831fd",
+                "itemKey": "be6b77d94829b1fbcbdeeb90fb1390207a87bfc11e8c4c0c561a9db5a283ab67",
+                "notes": "Relevant to this synthetic target",
+                "runSha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd",
+                "targetSha256": "333e3539bb653bb8c1470a02768ddbbccd969d384c37de7743e360ecd3ac22fb"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "a6de0691276df9f5cdaf3552b0105cce662398b6870a079991a232c16fabb460"
+            },
+            "run": {
+              "format": "us-agent-json-v1",
+              "id": "6f6fda8b-ca1a-4182-ad98-eef87976267c",
+              "sha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd"
+            },
+            "schemaVersion": 1,
+            "target": {
+              "format": "us-agent-json-v1",
+              "sha256": "333e3539bb653bb8c1470a02768ddbbccd969d384c37de7743e360ecd3ac22fb"
+            }
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "5cd2662cf34fdf194cb0ac39a59dd9a50bb45aa3aebc823d78ee4f6c3108b6cf"
+        }
+      },
+      {
+        "createdAt": "2026-10-18T05:06:02.019Z",
+        "createdBy": "local-development",
+        "id": "94f97a5d-d183-400c-acb8-893c5f4b1045",
+        "snapshot": {
+          "content": {
+            "originalItem": {
+              "content": {
+                "artifact": {
+                  "executionMode": "unspecified",
+                  "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                  "id": "demo-required",
+                  "metadata": {
+                    "extraSourceField": "Preserve without inventing scientific meaning",
+                    "fixture": true
+                  },
+                  "title": "Validar campos obrigatórios"
+                },
+                "contributions": [
+                  {
+                    "recordId": "candidate-c",
+                    "similarity": 0.875
+                  },
+                  {
+                    "recordId": "candidate-d",
+                    "similarity": 0.875
+                  }
+                ],
+                "denominator": 3,
+                "key": "66fdaacfe98d3b72b35123b4f78c5873a5a94f6cabf34a6417819757cbd79a5f",
+                "numerator": 1.75,
+                "score": 0.5833333333333334,
+                "support": 2,
+                "testCaseId": "demo-required"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "6f723293fa6b1ef24764a9a58ba781c99a27e3d0207f74c59477ed95089f8d92"
+            },
+            "request": {
+              "content": {
+                "decision": "rejected",
+                "id": "94f97a5d-d183-400c-acb8-893c5f4b1045",
+                "itemKey": "66fdaacfe98d3b72b35123b4f78c5873a5a94f6cabf34a6417819757cbd79a5f",
+                "notes": "Not selected for the target",
+                "runSha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd",
+                "targetSha256": "333e3539bb653bb8c1470a02768ddbbccd969d384c37de7743e360ecd3ac22fb"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "22bc20217f2033e1db5c064aaf867c6b7f74801fdab7c40f0bb997c470d1c823"
+            },
+            "run": {
+              "format": "us-agent-json-v1",
+              "id": "6f6fda8b-ca1a-4182-ad98-eef87976267c",
+              "sha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd"
+            },
+            "schemaVersion": 1,
+            "target": {
+              "format": "us-agent-json-v1",
+              "sha256": "333e3539bb653bb8c1470a02768ddbbccd969d384c37de7743e360ecd3ac22fb"
+            }
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "59ddec0c137145c5173af6312416345c5a356a2fbd42bbe29b1dbcc4579ee138"
+        }
+      }
+    ],
+    "run": {
+      "createdAt": "2026-10-18T05:06:01.422Z",
+      "createdBy": "local-development",
+      "durationMs": 133.67270000000008,
+      "id": "6f6fda8b-ca1a-4182-ad98-eef87976267c",
+      "snapshot": {
+        "content": {
+          "catalog": {
+            "content": {
+              "authorization": {
+                "basis": "synthetic",
+                "reference": "Authored local review fixture"
+              },
+              "catalog": {
+                "content": {
+                  "id": "testrec-synthetic-catalog",
+                  "items": [
+                    {
+                      "executionMode": "manual",
+                      "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                      "id": "demo-create",
+                      "metadata": {
+                        "fixture": true
+                      },
+                      "purpose": "Verificar um fluxo sintético de cadastro",
+                      "title": "Criar registro sintético"
+                    },
+                    {
+                      "executionMode": "unspecified",
+                      "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                      "id": "demo-required",
+                      "metadata": {
+                        "extraSourceField": "Preserve without inventing scientific meaning",
+                        "fixture": true
+                      },
+                      "title": "Validar campos obrigatórios"
+                    }
+                  ],
+                  "schemaVersion": 1,
+                  "source": {
+                    "kind": "synthetic",
+                    "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+                  },
+                  "version": "1"
+                },
+                "format": "us-agent-json-v1",
+                "sha256": "92ac324a773d2fcd846ff9203083f84e2691b4021ced4f89af429aa8aa0dada8"
+              },
+              "file": {
+                "bom": false,
+                "byteLength": 813,
+                "encoding": "utf-8",
+                "name": "synthetic.json",
+                "sha256": "f8c485cc347bae50a0e650c173459dcc3dcb2de99072ac2591dacb6dfc3d1ba3"
+              },
+              "id": "testrec-synthetic-catalog",
+              "importerVersion": "test-case-json-v1",
+              "schemaVersion": 1,
+              "version": "1"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "855e2b08cf705bd63d67564c00f3715d31fca32ec602b13f8bf4552d3d3ac007"
+          },
+          "dataset": {
+            "content": {
+              "catalog": {
+                "format": "us-agent-json-v1",
+                "id": "testrec-synthetic-catalog",
+                "sha256": "855e2b08cf705bd63d67564c00f3715d31fca32ec602b13f8bf4552d3d3ac007",
+                "version": "1"
+              },
+              "definition": {
+                "format": "us-agent-json-v1",
+                "id": "testrec-equations-demo",
+                "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                "version": "demo.1"
+              },
+              "id": "review-base",
+              "import": {
+                "fileSha256": "fad06dc6698dfacc8160fc36b64f5bf37f3ad223a693077b8b9294a176e7a2ad",
+                "id": "0fecdcc3-fa33-458b-b51c-bb789f200da9",
+                "previewSha256": "a2621ef14a9900a3e0e5c883ca07410599921104730cd855d60f8fb517500ad4"
+              },
+              "importerVersion": "test-case-dataset-import-v1",
+              "mapping": {
+                "attributes": {
+                  "acceptance_criteria": {
+                    "encoding": "value",
+                    "path": [
+                      "values",
+                      "acceptance_criteria"
+                    ]
+                  },
+                  "application_domain": {
+                    "encoding": "value",
+                    "path": [
+                      "values",
+                      "application_domain"
+                    ]
+                  },
+                  "module": {
+                    "encoding": "value",
+                    "path": [
+                      "values",
+                      "module"
+                    ]
+                  },
+                  "nfrs": {
+                    "encoding": "value",
+                    "path": [
+                      "values",
+                      "nfrs"
+                    ]
+                  },
+                  "operation": {
+                    "encoding": "value",
+                    "path": [
+                      "values",
+                      "operation"
+                    ]
+                  },
+                  "platforms": {
+                    "encoding": "value",
+                    "path": [
+                      "values",
+                      "platforms"
+                    ]
+                  },
+                  "story_id": {
+                    "encoding": "value",
+                    "path": [
+                      "values",
+                      "story_id"
+                    ]
+                  },
+                  "test_case_ids": {
+                    "encoding": "value",
+                    "path": [
+                      "values",
+                      "test_case_ids"
+                    ]
+                  }
+                },
+                "recordId": [
+                  "id"
+                ]
+              },
+              "records": [
+                {
+                  "id": "candidate-a",
+                  "provenance": {
+                    "source": "import:fad06dc6698dfacc8160fc36b64f5bf37f3ad223a693077b8b9294a176e7a2ad",
+                    "sourceRecordId": "candidate-a"
+                  },
+                  "values": {
+                    "acceptance_criteria": [
+                      "required",
+                      "unique"
+                    ],
+                    "application_domain": "Demo",
+                    "module": "Cadastro",
+                    "nfrs": [
+                      "privacy",
+                      "audit"
+                    ],
+                    "operation": "criar",
+                    "platforms": [
+                      "Web"
+                    ],
+                    "story_id": "synthetic-a",
+                    "test_case_ids": [
+                      "demo-create"
+                    ]
+                  }
+                },
+                {
+                  "id": "candidate-b",
+                  "provenance": {
+                    "source": "import:fad06dc6698dfacc8160fc36b64f5bf37f3ad223a693077b8b9294a176e7a2ad",
+                    "sourceRecordId": "candidate-b"
+                  },
+                  "values": {
+                    "acceptance_criteria": [
+                      "required",
+                      "unique"
+                    ],
+                    "application_domain": "Demo",
+                    "module": "Cadastro",
+                    "nfrs": [
+                      "privacy",
+                      "audit"
+                    ],
+                    "operation": "alterar",
+                    "platforms": [
+                      "Web"
+                    ],
+                    "story_id": "synthetic-b",
+                    "test_case_ids": [
+                      "demo-required"
+                    ]
+                  }
+                },
+                {
+                  "id": "candidate-c",
+                  "provenance": {
+                    "source": "import:fad06dc6698dfacc8160fc36b64f5bf37f3ad223a693077b8b9294a176e7a2ad",
+                    "sourceRecordId": "candidate-c"
+                  },
+                  "values": {
+                    "acceptance_criteria": [
+                      "required",
+                      "unique"
+                    ],
+                    "application_domain": "Outro",
+                    "module": "Cadastro",
+                    "nfrs": [
+                      "privacy",
+                      "audit"
+                    ],
+                    "operation": "criar",
+                    "platforms": [
+                      "Web"
+                    ],
+                    "story_id": "synthetic-c",
+                    "test_case_ids": [
+                      "demo-create",
+                      "demo-required"
+                    ]
+                  }
+                },
+                {
+                  "id": "candidate-d",
+                  "provenance": {
+                    "source": "import:fad06dc6698dfacc8160fc36b64f5bf37f3ad223a693077b8b9294a176e7a2ad",
+                    "sourceRecordId": "candidate-d"
+                  },
+                  "values": {
+                    "acceptance_criteria": [
+                      "required",
+                      "unique"
+                    ],
+                    "application_domain": "Demo",
+                    "module": "Outro",
+                    "nfrs": [
+                      "privacy",
+                      "audit"
+                    ],
+                    "operation": "criar",
+                    "platforms": [
+                      "Web"
+                    ],
+                    "story_id": "synthetic-d",
+                    "test_case_ids": [
+                      "demo-create",
+                      "demo-required"
+                    ]
+                  }
+                }
+              ],
+              "schemaVersion": 2,
+              "selection": {
+                "excludedOrdinals": [
+                  5
+                ],
+                "includedOrdinals": [
+                  1,
+                  2,
+                  3,
+                  4
+                ]
+              },
+              "source": {
+                "authorization": {
+                  "basis": "synthetic",
+                  "reference": "Authored local review fixture"
+                },
+                "description": "Synthetic assessment profiles"
+              },
+              "version": "1"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "0256179cc05b7696097b74d0501c5bdac217f88df91574d1b325d0024731d53a"
+          },
+          "definition": {
+            "content": {
+              "definition": {
+                "attributes": [
+                  {
+                    "cardinality": "single",
+                    "id": "story_id",
+                    "name": "Source story ID",
+                    "representation": "none",
+                    "required": true,
+                    "role": "context",
+                    "scope": "artifact",
+                    "valueType": {
+                      "type": "text"
+                    }
+                  },
+                  {
+                    "cardinality": "single",
+                    "id": "module",
+                    "name": "Module",
+                    "representation": "presence",
+                    "required": true,
+                    "role": "feature",
+                    "scope": "artifact",
+                    "valueType": {
+                      "type": "category"
+                    }
+                  },
+                  {
+                    "cardinality": "single",
+                    "id": "operation",
+                    "name": "Operation",
+                    "representation": "presence",
+                    "required": true,
+                    "role": "feature",
+                    "scope": "artifact",
+                    "valueType": {
+                      "type": "category"
+                    }
+                  },
+                  {
+                    "cardinality": "many",
+                    "id": "platforms",
+                    "name": "Platforms",
+                    "representation": "presence",
+                    "required": true,
+                    "role": "feature",
+                    "scope": "project",
+                    "valueType": {
+                      "type": "category"
+                    }
+                  },
+                  {
+                    "cardinality": "single",
+                    "id": "application_domain",
+                    "name": "Application domain",
+                    "representation": "presence",
+                    "required": true,
+                    "role": "feature",
+                    "scope": "project",
+                    "valueType": {
+                      "type": "category"
+                    }
+                  },
+                  {
+                    "cardinality": "many",
+                    "id": "acceptance_criteria",
+                    "name": "Acceptance criterion IDs",
+                    "representation": "presence",
+                    "required": true,
+                    "role": "feature",
+                    "scope": "artifact",
+                    "valueType": {
+                      "type": "category"
+                    }
+                  },
+                  {
+                    "cardinality": "many",
+                    "id": "nfrs",
+                    "name": "Context NFR IDs",
+                    "representation": "presence",
+                    "required": true,
+                    "role": "feature",
+                    "scope": "project",
+                    "valueType": {
+                      "type": "category"
+                    }
+                  },
+                  {
+                    "cardinality": "many",
+                    "id": "test_case_ids",
+                    "name": "Associated test IDs",
+                    "representation": "none",
+                    "required": false,
+                    "role": "output",
+                    "scope": "artifact",
+                    "valueType": {
+                      "type": "category"
+                    }
+                  }
+                ],
+                "id": "testrec-equations-demo",
+                "method": {
+                  "bindings": {
+                    "acceptance_criteria": "acceptance_criteria",
+                    "application_domain": "application_domain",
+                    "module": "module",
+                    "nfrs": "nfrs",
+                    "operation": "operation",
+                    "platforms": "platforms",
+                    "story_id": "story_id",
+                    "test_case_ids": "test_case_ids"
+                  },
+                  "id": "us_agent_e21_equations_demo_v1",
+                  "parameters": {
+                    "aggregation": "sum_similarity_over_k_eq4_3",
+                    "eligibility": "exclude_target_record_or_story",
+                    "insufficient_candidates": "block",
+                    "item_tie": "ascending_test_id",
+                    "k": 3,
+                    "mode": "equation_demonstration",
+                    "reference": "E21",
+                    "representation": "target_binary_presence",
+                    "scientific_reproduction": false,
+                    "similarity": "normalized_manhattan_eq4_2",
+                    "sources": "synthetic_only",
+                    "tie": "more_test_ids_then_ascending_record_id",
+                    "unknown_associations": "block",
+                    "zero_similarity": "keep"
+                  },
+                  "version": "1"
+                },
+                "name": "Test cases — E21 equations, synthetic demonstration",
+                "schemaVersion": 1,
+                "state": "published",
+                "version": "demo.1"
+              },
+              "implementation": {
+                "adapterVersion": "e21-equations-adapter-v1",
+                "methodId": "us_agent_e21_equations_demo_v1"
+              },
+              "schemaVersion": 1,
+              "taxonomies": []
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2"
+          },
+          "explanation": {
+            "content": {
+              "excluded": [],
+              "issues": [],
+              "ranked": [
+                {
+                  "distance": 0,
+                  "recordId": "candidate-a",
+                  "similarity": 1,
+                  "testCaseIds": [
+                    "demo-create"
+                  ],
+                  "vector": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                {
+                  "distance": 1,
+                  "recordId": "candidate-c",
+                  "similarity": 0.875,
+                  "testCaseIds": [
+                    "demo-create",
+                    "demo-required"
+                  ],
+                  "vector": [
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                {
+                  "distance": 1,
+                  "recordId": "candidate-d",
+                  "similarity": 0.875,
+                  "testCaseIds": [
+                    "demo-create",
+                    "demo-required"
+                  ],
+                  "vector": [
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                {
+                  "distance": 1,
+                  "recordId": "candidate-b",
+                  "similarity": 0.875,
+                  "testCaseIds": [
+                    "demo-required"
+                  ],
+                  "vector": [
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              ],
+              "rules": {
+                "aggregation": "E21_equation_4_3_sum_similarity_over_k",
+                "eligibility": "US-Agent_exclude_target_record_or_story",
+                "insufficientCandidates": "US-Agent_block_below_configured_k",
+                "itemTie": "US-Agent_ascending_test_ID",
+                "primaryTie": "E21_section_4_5_5_more_associated_tests",
+                "representation": "E21_table_4_6_target_presence",
+                "residualTie": "US-Agent_ascending_ID",
+                "similarity": "E21_equation_4_2_normalized_manhattan",
+                "unknownAssociations": "US-Agent_block_any_eligible_unknown",
+                "zeroSimilarity": "US-Agent_keep_without_threshold"
+              }
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "08fcb56c3670284cf699cd523ec7c39736f078f093c481815d0e5644ecd00694"
+          },
+          "projection": {
+            "content": {
+              "bridge": {
+                "content": {
+                  "attributes": [
+                    {
+                      "cardinality": "single",
+                      "id": "story_id",
+                      "name": "Source story ID",
+                      "representation": "none",
+                      "required": true,
+                      "role": "context",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "text"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "module",
+                      "name": "Module",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "operation",
+                      "name": "Operation",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "platforms",
+                      "name": "Platforms",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "application_domain",
+                      "name": "Application domain",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "acceptance_criteria",
+                      "name": "Acceptance criterion IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "nfrs",
+                      "name": "Context NFR IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "test_case_ids",
+                      "name": "Associated test IDs",
+                      "representation": "none",
+                      "required": false,
+                      "role": "output",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    }
+                  ],
+                  "id": "testrec-equations-demo",
+                  "method": {
+                    "bindings": {
+                      "acceptance_criteria": "acceptance_criteria",
+                      "application_domain": "application_domain",
+                      "module": "module",
+                      "nfrs": "nfrs",
+                      "operation": "operation",
+                      "platforms": "platforms",
+                      "story_id": "story_id",
+                      "test_case_ids": "test_case_ids"
+                    },
+                    "id": "testrec_e21_data_contract_v1",
+                    "parameters": {
+                      "aggregation": "pending_Q02",
+                      "k": 3,
+                      "reference": "E21",
+                      "representation": "target_binary_presence",
+                      "similarity": "pending_Q01",
+                      "status": "data_contract_only"
+                    },
+                    "version": "contract.1"
+                  },
+                  "name": "Test cases — E21 equations, synthetic demonstration",
+                  "schemaVersion": 1,
+                  "state": "draft",
+                  "version": "demo.1"
+                },
+                "format": "us-agent-json-v1",
+                "sha256": "4d54ea49030afb9f1a8f2866f699aa2564912d2cbc22b0a27dc794fc62440685"
+              },
+              "representation": {
+                "candidates": [
+                  {
+                    "recordId": "candidate-a",
+                    "sameStory": false,
+                    "tests": {
+                      "ids": [
+                        "demo-create"
+                      ],
+                      "state": "known"
+                    },
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "recordId": "candidate-b",
+                    "sameStory": false,
+                    "tests": {
+                      "ids": [
+                        "demo-required"
+                      ],
+                      "state": "known"
+                    },
+                    "vector": [
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "recordId": "candidate-c",
+                    "sameStory": false,
+                    "tests": {
+                      "ids": [
+                        "demo-create",
+                        "demo-required"
+                      ],
+                      "state": "known"
+                    },
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "recordId": "candidate-d",
+                    "sameStory": false,
+                    "tests": {
+                      "ids": [
+                        "demo-create",
+                        "demo-required"
+                      ],
+                      "state": "known"
+                    },
+                    "vector": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "dimensions": [
+                  {
+                    "label": "module",
+                    "slot": "module",
+                    "value": "Cadastro"
+                  },
+                  {
+                    "label": "operation",
+                    "slot": "operation",
+                    "value": "criar"
+                  },
+                  {
+                    "label": "platforms:Web",
+                    "slot": "platforms",
+                    "value": "Web"
+                  },
+                  {
+                    "label": "application_domain",
+                    "slot": "application_domain",
+                    "value": "Demo"
+                  },
+                  {
+                    "label": "acceptance_criteria:required",
+                    "slot": "acceptance_criteria",
+                    "value": "required"
+                  },
+                  {
+                    "label": "acceptance_criteria:unique",
+                    "slot": "acceptance_criteria",
+                    "value": "unique"
+                  },
+                  {
+                    "label": "nfrs:privacy",
+                    "slot": "nfrs",
+                    "value": "privacy"
+                  },
+                  {
+                    "label": "nfrs:audit",
+                    "slot": "nfrs",
+                    "value": "audit"
+                  }
+                ],
+                "targetVector": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "81eda52d929fa52f83f858421b89f0f7176b45a3ac8ee67143d4d148e45c114d"
+          },
+          "request": {
+            "content": {
+              "catalog": {
+                "format": "us-agent-json-v1",
+                "id": "testrec-synthetic-catalog",
+                "sha256": "855e2b08cf705bd63d67564c00f3715d31fca32ec602b13f8bf4552d3d3ac007",
+                "version": "1"
+              },
+              "dataset": {
+                "format": "us-agent-json-v1",
+                "id": "review-base",
+                "sha256": "0256179cc05b7696097b74d0501c5bdac217f88df91574d1b325d0024731d53a",
+                "version": "1"
+              },
+              "definition": {
+                "format": "us-agent-json-v1",
+                "id": "testrec-equations-demo",
+                "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                "version": "demo.1"
+              },
+              "id": "6f6fda8b-ca1a-4182-ad98-eef87976267c",
+              "input": {
+                "id": "demo-target",
+                "provenance": {
+                  "source": "US-Agent synthetic target"
+                },
+                "values": {
+                  "acceptance_criteria": [
+                    "required",
+                    "unique"
+                  ],
+                  "application_domain": "Demo",
+                  "module": "Cadastro",
+                  "nfrs": [
+                    "privacy",
+                    "audit"
+                  ],
+                  "operation": "criar",
+                  "platforms": [
+                    "Web"
+                  ],
+                  "story_id": "synthetic-target"
+                }
+              }
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "8760fa58bb74bc5bb9d48756f6d7e873aa73a352a76cf49907d23340609f362a"
+          },
+          "result": {
+            "content": {
+              "items": [
+                {
+                  "artifact": {
+                    "executionMode": "manual",
+                    "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                    "id": "demo-create",
+                    "metadata": {
+                      "fixture": true
+                    },
+                    "purpose": "Verificar um fluxo sintético de cadastro",
+                    "title": "Criar registro sintético"
+                  },
+                  "contributions": [
+                    {
+                      "recordId": "candidate-a",
+                      "similarity": 1
+                    },
+                    {
+                      "recordId": "candidate-c",
+                      "similarity": 0.875
+                    },
+                    {
+                      "recordId": "candidate-d",
+                      "similarity": 0.875
+                    }
+                  ],
+                  "denominator": 3,
+                  "key": "be6b77d94829b1fbcbdeeb90fb1390207a87bfc11e8c4c0c561a9db5a283ab67",
+                  "numerator": 2.75,
+                  "score": 0.9166666666666666,
+                  "support": 3,
+                  "testCaseId": "demo-create"
+                },
+                {
+                  "artifact": {
+                    "executionMode": "unspecified",
+                    "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                    "id": "demo-required",
+                    "metadata": {
+                      "extraSourceField": "Preserve without inventing scientific meaning",
+                      "fixture": true
+                    },
+                    "title": "Validar campos obrigatórios"
+                  },
+                  "contributions": [
+                    {
+                      "recordId": "candidate-c",
+                      "similarity": 0.875
+                    },
+                    {
+                      "recordId": "candidate-d",
+                      "similarity": 0.875
+                    }
+                  ],
+                  "denominator": 3,
+                  "key": "66fdaacfe98d3b72b35123b4f78c5873a5a94f6cabf34a6417819757cbd79a5f",
+                  "numerator": 1.75,
+                  "score": 0.5833333333333334,
+                  "support": 2,
+                  "testCaseId": "demo-required"
+                }
+              ],
+              "k": 3,
+              "messages": [],
+              "method": "us_agent_e21_equations_demo_v1",
+              "mode": "equation_demonstration",
+              "neighbors": [
+                {
+                  "distance": 0,
+                  "recordId": "candidate-a",
+                  "similarity": 1,
+                  "testCaseIds": [
+                    "demo-create"
+                  ],
+                  "vector": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                {
+                  "distance": 1,
+                  "recordId": "candidate-c",
+                  "similarity": 0.875,
+                  "testCaseIds": [
+                    "demo-create",
+                    "demo-required"
+                  ],
+                  "vector": [
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                {
+                  "distance": 1,
+                  "recordId": "candidate-d",
+                  "similarity": 0.875,
+                  "testCaseIds": [
+                    "demo-create",
+                    "demo-required"
+                  ],
+                  "vector": [
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              ],
+              "scientificReproduction": false,
+              "status": "completed"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "d2ebb28064b227b122cef7a53a6b3c38176ae8297087896c885c163bdc655fd8"
+          },
+          "schemaVersion": 2,
+          "software": {
+            "adapterVersion": "e21-equations-adapter-v1",
+            "definitionAdapterVersion": "e21-equations-adapter-v1",
+            "kernelVersion": "policy-knn-v1",
+            "policyVersion": "e21-equations-policy-v1",
+            "runtime": {
+              "icu": "77.1",
+              "locale": "pt-BR",
+              "node": "v24.11.1"
+            }
+          }
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd"
+      }
+    },
+    "schemaVersion": 1,
+    "scope": "Synthetic technical assessment verification, not empirical relevance or original TestRec reproduction",
+    "sourceHashes": {
+      "apps/api/src/domain/test-case-review.ts": "bba7230eb74e9abc1e6e68eaf8d7331503198de6fd4bb115e234a9d97e4a0a50",
+      "apps/api/src/routes/test-case-review.ts": "e2353c714037a5e76d49f83a806cd63480f154e3e4780c42d81da5de1fcb4b3b",
+      "apps/api/src/services/test-case-review.ts": "1f6f5f1d36c9d42ec331f36cea1a841c4f1ea9fe13cdfadfe07f133edb17882d",
+      "database/migrations/024_test_case_reviews.sql": "661b06614e29bfc3139a01e77c4ecc31d21f91e9478500805444908fb2c1e2fe",
+      "scripts/check-test-case-reviews.mjs": "6db037f3e761a00c50a4f67e37a0bb20a81edba0ec792afa6dbd4d957295b381"
+    },
+    "target": {
+      "createdAt": "2026-10-18T05:06:01.748Z",
+      "createdBy": "local-development",
+      "snapshot": {
+        "content": {
+          "input": {
+            "content": {
+              "id": "demo-target",
+              "provenance": {
+                "source": "US-Agent synthetic target"
+              },
+              "values": {
+                "acceptance_criteria": [
+                  "required",
+                  "unique"
+                ],
+                "application_domain": "Demo",
+                "module": "Cadastro",
+                "nfrs": [
+                  "privacy",
+                  "audit"
+                ],
+                "operation": "criar",
+                "platforms": [
+                  "Web"
+                ],
+                "story_id": "synthetic-target"
+              }
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "06f2a5a95d0add8bc4d2ca149a4c0fef28443340b5310f372815f4977691b85b"
+          },
+          "request": {
+            "content": {
+              "runSha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd",
+              "target": {
+                "kind": "input"
+              }
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "55b8478d61ab2b526a4692cdf89360517e0e43a2bec32d4d193b143334d6de85"
+          },
+          "run": {
+            "format": "us-agent-json-v1",
+            "id": "6f6fda8b-ca1a-4182-ad98-eef87976267c",
+            "sha256": "f87a9625aa1e722660b89fb64f10d5ef4b8db0c5b92d520effe62cd9086864dd"
+          },
+          "schemaVersion": 1,
+          "scopeSha256": "c978cdbac3fd184a485413e0a109927f63476bc6e7845a9272107e3cdac2bb91"
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "333e3539bb653bb8c1470a02768ddbbccd969d384c37de7743e360ecd3ac22fb"
+      }
+    }
+  }
+}

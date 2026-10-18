@@ -1,0 +1,691 @@
+Projeto;ID_US;ID_TC;CA;RNFs;ID_STD_AC
+ARTools; #11971;#4139 - Cadastro de usuário com dados válidos;Verificar cadastro de usuários quando os dados forem inseridos corretamente.;1.2;1
+ARTools; #11971;#4106 - Cadastro com dados inválidos - dados pessoais;Verificar que usuário não é cadastrado quando dados inválidos forem inseridos nos campos de cadastro de usuário.;1.2;3
+ARTools; #11971;#4403 - Cadastro com dados inválidos - autenticação;Verificar que usuário não é cadastrado quando dados inválidos forem inseridos nos campos de: usuário e senha durante cadastro de usuário.;1.2;3
+ARTools; #11971;Cadastro de usuários sem autenticação;;1.2;4
+ARTools; #11971;Cadastro de usuários sem autorização;;1.2;5
+ARTools; #11971;Cadastrar usuário com nome de usuário existente;;1.2;6
+ARTools; #11971;Cadastro de senha diferente da confirmação;;1.2;7
+ARTools; #11971;Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos;;1.2;51
+ARTools;#11971-2;#4211 - Editar Usuário com dados válidos;Verificar a edição de usuários quando os dados forem alterados corretamente.;1.2;8
+ARTools;#11971-2;#4189 - Editar Usuário com dados inválidos - dados pessoais;Verificar a proibição de edição de usuários quando os dados não forem editados corretamente.;1.2;10
+ARTools;#11971-2;#4405 - Editar Usuário com dados inválidos - autenticação;Verificar a proibição de edição de usuários quando os dados dos campos: usuário e senha não forem editados corretamente.;1.2;10
+ARTools;#11971-2;#4179 - Listagem de Usuários - botões ativar/desativar;Validar ação de ativar e desativar usuários.;1.2;8
+ARTools;#11971-2;Alteração com campos obrigatórios não preenchidos;;1.2;9
+ARTools;#11971-2;Alteração sem autenticação;;1.2;11
+ARTools;#11971-2;Alteração sem autorização;;1.2;12
+ARTools;#11971-2;Ao alterar usuário com identificador existente, mensagem deve ser exibida;;1.2;13
+ARTools;#11971-2;Atualizar dados com cartateres especiais;;1.2;39
+ARTools;#11971-2;Ao inserir um link de um usuário inexistente um erro 404 deve ser exibido;;1.2;44
+ARTools;#11971-2;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no usuário;;1.2;47
+ARTools;#11971-2;Ao clicar no botão editar, tela de edição deve ser exibida e preenchida com os dados do usuário;;1.2;49
+ARTools;#11971-3;#4435 - Paginação de Usuários - avançar páginas;Validar a lista e paginação de usuários;1.2;17
+ARTools;#11971-3;#4437 - Paginação de Usuários - voltar páginas;Validar a lista e paginação de usuários;1.2;17
+ARTools;#11971-3;#4439 - Paginação de Usuários - única página;Validar a paginação de usuários quando tiver até 20 usuários;1.2;17
+ARTools;#11971-3;Listagem de dados;;1.2;15
+ARTools;#11971-3;Listagem sem dados cadastrados;;1.2;16
+ARTools;#11971-3;Listagem com valor do filtro cadastrado;;1.2;18
+ARTools;#11971-3;Listagem com valor do filtro não cadastrado;;1.2;19
+ARTools;#11971-3;Listagem sem autenticação;;1.2;20
+ARTools;#11971-3;Listagem sem autorização;;1.2;21
+ARTools;#11971-3;Listagem ordenar dados;;1.2;22
+ARTools;#11971-3;Buscar dados de um item;;1.2;34
+ARTools;#11971-3;Buscar dados de um item inexistente;;1.2;35
+ARTools;#11971-3;Buscar dados de um item sem autenticação;;1.2;36
+ARTools;#11971-3;Buscar dados de um item sem autorização;;1.2;37
+RCP;#2379;#2523; Ao informar login e senha cadastrados usuário deve acessar o sistema;1.2;23
+RCP;#2379;#2524;Ao informar login cadastro e senha incorreta o sistema deve exibir mensagem de senha incorreta.;1.2;40
+RCP;#2379;#2525;Ao informar login e senha não cadastrada o sistema deverá exibir mensagem de login incorreto.;1.2;24
+RCP;#2379;#2526;Ao não informar o login ou a senha o sistema deve exibir mensagem login e senha devem ser informados.;1.2;42
+RCP;#2376;#2533;Ao acessar a tela de cadastro os campos matrícula, nome e função devem ser exibidos.;1.2;43
+RCP;#2376;#2534;Ao informar os campos da tela e clicar em salvar o usuário deve ser cadastrado.;1.2;1
+RCP;#2376;#2535;Ao não fornecer um dos campos o sistema deve exibir mensagem de campo obrigatório não preenchido.;1.2;2
+RCP;#2376;#2536;Ao informar matrícula do novo usuário igual ao de usuário já cadastrado o sistema deve informar o usuário e não permitir o cadastro.;1.2;6
+RCP;#2376;#2537;Ao informar e-mail inválido o sistema deverá exibir mensagem de e-mail inválido para o usuário.;1.2;3
+RCP;#2392;#2539;Ao acessar o usuário os dados matrícula, nome e função devem estar preenchidos para edição;1.2;43
+RCP;#2392;#2540;Ao alterar algum campo ou não e clicar em salvar o usuário deve ser cadastrado com os novos dados registrados.;1.2;8
+RCP;#2392;#2541;Ao apagar um dos campos o sistema deve exibir mensagem de campo obrigatório não preenchido.;1.2;9
+RCP;#2392;#2542;Ao alterar matrícula do usuário para a de outro usuário já cadastrado o sistema deve informar o usuário e não permitir a alteração.;1.2;13
+RCP;#2392;#2543;Ao alterar o e-mail para um inválido o sistema deverá exibir mensagem de e-mail inválido para o usuário.;1.2;10
+RCP;#2384;#3170;Ao informar os campos obrigatórios da tela e clicar em salvar a linha deve ser cadastrada.;1.2;1
+RCP;#2384;#3171;Ao não informar algum dos campos obrigatórios da tela e clicar no botão salvar o sistema deverá exibir mensagem de campo obrigatório não preenchido.;1.2;2
+RCP;#2384;#3173;Ao tentar entrar na tela de inserção de linhas de produção sem estar logado, o sistema deverá exibir tela de login.;1.2;4
+RCP;#2384;#3174;Ao tentar acessar tela de inserção de linha de produção com papel que não possui acesso, uma tela de acesso negado deverá ser exibida.;1.2;5
+RCP;#2385;#3176;Ao acessar tela de consulta de linhas de produção as linhas de produção cadastradas devem ser exibidas.;1.2;15
+RCP;#2385;#3177; Ao acessar a tela de consulta de linhas de produção, caso não haja dado cadastrado, mensagem deve ser exibida.;1.2;16
+RCP;#2385;#3178;Caso a quantidade de linhas de produção cadastradas seja maior que 10, a paginação deve ser exibida.;1.2;17
+RCP;#2385;#3180;Ao tentar acessar tela de listagem de linhas de produção sem estar autenticado, a tela de login deve ser exibida.;1.2;20
+RCP;#2385;#3181;Ao tentar acessar a tela de listagem cujo usuário não possui acesso, o sistema deverá exibir tela de acesso negado.;1.2;21
+RCP;#2450;#3184;Ao clicar em um elemento da lista de linhas de produção, uma tela com os dados do item deve ser exibida.;1.2;34
+RCP;#2450;#3185;Ao alterar um valor do item a ser editado, se os campos obrigatórios estiverem preenchidos e o botão salvar for clicado, o item deve ter seus valores alterados.;1.2;8
+RCP;#2450;#3186; Ao tentar acessar a tela de alteração de linhas de produção e o usuário não estiver logado a tela de login deve ser exibida.;1.2;11
+RCP;#2450;#3187;Ao tentar acessar a tela de alteração de linhas de produção e o usuário não tenha acesso, uma tela de acesso negado deve ser exibida.;1.2;12
+RCP;#2490;#3876;Ao acessar tela de produtos finais produtos finais cadastrados devem ser exibidos.;1.2;15
+RCP;#2490;#3877;Ao acessar a tela de consulta de produtos finais, caso não haja dado cadastrado, mensagem deve ser exibida.;1.2;57
+RCP;#2490;#3878;Caso a quantidade de produtos finais cadastrados seja maior que 10, a paginação deve ser exibida.;1.2;17
+RCP;#2490;#3879;Ao tentar acessar tela de listagem de produtos finais sem estar autenticado, a tela de login deve ser exibida.;1.2;20
+RCP;#2490;#3880;o tentar acessar a tela de listagem cujo usuário não possui acesso, o sistema deverá exibir tela de acesso negado.;1.2;21
+RCP;#3392;#3881;Ao acessar tela de detalhe de produto final os dados do produto final devem ser exibidos.;1.2;43
+RCP;#3392;#3882;Caso o usuário insira o link para o detalhe de um produto final inexistente uma erro 404 deve ser exibido.;1.2;44
+RCP;#3392;#3883;Ao tentar acessar tela de detalhes de produto final sem estar autenticado o sistema deverá exibir a tela de login.;1.2;36
+RCP;#3392;#3897;Ao tentar acessar a tela de detalhes cujo usuário não possui acesso, o sistema deverá exibir tela de acesso negado.;1.2;37
+RCP;#2377;#3907;Ao acessar tela de ordens de produção os cadastrados devem ser exibidos.;1.2;43
+RCP;#2377;#3908;Ao acessar a tela de consulta de ordens de produção, caso não haja dado cadastrado, mensagem deve ser exibida.;1.2;16
+RCP;#2377;#3909;Caso a quantidade de ordens de produção cadastradas seja maior que 10, a paginação deve ser exibida.;1.2;17
+RCP;#2377;#3910;Ao tentar acessar tela de listagem de ordens de produção sem estar autenticado, a tela de login deve ser exibida.;1.2;20
+RCP;#2377;#3911;Ao tentar acessar a tela de listagem cujo usuário não possui acesso, o sistema deverá exibir tela de acesso negado.;1.2;21
+RCP;#3381;#3914;Ao acessar tela de detalhe de ordens de produção os dados do produto final devem ser exibidos.;1.2;43
+RCP;#3381;#3915;Caso o usuário insira o link para o detalhe de uma ordem de produção inexistente uma erro 404 deve ser exibido.;1.2;44
+RCP;#3381;#3916;Ao tentar acessar tela de detalhes de ordem de produção sem estar autenticado o sistema deverá exibir a tela de login.;1.2;11
+RCP;#3381;#3917;Ao tentar acessar a tela de detalhes cujo usuário não possui acesso, o sistema deverá exibir tela de acesso negado.;1.2;12
+RCP;#2383;#3920;Ao acessar tela de BOM (matéria prima) os cadastrados devem ser exibidos.;1.2;15
+RCP;#2383;#3921;Ao acessar a tela de consulta de BOMs, caso não haja dado cadastrado, mensagem deve ser exibida.;1.2;16
+RCP;#2383;#3923;Caso a quantidade de BOMs cadastradas seja maior que 10, a paginação deve ser exibida.;1.2;17
+RCP;#2383;#3924;Ao tentar acessar tela de listagem de BOMs sem estar autenticado, a tela de login deve ser exibida.;1.2;20
+RCP;#2383;#3926;Ao tentar acessar a tela de listagem cujo usuário não possui acesso, o sistema deverá exibir tela de acesso negado.;1.2;21
+RCP;#3390;#3928;Ao acessar tela de detalhe de BOM os dados do produto final devem ser exibidos.;1.2;43
+RCP;#3390;#3929;Caso o usuário insira o link para o detalhe de BOM inexistente uma erro 404 deve ser exibido.;1.2;44
+RCP;#3390;#3930;Ao tentar acessar tela de detalhes de BOMs sem estar autenticado o sistema deverá exibir a tela de login.;1.2;11
+RCP;#3390;#3931;Ao tentar acessar a tela de detalhes cujo usuário não possui acesso, o sistema deverá exibir tela de acesso negado.;1.2;12
+SSPI;#2277;#2308;O formulário para EDIÇÃO de usuários deve ter os seguintes campos: Matrícula, Nome (String, máx. 50 char.), Perfil (select box com os perfis disponíveis), Senha e Confirmação de Senha Além dos botões CANCELAR e SALVAR.;1.2;49
+SSPI;#2277;#2309;Ao apertar o botão SALVAR deve-se alterar os dados no banco de dados. Criar.;1.2;8
+SSPI;#2277;#2311;O campos ID interno não poderá ser editado. Criar.;1.2;54
+SSPI;#2277;#2291;Não poderá haver dois usuários para o perfil administrador;1.2;48
+SSPI;#2277;#2292;Ao apertar o botão CANCELAR, deve-se abortar a ação e voltar a tela de listagem de usuários.;1.2;47
+SSPI;#2277;#2297;Não poderá haver dois usuários com a mesma matrícula;1.2;6
+SSPI;#2277;#2284;Ao clicar no ícone de editar deve abrir o formulário para edição;1.2;49
+SSPI;#2570;#3305;A tela para inclusão de máquinas deve possuir os seguintes campos: Número de Identificação, Descrição (Nome) e Limite de Inatividade;1.2;51
+SSPI;#2570;#3305;Ao Clicar o Botão Adicionar, deve-se incluir no banco de dados a Máquina com os dados devidamente preenchidos;1.2;1
+SSPI;#2570-2;#3307-1;O formulário de edição de máquinas deve possuir os seguintes campos: Número de Identificação, Descrição (Nome) e Limite de Inatividade;1.2;49
+SSPI;#2570-2;#3307-2;"Ao Apertar o botão ""Atualizar"" deve-se alterar os dados no banco de dados";1.2;8
+SSPI;#2570-2;#3307-3;O Id interno não pode ser editado;1.2;54
+SSPI;#2570;#3308-1;"Ao apertar o botão ""Cancelar"", deve-se abortar a ação, voltando para a tela de listagem";1.2;47
+SSPI;#2570-2;#3308-1;"Ao apertar o botão ""Cancelar"", deve-se abortar a ação, voltando para a tela de listagem";1.2;47
+SSPI;#2570-2;#3308-2;Não poderá haver duas maquinas com o mesmo número de identificação;1.2;13
+SSPI;#2570;#3308-2;Não poderá haver duas maquinas com o mesmo número de identificação;1.2;6
+SSPI;#2589-1;#3313-1;A tela para inclusão de Tipos de Problemas deve possuir o campo de Descrição;1.2;51
+SSPI;#2589-1;#3313-2;Ao Clicar o Botão Adicionar, deve-se incluir no banco de dados O Tipo de Problema com os dados devidamente preenchidos;1.2;1
+SSPI;#2589-2;#3311-1;Deve haver uma tabela exibindo a Descrição e os botões de ação (EDITAR e DELETAR) ;1.2;15
+SSPI;#2589-2;#3311-2;Ao Clicar no botão de Adicionar deve abrir o formulário de criação Tipos de Problemas;1.2;51
+SSPI;#2589-2;#3311-3;Ao Clicar no botão de Editar deve abrir a tela de edição;1.2;49
+SSPI;#2589-2;#3311-4;Ao clicar no ícone da lixeira, deve-se realizar a exclusão do Tipo de Problema;1.2;50
+SSPI;#2589-3;#3314-1;O formulário de edição Tipos de problemas deve possuir o Campo de Descrição e os Botões de Atualizar e Cancelar.;1.2;49
+SSPI;#2589-3;#3314-2;"Ao Apertar o botão ""Atualizar"" deve-se alterar os dados no banco de dados.";1.2;8
+SSPI;#2589-3;#3314-3;O Id interno não pode ser editado.;1.2;54
+SSPI;#2598-1;#3318-1; Deve haver uma tabela exibindo a Descrição e os botões de ação (EDITAR e DELETAR) ;1.2;15
+SSPI;#2598-1;#3318-2;Ao Clicar no botão de Adicionar deve abrir o formulário de criação dos Tipos de Operação;1.2;51
+SSPI;#2598-1;#3318-3;Ao Clicar no botão de Editar deve abrir a tela de edição;1.2;49
+SSPI;#2598-1;#3318-4;Ao clicar no ícone da lixeira, deve-se realizar a exclusão do Tipo de Operação;1.2;50
+SSPI;#2598-2;#3320-1;A tela para inclusão de Tipos de Operação deve possuir o campo de Descrição;1.2;51
+SSPI;#2598-2;#3320-2;Ao Clicar o Botão Adicionar, deve-se incluir no banco de dados O Tipo de Operação com os dados devidamente preenchidos.;1.2;1
+SSPI;#2598-3;#3321-1;O formulário de edição dos Tipos de Operação deve possuir o Campo de Descrição e os Botões de Atualizar e Cancelar;1.2;49
+SSPI;#2598-3;#3321-2;"Ao Apertar o botão ""Atualizar"" deve-se alterar os dados no banco de dados";1.2;8
+SSPI;#2598-3;#3321-3;O Id interno não pode ser editado;1.2;54
+RCP;#2831;#4372;Ao informar os campos obrigatórios da tela e clicar em salvar a familia deve ser cadastrada.;1.2;1
+RCP;#2831;#4373;Ao não informar algum dos campos obrigatórios da tela e clicar no botão salvar o sistema deverá exibir mensagem de campo obrigatório não preenchido.;1.2;2
+RCP;#2831;#4374;Ao tentar entrar na tela de inserção de famílias de produto sem estar logado, o sistema deverá exibir tela de login.;1.2;4
+RCP;#2831;#4375;Ao tentar acessar tela de inserção de famílias de produto com papel que não possui acesso, uma tela de acesso negado deverá ser exibida.;1.2;5
+RCP;#2485;#4378;Ao clicar em um elemento da lista de famílias de produto, uma tela com os dados do item deve ser exibida.;1.2;43
+RCP;#2485;#4379;Ao alterar um valor do item a ser editado, se os campos obrigatórios estiverem preenchidos e o botão salvar for clicado, o item deve ter seus valores alterados.;1.2;8
+RCP;#2485;#4380;Ao tentar acessar a tela de alteração de famílias de produto e o usuário não estiver logado a tela de login deve ser exibida.;1.2;11
+RCP;#2485;#4381;Ao tentar acessar a tela de alteração de famílias de produto e o usuário não tenha acesso, uma tela de acesso negado deve ser exibida.;1.2;12
+RCP;#2486;#4363;Ao acessar tela de famílias de produtos cadastradas devem ser exibidas.;1.2;15
+RCP;#2486;#4364;Ao acessar a tela de família de produtos, caso não haja dado cadastrado, mensagem deve ser exibida.;1.2;16
+RCP;#2486;#4365;Caso a quantidade de famílias de produto cadastradas seja maior que 10, a paginação deve ser exibida.;1.2;17
+RCP;#2486;#4366;Ao tentar acessar tela de listagem de famílias de produtos sem estar autenticado, a tela de login deve ser exibida.;1.2;20
+RCP;#2486;#4367;Ao tentar acessar a tela de listagem cujo usuário não possui acesso, o sistema deverá exibir tela de acesso negado.;1.2;21
+RCP;#4464;#4793;Ao registrar uma separação para uma ordem informando todos os BOM's do produto a separação deve ser marcada como concluída.;1.2;1
+RCP;#4464;#4794;Ao registrar uma separação para uma ordem informando parte dos BOM's a separação deve ser marcada como em andamento.;1.2;1
+RCP;#4464;#4795;Ao tentar adicionar o serial number de um BOM's em uma separação que não constam no produto da ordem, exibir mensagem informando que o BOM não existe para a separação.;1.2;
+RCP;#4464;#4796;Ao registrar a separação de todos os BOM's de uma determinada ordem o sistema não deve permitir a separação de mais BOM's.;1.2;
+RCP;#4464;#4797;Ao tentar registrar separação de um BOM sem informar o serial number do mesmo, o sistema deve desabilitar o botão de registro.;1.2;2
+RCP;#4670;#4799;Ao selecionar a ordem de produção com separação concluída e informar o usuário que está fazendo a entrega e clicar salvar, a entrega deve ser feita baseada na linha de produção da ordem.;1.2;
+RCP;#4670;#4801;Caso o usuário não selecione a ordem de produção o sistema não deve permitir a entrega.;1.2;
+RCP;#4670;#4802;Caso o usuário não informe a matrícula do abastecedor que está fazendo a entrega o sistema não deve permitir a mesma.;1.2;
+RCP;#4670;#4803;Ordens de produção com separação não concluídas ou já entregues não devem aparecer como opção.;1.2;
+RCP;#2376;#5323;Ao selecionar um usuário e informar os campos obrigatórios e não informar a senha, a senha do usuário sendo atualizado não deve ser alterada.;1.2;45
+RCP;#2376;#5324;Ao selecionar um usuário e informar os campos obrigatórios e informar a senha, a senha do usuário sendo atualizado deve ser alterada.;1.2;8
+SSPI;#2278;#2449;Ao clicar no botão Login deve-se verificar as credenciais do usuário e caso seja validado, exibir a tela inicial;1.2;23
+SSPI;#2278;#2510;Apenas usuários ativos e não deletados lógicamente poderão realizar Login;1.2;46
+SSPI;#2279;#3246;Ao Efetuar o Logout, a sessão deverá ser encerrada e o usuário redirecionado à tela de Login;1.2;38
+SSPI;#2276;#2291;Não poderá haver dois usuários para o perfil administrador;1.2;48
+SSPI;#2276;#2292;Ao apertar o botão CANCELAR, deve-se abortar a ação e voltar a tela de listagem de usuários.;1.2;47
+SSPI;#2276;#2293;Ao apertar o botão SALVAR deve-se incluir no banco de dados o usuário com os dados preenchidos.;1.2;1
+SSPI;#2276;#2297;Não poderá haver dois usuários com a mesma matrícula;1.2;6
+SSPI;#2276;#2309;Ao apertar o botão SALVAR deve-se alterar os dados no banco de dados. Criar.;1.2;8
+SSPI;#2275;#2283;Deve apresentar no máximo 10 linhas na tabela por paginação.;1.2;17
+SSPI;#2275;#2284;Ao clicar no ícone de editar deve abrir o formulário para edição;1.2;49
+SSPI;#2275;#2285;Ao clicar no ícone da 'lixeira', deve realizar a exclusão lógica do usuário. Alterando o estado de removido.;1.2;50
+SSPI;#2275;#2288;Ao clicar no botão ADICIONAR deve-se abrir o formulário para inclusão de novo usuário;1.2;51
+SSPI;#2275;#2298;Os ícones de edição e exclusão de usuários só devem ficar habilitados para usuários com situação ATIVA;1.2;52
+SSPI;#2275;#2433;Ao clicar no botão REMOVIDOS deve-se abrir a lista com os usuários que foram previamente removidos;1.2;53
+SSPI;#2252;#3235;A Sidebar deve listar as ordens de produção Cadastradas do Sistema;1.2;15
+SSPI;#2252;#3238;A Sidebar deve conseguir filtrar as ordens de produção pelo seu respectivo Status;1.2;18
+VRE;#1804;1;A tela de exibição do streaming de vídeo deve exibi-lo com a qualidade máxima obtida via transmissão. Além disso, o conteúdo não pode ser distorcido, e dados pessoais do paciente não podem ser exibido. Screenshots devem ser observados e encerrar a sessão do usuário que o fez. Se possível, notificando via chat a ação realizada.;1.2;15
+VRE;#1806;2;A tela de exibição do streaming de vídeo deve exibi-lo com a qualidade máxima obtida via transmissão. Além disso, o conteúdo não pode ser distorcido, e dados pessoais do paciente não podem ser exibido. Screenshots devem ser observados e encerrar a sessão do usuário que o fez. Se possível, notificando via chat a ação realizada.;1.2;55
+VRE;#1809;3;O conteúdo precisa ser visualizado em navegador Web (ambos PC e Mobile), ao menos nos principais navegadores (IE, Firefox, Chrome e Safari).  O conteúdo precisa responsivo.;1,2,3;56
+VRE;#1815;5;O usuário deve fornecer código e senha. Além disso, deve haver uma informação sobre o código esperado. Em caso de troca de senha por parte do médico assistido, a sessão é encerrada, e o usuário é conduzido à tela de login.;1,2;25
+VRE;#1817;7;O usuário deve fornecer código e senha. Além disso, deve haver uma informação sobre o código esperado. Em caso de troca de senha por parte do médico assistido, a sessão é encerrada, e o usuário é conduzido à tela de login.;1,2;25
+VRE;#1818;8;O usuário deve fornecer código e senha. Além disso, deve haver uma informação sobre o código esperado. Em caso de troca de senha por parte do médico assistido, a sessão é encerrada, e o usuário é conduzido à tela de login.;1,2;25
+Event Driven System for Business Services Integration;#242-1;1;Ao acessar tela de listagem de categoria de lojas os dados cadastrados devem ser exibidos;1,2;15
+Event Driven System for Business Services Integration;#242-1;2;Ao acessar tela de listagem de categorias e não houver dados cadastrados uma mensagem deverá ser exibida;1,2;16
+Event Driven System for Business Services Integration;#242-1;3;Ao acessar a tela de listagem deverá aparecer no máximo 10 linhas por página;1,2;17
+Event Driven System for Business Services Integration;#242-1;4;A tela deve permitir a listagem ao digitar um valor.;1,2;18
+Event Driven System for Business Services Integration;#242-1;5;Ao informar um valor inexistente, nenhum valor deverá ser exibido.;1,2;19
+Event Driven System for Business Services Integration;#242-1;6;Ao acessar a tela de listagem sem estar autenticado o sistema deverá redirecionar para tela de login.;1,2;20
+Event Driven System for Business Services Integration;#242-1;7;Ao acessar a tela de listagem sem estar autorização o sistema deverá redirecionar para tela 404.;1,2;21
+Event Driven System for Business Services Integration;#242-1;8;Ao clicar no botão editar, tela de edição deve ser exibida e preenchida com os dados da categoria de loja;1,2;49
+Event Driven System for Business Services Integration;#242-1;9;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, o tipo de loja deve ser excluído;1,2;50
+Event Driven System for Business Services Integration;#242-1;10;Ao clicar no botão adicionar, a tela de inserção do tipo de loja deve ser exibida sem dados preenchidos;1,2;51
+Event Driven System for Business Services Integration;#242-1;11;Os ícones excluir e alterar deve ser exibido apenas para usuários ativos;1,2;52
+Event Driven System for Business Services Integration;#242-2;12;Ao inserir dados e clicar em salvar os dados devem ser armazenados no banco de dados.;1,2;1
+Event Driven System for Business Services Integration;#242-2;13;Ao não fornecer um dos campos o sistema deve exibir mensagem de campo obrigatório não preenchido.;1,2;2
+Event Driven System for Business Services Integration;#242-2;14;Ao acessar a tela sem autenticação o sistema deverá redirecionar para a tela de login.;1,2;4
+Event Driven System for Business Services Integration;#242-2;15;Ao tentar acesar a tela de inserção sem login o sistema deverá redirecionar o usuário para a tela 404.;1,2;5
+Event Driven System for Business Services Integration;#242-3;16;Ao alterar algum campo ou não e clicar em salvar o usuário deve ser cadastrado com os novos dados registrados.;1,2;8
+Event Driven System for Business Services Integration;#242-3;17;Ao acessar o tipo de loja os dados da mesma devem estar preenchidos.;1,2;43
+Event Driven System for Business Services Integration;#242-3;18;Ao inserir um link de um tipo de de loja inexistente um erro 404 deve ser exibido.;1,2;44
+Event Driven System for Business Services Integration;#242-4;19;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, o tipo de loja deve ser excluído;1,2;50
+Event Driven System for Business Services Integration;#242-3;20;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no tipo de loja;1,2;47
+Event Driven System for Business Services Integration;#243;21;Ao clicar no botão desativar uma loja deverá ser desativada.;1,2;58
+Event Driven System for Business Services Integration;#253-1;22;Ao acessar tela de listagem de filiais os dados cadastrados devem ser exibidos;1,2;15
+Event Driven System for Business Services Integration;#253-1;23;Ao acessar tela de listagem de filiais e não houver dados cadastrados uma mensagem deverá ser exibida;1,2;16
+Event Driven System for Business Services Integration;#253-1;24;Ao acessar a tela de listagem deverá aparecer no máximo 10 linhas por página;1,2;17
+Event Driven System for Business Services Integration;#253-1;25;A tela deve permitir a listagem ao digitar um valor.;1,2;18
+Event Driven System for Business Services Integration;#253-1;26;Ao informar um valor inexistente, nenhum valor deverá ser exibido.;1,2;19
+Event Driven System for Business Services Integration;#253-1;27;Ao acessar a tela de listagem sem estar autenticado o sistema deverá redirecionar para tela de login.;1,2;20
+Event Driven System for Business Services Integration;#253-1;28;Ao acessar a tela de listagem sem estar autorização o sistema deverá redirecionar para tela 404.;1,2;21
+Event Driven System for Business Services Integration;#253-1;29;Ao clicar no botão editar, tela de edição deve ser exibida e preenchida com os dados da filial;1,2;49
+Event Driven System for Business Services Integration;#253-1;30;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a filial deve ser excluída;1,2;50
+Event Driven System for Business Services Integration;#253-1;31;Ao clicar no botão adicionar, a tela de inserção de filial deve ser exibida sem dados preenchidos;1,2;51
+Event Driven System for Business Services Integration;#253-1;32;Os ícones excluir e alterar deve ser exibido apenas para usuários ativos;1,2;52
+Event Driven System for Business Services Integration;#253-2;33;Ao inserir dados e clicar em salvar os dados devem ser armazenados no banco de dados.;1,2;1
+Event Driven System for Business Services Integration;#253-2;34;Ao não fornecer um dos campos o sistema deve exibir mensagem de campo obrigatório não preenchido.;1,2;2
+Event Driven System for Business Services Integration;#253-2;35;Ao acessar a tela sem autenticação o sistema deverá redirecionar para a tela de login.;1,2;4
+Event Driven System for Business Services Integration;#253-2;36;Ao tentar acesar a tela de inserção sem login o sistema deverá redirecionar o usuário para a tela 404.;1,2;5
+Event Driven System for Business Services Integration;#253-3;37;Ao alterar algum campo ou não e clicar em salvar a filial deve ser cadastrada com os novos dados registrados.;1,2;8
+Event Driven System for Business Services Integration;#253-3;38;Ao acessar a filial os dados da mesma devem estar preenchidos.;1,2;43
+Event Driven System for Business Services Integration;#253-3;39;Ao inserir um link de uma filial inexistente um erro 404 deve ser exibido.;1,2;44
+Event Driven System for Business Services Integration;#253-4;40;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a filial deve ser excluída;1,2;50
+Event Driven System for Business Services Integration;#253-3;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na filial;1,2;47
+Event Driven System for Business Services Integration;#253-3;42;31-Jan-20;1,2;13
+Event Driven System for Business Services Integration;#273;43;Listar no Dynaforms, os produtos que foram criados no BCA.;1,2;15
+Event Driven System for Business Services Integration;#292;44;Ao clicar no ícone desativar o produto ativa deverá ser desativada.;1,2;57
+Event Driven System for Business Services Integration;#274;45;Ao clicar no ícone ativar o produto inativo deverá ser ativada.;1,2;58
+Event Driven System for Business Services Integration;#282;17;Habilitar a opção de criar um objeto na entidade a partir de uma planilha. Testar o carregamento de um produto do BCA, convertendo os campos para os nomes que estão no TestLink. Atualmente todo Produto importado do BCA gera um ProdutoFilho e um ProdutoPai Inicialmente, um produto é criado como inativo.;1,2;59
+SGCond;SGC-US01;1;Cadastrar;1,2;1
+SGCond;SGC-US01;2;Cadastrar com campos obrigatórios não preenchidos;1,2;2
+SGCond;SGC-US01;3;Cadastrar com campos inválidos;1,2;3
+SGCond;SGC-US01;4;Cadastrar sem autenticação;1,2;4
+SGCond;SGC-US01;5;Cadastrar sem autorização;1,2;5
+SGCond;SGC-US01;6;Ao tentar inserir uma área comum cujo nome já esteja cadastrado no sistema o mesmo deverá uma mensagem;1,2;6
+SGCond;SGC-US01;7;Ao clicar no botão adicionar, a tela de inserção da área comum deve ser exibida sem dados preenchidos;1,2;51
+SGCond;SGC-US01;8;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na área comum;1,2;47
+SGCond;SGC-US02;9;Ao alterar campos da área comum e clicar em salvar a área comum deve ser atualizada;1,2;8
+SGCond;SGC-US02;10;Alteração com campos obrigatórios não preenchidos;1,2;9
+SGCond;SGC-US02;11;Alteração com campos inválidos;1,2;10
+SGCond;SGC-US02;12;Alteração sem autenticação;1,2;11
+SGCond;SGC-US02;13;Alteração sem autorização;1,2;12
+SGCond;SGC-US02;14;Ao alterar área comum com identificador existente, mensagem deve ser exibida;1,2;13
+SGCond;SGC-US02;15;Ao acessar área comum os dados da mesma devem estar preenchidos;1,2;43
+SGCond;SGC-US02;16;Ao inserir um link de uma área comum inexistente um erro 404 deve ser exibido;1,2;44
+SGCond;SGC-US02;17;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na área comum;1,2;47
+SGCond;SGC-US02;18;Ao exibir tela de edição, identificador não deve poder ser alterado;1,2;54
+SGCond;SGC-US03;19;Listar dados;1,2;15
+SGCond;SGC-US03;20;LIstar sem dados cadatrados;1,2;16
+SGCond;SGC-US03;21;No resultado da busca, a página deve exibir no máximo 10 valores;1,2;17
+SGCond;SGC-US03;22;Listagem com valor do filtro cadastrado;1,2;18
+SGCond;SGC-US03;23;Listagem com valor do filtro não cadastrado;1,2;19
+SGCond;SGC-US03;24;Listagem sem autenticação;1,2;20
+SGCond;SGC-US03;25;Listagem sem autorização;1,2;21
+SGCond;SGC-US03;26;Ordenar dados;1,2;22
+SGCond;SGC-US03;27;Buscar dados de um item;1,2;34
+SGCond;SGC-US03;28;Buscar dados de um item inexistente;1,2;35
+SGCond;SGC-US04;29;Exclusão de dados;1,2;31
+SGCond;SGC-US04;30;Exclusão de dados sem autenticação;1,2;32
+SGCond;SGC-US04;31;Exclusão de dados sem autorização;1,2;33
+SGCond;SGC-US04;32;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a área comum deve ser excluída;1,2;50
+SGCond;SGC-US04;33;Ao clicar no botão cancelar, a área comum não deve ser excluída.;1,2;61
+SGCond;SGC-US05;34;Cadastrar;1,2;1
+SGCond;SGC-US05;35;Cadastrar com campos obrigatórios não preenchidos;1,2;2
+SGCond;SGC-US05;36;Cadastrar com campos inválidos;1,2;3
+SGCond;SGC-US05;37;Cadastrar sem autenticação;1,2;4
+SGCond;SGC-US05;38;Cadastrar sem autorização;1,2;5
+SGCond;SGC-US05;39;Ao tentar inserir uma área comum cujo nome já esteja cadastrado no sistema o mesmo deverá uma mensagem;1,2;6
+SGCond;SGC-US05;40;Ao clicar no botão adicionar, a tela de inserção da área comum deve ser exibida sem dados preenchidos;1,2;51
+SGCond;SGC-US05;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na área comum;1,2;47
+SGCond;SGC-US06;42;Ao alterar campos da área comum e clicar em salvar a área comum deve ser atualizada;1,2;8
+SGCond;SGC-US06;43;Alteração com campos obrigatórios não preenchidos;1,2;9
+SGCond;SGC-US06;44;Alteração com campos inválidos;1,2;10
+SGCond;SGC-US06;45;Alteração sem autenticação;1,2;11
+SGCond;SGC-US06;46;Alteração sem autorização;1,2;12
+SGCond;SGC-US06;47;Ao alterar área comum com identificador existente, mensagem deve ser exibida;1,2;13
+SGCond;SGC-US06;48;Ao acessar área comum os dados da mesma devem estar preenchidos;1,2;43
+SGCond;SGC-US06;49;Ao inserir um link de uma área comum inexistente um erro 404 deve ser exibido;1,2;44
+SGCond;SGC-US06;50;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na área comum;1,2;47
+SGCond;SGC-US06;51;Ao exibir tela de edição, identificador não deve poder ser alterado;1,2;54
+SGCond;SGC-US07;19;Listar dados;1,2;15
+SGCond;SGC-US07;20;LIstar sem dados cadatrados;1,2;16
+SGCond;SGC-US07;21;No resultado da busca, a página deve exibir no máximo 10 valores;1,2;17
+SGCond;SGC-US07;22;Listagem com valor do filtro cadastrado;1,2;18
+SGCond;SGC-US07;23;Listagem com valor do filtro não cadastrado;1,2;19
+SGCond;SGC-US07;24;Listagem sem autenticação;1,2;20
+SGCond;SGC-US07;25;Listagem sem autorização;1,2;21
+SGCond;SGC-US07;26;Ordenar dados;1,2;22
+SGCond;SGC-US07;27;Buscar dados de um item;1,2;34
+SGCond;SGC-US07;28;Buscar dados de um item inexistente;1,2;35
+SGCond;SGC-US08;34;Cadastrar;1,2;1
+SGCond;SGC-US08;35;Cadastrar com campos obrigatórios não preenchidos;1,2;2
+SGCond;SGC-US08;36;Cadastrar com campos inválidos;1,2;3
+SGCond;SGC-US08;37;Cadastrar sem autenticação;1,2;4
+SGCond;SGC-US08;38;Cadastrar sem autorização;1,2;5
+SGCond;SGC-US08;39;Ao tentar inserir um condomínio cujo CNPJ já esteja cadastrado no sistema o mesmo deverá uma mensagem;1,2;6
+SGCond;SGC-US08;40;Ao clicar no botão adicionar, a tela de inserção do condomínio deve ser exibida sem dados preenchidos;1,2;51
+SGCond;SGC-US08;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na área comum;1,2;47
+SGCond;SGC-US08;42;Ao informar o CNPJ, o sistema deve verificar se trata de um CNPJ válido;1,2;3
+SGCond;SGC-US09;42;Ao alterar campos do condomínio e clicar em salvar a área comum deve ser atualizada;1,2;8
+SGCond;SGC-US09;43;Alteração com campos obrigatórios não preenchidos;1,2;9
+SGCond;SGC-US09;44;Alteração com campos inválidos;1,2;10
+SGCond;SGC-US09;45;Alteração sem autenticação;1,2;11
+SGCond;SGC-US09;46;Alteração sem autorização;1,2;12
+SGCond;SGC-US09;47;Ao alterar condomínio com identificador existente, mensagem deve ser exibida;1,2;13
+SGCond;SGC-US09;48;Ao acessar condomínio os dados da mesma devem estar preenchidos;1,2;43
+SGCond;SGC-US09;49;Ao inserir um link de um condomínio inexistente um erro 404 deve ser exibido;1,2;44
+SGCond;SGC-US09;50;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no condomínio;1,2;47
+SGCond;SGC-US09;51;Ao exibir tela de edição, identificador não deve poder ser alterado;1,2;54
+SGCond;SGC-US09;42;Ao informar o CNPJ, o sistema deve verificar se trata de um CNPJ válido;1,2;3
+SGCond;SGC-US10;19;Listar dados;1,2;15
+SGCond;SGC-US10;20;LIstar sem dados cadatrados;1,2;16
+SGCond;SGC-US10;21;No resultado da busca, a página deve exibir no máximo 10 valores;1,2;17
+SGCond;SGC-US10;22;Listagem com valor do filtro cadastrado;1,2;18
+SGCond;SGC-US10;23;Listagem com valor do filtro não cadastrado;1,2;19
+SGCond;SGC-US10;24;Listagem sem autenticação;1,2;20
+SGCond;SGC-US10;25;Listagem sem autorização;1,2;21
+SGCond;SGC-US10;26;Ordenar dados;1,2;22
+SGCond;SGC-US10;27;Buscar dados de um item;1,2;34
+SGCond;SGC-US10;28;Buscar dados de um item inexistente;1,2;35
+SGCond;SGC-US11;34;Cadastrar;1,2;1
+SGCond;SGC-US11;35;Cadastrar com campos obrigatórios não preenchidos;1,2;2
+SGCond;SGC-US11;36;Cadastrar com campos inválidos;1,2;3
+SGCond;SGC-US11;37;Cadastrar sem autenticação;1,2;4
+SGCond;SGC-US11;38;Cadastrar sem autorização;1,2;5
+SGCond;SGC-US11;39;Ao tentar inserir uma moradia cujo identificador já esteja cadastrado no sistema o mesmo deverá uma mensagem;1,2;6
+SGCond;SGC-US11;40;Ao clicar no botão adicionar, a tela de inserção da moradia deve ser exibida sem dados preenchidos;1,2;51
+SGCond;SGC-US11;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na moradia;1,2;47
+SGCond;SGC-US12;19;Listar dados;1,2;15
+SGCond;SGC-US12;20;LIstar sem dados cadatrados;1,2;16
+SGCond;SGC-US12;21;No resultado da busca, a página deve exibir no máximo 10 valores;1,2;17
+SGCond;SGC-US12;22;Listagem com valor do filtro cadastrado;1,2;18
+SGCond;SGC-US12;23;Listagem com valor do filtro não cadastrado;1,2;19
+SGCond;SGC-US12;24;Listagem sem autenticação;1,2;20
+SGCond;SGC-US12;25;Listagem sem autorização;1,2;21
+SGCond;SGC-US12;26;Ordenar dados;1,2;22
+SGCond;SGC-US12;27;Buscar dados de um item;1,2;34
+SGCond;SGC-US12;28;Buscar dados de um item inexistente;1,2;35
+SGCond;SGC-US13;42;Ao alterar campos do condomínio e clicar em salvar a área comum deve ser atualizada;1,2;8
+SGCond;SGC-US13;43;Alteração com campos obrigatórios não preenchidos;1,2;9
+SGCond;SGC-US13;44;Alteração com campos inválidos;1,2;10
+SGCond;SGC-US13;45;Alteração sem autenticação;1,2;11
+SGCond;SGC-US13;46;Alteração sem autorização;1,2;12
+SGCond;SGC-US13;47;Ao alterar moradia com identificador existente, mensagem deve ser exibida;1,2;13
+SGCond;SGC-US13;48;Ao acessar moradia os dados da mesma devem estar preenchidos;1,2;43
+SGCond;SGC-US13;49;Ao inserir um link de uma moradia inexistente um erro 404 deve ser exibido;1,2;44
+SGCond;SGC-US13;50;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na moradia;1,2;47
+SGCond;SGC-US13;51;Ao exibir tela de edição, identificador não deve poder ser alterado;1,2;54
+SGCond;SGC-US14;34;Cadastrar chamado;1,2;1
+SGCond;SGC-US14;35;Cadastrar com campos obrigatórios não preenchidos;1,2;2
+SGCond;SGC-US14;37;Cadastrar sem autenticação;1,2;4
+SGCond;SGC-US14;38;Cadastrar sem autorização;1,2;5
+SGCond;SGC-US14;40;Ao clicar no botão adicionar, a tela de inserção da moradia deve ser exibida sem dados preenchidos;1,2;51
+SGCond;SGC-US14;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na moradia;1,2;47
+SGCond;SGC-US14;41;"Ao salvar um chamado seu estado deve ser ""Novo""";1,2;62
+SGCond;SGC-US15;42;Ao alterar campos do chamado e clicar em salvar a área comum deve ser atualizada;1,2;8
+SGCond;SGC-US15;43;Alteração com campos obrigatórios não preenchidos;1,2;9
+SGCond;SGC-US15;45;Alteração sem autenticação;1,2;11
+SGCond;SGC-US15;46;Alteração sem autorização;1,2;12
+SGCond;SGC-US15;48;Ao acessar o chamado os dados da mesma devem estar preenchidos;1,2;43
+SGCond;SGC-US15;49;Ao inserir um link de um chamado inexistente um erro 404 deve ser exibido;1,2;44
+SGCond;SGC-US15;50;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no chamado;1,2;47
+SGCond;SGC-US15;50;Ao alterar um chamado que se encontra no estado novo, os estados possíveis são: em andamento, duplicado ou resolvido;1,2;63
+SGCond;SGC-US15;50;Ao alterar um chamado que se encontra no estado em andamento, os estados possíveis são: resolvido;1,2;63
+SGCond;SGC-US16;19;Listar dados;1,2;15
+SGCond;SGC-US16;20;LIstar sem dados cadatrados;1,2;16
+SGCond;SGC-US16;21;No resultado da busca, a página deve exibir no máximo 10 valores;1,2;17
+SGCond;SGC-US16;22;Listagem com valor do filtro cadastrado;1,2;18
+SGCond;SGC-US16;23;Listagem com valor do filtro não cadastrado;1,2;19
+SGCond;SGC-US16;24;Listagem sem autenticação;1,2;20
+SGCond;SGC-US16;25;Listagem sem autorização;1,2;21
+SGCond;SGC-US16;26;Ordenar dados;1,2;22
+SGCond;SGC-US16;27;Buscar dados de um item;1,2;34
+SGCond;SGC-US16;28;Buscar dados de um item inexistente;1,2;35
+SGCond;SGC-US17;29;Exclusão de dados;1,2;31
+SGCond;SGC-US17;30;Exclusão de dados sem autenticação;1,2;32
+SGCond;SGC-US17;31;Exclusão de dados sem autorização;1,2;33
+SGCond;SGC-US17;32;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a área comum deve ser excluída;1,2;50
+SGCond;SGC-US17;33;Ao clicar no botão cancelar, a área comum não deve ser excluída.;1,2;61
+SGCond;SGC-US18;34;Cadastrar;1,2;1
+SGCond;SGC-US18;35;Cadastrar com campos obrigatórios não preenchidos;1,2;2
+SGCond;SGC-US18;36;Cadastrar com campos inválidos;1,2;3
+SGCond;SGC-US18;37;Cadastrar sem autenticação;1,2;4
+SGCond;SGC-US18;38;Cadastrar sem autorização;1,2;5
+SGCond;SGC-US18;39;Ao tentar reservar uma área comum que já esteja reservada no sistema o mesmo deverá uma mensagem;1,2;6
+SGCond;SGC-US18;40;Ao clicar no botão adicionar, a tela de reserva da área comum deve ser exibida sem dados preenchidos;1,2;51
+SGCond;SGC-US18;41;Ao clicar no botão cancelar, o calendário deve ser exibido e nenhuma alteração deve ser feita na reserva;1,2;47
+SGCond;SGC-US19;42;Ao alterar campos do condomínio e clicar em salvar a área comum deve ser atualizada;1,2;8
+SGCond;SGC-US19;43;Alteração com campos obrigatórios não preenchidos;1,2;9
+SGCond;SGC-US19;44;Alteração com campos inválidos;1,2;10
+SGCond;SGC-US19;45;Alteração sem autenticação;1,2;11
+SGCond;SGC-US19;46;Alteração sem autorização;1,2;12
+SGCond;SGC-US19;47;Ao alterar reserva com horário já reservado, mensagem deve ser exibida;1,2;13
+SGCond;SGC-US19;48;Ao acessar reserva os dados da mesma devem estar preenchidos;1,2;43
+SGCond;SGC-US19;49;Ao inserir uma link de uma resreva inexistente um erro 404 deve ser exibido;1,2;44
+SGCond;SGC-US19;50;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na reserva;1,2;47
+SGCond;SGC-US20;29;Exclusão de dados;1,2;31
+SGCond;SGC-US20;30;Exclusão de dados sem autenticação;1,2;32
+SGCond;SGC-US20;31;Exclusão de dados sem autorização;1,2;33
+SGCond;SGC-US20;32;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a reserva deve ser excluída;1,2;50
+SGCond;SGC-US20;33;Ao clicar no botão cancelar, a reserva não deve ser excluída.;1,2;61
+SGCond;SGC-US21;19;Listar dados;1,2;15
+SGCond;SGC-US21;20;LIstar sem dados cadatrados;1,2;16
+SGCond;SGC-US21;22;Listagem com valor do filtro cadastrado;1,2;18
+SGCond;SGC-US21;23;Listagem com valor do filtro não cadastrado;1,2;19
+SGCond;SGC-US21;24;Listagem sem autenticação;1,2;20
+SGCond;SGC-US21;25;Listagem sem autorização;1,2;21
+SGCond;SGC-US21;27;Buscar dados de um item;1,2;34
+SGCond;SGC-US21;28;Buscar dados de um item inexistente;1,2;35
+SGCond;SGC-US22;34;Cadastrar;1,2;1
+SGCond;SGC-US22;35;Cadastrar com campos obrigatórios não preenchidos;1,2;2
+SGCond;SGC-US22;36;Cadastrar com campos inválidos;1,2;3
+SGCond;SGC-US22;37;Cadastrar sem autenticação;1,2;4
+SGCond;SGC-US22;38;Cadastrar sem autorização;1,2;5
+SGCond;SGC-US22;39;Ao tentar cadastrar um usuário cujo e-mail já esteja cadastrado no sistema o mesmo deverá uma mensagem;1,2;6
+SGCond;SGC-US22;40;Ao clicar no botão adicionar, a tela de inserção de usuário  deve ser exibida sem dados preenchidos;1,2;51
+SGCond;SGC-US22;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no usuário;1,2;47
+SGCond;SGC-US23;55;Ao fazer login com nome de usuário e senha válida a página principal deve ser exibida.;1,2;23
+SGCond;SGC-US23;56;Ao fazer login com nome de usuário cadastrado ou senha inválida o sistema deverá apresentar uma mensagem;1,2;40
+SGCond;SGC-US23;57;Ao fazer login sem preencher nome de usuário ou senha o sistema deverá exibir uma mensagem;1,2;2
+SGCond;SGC-US23;58;Ao fazer login com nome de usuário não cadastrado e qualquer senha o sistema deverá apresentar uma mensagem;1,2;42
+SGCond;SGC-US24;59;Ao informar e-mail cadastrado, um e-mail deve ser enviado com uma senha provisória pro e-mail do usuário.;1,2;28
+SGCond;SGC-US24;60;Ao informar um e-mail não cadastrado o sistem deverá exibir uma mensagem;1,2;29
+SGCond;SGC-US24;61;Ao informar um e-mail inválido o sistema deverá exibir uma mensagem;1,2;30
+SGCond;SGC-US25;34;Cadastrar;1,2;1
+SGCond;SGC-US25;35;Cadastrar com campos obrigatórios não preenchidos;1,2;2
+SGCond;SGC-US25;36;Cadastrar com campos inválidos;1,2;3
+SGCond;SGC-US25;37;Cadastrar sem autenticação;1,2;4
+SGCond;SGC-US25;38;Cadastrar sem autorização;1,2;5
+SGCond;SGC-US25;40;Ao clicar no botão adicionar, a tela de inserção da enquete deve ser exibida sem dados preenchidos;1,2;51
+SGCond;SGC-US25;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na enquete;1,2;47
+SGCond;SGC-US26;42;Ao alterar campos da enquete e clicar em salvar a enquete deve ser atualizada;1,2;8
+SGCond;SGC-US26;43;Alteração com campos obrigatórios não preenchidos;1,2;9
+SGCond;SGC-US26;44;Alteração com campos inválidos;1,2;10
+SGCond;SGC-US26;45;Alteração sem autenticação;1,2;11
+SGCond;SGC-US26;46;Alteração sem autorização;1,2;12
+SGCond;SGC-US26;47;Ao alterar a enquete com horário já reservado, mensagem deve ser exibida;1,2;13
+SGCond;SGC-US26;48;Ao acessar enquete os dados da mesma devem estar preenchidos;1,2;43
+SGCond;SGC-US26;49;Ao inserir uma link de uma enquete inexistente um erro 404 deve ser exibido;1,2;44
+SGCond;SGC-US26;50;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na enquete;1,2;47
+SGCond;SGC-US27;20;LIstar sem dados cadatrados;1,2;16
+SGCond;SGC-US27;21;No resultado da busca, a página deve exibir no máximo 10 valores;1,2;17
+SGCond;SGC-US27;22;Listagem com valor do filtro cadastrado;1,2;18
+SGCond;SGC-US27;23;Listagem com valor do filtro não cadastrado;1,2;19
+SGCond;SGC-US27;24;Listagem sem autenticação;1,2;20
+SGCond;SGC-US27;25;Listagem sem autorização;1,2;21
+SGCond;SGC-US27;26;Ordenar dados;1,2;22
+SGCond;SGC-US27;27;Buscar dados de um item;1,2;34
+SGCond;SGC-US27;28;Buscar dados de um item inexistente;1,2;35
+SGCond;SGC-US28;29;Exclusão de dados;1,2;31
+SGCond;SGC-US28;30;Exclusão de dados sem autenticação;1,2;32
+SGCond;SGC-US28;31;Exclusão de dados sem autorização;1,2;33
+SGCond;SGC-US28;32;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a enquete deve ser excluída;1,2;50
+SGCond;SGC-US28;33;Ao clicar no botão cancelar, a enquete comum não deve ser excluída.;1,2;61
+SGCond;SGC-US29;61;Ao selecionar uma opção e clicar em votar o voto deve ser registrado na base de dados;1,2;1
+SGCond;SGC-US29;62;Ao clicar em votar sem selecionar uma opção o sistema deverá exibir uma mensagem de campo obrigatório não preenchido.;1,2;2
+SGCond;SGC-US29;63;Ao votar com suceso o resultado parcial da enquete deve ser exibido;1,2;
+SGCond;SGC-US29;64;Ao cancelar o voto o mesmo não deve ser registrado na base de dados;1,2;47
+SGCond;SGC-US29;65;Ao registrar o voto o mesmo não deve ser mais exibido para o usuário;1,2;
+SGCond;SGC-US29;65;Tentar registrar voto sem autenticação;1,2;4
+SGCond;SGC-US29;65;Tentar registrar voto sem autorização;1,2;5
+SGCond;SGC-US30;65;Ao acessar dashboard as enquetes em andamento devem ser exibidas, caso o usuário não tenha votado;1,2;15
+SGCond;SGC-US30;65;Acessar dashboard sem ter feito autenticação;1,2;20
+MyPocket;MPT-US01;55;Ao fazer login com nome de usuário e senha válida a página principal deve ser exibida.;1;23
+MyPocket;MPT-US01;56;Ao fazer login com nome de usuário cadastrado ou senha inválida o sistema deverá apresentar uma mensagem;1;40
+MyPocket;MPT-US01;57;Ao fazer login sem preencher nome de usuário ou senha o sistema deverá exibir uma mensagem;1;2
+MyPocket;MPT-US01;58;Ao fazer login com nome de usuário não cadastrado e qualquer senha o sistema deverá apresentar uma mensagem;1;42
+MyPocket;MPT-US02;60;Ao fazer logout no sistema o mesmo deve ser redirecionado para tela de login;1;38
+MyPocket;MPT-US03;34;Cadastrar;1;1
+MyPocket;MPT-US03;35;Cadastrar com campos obrigatórios não preenchidos;1;2
+MyPocket;MPT-US03;36;Cadastrar com campos inválidos;1;3
+MyPocket;MPT-US03;37;Cadastrar sem autenticação;1;4
+MyPocket;MPT-US03;40;Ao clicar no botão adicionar, a tela de inserção da transação deve ser exibida sem dados preenchidos;1;51
+MyPocket;MPT-US03;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na transação;1;47
+MyPocket;MPT-US04;42;Ao alterar campos da transação e clicar em salvar a enquete deve ser atualizada;1;8
+MyPocket;MPT-US04;43;Alteração com campos obrigatórios não preenchidos;1;9
+MyPocket;MPT-US04;44;Alteração com campos inválidos;1;10
+MyPocket;MPT-US04;45;Alteração sem autenticação;1;11
+MyPocket;MPT-US04;48;Ao acessar transação os dados da mesma devem estar preenchidos;1;43
+MyPocket;MPT-US04;49;Ao inserir uma link de uma transação inexistente um erro 404 deve ser exibido;1;44
+MyPocket;MPT-US04;50;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na transação;1;47
+MyPocket;MPT-US05;20;LIstar sem dados cadatrados;1;16
+MyPocket;MPT-US05;22;Listagem com valor do filtro cadastrado;1;18
+MyPocket;MPT-US05;23;Listagem com valor do filtro não cadastrado;1;19
+MyPocket;MPT-US05;24;Listagem sem autenticação;1;20
+MyPocket;MPT-US05;26;Ordenar dados;1;22
+MyPocket;MPT-US05;27;Buscar dados de um item;1;34
+MyPocket;MPT-US06;29;Exclusão de dados;1,2;31
+MyPocket;MPT-US06;30;Exclusão de dados sem autenticação;1,2;32
+MyPocket;MPT-US06;32;Ao clicar no botão excluir, um botão de confirmarção deve ser exibido e caso confirmado, a transação deve ser excluída;1,2;50
+MyPocket;MPT-US06;33;Ao clicar no botão cancelar, a transação não deve ser excluída.;1,2;61
+MyPocket;MPT-US07;20;LIstar sem dados cadatrados;1;16
+MyPocket;MPT-US07;22;Listagem com valor do filtro cadastrado;1;18
+MyPocket;MPT-US07;23;Listagem com valor do filtro não cadastrado;1;19
+MyPocket;MPT-US07;24;Listagem sem autenticação;1;20
+MyPocket;MPT-US07;26;Ordenar dados;1;22
+MyPocket;MPT-US07;27;Buscar dados de um item;1;34
+MyPocket;MPT-US07;21;No resultado da busca, a página deve exibir no máximo 10 valores;1,2;17
+MyPocket;MPT-US08;34;Cadastrar;1;1
+MyPocket;MPT-US08;35;Cadastrar com campos obrigatórios não preenchidos;1;2
+MyPocket;MPT-US08;36;Cadastrar com campos inválidos;1;3
+MyPocket;MPT-US08;37;Cadastrar sem autenticação;1;4
+MyPocket;MPT-US08;40;Ao clicar no botão adicionar, a tela de inserção da categoria deve ser exibida sem dados preenchidos;1;51
+MyPocket;MPT-US08;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na categoria;1;47
+MyPocket;MPT-US09;42;Ao alterar campos da categoria e clicar em salvar a enquete deve ser atualizada;1;8
+MyPocket;MPT-US09;43;Alteração com campos obrigatórios não preenchidos;1;9
+MyPocket;MPT-US09;44;Alteração com campos inválidos;1;10
+MyPocket;MPT-US09;45;Alteração sem autenticação;1;11
+MyPocket;MPT-US09;48;Ao acessar categoria os dados da mesma devem estar preenchidos;1;43
+MyPocket;MPT-US09;49;Ao inserir uma link de uma categoria inexistente um erro 404 deve ser exibido;1;44
+MyPocket;MPT-US09;50;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na categoria;1;47
+MyPocket;MPT-US10;59;Ao informar e-mail cadastrado, um e-mail deve ser enviado com uma senha provisória pro e-mail do usuário.;1.2;28
+MyPocket;MPT-US10;60;Ao informar um e-mail não cadastrado o sistem deverá exibir uma mensagem;1.2;29
+MyPocket;MPT-US10;61;Ao informar um e-mail inválido o sistema deverá exibir uma mensagem;1.2;30
+MyPocket;MPT-US12;34;Cadastrar;1;1
+MyPocket;MPT-US12;35;Cadastrar com campos obrigatórios não preenchidos;1;2
+MyPocket;MPT-US12;36;Cadastrar com campos inválidos;1;3
+MyPocket;MPT-US12;37;Cadastrar sem autenticação;1;4
+MyPocket;MPT-US12;40;Ao clicar no botão adicionar, a tela de inserção do cartão deve ser exibida sem dados preenchidos;1;51
+MyPocket;MPT-US12;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no cartão;1;47
+MyPocket;MPT-US13;20;LIstar sem dados cadatrados;1;16
+MyPocket;MPT-US13;22;Listagem com valor do filtro cadastrado;1;18
+MyPocket;MPT-US13;23;Listagem com valor do filtro não cadastrado;1;19
+MyPocket;MPT-US13;24;Listagem sem autenticação;1;20
+MyPocket;MPT-US13;26;Ordenar dados;1;22
+MyPocket;MPT-US13;27;Buscar dados de um item;1;34
+MyPocket;MPT-US13;21;No resultado da busca, a página deve exibir no máximo 10 valores;1;17
+MyPocket;MPT-US14;34;Cadastrar;1;1
+MyPocket;MPT-US14;35;Cadastrar com campos obrigatórios não preenchidos;1;2
+MyPocket;MPT-US14;36;Cadastrar com campos inválidos;1;3
+MyPocket;MPT-US14;37;Cadastrar sem autenticação;1;4
+MyPocket;MPT-US14;40;Ao clicar no botão adicionar, a tela de inserção do conta deve ser exibida sem dados preenchidos;1;51
+MyPocket;MPT-US14;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na conta;1;47
+MyPocket;MPT-US15;42;Ao alterar campos da conta e clicar em salvar a enquete deve ser atualizada;1;8
+MyPocket;MPT-US15;43;Alteração com campos obrigatórios não preenchidos;1;9
+MyPocket;MPT-US15;44;Alteração com campos inválidos;1;10
+MyPocket;MPT-US15;45;Alteração sem autenticação;1;11
+MyPocket;MPT-US15;48;Ao acessar conta os dados da mesma devem estar preenchidos;1;43
+MyPocket;MPT-US15;49;Ao inserir uma link de uma conta inexistente um erro 404 deve ser exibido;1;44
+MyPocket;MPT-US15;50;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na conta;1;47
+MyPocket;MPT-US16;34;Cadastrar;1;1
+MyPocket;MPT-US16;35;Cadastrar com campos obrigatórios não preenchidos;1;2
+MyPocket;MPT-US16;36;Cadastrar com campos inválidos;1;3
+MyPocket;MPT-US16;37;Cadastrar sem autenticação;1;4
+MyPocket;MPT-US16;40;Ao clicar no botão adicionar, a tela de inserção do transação deve ser exibida sem dados preenchidos;1;51
+MyPocket;MPT-US16;41;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na transação;1;47
+MyPocket;MPT-US17;20;LIstar sem dados cadatrados;1;16
+MyPocket;MPT-US17;22;Listagem com valor do filtro cadastrado;1;18
+MyPocket;MPT-US17;23;Listagem com valor do filtro não cadastrado;1;19
+MyPocket;MPT-US17;24;Listagem sem autenticação;1;20
+MyPocket;MPT-US17;26;Ordenar dados;1;22
+MyPocket;MPT-US17;27;Buscar dados de um item;1;34
+MyPocket;MPT-US17;21;No resultado da busca, a página deve exibir no máximo 10 valores;1;17
+TestRec;TR-22784;;Campos Obrigatórios devem estar preenchidos;1;2
+TestRec;TR-22784;;Caso usuário não esteja cadastrado o sistema deverá enviar mensagem;1;24
+TestRec;TR-22784;;Caso o usuário forneça senha inválida o sistema deverá enviar mensagem;1;40
+TestRec;TR-22784;;Caso o usuário esteja logado o sistema deverá ser redirecionado para tela principal;1;55
+TestRec;TR-27899;;Ao registrar o usuário, o mesmo poderá acessar o sistema.;1;64
+TestRec;TR-27899;;O usuário deverá fornecer e-mail, nome de usuário, nome, senha e confirmação.;1;65
+TestRec;TR-27899;;Caso algum dos campos não seja informado, o sistema não deverá permitir a inclusão.;1;2
+TestRec;TR-27899;;Caso o nome de usuário já exista o sistema deverá exibir uma mensagem;1;13
+TestRec;TR-27787-E;;Ao alterar campos do projeto e clicar em salvar, o projeto deve ser atualizado;1;8
+TestRec;TR-27787-E;;Alteração com campos obrigatórios não preenchidos;1;9
+TestRec;TR-27787-E;;Alteração com campos inválidos;1;10
+TestRec;TR-27787-E;;Alteração sem autenticação;1;11
+TestRec;TR-27787-E;;Ao inserir um link de um projeto inexistente um erro 404 deve ser exibido;1;44
+TestRec;TR-27787-E;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no projeto;1;47
+TestRec;TR-27787-C;;Inserção com dados corretos;1;1
+TestRec;TR-27787-C;;Ao informar <campo> inválido o sistema deverá exibir mensagem de campo inválido;1;3
+TestRec;TR-27787-C;;Inserção sem autenticação;1;4
+TestRec;TR-27787-C;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>;1;47
+TestRec;TR-27787-C;;Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos;1;51
+TestRec;TR-27787-L;;Listagem de dados;1;15
+TestRec;TR-27787-L;;Listagem sem dados cadastrados;1;16
+TestRec;TR-27787-L;;No resultado da busca, a página deve exibir no máximo <x> valores;1;17
+TestRec;TR-27787-L;;Listagem com valor do filtro cadastrado;1;18
+TestRec;TR-27787-L;;Listagem com valor do filtro não cadastrado;1;19
+TestRec;TR-27787-L;;Listagem sem autenticação;1;20
+TestRec;TR-27789-L;;Listagem de dados;1;15
+TestRec;TR-27789-L;;Listagem sem dados cadastrados;1;16
+TestRec;TR-27789-L;;No resultado da busca, a página deve exibir no máximo <x> valores;1;17
+TestRec;TR-27789-L;;Listagem com valor do filtro cadastrado;1;18
+TestRec;TR-27789-L;;Listagem com valor do filtro não cadastrado;1;19
+TestRec;TR-27789-L;;Listagem sem autenticação;1;20
+TestRec;TR-27789-C;;Inserção com dados corretos;1;1
+TestRec;TR-27789-C;;Ao informar <campo> inválido o sistema deverá exibir mensagem de campo inválido;1;3
+TestRec;TR-27789-C;;Inserção sem autenticação;1;4
+TestRec;TR-27789-C;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>;1;47
+TestRec;TR-27789-C;;Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos;1;51
+TestRec;TR-27789-E;;Ao alterar campos do projeto e clicar em salvar, o projeto deve ser atualizado;1;8
+TestRec;TR-27789-E;;Alteração com campos obrigatórios não preenchidos;1;9
+TestRec;TR-27789-E;;Alteração sem autenticação;1;11
+TestRec;TR-27789-E;;Ao inserir um link de um projeto inexistente um erro 404 deve ser exibido;1;44
+TestRec;TR-27789-E;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no projeto;1;47
+TestRec;TR-27789-X;;Cancelar exclusão da entidade;1;27
+TestRec;TR-27789-X;;Excluir com sucesso;1;12
+TestRec;TR-27788-C;;Inserção com dados corretos;1;1
+TestRec;TR-27788-C;;Inserção sem autenticação;1;4
+TestRec;TR-27788-C;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>;1;47
+TestRec;TR-27788-C;;Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos;1;51
+TestRec;TR-27788-C;;Ao informar um período em que haja outra sprint o sistema não deve permitir o cadastro.;1;66
+TestRec;TR-27788-C;;Ao informar o período da sprint fora do período do projeto o sistema não deve permitir o cadastro.;1;67
+TestRec;TR-27788-C;;Campos Obrigatórios devem estar preenchidos;1;2
+TestRec;TR-27788-E;;Ao alterar campos da sprint e clicar em salvar, o projeto deve ser atualizado;1;8
+TestRec;TR-27788-E;;Alteração com campos obrigatórios não preenchidos;1;9
+TestRec;TR-27788-E;;Alteração sem autenticação;1;11
+TestRec;TR-27788-E;;Ao inserir um link de um item inexistente um erro 404 deve ser exibido;1;44
+TestRec;TR-27788-E;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no item;1;47
+TestRec;TR-27788-E;;Ao informar um período em que haja outra sprint o sistema não deve permitir o cadastro.;1;66
+TestRec;TR-27788-E;;Ao informar o período da sprint fora do período do projeto o sistema não deve permitir o cadastro.;1;67
+TestRec;TR-27788-L;;Listagem de dados;1;15
+TestRec;TR-27788-L;;Listagem sem dados cadastrados;1;16
+TestRec;TR-27788-L;;No resultado da busca, a página deve exibir no máximo <x> valores;1;17
+TestRec;TR-27788-L;;Listagem com valor do filtro cadastrado;1;18
+TestRec;TR-27788-L;;Listagem com valor do filtro não cadastrado;1;19
+TestRec;TR-27788-L;;Listagem sem autenticação;1;20
+TestRec;TR-28652;;Ao arrastar um item para um grupo os mesmos devem ser associados;1;68
+TestRec;TR-28652;;Ao remover um item de um grupo os mesmos devem ser desassociados;1;69
+TestRec;TR-27786-C;;Inserção com dados corretos;1;1
+TestRec;TR-27786-C;;Ao informar <campo> inválido o sistema deverá exibir mensagem de campo inválido;1;3
+TestRec;TR-27786-C;;Inserção sem autenticação;1;4
+TestRec;TR-27786-C;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>;1;47
+TestRec;TR-27786-C;;Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos;1;51
+TestRec;TR-27786-E;;Ao alterar campos do test case e clicar em salvar, o teste deve ser atualizado;1;8
+TestRec;TR-27786-E;;Alteração com campos obrigatórios não preenchidos;1;9
+TestRec;TR-27786-E;;Alteração sem autenticação;1;11
+TestRec;TR-27786-E;;Ao inserir um link de um item inexistente um erro 404 deve ser exibido;1;44
+TestRec;TR-27786-E;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no item;1;47
+TestRec;TR-29212;;Ao adicionar um ou vários critérios de aceitação e clicar em salvar os critérios devem ser associados a US.;1;1
+TestRec;TR-29212;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>;1;47
+TestRec;TR-29212;;Alteração sem autenticação;1;11
+TestRec;TR-27790;;Listagem de dados;1;15
+TestRec;TR-27790;;Listagem sem dados cadastrados;1;16
+TestRec;TR-27790;;Listagem sem sprint em andamento;1;74
+TestRec;TR-27790;;Listagem sem autenticação;1;20
+TestRec;TR-28363;;Inserção com dados corretos;1;1
+TestRec;TR-28363;;Inserção sem autenticação;1;4
+TestRec;TR-28363;;Copiar entidade previamente copiada;1;75
+RiskControl;RC-29386;;Campos Obrigatórios devem estar preenchidos;1;2
+RiskControl;RC-29386;;Caso usuário não esteja cadastrado o sistema deverá enviar mensagem;1;24
+RiskControl;RC-29386;;Caso o usuário forneça senha inválida o sistema deverá enviar mensagem;1;40
+RiskControl;RC-29386;;Caso o usuário esteja logado o sistema deverá ser redirecionado para tela principal;1;55
+RiskControl;RC-29391-E;;Ao alterar campos do projeto e clicar em salvar, o teste deve ser atualizado;1;8
+RiskControl;RC-29391-E;;Alteração com campos obrigatórios não preenchidos;1;9
+RiskControl;RC-29391-E;;Alteração sem autenticação;1;11
+RiskControl;RC-29391-E;;Ao inserir um link de um item inexistente um erro 404 deve ser exibido;1;44
+RiskControl;RC-29391-E;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no item;1;47
+RiskControl;RC-29391-L;;Listagem de dados;1;15
+RiskControl;RC-29391-L;;Listagem sem dados cadastrados;1;16
+RiskControl;RC-29391-L;;No resultado da busca, a página deve exibir no máximo <x> valores;1;17
+RiskControl;RC-29391-L;;Listagem sem autenticação;1;20
+RiskControl;RC-30352-C;;Inserção com dados corretos;1;1
+RiskControl;RC-30352-C;;Ao informar <campo> inválido o sistema deverá exibir mensagem de campo inválido;1;3
+RiskControl;RC-30352-C;;Inserção sem autenticação;1;4
+RiskControl;RC-30352-C;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>;1;47
+RiskControl;RC-30352-C;;Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos;1;51
+RiskControl;RC-30352-E;;Ao alterar campos do projeto e clicar em salvar, o teste deve ser atualizado;1;8
+RiskControl;RC-30352-E;;Alteração com campos obrigatórios não preenchidos;1;9
+RiskControl;RC-30352-E;;Alteração sem autenticação;1;11
+RiskControl;RC-30352-E;;Ao inserir um link de um item inexistente um erro 404 deve ser exibido;1;44
+RiskControl;RC-30352-E;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no item;1;47
+RiskControl;RC-30352-L;;Listagem de dados;1;15
+RiskControl;RC-30352-L;;Listagem sem dados cadastrados;1;16
+RiskControl;RC-30352-L;;No resultado da busca, a página deve exibir no máximo <x> valores;1;17
+RiskControl;RC-30352-L;;Listagem sem autenticação;1;20
+SmartClassroom;SC-29048;;"Ao executar/abrir/ligar o Raspberry Pi, o sistema deverá mostrar para o usuário uma tela de login para acessar as demais funcionalidades;";1,2;76
+SmartClassroom;SC-29048;;"O usuário poderá escrever suas credenciais via teclado físico nessa primeira versão;";1,2;77
+SmartClassroom;SC-29048;;O sistema deverá requisitar ao site de gerenciamento de usuários para logar-se corretamente;1,2;78
+SmartClassroom;SC-29048;;"O site de gerenciamento de usuários deve ser verificado para não haver problemas de cadastro;";1,2;79
+SmartClassroom;SC-29048;;O site de gerenciamento deve estar no ar utilizando o AWS do projeto Epson VIRTUS: A URL do site deve ser portal.virtus-smart-classroom.com;1,2;80
+SmartClassroom;SC-29048;;O site deve ter um login (pode ser fixo: admin / admin@admin) para que apenas pessoas autorizadas tenham acesso;1,2;81
+SmartClassroom;SC-29966;;Ao registrar o usuário, o mesmo poderá acessar o sistema.;1,2;64
+SmartClassroom;SC-29966;;O usuário deverá fornecer e-mail, nome de usuário, nome, senha e confirmação.;1,2;65
+SmartClassroom;SC-29966;;Caso algum dos campos não seja informado, o sistema não deverá permitir a inclusão.;1,2;2
+SmartClassroom;SC-29966;;Caso o nome de usuário já exista o sistema deverá exibir uma mensagem;1,2;13
+SmartClassroom;SC-29966;;Uma vez criado, o usuário já deve estar logado na aplicação;1,2;82
+SmartClassroom;SC-29966-L;;Listagem de dados;1,2;15
+SmartClassroom;SC-29966-L;;Listagem sem dados cadastrados;1,2;16
+SmartClassroom;SC-29966-L;;No resultado da busca, a página deve exibir no máximo <x> valores;1,2;17
+SmartClassroom;SC-29966-L;;Listagem com valor do filtro cadastrado;1,2;18
+SmartClassroom;SC-29966-L;;Listagem com valor do filtro não cadastrado;1,2;19
+SmartClassroom;SC-29966-L;;Listagem sem autenticação;1,2;20
+SmartClassroom;SC-29966-L;;Ao clicar nos campos a listagem deverá ser ordenada;1,2;22
+SmartClassroom;SC-29966-E;;Ao alterar campos do projeto e clicar em salvar, o teste deve ser atualizado;1,2;8
+SmartClassroom;SC-29966-E;;Alteração com campos obrigatórios não preenchidos;1,2;9
+SmartClassroom;SC-29966-E;;Alteração sem autenticação;1,2;11
+SmartClassroom;SC-29966-E;;Ao inserir um link de um item inexistente um erro 404 deve ser exibido;1,2;44
+SmartClassroom;SC-29966-E;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no item;1,2;47
+SmartClassroom;SC-29348;;Inserção com dados corretos;1,2;1
+SmartClassroom;SC-29348;;Ao informar <campo> inválido o sistema deverá exibir mensagem de campo inválido;1,2;3
+SmartClassroom;SC-29348;;Inserção sem autenticação;1,2;4
+SmartClassroom;SC-29348;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita na <entidade>;1,2;47
+SmartClassroom;SC-29348;;Ao clicar no botão adicionar, a tela de inserção da <entidade> deve ser exibida sem dados preenchidos;1,2;51
+SmartClassroom;SC-29348-E;;Ao alterar campos do projeto e clicar em salvar, o teste deve ser atualizado;1,2;8
+SmartClassroom;SC-29348-E;;Alteração com campos obrigatórios não preenchidos;1,2;9
+SmartClassroom;SC-29348-E;;Alteração sem autenticação;1,2;11
+SmartClassroom;SC-29348-E;;Ao inserir um link de um item inexistente um erro 404 deve ser exibido;1,2;44
+SmartClassroom;SC-29348-E;;Ao clicar no botão cancelar, a tela de listagem deve ser exibida e nenhuma alteração deve ser feita no item;1,2;47
+SmartClassroom;SC-29348-L;;Listagem de dados;1,2;15
+SmartClassroom;SC-29348-L;;Listagem sem dados cadastrados;1,2;16
+SmartClassroom;SC-29348-L;;No resultado da busca, a página deve exibir no máximo <x> valores;1,2;17
+SmartClassroom;SC-29348-L;;Listagem com valor do filtro cadastrado;1,2;18
+SmartClassroom;SC-29348-L;;Listagem com valor do filtro não cadastrado;1,2;19
+SmartClassroom;SC-29348-L;;Listagem sem autenticação;1,2;20
+SmartClassroom;SC-29348-L;;Ao clicar nos campos a listagem deverá ser ordenada;1,2;22

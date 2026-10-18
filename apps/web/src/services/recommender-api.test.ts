@@ -12,16 +12,31 @@ test('requests use same-origin access, encoded identities and explicit paginatio
   for (const [, options] of fetch.mock.calls) { expect(options.credentials).toBe('same-origin'); expect(options.headers).toBeUndefined(); }
 });
 
-test('API-only methods cannot enter RNF editors, import recovery or result components', async () => {
+test('unimplemented methods stay unavailable and the RNF-only reader rejects test runs', async () => {
   expect(supportsWebMethod('ramos_2019_manhattan_k1_v2')).toBe(true);
-  expect(supportsWebMethod('us_agent_e21_equations_demo_v1')).toBe(false);
-  const fetch = vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({ definition: { method: { id: 'us_agent_e21_equations_demo_v1' } } })))
+  expect(supportsWebMethod('us_agent_e21_equations_demo_v1')).toBe(true);
+  expect(supportsWebMethod('testrec_e21_data_contract_v1')).toBe(false);
+  const fetch = vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({ definition: { method: { id: 'testrec_e21_data_contract_v1' } } })))
     .mockResolvedValueOnce(new Response(JSON.stringify({ snapshot: { content: { schemaVersion: 2 } } })))
-    .mockResolvedValueOnce(new Response(JSON.stringify({ snapshot: { content: { schemaVersion: 2 } } })));
+    .mockResolvedValueOnce(new Response(JSON.stringify({ snapshot: { content: { schemaVersion: 2, definition: { content: { definition: { method: { id: 'testrec_e21_data_contract_v1' } } } } } } })));
   vi.stubGlobal('fetch', fetch);
   await expect(recommenderApi.definition('testrec', '1')).rejects.toMatchObject({ status: 422, message: expect.stringContaining('web interface is pending') });
   await expect(recommenderApi.run('test-run')).rejects.toMatchObject({ status: 422, message: expect.stringContaining('web interface is pending') });
   await expect(recommenderApi.datasetImport('test-import')).rejects.toMatchObject({ status: 422, message: expect.stringContaining('web interface is pending') });
+});
+
+test('test-case requests use the common run endpoint and catalog publication pins original bytes and declaration', async () => {
+  const fetch = vi.fn().mockImplementation(async () => new Response('{}')); vi.stubGlobal('fetch', fetch);
+  const t = (await import('../test-fixtures/test-case')).testCaseFixture();
+  await recommenderApi.executeTestCases(t.request);
+  expect(fetch.mock.calls[0][0]).toBe('/api/internal/recommendation-runs');
+  expect(JSON.parse(fetch.mock.calls[0][1].body)).toEqual(t.request);
+  const file = new File(['{}'], 'catalog.json');
+  await recommenderApi.publishTestCaseCatalog('catalog', '2/test', file, 'f'.repeat(64), 'Authored fixture');
+  expect(fetch.mock.calls[1][0]).toContain('/catalog/versions/2%2Ftest/publish');
+  const body = fetch.mock.calls[1][1].body as FormData;
+  expect(JSON.parse(body.get('spec') as string)).toEqual({ expectedFileSha256: 'f'.repeat(64), authorization: { basis: 'synthetic', reference: 'Authored fixture' } });
+  expect(body.get('file')).toBe(file); expect(fetch.mock.calls[1][1].headers).toBeUndefined();
 });
 
 test('HTTP validation paths reach the form and authorization failures remain explicit', async () => {

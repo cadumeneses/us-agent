@@ -1,0 +1,61 @@
+[
+  {
+    "id": "exercise-rnf-neighbor",
+    "values": {
+      "classification_id": "4",
+      "story_id": "4",
+      "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+      "project": "[DEMO] 4",
+      "taxonomy_version": "wis-v1",
+      "review_status": "reviewed",
+      "project_taxonomy_version": "wis-v1",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        }
+      ],
+      "platforms": [
+        "Web"
+      ],
+      "application_domains": [
+        "Education"
+      ],
+      "architectures": [
+        "Client-server"
+      ],
+      "languages": [
+        "TypeScript"
+      ],
+      "frameworks": [
+        "Angular"
+      ],
+      "apis": [
+        "Mongoose"
+      ],
+      "data_persistence": [
+        "MongoDB"
+      ],
+      "objective": "product",
+      "tasks": [
+        {
+          "category": "t6"
+        },
+        {
+          "category": "t7"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "Synthetic sentence for checking item retrieval."
+        }
+      ],
+      "study_context": "pilot"
+    },
+    "provenance": {
+      "source": "US-Agent configuration task pack; technical demonstration, not original empirical data."
+    }
+  }
+]

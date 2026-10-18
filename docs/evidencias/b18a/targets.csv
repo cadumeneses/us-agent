@@ -1,0 +1,7 @@
+"case_id","status","expected_status","repeatable","judged","returned_items","tp","fp","fn","precision","recall","f1","f2","catalog_sha256","result_sha256"
+"create-only","completed","completed","true","true","2","1","1","0","0.5","1","0.6666666666666666","0.8333333333333334","7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394","a7c8f7e61606bd78b5c67f273eaf923cbe230350bfee8aff592875409d0c8dcf"
+"both-tests","completed","completed","true","true","2","2","0","0","1","1","1","1","7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394","a7c8f7e61606bd78b5c67f273eaf923cbe230350bfee8aff592875409d0c8dcf"
+"known-empty","no_items","no_items","true","true","0","0","0","0",,,,,"7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394","a7c74c100635ad7db2aea3e74d68cbae01708bf4025f714ec9e55902e1e7a956"
+"insufficient","blocked","blocked","true","true","0","0","0","1",,"0","0","0","7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394","1ec019aa0f0b1daf145386fe1bceffb978e7f73cc07ed232d253b74493d4bc16"
+"invalid-input","technical_failure","technical_failure","true","true","0","0","0","1",,"0","0","0",,
+"unjudged","completed","completed","true","false","2",,,,,,,,"7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394","a7c8f7e61606bd78b5c67f273eaf923cbe230350bfee8aff592875409d0c8dcf"

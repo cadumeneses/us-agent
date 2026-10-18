@@ -1,0 +1,1364 @@
+Projeto;ID_US;ID;ID_TC;ID_STD_TC                            
+SPGEC;#16759;1;Cadastrar Entidade com sucesso;                         
+SPGEC;#16759;2;Cancelar cadastro de Entidade com sucesso;                       
+SPGEC;#16759;3;Cadastrar Entidade com ID existente;                        
+SPGEC;#16759;4;Cadastrar Entidade sem campos obrigatórios preenchidos;                       
+SPGEC;#16759;5;Cadastrar usuários com diferentes papéis;                        
+SPGEC;#16759;6;Editar informações da entidade com sucesso;                       
+SPGEC;#16759;7;Editar entidade alterando o ID para um existente;                     
+SPGEC;#16759;8;Editar entidade deixando os campos obrigatórios do formulário em branco;                   
+SPGEC;#16759;9;Inativar usuários com sucesso;                         
+SPGEC;#16759;10;Cancelar edição da entidade com sucesso;                       
+SPGEC;#16759;11;Verificar acessibilidade às páginas;                         
+SPGEC;#16759;12;Excluir Entidade com sucesso;                         
+SPGEC;#16759;13;Acessar tela sem estar autenticado na aplicação;                      
+SPGEC;#16759;14;Acessar tela com usuário não cadastrado;                       
+SPGEC;#16759;15;Listar todas as Entidades com sucesso;                       
+SPGEC;#16759;16;Verificar presença de campos retornados;                        
+SPGEC;#16759;17;Validar resultado da consulta de Entidade sem dados;                     
+SPGEC;#16759;18;Tentar acessar tela após time out;                       
+SPGEC;#16759;19;Verificar paginação;                           
+SPGEC;#16759;20;Verificar acesso por papéis;                         
+SPGEC;#16759;21;Validar resultado da consulta (filtro) de Entidade;                      
+SPGEC;#16759;22;Verificar se todos os dados da entidade estão sendo exibidos;                   
+SPGEC;#16759;23;Verificar inserção de link de entidade inexistente;                      
+SPGEC;#16759;24;Realizar ação com usuário inativo;                        
+SPGEC;#16759;25;O campo senha deve seguir regra;                       
+SPGEC;#16759;26;Fechar a tela antes de excutar ação;                      
+SPGEC;#16759;27;Cancelar exclusão da entidade;                         
+SPGEC;#16759;28;Fazer primeiro login do usuário;                        
+SPGEC;#16759;29;Cadastrar Entidade com o ID de um previamente excluído;                    
+SPGEC;#16759;30;Recuprar senha com sucesso.;                         
+SPGEC;#16759;31;Tentar autenticar sem preencher username;                        
+SPGEC;#16759;32;Tentar autenticar com usuário não cadastrado;                       
+SPGEC;#16759;33;Tentar autenticar com usuário inativo;                        
+SPGEC;#16759;34;Verificar comportamento do campo;                         
+SPGEC;#16759;35;Validar logout da aplicação;                         
+SPGEC;#16759;36;Fechar browser e abrir aplicação novamente;                       
+SPGEC;#16759;37;Validar ação sem conexão com servidor;                       
+SPGEC;#16759;38;Verificar cadastro de mais de um administrador;                      
+SPGEC;#16759;39;Verificar campos senha e confirmação;                        
+SPGEC;#16759;40;Fazer login com usuário e senha válidos;                      
+SPGEC;#16759;41;Verificar internacionalização;                           
+SPGEC;#16759;42;Verificar exibição de notificações nas telas;                       
+SPGEC;#16759;43;Cadastrar Entidade com campos inválidos;                        
+SPGEC;#16759;44;Realizar ação com campo inválido;                        
+SPGEC;#16759;45;Realizar download do relatório;                         
+SPGEC;#16759;46;Gerar PDF de relatório com sucesso;                       
+SPGEC;#16759;47;Tentar gerar relatório em um formato diferente do PDF;                    
+SPGEC;#16759;48;Validar nomenclatura do arquivo PDF gerado;                       
+SPGEC;#16759;49;Cadastrar Entidade com restrição de negócio;                       
+SPGEC;#16759;50;Alterar entidade com restrição de negócio;                       
+SPGEC;#16759;51;Visualizar dados da Entidade;                         
+SPGEC;#16759;52;Incluir papel do usuário;                         
+SPGEC;#16759;53;Excluir papel do usuário;                         
+SPGEC;#16759;54;Verificar gráfico Entidade;                          
+SPGEC;#16759;55;Executar ação sem ter feito login;                       
+SPGEC;#16759;56;Verificar se estados da entidade estão de acordo;                     
+SPGEC;#16759;57;Recuperar senha com nome de usuário inválido;                      
+SPGEC;#16759;58;Recuperar senha com nome de usuário não cadastrado;                     
+SPGEC;#16759;59;Fazer login com usuário inexistente;                        
+SPGEC;#16759;60;Fazer login com senha inválida;                        
+SPGEC;#16759;61;Fazer login com campo obrigatório não preenchido;                      
+SPGEC;#16759;62;Salvar com data inical maior que data final;                     
+SPGEC;#16759;63;Listar dashboard sem sprint em andamento;                       
+TestRec;TR-27788-C;64;Cadastro de Sprint com fora do período do projeto;                    
+TestRec;TR-27788-C;65;Cadastro de Sprint com período conflitante com outra sprint;                    
+TestRec;TR-28652;66;Associar US à sprint;                         
+TestRec;TR-28652;67;Desassociar US à sprint;                         
+RCP;#2376;68;HWLL-18:[TC] Cadastrar usuário com sucesso;1                        
+RCP;#2376;69;HWLL-20:[TC] Cancelar cadastro de usuário com sucesso;2                      
+RCP;#2376;70;HWLL-21:[SPEC] Verificar duplicidade no cadastro de usuário;3                      
+RCP;#2376;71;HWLL-28:[TC] Cadastrar usuário sem informar nenhum campo obrigatório;4                     
+RCP;#2376;72;HWLL-29:[SPEC] Criar usuários utilizando diferentes perfis;5                       
+RCP;#2376;73;HWLL-30:[SPEC] Validar comportamento do campo Confirmar Senha;34                      
+RCP;#2376;74;HWLL-31:[SPEC] Validar comportamento do campo Matrícula;34                       
+RCP;#2376;75;HWLL-32:[SPEC] Validar comportamento do campo Nome;34                       
+RCP;#2376;76;HWLL-33:[SPEC] Validar comportamento do campo Função;34                       
+RCP;#2376;77;HWLL-34:[SPEC] Validar comportamento do campo Senha;34                       
+RCP;#2376;78;HWLL-35:[SPEC] Validar comportamento do campo Perfil;34                       
+RCP;#2392;79;HWLL-36:[SPEC] Validar comportamento do campo Função;34                       
+RCP;#2392;80;HWLL-37:[SPEC] Validar comportamento do campo Nome;34                       
+RCP;#2392;81;HWLL-38:[SPEC] Validar comportamento do campo Matrícula;34                       
+RCP;#2392;82;HWLL-39:[SPEC] Editar informações do usuário com sucesso;6                      
+RCP;#2392;83;HWLL-40:[SPEC] Verificar duplicidade na edição de usuário;7                      
+RCP;#2392;84;HWLL-41:[TC] Editar usuário deixando todos os campos de texto do formulário em branco;8                
+RCP;#2392;85;"HWLL-42:[TC] Verificar presença do botão ""Cancelar""";16
+RCP;#2392;86;HWLL-43:[TC] Cancelar edição de usuário com sucesso;10                      
+RCP;#2399;87;HWLL-14:[SPEC] Validações de dados;                         
+RCP;#2399;88;HWLL-13:[TC] Verificar acessibilidade às páginas;11                        
+RCP;#2399;89;HWLL-12:[TC] Excluir papel User;53                         
+RCP;#2399;90;HWLL-11:[TC] Incluir papel User;52                         
+RCP;#2399;91;HWLL-6:[TC] Incluir papel Admin;52                         
+RCP;#2399;92;HWLL-7:[TC] Excluir papel Admin;53                         
+RCP;#2399;93;HWLL-8:[TC] Verificar acessibilidade às páginas;11                        
+RCP;#2399;94;HWLL-9:[SPEC] Validações de dados;                         
+RCP;#2377;95;HWLL-22:[SPEC] Verificar acesso por Perfis;20                        
+RCP;#2377;96;HWLL-49:[TC] Acessar tela de consulta de OPS sem estar logado a aplicação;13                 
+RCP;#2377;97;HWLL-50:[TC] Validar acesso de usuário inativado;24                       
+RCP;#2377;98;HWLL-51:[TC] Listar todas as OPs com sucesso;15                      
+RCP;#2377;99;HWLL-52:[TC] Validar nomenclatura das colunas listadas;16                       
+RCP;#2377;100;HWLL-53:[TC] Validar resultado de consulta por OP's vazia;17                     
+RCP;#2377;101;HWLL-54:[TC] Verificar redirecionamento a tela de login após time out;35                   
+RCP;#2377;102;HWLL-55:[TC] Validar paginação;19                          
+RCP;#2383;103;HWLL-56:[TC] Validar paginação;19                          
+RCP;#2383;104;HWLL-57:[SPEC] Verificar acesso por Perfis;20                        
+RCP;#2383;105;HWLL-58:[TC] Acessar tela de consulta de Consultar BOM sem estar logado a aplicação;13                
+RCP;#2383;106;HWLL-59:[TC] Validar acesso de usuário inativado;24                       
+RCP;#2383;107;HWLL-60:[TC] Listar todas as Matérias-Primas com sucesso;15                      
+RCP;#2383;108;HWLL-61:[TC] Validar nomenclatura das colunas listadas;16                       
+RCP;#2383;109;HWLL-62:[TC] Validar resultado de consulta de Matéria-Prima vazia;17                     
+RCP;#2383;110;HWLL-63:[TC] Verificar redirecionamento a tela de login após time out;35                   
+RCP;#2383;111;HWLL-65:[SPEC] Verificar acesso por Perfis;20                        
+RCP;#2383;112;HWLL-67:[TC] Validar acesso de usuário inativado;24                       
+RCP;#2383;113;HWLL-71:[TC] Verificar redirecionamento a tela de login após time out;35                   
+RCP;#2490;114;HWLL-64:[TC] Validar paginação;19                          
+RCP;#2490;115;HWLL-66:[TC] Acessar tela Consultar produtos finais sem estar logado a aplicação;13                  
+RCP;#2490;116;HWLL-68:[TC] Listar todas os produtos finais com sucesso;15                     
+RCP;#2490;117;HWLL-69:[TC] Validar nomenclatura das colunas listadas;16                       
+RCP;#2490;118;HWLL-70:[TC] Validar resultado de consulta de produtos finais;15                     
+RCP;#2598-1;119;HWLL-72:[SPEC] Validar ações no campo Search em Ordens de Produção;34                   
+RCP;#2383;120;HWLL-73:[SPEC] Validar ações no campo Search em BOM (matéria-prima);34                    
+RCP;#2490;121;HWLL-74:[SPEC] Validar ações no campo Search em Produtos Finais;34                    
+RCP;#3381;122;HWLL-75:[SPEC] Verificar acesso por Perfis;20                        
+RCP;#3381;123;HWLL-76:[TC] Acessar tela de Detalhamento de OP's sem estar logado a aplicação;13                 
+RCP;#3381;124;HWLL-77:[TC] Validar acesso de usuário inativado;24                       
+RCP;#3381;125;HWLL-78:[TC] Verificar se todos os dados da OP estão sendo exibidos;22                  
+RCP;#3381;126;HWLL-79:[TC] Verificar inserção de link em ordem de produção inexistente;23                   
+RCP;#3381;127;HWLL-80:[TC] Verificar redirecionamento a tela de login após time out;35                   
+RCP;#3390;128;HWLL-81:[SPEC] Verificar acesso por Perfis;20                        
+RCP;#3390;129;HWLL-82:[TC] Acessar tela de consulta de matérias-primas sem estar logado a aplicação;13                 
+RCP;#3390;130;HWLL-83:[TC] Validar acesso de usuário inativado;24                       
+RCP;#3390;131;HWLL-84:[TC] Listar todas as Matérias-Primas com sucesso;15                      
+RCP;#3390;132;HWLL-85:[TC] Validar resultado de consulta por matérias-primas vazia;17                     
+RCP;#3390;133;HWLL-86:[TC] Verificar redirecionamento a tela de login após time out;35                   
+RCP;#3390;134;HWLL-87:[TC] Validar paginação;19                          
+RCP;#3390;135;HWLL-88:[TC] Validar nomenclatura das colunas listadas;16                       
+RCP;#3392;136;HWLL-89:[SPEC] Verificar acesso por Perfis;20                        
+RCP;#3392;137;HWLL-90:[TC] Acessar tela de consulta de matérias-primas sem estar logado a aplicação;13                 
+RCP;#3392;138;HWLL-91:[TC] Validar acesso de usuário inativado;24                       
+RCP;#3392;139;HWLL-92:[TC] Listar todos os Produtos Finais com sucesso;15                     
+RCP;#3392;140;HWLL-93:[TC] Validar resultado de consulta por produtos finais vazia;17                    
+RCP;#3392;141;HWLL-94:[TC] Verificar redirecionamento a tela de login após time out;35                   
+RCP;#3392;142;HWLL-95:[TC] Validar paginação;19                          
+RCP;#3392;143;HWLL-96:[TC] Validar nomenclatura das colunas listadas;16                       
+RCP;#2379;144;HWLL-1:[TC] Validar redirecionamento para o login quando o usuário tenta navegar sem estar autenticado;13               
+RCP;#2379;145;HWLL-2:[SPEC] Validar se página é redirecionada ao colar link em outra aba do navegador;13               
+RCP;#2379;146;HWLL-3:[SPEC] Validar acesso de usuário Ativo e Inativo;24                     
+RCP;#2379;147;HWLL-4:[SPEC] Validar campo Nome;25                         
+RCP;#2379;148;HWLL-5:[SPEC] Validar campo Senha;25                         
+SSPI;#2570-2;149;ENERSH-224:[TC] Editar tipo de problema deixando todos os campos de texto do formulário em branco;8              
+SSPI;#2570-2;150;ENERSH-225:[TC] Verificar duplicidade na edição de Máquinas;7                      
+SSPI;#2570;151;ENERSH-226:[SPEC] Validar comportamento do campo Descrição;34                       
+SSPI;#2570;152;ENERSH-227:[TC] Verificar presença do botão Cancelar;16                       
+SSPI;#2570-2;153;ENERSH-228:[TC] Editar Máquina com sucesso;6                        
+SSPI;#2570;154;ENERSH-229:[TC] Cancelar cadastro de Máquinas com sucesso;10                      
+SSPI;#2570-4;155;ENERSH-230:[TC] Fechar tela de remoção antes de efetuar a ação de deletar;26                 
+SSPI;#2570-4;156;ENERSH-231:[TC] Deletar Máquina com sucesso;12                        
+SSPI;#2570-4;157;ENERSH-232:[TC] Cancelar a remoção de uma Máquina;27                      
+SSPI;#2570-3;158;ENERSH-233:[Spec] Validar acesso a lista de Máquinas por perfis;20                    
+SSPI;#2570-3;159;ENERSH-234:[TC] Paginar listagem de Máquinas ao atingir número máximo de linhas;19                  
+SSPI;#2570;160;ENERSH-235:[TC] Verificar a presença do botão para criação de uma nova Máquina;16                 
+SSPI;#2570-3;161;ENERSH-236:[TC] Verificar a presença de botões de edição para cada Máquina listada;16                 
+SSPI;#2570-3;162;ENERSH-237:[TC] Verificar a presença de botões de exclusão para cada Máquina listada;16                 
+SSPI;#2570-3;163;ENERSH-238:[TC] Tentar listar Máquina utilizando um usuário inativo;24                     
+SSPI;#2570-3;164;ENERSH-239:[TC] Validar nomenclatura das colunas listadas;16                       
+SSPI;#2570-3;165;ENERSH-240:[TC] Listar todas as Máquina com sucesso;15                      
+SSPI;#2570-2;166;"ENERSH-241:[TC] Verificar presença do botão ""Cancelar""";16
+SSPI;#2570-2;167;ENERSH-242:[SPEC] Validar comportamento do campo Descrição;34                       
+SSPI;#2570;168;ENERSH-243:[SPEC] Validar controle de acesso para criação de nova Máquina;20                   
+SSPI;#2570;169;ENERSH-244:[TC] Cadastrar Máquina com sucesso;1                        
+SSPI;#2570;170;ENERSH-245:[TC] Verificar duplicidade no cadastro de um tipo de operação já registrado;3                 
+SSPI;#2570;171;ENERSH-246:[TC] Cadastrar Máquina sem informar nenhum campo obrigatório;4                     
+SSPI;#2570;172;ENERSH-247:[TC] Cancelar cadastro de Máquina com sucesso;2                      
+SSPI;#2278;173;ENERSH-1:[TC] Validar redirecionamento a página de login em usuário não autenticado;13                  
+SSPI;#2278;174;ENERSH-2:[SPEC] Validar se página é redirecionada ao colar link em outra aba do navegador;13               
+SSPI;#2278;175;ENERSH-3:[TC] Validar usuário sem preencher campo $Matricula;31                      
+SSPI;#2278;176;ENERSH-4:[SPEC] Validar acesso de usuário Ativo e Inativo;33                     
+SSPI;#2278;177;ENERSH-5:[SPEC] Validar campo $Matrícula;34                         
+SSPI;#2278;178;ENERSH-6:[SPEC] Validar campo $Senha;34                         
+SSPI;#2279;179;"ENERSH-82:[TC] Validar presença do botão ""Sair""";16
+SSPI;#2279;180;ENERSH-7:[TC] Validar redirecionamento a página de login ao clicar no botão <Sair>;35                 
+SSPI;#2279;181;ENERSH-8:[TC] Validar se sistema ainda ficará logado caso feche a sessão e abra novamente;36               
+SSPI;#2279;182;ENERSH-9:[TC] Validar ação do clique no botão Sair na ausência de conexão com o servidor;37              
+SSPI;#2276;183;ENERSH-48:[TC] Cadastrar usuário com sucesso;1                        
+SSPI;#2276;184;ENERSH-50:[TC] Cadastrar mais de um Administrador no sistema;38                     
+SSPI;#2276;185;ENERSH-51:[TC] Cadastrar usuário informando senhas diferentes nos campos senha e confirmação;39                  
+SSPI;#2276;186;ENERSH-53:[TC] Cadastrar usuário sem informar nenhum campo obrigatório;4                     
+SSPI;#2276;187;ENERSH-55:[TC] Cadastrar Usuário deixando todos os campos do formulário sem preenchimento;4                  
+SSPI;#2276;188;ENERSH-57:Verificar duplicidade de cadastro de Usuário;3                       
+SSPI;#2276;189;ENERSH-58:[SPEC] Criar usuários utilizando diferentes perfis;5                       
+SSPI;#2276;190;ENERSH-60:[TC] Cadastrar usuário sem registrar perfil;4                       
+SSPI;#2275;191;ENERSH-32:[TC] Verificar ação do botão Excluir para um usuário listado e ativo;16                 
+SSPI;#2275;192;ENERSH-31:[TC] Verificar ação do botão Adicionar para um usuário listado e ativo;16                 
+SSPI;#2275;193;ENERSH-29:[TC] Verificar presença do botão Adicionar para um usuário listado e ativo;16                 
+SSPI;#2275;194;ENERSH-28:[TC] Verificar presença do botão Excluir para um usuário listado e ativo;16                 
+SSPI;#2275;195;ENERSH-22:[SPEC] Verificar acesso por Perfis;20                        
+SSPI;#2275;196;ENERSH-23:[TC] Listar usuário inativo;15                         
+SSPI;#2275;197;ENERSH-25:[TC] Verificar presença do botão Editar para um usuário listado e ativo;16                 
+SSPI;#2275;198;ENERSH-30:[TC] Verificar ação do botão Editar para um usuário listado e ativo;16                 
+SSPI;#2275;199;ENERSH-33:[TC] Validar ação de paginação;19                        
+SSPI;#2275;200;ENERSH-34:[TC] Validar nomenclatura das colunas;16                        
+SSPI;#2277;201;ENERSH-81:[TC] Verificar layout do botão Editar para cada usuário cadastrado;16                   
+SSPI;#2277;202;ENERSH-80:[TC] Cancelar edição de usuário com sucesso;10                      
+SSPI;#2277;203;ENERSH-79:[TC] Tentar editar ID interno do usuário;7                      
+SSPI;#2277;204;ENERSH-69:[SPEC] Editar informações do usuário com sucesso;6                      
+SSPI;#2277;205;ENERSH-70:[TC] Verificar duplicidade de nome na edição de usuário;7                    
+SSPI;#2277;206;ENERSH-71:[TC] Verificar duplicidade de matricula na edição de usuário;7                    
+SSPI;#2277;207;ENERSH-72:[TC] Verificar duplicidade de perfil administrador na edição de usuário;38                   
+SSPI;#2277;208;"ENERSH-73:[TC] Verificar presença do botão ""Cancelar""";16
+SSPI;#2252;209;ENERSH-68:[TC] Validar acesso de usuário inativo;24                       
+SSPI;#2252;210;ENERSH-66:[TC] Selecionar dois ou mais filtros para visualização das OPs;21                   
+SSPI;#2252;211;ENERSH-65:[SPEC] Verificar filtro de visualização;21                        
+SSPI;#2252;212;ENERSH-67:[SPEC] Verificar acesso por Perfis;20                        
+SSPI;#2252;213;ENERSH-64:[TC] Fechar visualização da Ordens de Produção;26                      
+SSPI;#2252;214;ENERSH-63:[TC] Validar se todas as OPs disponíveis para planejamento são listadas;21                  
+SSPI;#2252;215;ENERSH-62:[TC] Verificar presença do botão para expandir o sidebar de exibição das OPs;16                
+SSPI;#2589-2;216;ENERSH-90:[SPEC] Validar acesso a lista de tipos de problemas por perfis;20                  
+SSPI;#2589-2;217;ENERSH-89:[TC] Paginar listagem de tipos de problemas ao atingir número máximo de linhas;19                
+SSPI;#2589-2;218;ENERSH-88:[TC] Verificar a presença do botão para criação de um novo tipo de problema;16               
+SSPI;#2589-2;219;ENERSH-87:[TC] Verificar a presença de botões de edição para cada tipo de problema listado;16               
+SSPI;#2589-2;220;ENERSH-86:[TC] Verificar a presença de botões de exclusão para cada tipo de problema listado;16               
+SSPI;#2589-2;221;ENERSH-85:[TC] Tentar listar Tipos de Problemas utilizando um usuário inativo;24                   
+SSPI;#2589-2;222;ENERSH-83:[TC] Listar todos tipos de problemas com sucesso;15                     
+SSPI;#2589-2;223;ENERSH-84:[TC] Validar nomenclatura das colunas listadas;16                       
+SSPI;#2589-1;224;"ENERSH-98:[TC] Verificar presença do botão ""Cancelar""";16
+SSPI;#2589-1;225;ENERSH-95:[SPEC] Validar controle de acesso para criação de novos tipos de problemas;20                 
+SSPI;#2589-1;226;ENERSH-91:[TC] Cadastrar Tipos de Problemas com sucesso;1                      
+SSPI;#2589-1;227;ENERSH-92:[TC] Verificar duplicidade no cadastro de um tipo de problema já registrado;3                 
+SSPI;#2589-1;228;ENERSH-93:[TC] Cadastrar tipo de problema sem informar nenhum campo obrigatório;4                   
+SSPI;#2589-1;229;ENERSH-97:[TC] Cancelar cadastro de Tipo de Problema com sucesso;2                    
+SSPI;#2589-3;230;ENERSH-103:[TC] Editar tipo de problema deixando todos os campos de texto do formulário em branco;8              
+SSPI;#2589-3;231;ENERSH-108:[TC] Verificar duplicidade na edição do tipo de problema;7                    
+SSPI;#2589-3;232;ENERSH-112:[TC] Verificar presença do botão Cancelar;16                       
+SSPI;#2589-3;233;ENERSH-99:[TC] Editar Tipo do Problema com sucesso;6                      
+SSPI;#2589-3;234;ENERSH-111:[TC] Cancelar edição de Tipo de Problema com sucesso;10                    
+SSPI;#2589-4;235;ENERSH-124:[TC] Fechar tela de remoção antes de efetuar a ação de deletar;26                 
+SSPI;#2589-4;236;ENERSH-123:[TC] Deletar tipo de problema com sucesso;12                      
+SSPI;#2589-4;237;ENERSH-122:[TC] Cancelar a remoção de um tipo de problema;27                    
+SSPI;#2598-3;238;ENERSH-212:[TC] Editar tipo de problema deixando todos os campos de texto do formulário em branco;8              
+SSPI;#2598-3;239;ENERSH-213:[TC] Verificar duplicidade na edição do tipo de problema;7                    
+SSPI;#2598-3;240;ENERSH-215:[TC] Verificar presença do botão Cancelar;9                       
+SSPI;#2598-3;241;ENERSH-216:[TC] Editar Tipo do Operação com sucesso;6                      
+SSPI;#2598-3;242;ENERSH-217:[TC] Cancelar cadastro de Tipo de Operação com sucesso;10                    
+SSPI;#2598-1;243;ENERSH-113:[Spec] Validar acesso a lista de tipos de operações por perfis;20                  
+SSPI;#2598-1;244;ENERSH-114:[TC] Paginar listagem de tipos de operações ao atingir número máximo de linhas;19                
+SSPI;#2598-1;245;ENERSH-115:[TC] Verificar a presença do botão para criação de um novo tipo de operação;16               
+SSPI;#2598-1;246;ENERSH-116:[TC] Verificar a presença de botões de edição para cada tipo de operação listado;16               
+SSPI;#2598-1;247;ENERSH-117:[TC] Verificar a presença de botões de exclusão para cada tipo de operação listado;16               
+SSPI;#2598-1;248;ENERSH-118:[TC] Tentar listar Tipos de operações utilizando um usuário inativo;33                   
+SSPI;#2598-1;249;ENERSH-119:[TC] Validar nomenclatura das colunas listadas;16                       
+SSPI;#2598-1;250;ENERSH-120:[TC] Listar todos tipos de operações com sucesso;15                     
+SSPI;#2598-2;251;"ENERSH-125:[TC] Verificar presença do botão ""Cancelar""";16
+SSPI;#2598-2;252;ENERSH-127:[SPEC] Validar controle de acesso para criação de novos tipos de operações;20                 
+SSPI;#2598-2;253;ENERSH-128:[TC] Cadastrar Tipos de operações com sucesso;1                      
+SSPI;#2598-2;254;ENERSH-129:[TC] Verificar duplicidade no cadastro de um tipo de operação já registrado;3                 
+SSPI;#2598-2;255;ENERSH-130:[TC] Cadastrar tipo de operação sem informar nenhum campo obrigatório;4                   
+SSPI;#2598-2;256;ENERSH-131:[TC] Cancelar cadastro de Tipo de Operação com sucesso;2                    
+SSPI;#2598-4;257;ENERSH-218:[TC] Fechar tela de remoção antes de efetuar a ação de deletar;26                 
+SSPI;#2598-4;258;ENERSH-219:[TC] Deletar Tipo de Operação com sucesso;12                      
+SSPI;#2598-4;259;ENERSH-220:[TC] Cancelar a remoção de um Tipo de Operação;27                    
+VRE;#1804;260;Edit project with previously registered name;6                       
+VRE;#1804;261;Login with known credentials;40                         
+VRE;#1804;262;Create user with input validation;1                        
+VRE;#1804;263;Associate organization with user;6                         
+VRE;#1804;264;Edit user;6                           
+VRE;#1804;265;Edit project with previously registered name;6                       
+VRE;#1804;266;Ações do botão Voltar na tela de Histórico de Check-in (Administrador);34                  
+VRE;#1804;267;Teste estático de arquivo de tradução (plataforma Android);41                     
+VRE;#1806;268;Cancel deleting project;27                          
+VRE;#1806;269;Filter project;21                           
+VRE;#1806;270;Create organization with input validation;1                        
+VRE;#1806;271;Cancel project variable creation;2                         
+VRE;#1806;272;Cancel editing project variable;10                         
+VRE;#1806;273;Ocultar e exibir colunas do formulário de Configuração de Rotas;16                   
+VRE;#1806;274;Validar ações do Administrador com GaMMa inoperante;20                      
+VRE;#1806;275;Validar ações do Convidado com GaMMa inoperante;20                      
+VRE;#1806;276;Cancel deleting organization;27                          
+VRE;#1809;277;Edit user password with input validation;6                       
+VRE;#1809;278;Cancel deleting project;27                          
+VRE;#1809;279;Filter user with input validation;21                        
+VRE;#1809;280;Edit organization with previously registered name;7                       
+VRE;#1809;281;Filter organization;21                           
+VRE;#1809;282;Edição de evento global considerando a opção de publicação para convidados e recepcionistas;6                
+VRE;#1815;283;Filter project;21                           
+VRE;#1815;284;Cancel disassociating organization from user through list actions;10                     
+VRE;#1815;285;Create project with previously registered name;1                       
+VRE;#1817;286;Clear all filters (filter project);21                        
+VRE;#1817;287;Search organization with input validation;21                        
+VRE;#1818;288;Filter project;21                           
+VRE;#1818;289;Clear all filters (filter organization);21                        
+Event Driven System for Business Services Integration;#242-3;290;Editar usuário com campo E-mail vazio.;8                 
+Event Driven System for Business Services Integration;#243;291;"Marcar convidados listados na pesquisa como ""convite enviado"" ""Event Driven System for Business Services Integration";21
+Event Driven System for Business Services Integration;#282;292;Fechamento do programa antes da execução ser finalizada.;36
+Event Driven System for Business Services Integration;#282;293;Limite de caracteres para o filtro Route_Desc;16
+Event Driven System for Business Services Integration;#282;294;Exibição de filtros aplicados no arquivo exportado;16
+Event Driven System for Business Services Integration;#273;295;Cancel disassociating user from organization through association list;10
+Event Driven System for Business Services Integration;#273;296;Disassociate organization from user through association list;6
+Event Driven System for Business Services Integration;#273;297;Create and View Project;1
+Event Driven System for Business Services Integration;#273;298;Edit user;6
+Event Driven System for Business Services Integration;#274;299;US11590 - Verificar informações exibidas na lista de pessoas;21
+Event Driven System for Business Services Integration;#274;300;US11589 - Verificar as organizações exibidas;21
+Event Driven System for Business Services Integration;#282;301;Limite de caracteres para os filtros;16
+Event Driven System for Business Services Integration;#275;302;Cancel date picking for monthly and annual charts;10
+Event Driven System for Business Services Integration;#275;303;Ocultar e exibir todas as colunas do formulário;16
+Event Driven System for Business Services Integration;#292;304;US11516 - Verificar o tamanho máximo da foto;34
+Event Driven System for Business Services Integration;#291;305;US11516 - Verificar o tamanho máximo da foto;34
+Event Driven System for Business Services Integration;#253-1;306;Deselecionar convidados filtrados por status;16
+Event Driven System for Business Services Integration;#253-2;307;"Criar """"Outros Links"" com nome já adicionado em outro link no mesmo evento específico.";3    
+Event Driven System for Business Services Integration;#253-3;308;Validar apresentação de detalhes no card de um app tipo Aplicativo sem versão.;16          
+Event Driven System for Business Services Integration;#253-1;309;Pesquisar administrador por nome.;17                   
+Event Driven System for Business Services Integration;#253-3;310;Validar apresentação de detalhes no card de um app tipo Game sem versão;16          
+Event Driven System for Business Services Integration;#253-2;311;"Validações de campos durante a criação de ""Outros Links"" evento específico";34             
+Event Driven System for Business Services Integration;#253-4;312;Remover categoria adicionada na criação de evento;12                
+Event Driven System for Business Services Integration;#253-1;313;Filtrar convidados por dados profissionais;21                  
+Event Driven System for Business Services Integration;#257;314;Cadastrar um plano de teste;1                  
+Event Driven System for Business Services Integration;#257;315;Associar suítes ao plano de teste com alguns casos de testes iguais;6           
+Event Driven System for Business Services Integration;#264;316;Remover Configuração de Insumo com sucesso;12                 
+Event Driven System for Business Services Integration;#264;317;Gráfico de Pessoas;54                    
+Event Driven System for Business Services Integration;#267;318;Action the of Close button in all screens to Device SetUp;34            
+Event Driven System for Business Services Integration;#268;319;Exibir Clientes Ativos;15                    
+Event Driven System for Business Services Integration;#268;320;Gráfico de detalhe de Região;54                  
+Event Driven System for Business Services Integration;#263;321;Limite de caracteres para peso da Cola;34                
+Event Driven System for Business Services Integration;#263;322;Finalizar uso de Cola na Máquina de Cola com peso inválido;44            
+Event Driven System for Business Services Integration;#263;323;"Validação da seção ""Participação em Eventos"" ""Event Driven System for Business Services Integration";34
+Event Driven System for Business Services Integration;#328;324;Explorar exibição de toasts de erro e modificações;42
+Event Driven System for Business Services Integration;#328;325;Exportar tabela de Pasta de Solda;60
+Event Driven System for Business Services Integration;#253;326;Save and Continue for Critical Task - no critical files uploaded;
+Event Driven System for Business Services Integration;#242;327;"Action of the ""top of page"" button on the ""Cover timeline"" screen";34
+Event Driven System for Business Services Integration;#242;328;"Scrolling action on the timeline on the ""Cover Timeline"" screen";34
+Event Driven System for Business Services Integration;#243;329;Filtrar auditoria por (Usuário) como Administrador de dispositivo no MDM Web;21            
+Event Driven System for Business Services Integration;#243;330;Verificar que ações realizadas por Super Usuário não são exibidas para Administrador de dispositivo no MDM Web;20      
+Event Driven System for Business Services Integration;#242-3;331;"Validate reset function in the ""field""""Reset"" All ""Counters"""""" in device Transponder ""Event Driven System for Business Services Integration";6
+Event Driven System for Business Services Integration;#3908;332;Limite de caracteres para os filtros;34
+Event Driven System for Business Services Integration;#3908;333;Fechamento do programa antes da execução ser finalizada.;26
+Event Driven System for Business Services Integration;#3908;334;Limite de caracteres para o filtro Route_Desc;34
+Event Driven System for Business Services Integration;#3908;335;Exibição de filtros aplicados no arquivo exportado;21
+Event Driven System for Business Services Integration;#260;336;Limite de caracteres para peso da Cola;34
+Event Driven System for Business Services Integration;#265;337;"Action the of """"Close"" button in all screens to Device SetUp";34    
+Event Driven System for Business Services Integration;#266;338;Exibir Clientes Ativos;15                    
+Event Driven System for Business Services Integration;#266;339;Gráfico de detalhe de Região;54                  
+Game Marketing Manager;#997;340;Menu dashboard da aplicação (Garantir que as opções do menu dashboard estão sendo exibidas e que é possível clicar em cada opção e acessar sua página específica.);20
+Game Marketing Manager;#997;341;Apresentação do menu principal;20                       
+Game Marketing Manager;#997;342;Dashboard - Inspeção de compatibilidade;20                      
+Game Marketing Manager;#997-1;343;Validações do campo Name no form Edit Group;34                   
+Game Marketing Manager;#997-2;344;Inspeção de usabilidade das ações do botão Fab nas telas de listagem de Configurações;16             
+Game Marketing Manager;#997-3;345;Inspeção de usabilidade das ações do botão Fab nas telas de listagem de Evento;16             
+Game Marketing Manager;#997-4;346;Permissões de usuários para Apps;20                      
+Game Marketing Manager;#997-5;347;Permissões de usuários para Itens de Publicidade;20                    
+Game Marketing Manager;#997-6;348;Permissões de usuários para Campanhas;20                      
+Game Marketing Manager;#997-7;349;Permissões de usuários para Listagem de participantes;20                    
+Game Marketing Manager;#997-8;350;Permissões de usuários para Jogadores;20                      
+Game Marketing Manager;#997-9;351;Permissões de usuários para Push;20                      
+Game Marketing Manager;#997-10;352;Permissões de usuários para Regiões;20                      
+Game Marketing Manager;#997-11;353;Permissões de usuários para Grupos;20                      
+Game Marketing Manager;#997-12;354;Permissões de usuários para Configurações;20                      
+Game Marketing Manager;#997-13;355;Permissões de usuário para Usuários;20                      
+Game Marketing Manager;#1006;356;Add Server's datetime and API version to services' header (Validações do campo Name no form Edit Group);34          
+Game Marketing Manager;#1028;357;Cadastrar eventos com sucesso;1                       
+Game Marketing Manager;#1028;358;Cancelar cadastro de eventos com sucesso;2                     
+Game Marketing Manager;#1028;359;Cadastrar eventos sem campos obrigatórios preenchidos;4                     
+Game Marketing Manager;#1028;360;Verificar presença de campos na tela de inserção;16                   
+Game Marketing Manager;#1028;361;Verificar comportamento máximo de 50 caracteres do campo nome;34                  
+TVD II;#1611;362;TVD-18:[TC] Cadastrar usuário com sucesso;1                       
+TVD II;#1611;363;TVD-44:[SPEC] Validar comportamento do campo Confirmar Senha;34                     
+TVD II;#1611;364;TVD-42:[SPEC] Validar comportamento do campo Telefone;34                      
+TVD II;#1611;365;TVD-20:[TC] Cancelar cadastro de usuário com sucesso;2                     
+TVD II;#1611;366;TVD-24:[TC] Cadastrar usuário sem informar nenhum campo obrigatório;4                    
+TVD II;#1611;367;TVD-29:[SPEC] Verificar duplicidade no cadastro de usuário;3                     
+TVD II;#1611;368;TVD-32:[SPEC] Criar usuários utilizando diferentes perfis;5                      
+TVD II;#1611;369;TVD-35:[SPEC] Validar comportamento do campo Nome;34                      
+TVD II;#1611;370;TVD-37:[SPEC] Validar comportamento do campo Email;34                      
+TVD II;#1611;371;TVD-38:[SPEC] Validar comportamento do campo Senha;25                      
+TVD II;#1611;372;TVD-40:[SPEC] Validar comportamento do campo Perfil;34                      
+TVD II;#1610;373;TVD-57:[TC] Fechar tela de inativação antes de efetuar a ação de desabilitar;26                
+TVD II;#1610;374;TVD-56:[TC] Cancelar a inativação de um usuário;10                     
+TVD II;#1610;375;TVD-55:[TC] Inativar usuário com sucesso;9                       
+TVD II;#1610-2;376;TVD-15:[TC] Verificar a presença do botão para criação de um novo usuário;16                
+TVD II;#1610-2;377;TVD-14:[TC] Verificar a presença de botões de inativação para cada usuário listado;16                
+TVD II;#1610-2;378;TVD-2:[TC] Validar nomenclatura das colunas listadas;16                      
+TVD II;#1610-2;379;TVD-7:[TC] Listar todos os usuários com sucesso;15                     
+TVD II;#1610-2;380;TVD-12:[TC] Tentar listar usuários utilizando um usuário inativo;24                    
+TVD II;#1610-2;381;TVD-8:[SPEC] Validar acesso a lista de usuários por perfis;20                   
+TVD II;#1610-2;382;TVD-13:[TC] Verificar a presença de botões de edição para cada usuário listado;16                
+TVD II;#1610-2;383;TVD-16:[TC] Paginar listagem de usuários ao atingir número máximo de linhas;19                 
+TVD II;#1610-3;384;TVD-52:[SPEC] Validar comportamento do campo Telefone;34                      
+TVD II;#1610-3;385;TVD-51:[SPEC] Validar comportamento do campo Nome;34                      
+TVD II;#1610-3;386;TVD-50:[SPEC] Validar comportamento do campo Email;34                      
+TVD II;#1610-3;387;TVD-46:[SPEC] Editar informações do usuário com sucesso;6                     
+TVD II;#1610-3;388;TVD-47:[SPEC] Verificar duplicidade na edição de usuário;7                     
+TVD II;#1610-3;389;TVD-49:[TC] Editar usuário deixando todos os campos de texto do formulário em branco;8               
+TVD II;#1610-3;390;TVD-53:[TC] Cancelar edição de usuário com sucesso;10                     
+TVD II;#1610-3;391;"TVD-54:[TC] Verificar presença do botão ""Cancelar""";16
+TVD II;#1612;392;TVD-58:[Spec] Buscar usuários;21                         
+TVD II;#1612;393;TVD-59:[Spec] Validar acesso ao Search de usuários por perfis;20                   
+TVD II;#1612;394;TVD-60:[TC] Tentar pesquisar usuários utilizando um usuário inativo;24                    
+TVD II;#1612;395;TVD-61:[TC] Realizar pesquisa informando caracteres especiais;34                      
+TVD II;#1612;396;TVD-62:[TC] Realizar pesquisa informando espaços em branco;34                     
+TVD II;#1612;397;TVD-63:[TC] Pesquisar Usuários informando campo de pesquisa vazio;15                    
+TVD II;#1612;398;TVD-64:[TC] Pesquisar por Usuário inexistente;17                       
+TVD II;#1612;399;TVD-65:[TC] Pesquisar por Usuário inativados do sistema;21                     
+TVD II;#1594;400;TVD-106:[TC] Validar redirecionamento para o login quando o usuário tenta navegar sem estar autenticado;13              
+TVD II;#1594;401;TVD-111:[SPEC] Validar se página é redirecionada ao colar link em outra aba do navegador;13              
+TVD II;#1594;402;TVD-201:[TC] Validar usuário informando um nome sem domínio de e-mail;34                  
+TVD II;#1594;403;TVD-206:[SPEC] Validar usuário informando um e-mail;34                      
+TVD II;#1594;404;TVD-219:[SPEC] Validar campo Login;34                        
+TVD II;#1594;405;TVD-235:[SPEC] Validar campo Senha;34                        
+TVD II;#1594;406;"TVD-238:[TC] Validar redirecionamento à página de login quando o usuário clicar no botão ""Sair""";35
+TVD II;#1594;407;TVD-239:[TC] Validar se sistema ainda ficará logado caso feche a sessão e abra novamente;36              
+TVD II;#1594;408;TVD-240:[TC] Validar ação do clique no botão Sair na ausência de conexão com o servidor;37             
+TVD II;#1604;409;TVD-3:[TC] Incluir dispositivo já existente no banco de dados;3                   
+TVD II;#1604;410;TVD-4:[TC] Incluir dispositivo com sucesso;1                       
+TVD II;#1604;411;TVD-5:[TC] Cadastrar dispositivos deixando todos os campos em branco;4                   
+TVD II;#1604;412;TVD-9:[TC] Verificar se existe TimeOut da sessão;18                     
+TVD II;#1604;413;TVD-10:[TC] Validar adição de novo dispositivo junto ao Banco de Dados;1                 
+TVD II;#1604;414;TVD-11:[SPEC] Verificar layout na tela para Cadastro de Dispositivo;16                   
+TVD II;#1604;415;"TVD-17:[SPEC] Validar campo ""Nome""";34
+TVD II;#1604;416;"TVD-48:[SPEC] Validar campo ""Descrição""";34
+TVD II;#1602;417;TVD-45:[TC] Verificar se perfil de usuário não Administrador consegue Listar algum dispositivo;20                
+TVD II;#1602;418;TVD-78:[TC] Verificar se perfil de usuário Administrador consegue Listar algum dispositivo;20                 
+TVD II;#1602;419;TVD-79:[SPEC] Validar cabeçalhos da tabela;16                       
+TVD II;#1602;420;TVD-80:[TC] Validar comportamento dos botão Exclusão;34                      
+TVD II;#1602;421;TVD-81:[TC] Validar comportamento dos botão Edição;34                      
+TVD II;#1602;422;TVD-85:[TC] Validar paginação da tabela: 10 linhas;19                     
+TVD II;#1602-2;423;TVD-27:[TC] Verificar layout da tela de confirmação da Exclusão;16                   
+TVD II;#1602-2;424;TVD-28:[TC] Deletar dispositivo com sucesso;12                       
+TVD II;#1602-2;425;TVD-30:[TC] Cancelar a remoção de um dispositivo;27                     
+TVD II;#1602-2;426;TVD-31:[TC] Fechar tela de remoção antes de efetuar a ação de deletar;26                
+TVD II;#1602-2;427;TVD-33:[TC] Verificar se perfil de usuário não Administrador consegue Excluir algum dispositivo;20                
+TVD II;#1602-3;428;TVD-41:[TC] Verificar se perfil de usuário não Administrador consegue Editar algum dispositivo;20                
+TVD II;#1602-3;429;TVD-34:[TC] Cancelar a edição de um dispositivo;10                     
+TVD II;#1602-3;430;TVD-36:[TC] Verificar clique fora do modal de edição;34                    
+TVD II;#1602-3;431;TVD-43:[TC] Editar dispositivo deixando todos os campos de texto do formulário em branco;8               
+TVD II;#1602-3;432;TVD-67:[SPEC] Validar layout de campos do formulário modal Edição;16                   
+TVD II;#1602-3;433;TVD-71:[SPEC] Validar campo Nome;34                        
+TVD II;#1602-3;434;TVD-76:[SPEC] Validar campo Descrição;34                        
+TVD II;#1603;435;TVD-88:[TC] Verificar nomenclatura do campo Pesquisa;16                      
+TVD II;#1603;436;"TVD-89:[TC] Verificar se campo é ""case sensitive""";34
+TVD II;#1603;437;TVD-90:[TC] Verificar quantidade máxima de caracteres campo Pesquisa;34                    
+TVD II;#1603;438;TVD-91:[TC] Validar ação do botão da Lupa;34                     
+TVD II;#1603;439;TVD-92:[TC] Validar ação ao digitar caracteres no campo Pesquisa com iniciais de dispositivo cadastrado;34              
+TVD II;#1603;440;TVD-94:[TC] Validar ação ao digitar caracteres no campo Pesquisa com iniciais de disp. NÃO cadastrados;34             
+TVD II;#1603;441;TVD-103:[TC] Validar se usuário Não Administrador consegue realizar pesquisa no campo Pesquisa;20                
+TVD II;#1613-1;442;TVD-86:[SPEC] Validar comportamento do campo Descrição;34                      
+TVD II;#1613-1;443;TVD-84:[SPEC] Validar comportamento do campo Nome;34                      
+TVD II;#1613-1;444;TVD-82:[SPEC] Validar acesso a criação de itens de avaliação por perfis;20                 
+TVD II;#1613-1;445;TVD-70:[TC] Criar item de avaliação sem informar campos obrigatórios;4                   
+TVD II;#1613-1;446;TVD-69:[TC] Criar item de avaliação com a mesma nomenclatura;3                   
+TVD II;#1613-1;447;TVD-68:[TC] Criar item de avaliação com sucesso;1                     
+TVD II;#1613-1;448;TVD-72:[TC] Cancelar criação de item de avaliação com sucesso;2                   
+TVD II;#1613-1;449;TVD-73:[TC] Verificar clique fora da janela de criação;34                    
+TVD II;#1613-1;450;TVD-75:[TC] Criar item de avaliação com o nome de um que tenha sido recentemente excluído;29             
+TVD II;#1613-1;451;TVD-83:[TC] Tentar criar item de avaliação utilizando um usuário inativo;24                  
+TVD II;#1613-2;452;TVD-115:[TC] Cancelar a remoção de um Item de Avaliação;27                   
+TVD II;#1613-2;453;TVD-77:[TC] Deletar Itens de Avaliação com sucesso;12                     
+TVD II;#1614;454;TVD-107:[TC] Paginar listagem de métricas ao atingir número máximo de linhas;19                 
+TVD II;#1614;455;TVD-105:[TC] Verificar a presença do botão para edição de uma nova métrica;16                
+TVD II;#1614;456;TVD-104:[TC] Verificar a presença do botão para criação de uma nova métrica;16                
+TVD II;#1614;457;TVD-102:[TC] Verificar a presença de botões de exclusão para cada métrica listada;16                
+TVD II;#1614;458;TVD-101:[TC] Verificar a presença do botão para criação de um novo item;16                
+TVD II;#1614;459;TVD-100:[TC] Verificar a presença de botões de exclusão para cada item listado;16                
+TVD II;#1614;460;TVD-98:[TC] Tentar listar itens utilizando um usuário inativo;24                    
+TVD II;#1614;461;TVD-97:[SPEC] Validar acesso a lista de Itens por perfis;20                   
+TVD II;#1614;462;TVD-96:[TC] Listar todas as métricas de um item com sucesso;15                  
+TVD II;#1614;463;TVD-93:[TC] Listar todos os Itens em tabs com sucesso;15                   
+TVD II;#1614;464;TVD-95:[TC] Validar nomenclatura das tabs listadas;16                      
+TVD II;#1614;465;TVD-87:[TC] Paginar listagem de itens ao atingir número máximo de tabs;19                 
+TVD II;#1615;466;TVD-114:[TC] Tentar criar métricas de avaliação utilizando um usuário inativo;24                  
+TVD II;#1615;467;TVD-113:[SPEC] Validar acesso a criação de métricas de avaliação por perfis;20                 
+TVD II;#1615;468;TVD-112:[SPEC] Validar comportamento do campo Descrição Métricas;34                     
+TVD II;#1615;469;TVD-110:[TC] Criar métrica de avaliação sem informar campos obrigatórios;4                   
+TVD II;#1615;470;TVD-109:[TC] Criar métrica de avaliação sem possuir um item de avaliação;4                 
+TVD II;#1615;471;TVD-108:[TC] Criar métricas de avaliação com sucesso;1                     
+TVD II;#1617;472;TVD-276:[TC] Realizar busca de relatório com sucesso;15                     
+TVD II;#1617;473;TVD-277:[TC] Tentar pesquisar dispositivos utilizando um usuário inativo;24                    
+TVD II;#1617;474;TVD-278:[TC] Validar resultado ao buscar relatório pelo nome do usuário;21                  
+TVD II;#1617;475;TVD-279:[TC] Validar resultado ao buscar relatório pela data;21                    
+TVD II;#1617;476;TVD-280:[TC] Validar comportamento do sistema para uma busca sem resultados;17                  
+TVD II;#1617;477;TVD-281:[TC] Validar ação do botão da Lupa;34                     
+TVD II;#1617;478;TVD-283:[TC] Validar ação ao digitar caracteres no campo Pesquisa com iniciais de dispositivo cadastrado;34              
+TVD II;#1617;479;TVD-284:[TC] Validar ação ao digitar caracteres no campo Pesquisa com iniciais de disp. NÃO cadastrados;34             
+TVD II;#1617;480;TVD-286:[Spec] Validar acesso a pesquisa de dispositivos por perfis;20                   
+TVD II;#1617;481;TVD-289:[SPEC] Validações de campo Search;34                       
+TVD II;#1619;482;"TVD-292:[SPEC] Validações de ação do botão ""Visualizar""";34
+TVD II;#1619;483;TVD-293:[SPEC] Validar dados gerais da tela de visualização;16                    
+TVD II;#1619;484;TVD-294:[SPEC] Validar tela de Sumário;16                       
+TVD II;#1619;485;TVD-295:[SPEC] Validar informações detalhadas;16                        
+TVD II;#1618;486;TVD-275:[SPEC] Filtrar Relatórios informando filtros de datas que não possuam relatórios associados;17                
+TVD II;#1618;487;TVD-274:[SPEC] Filtrar Relatórios informando filtros de datas que possuam relatórios associados;17                 
+TVD II;#1618;488;TVD-282:[TC] Tentar realizar uma pesquisa de relatórios utilizando Data Inicial em formato inválido;44               
+TVD II;#1618;489;TVD-285:[TC] Tentar realizar uma pesquisa de relatórios utilizando Data Final em formato inválido;44               
+TVD II;#1618;490;TVD-288:[TC] Tentar realizar uma pesquisa de relatórios utilizando a primeira Data disponibilizada;44                
+TVD II;#1618;491;TVD-287:[TC] Tentar realizar uma pesquisa de relatórios utilizando a última Data disponibilizada;44                
+TVD II;#1618;492;TVD-290:[SPEC] Validar comportamento do campo Data Inicial;34                     
+TVD II;#1618;493;TVD-291:[SPEC] Validar comportamento do campo Data Final;34                     
+TVD II;#1620;494;TVD-267: [SPEC] Validar acesso para realizar Download de relatório;20                   
+TVD II;#1620;495;TVD-266:[SPEC] Realizar download de um relatório de Avaliação;45                    
+TVD II;#1620;496;TVD-269:[TC] Gerar PDF de relatório com sucesso;46                     
+TVD II;#1620;497;TVD-270:[TC] Tentar gerar arquivo de Relatório em um formato diferente de PDF;47                
+TVD II;#1620;498;TVD-271:[TC] Validar nomenclatura do arquivo PDF gerado;48                     
+TVD II;#1620;499;TVD-273:[TC] Validar consistência da estrutura do arquivo PDF gerada;16                   
+TVD II;#1627;500;TVD-334:[SPEC] Editar informações do usuário com sucesso;6                     
+TVD II;#1627;501;TVD-335:[SPEC] Verificar duplicidade na edição de usuário;7                     
+TVD II;#1627;502;TVD-336:[TC] Editar usuário deixando todos os campos de texto do formulário em branco;8               
+TVD II;#1627;503;TVD-350:[SPEC] Validar comportamento do campo Nome;34                      
+TVD II;#1627;504;TVD-333:[SPEC] Validar comportamento do campo Email;34                      
+TVD II;#1627;505;TVD-351:[SPEC] Validar comportamento do campo Perfil;34                      
+TVD II;#1627;506;TVD-337:[TC] Cancelar edição de usuário com sucesso;10                     
+TVD II;#1627;507;"TVD-338:[TC] Verificar presença do botão ""Cancelar""";16
+TVD II;#1627;508;TVD-352:[TC] Editar Usuário no App Mobile e verificar sua modificação na Plataforma Web;6               
+TVD II;#1626;509;TVD-339:[Spec] Buscar usuários;15                         
+TVD II;#1626;510;TVD-340:[Spec] Validar acesso ao Search de usuários por perfis;20                   
+TVD II;#1626;511;TVD-341:[TC] Tentar pesquisar usuários utilizando um usuário inativo;24                    
+TVD II;#1626;512;TVD-342:[TC] Realizar pesquisa informando caracteres especiais;34                      
+TVD II;#1626;513;TVD-343:[TC] Realizar pesquisa informando espaços em branco;34                     
+TVD II;#1626;514;TVD-344:[TC] Pesquisar Usuários informando campo de pesquisa vazio;15                    
+TVD II;#1626;515;TVD-345:[TC] Pesquisar por Usuário inexistente;17                       
+TVD II;#1626;516;TVD-346:[TC] Pesquisar por Usuário inativados do sistema;21                     
+TVD II;#1629;517;TVD-311:[TC] Cadastrar usuário com sucesso;1                       
+TVD II;#1629;518;TVD-313:[TC] Cadastrar usuário sem informar nenhum campo obrigatório;4                    
+TVD II;#1629;519;TVD-347:[TC] Cadastrar usuário informando email inválido;43                      
+TVD II;#1629;520;TVD-314:[SPEC] Verificar duplicidade no cadastro de usuário;3                     
+TVD II;#1629;521;TVD-315:[SPEC] Criar usuários utilizando diferentes perfis;5                      
+TVD II;#1629;522;TVD-316:[SPEC] Validar comportamento do campo Nome;34                      
+TVD II;#1629;523;TVD-317:[SPEC] Validar comportamento do campo Email;34                      
+TVD II;#1629;524;TVD-319:[SPEC] Validar comportamento do campo Perfil;34                      
+TVD II;#1629;525;TVD-312:[TC] Cancelar cadastro de usuário com sucesso;1                     
+TVD II;#1629;526;TVD-348:[TC] Cadastrar Usuário no App Mobile e verificar sua existência na Plataforma Web;6               
+TVD II;#1629;527;"TVD-349:[TC] Verificar presença do botão ""Cancelar""";16
+TVD II;#1628;528;TVD-354:[TC] Verificar clique fora da janela de exclusão;34                    
+TVD II;#1628;529;TVD-353:[TC] Excluir Usuário no App Mobile e verificar sua exclusão na Plataforma Web;34               
+TVD II;#1628;530;TVD-320:[TC] Fechar tela de inativação antes de efetuar a ação de desabilitar;26                
+TVD II;#1628;531;TVD-321:[TC] Cancelar a inativação de um usuário;10                     
+TVD II;#1628;532;TVD-322:[TC] Inativar usuário com sucesso;9                       
+TVD II;#1626-2;533;TVD-326:[TC] Listar todos os usuários com sucesso;15                     
+TVD II;#1626-2;534;TVD-325:[TC] Validar nomenclatura das colunas listadas;16                      
+TVD II;#1626-2;535;TVD-328:[SPEC] Validar acesso a lista de usuários por perfis;20                   
+TVD II;#1626-2;536;TVD-327:[TC] Tentar listar usuários utilizando um usuário inativo;24                    
+TVD II;#1626-2;537;TVD-323:[TC] Verificar a presença do botão para criação de um novo usuário;16                
+TVD II;#1626-2;538;TVD-324:[TC] Verificar a presença de botões de inativação para cada usuário listado;16                
+TVD II;#1626-2;539;TVD-329:[TC] Verificar a presença de botões de edição para cada usuário listado;16                
+TVD II;#1626-2;540;TVD-330:[TC] Validar que o App Mobile exibe a mesma quantidade de usuários presentes na Plataforma Web;15            
+TVD II;#1532-1;541;TVD-411:[TC] Cadastrar tipos de testes;1                       
+TVD II;#1532-1;542;TVD-413:[TC] Verificar duplicidade no cadastro de um teste já registrado;3                  
+TVD II;#1532-1;543;TVD-416:[TC] Cadastrar teste sem informar nenhum campo;4                     
+TVD II;#1532-1;544;TVD-417:[SPEC] Validar controle de acesso para criação de novos testes;20                  
+TVD II;#1532-1;545;TVD-420:[SPEC] Validar comportamento do campo Nome;34                      
+TVD II;#1532-1;546;TVD-426:[SPEC] Validar comportamento do campo Descrição;34                      
+TVD II;#1532-1;547;TVD-427:[SPEC] Validar comportamento do campo Data Inicial;34                     
+TVD II;#1532-1;548;TVD-428:[SPEC] Validar comportamento do campo Data Final;34                     
+TVD II;#1532-1;549;"TVD-429:[TC] Validar comportamento do Selectbox ""Nivel de Pesquisa""";34
+TVD II;#1532-1;550;"TVD-434:[TC] Validar comportamento do Selectbox ""Equipamento Usado""";34
+TVD II;#1532-1;551;TVD-435:[TC] Verificar presença do botão Cancelar;16                      
+TVD II;#1532-1;552;TVD-436:[TC] Cancelar cadastro de teste com sucesso;2                     
+TVD II;#1532-2;553;TVD-473:[TC] Pesquisar teste com sucesso;15                       
+TVD II;#1532-2;554;TVD-479:[TC] Pesquisar por teste inexistente;17                       
+TVD II;#1532-2;555;TVD-474:[Spec] Validar acesso a pesquisa de testes por perfis;20                   
+TVD II;#1532-2;556;TVD-475:[TC] Tentar pesquisar testes utilizando um usuário inativo;24                    
+TVD II;#1532-2;557;TVD-476:[TC] Realizar pesquisa informando caracteres especiais;34                      
+TVD II;#1532-2;558;TVD-477:[TC] Realizar pesquisa informando espaços em branco;34                     
+TVD II;#1532-2;559;TVD-478:[TC] Pesquisar testes informando campo de pesquisa vazio;34                    
+TVD II;#1532-2;560;TVD-480:[TC] Pesquisar por testes inativados do sistema;21                     
+TVD II;#1532-3;561;TVD-441:[TC] Editar tipos de testes;6                       
+TVD II;#1532-3;562;TVD-442:[TC] Verificar duplicidade na edição do teste;7                     
+TVD II;#1532-3;563;TVD-443:[TC] Editar teste sem informar nenhum campo;8                     
+TVD II;#1532-3;564;TVD-444:[SPEC] Validar controle de acesso para edição de testes;20                   
+TVD II;#1532-3;565;TVD-445:[SPEC] Validar comportamento do campo Nome;34                      
+TVD II;#1532-3;566;TVD-446:[SPEC] Validar comportamento do campo Descrição;34                      
+TVD II;#1532-3;567;TVD-447:[SPEC] Validar comportamento do campo Data Inicial;34                     
+TVD II;#1532-3;568;TVD-448:[SPEC] Validar comportamento do campo Data Final;34                     
+TVD II;#1532-3;569;"TVD-449:[TC] Validar comportamento do Selectbox ""Nivel de Pesquisa""";34
+TVD II;#1532-3;570;"TVD-458:[TC] Validar comportamento do Selectbox ""Equipamento Usado""";34
+TVD II;#1532-3;571;TVD-451:[TC] Verificar presença do botão Cancelar;16                      
+TVD II;#1532-3;572;TVD-452:[TC] Cancelar cadastro de teste com sucesso;2                     
+TVD II;#1532-4;573;TVD-459:[TC] Inativar teste com sucesso;9                       
+TVD II;#1532-4;574;TVD-460:[TC] Cancelar a inativação de um teste;10                     
+TVD II;#1532-4;575;TVD-461:[TC] Verificar comportamento ao inativar item;                      
+TVD II;#1532-5;576;TVD-464:[TC] Listar todas as baterias de testes com sucesso;15                   
+TVD II;#1532-5;577;TVD-465:[TC] Validar nomenclatura das colunas listadas;16                      
+TVD II;#1532-5;578;TVD-466:[SPEC] Validar acesso a lista de usuários por perfis;20                   
+TVD II;#1532-5;579;TVD-467:[TC] Tentar listar testes utilizando um usuário inativo;24                    
+TVD II;#1532-5;580;TVD-468:[TC] Verificar a presença do botão para criação de um novo teste;16                
+TVD II;#1532-5;581;TVD-469:[TC] Verificar a presença de botões de inativação para cada teste listado;16                
+TVD II;#1532-5;582;TVD-470:[TC] Verificar a presença de botões de edição para cada teste listado;16                
+TVD II;#1532-5;583;TVD-471:[TC] Validar que o App Mobile exibe a mesma quantidade de testes presentes na Plataforma Web;15            
+TVD II;#1532-5;584;TVD-472:[TC] Paginar listagem de baterias de testes ao atingir número máximo de linhas;19               
+TVD II;#1577;585;TVD-355:[SPEC] Validar acesso de usuário;20                       
+TVD II;#1577;586;TVD-356:[SPEC] Realizar Login sem informar campos obrigatórios;31                     
+TVD II;#1577;587;TVD-359:[SPEC] Validar campo Login;34                        
+TVD II;#1577;588;TVD-360:[SPEC] Validar campo Senha;34                        
+TVD II;#1578;589;"TVD-366:[TC] Validar presença do botão ""Sair""";16
+TVD II;#1578;590;"TVD-361:[TC] Validar redirecionamento à página de login quando o usuário clicar no botão ""Sair""";35
+TVD II;#1578;591;TVD-362:[TC] Validar se sistema ainda ficará logado caso feche a sessão e abra novamente;36              
+TVD II;#1578;592;TVD-363:[TC] Validar ação do clique no botão Sair na ausência de conexão com o servidor;37             
+TVD II;#1564;593;TVD-485:[TC] Validar presença do scroll na listagem de dispositivos;16                   
+TVD II;#1564;594;TVD-487:[TC] Validar presença do botão <Realizar Teste> ao selecionar um dispositivo;16                 
+TVD II;#1564;595;TVD-486:[TC] Validar presença do botão Voltar;16                      
+TVD II;#1564;596;TVD-489:[TC] Testar ação do scroll em tela com quantidade de dispositivos inferior a 10;19              
+TVD II;#1564;597;TVD-490:[TC] Testar ação do scroll em tela com quantidade de dispositivos superior a 10;19              
+TVD II;#1564;598;TVD-491:[TC] Validar comportamento ao listar dispositivos em caso de perda de conexão;37                
+TVD II;#1564;599;TVD-492:[TC] Excluir um dispositivo na plataforma Web e testar sincronização da exclusão em Mobile;              
+TVD II;#1564;600;TVD-493:[TC] Validar acesso de Perfil não Adm à listagem de Dispositivos;20                 
+AR Tools Web;#11971;601;Cadastrar com dados inválidos;43                       
+AR Tools Web;#11971;602;Cadastrar com dados válidos;1                       
+AR Tools Web;#11971;603;Cadastrar sem estar logado;13                       
+AR Tools Web;#11971;604;Cadastrar sem permissão;20                        
+AR Tools Web;#11971;605;Cadastrar sem campos obrigatórios;4                       
+AR Tools Web;#11971;606;Cadastrar com username existente;3                       
+AR Tools Web;#11971;607;Cadastrar usuários com papeis diferentes;5                      
+AR Tools Web;#11971;608;Verificar campo senha e confirmação;39                      
+AR Tools Web;#11971-2;609;Editar com dados válidos;6                       
+AR Tools Web;#11971-2;610;Editar com dados inválidos;7                       
+AR Tools Web;#11971-2;611;Editar sem permissão;20                        
+AR Tools Web;#11971-2;612;Editar sem estar logado;13                       
+AR Tools Web;#11971-2;613;Editar sem campos obrigatórios;8                       
+AR Tools Web;#11971-2;614;Editar com username existente;7                       
+AR Tools Web;#11971-2;615;Verificar campo senha e confirmação;39                      
+AR Tools Web;#11971-3;616;Verificar paginação;19                         
+AR Tools Web;#11971-3;617;Listagem com sucesso;15                        
+AR Tools Web;#11971-3;618;Verificar presença de campos retornados;16                      
+AR Tools Web;#11971-3;619;Validar resltado da consulta de usuários;21                     
+AR Tools Web;#11971-3;620;Validar resltado da consulta de usuários sem dados;17                   
+Gestão da Capacitação;US01;621;gestao-capacita-5: Primeiro Login do Administrador;28                      
+Gestão da Capacitação;US02;622;gestao-capacita-6: Alteração de Senha do Administrador;6                     
+Gestão da Capacitação;US03;623;gestao-capacita-7: Recuperação de senha de administrador;30                     
+Gestão da Capacitação;US04;624;gestao-capacita-8: Criação de Contrato;1                       
+Gestão da Capacitação;US04;625;gestao-capacita-9:Criaçao de Contrato apenas com Campos Obrigatorios;1                    
+Gestão da Capacitação;US04;626;Criação de Contrato campos inválidos;43                      
+Gestão da Capacitação;US04;627;Criação de contrato sem autenticação;13                      
+Gestão da Capacitação;US04;628;Criação de contrato sem autorização;20                      
+Gestão da Capacitação;US05;629;gestao-capacita-10: Criação de Gestor;1                       
+Gestão da Capacitação;US05;630;Criação de gestor campos obrigatórios não preenchidos;4                    
+Gestão da Capacitação;US05;631;Criação de gestor campos inválidos;43                      
+Gestão da Capacitação;US05;632;Criação de gestor sem autenticação;13                      
+Gestão da Capacitação;US05;633;Criação de gestor sem autorização;20                      
+Gestão da Capacitação;US06;634;gestao-capacita-11: Exclusão de Conta de Gestor;12                     
+Gestão da Capacitação;US06;635;Exclusão de conta de gestor sem autenticação;13                    
+Gestão da Capacitação;US06;636;Exclusão de conta de gestor sem autorização;20                    
+Gestão da Capacitação;US07;637;Expandir informações de um gestro cadastrado;22                     
+Gestão da Capacitação;US07;638;Expandir informações de um gestro cadastrado sem autorização;13                   
+Gestão da Capacitação;US07;639;Expandir informações de um gestro cadastrado sem autenticação;20                   
+Gestão da Capacitação;US08;640;gestao-capacita-13: Ordenação de Gestores;21                       
+Gestão da Capacitação;US08;641;gestao-capacita-13: Ordenação de Gestores - Sem autenticação;13                    
+Gestão da Capacitação;US08;642;gestao-capacita-13: Ordenação de Gestores - Sem autorização;20                    
+Gestão da Capacitação;US09;643;gestao-capacita-14: Fazer logout;35                        
+Gestão da Capacitação;US10;644;gestao-capacita-15: Criação de Conta de Coach;1                     
+Gestão da Capacitação;US10;645;gestao-capacita-15: Criação de Conta de Coach - Campos Obrigatórios;4                  
+Gestão da Capacitação;US10;646;gestao-capacita-15: Criação de Conta de Coach - Campos Inválidos;43                  
+Gestão da Capacitação;US10;647;gestao-capacita-15: Criação de Conta de Coach - Sem Autenticação;13                  
+Gestão da Capacitação;US10;648;gestao-capacita-15: Criação de Conta de Coach - Sem Autorização;20                  
+Gestão da Capacitação;US13;649;gestao-capacita-17: Ordenar lista de coaches cadastrados;                     
+Gestão da Capacitação;US13;650;gestao-capacita-17: Ordenar lista de coaches cadastrados - Sem dados;17                  
+Gestão da Capacitação;US13;651;gestao-capacita-17: Ordenar lista de coaches cadastrados - Sem autenticação;13                  
+Gestão da Capacitação;US13;652;gestao-capacita-17: Ordenar lista de coaches cadastrados - Sem autorização;20                  
+Gestão da Capacitação;US14;653;gestao-capacita-18: Criação de Conta de Aluno;1                     
+Gestão da Capacitação;US15;654;gestao-capacita-19: Exclusão de Conta de Aluno;12                     
+Gestão da Capacitação;US16;655;gestao-capacita-20: Expansão das Informações de Aluno;22                     
+Gestão da Capacitação;US16;656;gestao-capacita-20: Expansão das Informações de Aluno - Sem dados;17                  
+Gestão da Capacitação;US16;657;gestao-capacita-20: Expansão das Informações de Aluno - Sem autenticação;13                  
+Gestão da Capacitação;US16;658;gestao-capacita-20: Expansão das Informações de Aluno - Sem autorização;20                  
+Gestão da Capacitação;US17;659;Ordenar lista de alunos cadastrados;649                      
+Gestão da Capacitação;US17;660;Ordenar lista de alunos cadastrados - Sem autenticação;13                   
+Gestão da Capacitação;US17;661;Ordenar lista de alunos cadastrados - Sem autorização;20                   
+Gestão da Capacitação;US18;662;gestao-capacita-22: Criação de Equipe;1                       
+Gestão da Capacitação;US18;663;gestao-capacita-22: Criação de Equipe - Campos obrigatórios;4                    
+Gestão da Capacitação;US18;664;gestao-capacita-22: Criação de Equipe - Campos inválidos;43                    
+Gestão da Capacitação;US18;665;gestao-capacita-22: Criação de Equipe - Sem autenticação;13                    
+Gestão da Capacitação;US18;666;gestao-capacita-22: Criação de Equipe - Sem autorização;20                    
+Gestão da Capacitação;US19;667;gestao-capacita-23: Atualização de Dados,;6
+Gestão da Capacitação;US20;668;gestao-capacita-24: Cadastro de Horarios;1                       
+Gestão da Capacitação;US20;669;gestao-capacita-24: Cadastro de Horarios - Sem campos obrigatórios;4                   
+Gestão da Capacitação;US20;670;gestao-capacita-37: Cadastrar horários, com menos de duas horas diárias, na agenda.;49
+Gestão da Capacitação;US20;671;gestao-capacita-38: Cadastrar horários, com mais de quatro horas diárias, na agenda.;49
+Gestão da Capacitação;US20;672;gestao-capacita-39: Cadastrar horários, com menos de vintes horas semanais, na agenda.;49
+Gestão da Capacitação;US20;673;gestao-capacita-40: Cadastrar horários, com mais de vintes horas semanais, na agenda.;49
+Gestão da Capacitação;US21;674;gestao-capacita-25: Visualização de Horarios da Equipe;15                     
+Gestão da Capacitação;US21;675;gestao-capacita-25: Visualização de Horarios da Equipe - Sem dados;17                  
+Gestão da Capacitação;US21;676;gestao-capacita-25: Visualização de Horarios da Equipe - Sem autenticação;13                  
+Gestão da Capacitação;US21;677;gestao-capacita-25: Visualização de Horarios da Equipe - Sem autorização;20                  
+Gestão da Capacitação;US22;678;gestao-capacita-26: Registro de Atividade de Teste;1                     
+Gestão da Capacitação;US22;679;gestao-capacita-27: Registro de Atividade de Desenvolvimento;1                     
+Gestão da Capacitação;US23;680;gestao-capacita-28: Revisar atividade de Teste;6                      
+Gestão da Capacitação;US24;681;gestao-capacita-28: Revisar atividade de Teste;6                      
+Gestão da Capacitação;US25;682;gestao-capacita-29: Desalocar Alunos da Equipe - Sem autenticação;13                   
+Gestão da Capacitação;US25;683;gestao-capacita-29: Desalocar Alunos da Equipe - Sem autorização;20                   
+Gestão da Capacitação;US25;684;gestao-capacita-29: Desalocar Alunos da Equipe;6                      
+Gestão da Capacitação;US26;685;gestao-capacita-30: Buscas por Usuários;15                       
+Gestão da Capacitação;US27;686;gestao-capacita-30: Buscas por Usuários;15                       
+Gestão da Capacitação;US28;687;gestao-capacita-30: Buscas por Usuários;15                       
+Gestão da Capacitação;US28;688;gestao-capacita-30: Buscas por Usuários - Sem autenticação;13                    
+Gestão da Capacitação;US28;689;gestao-capacita-30: Buscas por Usuários - Sem autorização;20                    
+Gestão da Capacitação;US29;690;gestao-capacita-25: Visualização de Horarios da Equipe;15                     
+Gestão da Capacitação;US29;691;gestao-capacita-25: Visualização de Horarios da Equipe - Sem dados;17                  
+Gestão da Capacitação;US29;692;gestao-capacita-25: Visualização de Horarios da Equipe - Sem autenticação;13                  
+Gestão da Capacitação;US29;693;gestao-capacita-25: Visualização de Horarios da Equipe - Sem autorização;20                  
+Gestão da Capacitação;US30;694;gestao-capacita-30: Buscas por Usuários;15                       
+Gestão da Capacitação;US35;695;gestao-capacita-24:Cadastro de Horarios;1                        
+Gestão da Capacitação;US35;696;gestao-capacita-37:Cadastrar horários, com menos de duas horas diárias, na agenda.;49
+Gestão da Capacitação;US35;697;gestao-capacita-38:Cadastrar horários, com mais de quatro horas diárias, na agenda.;49
+Gestão da Capacitação;US35;698;gestao-capacita-39:Cadastrar horários, com menos de vintes horas semanais, na agenda.;49
+Gestão da Capacitação;US35;699;gestao-capacita-40:Cadastrar horários, com mais de vintes horas semanais, na agenda.;49
+Gestão da Capacitação;US35;700;gestao-capacita-68:Cadastrar horários irregulares, com permissão do coach;1
+Gestão da Capacitação;US36;701;gestao-capacita-22: Criação de Equipe;1                       
+Gestão da Capacitação;US36;702;gestao-capacita-69: Listagem de Equipes;15                       
+Gestão da Capacitação;US39;703;gestao-capacita-41: Atualizar nome de usuários contendo números.;34                    
+Gestão da Capacitação;US39;704;gestao-capacita-42: Atualizar nome de usuários contendo caracteres especiais.;34                   
+Gestão da Capacitação;US39;705;gestao-capacita-43: Atualizar cpf de usuários menos de onze números.;34                  
+Gestão da Capacitação;US39;706;gestao-capacita-44: Atualizar cpf de usuários contendo letras.;34                    
+Gestão da Capacitação;US39;707;gestao-capacita-45: Atualizar cpf de usuários contendo caracteres especiais.;34                   
+Gestão da Capacitação;US39;708;gestao-capacita-57: Atualizar RG com menos de sete números.;34                   
+Gestão da Capacitação;US39;709;gestao-capacita-58: Atualizar data de nascimento de usuários para menos de 16 anos.;34               
+Gestão da Capacitação;US39;710;gestao-capacita-59: Salvar sem selecionar perído.;4                      
+Gestão da Capacitação;US39;711;gestao-capacita-60: Salvar sem selecionar um curso.;4                     
+Gestão da Capacitação;US39;712;gestao-capacita-61: Atualizar CRA para um valor maior que dez;34                  
+Gestão da Capacitação;US39;713;gestao-capacita-62: Atualizar CRA para um valor menor que zero.;34                  
+Gestão da Capacitação;US39;714;gestao-capacita-63: Atualizar dados de conclusão contendo letras.;34                    
+Gestão da Capacitação;US39;715;gestao-capacita-64: Atualizar dados de conclusão contendo caracteres especiais.;34                   
+Gestão da Capacitação;US39;716;gestao-capacita-65: Atualizar dados do histórico acadêmico com arquivos em outros formatos.;34                
+Gestão da Capacitação;US39;717;gestao-capacita-66: Atualizar CRA com mais de duas casas após a vírgula;34                
+Gestão da Capacitação;US39;718;gestao-capacita-67: Atualizar CRA com símbolo de menos;34                    
+Kaizen;#9;719;kaizen-59:Cadastrar usuário com permissão Básica;1                        
+Kaizen;#9;720;kaizen-2:Cadastro de usuário válido;1                         
+Kaizen;#9;721;kaizen-66:Cadastro de Usuário válido;1                         
+Kaizen;#9;722;kaizen-60:Cadastrar usuário com permissão Administrador;1                        
+Kaizen;#9;723;kaizen-61:Cadastrar usuário sem permissão;1                         
+Kaizen;#12;724;kaizen-20:Criar um Projeto válido;1                         
+Kaizen;#12;725;kaizen-78:Adicionar foto ao projeto;6                         
+Kaizen;#12;726;kaizen-79:Adicionar descrição ao projeto;6                         
+Kaizen;#14;727;kaizen-30:Editar um Projeto corretamente;6                         
+Kaizen;#14;728;kaizen-97:Alterar foto do projeto;6                         
+Kaizen;#14;729;kaizen-98:Editar descrição do projeto;6                         
+Kaizen;#16;730;kaizen-34:Criar uma Sprint válida;1                         
+Kaizen;#22;731;kaizen-42: Cadastrar um Ponto Positivo válido;1                       
+Kaizen;#22;732;kaizen-43: Cadastrar um Ponto Negativo válido;1                       
+Kaizen;#22;733;kaizen-46: Criar uma Sugestão válida;1                        
+Kaizen;#22;734;kaizen-48: Editar um Ponto Positivo;6                        
+Kaizen;#22;735;kaizen-101: Editar um Ponto Negativo;6                        
+Kaizen;#22;736;kaizen-102: Editar uma Sugestão;6                         
+Kaizen;#22;737;kaizen-112: Deletar uma Sugestão;12                         
+Kaizen;#22;738;kaizen-110: Deletar um Ponto Positivo;12                        
+Kaizen;#22;739;kaizen-111: Deletar um Ponto Negativo;12                        
+Kaizen;#24;740;kaizen-49: Adicionar impedimento;6                          
+Kaizen;#24;741;kaizen-51: Excluir impedimento (ScrumMaster);12                         
+Kaizen;#24;742;kaizen-52: Excluir impedimento (Criador);12                         
+Kaizen;#24;743;kaizen-54: Alocar impedimento;6                          
+Kaizen;#24;744;kaizen-56: Desalocar impedimento;6                          
+Kaizen;#24;745;kaizen-76: Excluir impedimento (desenvolvedor);12                         
+Kaizen;#24;746;kaizen-100: Mover impedimentos entre os quadros;6                       
+NewPCS;#14941;747;Inserir Product com sucesso;1                         
+NewPCS;#14941;748;Inserir Product com valores inválidos;43                        
+NewPCS;#14941-3;749;Remover Product através do Protheus;12                        
+NewPCS;#14941-2;750;Modificar um Product com sucesso;6                        
+NewPCS;#14941-2;751;Modificar um Product com valores inválidos;44                       
+NewPCS;#14329;752;Inserir registro com sucesso;1                         
+NewPCS;#14329;753;Cancelar inserção;2                           
+NewPCS;#14329;754;Inserir registro com um valor já existente;3                      
+NewPCS;#14329;755;Campos Obrigatórios Vazios;4                          
+NewPCS;#14329;756;Limite de caracteres para a inserção;34                       
+NewPCS;#14329-3;757;Modificar um registro com sucesso;6                        
+NewPCS;#14329;758;Cancelar a modificação;10                          
+NewPCS;#14329-3;759;Campos obrigatórios vazios;8                          
+NewPCS;#14329-3;760;Limite de caracteres para a modificação;34                       
+NewPCS;#14329-2;761;Remover registro com sucesso;12                         
+NewPCS;#14329;762;Cancelar registro com sucesso;2                         
+NewPCS;#14329;763;Atualizar Formulário;6                           
+NewPCS;#14315-2;764;Remover registro com sucesso;12                         
+NewPCS;#14315;765;Cancelar registro com sucesso;2                         
+NewPCS;#14315-3;766;Modificar um registro com sucesso;6                        
+NewPCS;#14315;767;Cancelar a modificação;10                          
+NewPCS;#14315-3;768;Limite de caracteres;34                          
+NewPCS;#14315-3;769;Campos obrigatórios vazios;8                          
+NewPCS;#14315;770;Inserir registro com sucesso;1                         
+NewPCS;#14315;771;Cancelar inserção;2                           
+NewPCS;#14315;772;Inserir registro com um valor já existente;3                      
+NewPCS;#14315;773;Campos Obrigatórios Vazios;4                          
+NewPCS;#14315;774;Limite de caracteres para a inserção;34                       
+ARTools;#11972;775;#4112 - Cadastro de perfil com dados inválidos;43                     
+ARTools;#11972;776;Cadastro de perfil com sucesso;1                        
+ARTools;#11972;777;Cadastro de perfil com identificador existente;3                       
+ARTools;#11972;778;Cadatro de perfil com campos obrigatórios não preenchidos;4                     
+ARTools;#11972;779;Cancelar cadastro de peril com sucesso;2                       
+ARTools;#11972-2;780;#4205 - Editar perfil com dados inválidos;44                      
+ARTools;#11972-2;781;#4210 - Editar perfil com dados válidos;6                      
+ARTools;#11972-2;782;Editar perfil modificando para um valor existente;7                      
+ARTools;#11972-2;783;Editar perfil sem campos obrigatórios;8                        
+ARTools;#11972-2;784;Cancelar edição do perfil;10                         
+ARTools;#11972-2;785;Verificar se todos os dados do perfil estão sendo exibidos;22                   
+ARTools;#11972-2;786;Verificar inserção de link para perfil inexistente;23                      
+ARTools;#11972-2;787;#4443 - Listagem de Perfis - botões ativar/desativar;15                     
+ARTools;#11972-3;788;#4438 - Paginação de perfis - avançar páginas;19                     
+ARTools;#11972-3;789;#4440 - Paginação de perfis - voltar páginas;19                     
+ARTools;#11972-3;790;#4448 - Listagem de Perfis - Layout;16                      
+ARTools;#11972-3;791;#4129 - Paginação de perfis - única página;19                     
+ARTools;#11973;792;#4742 - Permissões;20                          
+ARTools;#11973-3;793;#4430 - Paginação de Permissões - avançar páginas;19                     
+ARTools;#11973-3;794;#4431 - Paginação de Permissões - voltar páginas;19                     
+ARTools;#11973-3;795;#4132 - Paginação de Permissões - única página;19                     
+ARTools;#11983-2;796;#5131 - Listagem de Planos SLA - layout;16                     
+ARTools;#11983-4;797;#5133 - Listagem de Planos SLA - botões ativar/desativar;34                    
+ARTools;#11983;798;#5134 - Cadastro de planos SLA com dados válidos;1                    
+ARTools;#11983;799;#5142 - Cadastro de planos SLA com dados inválidos;43                    
+ARTools;#11983;800;#5144 - Cadastro de planos SLA com dados inválidos - Regra de Negócio;49                
+ARTools;#11983;801;Cancelar cadastro de SLA com sucesso;2                       
+ARTools;#11983;802;Cadastrar SLA sem campos obrigatórios preenchidos;4                       
+ARTools;#11983-3;803;#5148 - Editar plano SLA com dados válidos;6                     
+ARTools;#11983-3;804;#5149 - Editar plano SLA com dados inválidos;44                     
+ARTools;#11983-3;805;Editar entidade deixando os campos obrigatórios do formulário em branco;8                   
+ARTools;#11983-3;806;Cancelar edição da SLA com sucesso;10                       
+ARTools;#11983-3;807;Verificar se todos os dados da SLA estão sendo exibidos;22                   
+ARTools;#11983-3;808;Verificar inserção de link de SLAinexistente;23                       
+ARTools;#11983-2;809;#5359 - Visualizar Planos SLA;15                        
+ARTools;#11983-3;810;#18240 - Restrições no cadastro de um plano de SLA;49                   
+ARTools;#11983-3;811;#18241 - Restrições na edição de um plano SLA;50                    
+ARTools;#11984;812;#4981 - Cadastro de filas de atendimento com dados válidos;1                   
+ARTools;#11984;813;#5003 - Cadastro de filas de atendimento com dados inválidos;43                   
+ARTools;#11984;814;#5009 - Formulário de cadastro de filas;4                      
+ARTools;#11984-3;815;#5024 - Edição de filas com dados válidos;6                     
+ARTools;#11984-3;816;#5032 - Editar filas de atendimento com dados inválidos;44                    
+ARTools;#11984-3;817;#5039 - Formulário de edição de filas;8                      
+ARTools;#11984-3;818;Cancelar edição da fila com sucesso;10                       
+ARTools;#11984-3;819;Verificar se todos os dados da fila estão sendo exibidos;22                   
+ARTools;#11984-3;820;Verificar inserção de link de fila inexistente;23                      
+ARTools;#11984-2;821;#5053 - Listagem de filas de atendimento;15                      
+ARTools;#11984-4;822;#5058 - Ativar/Desativar fila de atendimento;6                       
+ARTools;#11984-2;823;#5061 - Paginação de filas - avançar páginas;19                     
+ARTools;#11984-2;824;#5067 - Paginação de filas - voltar páginas;19                     
+ARTools;#11984-2;825;#5074 - Paginação de filas - única página;19                     
+ARTools;#11984-2;826;#5356 - Visualizar fila de atendimento;51                       
+ARTools;#11984-2;827;Validar resultado da consulta da fila sem dados;17                     
+ARTools;#12216-2;828;#4968 - Listagem de Produtos - botões;15                      
+ARTools;#12216-2;829;#4970 - Paginação de Produtos - avançar páginas;19                     
+ARTools;#12216-2;830;#4971 - Paginação de Produtos - voltar páginas;19                     
+ARTools;#12216-2;831;#4972 - Paginação de Produtos - única página;19                     
+ARTools;#12216-2;832;#4973 - Listagem de Produtos - layout;16                      
+ARTools;#12216-2;833;Validar resultado da consulta de produtos sem dados;17                     
+ARTools;#12216;834;#5035 - Cadastro de produtos com dados válidos;1                     
+ARTools;#12216;835;#5051 - Cadastro de produtos com dados inválidos;43                     
+ARTools;#12216;836;Cancelar cadastro de produto com sucesso;2                       
+ARTools;#12216;837;Cadastrar produto sem campos obrigatórios preenchidos;4                       
+ARTools;#12216-2;838;#5064 - Listagem de Produtos - botões ativar/desativar;15                     
+ARTools;#12216-3;839;#5093 - Editar produto com dados válidos;6                      
+ARTools;#12216-3;840;#5102 - Editar produto com dados inválidos;44                      
+ARTools;#12216-2;841;#5363 - Visualizar Produtos;51                         
+ARTools;#12216-3;842;#18187 - Restrições na edição de produto;50                      
+ARTools;#12216-2;843;#18206 - Filtrar produtos;21                         
+ARTools;#12216-2;844;Validar resultado da consulta de produtos sem dados;17                     
+ARTools;#12216-2;845;Verificar paginação;19                           
+ARTools;#12216-3;846;Editar entidade deixando os campos obrigatórios do formulário em branco;8                   
+ARTools;#12216-3;847;Cancelar edição do produto com sucesso;10                       
+ARTools;#12216-3;848;Verificar se todos os dados do produto estão sendo exibidos;22                   
+ARTools;#12216-3;849;Verificar inserção de link do produto inexistente;23                      
+SGCond;SGC-US01;850;Verificar acesso por papel não autorizado;20                       
+SGCond;SGC-US01;851;Tentar inserir sem conexão com o servidor;37                      
+SGCond;SGC-US01;852;Fechar a tela antes de inserir área comum;26                     
+SGCond;SGC-US01;853;Cadastar área comum com sucesso;1                        
+SGCond;SGC-US01;854;Cancelar cadastro de área comum com sucesso;2                      
+SGCond;SGC-US01;855;Cadastrar área comum com nome já existente;3                      
+SGCond;SGC-US01;856;Cadastrar área comum com campos obrigatórios não preenchidos;4                     
+SGCond;SGC-US01;857;Cadastrar área comum com título previamente excluído;29                      
+SGCond;SGC-US01;858;Cadastrar área comum com campos inválidos;43                       
+SGCond;SGC-US02;859;Editar informações da área comum com sucesso;6                      
+SGCond;SGC-US02;860;Editar entidade deixando os campos obrigatórios do formulário em branco;8                   
+SGCond;SGC-US02;861;Cancelar edição da área comum com sucesso;10                      
+SGCond;SGC-US02;862;Verificar se todos os dados da área comum estão sendo exibidos;22                  
+SGCond;SGC-US02;863;Verificar inserção de link da área comum inexistente;23                     
+SGCond;SGC-US02;864;Verificar presença de campos retornados;16                        
+SGCond;SGC-US02;865;Fechar a tela antes de excutar ação;26                      
+SGCond;SGC-US02;866;Editar entidade alterando o nome para um existente;7                     
+SGCond;SGC-US03;867;Listar todas as áreas comuns com sucesso;15                      
+SGCond;SGC-US03;868;Validar resultado da listagem sem dados;17                       
+SGCond;SGC-US03;869;Verificar paginação;19                           
+SGCond;SGC-US03;870;Validar resultado da consulta de áreas comuns;21                      
+SGCond;SGC-US03;871;Visualizar dados da entidade;51                         
+SGCond;SGC-US03;872;Verificar permissão de acesso à página;20                       
+SGCond;SGC-US03;873;Verificar dados retornados;16                          
+SGCond;SGC-US04;874;Excluir área comum com sucesso;12                        
+SGCond;SGC-US04;875;"Cancelar exclusão da entidade
+";27
+SGCond;SGC-US04;876;Fechar a tela antes de executar exclusão;26                      
+SGCond;SGC-US05;877;Verificar acesso por papel não autorizado;20                       
+SGCond;SGC-US05;878;Tentar inserir sem conexão com o servidor;37                      
+SGCond;SGC-US05;879;Fechar a tela antes de inserir área comum;26                     
+SGCond;SGC-US05;880;Cadastar área comum com sucesso;1                        
+SGCond;SGC-US05;881;Cancelar cadastro de área comum com sucesso;2                      
+SGCond;SGC-US05;882;Cadastrar área comum com nome já existente;3                      
+SGCond;SGC-US05;883;Cadastrar área comum com campos obrigatórios não preenchidos;4                     
+SGCond;SGC-US05;884;Cadastrar área comum com título previamente excluído;29                      
+SGCond;SGC-US05;885;Cadastrar área comum com campos inválidos;43                       
+SGCond;SGC-US06;886;Editar informações da área comum com sucesso;6                      
+SGCond;SGC-US06;887;Editar entidade deixando os campos obrigatórios do formulário em branco;8                   
+SGCond;SGC-US06;888;Cancelar edição da área comum com sucesso;10                      
+SGCond;SGC-US06;889;Verificar se todos os dados da área comum estão sendo exibidos;22                  
+SGCond;SGC-US06;890;Verificar inserção de link da área comum inexistente;23                     
+SGCond;SGC-US06;891;Verificar presença de campos retornados;16                        
+SGCond;SGC-US06;892;Fechar a tela antes de excutar ação;26                      
+SGCond;SGC-US06;893;Editar entidade alterando o nome para um existente;7                     
+SGCond;SGC-US07;894;Listar todas as áreas comuns com sucesso;15                      
+SGCond;SGC-US07;895;Validar resultado da listagem sem dados;17                       
+SGCond;SGC-US07;896;Verificar paginação;19                           
+SGCond;SGC-US07;897;Validar resultado da consulta de áreas comuns;21                      
+SGCond;SGC-US07;898;Visualizar dados da entidade;51                         
+SGCond;SGC-US07;899;Verificar permissão de acesso à página;20                       
+SGCond;SGC-US07;900;Verificar dados retornados;16                          
+SGCond;SGC-US08;901;Verificar acesso por papel não autorizado;20                       
+SGCond;SGC-US08;902;Tentar inserir sem conexão com o servidor;37                      
+SGCond;SGC-US08;903;Fechar a tela antes de inserir condomínio;26                      
+SGCond;SGC-US08;904;Cadastar condomínio com sucesso;1                         
+SGCond;SGC-US08;905;Cancelar cadastro de condomínio com sucesso;2                       
+SGCond;SGC-US08;906;Cadastrar condomínio com CNPJ já existente;3                       
+SGCond;SGC-US08;907;Cadastrar condomínio com campos obrigatórios não preenchidos;4                      
+SGCond;SGC-US08;908;Cadastrar condomínio com CNPJ previamente excluído;29                       
+SGCond;SGC-US08;909;Cadastrar condomínio com campos inválidos;43                        
+SGCond;SGC-US09;910;Editar informações do condomínio com sucesso;6                       
+SGCond;SGC-US09;911;Editar condomínio deixando os campos obrigatórios do formulário em branco;8                   
+SGCond;SGC-US09;912;Cancelar edição do condomínio com sucesso;10                       
+SGCond;SGC-US09;913;Verificar se todos os dados do condomínio estão sendo exibidos;22                   
+SGCond;SGC-US09;914;Verificar inserção de link do condomínio inexistente;23                      
+SGCond;SGC-US09;915;Verificar presença de campos retornados;16                        
+SGCond;SGC-US09;916;Fechar a tela antes de excutar ação;26                      
+SGCond;SGC-US09;917;Editar informando um CNPJ já existente;7                       
+SGCond;SGC-US09;918;Editar informando um CNPJ inválido;10                        
+SGCond;SGC-US10;919;Listar todas as áreas comuns com sucesso;15                      
+SGCond;SGC-US10;920;Validar resultado da listagem sem dados;17                       
+SGCond;SGC-US10;921;Verificar paginação;19                           
+SGCond;SGC-US10;922;Validar resultado da consulta de áreas comuns;21                      
+SGCond;SGC-US10;923;Visualizar dados da entidade;51                         
+SGCond;SGC-US10;924;Verificar permissão de acesso à página;20                       
+SGCond;SGC-US10;925;Verificar dados retornados;16                          
+SGCond;SGC-US10;926;Acessar página sem fazer login;55                        
+SGCond;SGC-US11;927;Tentar inserir sem conexão com o servidor;37                      
+SGCond;SGC-US11;928;Fechar a tela antes de inserir condomínio;26                      
+SGCond;SGC-US11;929;Cadastar moradia com sucesso;1                         
+SGCond;SGC-US11;930;Cancelar cadastro de moradia com sucesso;2                       
+SGCond;SGC-US11;931;Cadastrar moradia com identificador já existente;3                       
+SGCond;SGC-US11;932;Cadastrar moradia com campos obrigatórios não preenchidos;4                      
+SGCond;SGC-US11;933;Cadastrar moraia com número previamente excluído;29                       
+SGCond;SGC-US11;934;Cadastrar moradia com campos inválidos;43                        
+SGCond;SGC-US12;935;Listar todas as áreas comuns com sucesso;15                      
+SGCond;SGC-US12;936;Validar resultado da listagem sem dados;17                       
+SGCond;SGC-US12;937;Verificar paginação;19                           
+SGCond;SGC-US12;938;Validar resultado da consulta de áreas comuns;21                      
+SGCond;SGC-US12;939;Visualizar dados da entidade;51                         
+SGCond;SGC-US12;940;Verificar permissão de acesso à página;20                       
+SGCond;SGC-US12;941;Verificar dados retornados;16                          
+SGCond;SGC-US12;942;Acessar página sem fazer login;55                        
+SGCond;SGC-US13;943;Editar condomínio deixando os campos obrigatórios do formulário em branco;8                   
+SGCond;SGC-US13;944;Cancelar edição da moradia com sucesso;10                       
+SGCond;SGC-US13;945;Verificar se todos os dados da moradia estão sendo exibidos;22                   
+SGCond;SGC-US13;946;Verificar inserção de link da moradia inexistente;23                      
+SGCond;SGC-US13;947;Verificar presença de campos retornados;16                        
+SGCond;SGC-US13;948;Fechar a tela antes de excutar ação;26                      
+SGCond;SGC-US13;949;Editar informando um identificador já existente;7                       
+SGCond;SGC-US14;950;Tentar inserir sem conexão com o servidor;37                      
+SGCond;SGC-US14;951;Fechar a tela antes de inserir chamado;26                      
+SGCond;SGC-US14;952;Cadastar chamado com sucesso;1                         
+SGCond;SGC-US14;953;Cancelar chamado de moradia com sucesso;2                       
+SGCond;SGC-US14;954;Cadastrar chamado com campos obrigatórios não preenchidos;4                      
+SGCond;SGC-US15;955;Editar chamado deixando os campos obrigatórios do formulário em branco;8                   
+SGCond;SGC-US15;956;Cancelar edição do chamado com sucesso;10                       
+SGCond;SGC-US15;957;Verificar se todos os dados do chamado estão sendo exibidos;22                   
+SGCond;SGC-US15;958;Verificar inserção de link de chamado inexistente;23                      
+SGCond;SGC-US15;959;Verificar presença de campos retornados;16                        
+SGCond;SGC-US15;960;Fechar a tela antes de excutar ação;26                      
+SGCond;SGC-US15;961;Verificar se estados possíveis do chamado estão de acordo;56                    
+SGCond;SGC-US16;962;Listar todas o chamados com sucesso;15                       
+SGCond;SGC-US16;963;Validar resultado da listagem sem dados;17                       
+SGCond;SGC-US16;964;Verificar paginação;19                           
+SGCond;SGC-US16;965;Validar resultado da consulta de chamados;21                       
+SGCond;SGC-US16;966;Visualizar dados da entidade;51                         
+SGCond;SGC-US16;967;Verificar permissão de acesso à página;20                       
+SGCond;SGC-US16;968;Verificar dados retornados;16                          
+SGCond;SGC-US16;969;Acessar página sem fazer login;55                        
+SGCond;SGC-US17;970;Excluir chamado comum com sucesso;12                        
+SGCond;SGC-US17;971;"Cancelar exclusão da entidade
+";27
+SGCond;SGC-US17;972;Fechar a tela antes de executar exclusão;26                      
+SGCond;SGC-US17;973;Tentar excluir sem ter feito login;55                       
+SGCond;SGC-US17;974;Tentar excluir sem ter permissão;20                        
+SGCond;SGC-US18;975;Tentar inserir sem conexão com o servidor;37                      
+SGCond;SGC-US18;976;Fechar a tela antes de reservar área comum;26                     
+SGCond;SGC-US18;977;Reservar área comum com sucesso;1                        
+SGCond;SGC-US18;978;Cancelar reserva de área comum com sucesso;2                      
+SGCond;SGC-US18;979;"Reservar área em data já reservada
+";3
+SGCond;SGC-US18;980;Reservar área comum com campos obrigatórios não preenchidos;4                     
+SGCond;SGC-US18;981;Reservar área comum com data previamente excluída;29                      
+SGCond;SGC-US18;982;Reservar área comum com campos inválidos;43                       
+SGCond;SGC-US18;983;Tentar reservar sem ter permissão;20                        
+SGCond;SGC-US18;984;Tentar reservar sem ter feito login;55                       
+SGCond;SGC-US19;985;Editar informações da reserva com sucesso;6                       
+SGCond;SGC-US19;986;Editar reserva deixando os campos obrigatórios do formulário em branco;8                   
+SGCond;SGC-US19;987;Cancelar edição da reserva com sucesso;10                       
+SGCond;SGC-US19;988;Verificar se todos os dados da reserva estão sendo exibidos;22                   
+SGCond;SGC-US19;989;Verificar inserção de link da reserva inexistente;23                      
+SGCond;SGC-US19;990;Verificar presença de campos retornados;16                        
+SGCond;SGC-US19;991;Tentar alterar sem permissão;20                         
+SGCond;SGC-US19;992;Tentar alterar sem ter feito login;55                       
+SGCond;SGC-US20;993;Excluir reserva com sucesso;12                         
+SGCond;SGC-US20;994;"Cancelar exclusão da entidade
+";27
+SGCond;SGC-US20;995;Fechar a tela antes de executar exclusão;26                      
+SGCond;SGC-US20;996;Tentar excluir sem ter feito login;55                       
+SGCond;SGC-US20;997;Tentar excluir sem ter permissão;20                        
+SGCond;SGC-US21;998;Listar todas as reservas com sucesso;15                       
+SGCond;SGC-US21;999;Validar resultado da listagem sem dados;17                       
+SGCond;SGC-US21;1000;Verificar paginação;19                           
+SGCond;SGC-US21;1001;Validar resultado da consulta de reservas;21                       
+SGCond;SGC-US21;1002;Visualizar dados da entidade;51                         
+SGCond;SGC-US21;1003;Verificar permissão de acesso à página;20                       
+SGCond;SGC-US21;1004;Verificar dados retornados;16                          
+SGCond;SGC-US21;1005;Acessar página sem fazer login;55                        
+SGCond;SGC-US22;1006;Tentar inserir sem conexão com o servidor;37                      
+SGCond;SGC-US22;1007;Fechar a tela antes de cadastrar usuário;26                      
+SGCond;SGC-US22;1008;Cadastrar usuário comum com sucesso;1                        
+SGCond;SGC-US22;1009;Cancelar cadastro de usuário com sucesso;2                       
+SGCond;SGC-US22;1010;"Cadastrar usuário com e-mail já cadastrado
+";3
+SGCond;SGC-US22;1011;Cadasrar usuário com campos obrigatórios não preenchidos;4                      
+SGCond;SGC-US22;1012;Cadastrar usuário com data previamente excluída;29                       
+SGCond;SGC-US22;1013;Cadastrar usuário com campos inválidos;43                        
+SGCond;SGC-US22;1014;Tentar cadastrar sem ter permissão;20                        
+SGCond;SGC-US22;1015;Tentar cadastrar sem ter feito login;55                       
+SGCond;SGC-US23;1016;HWLL-1:[TC] Validar redirecionamento para o login quando o usuário tenta navegar sem estar autenticado;13               
+SGCond;SGC-US23;1017;HWLL-2:[SPEC] Validar se página é redirecionada ao colar link em outra aba do navegador;13               
+SGCond;SGC-US23;1018;HWLL-3:[SPEC] Validar acesso de usuário Ativo e Inativo;24                     
+SGCond;SGC-US23;1019;HWLL-4:[SPEC] Validar campo Nome;25                         
+SGCond;SGC-US23;1020;HWLL-5:[SPEC] Validar campo Senha;25                         
+SGCond;SGC-US24;1021;Recuperar senha com sucesso;30                         
+SGCond;SGC-US24;1022;"Recuperar senha com e-mail inválido
+";57
+SGCond;SGC-US24;1023;Recuperar senha com e-mail não cadastrado;58                       
+SGCond;SGC-US25;1024;Verificar acesso por papel não autorizado;20                       
+SGCond;SGC-US25;1025;Tentar inserir sem conexão com o servidor;37                      
+SGCond;SGC-US25;1026;Fechar a tela antes de inserir enquete;26                      
+SGCond;SGC-US25;1027;Cadastar enquete com sucesso;1                         
+SGCond;SGC-US25;1028;Cancelar cadastro de enquete com sucesso;2                       
+SGCond;SGC-US25;1029;Cadastrar condomínio com campos obrigatórios não preenchidos;4                      
+SGCond;SGC-US25;1030;Cadastrar condomínio com campos inválidos;43                        
+SGCond;SGC-US26;1031;Editar informações da enquete com sucesso;6                       
+SGCond;SGC-US26;1032;Editar enquete deixando os campos obrigatórios do formulário em branco;8                   
+SGCond;SGC-US26;1033;Cancelar edição da enquete com sucesso;10                       
+SGCond;SGC-US26;1034;Verificar se todos os dados da enquete estão sendo exibidos;22                   
+SGCond;SGC-US26;1035;Verificar inserção de link da enquete inexistente;23                      
+SGCond;SGC-US26;1036;Verificar presença de campos retornados;16                        
+SGCond;SGC-US26;1037;Tentar alterar sem permissão;20                         
+SGCond;SGC-US26;1038;Tentar alterar sem ter feito login;55                       
+SGCond;SGC-US27;1039;Listar todas as enquetes com sucesso;15                       
+SGCond;SGC-US27;1040;Validar resultado da listagem sem dados;17                       
+SGCond;SGC-US27;1041;Verificar paginação;19                           
+SGCond;SGC-US27;1042;Validar resultado da consulta de chamados;21                       
+SGCond;SGC-US27;1043;Visualizar dados da entidade;51                         
+SGCond;SGC-US27;1044;Verificar permissão de acesso à página;20                       
+SGCond;SGC-US27;1045;Verificar dados retornados;16                          
+SGCond;SGC-US27;1046;Acessar página sem fazer login;55                        
+SGCond;SGC-US28;1047;Excluir chamado comum com sucesso;12                        
+SGCond;SGC-US28;1048;"Cancelar exclusão da entidade
+";27
+SGCond;SGC-US28;1049;Fechar a tela antes de executar exclusão;26                      
+SGCond;SGC-US28;1050;Tentar excluir sem ter feito login;55                       
+SGCond;SGC-US28;1051;Tentar excluir sem ter permissão;20                        
+SGCond;SGC-US29;1052;Registrar voto com sucesso;1                         
+SGCond;SGC-US29;1053;Cancelar voto com sucesso;2                         
+SGCond;SGC-US29;1054;Cadastrar voto sem selecionar item;4                        
+SGCond;SGC-US29;1055;Verificar acesso por papel não autorizado;20                       
+SGCond;SGC-US29;1056;Tentar votar sem ter feito login;55                       
+SGCond;SGC-US30;1057;Tentar acessar enquetes em aberto não votadas no dashboard;15                    
+SGCond;SGC-US30;1058;Listar sem ter feito login;55                        
+MyPocket;MPT-US01;1059;HWLL-1:[TC] Validar redirecionamento para o login quando o usuário tenta navegar sem estar autenticado;13               
+MyPocket;MPT-US01;1060;HWLL-2:[SPEC] Validar se página é redirecionada ao colar link em outra aba do navegador;13               
+MyPocket;MPT-US01;1061;HWLL-3:[SPEC] Validar acesso de usuário Ativo e Inativo;24                     
+MyPocket;MPT-US01;1062;HWLL-4:[SPEC] Validar campo Nome;25                         
+MyPocket;MPT-US01;1063;HWLL-5:[SPEC] Validar campo Senha;25                         
+MyPocket;MPT-US02;1064;Fazer logout na aplicação;35                         
+MyPocket;MPT-US03;1065;Tentar inserir sem conexão com o servidor;37                      
+MyPocket;MPT-US03;1066;Fechar a tela antes de inserir enquete;26                      
+MyPocket;MPT-US03;1067;Cadastar transação com sucesso;1                         
+MyPocket;MPT-US03;1068;Cancelar cadastro de transacação com sucesso;2                       
+MyPocket;MPT-US03;1069;Cadastrar transação com campos obrigatórios não preenchidos;4                      
+MyPocket;MPT-US03;1070;Cadastrar transação com campos inválidos;43                        
+MyPocket;MPT-US04;1071;Editar informações da transação com sucesso;6                       
+MyPocket;MPT-US04;1072;Editar transação deixando os campos obrigatórios do formulário em branco;8                   
+MyPocket;MPT-US04;1073;Cancelar edição da transação com sucesso;10                       
+MyPocket;MPT-US04;1074;Verificar se todos os dados da transação estão sendo exibidos;22                   
+MyPocket;MPT-US04;1075;Verificar inserção de link da transação inexistente;23                      
+MyPocket;MPT-US04;1076;Verificar presença de campos retornados;16                        
+MyPocket;MPT-US04;1077;Tentar alterar sem ter feito login;55                       
+MyPocket;MPT-US05;1078;Listar todas as transações com sucesso;15                       
+MyPocket;MPT-US05;1079;Validar resultado da listagem sem dados;17                       
+MyPocket;MPT-US05;1080;Validar resultado da consulta de chamados;21                       
+MyPocket;MPT-US05;1081;Visualizar dados da entidade;51                         
+MyPocket;MPT-US05;1082;Verificar dados retornados;16                          
+MyPocket;MPT-US05;1083;Acessar página sem fazer login;55                        
+MyPocket;MPT-US06;1084;Excluir chamado comum com sucesso;12                        
+MyPocket;MPT-US06;1085;"Cancelar exclusão da entidade
+";27
+MyPocket;MPT-US06;1086;Fechar a tela antes de executar exclusão;26                      
+MyPocket;MPT-US06;1087;Tentar excluir sem ter feito login;55                       
+MyPocket;MPT-US06;1088;Tentar excluir sem ter permissão;20                        
+MyPocket;MPT-US07;1089;Listar todas as categorias com sucesso;15                       
+MyPocket;MPT-US07;1090;Validar resultado da listagem sem dados;17                       
+MyPocket;MPT-US07;1091;Verificar paginação;19                           
+MyPocket;MPT-US07;1092;Validar resultado da consulta de chamados;21                       
+MyPocket;MPT-US07;1093;Visualizar dados da entidade;51                         
+MyPocket;MPT-US07;1094;Verificar dados retornados;16                          
+MyPocket;MPT-US07;1095;Acessar página sem fazer login;55                        
+MyPocket;MPT-US08;1096;Tentar inserir sem conexão com o servidor;37                      
+MyPocket;MPT-US08;1097;Fechar a tela antes de inserir enquete;26                      
+MyPocket;MPT-US08;1098;Cadastar categoria com sucesso;1                         
+MyPocket;MPT-US08;1099;Cancelar cadastro de categoria com sucesso;2                       
+MyPocket;MPT-US08;1100;Cadastrar categoria com campos obrigatórios não preenchidos;4                      
+MyPocket;MPT-US08;1101;Cadastrar categoria com campos inválidos;43                        
+MyPocket;MPT-US09;1102;Editar informações da categoria com sucesso;6                       
+MyPocket;MPT-US09;1103;Editar categoria deixando os campos obrigatórios do formulário em branco;8                   
+MyPocket;MPT-US09;1104;Cancelar edição da categoria com sucesso;10                       
+MyPocket;MPT-US09;1105;Verificar se todos os dados da categoria estão sendo exibidos;22                   
+MyPocket;MPT-US09;1106;Verificar inserção de link da categoria inexistente;23                      
+MyPocket;MPT-US09;1107;Verificar presença de campos retornados;16                        
+MyPocket;MPT-US09;1108;Tentar alterar sem ter feito login;55                       
+MyPocket;MPT-US10;1109;Recuperar senha com sucesso;30                         
+MyPocket;MPT-US10;1110;"Recuperar senha com e-mail inválido
+";57
+MyPocket;MPT-US10;1111;Recuperar senha com e-mail não cadastrado;58                       
+MyPocket;MPT-US12;1112;Tentar inserir sem conexão com o servidor;37                      
+MyPocket;MPT-US12;1113;Fechar a tela antes de inserir enquete;26                      
+MyPocket;MPT-US12;1114;Cadastar categoria com sucesso;1                         
+MyPocket;MPT-US12;1115;Cancelar cadastro de categoria com sucesso;2                       
+MyPocket;MPT-US12;1116;Cadastrar categoria com campos obrigatórios não preenchidos;4                      
+MyPocket;MPT-US12;1117;Cadastrar categoria com campos inválidos;43                        
+MyPocket;MPT-US13;1118;Listar todas as contas com sucesso;15                       
+MyPocket;MPT-US13;1119;Validar resultado da listagem sem dados;17                       
+MyPocket;MPT-US13;1120;Verificar paginação;19                           
+MyPocket;MPT-US13;1121;Validar resultado da consulta de contas;21                       
+MyPocket;MPT-US13;1122;Visualizar dados da entidade;51                         
+MyPocket;MPT-US13;1123;Verificar dados retornados;16                          
+MyPocket;MPT-US13;1124;Acessar página sem fazer login;55                        
+MyPocket;MPT-US14;1125;Tentar inserir sem conexão com o servidor;37                      
+MyPocket;MPT-US14;1126;Fechar a tela antes de inserir enquete;26                      
+MyPocket;MPT-US14;1127;Cadastar conta com sucesso;1                         
+MyPocket;MPT-US14;1128;Cancelar cadastro de conta com sucesso;2                       
+MyPocket;MPT-US14;1129;Cadastrar conta com campos obrigatórios não preenchidos;4                      
+MyPocket;MPT-US14;1130;Cadastrar conta com campos inválidos;43                        
+MyPocket;MPT-US15;1131;Editar informações da conta com sucesso;6                       
+MyPocket;MPT-US15;1132;Editar conta deixando os campos obrigatórios do formulário em branco;8                   
+MyPocket;MPT-US15;1133;Cancelar edição da conta com sucesso;10                       
+MyPocket;MPT-US15;1134;Verificar se todos os dados da conta estão sendo exibidos;22                   
+MyPocket;MPT-US15;1135;Verificar inserção de link da conta inexistente;23                      
+MyPocket;MPT-US15;1136;Verificar presença de campos retornados;16                        
+MyPocket;MPT-US15;1137;Tentar alterar sem ter feito login;55                       
+MyPocket;MPT-US16;1138;Tentar inserir sem conexão com o servidor;37                      
+MyPocket;MPT-US16;1139;Fechar a tela antes de inserir enquete;26                      
+MyPocket;MPT-US16;1140;Cadastar transação com sucesso;1                         
+MyPocket;MPT-US16;1141;Cancelar cadastro de transação com sucesso;2                       
+MyPocket;MPT-US16;1142;Cadastrar transação com campos obrigatórios não preenchidos;4                      
+MyPocket;MPT-US16;1143;Cadastrar transação com campos inválidos;43                        
+MyPocket;MPT-US17;1144;Validar resultado da listagem sem dados;17                       
+MyPocket;MPT-US17;1145;Verificar paginação;19                           
+MyPocket;MPT-US17;1146;Validar resultado da consulta de contas;21                       
+MyPocket;MPT-US17;1147;Visualizar dados da entidade;51                         
+MyPocket;MPT-US17;1148;Verificar dados retornados;16                          
+MyPocket;MPT-US17;1149;Acessar página sem fazer login;55                        
+TestRec;TR-22784;1150;Login com sucesso;40                          
+TestRec;TR-22784;1151;Login com usuário inexistente;59                         
+TestRec;TR-22784;1152;Login com senha inválida;60                         
+TestRec;TR-22784;1153;Login com campo obrigatório não preenchido;61                       
+TestRec;TR-22784;1154;Acessar a tela protegida sem ter realizado autenticação;13                     
+TestRec;TR-22784;1155;Testar com senha no formato inválido;25                       
+TestRec;TR-27899;1156;Registrar usuário com sucesso;1                         
+TestRec;TR-27899;1157;Registrar com campos obrigatórios não preenchidos;4                       
+TestRec;TR-27899;1158;Registrar com senha diferente da confirmação;39                       
+TestRec;TR-27899;1159;Registrar com nome de usuário existente;3                       
+TestRec;TR-27899;1160;Registrar com senha no formato inválido;43                       
+TestRec;TR-27899;1161;Cancelar registro com sucesso;2                         
+TestRec;TR-27787-E;1162;Editar projeto com data inicial maior que data final;62                    
+TestRec;TR-27787-E;1163;Editar projeto com sucesso;6                         
+TestRec;TR-27787-E;1164;Editar projeto com campo obrigatório não preenchido;8                      
+TestRec;TR-27787-E;1165;Verificar se todos os dados do projeto estão sendo exibidos;22                   
+TestRec;TR-27787-E;1166;Verificar inserção de link de projeto inexistente;23                      
+TestRec;TR-27787-E;1167;Fechar a tela antes de excutar ação;26                      
+TestRec;TR-27787-E;1168;Cancelar edição do projeto com sucesso;10                       
+TestRec;TR-27787-E;1169;Editar projeto com data inválida;44                        
+TestRec;TR-27787-C;1170;Cadastro de projeto com sucesso;1                        
+TestRec;TR-27787-C;1171;Cancelar cadastro de projeto com sucesso;2                       
+TestRec;TR-27787-C;1172;Validar ação sem conexão com servidor;37                       
+TestRec;TR-27787-C;1173;Executar ação sem ter feito login;55                       
+TestRec;TR-27787-C;1174;Cadastro de projeto com data inicial maior que data final;62                   
+TestRec;TR-27787-C;1175;Cadastro de projeto com campo obrigatório não preenchido;4                     
+TestRec;TR-27787-C;1176;Cadastrar entidade com campos inválidos;43                        
+TestRec;TR-27787-L;1177;Listar todas as entidades com sucesso;15                       
+TestRec;TR-27787-L;1178;Verificar presença de campos retornados;16                        
+TestRec;TR-27787-L;1179;Verificar paginação;19                           
+TestRec;TR-27787-L;1180;Realizar ação sem ter feito login;55                       
+TestRec;TR-27787-L;1181;Acessar a tela sem estar autenticado na aplicação;13                     
+TestRec;TR-27787-L;1182;Validar resultado da consulta de entidade sem dados;17                     
+TestRec;TR-27789-L;1183;Listar US cadastradas com sucesso;15                        
+TestRec;TR-27789-L;1184;Listar US sem dados cadastrados;17                        
+TestRec;TR-27789-L;1185;Verificar presença de campos retornados;16                        
+TestRec;TR-27789-L;1186;Verificar paginação;19                           
+TestRec;TR-27789-L;1187;Realizar ação sem ter feito login;55                       
+TestRec;TR-27789-L;1188;Visualizar dados da <entidade>;16                         
+TestRec;TR-27789-C;1189;Cadastro de User Story com sucesso;1                       
+TestRec;TR-27789-C;1190;Cadastro de US com campo obrigatório não preenchido;4                     
+TestRec;TR-27789-C;1191;Cancelar cadastro com sucesso;2                         
+TestRec;TR-27789-C;1192;Fechar a tela antes de excutar ação;26                      
+TestRec;TR-27789-C;1193;Validar ação sem conexão com servidor;37                       
+TestRec;TR-27789-C;1194;Executar ação sem ter feito login;55                       
+TestRec;TR-27789-E;1195;Editar User story com sucesso;6                        
+TestRec;TR-27789-E;1196;Editar User story sem campos obrigatórios preenchidos;8                      
+TestRec;TR-27789-E;1197;Cancelar edição com sucesso;10                         
+TestRec;TR-27789-E;1198;Verificar se todos os dados da <entidade> estão sendo exibidos;16                   
+TestRec;TR-27789-E;1199;Verificar inserção de link de <entidade> inexistente;23                      
+TestRec;TR-27789-E;1200;Fechar a tela antes de excutar ação;26                      
+TestRec;TR-27789-X;1201;Excluir US com sucesso;12                         
+TestRec;TR-27789-X;1202;Fechar a tela antes de excutar ação;26                      
+TestRec;TR-27789-X;1203;Cancelar exclusão da entidade;27                         
+TestRec;TR-27788-C;1204;Cancelar cadastro com sucesso;2                         
+TestRec;TR-27788-C;1205;Cadastro de Sprint com sucesso;1                        
+TestRec;TR-27788-C;1206;Cadastro de Sprint com campo obrigatório não preenchido;4                     
+TestRec;TR-27788-C;1207;Fechar a tela antes de excutar ação;26                      
+TestRec;TR-27788-C;1208;Validar ação sem conexão com servidor;37                       
+TestRec;TR-27788-C;1209;Executar ação sem ter feito login;55                       
+TestRec;TR-27788-C;1210;Cadastro de sprint com data inicial maior que data final;62                   
+TestRec;TR-27788-E;1211;Editar Sprint com sucesso;6                         
+TestRec;TR-27788-E;1212;Editar Sprint sem campos obrigatórios preenchidos;8                       
+TestRec;TR-27788-E;1213;Cancelar edição com sucesso;10                         
+TestRec;TR-27788-E;1214;Verificar se todos os dados da <entidade> estão sendo exibidos;16                   
+TestRec;TR-27788-E;1215;Verificar inserção de link de <entidade> inexistente;23                      
+TestRec;TR-27788-E;1216;Fechar a tela antes de excutar ação;26                      
+TestRec;TR-27788-E;1217;Editar sprint fora do período do projeto;64                      
+TestRec;TR-27788-E;1218;Editar sprint com período conflitante com outra;65                      
+TestRec;TR-27788-E;1219;Editar sprint com data inicial maior que data final;62                    
+TestRec;TR-27788-L;1220;Listar Sprints cadastradas com sucesso;15                        
+TestRec;TR-27788-L;1221;Listar Sprints sem dados cadastrados;17                        
+TestRec;TR-27788-L;1222;Verificar presença de campos retornados;16                        
+TestRec;TR-27788-L;1223;Verificar paginação;19                           
+TestRec;TR-27788-L;1224;Realizar ação sem ter feito login;55                       
+TestRec;TR-27786-C;1225;Cadastrar <entidade> sem campos obrigatórios preenchidos;4                       
+TestRec;TR-27786-C;1226;Cancelar cadastro de <entidade> com sucesso;2                       
+TestRec;TR-27786-C;1227;Fechar a tela antes de excutar ação;26                      
+TestRec;TR-27786-C;1228;Validar ação sem conexão com servidor;37                       
+TestRec;TR-27786-C;1229;Cadastrar <entidade> com sucesso;1                         
+TestRec;TR-27786-E;1230;Editar informações da <entidade> com sucesso;6                       
+TestRec;TR-27786-E;1231;Editar entidade deixando os campos obrigatórios do formulário em branco;8                   
+TestRec;TR-27786-E;1232;Cancelar edição da <entidade> com sucesso;10                       
+TestRec;TR-27786-E;1233;Fechar a tela antes de excutar ação;26                      
+TestRec;TR-27786-E;1234;Validar ação sem conexão com servidor;37                       
+TestRec;TR-27786-E;1235;Verificar inserção de link de <entidade> inexistente;23                      
+TestRec;TR-27786-E;1236;Verificar presença de campos retornados;16                        
+TestRec;TR-29212;1237;Adicionar critério de aceitação previamente cadastrado;21                       
+TestRec;TR-29212;1238;Cadastrar novo critério, adicionar e salvar;6
+TestRec;TR-29212;1239;Adicionar critério previamente cadastrado e cancelar;10                       
+TestRec;TR-29212;1240;Adicionar critério previamente cadastrado e fechar tela;26                      
+TestRec;TR-29212;1241;Cadastrar novo critério e cancelar;10                        
+TestRec;TR-29212;1242;Cadastrar novo critério e fechar tela;26                       
+TestRec;TR-29212;1243;Verificar presença de campos retornados;16                        
+TestRec;TR-27790;1244;Listar todas as <entidades> com sucesso;15                       
+TestRec;TR-27790;1245;Verificar presença de campos retornados;16                        
+TestRec;TR-27790;1246;Validar resultado da consulta de <entidade> sem dados;17                     
+TestRec;TR-27790;1247;Visualizar dados da <entidade>;16                         
+TestRec;TR-27790;1248;Executar ação sem ter feito login;55                       
+TestRec;TR-27790;1249;Acessar tela sem estar autenticado na aplicação;13                      
+TestRec;TR-27790;1250;Listar dashboard sem sprint em andamento;63                       
+TestRec;TR-28363;1251;Cadastrar <entidade> com sucesso;1                         
+TestRec;TR-28363;1252;Cadastrar <entidade> com ID existente;3                        
+TestRec;TR-28363;1253;Fechar a tela antes de excutar ação;26                      
+TestRec;TR-28363;1254;Validar ação sem conexão com servidor;37                       
+TestRec;TR-28363;1255;Executar ação sem ter feito login;55                       
+RiskControl;RC-29386;1256;Acessar tela sem estar autenticado na aplicação;13                      
+RiskControl;RC-29386;1257;O campo senha deve seguir regra <regra>;25                      
+RiskControl;RC-29386;1258;Fazer login com usuário e senha válidos;40                      
+RiskControl;RC-29386;1259;Fazer login com usuário inexistente;59                        
+RiskControl;RC-29386;1260;Fazer login com senha inválida;60                        
+RiskControl;RC-29386;1261;Fazer login com campo obrigatório não preenchido;61                      
+RiskControl;RC-29391-E;1262;Cancelar edição da <entidade> com sucesso;10                       
+RiskControl;RC-29391-E;1263;Editar informações da <entidade> com sucesso;6                       
+RiskControl;RC-29391-E;1264;Editar entidade deixando os campos obrigatórios do formulário em branco;8                   
+RiskControl;RC-29391-E;1265;Verificar presença de campos retornados;16                        
+RiskControl;RC-29391-E;1266;Verificar inserção de link de <entidade> inexistente;23                      
+RiskControl;RC-29391-E;1267;Fechar a tela antes de excutar ação;26                      
+RiskControl;RC-29391-E;1268;Verificar se todos os dados da <entidade> estão sendo exibidos;22                   
+RiskControl;RC-29391-E;1269;Salvar com data inical maior que data final;62                     
+RiskControl;RC-30352-C;1270;Cadastrar <entidade> com sucesso;10                         
+RiskControl;RC-30352-C;1271;Cancelar cadastro de <entidade> com sucesso;2                       
+RiskControl;RC-30352-C;1272;Cadastrar <entidade> sem campos obrigatórios preenchidos;4                       
+RiskControl;RC-30352-C;1273;Verificar acesso por papéis;20                         
+RiskControl;RC-30352-C;1274;Fechar a tela antes de executar ação;26                      
+RiskControl;RC-30352-C;1275;Validar ação sem conexão com servidor;37                       
+RiskControl;RC-30352-E;1276;Cancelar edição da <entidade> com sucesso;10                       
+RiskControl;RC-30352-E;1277;Editar informações da <entidade> com sucesso;6                       
+RiskControl;RC-30352-E;1278;Editar entidade deixando os campos obrigatórios do formulário em branco;8                   
+RiskControl;RC-30352-E;1279;Verificar presença de campos retornados;16                        
+RiskControl;RC-30352-E;1280;Fechar a tela antes de excutar ação;26                      
+RiskControl;RC-30352-E;1281;Verificar se todos os dados da <entidade> estão sendo exibidos;22                   
+RiskControl;RC-30352-L;1282;Verificar acesso por papéis;20                         
+RiskControl;RC-30352-L;1283;Listar todas as <entidades> com sucesso;15                       
+RiskControl;RC-30352-L;1284;Verificar presença de campos retornados;16                        
+RiskControl;RC-30352-L;1285;Validar resultado da consulta de <entidade> sem dados;17                     
+RiskControl;RC-30352-L;1286;Verificar paginação;19                           
+RiskControl;RC-30352-L;1287;Validar resultado da consulta (filtro) de <entidade>;21                      
+RiskControl;RC-30352-L;1288;Visualizar dados da <entidade>;16                         
+RiskControl;RC-30352-L;1289;Verificar comportamento <comportamento> do campo <campo>;34                       
+SmartClassroom;SC-29048;1290;Acessar tela sem estar autenticado na aplicação;13                      
+SmartClassroom;SC-29048;1291;O campo senha deve seguir regra <regra>;25                      
+SmartClassroom;SC-29048;1292;Fazer login com usuário e senha válidos;40                      
+SmartClassroom;SC-29048;1293;Fazer login com usuário inexistente;59                        
+SmartClassroom;SC-29048;1294;Fazer login com senha inválida;60                        
+SmartClassroom;SC-29048;1295;Fazer login com campo obrigatório não preenchido;61                      
+SmartClassroom;SC-29048;1296;Validar logout da aplicação;35                         
+SmartClassroom;SC-29048;1297;Validar ação sem conexão com servidor;37                       
+SmartClassroom;SC-29048;1298;Validar Termos de Uso e Política de Privacidade;                     
+SmartClassroom;SC-29966;1299;Cadastrar <entidade> com sucesso;10                         
+SmartClassroom;SC-29966;1300;Cancelar cadastro de <entidade> com sucesso;2                       
+SmartClassroom;SC-29966;1301;Cadastrar <entidade> com ID existente;3                        
+SmartClassroom;SC-29966;1302;Cadastrar <entidade> sem campos obrigatórios preenchidos;4                       
+SmartClassroom;SC-29966;1303;Fechar a tela antes de excutar ação;26                      
+SmartClassroom;SC-29966;1304;Validar ação sem conexão com servidor;37                       
+SmartClassroom;SC-29966;1305;Cadastrar <entidade> com campos inválidos;43                        
+SmartClassroom;SC-29966;1306;Cadastrar usuários com diferentes papéis;5                        
+SmartClassroom;SC-29966-L;1307;Listar todas as <entidades> com sucesso;15                       
+SmartClassroom;SC-29966-L;1308;Validar componentes da listagem de usuário;16                       
+SmartClassroom;SC-29966-L;1309;Validar resultado da consulta de <entidade> sem dados;17                     
+SmartClassroom;SC-29966-L;1310;Validar paginação do usuário;19                         
+SmartClassroom;SC-29966-L;1311;Pesquisar usuário;21                           
+SmartClassroom;SC-29966-L;1312;Visualizar Usuário;16                           
+SmartClassroom;SC-29966-L;1313;Validar Formulários de Usuário;                         
+SmartClassroom;SC-29966-L;1314;Ordenar usuários;649                           
+SmartClassroom;SC-29966-L;1315;Desativar/Ativar Usuário;9                           
+SmartClassroom;SC-29966-E;1316;Cancelar edição do usuário;10                         
+SmartClassroom;SC-29966-E;1317;Editar Usuário com Sucesso;6                         
+SmartClassroom;SC-29966-E;1318;Validar Regras do Formulário de Edição de Usuário;8                     
+SmartClassroom;SC-29966-E;1319;Verificar presença de campos retornados;16                        
+SmartClassroom;SC-29966-E;1320;Verificar inserção de link de <entidade> inexistente;23                      
+SmartClassroom;SC-29966-E;1321;Fechar a tela antes de excutar ação;26                      
+SmartClassroom;SC-29966-E;1322;Verificar se todos os dados da <entidade> estão sendo exibidos;22                   
+SmartClassroom;SC-29966-E;1323;Editar entidade alterando o ID para um existente;7                     
+SmartClassroom;SC-29966-E;1324;Validar Regras do Formulário de Edição de Usuário (Campos Inválidos);44                   
+SmartClassroom;SC-29048;1325;Acessar tela sem estar autenticado na aplicação;13                      
+SmartClassroom;SC-29048;1326;O campo senha deve seguir regra <regra>;25                      
+SmartClassroom;SC-29048;1327;Fazer login com usuário e senha válidos;40                      
+SmartClassroom;SC-29048;1328;Fazer login com usuário inexistente;59                        
+SmartClassroom;SC-29048;1329;Fazer login com senha inválida;60                        
+SmartClassroom;SC-29048;1330;Fazer login com campo obrigatório não preenchido;61                      
+SmartClassroom;SC-29048;1331;Validar logout da aplicação;35                         
+SmartClassroom;SC-29048;1332;Validar ação sem conexão com servidor;37                       
+SmartClassroom;SC-29048;1333;Validar Termos de Uso e Política de Privacidade;                     
+SmartClassroom;SC-29348;1334;Criar perfil com sucesso;10                         
+SmartClassroom;SC-29348;1335;Cancelar Criação de Perfil;2                         
+SmartClassroom;SC-29348;1336;Validar Regras do Formulário de Criação de Perfil;4                     
+SmartClassroom;SC-29348;1337;Fechar a tela antes de excutar ação;26                      
+SmartClassroom;SC-29348;1338;Validar ação sem conexão com servidor;37                       
+SmartClassroom;SC-29348;1339;Validar Regras do Formulário de Criação de Perfil;43                     
+SmartClassroom;SC-29348-E;1340;Cancelar Edição de Perfil;10                         
+SmartClassroom;SC-29348-E;1341;Editar Perfil com sucesso;6                         
+SmartClassroom;SC-29348-E;1342;Validar Regras do Formulário de Edição de Perfil;8                     
+SmartClassroom;SC-29348-E;1343;Verificar presença de campos retornados;16                        
+SmartClassroom;SC-29348-E;1344;Verificar inserção de link de <entidade> inexistente;23                      
+SmartClassroom;SC-29348-E;1345;Fechar a tela antes de excutar ação;26                      
+SmartClassroom;SC-29348-E;1346;Verificar se todos os dados da <entidade> estão sendo exibidos;22                   
+SmartClassroom;SC-29348-L;1347;Listar todas as <entidades> com sucesso;15                       
+SmartClassroom;SC-29348-L;1348;Validar Componentes da Listagem de Perfis;16                       
+SmartClassroom;SC-29348-L;1349;Validar resultado da consulta de <entidade> sem dados;17                     
+SmartClassroom;SC-29348-L;1350;Validar Paginação de Perfis;19                         
+SmartClassroom;SC-29348-L;1351;Pesquisar Perfil;21                           
+SmartClassroom;SC-29348-L;1352;Visualizar Perfil;16                           
+SmartClassroom;SC-29348-L;1353;Ordenar Perfis;649                           
+SmartClassroom;SC-29348-L;1354;Desativar/Ativar Perfil;9                           

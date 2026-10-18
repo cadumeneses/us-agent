@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import { recommenderApi, supportsWebMethod } from '../services/recommender-api';
-import type { ConfiguredInput, DatasetRecord, DefinitionRecord, ImportRecord, ImportSpec } from '../types/configurable-recommendations';
+import type { ConfiguredInput, ContentReference, DatasetRecord, DefinitionRecord, ImportSpec } from '../types/configurable-recommendations';
+import { TEST_CASE_METHOD, type MethodImportRecord, type MethodImportSpec } from '../types/test-case-recommendations';
+import { TestCaseCatalogPicker } from './TestCaseCatalogPicker';
 import { ReferenceDetails } from './ConfiguredRunDetails';
 import { CatalogState, useCatalog, versionKey } from './VersionCatalog';
 
@@ -15,7 +17,8 @@ export function DatasetImporter({ refresh, changed, busy, setBusy }: { refresh: 
   const [format, setFormat] = useState<'csv' | 'json'>('json'), [delimiter, setDelimiter] = useState<',' | ';' | '\t'>(',');
   const [source, setSource] = useState(''), [basis, setBasis] = useState<ImportSpec['source']['authorization']['basis'] | ''>(''), [authorization, setAuthorization] = useState('');
   const [recordPath, setRecordPath] = useState(''), [mapping, setMapping] = useState<Record<string, FieldMapping>>({});
-  const [file, setFile] = useState<File>(), [preview, setPreview] = useState<ImportRecord>();
+  const [file, setFile] = useState<File>(), [preview, setPreview] = useState<MethodImportRecord>();
+  const [catalog, setCatalog] = useState<ContentReference>();
   const [excluded, setExcluded] = useState<number[]>([]), [published, setPublished] = useState<DatasetRecord>();
   const [error, setError] = useState(''), [page, setPage] = useState(0), [recoverId, setRecoverId] = useState('');
   const running = useRef(false);
@@ -25,7 +28,8 @@ export function DatasetImporter({ refresh, changed, busy, setBusy }: { refresh: 
     try { await task(); } catch (reason) { setError((reason as Error).message); } finally { running.current = false; setBusy(false); }
   }
   const fields = definition?.snapshot?.content.definition.attributes ?? [];
-  function importSpec(): ImportSpec {
+  const testCases = definition?.definition.method.id === TEST_CASE_METHOD;
+  function importSpec(): MethodImportSpec {
     if (!definition?.snapshot || definition.state !== 'published') throw new Error("Load a published definition.");
     if (!id || !version || !source.trim() || !basis || !authorization.trim()) throw new Error("Enter the dataset ID, version, source, and use declaration.");
     const recordId = pathParts(recordPath);
@@ -38,7 +42,8 @@ export function DatasetImporter({ refresh, changed, busy, setBusy }: { refresh: 
       if (!validPath(path)) throw new Error(`Enter the source path for ${field.name}, one key per line.`);
       attributes[field.id] = { path, encoding: entry.encoding };
     }
-    return { schemaVersion: 1, id, version, format, ...(format === 'csv' ? { delimiter } : {}),
+    if (testCases && (!catalog || basis !== 'synthetic')) throw new Error('Choose a published synthetic catalog and a synthetic use declaration.');
+    return { ...(testCases ? { schemaVersion: 2 as const, catalog: catalog! } : { schemaVersion: 1 as const }), id, version, format, ...(format === 'csv' ? { delimiter } : {}),
       definition: { id: definition.definition.id, version: definition.definition.version, format: definition.snapshot.format, sha256: definition.snapshot.sha256 },
       source: { description: source, authorization: { basis, reference: authorization } }, mapping: { recordId, attributes } };
   }
@@ -57,13 +62,14 @@ export function DatasetImporter({ refresh, changed, busy, setBusy }: { refresh: 
   });
   const canPublish = !!preview && !published && !report!.fatal.length && includedRows.length > 0 && includedRows.every(row => row.input !== null) && !repeated;
   return <section className="card configured-panel" aria-label="Dataset import"><h2>Import and publish dataset</h2><p>Choose a published definition, describe its source, and review the report before publishing. Imported labels are preserved.</p>
-    <fieldset disabled={busy} className="configured-form-body"><label>Import definition<select value={choice} onChange={event => { setChoice(event.target.value); setDefinition(undefined); setMapping({}); invalidate(); }}><option value="">Select</option>{definitions.rows.map(item => <option disabled={!supportsWebMethod(item.method)} key={versionKey(item)} value={versionKey(item)}>{item.name} · {item.id} · {item.version}{!supportsWebMethod(item.method) && ' · API only'}</option>)}</select></label><button type="button" disabled={definitions.loading || !definitions.rows.some(item => versionKey(item) === choice)} onClick={() => void action(async () => {
+    <fieldset disabled={busy} className="configured-form-body"><label>Import definition<select value={choice} onChange={event => { setChoice(event.target.value); setDefinition(undefined); setCatalog(undefined); setMapping({}); invalidate(); }}><option value="">Select</option>{definitions.rows.map(item => <option disabled={!supportsWebMethod(item.method)} key={versionKey(item)} value={versionKey(item)}>{item.name} · {item.id} · {item.version}{!supportsWebMethod(item.method) && ' · API only'}</option>)}</select></label><button type="button" disabled={definitions.loading || !definitions.rows.some(item => versionKey(item) === choice)} onClick={() => void action(async () => {
       const summary = definitions.rows.find(item => versionKey(item) === choice)!;
       const record = await recommenderApi.definition(summary.id, summary.version);
       if (record.state !== 'published' || !record.snapshot || record.snapshot.sha256 !== summary.snapshot?.sha256) throw new Error("Definition unavailable or changed. Refresh the list.");
       setDefinition(record); setMapping(Object.fromEntries(record.definition.attributes.map(field => [field.id, { included: field.required, path: '', encoding: 'value' }]))); invalidate();
     })}>Load dataset schema</button><CatalogState catalog={definitions} title="import definitions"/>
     {definition?.snapshot && <><ReferenceDetails title="Import definition" reference={{ id: definition.definition.id, version: definition.definition.version, format: definition.snapshot.format, sha256: definition.snapshot.sha256 }}/>
+      {testCases && <><p>Synthetic E21 equation demonstration. Every dataset record must declare its test IDs; [] means known empty. Missing associations require an explicit exclusion.</p><TestCaseCatalogPicker value={catalog} refresh={refresh} onChange={value => { setCatalog(value); invalidate(); }}/></>}
       <div className="configured-editor-grid"><label>Dataset ID<input value={id} maxLength={80} onChange={event => { setId(event.target.value); invalidate(); }}/></label><label>Dataset version<input value={version} maxLength={80} onChange={event => { setVersion(event.target.value); invalidate(); }}/></label><label>File format<select value={format} onChange={event => { setFormat(event.target.value as 'csv' | 'json'); invalidate(); }}><option value="json">JSON</option><option value="csv">CSV</option></select></label>
         {format === 'csv' && <label>CSV delimiter<select value={delimiter} onChange={event => { setDelimiter(event.target.value as typeof delimiter); invalidate(); }}><option value=",">Comma</option><option value=";">Semicolon</option><option value={'\t'}>Tab</option></select></label>}</div>
       <label>Source description<textarea maxLength={500} value={source} onChange={event => { setSource(event.target.value); invalidate(); }}/></label>
@@ -90,6 +96,7 @@ export function DatasetImporter({ refresh, changed, busy, setBusy }: { refresh: 
     })}>Load preview</button></details>
     </fieldset>
     {preview && report && <div className="configured-import-preview"><h3>Preserved preview</h3><p>Preview ID: <code>{preview.id}</code></p><ReferenceDetails title="Definition preserved in preview" reference={preview.snapshot.content.spec.definition}/>
+      {preview.snapshot.content.schemaVersion === 2 && <ReferenceDetails title="Catalog preserved in preview" reference={preview.snapshot.content.spec.catalog}/>}
       <p>Dataset to publish: <b>{preview.snapshot.content.spec.id} · {preview.snapshot.content.spec.version}</b></p>
       <p>Source: {preview.snapshot.content.spec.source.description} · {preview.snapshot.content.spec.source.authorization.basis} · {preview.snapshot.content.spec.source.authorization.reference}</p>
       <p>File: {preview.snapshot.content.file.name} · {preview.snapshot.content.file.byteLength} bytes</p><p className="configured-hash">File SHA-256: {preview.snapshot.content.file.sha256}</p><p className="configured-hash">Preview SHA-256: {preview.snapshot.sha256}</p>

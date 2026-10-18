@@ -1,0 +1,303 @@
+{
+  "format": "us-agent-json-v1",
+  "sha256": "0053c0e5ab71acbee438ac3bc9eeeb76d530b13274aac02b25a2c8fdfe17baa2",
+  "content": {
+    "articleArithmetic": {
+      "aggregationConfirmed": false,
+      "displayedTC04": {
+        "calculated": 0.7066666666666667,
+        "k": 3,
+        "reported": 0.71,
+        "similarities": [
+          0.5,
+          0.87,
+          0.75
+        ]
+      },
+      "f2OfReportedPrecisionRecall": 0.5833333333333334,
+      "note": "F2 of mean precision/recall is not necessarily mean F2; per-target/fold outputs still required.",
+      "reference": "E26 PDF p.4 eqs.2–4; p.6 Table 3 and offline results",
+      "reportedOffline": {
+        "f2": 0.51,
+        "precision": 0.378,
+        "recall": 0.675
+      }
+    },
+    "audit": {
+      "content": {
+        "catalog": {
+          "acceptanceCriteria": 59,
+          "distinctAcceptanceCriterionIds": 59,
+          "nonemptyStandardTestIds": null,
+          "standardTestIdsAreCatalogContents": false
+        },
+        "comparisonPolicy": "trim_headers_and_values_remove_single_leading_hash_for_story_identity_no_other_alias_resolution",
+        "files": [
+          {
+            "blankValues": {
+              "Descrição": 0,
+              "ID": 0
+            },
+            "comparisonHeaders": [
+              "ID",
+              "Descrição"
+            ],
+            "formatError": null,
+            "headers": [
+              "ID",
+              "Descrição"
+            ],
+            "malformedRows": [],
+            "missingIdentityRows": null,
+            "name": "acceptance_criteria_data.csv",
+            "rows": 59,
+            "uniqueProjects": 0,
+            "uniqueStoryKeys": 0,
+            "validRows": 59
+          },
+          {
+            "blankValues": {
+              "DESC_Task": 276,
+              "DESC_US": 0,
+              "ID (mapeamento)": 90,
+              "ID_Task": 468,
+              "ID_US": 0,
+              "Mapeado? (SIM ou NAO)": 210,
+              "Módulo": 200,
+              "Operação": 203,
+              "Origem": 280,
+              "Plataforma": 287,
+              "Projeto": 0,
+              "Tarefa": 473,
+              "Tipo": 213
+            },
+            "comparisonHeaders": [
+              "Módulo",
+              "Operação",
+              "Tarefa",
+              "ID (mapeamento)",
+              "Projeto",
+              "ID_US",
+              "DESC_US",
+              "Plataforma",
+              "ID_Task",
+              "DESC_Task",
+              "Tipo",
+              "Mapeado? (SIM ou NAO)",
+              "Origem"
+            ],
+            "formatError": null,
+            "headers": [
+              "Módulo",
+              "Operação",
+              "Tarefa",
+              "ID (mapeamento)",
+              "Projeto",
+              "ID_US",
+              "DESC_US",
+              "Plataforma",
+              "ID_Task",
+              "DESC_Task",
+              "Tipo",
+              "Mapeado? (SIM ou NAO)",
+              "Origem"
+            ],
+            "malformedRows": [],
+            "missingIdentityRows": 0,
+            "name": "categorized_user_stories.csv",
+            "rows": 568,
+            "uniqueProjects": 17,
+            "uniqueStoryKeys": 304,
+            "validRows": 568
+          },
+          {
+            "blankValues": null,
+            "comparisonHeaders": [
+              "Projeto",
+              "ID_US",
+              "ID",
+              "ID_TC",
+              "ID_STD_TC"
+            ],
+            "formatError": {
+              "line": 86,
+              "message": "Aspas ou conteúdo após aspas inválidos no CSV."
+            },
+            "headers": [
+              "Projeto",
+              "ID_US",
+              "ID",
+              "ID_TC",
+              "ID_STD_TC                            "
+            ],
+            "malformedRows": [],
+            "missingIdentityRows": null,
+            "name": "test_cases_for_user_stories.csv",
+            "rows": null,
+            "uniqueProjects": null,
+            "uniqueStoryKeys": null,
+            "validRows": null
+          },
+          {
+            "blankValues": {
+              "CA": 24,
+              "ID_STD_AC": 8,
+              "ID_TC": 152,
+              "ID_US": 0,
+              "Projeto": 0,
+              "RNFs": 0
+            },
+            "comparisonHeaders": [
+              "Projeto",
+              "ID_US",
+              "ID_TC",
+              "CA",
+              "RNFs",
+              "ID_STD_AC"
+            ],
+            "formatError": null,
+            "headers": [
+              "Projeto",
+              "ID_US",
+              "ID_TC",
+              "CA",
+              "RNFs",
+              "ID_STD_AC"
+            ],
+            "malformedRows": [],
+            "missingIdentityRows": 0,
+            "name": "user_stories_test_cases.csv",
+            "rows": 690,
+            "uniqueProjects": 10,
+            "uniqueStoryKeys": 130,
+            "validRows": 690
+          }
+        ],
+        "imported": false,
+        "joins": [
+          {
+            "absentFromCategorized": 0,
+            "categorizedAbsentFromFile": 0,
+            "file": "categorized_user_stories.csv",
+            "matchingCategorizedStoryKeys": 304
+          },
+          {
+            "absentFromCategorized": null,
+            "categorizedAbsentFromFile": null,
+            "file": "test_cases_for_user_stories.csv",
+            "matchingCategorizedStoryKeys": null
+          },
+          {
+            "absentFromCategorized": 2,
+            "categorizedAbsentFromFile": 176,
+            "file": "user_stories_test_cases.csv",
+            "matchingCategorizedStoryKeys": 128
+          }
+        ],
+        "paperComparison": {
+          "reason": "Source files include different row granularities and populations; no selection manifest/folds/code located in this record.",
+          "reportedOffline": {
+            "distinctTestCases": 1077,
+            "projects": 13,
+            "stories": 217
+          },
+          "sourceSubsetConfirmed": false
+        },
+        "profile": {
+          "applicationDomainColumnPresent": false,
+          "conflictingStories": 13,
+          "gherkinColumnPresent": false,
+          "incompleteStories": 51,
+          "storiesWithAllRequiredProfileColumns": 253,
+          "uniqueStoryKeys": 304
+        },
+        "readiness": {
+          "blockers": [
+            "confirm_exact_experimental_subset_and_folds",
+            "review_malformed_rows_and_missing_fields_without_silent_exclusions",
+            "resolve_profile_conflicts_and_cross_file_identities",
+            "obtain_domain_values_and_complete_test_artifacts",
+            "confirm_Euclidean_similarity_and_item_associations",
+            "confirm_per_target_counts_and_metric_aggregation"
+          ],
+          "readyForScientificExecution": false
+        },
+        "scientificReproduction": false,
+        "version": "e26-source-audit-v1"
+      },
+      "format": "us-agent-json-v1",
+      "sha256": "51d0846714e9a61bf77ff53e940e8331633029e98077657788fa129135ab1079"
+    },
+    "kind": "e26_public_source_audit",
+    "limits": [
+      "Q01_Euclidean_transform_unconfirmed",
+      "Q02_illustrative_test_ids_differ_between_versions",
+      "Q03_metric_aggregation_unconfirmed",
+      "source_subset_and_code_not_confirmed",
+      "no_operational_import_or_empirical_reproduction"
+    ],
+    "schemaVersion": 1,
+    "source": {
+      "conceptDoi": "10.5281/zenodo.16131516",
+      "creators": [
+        {
+          "affiliation": null,
+          "name": "Anonymous, Anonymous",
+          "orcid": "0000-0001-8416-8385"
+        }
+      ],
+      "files": {
+        "acceptance_criteria_data.csv": {
+          "bytes": 3672,
+          "md5": "dddfce3a4a9fccb817cbdbc345222cd3",
+          "sha256": "9af26e760b59a98aeabc469867f61123a9753424eaa8240c94bbd5ccc7de2afe",
+          "url": "https://zenodo.org/api/records/16133793/files/acceptance_criteria_data.csv/content"
+        },
+        "categorized_user_stories.csv": {
+          "bytes": 68242,
+          "md5": "ae3e1b7fa05b0e3fe5c76c9288a227ed",
+          "sha256": "9203db6b6e3b85df5d0752e3a429c4c1ed5636c51b46dab5a856970113a4e0a4",
+          "url": "https://zenodo.org/api/records/16133793/files/categorized_user_stories.csv/content"
+        },
+        "test_cases_for_user_stories.csv": {
+          "bytes": 132733,
+          "md5": "7c07917ff126c13da2e5a9bb1d59a005",
+          "sha256": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a",
+          "url": "https://zenodo.org/api/records/16133793/files/test_cases_for_user_stories.csv/content"
+        },
+        "user_stories_test_cases.csv": {
+          "bytes": 68626,
+          "md5": "5e37627879cb8bf2d9f589a0c96030ac",
+          "sha256": "5ee242a804b4c355233aec151978e00e501bf3328e2207bdca7f3f2bcc3d47a1",
+          "url": "https://zenodo.org/api/records/16133793/files/user_stories_test_cases.csv/content"
+        }
+      },
+      "license": "cc-by-4.0",
+      "metadataSha256": "3a1cae165ed8bd95c6c61ac62f74110ac93ecb383f50b435246f29749d57cb93",
+      "paper": {
+        "doi": "10.1145/3748522.3779891",
+        "id": "E26",
+        "localPdfSha256": "cc895b9d7cbc49af9c63f0466f1050b82b432450bf0798307229c5a0cf23f445",
+        "pages": 9
+      },
+      "recordId": 16133793,
+      "schemaVersion": 1,
+      "scope": "Public source audit only; original bytes; not published into the synthetic demonstration or operational database.",
+      "title": "Trainning dataset",
+      "versionDoi": "10.5281/zenodo.16133793"
+    },
+    "sourceHashes": {
+      "apps/api/src/domain/content-snapshot.ts": "43d0a3570567b4d3bfe5efbff3c2e225d093de4193b4fd1d26fe996c4c781d8a",
+      "apps/api/src/domain/import-formats.ts": "cb9d5ea48c69d6e7f2616efb150f2b1ec362be9876f9f485468da92e17ef9745",
+      "apps/api/src/evaluation/testrec-source-audit.ts": "7ab241c46b1999cc86cce17370f9ec75313548e3f882208d88ad744d7cf85d41",
+      "package-lock.json": "f1a6ea761d579e0368fbb4a3ed5a4e98c8caf076c18e8ca66fe8a042b71faed4",
+      "research/sources/testrec-e26/zenodo-16133793/acceptance_criteria_data.csv": "9af26e760b59a98aeabc469867f61123a9753424eaa8240c94bbd5ccc7de2afe",
+      "research/sources/testrec-e26/zenodo-16133793/categorized_user_stories.csv": "9203db6b6e3b85df5d0752e3a429c4c1ed5636c51b46dab5a856970113a4e0a4",
+      "research/sources/testrec-e26/zenodo-16133793/inventory.json": "95d402949197ce31e79edec5f1d2673b65a2f622d1b7ad95f0413fd1d755e582",
+      "research/sources/testrec-e26/zenodo-16133793/record-metadata.json": "3a1cae165ed8bd95c6c61ac62f74110ac93ecb383f50b435246f29749d57cb93",
+      "research/sources/testrec-e26/zenodo-16133793/test_cases_for_user_stories.csv": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a",
+      "research/sources/testrec-e26/zenodo-16133793/user_stories_test_cases.csv": "5ee242a804b4c355233aec151978e00e501bf3328e2207bdca7f3f2bcc3d47a1",
+      "scripts/audit-testrec-source.ts": "5522fe92e62870d382b693020d5797009d4675eef0b3b3d7f7967b11057d4046"
+    }
+  }
+}

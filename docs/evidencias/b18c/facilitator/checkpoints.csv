@@ -1,0 +1,12 @@
+task,criterion,actual_id,actual_version,actual_sha256,evidence_file,review_status
+rnf,definition,,,,,pending
+rnf,taxonomy,,,,,pending
+rnf,dataset,,,,,pending
+rnf,run,,,,,pending
+rnf,replay,,,,,pending
+tests,definition,,,,,pending
+tests,taxonomy,,,,,pending
+tests,catalog,,,,,pending
+tests,dataset,,,,,pending
+tests,run,,,,,pending
+tests,replay,,,,,pending

@@ -1,0 +1,4 @@
+"session_id","participant_code","method","attempt","order","outcome","elapsed_ms","paused_ms","active_ms","errors","help_requests","configuration_changes","application_code_changes","missing_checkpoints"
+"synthetic-a-rnf","synthetic-a","ramos_2019_manhattan_k1_v2","1","1","completed","150000","30000","120000","1","1","1","0",""
+"synthetic-a-testrec","synthetic-a","us_agent_e21_equations_demo_v1","1","2","completed","210000","0","210000","0","0","0","1",""
+"synthetic-b-testrec","synthetic-b","us_agent_e21_equations_demo_v1","1","1","abandoned","90000","40000","50000","1","1","0","0","taxonomy|dataset|run|replay|catalog"

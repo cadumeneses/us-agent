@@ -1,0 +1,23 @@
+{
+  "id": "demo-target",
+  "provenance": {
+    "source": "US-Agent synthetic target"
+  },
+  "values": {
+    "story_id": "synthetic-target",
+    "module": "Cadastro",
+    "operation": "criar",
+    "platforms": [
+      "Web"
+    ],
+    "application_domain": "Demo",
+    "acceptance_criteria": [
+      "required",
+      "unique"
+    ],
+    "nfrs": [
+      "privacy",
+      "audit"
+    ]
+  }
+}

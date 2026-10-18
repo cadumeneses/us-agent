@@ -1,0 +1,14 @@
+# Exercício RNF — study-review-001
+
+Material técnico para revisão do roteiro. O exercício usa uma reconstrução de compatibilidade e não uma base original de avaliação científica. O objetivo é configurar e executar um recomendador pelo fluxo existente, com consulta a este roteiro permitida para todas as pessoas. Isso avalia configuração orientada por manual; não descoberta autônoma da interface.
+
+Abra `rnf/settings.json`, `rnf/dataset.json` e `rnf/target.json`. O observador fornece uma instalação local preparada, a revisão do software e o idioma fixado. Use os IDs deste lote; dados já publicados em outro namespace não substituem suas etapas.
+
+1. Em `/recommender-setup`, abra **Independent taxonomies** e crie a lista descrita em `settings.json → taxonomy`: ID, versão, nome, origem, seleção e nó, incluindo descrição e pai vazio. Salve, revise e publique.
+2. Em **Definitions**, escolha **New NFR from template**. Defina ID `study-review-001-rnf` e versão `1`. Adicione o atributo `Study context` descrito em `additionalAttribute`: `study_context`, categoria taxonômica, escopo do artefato, cardinalidade única, obrigatório, papel de contexto e representação fora do vetor. Selecione a taxonomia publicada na etapa anterior. Preserve os atributos e parâmetros científicos do template. Salve, revise e publique.
+3. Em **Import dataset**, selecione essa definição e carregue seu schema. Use o ID de base em `settings.json`, versão `1`, formato JSON e as declarações de origem/autorização fornecidas. Escolha `rnf/dataset.json`; **Use US-Agent record mapping** preenche os caminhos `id` e `values → atributo`. Confira o mapeamento do novo contexto, gere a prévia e revise todas as linhas. Publique a versão revisada. O arquivo é um array importável; não importe o documento de pesquisa nem o arquivo de alvo como base.
+4. Em `/configured-recommendations`, escolha explicitamente definição e base publicadas. Preencha ID, origem e todos os valores de `rnf/target.json`; para o campo de contexto, selecione o nó `pilot`. Para listas/registros, preserve cada valor e par. Selecione o par módulo/operação indicado por `labelIndex: 0`. A entrada fornecida não contém RNFs de resposta.
+5. Execute. Inspecione a entrada preservada, a base selecionada, o vizinho e as sugestões. Não altere o código ou a fórmula para fazer um resultado coincidir com uma expectativa.
+6. Abra o histórico, use **Verify replay**, baixe **Download JSON evidence** e entregue ao observador as referências/artefatos efetivamente produzidos. O observador registra checkpoints reais; este arquivo não contém hashes de uma execução sua.
+
+Ao encontrar dificuldade, registre a tentativa e peça ajuda conforme o roteiro comum. Desistência e tarefa incompleta também são resultados da observação. Não use o gabarito reservado ao observador.

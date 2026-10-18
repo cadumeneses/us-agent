@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import template from '../../../../config/recommenders/rnf-v2.draft.json';
 import { recommenderApi, supportsWebMethod } from '../services/recommender-api';
+import testTemplate from '../../../../config/recommenders/testrec-equations.draft.json';
+import { TEST_CASE_METHOD } from '../types/test-case-recommendations';
 import type { ConfiguredAttribute, ConfiguredDefinition, ConfiguredTaxonomy, DefinitionRecord, ScalarType, TaxonomyRecord, TaxonomySummary, ValueType } from '../types/configurable-recommendations';
 import { ReferenceDetails } from './ConfiguredRunDetails';
 import { CatalogState, useCatalog, versionKey } from './VersionCatalog';
@@ -66,15 +68,16 @@ export function DefinitionEditor({ refresh, changed, busy, setBusy }: { refresh:
   }
   const receive = (record: DefinitionRecord) => { setDraft(clone(record.definition)); setSaved(record); setSignature(JSON.stringify(record.definition)); };
   const editAttribute = (index: number, value: ConfiguredAttribute) => setDraft(current => current && ({ ...current, attributes: current.attributes.map((item, position) => position === index ? value : item) }));
+  function loadTemplate(value: ConfiguredDefinition) { setDraft({ ...clone(value), version: '' }); setSaved(undefined); setSignature(''); setError(''); setMessage('Template loaded. Choose an ID and version before saving.'); }
   return <section className="card configured-panel" aria-label="Definition editor"><h2>Definitions and attributes</h2><p>Start from the NFR template or load a version. Published versions are read-only; changes require a new draft version.</p>
     <fieldset disabled={busy} className="configured-form-body"><label>Definition version<select value={choice} onChange={event => setChoice(event.target.value)}><option value="">Select</option>{catalog.rows.map(item => <option disabled={!supportsWebMethod(item.method)} key={versionKey(item)} value={versionKey(item)}>{item.name} · {item.id} · {item.version} · {item.state}{!supportsWebMethod(item.method) && ' · API only'}</option>)}</select></label>
-      <div className="configured-actions"><button type="button" disabled={catalog.loading || !selection} onClick={() => void action(async () => { if (selection) receive(await recommenderApi.definition(selection.id, selection.version)); })}>Load definition</button><button type="button" onClick={() => { setDraft({ ...clone(template) as ConfiguredDefinition, version: '' }); setSaved(undefined); setSignature(''); setError(''); setMessage("Template loaded. Choose an ID and version before saving."); }}>New NFR from template</button></div><CatalogState catalog={catalog} title="definition versions"/>
+      <div className="configured-actions"><button type="button" disabled={catalog.loading || !selection} onClick={() => void action(async () => { if (selection) receive(await recommenderApi.definition(selection.id, selection.version)); })}>Load definition</button><button type="button" onClick={() => loadTemplate(template as ConfiguredDefinition)}>New NFR from template</button><button type="button" onClick={() => loadTemplate(testTemplate as ConfiguredDefinition)}>New test-case demonstration</button></div><CatalogState catalog={catalog} title="definition versions"/>
     </fieldset>
     {draft && <>
       <p role="status">State: {readonly ? saved?.state ?? draft.state : draft.state}{!readonly && (clean ? " · Draft saved" : " · Unsaved changes")}</p>
       {readonly && <button type="button" disabled={busy} onClick={() => { setDraft({ ...clone(draft), version: '', state: 'draft' }); setSaved(undefined); setSignature(''); }}>Create a new definition version</button>}
       <fieldset className="configured-form-body" disabled={busy || readonly}><IdentityFields value={draft} onChange={(key, value) => setDraft({ ...draft, [key]: value })}/>
-        <p>Method: {draft.method.id} · version {draft.method.version} · k={String(draft.method.parameters.k)}. This policy preserves Felipe's method; other methods require their own implementation.</p>
+        <p>Method: {draft.method.id} · version {draft.method.version} · k={String(draft.method.parameters.k)}. {draft.method.id === TEST_CASE_METHOD ? 'Synthetic E21 Manhattan equation demonstration; original Euclidean reproduction and Q01/Q02 remain pending.' : "This policy preserves Felipe's method; other methods require their own implementation."}</p>
         <h3>Attributes ({draft.attributes.length})</h3>{draft.attributes.map((attribute, index) => <details key={index} className="configured-subeditor"><summary>{attribute.name || `Attribute ${index + 1}`} · {attribute.id}</summary>
           <div className="configured-editor-grid"><label>Attribute ID<input value={attribute.id} onChange={event => editAttribute(index, { ...attribute, id: event.target.value })}/></label><label>Attribute name<input value={attribute.name} onChange={event => editAttribute(index, { ...attribute, name: event.target.value })}/></label>
           <label>Escopo<select value={attribute.scope} onChange={event => editAttribute(index, { ...attribute, scope: event.target.value as ConfiguredAttribute['scope'] })}><option value="artifact">Artifact</option><option value="project">Project</option></select></label>
@@ -86,7 +89,7 @@ export function DefinitionEditor({ refresh, changed, busy, setBusy }: { refresh:
         </details>)}<button type="button" disabled={draft.attributes.length >= 100} onClick={() => setDraft({ ...draft, attributes: [...draft.attributes, { id: '', name: '', valueType: { type: 'text' }, scope: 'artifact', cardinality: 'single', required: false, role: 'context', representation: 'none' }] })}>Add attribute</button>
         <CatalogState catalog={taxonomies} title="attribute taxonomies"/>
         <details><summary>Method attribute bindings</summary>{Object.entries(draft.method.bindings).map(([slot, id]) => <label key={slot}>{slot}<select value={id} onChange={event => setDraft({ ...draft, method: { ...draft.method, bindings: { ...draft.method.bindings, [slot]: event.target.value } } })}>{draft.attributes.map((item, index) => <option key={index} value={item.id}>{item.name} · {item.id}</option>)}</select></label>)}</details>
-        <LegacyMapping value={draft} onChange={setDraft}/>
+        {draft.method.id !== TEST_CASE_METHOD && <LegacyMapping value={draft} onChange={setDraft}/>}
       </fieldset>
       <details><summary>Review complete configuration</summary><pre className="configured-value">{JSON.stringify(draft, null, 2)}</pre></details>
       {saved?.snapshot && <ReferenceDetails title="Published definition" reference={{ id: saved.definition.id, version: saved.definition.version, format: saved.snapshot.format, sha256: saved.snapshot.sha256 }}/>}

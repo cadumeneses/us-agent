@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "version": "e26-source-version-comparison-v1",
+  "scope": "comparison_only_no_replacements",
+  "earlierRecord": 16133229,
+  "latestRecord": 16133793,
+  "flaggedPhysicalLines": [
+    86,
+    167,
+    180,
+    209,
+    225,
+    252,
+    292,
+    308,
+    312,
+    324,
+    328,
+    329,
+    332,
+    338,
+    392,
+    407,
+    416,
+    417,
+    437,
+    483,
+    508,
+    528,
+    550,
+    551,
+    570,
+    571,
+    590,
+    591,
+    668,
+    671,
+    672,
+    673,
+    674,
+    697,
+    698,
+    699,
+    700,
+    701,
+    876,
+    877,
+    973,
+    974,
+    982,
+    983,
+    998,
+    999,
+    1015,
+    1016,
+    1028,
+    1029,
+    1055,
+    1056,
+    1093,
+    1094,
+    1119,
+    1120,
+    1248
+  ],
+  "locallyEncodedLines": [
+    292,
+    308,
+    312,
+    324,
+    332,
+    338
+  ],
+  "multilineGroups": [
+    {
+      "startPhysicalLine": 876,
+      "endPhysicalLine": 877
+    },
+    {
+      "startPhysicalLine": 973,
+      "endPhysicalLine": 974
+    },
+    {
+      "startPhysicalLine": 982,
+      "endPhysicalLine": 983
+    },
+    {
+      "startPhysicalLine": 998,
+      "endPhysicalLine": 999
+    },
+    {
+      "startPhysicalLine": 1015,
+      "endPhysicalLine": 1016
+    },
+    {
+      "startPhysicalLine": 1028,
+      "endPhysicalLine": 1029
+    },
+    {
+      "startPhysicalLine": 1055,
+      "endPhysicalLine": 1056
+    },
+    {
+      "startPhysicalLine": 1093,
+      "endPhysicalLine": 1094
+    },
+    {
+      "startPhysicalLine": 1119,
+      "endPhysicalLine": 1120
+    }
+  ]
+}

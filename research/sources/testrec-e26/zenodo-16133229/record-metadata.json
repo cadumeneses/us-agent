@@ -1,0 +1,135 @@
+{
+  "created": "2025-07-19T03:16:59.564480+00:00",
+  "modified": "2025-07-19T03:16:59.954967+00:00",
+  "id": 16133229,
+  "conceptrecid": "16131516",
+  "doi": "10.5281/zenodo.16133229",
+  "conceptdoi": "10.5281/zenodo.16131516",
+  "doi_url": "https://doi.org/10.5281/zenodo.16133229",
+  "metadata": {
+    "title": "Trainning dataset",
+    "doi": "10.5281/zenodo.16133229",
+    "publication_date": "2025-07-18",
+    "description": "<p>Dataset for trainning recommender component to apply k-nn algorithm.</p>",
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Anonymous, Anonymous",
+        "affiliation": null,
+        "orcid": "0000-0001-8416-8385"
+      }
+    ],
+    "resource_type": {
+      "title": "Dataset",
+      "type": "dataset"
+    },
+    "license": {
+      "id": "cc-by-4.0"
+    },
+    "relations": {
+      "version": [
+        {
+          "index": 1,
+          "is_last": false,
+          "parent": {
+            "pid_type": "recid",
+            "pid_value": "16131516"
+          }
+        }
+      ]
+    }
+  },
+  "title": "Trainning dataset",
+  "links": {
+    "self": "https://zenodo.org/api/records/16133229",
+    "self_html": "https://zenodo.org/records/16133229",
+    "preview_html": "https://zenodo.org/records/16133229?preview=1",
+    "doi": "https://doi.org/10.5281/zenodo.16133229",
+    "self_doi": "https://doi.org/10.5281/zenodo.16133229",
+    "self_doi_html": "https://zenodo.org/doi/10.5281/zenodo.16133229",
+    "reserve_doi": "https://zenodo.org/api/records/16133229/draft/pids/doi",
+    "parent": "https://zenodo.org/api/records/16131516",
+    "parent_html": "https://zenodo.org/records/16131516",
+    "parent_doi": "https://doi.org/10.5281/zenodo.16131516",
+    "parent_doi_html": "https://zenodo.org/doi/10.5281/zenodo.16131516",
+    "self_iiif_manifest": "https://zenodo.org/api/iiif/record:16133229/manifest",
+    "self_iiif_sequence": "https://zenodo.org/api/iiif/record:16133229/sequence/default",
+    "files": "https://zenodo.org/api/records/16133229/files",
+    "media_files": "https://zenodo.org/api/records/16133229/media-files",
+    "latest": "https://zenodo.org/api/records/16133229/versions/latest",
+    "latest_html": "https://zenodo.org/records/16133229/latest",
+    "versions": "https://zenodo.org/api/records/16133229/versions",
+    "draft": "https://zenodo.org/api/records/16133229/draft",
+    "access_links": "https://zenodo.org/api/records/16133229/access/links",
+    "access_grants": "https://zenodo.org/api/records/16133229/access/grants",
+    "access_users": "https://zenodo.org/api/records/16133229/access/users",
+    "access_request": "https://zenodo.org/api/records/16133229/access/request",
+    "access": "https://zenodo.org/api/records/16133229/access",
+    "communities": "https://zenodo.org/api/records/16133229/communities",
+    "communities-suggestions": "https://zenodo.org/api/records/16133229/communities-suggestions",
+    "request_deletion": "https://zenodo.org/api/records/16133229/request-deletion",
+    "file_modification": "https://zenodo.org/api/records/16133229/file-modification",
+    "quota_increase": "https://zenodo.org/api/records/16133229/quota-increase",
+    "requests": "https://zenodo.org/api/records/16133229/requests"
+  },
+  "updated": "2025-07-19T03:16:59.954967+00:00",
+  "recid": "16133229",
+  "revision": 3,
+  "files": [
+    {
+      "id": "cacfa805-c04e-4a68-8ba0-ba8220d2f4fa",
+      "key": "uss.csv",
+      "size": 68134,
+      "checksum": "md5:6fec11b3d28de8c0ab1832b19d4bf9c7",
+      "links": {
+        "self": "https://zenodo.org/api/records/16133229/files/uss.csv/content"
+      }
+    },
+    {
+      "id": "d8e1d2ff-6ecd-4282-8999-2d39b4292306",
+      "key": "usscas.csv",
+      "size": 69652,
+      "checksum": "md5:564a32b2f4cb661b6660fd8e022d3034",
+      "links": {
+        "self": "https://zenodo.org/api/records/16133229/files/usscas.csv/content"
+      }
+    },
+    {
+      "id": "56f3b360-1ceb-47ca-b0c1-4b8c9066e358",
+      "key": "cas2.csv",
+      "size": 3672,
+      "checksum": "md5:dddfce3a4a9fccb817cbdbc345222cd3",
+      "links": {
+        "self": "https://zenodo.org/api/records/16133229/files/cas2.csv/content"
+      }
+    },
+    {
+      "id": "420812e9-c0df-483b-b89a-810a11df13bb",
+      "key": "tcs.csv",
+      "size": 103563,
+      "checksum": "md5:850d45f8c5dd410d379439f0f8bba12b",
+      "links": {
+        "self": "https://zenodo.org/api/records/16133229/files/tcs.csv/content"
+      }
+    }
+  ],
+  "swh": null,
+  "owners": [
+    {
+      "id": "1368256"
+    }
+  ],
+  "status": "published",
+  "stats": {
+    "downloads": 145,
+    "unique_downloads": 124,
+    "views": 89,
+    "unique_views": 68,
+    "version_downloads": 36,
+    "version_unique_downloads": 33,
+    "version_unique_views": 18,
+    "version_views": 19
+  },
+  "state": "done",
+  "submitted": true
+}

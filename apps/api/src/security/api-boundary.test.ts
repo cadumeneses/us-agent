@@ -37,6 +37,8 @@ test('API boundary rejects requests before handlers or body/upload parsing, acro
       ['GET', '/api/internal/test-case-catalogs'], ['POST', '/api/internal/test-case-catalogs/test/versions/1/publish'],
       ['GET', '/api/internal/test-case-catalogs/test/versions/1/original'], ['POST', '/api/internal/test-case-catalogs/test/versions/1/retire'],
       ['POST', '/api/internal/recommender-datasets/imports/preview'], ['POST', '/api/internal/recommendation-runs/id/decisions'],
+      ['GET', '/api/internal/test-case-reviews/id'], ['GET', '/api/internal/test-case-reviews/id/items/key'],
+      ['POST', '/api/internal/test-case-reviews/id/target'], ['POST', '/api/internal/test-case-reviews/id/decisions'], ['POST', '/api/internal/test-case-reviews/id/copies'],
     ];
     for (const [method, path] of routes) {
       const response = await send(path, { method });

@@ -1,0 +1,1321 @@
+{
+  "schemaVersion": 1,
+  "id": "e26-reviewed-associations-v1",
+  "status": "candidate_local_derivation",
+  "sourcePolicy": "latest_with_explicit_earlier_record_substitutions",
+  "sources": {
+    "latest": {
+      "path": "research/sources/testrec-e26/zenodo-16133793/test_cases_for_user_stories.csv",
+      "sha256": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a",
+      "bytes": 132733
+    },
+    "earlier": {
+      "path": "research/sources/testrec-e26/zenodo-16133229/tcs.csv",
+      "sha256": "8886b3db9378a5167aa7f98f17ca2a2bc86c4e219135bd4d82459c97fa58fa2f",
+      "bytes": 103563
+    }
+  },
+  "review": {
+    "actor": "codex_technical_review",
+    "date": "2026-10-18",
+    "validation": "not_author_or_supervisor_validation"
+  },
+  "decisions": [
+    {
+      "target": {
+        "startPhysicalLine": 86,
+        "endPhysicalLine": 86,
+        "startByte": 7127,
+        "endByteExclusive": 7224,
+        "sha256": "71b01f474a8409cb5e387a338c1f589b8802b20d828f62071ec80b7f1ed8ba11"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 86,
+        "endPhysicalLine": 86,
+        "startByte": 5165,
+        "endByteExclusive": 5235,
+        "sha256": "bd04a99cfdcf32b247090229a6253c85beced85237a74ea5e97ad43f53e55d0c"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "RCP",
+        "#2392",
+        "85",
+        "HWLL-42:[TC] Verificar presença do botão \"Cancelar\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 167,
+        "endPhysicalLine": 167,
+        "startByte": 15031,
+        "endByteExclusive": 15135,
+        "sha256": "3f1a49d16b683ceec22c2fc847b1cf3d809610e5d585130962aea188043541bf"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 167,
+        "endPhysicalLine": 167,
+        "startByte": 11324,
+        "endByteExclusive": 11401,
+        "sha256": "f1b75583c137a7c75d881f60ae629cbbdecda06f2a42ff80e73dcccacb0a45a7"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "SSPI",
+        "#2570-2",
+        "166",
+        "ENERSH-241:[TC] Verificar presença do botão \"Cancelar\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 180,
+        "endPhysicalLine": 180,
+        "startByte": 16387,
+        "endByteExclusive": 16482,
+        "sha256": "5a532614b657c7ac46a9c83427257b7a8150d01e819bb6701b413fae0faa0df7"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 180,
+        "endPhysicalLine": 180,
+        "startByte": 12401,
+        "endByteExclusive": 12469,
+        "sha256": "cea87b416a088a09610a482c631133b2c4366ed8fe7a9cafeb22cb69db4b4fe5"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "SSPI",
+        "#2279",
+        "179",
+        "ENERSH-82:[TC] Validar presença do botão \"Sair\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 209,
+        "endPhysicalLine": 209,
+        "startByte": 19512,
+        "endByteExclusive": 19613,
+        "sha256": "5ea1ecd72e14834f97c4379a6f2685c92810b20a0655ee600a586160fbb405ce"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 209,
+        "endPhysicalLine": 209,
+        "startByte": 14943,
+        "endByteExclusive": 15017,
+        "sha256": "df5b6a2d3d64bbee5efd7d20c8668e9cb30166e58dd750483e78de37e5babbf3"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "SSPI",
+        "#2277",
+        "208",
+        "ENERSH-73:[TC] Verificar presença do botão \"Cancelar\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 225,
+        "endPhysicalLine": 225,
+        "startByte": 21285,
+        "endByteExclusive": 21388,
+        "sha256": "6b47e3bff175805eb8fc833b22ff887ba210860fb00b79d9341b2e993d1e22b1"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 225,
+        "endPhysicalLine": 225,
+        "startByte": 16401,
+        "endByteExclusive": 16477,
+        "sha256": "b6179ddc177d4829405ff3ee8652be3fda799c598ce35878f6549ae4faa55b0e"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "SSPI",
+        "#2589-1",
+        "224",
+        "ENERSH-98:[TC] Verificar presença do botão \"Cancelar\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 252,
+        "endPhysicalLine": 252,
+        "startByte": 24307,
+        "endByteExclusive": 24411,
+        "sha256": "e7e6a4d1ae6c4bfb3146c8b471625dd64e10da2b0c9a31b60ed2027caedb9b84"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 252,
+        "endPhysicalLine": 252,
+        "startByte": 18902,
+        "endByteExclusive": 18979,
+        "sha256": "e2adb254ac6b3bca2a1eac6de10b02eda058d90436fca1d83ce6de7dd8d1e65f"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "SSPI",
+        "#2598-2",
+        "251",
+        "ENERSH-125:[TC] Verificar presença do botão \"Cancelar\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 292,
+        "endPhysicalLine": 292,
+        "startByte": 27847,
+        "endByteExclusive": 28030,
+        "sha256": "9478179fc225f311dba745588ed60be5b3c174261768553994723dd70fb8717e"
+      },
+      "operation": "encode_latest_literal_title",
+      "supportingSource": "latest",
+      "supporting": {
+        "startPhysicalLine": 292,
+        "endPhysicalLine": 292,
+        "startByte": 27847,
+        "endByteExclusive": 28030,
+        "sha256": "9478179fc225f311dba745588ed60be5b3c174261768553994723dd70fb8717e"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "Event Driven System for Business Services Integration",
+        "#243",
+        "291",
+        "Marcar convidados listados na pesquisa como \"convite enviado\" \"Event Driven System for Business Services Integration",
+        "21"
+      ],
+      "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 308,
+        "endPhysicalLine": 308,
+        "startByte": 29725,
+        "endByteExclusive": 29885,
+        "sha256": "14104a62ccbf54d6c10e2e0920381791026988dc752eac4ca704004671a5b050"
+      },
+      "operation": "encode_latest_literal_title",
+      "supportingSource": "latest",
+      "supporting": {
+        "startPhysicalLine": 308,
+        "endPhysicalLine": 308,
+        "startByte": 29725,
+        "endByteExclusive": 29885,
+        "sha256": "14104a62ccbf54d6c10e2e0920381791026988dc752eac4ca704004671a5b050"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "Event Driven System for Business Services Integration",
+        "#253-2",
+        "307",
+        "Criar \"\"Outros Links\" com nome já adicionado em outro link no mesmo evento específico.",
+        "3    "
+      ],
+      "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 312,
+        "endPhysicalLine": 312,
+        "startByte": 30319,
+        "endByteExclusive": 30480,
+        "sha256": "0d694139ef77621083a8ce19db62ccfdfa6a87b5d61f2cffeeffe0abc45d8968"
+      },
+      "operation": "encode_latest_literal_title",
+      "supportingSource": "latest",
+      "supporting": {
+        "startPhysicalLine": 312,
+        "endPhysicalLine": 312,
+        "startByte": 30319,
+        "endByteExclusive": 30480,
+        "sha256": "0d694139ef77621083a8ce19db62ccfdfa6a87b5d61f2cffeeffe0abc45d8968"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "Event Driven System for Business Services Integration",
+        "#253-2",
+        "311",
+        "Validações de campos durante a criação de \"Outros Links\" evento específico",
+        "34             "
+      ],
+      "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 324,
+        "endPhysicalLine": 324,
+        "startByte": 31855,
+        "endByteExclusive": 32027,
+        "sha256": "0e12b64aef59c0ea96a7c97a8980655e917ada0de560031bf6e27d9cf92cd0f0"
+      },
+      "operation": "encode_latest_literal_title",
+      "supportingSource": "latest",
+      "supporting": {
+        "startPhysicalLine": 324,
+        "endPhysicalLine": 324,
+        "startByte": 31855,
+        "endByteExclusive": 32027,
+        "sha256": "0e12b64aef59c0ea96a7c97a8980655e917ada0de560031bf6e27d9cf92cd0f0"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "Event Driven System for Business Services Integration",
+        "#263",
+        "323",
+        "Validação da seção \"Participação em Eventos\" \"Event Driven System for Business Services Integration",
+        "34"
+      ],
+      "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 328,
+        "endPhysicalLine": 328,
+        "startByte": 32377,
+        "endByteExclusive": 32523,
+        "sha256": "c0018fe0eb603a2e5fd26c1a257f893c71658c45aaf10e1fbea9b875c34cc421"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 328,
+        "endPhysicalLine": 328,
+        "startByte": 25832,
+        "endByteExclusive": 25964,
+        "sha256": "b30ea706adf61d83745198116dc7cdf22584006ada1f6c9d27d79955523f66d6"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "Event Driven System for Business Services Integration",
+        "#242",
+        "327",
+        "Action of the \"top of page\" button on the \"Cover timeline\" screen",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 329,
+        "endPhysicalLine": 329,
+        "startByte": 32523,
+        "endByteExclusive": 32667,
+        "sha256": "793695b97d35a5774e9f7ae9746c56be6ba2c642fa4b41cc546aec2a37e7b19f"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 329,
+        "endPhysicalLine": 329,
+        "startByte": 25964,
+        "endByteExclusive": 26094,
+        "sha256": "e2f1de2b816379635f2f5584875c1664aad729a609893864020cbb2bfb6ca462"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "Event Driven System for Business Services Integration",
+        "#242",
+        "328",
+        "Scrolling action on the timeline on the \"Cover Timeline\" screen",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 332,
+        "endPhysicalLine": 332,
+        "startByte": 33011,
+        "endByteExclusive": 33218,
+        "sha256": "3a971e1a4672c27c8ebd2b136e3b5f6cb0549843d6dbe19f523ccbcdf8420a2d"
+      },
+      "operation": "encode_latest_literal_title",
+      "supportingSource": "latest",
+      "supporting": {
+        "startPhysicalLine": 332,
+        "endPhysicalLine": 332,
+        "startByte": 33011,
+        "endByteExclusive": 33218,
+        "sha256": "3a971e1a4672c27c8ebd2b136e3b5f6cb0549843d6dbe19f523ccbcdf8420a2d"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "Event Driven System for Business Services Integration",
+        "#242-3",
+        "331",
+        "Validate reset function in the \"field\"\"Reset\" All \"Counters\"\"\" in device Transponder \"Event Driven System for Business Services Integration",
+        "6"
+      ],
+      "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 338,
+        "endPhysicalLine": 338,
+        "startByte": 33786,
+        "endByteExclusive": 33917,
+        "sha256": "4d2c733efe305f6dbf3f20627cd22d0b53e286701c63c6751e36f5aeffd56b4b"
+      },
+      "operation": "encode_latest_literal_title",
+      "supportingSource": "latest",
+      "supporting": {
+        "startPhysicalLine": 338,
+        "endPhysicalLine": 338,
+        "startByte": 33786,
+        "endByteExclusive": 33917,
+        "sha256": "4d2c733efe305f6dbf3f20627cd22d0b53e286701c63c6751e36f5aeffd56b4b"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "Event Driven System for Business Services Integration",
+        "#265",
+        "337",
+        "Action the of \"\"Close\" button in all screens to Device SetUp",
+        "34    "
+      ],
+      "rationale": "Preserve all five latest literal cells under the transport convention already recorded in B02e."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 392,
+        "endPhysicalLine": 392,
+        "startByte": 39542,
+        "endByteExclusive": 39643,
+        "sha256": "b6e64fd4b6b4f4495daf7f52f0b83a6dc3232514ad0736e32a85632538faf3f0"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 392,
+        "endPhysicalLine": 392,
+        "startByte": 31901,
+        "endByteExclusive": 31976,
+        "sha256": "a5904b1d042ebf290a775e64d9b55d84ae734909794793afbb9bea442b29d573"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1610-3",
+        "391",
+        "TVD-54:[TC] Verificar presença do botão \"Cancelar\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 407,
+        "endPhysicalLine": 407,
+        "startByte": 41058,
+        "endByteExclusive": 41196,
+        "sha256": "f75c69b443c66604d60cd4932699a3f3559fc58c2b0ae9e14e8e8c96d561778b"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 407,
+        "endPhysicalLine": 407,
+        "startByte": 33104,
+        "endByteExclusive": 33224,
+        "sha256": "cd862617da066f6f5ad842ddd9a9412d408a641927b6ecff406f9b58ab4bc359"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1594",
+        "406",
+        "TVD-238:[TC] Validar redirecionamento à página de login quando o usuário clicar no botão \"Sair\"",
+        "35"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 416,
+        "endPhysicalLine": 416,
+        "startByte": 42047,
+        "endByteExclusive": 42130,
+        "sha256": "d416a82172a9f23b4d9b0fb8e8fd5cb07b3c7ad72bac37955f9a181b5fea23d8"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 416,
+        "endPhysicalLine": 416,
+        "startByte": 33934,
+        "endByteExclusive": 33989,
+        "sha256": "7a0db7c45509e06c7c2911eb445fc331255035666e41777403c6424260f75116"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1604",
+        "415",
+        "TVD-17:[SPEC] Validar campo \"Nome\"",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 417,
+        "endPhysicalLine": 417,
+        "startByte": 42130,
+        "endByteExclusive": 42220,
+        "sha256": "060cf6c96ca6cebd37797864794344d8f6df2c1c47e21469f4945bd0a119b639"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 417,
+        "endPhysicalLine": 417,
+        "startByte": 33989,
+        "endByteExclusive": 34051,
+        "sha256": "1efc0e0cc4f73757c96777e8f045d7aeedf65e7eae24355efb891566b7ebdf71"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1604",
+        "416",
+        "TVD-48:[SPEC] Validar campo \"Descrição\"",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 437,
+        "endPhysicalLine": 437,
+        "startByte": 44216,
+        "endByteExclusive": 44314,
+        "sha256": "b170851d060de478866654936bd42dd4a5092c79105d7fc6db7276c4b7c38338"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 437,
+        "endPhysicalLine": 437,
+        "startByte": 35670,
+        "endByteExclusive": 35741,
+        "sha256": "c1bf6a50c3effdf270b6449786333b9b8397e91cd59df24691cf1590ce27e9e3"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1603",
+        "436",
+        "TVD-89:[TC] Verificar se campo é \"case sensitive\"",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 483,
+        "endPhysicalLine": 483,
+        "startByte": 49252,
+        "endByteExclusive": 49358,
+        "sha256": "06c6c984ce96f9bd25c28694e66b4bf1457aa258f240549d7986718ecbdc92db"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 483,
+        "endPhysicalLine": 483,
+        "startByte": 39853,
+        "endByteExclusive": 39934,
+        "sha256": "3180fb198b75a72a0bdf3415c671b9a894ce7bd8b71f4cec887612031457388f"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1619",
+        "482",
+        "TVD-292:[SPEC] Validações de ação do botão \"Visualizar\"",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 508,
+        "endPhysicalLine": 508,
+        "startByte": 51974,
+        "endByteExclusive": 52074,
+        "sha256": "9eef1250cd09203b6f4e219259a26df89a94ac67b45e1204affb2b5332b9cc00"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 508,
+        "endPhysicalLine": 508,
+        "startByte": 42086,
+        "endByteExclusive": 42160,
+        "sha256": "ee55c664421d5c6b5c5472cdea98258dfcc325883a6a91ab5900c50f0f4774c8"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1627",
+        "507",
+        "TVD-338:[TC] Verificar presença do botão \"Cancelar\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 528,
+        "endPhysicalLine": 528,
+        "startByte": 53997,
+        "endByteExclusive": 54097,
+        "sha256": "a27dccaef49143586a641bc2476e50cedae19371159172e37493545dca83d651"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 528,
+        "endPhysicalLine": 528,
+        "startByte": 43687,
+        "endByteExclusive": 43761,
+        "sha256": "5df7c2aca81153fd0321b7132f46c89e38e10c5bad2a20ce41bd9681fc7b90ec"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1629",
+        "527",
+        "TVD-349:[TC] Verificar presença do botão \"Cancelar\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 550,
+        "endPhysicalLine": 550,
+        "startByte": 56331,
+        "endByteExclusive": 56447,
+        "sha256": "6019441ad38ed416b3e37f02b909eea0e6127134ba6d00cce3995127981ea1ca"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 550,
+        "endPhysicalLine": 550,
+        "startByte": 45592,
+        "endByteExclusive": 45682,
+        "sha256": "83892200be235b650f0e74c5e9257f04c77f2719c83c8bb52d0741088996b0de"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1532-1",
+        "549",
+        "TVD-429:[TC] Validar comportamento do Selectbox \"Nivel de Pesquisa\"",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 551,
+        "endPhysicalLine": 551,
+        "startByte": 56447,
+        "endByteExclusive": 56564,
+        "sha256": "935e07def46e4c9e04a3571572233d9b19064eb428c0e5857d38d708ad0c494e"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 551,
+        "endPhysicalLine": 551,
+        "startByte": 45682,
+        "endByteExclusive": 45772,
+        "sha256": "32711d5f4940c21046bc953af078e7b3d293f5e3a761bfbae889852c078fe8dd"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1532-1",
+        "550",
+        "TVD-434:[TC] Validar comportamento do Selectbox \"Equipamento Usado\"",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 570,
+        "endPhysicalLine": 570,
+        "startByte": 58338,
+        "endByteExclusive": 58454,
+        "sha256": "fc733ad95efe8a8306f347058cb9772620a6efd95f2e83cdeb32b78c9e483ecb"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 570,
+        "endPhysicalLine": 570,
+        "startByte": 47164,
+        "endByteExclusive": 47254,
+        "sha256": "5d5cdd5907ee08f07d225b49e006c997ae6b067bfb508f9fb40c09554af4a45b"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1532-3",
+        "569",
+        "TVD-449:[TC] Validar comportamento do Selectbox \"Nivel de Pesquisa\"",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 571,
+        "endPhysicalLine": 571,
+        "startByte": 58454,
+        "endByteExclusive": 58571,
+        "sha256": "cd7f89c11747a5604a979d923c32183f68e05fafbf4eeb57573329b3a74ad24c"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 571,
+        "endPhysicalLine": 571,
+        "startByte": 47254,
+        "endByteExclusive": 47344,
+        "sha256": "bae1055ffbb4e000e3950ed34883726ab9bab28eb7fea4590ae85117d379b788"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1532-3",
+        "570",
+        "TVD-458:[TC] Validar comportamento do Selectbox \"Equipamento Usado\"",
+        "34"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 590,
+        "endPhysicalLine": 590,
+        "startByte": 60411,
+        "endByteExclusive": 60505,
+        "sha256": "6719dc3b04248694fce19771f69dc045c2a8553d3c59399ba8e134fea349fe0d"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 590,
+        "endPhysicalLine": 590,
+        "startByte": 48828,
+        "endByteExclusive": 48896,
+        "sha256": "f04f5f29e2c2ad3beda3928636f298bff905aea24c276fea3cc7e65f89622d33"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1578",
+        "589",
+        "TVD-366:[TC] Validar presença do botão \"Sair\"",
+        "16"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 591,
+        "endPhysicalLine": 591,
+        "startByte": 60505,
+        "endByteExclusive": 60643,
+        "sha256": "983f1351ffa172687a4f108c89ea5edb1aae3c1352ac1ce8bc094cd287d6c082"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 591,
+        "endPhysicalLine": 591,
+        "startByte": 48896,
+        "endByteExclusive": 49016,
+        "sha256": "784890fde4d5e6353fbe08eae08ec82694d0f0f432e05b1f27d5f9ad8b4e8ed0"
+      },
+      "decoding": "declared_literal_unquoted_title",
+      "afterCells": [
+        "TVD II",
+        "#1578",
+        "590",
+        "TVD-361:[TC] Validar redirecionamento à página de login quando o usuário clicar no botão \"Sair\"",
+        "35"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 668,
+        "endPhysicalLine": 668,
+        "startByte": 68665,
+        "endByteExclusive": 68776,
+        "sha256": "630faf206739362382609957d8164e7e470563c3af06292ce31af0a67602ecae"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 668,
+        "endPhysicalLine": 668,
+        "startByte": 55488,
+        "endByteExclusive": 55570,
+        "sha256": "f542960c731449976cc3ac1a90a5f04af1c970187b5c9f889b2e77ae9c01cb35"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US19",
+        "667",
+        "gestao-capacita-23: Atualização de Dados,",
+        "6"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 671,
+        "endPhysicalLine": 671,
+        "startByte": 68999,
+        "endByteExclusive": 69146,
+        "sha256": "489b74964aec036f497d8ad25b431fcf845c662349e2ec10ea5eab5164472fb0"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 671,
+        "endPhysicalLine": 671,
+        "startByte": 55751,
+        "endByteExclusive": 55876,
+        "sha256": "3d6a57bc8a56bcf743b36ce29381cae6492efabdedf825d050f598c3831b5e25"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US20",
+        "670",
+        "gestao-capacita-37: Cadastrar horários, com menos de duas horas diárias, na agenda.",
+        "49"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 672,
+        "endPhysicalLine": 672,
+        "startByte": 69146,
+        "endByteExclusive": 69294,
+        "sha256": "7efb8984d1a60d0654fe5b529e7205997a19bea70ea09cb798332caeab2e7737"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 672,
+        "endPhysicalLine": 672,
+        "startByte": 55876,
+        "endByteExclusive": 56002,
+        "sha256": "916aaa4afd7f62de7f68f722e4310fb0f74e6176d21ccee3c14a3da743f9fca4"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US20",
+        "671",
+        "gestao-capacita-38: Cadastrar horários, com mais de quatro horas diárias, na agenda.",
+        "49"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 673,
+        "endPhysicalLine": 673,
+        "startByte": 69294,
+        "endByteExclusive": 69443,
+        "sha256": "921fbb158ea283b6836ea6707dd3f7ae0d6c57d925f5cd3dbc8ea902923e0c38"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 673,
+        "endPhysicalLine": 673,
+        "startByte": 56002,
+        "endByteExclusive": 56129,
+        "sha256": "91807700535efa133572a0c6a5017947649662b2486d02d1082b87b9d220b456"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US20",
+        "672",
+        "gestao-capacita-39: Cadastrar horários, com menos de vintes horas semanais, na agenda.",
+        "49"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 674,
+        "endPhysicalLine": 674,
+        "startByte": 69443,
+        "endByteExclusive": 69591,
+        "sha256": "416140908d9cd723441de9aeda3b823c82a73965baf8c07b14b48bfe20cda9f3"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 674,
+        "endPhysicalLine": 674,
+        "startByte": 56129,
+        "endByteExclusive": 56255,
+        "sha256": "5addeedde22c8b4740a6d8e5709b15cb2412104bc5fe79e9b9fbe829f82ffbfc"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US20",
+        "673",
+        "gestao-capacita-40: Cadastrar horários, com mais de vintes horas semanais, na agenda.",
+        "49"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 697,
+        "endPhysicalLine": 697,
+        "startByte": 72128,
+        "endByteExclusive": 72275,
+        "sha256": "2a309fd683a0f803866daa663d355d510ca51d030749ce04d5cd45a45c7a190b"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 697,
+        "endPhysicalLine": 697,
+        "startByte": 58340,
+        "endByteExclusive": 58464,
+        "sha256": "1d5a35ccb46f992322240ebcb347ce3a9acb0c340d358e73b6fa04d0a3ce9e36"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US35",
+        "696",
+        "gestao-capacita-37:Cadastrar horários, com menos de duas horas diárias, na agenda.",
+        "49"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 698,
+        "endPhysicalLine": 698,
+        "startByte": 72275,
+        "endByteExclusive": 72423,
+        "sha256": "934fad518ec2d1d3ccb95fa32e48fe914aaa8249908aa387cb5736c0afde2120"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 698,
+        "endPhysicalLine": 698,
+        "startByte": 58464,
+        "endByteExclusive": 58589,
+        "sha256": "304f58e9f267fed04c288ed4b262b9f8c1c116f5413d5ab5ce11a34e15b43b52"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US35",
+        "697",
+        "gestao-capacita-38:Cadastrar horários, com mais de quatro horas diárias, na agenda.",
+        "49"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 699,
+        "endPhysicalLine": 699,
+        "startByte": 72423,
+        "endByteExclusive": 72572,
+        "sha256": "8f540a7737fcc497c5b46d5bbd135a1dec25147cdca11afb4c3fe7ecc6c16fdc"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 699,
+        "endPhysicalLine": 699,
+        "startByte": 58589,
+        "endByteExclusive": 58715,
+        "sha256": "8f9dec3c3efce26dbc2ebb887107d02425c621e292e209946b91e62ef344904c"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US35",
+        "698",
+        "gestao-capacita-39:Cadastrar horários, com menos de vintes horas semanais, na agenda.",
+        "49"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 700,
+        "endPhysicalLine": 700,
+        "startByte": 72572,
+        "endByteExclusive": 72720,
+        "sha256": "bd46ae1c4243a9565a974c9623d76a817d77ec554d37f778a3dd24297f33b669"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 700,
+        "endPhysicalLine": 700,
+        "startByte": 58715,
+        "endByteExclusive": 58840,
+        "sha256": "fb5bb06dff7b642fcc13b756fb82699c61a8de915416e87788ba5c5e13af8f03"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US35",
+        "699",
+        "gestao-capacita-40:Cadastrar horários, com mais de vintes horas semanais, na agenda.",
+        "49"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 701,
+        "endPhysicalLine": 701,
+        "startByte": 72720,
+        "endByteExclusive": 72860,
+        "sha256": "b38b373d73789ee340979abf19932a018eff772f3280a80dd228881ca9d43946"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 701,
+        "endPhysicalLine": 701,
+        "startByte": 58840,
+        "endByteExclusive": 58954,
+        "sha256": "2ecd67c259979c967e36b6d01c8ad1843997b215e40d2d0ebb1d17f7c41c48ea"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "Gestão da Capacitação",
+        "US35",
+        "700",
+        "gestao-capacita-68:Cadastrar horários irregulares, com permissão do coach",
+        "1"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 876,
+        "endPhysicalLine": 877,
+        "startByte": 88647,
+        "endByteExclusive": 88763,
+        "sha256": "242aa13f34cf29d46d0734d3af401fc0e4bbc97ed71d8382feeb0ca1118e8b50"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 876,
+        "endPhysicalLine": 877,
+        "startByte": 70832,
+        "endByteExclusive": 70889,
+        "sha256": "74ea0d1d26d17bddc73279c076db4d4249b6e1021d4f88ea3f1cc055ae77015d"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "SGCond",
+        "SGC-US04",
+        "875",
+        "Cancelar exclusão da entidade\n",
+        "27"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 973,
+        "endPhysicalLine": 974,
+        "startByte": 97233,
+        "endByteExclusive": 97349,
+        "sha256": "2748a1db9578263cff1ddcb772345420be02b645e59749b3666f3ecf52413ca6"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 973,
+        "endPhysicalLine": 974,
+        "startByte": 77193,
+        "endByteExclusive": 77250,
+        "sha256": "f212efeb2e3e0fc74490f6c10bb26003d3e09805ea876307243d3f105b6087f5"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "SGCond",
+        "SGC-US17",
+        "971",
+        "Cancelar exclusão da entidade\n",
+        "27"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 982,
+        "endPhysicalLine": 983,
+        "startByte": 97941,
+        "endByteExclusive": 98060,
+        "sha256": "2064d7ea2418108ca9b4707573f2f6cfe5464a13de1f4b3012c83f4f2906f30b"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 982,
+        "endPhysicalLine": 983,
+        "startByte": 77684,
+        "endByteExclusive": 77746,
+        "sha256": "b3a2a802acea2e0826eb430a966a7266e6227286460c9b4ecb16fd250615099b"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "SGCond",
+        "SGC-US18",
+        "979",
+        "Reservar área em data já reservada\n",
+        "3"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 998,
+        "endPhysicalLine": 999,
+        "startByte": 99329,
+        "endByteExclusive": 99445,
+        "sha256": "f95971418a7d66481beb48a6550677779fcbce0489abe249304b11b0ad5110f3"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 998,
+        "endPhysicalLine": 999,
+        "startByte": 78699,
+        "endByteExclusive": 78756,
+        "sha256": "6e7b681fbb4797bcb409d02046548140702389470fcbc52b5924e0cd5332401e"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "SGCond",
+        "SGC-US20",
+        "994",
+        "Cancelar exclusão da entidade\n",
+        "27"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 1015,
+        "endPhysicalLine": 1016,
+        "startByte": 100698,
+        "endByteExclusive": 100826,
+        "sha256": "0bc1615f09fb8e5621b1b32b2867e254dc474c90aa39df01303ebba15c512546"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 1015,
+        "endPhysicalLine": 1016,
+        "startByte": 79655,
+        "endByteExclusive": 79726,
+        "sha256": "145a5707d5b8a85f77ff965f543be10aa506c4b184d22a2f52d1f80a6b555b90"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "SGCond",
+        "SGC-US22",
+        "1010",
+        "Cadastrar usuário com e-mail já cadastrado\n",
+        "3"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 1028,
+        "endPhysicalLine": 1029,
+        "startByte": 101901,
+        "endByteExclusive": 102023,
+        "sha256": "a97912dea6599217bf7aab62c5bd9f3b4374f5b1066c486c831b663630a929c3"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 1028,
+        "endPhysicalLine": 1029,
+        "startByte": 80559,
+        "endByteExclusive": 80623,
+        "sha256": "6cbffa304857a39c5fe42a240e63d217891d1f8025dccf639b5562563b77a4ab"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "SGCond",
+        "SGC-US24",
+        "1022",
+        "Recuperar senha com e-mail inválido\n",
+        "57"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 1055,
+        "endPhysicalLine": 1056,
+        "startByte": 104226,
+        "endByteExclusive": 104343,
+        "sha256": "33d292160a372667fe105061a3a15464b24de85ffe7226488021d5197815706f"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 1055,
+        "endPhysicalLine": 1056,
+        "startByte": 82246,
+        "endByteExclusive": 82304,
+        "sha256": "7e1e1de5dd96362c769395cf5e754fae78d11c3d56aeae6f0c5a39cd52cb84e4"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "SGCond",
+        "SGC-US28",
+        "1048",
+        "Cancelar exclusão da entidade\n",
+        "27"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 1093,
+        "endPhysicalLine": 1094,
+        "startByte": 107659,
+        "endByteExclusive": 107778,
+        "sha256": "a83b8ad9ade37bc96e9aa949a7d3197a9ae0db48744056e2e538cf1ac43b01e2"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 1093,
+        "endPhysicalLine": 1094,
+        "startByte": 84802,
+        "endByteExclusive": 84862,
+        "sha256": "1a700210368b667b4747dad6bbdae51a986224aaa26ab641d34c4a52aa000023"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "MyPocket",
+        "MPT-US06",
+        "1085",
+        "Cancelar exclusão da entidade\n",
+        "27"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 1119,
+        "endPhysicalLine": 1120,
+        "startByte": 109940,
+        "endByteExclusive": 110064,
+        "sha256": "e01e6d964209c233868ce5ad436805f3d6a8e20912cbd6cb7c3b9b9be610171e"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 1119,
+        "endPhysicalLine": 1120,
+        "startByte": 86468,
+        "endByteExclusive": 86534,
+        "sha256": "5ac512da1795eb0f1318e373e6e624f3ea3add3e1bfdde72f31490bb1fb551da"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "MyPocket",
+        "MPT-US10",
+        "1110",
+        "Recuperar senha com e-mail inválido\n",
+        "57"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    },
+    {
+      "target": {
+        "startPhysicalLine": 1248,
+        "endPhysicalLine": 1248,
+        "startByte": 121537,
+        "endByteExclusive": 121637,
+        "sha256": "f179ea721bcfd766767de3181c310a996b7b249ae6505e7af3d54b7c73488257"
+      },
+      "operation": "adopt_explicit_earlier_record",
+      "supportingSource": "earlier",
+      "supporting": {
+        "startPhysicalLine": 1248,
+        "endPhysicalLine": 1248,
+        "startByte": 95076,
+        "endByteExclusive": 95147,
+        "sha256": "887437115fcfa6b320dacbf94e4f5a9b1052a76e88b75d3f8492bcb878ca6c63"
+      },
+      "decoding": "strict_csv",
+      "afterCells": [
+        "TestRec",
+        "TR-29212",
+        "1238",
+        "Cadastrar novo critério, adicionar e salvar",
+        "6"
+      ],
+      "rationale": "Adopt this explicitly identified published earlier record for an invalid latest span; source record/story IDs must match, with only reviewed project quote differences. This is a candidate local derivation, not author confirmation."
+    }
+  ]
+}

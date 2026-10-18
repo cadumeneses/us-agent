@@ -147,6 +147,8 @@
 .configured-reference small{color:var(--color-neutral-550)}
 .configured-references,.configured-input-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .configured-result{border-top:1px solid var(--color-neutral-260);margin-top:24px;padding-top:18px}
+.configured-demo-notice{border-left:3px solid var(--color-brand-500);padding:12px 14px;background:var(--color-neutral-75);border-radius:6px}
+.test-case-item{margin:20px 0}
 .configured-result details{margin:16px 0;padding:12px;background:var(--color-neutral-75);border-radius:6px}
 .configured-result summary{cursor:pointer;font-size:13px;font-weight:600}
 .configured-neighbor{border-left:3px solid var(--color-brand-500);padding-left:16px;margin:20px 0}

@@ -31,6 +31,7 @@ export type DefinitionRecord = { state: DefinitionSummary['state']; definition: 
 export type DatasetSummary = {
   id: string; version: string; state: 'published' | 'retired'; definition: ContentReference; recordCount: number;
   snapshot: Pick<Snapshot<unknown>, 'format' | 'sha256'>; publishedBy: string; publishedAt: string;
+  catalog?: ContentReference;
 };
 export type ConfiguredInput = { id: string; values: Record<string, JsonValue>;
   provenance: { source: string; sourceRecordId?: string } };

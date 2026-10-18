@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "id": "e26-six-isolated-literal-titles",
+  "version": "e26-literal-title-encoding-v1",
+  "source": {
+    "file": "test_cases_for_user_stories.csv",
+    "sha256": "c2b6ee1c259b3abfb2200614086ee82907c52e73d577b6978ca5f8bc56d6e65a",
+    "bytes": 132733
+  },
+  "review": {
+    "actor": "codex_technical_review",
+    "date": "2026-10-18",
+    "basis": "explicit_literal_cells_transport_convention",
+    "validation": "not_author_or_supervisor_validation"
+  },
+  "decisions": [
+    {
+      "physicalLine": 292,
+      "spanSha256": "9478179fc225f311dba745588ed60be5b3c174261768553994723dd70fb8717e",
+      "previousSpanSha256": "8f05b26120389e923b214ea85901826d3547e340e24ed2cfa803a3175397a56a",
+      "nextSpanSha256": "b6a322392a1b4b838f5618b50dceb0e4c25ec0287bbeb53d8005f12e37c33665",
+      "operation": "quote_unquoted_title_preserving_literal_characters",
+      "beforeCells": [
+        "Event Driven System for Business Services Integration",
+        "#243",
+        "291",
+        "Marcar convidados listados na pesquisa como \"convite enviado\" \"Event Driven System for Business Services Integration",
+        "21"
+      ]
+    },
+    {
+      "physicalLine": 308,
+      "spanSha256": "14104a62ccbf54d6c10e2e0920381791026988dc752eac4ca704004671a5b050",
+      "previousSpanSha256": "4cd82157cc57b6287e412362084b409e9a963dc638b25e5c35983067b0153781",
+      "nextSpanSha256": "062efce80681b8ca4e516b2b065889f4c1443787949db53177362a07e953531b",
+      "operation": "quote_unquoted_title_preserving_literal_characters",
+      "beforeCells": [
+        "Event Driven System for Business Services Integration",
+        "#253-2",
+        "307",
+        "Criar \"\"Outros Links\" com nome já adicionado em outro link no mesmo evento específico.",
+        "3    "
+      ]
+    },
+    {
+      "physicalLine": 312,
+      "spanSha256": "0d694139ef77621083a8ce19db62ccfdfa6a87b5d61f2cffeeffe0abc45d8968",
+      "previousSpanSha256": "c804eeb4380d08ce79d08f648929c97cd9d4503641ab7a40be6c4de8b25044cc",
+      "nextSpanSha256": "213416b31da4a24d87783e7fd681f1251e02157f4c76e4cf0e36844d9e6915af",
+      "operation": "quote_unquoted_title_preserving_literal_characters",
+      "beforeCells": [
+        "Event Driven System for Business Services Integration",
+        "#253-2",
+        "311",
+        "Validações de campos durante a criação de \"Outros Links\" evento específico",
+        "34             "
+      ]
+    },
+    {
+      "physicalLine": 324,
+      "spanSha256": "0e12b64aef59c0ea96a7c97a8980655e917ada0de560031bf6e27d9cf92cd0f0",
+      "previousSpanSha256": "f54ec9f162a35e5fa95d014b457f47b1616c4d32763ac6035931a70077b8ea0a",
+      "nextSpanSha256": "68ad9b4a7698407af277d6a05331cfe439d24b60829efdd2a66f9c3e791263b0",
+      "operation": "quote_unquoted_title_preserving_literal_characters",
+      "beforeCells": [
+        "Event Driven System for Business Services Integration",
+        "#263",
+        "323",
+        "Validação da seção \"Participação em Eventos\" \"Event Driven System for Business Services Integration",
+        "34"
+      ]
+    },
+    {
+      "physicalLine": 332,
+      "spanSha256": "3a971e1a4672c27c8ebd2b136e3b5f6cb0549843d6dbe19f523ccbcdf8420a2d",
+      "previousSpanSha256": "679fd41abd597f5854423c6c3ec2fcb6d3198b3cdda75e276a9032b539fb714a",
+      "nextSpanSha256": "3de34918e1326d1a054259251caf8f5a0bdce35e4d3b8001f5145e4de0b15878",
+      "operation": "quote_unquoted_title_preserving_literal_characters",
+      "beforeCells": [
+        "Event Driven System for Business Services Integration",
+        "#242-3",
+        "331",
+        "Validate reset function in the \"field\"\"Reset\" All \"Counters\"\"\" in device Transponder \"Event Driven System for Business Services Integration",
+        "6"
+      ]
+    },
+    {
+      "physicalLine": 338,
+      "spanSha256": "4d2c733efe305f6dbf3f20627cd22d0b53e286701c63c6751e36f5aeffd56b4b",
+      "previousSpanSha256": "40b8c9004a0102624ca54fa649021b19a0904ce1bfe01c2269d558d5613ff7d1",
+      "nextSpanSha256": "c5d0d9b8b8864e627aa1b1fc42e362bdce73520f09e696b622b40fdd20a5638c",
+      "operation": "quote_unquoted_title_preserving_literal_characters",
+      "beforeCells": [
+        "Event Driven System for Business Services Integration",
+        "#265",
+        "337",
+        "Action the of \"\"Close\" button in all screens to Device SetUp",
+        "34    "
+      ]
+    }
+  ]
+}

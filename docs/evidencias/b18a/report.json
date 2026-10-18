@@ -1,0 +1,5055 @@
+{
+  "schemaVersion": 1,
+  "deterministic": {
+    "format": "us-agent-json-v1",
+    "sha256": "3055cfd093d8fdb772fb29cea4da81cef8a448bf1e282a0b9721dfe30d43534f",
+    "content": {
+      "bundleSha256": "b017d7a62826c119ff8dc9c6c4ae4d61fd08dc319684df0f5c37296d5dcbd115",
+      "evaluatorVersion": "testrec-evaluation-v1",
+      "results": [
+        {
+          "caseId": "create-only",
+          "error": null,
+          "execution": {
+            "catalog": {
+              "content": {
+                "authorization": {
+                  "basis": "synthetic",
+                  "reference": "US-Agent authored fixture; not original author data"
+                },
+                "catalog": {
+                  "content": {
+                    "id": "testrec-synthetic-catalog",
+                    "items": [
+                      {
+                        "executionMode": "manual",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                        "id": "demo-create",
+                        "metadata": {
+                          "fixture": true
+                        },
+                        "purpose": "Verificar um fluxo sintético de cadastro",
+                        "title": "Criar registro sintético"
+                      },
+                      {
+                        "executionMode": "unspecified",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                        "id": "demo-required",
+                        "metadata": {
+                          "extraSourceField": "Preserve without inventing scientific meaning",
+                          "fixture": true
+                        },
+                        "title": "Validar campos obrigatórios"
+                      }
+                    ],
+                    "schemaVersion": 1,
+                    "source": {
+                      "kind": "synthetic",
+                      "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+                    },
+                    "version": "1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "92ac324a773d2fcd846ff9203083f84e2691b4021ced4f89af429aa8aa0dada8"
+                },
+                "file": {
+                  "bom": false,
+                  "byteLength": 813,
+                  "encoding": "utf-8",
+                  "name": "synthetic.json",
+                  "sha256": "f8c485cc347bae50a0e650c173459dcc3dcb2de99072ac2591dacb6dfc3d1ba3"
+                },
+                "id": "testrec-synthetic-catalog",
+                "importerVersion": "test-case-json-v1",
+                "schemaVersion": 1,
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394"
+            },
+            "dataset": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "testrec-pilot-create-only",
+                "import": {
+                  "fileSha256": "98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                  "id": "78a30f8c-ff60-4c79-8b2e-79febb1b26bd",
+                  "previewSha256": "cd35fef403d6999cc4c0c4b22279f0e070ad89c17f35b2cc40e454c751bd620c"
+                },
+                "importerVersion": "test-case-dataset-import-v1",
+                "mapping": {
+                  "attributes": {
+                    "acceptance_criteria": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "acceptance_criteria"
+                      ]
+                    },
+                    "application_domain": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "application_domain"
+                      ]
+                    },
+                    "module": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "module"
+                      ]
+                    },
+                    "nfrs": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "nfrs"
+                      ]
+                    },
+                    "operation": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "operation"
+                      ]
+                    },
+                    "platforms": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "platforms"
+                      ]
+                    },
+                    "story_id": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "story_id"
+                      ]
+                    },
+                    "test_case_ids": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "test_case_ids"
+                      ]
+                    }
+                  },
+                  "recordId": [
+                    "id"
+                  ]
+                },
+                "records": [
+                  {
+                    "id": "candidate-a",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-a"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-a",
+                      "test_case_ids": [
+                        "demo-create"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-b",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-b"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "alterar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-b",
+                      "test_case_ids": [
+                        "demo-required"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-c",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-c"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Outro",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-c",
+                      "test_case_ids": [
+                        "demo-create",
+                        "demo-required"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-d",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-d"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Outro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-d",
+                      "test_case_ids": [
+                        "demo-create",
+                        "demo-required"
+                      ]
+                    }
+                  }
+                ],
+                "schemaVersion": 2,
+                "selection": {
+                  "excludedOrdinals": [],
+                  "includedOrdinals": [
+                    1,
+                    2,
+                    3,
+                    4
+                  ]
+                },
+                "source": {
+                  "authorization": {
+                    "basis": "synthetic",
+                    "reference": "research/pilots/testrec-v1/protocol.md"
+                  },
+                  "description": "Synthetic offline evaluator verification, not an author dataset"
+                },
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "065b923ecd614d9a0aa6770241a1d3640973801aeb1860c3b27ed0c6e004ced9"
+            },
+            "definition": {
+              "content": {
+                "definition": {
+                  "attributes": [
+                    {
+                      "cardinality": "single",
+                      "id": "story_id",
+                      "name": "Source story ID",
+                      "representation": "none",
+                      "required": true,
+                      "role": "context",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "text"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "module",
+                      "name": "Module",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "operation",
+                      "name": "Operation",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "platforms",
+                      "name": "Platforms",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "application_domain",
+                      "name": "Application domain",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "acceptance_criteria",
+                      "name": "Acceptance criterion IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "nfrs",
+                      "name": "Context NFR IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "test_case_ids",
+                      "name": "Associated test IDs",
+                      "representation": "none",
+                      "required": false,
+                      "role": "output",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    }
+                  ],
+                  "id": "testrec-equations-demo",
+                  "method": {
+                    "bindings": {
+                      "acceptance_criteria": "acceptance_criteria",
+                      "application_domain": "application_domain",
+                      "module": "module",
+                      "nfrs": "nfrs",
+                      "operation": "operation",
+                      "platforms": "platforms",
+                      "story_id": "story_id",
+                      "test_case_ids": "test_case_ids"
+                    },
+                    "id": "us_agent_e21_equations_demo_v1",
+                    "parameters": {
+                      "aggregation": "sum_similarity_over_k_eq4_3",
+                      "eligibility": "exclude_target_record_or_story",
+                      "insufficient_candidates": "block",
+                      "item_tie": "ascending_test_id",
+                      "k": 3,
+                      "mode": "equation_demonstration",
+                      "reference": "E21",
+                      "representation": "target_binary_presence",
+                      "scientific_reproduction": false,
+                      "similarity": "normalized_manhattan_eq4_2",
+                      "sources": "synthetic_only",
+                      "tie": "more_test_ids_then_ascending_record_id",
+                      "unknown_associations": "block",
+                      "zero_similarity": "keep"
+                    },
+                    "version": "1"
+                  },
+                  "name": "Test cases — E21 equations, synthetic demonstration",
+                  "schemaVersion": 1,
+                  "state": "published",
+                  "version": "demo.1"
+                },
+                "implementation": {
+                  "adapterVersion": "e21-equations-adapter-v1",
+                  "methodId": "us_agent_e21_equations_demo_v1"
+                },
+                "schemaVersion": 1,
+                "taxonomies": []
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2"
+            },
+            "explanation": {
+              "content": {
+                "excluded": [],
+                "issues": [],
+                "ranked": [
+                  {
+                    "distance": 0,
+                    "recordId": "candidate-a",
+                    "similarity": 1,
+                    "testCaseIds": [
+                      "demo-create"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-c",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-d",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-b",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-required"
+                    ],
+                    "vector": [
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "rules": {
+                  "aggregation": "E21_equation_4_3_sum_similarity_over_k",
+                  "eligibility": "US-Agent_exclude_target_record_or_story",
+                  "insufficientCandidates": "US-Agent_block_below_configured_k",
+                  "itemTie": "US-Agent_ascending_test_ID",
+                  "primaryTie": "E21_section_4_5_5_more_associated_tests",
+                  "representation": "E21_table_4_6_target_presence",
+                  "residualTie": "US-Agent_ascending_ID",
+                  "similarity": "E21_equation_4_2_normalized_manhattan",
+                  "unknownAssociations": "US-Agent_block_any_eligible_unknown",
+                  "zeroSimilarity": "US-Agent_keep_without_threshold"
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "08fcb56c3670284cf699cd523ec7c39736f078f093c481815d0e5644ecd00694"
+            },
+            "projection": {
+              "content": {
+                "bridge": {
+                  "content": {
+                    "attributes": [
+                      {
+                        "cardinality": "single",
+                        "id": "story_id",
+                        "name": "Source story ID",
+                        "representation": "none",
+                        "required": true,
+                        "role": "context",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "text"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "module",
+                        "name": "Module",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "operation",
+                        "name": "Operation",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "platforms",
+                        "name": "Platforms",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "application_domain",
+                        "name": "Application domain",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "acceptance_criteria",
+                        "name": "Acceptance criterion IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "nfrs",
+                        "name": "Context NFR IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "test_case_ids",
+                        "name": "Associated test IDs",
+                        "representation": "none",
+                        "required": false,
+                        "role": "output",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      }
+                    ],
+                    "id": "testrec-equations-demo",
+                    "method": {
+                      "bindings": {
+                        "acceptance_criteria": "acceptance_criteria",
+                        "application_domain": "application_domain",
+                        "module": "module",
+                        "nfrs": "nfrs",
+                        "operation": "operation",
+                        "platforms": "platforms",
+                        "story_id": "story_id",
+                        "test_case_ids": "test_case_ids"
+                      },
+                      "id": "testrec_e21_data_contract_v1",
+                      "parameters": {
+                        "aggregation": "pending_Q02",
+                        "k": 3,
+                        "reference": "E21",
+                        "representation": "target_binary_presence",
+                        "similarity": "pending_Q01",
+                        "status": "data_contract_only"
+                      },
+                      "version": "contract.1"
+                    },
+                    "name": "Test cases — E21 equations, synthetic demonstration",
+                    "schemaVersion": 1,
+                    "state": "draft",
+                    "version": "demo.1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "4d54ea49030afb9f1a8f2866f699aa2564912d2cbc22b0a27dc794fc62440685"
+                },
+                "representation": {
+                  "candidates": [
+                    {
+                      "recordId": "candidate-a",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-b",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-c",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create",
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-d",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create",
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "dimensions": [
+                    {
+                      "label": "module",
+                      "slot": "module",
+                      "value": "Cadastro"
+                    },
+                    {
+                      "label": "operation",
+                      "slot": "operation",
+                      "value": "criar"
+                    },
+                    {
+                      "label": "platforms:Web",
+                      "slot": "platforms",
+                      "value": "Web"
+                    },
+                    {
+                      "label": "application_domain",
+                      "slot": "application_domain",
+                      "value": "Demo"
+                    },
+                    {
+                      "label": "acceptance_criteria:required",
+                      "slot": "acceptance_criteria",
+                      "value": "required"
+                    },
+                    {
+                      "label": "acceptance_criteria:unique",
+                      "slot": "acceptance_criteria",
+                      "value": "unique"
+                    },
+                    {
+                      "label": "nfrs:privacy",
+                      "slot": "nfrs",
+                      "value": "privacy"
+                    },
+                    {
+                      "label": "nfrs:audit",
+                      "slot": "nfrs",
+                      "value": "audit"
+                    }
+                  ],
+                  "targetVector": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "81eda52d929fa52f83f858421b89f0f7176b45a3ac8ee67143d4d148e45c114d"
+            },
+            "request": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "dataset": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-pilot-create-only",
+                  "sha256": "065b923ecd614d9a0aa6770241a1d3640973801aeb1860c3b27ed0c6e004ced9",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "d109a62c-a38a-42c8-8bc0-ad9b6e5bd352",
+                "input": {
+                  "id": "pilot-create-only",
+                  "provenance": {
+                    "source": "US-Agent synthetic target"
+                  },
+                  "values": {
+                    "acceptance_criteria": [
+                      "required",
+                      "unique"
+                    ],
+                    "application_domain": "Demo",
+                    "module": "Cadastro",
+                    "nfrs": [
+                      "privacy",
+                      "audit"
+                    ],
+                    "operation": "criar",
+                    "platforms": [
+                      "Web"
+                    ],
+                    "story_id": "held-out-create-only",
+                    "test_case_ids": []
+                  }
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "a4a562ca2b9195bd0e576121f2bc38e9b713a2133f89c351ad5c23cfec1b5f47"
+            },
+            "result": {
+              "content": {
+                "items": [
+                  {
+                    "artifact": {
+                      "executionMode": "manual",
+                      "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                      "id": "demo-create",
+                      "metadata": {
+                        "fixture": true
+                      },
+                      "purpose": "Verificar um fluxo sintético de cadastro",
+                      "title": "Criar registro sintético"
+                    },
+                    "contributions": [
+                      {
+                        "recordId": "candidate-a",
+                        "similarity": 1
+                      },
+                      {
+                        "recordId": "candidate-c",
+                        "similarity": 0.875
+                      },
+                      {
+                        "recordId": "candidate-d",
+                        "similarity": 0.875
+                      }
+                    ],
+                    "denominator": 3,
+                    "key": "9f9a3060153dcf8af85cfd8457f7bf8a4a3be080a581e96ce1acecbe8f70271a",
+                    "numerator": 2.75,
+                    "score": 0.9166666666666666,
+                    "support": 3,
+                    "testCaseId": "demo-create"
+                  },
+                  {
+                    "artifact": {
+                      "executionMode": "unspecified",
+                      "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                      "id": "demo-required",
+                      "metadata": {
+                        "extraSourceField": "Preserve without inventing scientific meaning",
+                        "fixture": true
+                      },
+                      "title": "Validar campos obrigatórios"
+                    },
+                    "contributions": [
+                      {
+                        "recordId": "candidate-c",
+                        "similarity": 0.875
+                      },
+                      {
+                        "recordId": "candidate-d",
+                        "similarity": 0.875
+                      }
+                    ],
+                    "denominator": 3,
+                    "key": "6721f97514fa477ce6ae850d3583c0d58392e4f99f2dcb5700f6db0e5f694519",
+                    "numerator": 1.75,
+                    "score": 0.5833333333333334,
+                    "support": 2,
+                    "testCaseId": "demo-required"
+                  }
+                ],
+                "k": 3,
+                "messages": [],
+                "method": "us_agent_e21_equations_demo_v1",
+                "mode": "equation_demonstration",
+                "neighbors": [
+                  {
+                    "distance": 0,
+                    "recordId": "candidate-a",
+                    "similarity": 1,
+                    "testCaseIds": [
+                      "demo-create"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-c",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-d",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "scientificReproduction": false,
+                "status": "completed"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "a7c8f7e61606bd78b5c67f273eaf923cbe230350bfee8aff592875409d0c8dcf"
+            },
+            "schemaVersion": 2,
+            "software": {
+              "adapterVersion": "e21-equations-adapter-v1",
+              "definitionAdapterVersion": "e21-equations-adapter-v1",
+              "kernelVersion": "policy-knn-v1",
+              "policyVersion": "e21-equations-policy-v1",
+              "runtime": {
+                "icu": "77.1",
+                "locale": "pt-BR",
+                "node": "v24.11.1"
+              }
+            }
+          },
+          "expectedStatus": "completed",
+          "outcomeHashes": [
+            "5cedffeb562742a0b5d098a4fd2c6ab55ae5e466b9ed7e0f5ab03c91110a3814",
+            "5cedffeb562742a0b5d098a4fd2c6ab55ae5e466b9ed7e0f5ab03c91110a3814"
+          ],
+          "partition": {
+            "content": {
+              "history": [
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-a"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-b"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-c"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-d"
+                }
+              ],
+              "source": "Authored synthetic identities/groups; no claim of project independence inferred from feature equality.",
+              "targetGroup": "held-out-target"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "b8bbb5c19bff49a76ce5df80c66b7bf29fe9ff6414d62d4733d07957c4de50ad"
+          },
+          "relevance": {
+            "annotation": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "kind": "authored_synthetic_judgment",
+                "source": "US-Agent technical fixtures authored for evaluator verification. These judgments are artificial, are not derived from ranking or acceptance, and do not represent author data or empirical relevance.",
+                "testCaseIds": [
+                  "demo-create"
+                ]
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "90440048cfc5410759d022fb8e9a66ac319b1636132f3b4684d72378cd4aefc8"
+            },
+            "metrics": {
+              "f1": 0.6666666666666666,
+              "f2": 0.8333333333333334,
+              "fn": 0,
+              "fp": 1,
+              "precision": 0.5,
+              "recall": 1,
+              "tp": 1
+            }
+          },
+          "repeatable": true,
+          "status": "completed",
+          "statusMatches": true
+        },
+        {
+          "caseId": "both-tests",
+          "error": null,
+          "execution": {
+            "catalog": {
+              "content": {
+                "authorization": {
+                  "basis": "synthetic",
+                  "reference": "US-Agent authored fixture; not original author data"
+                },
+                "catalog": {
+                  "content": {
+                    "id": "testrec-synthetic-catalog",
+                    "items": [
+                      {
+                        "executionMode": "manual",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                        "id": "demo-create",
+                        "metadata": {
+                          "fixture": true
+                        },
+                        "purpose": "Verificar um fluxo sintético de cadastro",
+                        "title": "Criar registro sintético"
+                      },
+                      {
+                        "executionMode": "unspecified",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                        "id": "demo-required",
+                        "metadata": {
+                          "extraSourceField": "Preserve without inventing scientific meaning",
+                          "fixture": true
+                        },
+                        "title": "Validar campos obrigatórios"
+                      }
+                    ],
+                    "schemaVersion": 1,
+                    "source": {
+                      "kind": "synthetic",
+                      "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+                    },
+                    "version": "1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "92ac324a773d2fcd846ff9203083f84e2691b4021ced4f89af429aa8aa0dada8"
+                },
+                "file": {
+                  "bom": false,
+                  "byteLength": 813,
+                  "encoding": "utf-8",
+                  "name": "synthetic.json",
+                  "sha256": "f8c485cc347bae50a0e650c173459dcc3dcb2de99072ac2591dacb6dfc3d1ba3"
+                },
+                "id": "testrec-synthetic-catalog",
+                "importerVersion": "test-case-json-v1",
+                "schemaVersion": 1,
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394"
+            },
+            "dataset": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "testrec-pilot-both-tests",
+                "import": {
+                  "fileSha256": "98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                  "id": "b89df019-6b87-461c-8ce9-b9147209a624",
+                  "previewSha256": "48d780af3e2ceed2a5ca6b31d9aa82fafa455821f321116e6199479ff2949821"
+                },
+                "importerVersion": "test-case-dataset-import-v1",
+                "mapping": {
+                  "attributes": {
+                    "acceptance_criteria": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "acceptance_criteria"
+                      ]
+                    },
+                    "application_domain": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "application_domain"
+                      ]
+                    },
+                    "module": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "module"
+                      ]
+                    },
+                    "nfrs": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "nfrs"
+                      ]
+                    },
+                    "operation": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "operation"
+                      ]
+                    },
+                    "platforms": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "platforms"
+                      ]
+                    },
+                    "story_id": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "story_id"
+                      ]
+                    },
+                    "test_case_ids": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "test_case_ids"
+                      ]
+                    }
+                  },
+                  "recordId": [
+                    "id"
+                  ]
+                },
+                "records": [
+                  {
+                    "id": "candidate-a",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-a"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-a",
+                      "test_case_ids": [
+                        "demo-create"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-b",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-b"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "alterar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-b",
+                      "test_case_ids": [
+                        "demo-required"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-c",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-c"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Outro",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-c",
+                      "test_case_ids": [
+                        "demo-create",
+                        "demo-required"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-d",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-d"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Outro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-d",
+                      "test_case_ids": [
+                        "demo-create",
+                        "demo-required"
+                      ]
+                    }
+                  }
+                ],
+                "schemaVersion": 2,
+                "selection": {
+                  "excludedOrdinals": [],
+                  "includedOrdinals": [
+                    1,
+                    2,
+                    3,
+                    4
+                  ]
+                },
+                "source": {
+                  "authorization": {
+                    "basis": "synthetic",
+                    "reference": "research/pilots/testrec-v1/protocol.md"
+                  },
+                  "description": "Synthetic offline evaluator verification, not an author dataset"
+                },
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "2da14e1e56105b825554b4c4ab8ef82f212124122f808808789d3965cbcf1f08"
+            },
+            "definition": {
+              "content": {
+                "definition": {
+                  "attributes": [
+                    {
+                      "cardinality": "single",
+                      "id": "story_id",
+                      "name": "Source story ID",
+                      "representation": "none",
+                      "required": true,
+                      "role": "context",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "text"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "module",
+                      "name": "Module",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "operation",
+                      "name": "Operation",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "platforms",
+                      "name": "Platforms",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "application_domain",
+                      "name": "Application domain",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "acceptance_criteria",
+                      "name": "Acceptance criterion IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "nfrs",
+                      "name": "Context NFR IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "test_case_ids",
+                      "name": "Associated test IDs",
+                      "representation": "none",
+                      "required": false,
+                      "role": "output",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    }
+                  ],
+                  "id": "testrec-equations-demo",
+                  "method": {
+                    "bindings": {
+                      "acceptance_criteria": "acceptance_criteria",
+                      "application_domain": "application_domain",
+                      "module": "module",
+                      "nfrs": "nfrs",
+                      "operation": "operation",
+                      "platforms": "platforms",
+                      "story_id": "story_id",
+                      "test_case_ids": "test_case_ids"
+                    },
+                    "id": "us_agent_e21_equations_demo_v1",
+                    "parameters": {
+                      "aggregation": "sum_similarity_over_k_eq4_3",
+                      "eligibility": "exclude_target_record_or_story",
+                      "insufficient_candidates": "block",
+                      "item_tie": "ascending_test_id",
+                      "k": 3,
+                      "mode": "equation_demonstration",
+                      "reference": "E21",
+                      "representation": "target_binary_presence",
+                      "scientific_reproduction": false,
+                      "similarity": "normalized_manhattan_eq4_2",
+                      "sources": "synthetic_only",
+                      "tie": "more_test_ids_then_ascending_record_id",
+                      "unknown_associations": "block",
+                      "zero_similarity": "keep"
+                    },
+                    "version": "1"
+                  },
+                  "name": "Test cases — E21 equations, synthetic demonstration",
+                  "schemaVersion": 1,
+                  "state": "published",
+                  "version": "demo.1"
+                },
+                "implementation": {
+                  "adapterVersion": "e21-equations-adapter-v1",
+                  "methodId": "us_agent_e21_equations_demo_v1"
+                },
+                "schemaVersion": 1,
+                "taxonomies": []
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2"
+            },
+            "explanation": {
+              "content": {
+                "excluded": [],
+                "issues": [],
+                "ranked": [
+                  {
+                    "distance": 0,
+                    "recordId": "candidate-a",
+                    "similarity": 1,
+                    "testCaseIds": [
+                      "demo-create"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-c",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-d",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-b",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-required"
+                    ],
+                    "vector": [
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "rules": {
+                  "aggregation": "E21_equation_4_3_sum_similarity_over_k",
+                  "eligibility": "US-Agent_exclude_target_record_or_story",
+                  "insufficientCandidates": "US-Agent_block_below_configured_k",
+                  "itemTie": "US-Agent_ascending_test_ID",
+                  "primaryTie": "E21_section_4_5_5_more_associated_tests",
+                  "representation": "E21_table_4_6_target_presence",
+                  "residualTie": "US-Agent_ascending_ID",
+                  "similarity": "E21_equation_4_2_normalized_manhattan",
+                  "unknownAssociations": "US-Agent_block_any_eligible_unknown",
+                  "zeroSimilarity": "US-Agent_keep_without_threshold"
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "08fcb56c3670284cf699cd523ec7c39736f078f093c481815d0e5644ecd00694"
+            },
+            "projection": {
+              "content": {
+                "bridge": {
+                  "content": {
+                    "attributes": [
+                      {
+                        "cardinality": "single",
+                        "id": "story_id",
+                        "name": "Source story ID",
+                        "representation": "none",
+                        "required": true,
+                        "role": "context",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "text"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "module",
+                        "name": "Module",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "operation",
+                        "name": "Operation",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "platforms",
+                        "name": "Platforms",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "application_domain",
+                        "name": "Application domain",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "acceptance_criteria",
+                        "name": "Acceptance criterion IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "nfrs",
+                        "name": "Context NFR IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "test_case_ids",
+                        "name": "Associated test IDs",
+                        "representation": "none",
+                        "required": false,
+                        "role": "output",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      }
+                    ],
+                    "id": "testrec-equations-demo",
+                    "method": {
+                      "bindings": {
+                        "acceptance_criteria": "acceptance_criteria",
+                        "application_domain": "application_domain",
+                        "module": "module",
+                        "nfrs": "nfrs",
+                        "operation": "operation",
+                        "platforms": "platforms",
+                        "story_id": "story_id",
+                        "test_case_ids": "test_case_ids"
+                      },
+                      "id": "testrec_e21_data_contract_v1",
+                      "parameters": {
+                        "aggregation": "pending_Q02",
+                        "k": 3,
+                        "reference": "E21",
+                        "representation": "target_binary_presence",
+                        "similarity": "pending_Q01",
+                        "status": "data_contract_only"
+                      },
+                      "version": "contract.1"
+                    },
+                    "name": "Test cases — E21 equations, synthetic demonstration",
+                    "schemaVersion": 1,
+                    "state": "draft",
+                    "version": "demo.1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "4d54ea49030afb9f1a8f2866f699aa2564912d2cbc22b0a27dc794fc62440685"
+                },
+                "representation": {
+                  "candidates": [
+                    {
+                      "recordId": "candidate-a",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-b",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-c",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create",
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-d",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create",
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "dimensions": [
+                    {
+                      "label": "module",
+                      "slot": "module",
+                      "value": "Cadastro"
+                    },
+                    {
+                      "label": "operation",
+                      "slot": "operation",
+                      "value": "criar"
+                    },
+                    {
+                      "label": "platforms:Web",
+                      "slot": "platforms",
+                      "value": "Web"
+                    },
+                    {
+                      "label": "application_domain",
+                      "slot": "application_domain",
+                      "value": "Demo"
+                    },
+                    {
+                      "label": "acceptance_criteria:required",
+                      "slot": "acceptance_criteria",
+                      "value": "required"
+                    },
+                    {
+                      "label": "acceptance_criteria:unique",
+                      "slot": "acceptance_criteria",
+                      "value": "unique"
+                    },
+                    {
+                      "label": "nfrs:privacy",
+                      "slot": "nfrs",
+                      "value": "privacy"
+                    },
+                    {
+                      "label": "nfrs:audit",
+                      "slot": "nfrs",
+                      "value": "audit"
+                    }
+                  ],
+                  "targetVector": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "81eda52d929fa52f83f858421b89f0f7176b45a3ac8ee67143d4d148e45c114d"
+            },
+            "request": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "dataset": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-pilot-both-tests",
+                  "sha256": "2da14e1e56105b825554b4c4ab8ef82f212124122f808808789d3965cbcf1f08",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "a649a766-c469-4b97-8966-2833e4c2249c",
+                "input": {
+                  "id": "pilot-both-tests",
+                  "provenance": {
+                    "source": "US-Agent synthetic target"
+                  },
+                  "values": {
+                    "acceptance_criteria": [
+                      "required",
+                      "unique"
+                    ],
+                    "application_domain": "Demo",
+                    "module": "Cadastro",
+                    "nfrs": [
+                      "privacy",
+                      "audit"
+                    ],
+                    "operation": "criar",
+                    "platforms": [
+                      "Web"
+                    ],
+                    "story_id": "held-out-both-tests",
+                    "test_case_ids": []
+                  }
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "272dab327d0843f9beb3b5c3b85c410ea8c07d8f86b3af484512bbce1bbf75df"
+            },
+            "result": {
+              "content": {
+                "items": [
+                  {
+                    "artifact": {
+                      "executionMode": "manual",
+                      "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                      "id": "demo-create",
+                      "metadata": {
+                        "fixture": true
+                      },
+                      "purpose": "Verificar um fluxo sintético de cadastro",
+                      "title": "Criar registro sintético"
+                    },
+                    "contributions": [
+                      {
+                        "recordId": "candidate-a",
+                        "similarity": 1
+                      },
+                      {
+                        "recordId": "candidate-c",
+                        "similarity": 0.875
+                      },
+                      {
+                        "recordId": "candidate-d",
+                        "similarity": 0.875
+                      }
+                    ],
+                    "denominator": 3,
+                    "key": "9f9a3060153dcf8af85cfd8457f7bf8a4a3be080a581e96ce1acecbe8f70271a",
+                    "numerator": 2.75,
+                    "score": 0.9166666666666666,
+                    "support": 3,
+                    "testCaseId": "demo-create"
+                  },
+                  {
+                    "artifact": {
+                      "executionMode": "unspecified",
+                      "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                      "id": "demo-required",
+                      "metadata": {
+                        "extraSourceField": "Preserve without inventing scientific meaning",
+                        "fixture": true
+                      },
+                      "title": "Validar campos obrigatórios"
+                    },
+                    "contributions": [
+                      {
+                        "recordId": "candidate-c",
+                        "similarity": 0.875
+                      },
+                      {
+                        "recordId": "candidate-d",
+                        "similarity": 0.875
+                      }
+                    ],
+                    "denominator": 3,
+                    "key": "6721f97514fa477ce6ae850d3583c0d58392e4f99f2dcb5700f6db0e5f694519",
+                    "numerator": 1.75,
+                    "score": 0.5833333333333334,
+                    "support": 2,
+                    "testCaseId": "demo-required"
+                  }
+                ],
+                "k": 3,
+                "messages": [],
+                "method": "us_agent_e21_equations_demo_v1",
+                "mode": "equation_demonstration",
+                "neighbors": [
+                  {
+                    "distance": 0,
+                    "recordId": "candidate-a",
+                    "similarity": 1,
+                    "testCaseIds": [
+                      "demo-create"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-c",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-d",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "scientificReproduction": false,
+                "status": "completed"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "a7c8f7e61606bd78b5c67f273eaf923cbe230350bfee8aff592875409d0c8dcf"
+            },
+            "schemaVersion": 2,
+            "software": {
+              "adapterVersion": "e21-equations-adapter-v1",
+              "definitionAdapterVersion": "e21-equations-adapter-v1",
+              "kernelVersion": "policy-knn-v1",
+              "policyVersion": "e21-equations-policy-v1",
+              "runtime": {
+                "icu": "77.1",
+                "locale": "pt-BR",
+                "node": "v24.11.1"
+              }
+            }
+          },
+          "expectedStatus": "completed",
+          "outcomeHashes": [
+            "888c481419855d918bb9358131600d061490cb07cbb4f8d709ed9f634d7d9fde",
+            "888c481419855d918bb9358131600d061490cb07cbb4f8d709ed9f634d7d9fde"
+          ],
+          "partition": {
+            "content": {
+              "history": [
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-a"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-b"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-c"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-d"
+                }
+              ],
+              "source": "Authored synthetic identities/groups; no claim of project independence inferred from feature equality.",
+              "targetGroup": "held-out-target"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "b8bbb5c19bff49a76ce5df80c66b7bf29fe9ff6414d62d4733d07957c4de50ad"
+          },
+          "relevance": {
+            "annotation": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "kind": "authored_synthetic_judgment",
+                "source": "US-Agent technical fixtures authored for evaluator verification. These judgments are artificial, are not derived from ranking or acceptance, and do not represent author data or empirical relevance.",
+                "testCaseIds": [
+                  "demo-create",
+                  "demo-required"
+                ]
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "0ebd0ccf4d788819b03fdb15fa17936ae52636e992e3116fe93b4ff7e1a8b90c"
+            },
+            "metrics": {
+              "f1": 1,
+              "f2": 1,
+              "fn": 0,
+              "fp": 0,
+              "precision": 1,
+              "recall": 1,
+              "tp": 2
+            }
+          },
+          "repeatable": true,
+          "status": "completed",
+          "statusMatches": true
+        },
+        {
+          "caseId": "known-empty",
+          "error": null,
+          "execution": {
+            "catalog": {
+              "content": {
+                "authorization": {
+                  "basis": "synthetic",
+                  "reference": "US-Agent authored fixture; not original author data"
+                },
+                "catalog": {
+                  "content": {
+                    "id": "testrec-synthetic-catalog",
+                    "items": [
+                      {
+                        "executionMode": "manual",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                        "id": "demo-create",
+                        "metadata": {
+                          "fixture": true
+                        },
+                        "purpose": "Verificar um fluxo sintético de cadastro",
+                        "title": "Criar registro sintético"
+                      },
+                      {
+                        "executionMode": "unspecified",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                        "id": "demo-required",
+                        "metadata": {
+                          "extraSourceField": "Preserve without inventing scientific meaning",
+                          "fixture": true
+                        },
+                        "title": "Validar campos obrigatórios"
+                      }
+                    ],
+                    "schemaVersion": 1,
+                    "source": {
+                      "kind": "synthetic",
+                      "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+                    },
+                    "version": "1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "92ac324a773d2fcd846ff9203083f84e2691b4021ced4f89af429aa8aa0dada8"
+                },
+                "file": {
+                  "bom": false,
+                  "byteLength": 813,
+                  "encoding": "utf-8",
+                  "name": "synthetic.json",
+                  "sha256": "f8c485cc347bae50a0e650c173459dcc3dcb2de99072ac2591dacb6dfc3d1ba3"
+                },
+                "id": "testrec-synthetic-catalog",
+                "importerVersion": "test-case-json-v1",
+                "schemaVersion": 1,
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394"
+            },
+            "dataset": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "testrec-pilot-known-empty",
+                "import": {
+                  "fileSha256": "f0de4773414f6f3c15aec93a535204a0e9d0e40563bcbb45367af28c8fded27e",
+                  "id": "282c1795-e6a7-4b66-8b47-281064ca6ae8",
+                  "previewSha256": "4eee7e4f858d9cc3d870c338ccb19d031a0ecc1fa02009e8c0da8ecc570eda23"
+                },
+                "importerVersion": "test-case-dataset-import-v1",
+                "mapping": {
+                  "attributes": {
+                    "acceptance_criteria": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "acceptance_criteria"
+                      ]
+                    },
+                    "application_domain": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "application_domain"
+                      ]
+                    },
+                    "module": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "module"
+                      ]
+                    },
+                    "nfrs": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "nfrs"
+                      ]
+                    },
+                    "operation": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "operation"
+                      ]
+                    },
+                    "platforms": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "platforms"
+                      ]
+                    },
+                    "story_id": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "story_id"
+                      ]
+                    },
+                    "test_case_ids": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "test_case_ids"
+                      ]
+                    }
+                  },
+                  "recordId": [
+                    "id"
+                  ]
+                },
+                "records": [
+                  {
+                    "id": "candidate-a",
+                    "provenance": {
+                      "source": "import:f0de4773414f6f3c15aec93a535204a0e9d0e40563bcbb45367af28c8fded27e",
+                      "sourceRecordId": "candidate-a"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-a",
+                      "test_case_ids": []
+                    }
+                  },
+                  {
+                    "id": "candidate-b",
+                    "provenance": {
+                      "source": "import:f0de4773414f6f3c15aec93a535204a0e9d0e40563bcbb45367af28c8fded27e",
+                      "sourceRecordId": "candidate-b"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "alterar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-b",
+                      "test_case_ids": []
+                    }
+                  },
+                  {
+                    "id": "candidate-c",
+                    "provenance": {
+                      "source": "import:f0de4773414f6f3c15aec93a535204a0e9d0e40563bcbb45367af28c8fded27e",
+                      "sourceRecordId": "candidate-c"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Outro",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-c",
+                      "test_case_ids": []
+                    }
+                  },
+                  {
+                    "id": "candidate-d",
+                    "provenance": {
+                      "source": "import:f0de4773414f6f3c15aec93a535204a0e9d0e40563bcbb45367af28c8fded27e",
+                      "sourceRecordId": "candidate-d"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Outro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-d",
+                      "test_case_ids": []
+                    }
+                  }
+                ],
+                "schemaVersion": 2,
+                "selection": {
+                  "excludedOrdinals": [],
+                  "includedOrdinals": [
+                    1,
+                    2,
+                    3,
+                    4
+                  ]
+                },
+                "source": {
+                  "authorization": {
+                    "basis": "synthetic",
+                    "reference": "research/pilots/testrec-v1/protocol.md"
+                  },
+                  "description": "Synthetic offline evaluator verification, not an author dataset"
+                },
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "943f0a0ea1e983363b68d49c9de6cd1588059dc497537109dd1917db1ab9c7ce"
+            },
+            "definition": {
+              "content": {
+                "definition": {
+                  "attributes": [
+                    {
+                      "cardinality": "single",
+                      "id": "story_id",
+                      "name": "Source story ID",
+                      "representation": "none",
+                      "required": true,
+                      "role": "context",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "text"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "module",
+                      "name": "Module",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "operation",
+                      "name": "Operation",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "platforms",
+                      "name": "Platforms",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "application_domain",
+                      "name": "Application domain",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "acceptance_criteria",
+                      "name": "Acceptance criterion IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "nfrs",
+                      "name": "Context NFR IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "test_case_ids",
+                      "name": "Associated test IDs",
+                      "representation": "none",
+                      "required": false,
+                      "role": "output",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    }
+                  ],
+                  "id": "testrec-equations-demo",
+                  "method": {
+                    "bindings": {
+                      "acceptance_criteria": "acceptance_criteria",
+                      "application_domain": "application_domain",
+                      "module": "module",
+                      "nfrs": "nfrs",
+                      "operation": "operation",
+                      "platforms": "platforms",
+                      "story_id": "story_id",
+                      "test_case_ids": "test_case_ids"
+                    },
+                    "id": "us_agent_e21_equations_demo_v1",
+                    "parameters": {
+                      "aggregation": "sum_similarity_over_k_eq4_3",
+                      "eligibility": "exclude_target_record_or_story",
+                      "insufficient_candidates": "block",
+                      "item_tie": "ascending_test_id",
+                      "k": 3,
+                      "mode": "equation_demonstration",
+                      "reference": "E21",
+                      "representation": "target_binary_presence",
+                      "scientific_reproduction": false,
+                      "similarity": "normalized_manhattan_eq4_2",
+                      "sources": "synthetic_only",
+                      "tie": "more_test_ids_then_ascending_record_id",
+                      "unknown_associations": "block",
+                      "zero_similarity": "keep"
+                    },
+                    "version": "1"
+                  },
+                  "name": "Test cases — E21 equations, synthetic demonstration",
+                  "schemaVersion": 1,
+                  "state": "published",
+                  "version": "demo.1"
+                },
+                "implementation": {
+                  "adapterVersion": "e21-equations-adapter-v1",
+                  "methodId": "us_agent_e21_equations_demo_v1"
+                },
+                "schemaVersion": 1,
+                "taxonomies": []
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2"
+            },
+            "explanation": {
+              "content": {
+                "excluded": [],
+                "issues": [],
+                "ranked": [
+                  {
+                    "distance": 0,
+                    "recordId": "candidate-a",
+                    "similarity": 1,
+                    "testCaseIds": [],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-b",
+                    "similarity": 0.875,
+                    "testCaseIds": [],
+                    "vector": [
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-c",
+                    "similarity": 0.875,
+                    "testCaseIds": [],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-d",
+                    "similarity": 0.875,
+                    "testCaseIds": [],
+                    "vector": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "rules": {
+                  "aggregation": "E21_equation_4_3_sum_similarity_over_k",
+                  "eligibility": "US-Agent_exclude_target_record_or_story",
+                  "insufficientCandidates": "US-Agent_block_below_configured_k",
+                  "itemTie": "US-Agent_ascending_test_ID",
+                  "primaryTie": "E21_section_4_5_5_more_associated_tests",
+                  "representation": "E21_table_4_6_target_presence",
+                  "residualTie": "US-Agent_ascending_ID",
+                  "similarity": "E21_equation_4_2_normalized_manhattan",
+                  "unknownAssociations": "US-Agent_block_any_eligible_unknown",
+                  "zeroSimilarity": "US-Agent_keep_without_threshold"
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "731fe8f598f16aae0713c237005236f0c38eea5cd400e2465981c2516cae8b08"
+            },
+            "projection": {
+              "content": {
+                "bridge": {
+                  "content": {
+                    "attributes": [
+                      {
+                        "cardinality": "single",
+                        "id": "story_id",
+                        "name": "Source story ID",
+                        "representation": "none",
+                        "required": true,
+                        "role": "context",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "text"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "module",
+                        "name": "Module",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "operation",
+                        "name": "Operation",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "platforms",
+                        "name": "Platforms",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "application_domain",
+                        "name": "Application domain",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "acceptance_criteria",
+                        "name": "Acceptance criterion IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "nfrs",
+                        "name": "Context NFR IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "test_case_ids",
+                        "name": "Associated test IDs",
+                        "representation": "none",
+                        "required": false,
+                        "role": "output",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      }
+                    ],
+                    "id": "testrec-equations-demo",
+                    "method": {
+                      "bindings": {
+                        "acceptance_criteria": "acceptance_criteria",
+                        "application_domain": "application_domain",
+                        "module": "module",
+                        "nfrs": "nfrs",
+                        "operation": "operation",
+                        "platforms": "platforms",
+                        "story_id": "story_id",
+                        "test_case_ids": "test_case_ids"
+                      },
+                      "id": "testrec_e21_data_contract_v1",
+                      "parameters": {
+                        "aggregation": "pending_Q02",
+                        "k": 3,
+                        "reference": "E21",
+                        "representation": "target_binary_presence",
+                        "similarity": "pending_Q01",
+                        "status": "data_contract_only"
+                      },
+                      "version": "contract.1"
+                    },
+                    "name": "Test cases — E21 equations, synthetic demonstration",
+                    "schemaVersion": 1,
+                    "state": "draft",
+                    "version": "demo.1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "4d54ea49030afb9f1a8f2866f699aa2564912d2cbc22b0a27dc794fc62440685"
+                },
+                "representation": {
+                  "candidates": [
+                    {
+                      "recordId": "candidate-a",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-b",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-c",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-d",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [],
+                        "state": "known"
+                      },
+                      "vector": [
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "dimensions": [
+                    {
+                      "label": "module",
+                      "slot": "module",
+                      "value": "Cadastro"
+                    },
+                    {
+                      "label": "operation",
+                      "slot": "operation",
+                      "value": "criar"
+                    },
+                    {
+                      "label": "platforms:Web",
+                      "slot": "platforms",
+                      "value": "Web"
+                    },
+                    {
+                      "label": "application_domain",
+                      "slot": "application_domain",
+                      "value": "Demo"
+                    },
+                    {
+                      "label": "acceptance_criteria:required",
+                      "slot": "acceptance_criteria",
+                      "value": "required"
+                    },
+                    {
+                      "label": "acceptance_criteria:unique",
+                      "slot": "acceptance_criteria",
+                      "value": "unique"
+                    },
+                    {
+                      "label": "nfrs:privacy",
+                      "slot": "nfrs",
+                      "value": "privacy"
+                    },
+                    {
+                      "label": "nfrs:audit",
+                      "slot": "nfrs",
+                      "value": "audit"
+                    }
+                  ],
+                  "targetVector": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "3687f995ac84cf4cc1424e5eeb15ac50a2bcf8164d207c29184f0bad3c9ef69b"
+            },
+            "request": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "dataset": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-pilot-known-empty",
+                  "sha256": "943f0a0ea1e983363b68d49c9de6cd1588059dc497537109dd1917db1ab9c7ce",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "c8d6e33e-ca9c-42a1-8973-b71ed8edad55",
+                "input": {
+                  "id": "pilot-known-empty",
+                  "provenance": {
+                    "source": "US-Agent synthetic target"
+                  },
+                  "values": {
+                    "acceptance_criteria": [
+                      "required",
+                      "unique"
+                    ],
+                    "application_domain": "Demo",
+                    "module": "Cadastro",
+                    "nfrs": [
+                      "privacy",
+                      "audit"
+                    ],
+                    "operation": "criar",
+                    "platforms": [
+                      "Web"
+                    ],
+                    "story_id": "held-out-known-empty",
+                    "test_case_ids": []
+                  }
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "ccbbbb6ad766260ae3346f53d1f1f750d19d15e3a3e2652edfa17d681aef660a"
+            },
+            "result": {
+              "content": {
+                "items": [],
+                "k": 3,
+                "messages": [],
+                "method": "us_agent_e21_equations_demo_v1",
+                "mode": "equation_demonstration",
+                "neighbors": [
+                  {
+                    "distance": 0,
+                    "recordId": "candidate-a",
+                    "similarity": 1,
+                    "testCaseIds": [],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-b",
+                    "similarity": 0.875,
+                    "testCaseIds": [],
+                    "vector": [
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-c",
+                    "similarity": 0.875,
+                    "testCaseIds": [],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "scientificReproduction": false,
+                "status": "no_items"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "a7c74c100635ad7db2aea3e74d68cbae01708bf4025f714ec9e55902e1e7a956"
+            },
+            "schemaVersion": 2,
+            "software": {
+              "adapterVersion": "e21-equations-adapter-v1",
+              "definitionAdapterVersion": "e21-equations-adapter-v1",
+              "kernelVersion": "policy-knn-v1",
+              "policyVersion": "e21-equations-policy-v1",
+              "runtime": {
+                "icu": "77.1",
+                "locale": "pt-BR",
+                "node": "v24.11.1"
+              }
+            }
+          },
+          "expectedStatus": "no_items",
+          "outcomeHashes": [
+            "081a135fc0ba340bc923ceb5d19c00763d1eac8aeee02172d1e9bf588ac016bf",
+            "081a135fc0ba340bc923ceb5d19c00763d1eac8aeee02172d1e9bf588ac016bf"
+          ],
+          "partition": {
+            "content": {
+              "history": [
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-a"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-b"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-c"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-d"
+                }
+              ],
+              "source": "Authored synthetic identities/groups; no claim of project independence inferred from feature equality.",
+              "targetGroup": "held-out-target"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "b8bbb5c19bff49a76ce5df80c66b7bf29fe9ff6414d62d4733d07957c4de50ad"
+          },
+          "relevance": {
+            "annotation": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "kind": "authored_synthetic_judgment",
+                "source": "US-Agent technical fixtures authored for evaluator verification. These judgments are artificial, are not derived from ranking or acceptance, and do not represent author data or empirical relevance.",
+                "testCaseIds": []
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "4c6dcb77f5d93d8576f238b487e63d64d05dca3de73c522eae807e2ceb9fc721"
+            },
+            "metrics": {
+              "f1": null,
+              "f2": null,
+              "fn": 0,
+              "fp": 0,
+              "precision": null,
+              "recall": null,
+              "tp": 0
+            }
+          },
+          "repeatable": true,
+          "status": "no_items",
+          "statusMatches": true
+        },
+        {
+          "caseId": "insufficient",
+          "error": null,
+          "execution": {
+            "catalog": {
+              "content": {
+                "authorization": {
+                  "basis": "synthetic",
+                  "reference": "US-Agent authored fixture; not original author data"
+                },
+                "catalog": {
+                  "content": {
+                    "id": "testrec-synthetic-catalog",
+                    "items": [
+                      {
+                        "executionMode": "manual",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                        "id": "demo-create",
+                        "metadata": {
+                          "fixture": true
+                        },
+                        "purpose": "Verificar um fluxo sintético de cadastro",
+                        "title": "Criar registro sintético"
+                      },
+                      {
+                        "executionMode": "unspecified",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                        "id": "demo-required",
+                        "metadata": {
+                          "extraSourceField": "Preserve without inventing scientific meaning",
+                          "fixture": true
+                        },
+                        "title": "Validar campos obrigatórios"
+                      }
+                    ],
+                    "schemaVersion": 1,
+                    "source": {
+                      "kind": "synthetic",
+                      "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+                    },
+                    "version": "1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "92ac324a773d2fcd846ff9203083f84e2691b4021ced4f89af429aa8aa0dada8"
+                },
+                "file": {
+                  "bom": false,
+                  "byteLength": 813,
+                  "encoding": "utf-8",
+                  "name": "synthetic.json",
+                  "sha256": "f8c485cc347bae50a0e650c173459dcc3dcb2de99072ac2591dacb6dfc3d1ba3"
+                },
+                "id": "testrec-synthetic-catalog",
+                "importerVersion": "test-case-json-v1",
+                "schemaVersion": 1,
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394"
+            },
+            "dataset": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "testrec-pilot-insufficient",
+                "import": {
+                  "fileSha256": "862e63c0b5a8e76e79a835e2e75ccb12345350128bc4c2d5dea676532dd01b8f",
+                  "id": "29cb5b49-0b25-4e73-88c3-da08bfda74f4",
+                  "previewSha256": "14393802f8295c4e060b9e5f1ff8d2d3b316e7fab699b7121a36061bd6f7e47f"
+                },
+                "importerVersion": "test-case-dataset-import-v1",
+                "mapping": {
+                  "attributes": {
+                    "acceptance_criteria": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "acceptance_criteria"
+                      ]
+                    },
+                    "application_domain": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "application_domain"
+                      ]
+                    },
+                    "module": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "module"
+                      ]
+                    },
+                    "nfrs": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "nfrs"
+                      ]
+                    },
+                    "operation": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "operation"
+                      ]
+                    },
+                    "platforms": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "platforms"
+                      ]
+                    },
+                    "story_id": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "story_id"
+                      ]
+                    },
+                    "test_case_ids": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "test_case_ids"
+                      ]
+                    }
+                  },
+                  "recordId": [
+                    "id"
+                  ]
+                },
+                "records": [
+                  {
+                    "id": "candidate-a",
+                    "provenance": {
+                      "source": "import:862e63c0b5a8e76e79a835e2e75ccb12345350128bc4c2d5dea676532dd01b8f",
+                      "sourceRecordId": "candidate-a"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-a",
+                      "test_case_ids": [
+                        "demo-create"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-b",
+                    "provenance": {
+                      "source": "import:862e63c0b5a8e76e79a835e2e75ccb12345350128bc4c2d5dea676532dd01b8f",
+                      "sourceRecordId": "candidate-b"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "alterar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-b",
+                      "test_case_ids": [
+                        "demo-required"
+                      ]
+                    }
+                  }
+                ],
+                "schemaVersion": 2,
+                "selection": {
+                  "excludedOrdinals": [],
+                  "includedOrdinals": [
+                    1,
+                    2
+                  ]
+                },
+                "source": {
+                  "authorization": {
+                    "basis": "synthetic",
+                    "reference": "research/pilots/testrec-v1/protocol.md"
+                  },
+                  "description": "Synthetic offline evaluator verification, not an author dataset"
+                },
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "f70f9679f96c95c6f08df29c65de891613447f297699d9f995865f8aea549699"
+            },
+            "definition": {
+              "content": {
+                "definition": {
+                  "attributes": [
+                    {
+                      "cardinality": "single",
+                      "id": "story_id",
+                      "name": "Source story ID",
+                      "representation": "none",
+                      "required": true,
+                      "role": "context",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "text"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "module",
+                      "name": "Module",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "operation",
+                      "name": "Operation",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "platforms",
+                      "name": "Platforms",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "application_domain",
+                      "name": "Application domain",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "acceptance_criteria",
+                      "name": "Acceptance criterion IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "nfrs",
+                      "name": "Context NFR IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "test_case_ids",
+                      "name": "Associated test IDs",
+                      "representation": "none",
+                      "required": false,
+                      "role": "output",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    }
+                  ],
+                  "id": "testrec-equations-demo",
+                  "method": {
+                    "bindings": {
+                      "acceptance_criteria": "acceptance_criteria",
+                      "application_domain": "application_domain",
+                      "module": "module",
+                      "nfrs": "nfrs",
+                      "operation": "operation",
+                      "platforms": "platforms",
+                      "story_id": "story_id",
+                      "test_case_ids": "test_case_ids"
+                    },
+                    "id": "us_agent_e21_equations_demo_v1",
+                    "parameters": {
+                      "aggregation": "sum_similarity_over_k_eq4_3",
+                      "eligibility": "exclude_target_record_or_story",
+                      "insufficient_candidates": "block",
+                      "item_tie": "ascending_test_id",
+                      "k": 3,
+                      "mode": "equation_demonstration",
+                      "reference": "E21",
+                      "representation": "target_binary_presence",
+                      "scientific_reproduction": false,
+                      "similarity": "normalized_manhattan_eq4_2",
+                      "sources": "synthetic_only",
+                      "tie": "more_test_ids_then_ascending_record_id",
+                      "unknown_associations": "block",
+                      "zero_similarity": "keep"
+                    },
+                    "version": "1"
+                  },
+                  "name": "Test cases — E21 equations, synthetic demonstration",
+                  "schemaVersion": 1,
+                  "state": "published",
+                  "version": "demo.1"
+                },
+                "implementation": {
+                  "adapterVersion": "e21-equations-adapter-v1",
+                  "methodId": "us_agent_e21_equations_demo_v1"
+                },
+                "schemaVersion": 1,
+                "taxonomies": []
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2"
+            },
+            "explanation": {
+              "content": {
+                "excluded": [],
+                "issues": [
+                  {
+                    "code": "fewer_than_three_candidates",
+                    "recordIds": [
+                      "candidate-a",
+                      "candidate-b"
+                    ]
+                  }
+                ],
+                "ranked": [],
+                "rules": {
+                  "aggregation": "E21_equation_4_3_sum_similarity_over_k",
+                  "eligibility": "US-Agent_exclude_target_record_or_story",
+                  "insufficientCandidates": "US-Agent_block_below_configured_k",
+                  "itemTie": "US-Agent_ascending_test_ID",
+                  "primaryTie": "E21_section_4_5_5_more_associated_tests",
+                  "representation": "E21_table_4_6_target_presence",
+                  "residualTie": "US-Agent_ascending_ID",
+                  "similarity": "E21_equation_4_2_normalized_manhattan",
+                  "unknownAssociations": "US-Agent_block_any_eligible_unknown",
+                  "zeroSimilarity": "US-Agent_keep_without_threshold"
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "16aa954fee61c2bdb31c72948758a14324e5cddbe12f7dc2b9233dfdb0ed15be"
+            },
+            "projection": {
+              "content": {
+                "bridge": {
+                  "content": {
+                    "attributes": [
+                      {
+                        "cardinality": "single",
+                        "id": "story_id",
+                        "name": "Source story ID",
+                        "representation": "none",
+                        "required": true,
+                        "role": "context",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "text"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "module",
+                        "name": "Module",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "operation",
+                        "name": "Operation",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "platforms",
+                        "name": "Platforms",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "application_domain",
+                        "name": "Application domain",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "acceptance_criteria",
+                        "name": "Acceptance criterion IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "nfrs",
+                        "name": "Context NFR IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "test_case_ids",
+                        "name": "Associated test IDs",
+                        "representation": "none",
+                        "required": false,
+                        "role": "output",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      }
+                    ],
+                    "id": "testrec-equations-demo",
+                    "method": {
+                      "bindings": {
+                        "acceptance_criteria": "acceptance_criteria",
+                        "application_domain": "application_domain",
+                        "module": "module",
+                        "nfrs": "nfrs",
+                        "operation": "operation",
+                        "platforms": "platforms",
+                        "story_id": "story_id",
+                        "test_case_ids": "test_case_ids"
+                      },
+                      "id": "testrec_e21_data_contract_v1",
+                      "parameters": {
+                        "aggregation": "pending_Q02",
+                        "k": 3,
+                        "reference": "E21",
+                        "representation": "target_binary_presence",
+                        "similarity": "pending_Q01",
+                        "status": "data_contract_only"
+                      },
+                      "version": "contract.1"
+                    },
+                    "name": "Test cases — E21 equations, synthetic demonstration",
+                    "schemaVersion": 1,
+                    "state": "draft",
+                    "version": "demo.1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "4d54ea49030afb9f1a8f2866f699aa2564912d2cbc22b0a27dc794fc62440685"
+                },
+                "representation": {
+                  "candidates": [
+                    {
+                      "recordId": "candidate-a",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-b",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "dimensions": [
+                    {
+                      "label": "module",
+                      "slot": "module",
+                      "value": "Cadastro"
+                    },
+                    {
+                      "label": "operation",
+                      "slot": "operation",
+                      "value": "criar"
+                    },
+                    {
+                      "label": "platforms:Web",
+                      "slot": "platforms",
+                      "value": "Web"
+                    },
+                    {
+                      "label": "application_domain",
+                      "slot": "application_domain",
+                      "value": "Demo"
+                    },
+                    {
+                      "label": "acceptance_criteria:required",
+                      "slot": "acceptance_criteria",
+                      "value": "required"
+                    },
+                    {
+                      "label": "acceptance_criteria:unique",
+                      "slot": "acceptance_criteria",
+                      "value": "unique"
+                    },
+                    {
+                      "label": "nfrs:privacy",
+                      "slot": "nfrs",
+                      "value": "privacy"
+                    },
+                    {
+                      "label": "nfrs:audit",
+                      "slot": "nfrs",
+                      "value": "audit"
+                    }
+                  ],
+                  "targetVector": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "16562abbb2373f74a60cd1fb5c157f907b2c4876414d18e4e5d7b522eaffc278"
+            },
+            "request": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "dataset": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-pilot-insufficient",
+                  "sha256": "f70f9679f96c95c6f08df29c65de891613447f297699d9f995865f8aea549699",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "f5815d9d-299e-4635-801a-ec2cc62cda03",
+                "input": {
+                  "id": "pilot-insufficient",
+                  "provenance": {
+                    "source": "US-Agent synthetic target"
+                  },
+                  "values": {
+                    "acceptance_criteria": [
+                      "required",
+                      "unique"
+                    ],
+                    "application_domain": "Demo",
+                    "module": "Cadastro",
+                    "nfrs": [
+                      "privacy",
+                      "audit"
+                    ],
+                    "operation": "criar",
+                    "platforms": [
+                      "Web"
+                    ],
+                    "story_id": "held-out-insufficient",
+                    "test_case_ids": []
+                  }
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "06deca36c21e8ad0e555eaeb5ef74892cf816b421c34ae80016ff604143d4d13"
+            },
+            "result": {
+              "content": {
+                "items": [],
+                "k": 3,
+                "messages": [
+                  "fewer_than_three_candidates: candidate-a, candidate-b"
+                ],
+                "method": "us_agent_e21_equations_demo_v1",
+                "mode": "equation_demonstration",
+                "neighbors": [],
+                "scientificReproduction": false,
+                "status": "blocked"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "1ec019aa0f0b1daf145386fe1bceffb978e7f73cc07ed232d253b74493d4bc16"
+            },
+            "schemaVersion": 2,
+            "software": {
+              "adapterVersion": "e21-equations-adapter-v1",
+              "definitionAdapterVersion": "e21-equations-adapter-v1",
+              "kernelVersion": "policy-knn-v1",
+              "policyVersion": "e21-equations-policy-v1",
+              "runtime": {
+                "icu": "77.1",
+                "locale": "pt-BR",
+                "node": "v24.11.1"
+              }
+            }
+          },
+          "expectedStatus": "blocked",
+          "outcomeHashes": [
+            "249134d3c9220709001a3ca1a321c6fc3be71a164c0c47a8759781b86335dd24",
+            "249134d3c9220709001a3ca1a321c6fc3be71a164c0c47a8759781b86335dd24"
+          ],
+          "partition": {
+            "content": {
+              "history": [
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-a"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-b"
+                }
+              ],
+              "source": "Authored synthetic identities/groups; no claim of project independence inferred from feature equality.",
+              "targetGroup": "held-out-target"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "cf2b741d86aab0a01767206bf0421c279eca3107add36a1699d1f9eae9e89b4c"
+          },
+          "relevance": {
+            "annotation": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "kind": "authored_synthetic_judgment",
+                "source": "US-Agent technical fixtures authored for evaluator verification. These judgments are artificial, are not derived from ranking or acceptance, and do not represent author data or empirical relevance.",
+                "testCaseIds": [
+                  "demo-create"
+                ]
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "90440048cfc5410759d022fb8e9a66ac319b1636132f3b4684d72378cd4aefc8"
+            },
+            "metrics": {
+              "f1": 0,
+              "f2": 0,
+              "fn": 1,
+              "fp": 0,
+              "precision": null,
+              "recall": 0,
+              "tp": 0
+            }
+          },
+          "repeatable": true,
+          "status": "blocked",
+          "statusMatches": true
+        },
+        {
+          "caseId": "invalid-input",
+          "error": {
+            "code": "execution_error",
+            "message": "[{\"code\":\"invalid_type\",\"message\":\"Invalid input: expected array, received string\",\"path\":[\"platforms\"]}]"
+          },
+          "execution": null,
+          "expectedStatus": "technical_failure",
+          "outcomeHashes": [
+            "2ce8d83428f1eec74660f07cff06faeb25538a76123844f8c18d539316799117",
+            "2ce8d83428f1eec74660f07cff06faeb25538a76123844f8c18d539316799117"
+          ],
+          "partition": {
+            "content": {
+              "history": [
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-a"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-b"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-c"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-d"
+                }
+              ],
+              "source": "Authored synthetic identities/groups; no claim of project independence inferred from feature equality.",
+              "targetGroup": "held-out-target"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "b8bbb5c19bff49a76ce5df80c66b7bf29fe9ff6414d62d4733d07957c4de50ad"
+          },
+          "relevance": {
+            "annotation": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "kind": "authored_synthetic_judgment",
+                "source": "US-Agent technical fixtures authored for evaluator verification. These judgments are artificial, are not derived from ranking or acceptance, and do not represent author data or empirical relevance.",
+                "testCaseIds": [
+                  "demo-required"
+                ]
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "8ec7b2809db50cf3a4f3a850b63b88e025b8314a8e7f678d8a9f7418e464bd44"
+            },
+            "metrics": {
+              "f1": 0,
+              "f2": 0,
+              "fn": 1,
+              "fp": 0,
+              "precision": null,
+              "recall": 0,
+              "tp": 0
+            }
+          },
+          "repeatable": true,
+          "status": "technical_failure",
+          "statusMatches": true
+        },
+        {
+          "caseId": "unjudged",
+          "error": null,
+          "execution": {
+            "catalog": {
+              "content": {
+                "authorization": {
+                  "basis": "synthetic",
+                  "reference": "US-Agent authored fixture; not original author data"
+                },
+                "catalog": {
+                  "content": {
+                    "id": "testrec-synthetic-catalog",
+                    "items": [
+                      {
+                        "executionMode": "manual",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                        "id": "demo-create",
+                        "metadata": {
+                          "fixture": true
+                        },
+                        "purpose": "Verificar um fluxo sintético de cadastro",
+                        "title": "Criar registro sintético"
+                      },
+                      {
+                        "executionMode": "unspecified",
+                        "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                        "id": "demo-required",
+                        "metadata": {
+                          "extraSourceField": "Preserve without inventing scientific meaning",
+                          "fixture": true
+                        },
+                        "title": "Validar campos obrigatórios"
+                      }
+                    ],
+                    "schemaVersion": 1,
+                    "source": {
+                      "kind": "synthetic",
+                      "reference": "Technical fixtures for source-preserving test-case validation; not E21/E26 original cases."
+                    },
+                    "version": "1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "92ac324a773d2fcd846ff9203083f84e2691b4021ced4f89af429aa8aa0dada8"
+                },
+                "file": {
+                  "bom": false,
+                  "byteLength": 813,
+                  "encoding": "utf-8",
+                  "name": "synthetic.json",
+                  "sha256": "f8c485cc347bae50a0e650c173459dcc3dcb2de99072ac2591dacb6dfc3d1ba3"
+                },
+                "id": "testrec-synthetic-catalog",
+                "importerVersion": "test-case-json-v1",
+                "schemaVersion": 1,
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394"
+            },
+            "dataset": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "testrec-pilot-unjudged",
+                "import": {
+                  "fileSha256": "98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                  "id": "9f7dc9a2-e28e-47bd-86cc-540309c58d5b",
+                  "previewSha256": "ea024675ed1eadbcad9e7cf9a89e403884515a211ef557edfcfadadec8d5c384"
+                },
+                "importerVersion": "test-case-dataset-import-v1",
+                "mapping": {
+                  "attributes": {
+                    "acceptance_criteria": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "acceptance_criteria"
+                      ]
+                    },
+                    "application_domain": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "application_domain"
+                      ]
+                    },
+                    "module": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "module"
+                      ]
+                    },
+                    "nfrs": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "nfrs"
+                      ]
+                    },
+                    "operation": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "operation"
+                      ]
+                    },
+                    "platforms": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "platforms"
+                      ]
+                    },
+                    "story_id": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "story_id"
+                      ]
+                    },
+                    "test_case_ids": {
+                      "encoding": "value",
+                      "path": [
+                        "values",
+                        "test_case_ids"
+                      ]
+                    }
+                  },
+                  "recordId": [
+                    "id"
+                  ]
+                },
+                "records": [
+                  {
+                    "id": "candidate-a",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-a"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-a",
+                      "test_case_ids": [
+                        "demo-create"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-b",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-b"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "alterar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-b",
+                      "test_case_ids": [
+                        "demo-required"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-c",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-c"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Outro",
+                      "module": "Cadastro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-c",
+                      "test_case_ids": [
+                        "demo-create",
+                        "demo-required"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "candidate-d",
+                    "provenance": {
+                      "source": "import:98205e71f5257278dcc4548739a778826a818311e1bd80fbc741a2944a82c4d6",
+                      "sourceRecordId": "candidate-d"
+                    },
+                    "values": {
+                      "acceptance_criteria": [
+                        "required",
+                        "unique"
+                      ],
+                      "application_domain": "Demo",
+                      "module": "Outro",
+                      "nfrs": [
+                        "privacy",
+                        "audit"
+                      ],
+                      "operation": "criar",
+                      "platforms": [
+                        "Web"
+                      ],
+                      "story_id": "synthetic-d",
+                      "test_case_ids": [
+                        "demo-create",
+                        "demo-required"
+                      ]
+                    }
+                  }
+                ],
+                "schemaVersion": 2,
+                "selection": {
+                  "excludedOrdinals": [],
+                  "includedOrdinals": [
+                    1,
+                    2,
+                    3,
+                    4
+                  ]
+                },
+                "source": {
+                  "authorization": {
+                    "basis": "synthetic",
+                    "reference": "research/pilots/testrec-v1/protocol.md"
+                  },
+                  "description": "Synthetic offline evaluator verification, not an author dataset"
+                },
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "7cb859847b8799638016afeebde44972a750f02a60806f51c37b8c2496bd67d1"
+            },
+            "definition": {
+              "content": {
+                "definition": {
+                  "attributes": [
+                    {
+                      "cardinality": "single",
+                      "id": "story_id",
+                      "name": "Source story ID",
+                      "representation": "none",
+                      "required": true,
+                      "role": "context",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "text"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "module",
+                      "name": "Module",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "operation",
+                      "name": "Operation",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "platforms",
+                      "name": "Platforms",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "single",
+                      "id": "application_domain",
+                      "name": "Application domain",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "acceptance_criteria",
+                      "name": "Acceptance criterion IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "nfrs",
+                      "name": "Context NFR IDs",
+                      "representation": "presence",
+                      "required": true,
+                      "role": "feature",
+                      "scope": "project",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    },
+                    {
+                      "cardinality": "many",
+                      "id": "test_case_ids",
+                      "name": "Associated test IDs",
+                      "representation": "none",
+                      "required": false,
+                      "role": "output",
+                      "scope": "artifact",
+                      "valueType": {
+                        "type": "category"
+                      }
+                    }
+                  ],
+                  "id": "testrec-equations-demo",
+                  "method": {
+                    "bindings": {
+                      "acceptance_criteria": "acceptance_criteria",
+                      "application_domain": "application_domain",
+                      "module": "module",
+                      "nfrs": "nfrs",
+                      "operation": "operation",
+                      "platforms": "platforms",
+                      "story_id": "story_id",
+                      "test_case_ids": "test_case_ids"
+                    },
+                    "id": "us_agent_e21_equations_demo_v1",
+                    "parameters": {
+                      "aggregation": "sum_similarity_over_k_eq4_3",
+                      "eligibility": "exclude_target_record_or_story",
+                      "insufficient_candidates": "block",
+                      "item_tie": "ascending_test_id",
+                      "k": 3,
+                      "mode": "equation_demonstration",
+                      "reference": "E21",
+                      "representation": "target_binary_presence",
+                      "scientific_reproduction": false,
+                      "similarity": "normalized_manhattan_eq4_2",
+                      "sources": "synthetic_only",
+                      "tie": "more_test_ids_then_ascending_record_id",
+                      "unknown_associations": "block",
+                      "zero_similarity": "keep"
+                    },
+                    "version": "1"
+                  },
+                  "name": "Test cases — E21 equations, synthetic demonstration",
+                  "schemaVersion": 1,
+                  "state": "published",
+                  "version": "demo.1"
+                },
+                "implementation": {
+                  "adapterVersion": "e21-equations-adapter-v1",
+                  "methodId": "us_agent_e21_equations_demo_v1"
+                },
+                "schemaVersion": 1,
+                "taxonomies": []
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2"
+            },
+            "explanation": {
+              "content": {
+                "excluded": [],
+                "issues": [],
+                "ranked": [
+                  {
+                    "distance": 0,
+                    "recordId": "candidate-a",
+                    "similarity": 1,
+                    "testCaseIds": [
+                      "demo-create"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-c",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-d",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-b",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-required"
+                    ],
+                    "vector": [
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "rules": {
+                  "aggregation": "E21_equation_4_3_sum_similarity_over_k",
+                  "eligibility": "US-Agent_exclude_target_record_or_story",
+                  "insufficientCandidates": "US-Agent_block_below_configured_k",
+                  "itemTie": "US-Agent_ascending_test_ID",
+                  "primaryTie": "E21_section_4_5_5_more_associated_tests",
+                  "representation": "E21_table_4_6_target_presence",
+                  "residualTie": "US-Agent_ascending_ID",
+                  "similarity": "E21_equation_4_2_normalized_manhattan",
+                  "unknownAssociations": "US-Agent_block_any_eligible_unknown",
+                  "zeroSimilarity": "US-Agent_keep_without_threshold"
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "08fcb56c3670284cf699cd523ec7c39736f078f093c481815d0e5644ecd00694"
+            },
+            "projection": {
+              "content": {
+                "bridge": {
+                  "content": {
+                    "attributes": [
+                      {
+                        "cardinality": "single",
+                        "id": "story_id",
+                        "name": "Source story ID",
+                        "representation": "none",
+                        "required": true,
+                        "role": "context",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "text"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "module",
+                        "name": "Module",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "operation",
+                        "name": "Operation",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "platforms",
+                        "name": "Platforms",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "single",
+                        "id": "application_domain",
+                        "name": "Application domain",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "acceptance_criteria",
+                        "name": "Acceptance criterion IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "nfrs",
+                        "name": "Context NFR IDs",
+                        "representation": "presence",
+                        "required": true,
+                        "role": "feature",
+                        "scope": "project",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      },
+                      {
+                        "cardinality": "many",
+                        "id": "test_case_ids",
+                        "name": "Associated test IDs",
+                        "representation": "none",
+                        "required": false,
+                        "role": "output",
+                        "scope": "artifact",
+                        "valueType": {
+                          "type": "category"
+                        }
+                      }
+                    ],
+                    "id": "testrec-equations-demo",
+                    "method": {
+                      "bindings": {
+                        "acceptance_criteria": "acceptance_criteria",
+                        "application_domain": "application_domain",
+                        "module": "module",
+                        "nfrs": "nfrs",
+                        "operation": "operation",
+                        "platforms": "platforms",
+                        "story_id": "story_id",
+                        "test_case_ids": "test_case_ids"
+                      },
+                      "id": "testrec_e21_data_contract_v1",
+                      "parameters": {
+                        "aggregation": "pending_Q02",
+                        "k": 3,
+                        "reference": "E21",
+                        "representation": "target_binary_presence",
+                        "similarity": "pending_Q01",
+                        "status": "data_contract_only"
+                      },
+                      "version": "contract.1"
+                    },
+                    "name": "Test cases — E21 equations, synthetic demonstration",
+                    "schemaVersion": 1,
+                    "state": "draft",
+                    "version": "demo.1"
+                  },
+                  "format": "us-agent-json-v1",
+                  "sha256": "4d54ea49030afb9f1a8f2866f699aa2564912d2cbc22b0a27dc794fc62440685"
+                },
+                "representation": {
+                  "candidates": [
+                    {
+                      "recordId": "candidate-a",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-b",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-c",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create",
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        1,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "recordId": "candidate-d",
+                      "sameStory": false,
+                      "tests": {
+                        "ids": [
+                          "demo-create",
+                          "demo-required"
+                        ],
+                        "state": "known"
+                      },
+                      "vector": [
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "dimensions": [
+                    {
+                      "label": "module",
+                      "slot": "module",
+                      "value": "Cadastro"
+                    },
+                    {
+                      "label": "operation",
+                      "slot": "operation",
+                      "value": "criar"
+                    },
+                    {
+                      "label": "platforms:Web",
+                      "slot": "platforms",
+                      "value": "Web"
+                    },
+                    {
+                      "label": "application_domain",
+                      "slot": "application_domain",
+                      "value": "Demo"
+                    },
+                    {
+                      "label": "acceptance_criteria:required",
+                      "slot": "acceptance_criteria",
+                      "value": "required"
+                    },
+                    {
+                      "label": "acceptance_criteria:unique",
+                      "slot": "acceptance_criteria",
+                      "value": "unique"
+                    },
+                    {
+                      "label": "nfrs:privacy",
+                      "slot": "nfrs",
+                      "value": "privacy"
+                    },
+                    {
+                      "label": "nfrs:audit",
+                      "slot": "nfrs",
+                      "value": "audit"
+                    }
+                  ],
+                  "targetVector": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "81eda52d929fa52f83f858421b89f0f7176b45a3ac8ee67143d4d148e45c114d"
+            },
+            "request": {
+              "content": {
+                "catalog": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-synthetic-catalog",
+                  "sha256": "7d4570ac9efe2c77b72b13e47ea7bd37392ae4d813c2b00609202323600e3394",
+                  "version": "1"
+                },
+                "dataset": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-pilot-unjudged",
+                  "sha256": "7cb859847b8799638016afeebde44972a750f02a60806f51c37b8c2496bd67d1",
+                  "version": "1"
+                },
+                "definition": {
+                  "format": "us-agent-json-v1",
+                  "id": "testrec-equations-demo",
+                  "sha256": "80e318ed7f76464c18377774a02872f9acffca413cdd172a5fe4e09f6b66ceb2",
+                  "version": "demo.1"
+                },
+                "id": "2dd3486a-5842-4ac6-800f-7466c05ebcbe",
+                "input": {
+                  "id": "pilot-unjudged",
+                  "provenance": {
+                    "source": "US-Agent synthetic target"
+                  },
+                  "values": {
+                    "acceptance_criteria": [
+                      "required",
+                      "unique"
+                    ],
+                    "application_domain": "Demo",
+                    "module": "Cadastro",
+                    "nfrs": [
+                      "privacy",
+                      "audit"
+                    ],
+                    "operation": "criar",
+                    "platforms": [
+                      "Web"
+                    ],
+                    "story_id": "held-out-unjudged",
+                    "test_case_ids": []
+                  }
+                }
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "e67ffe33a551f9620096a1e5e3426b0c26c3d96e1e985a2296985d0e4147a92e"
+            },
+            "result": {
+              "content": {
+                "items": [
+                  {
+                    "artifact": {
+                      "executionMode": "manual",
+                      "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                      "id": "demo-create",
+                      "metadata": {
+                        "fixture": true
+                      },
+                      "purpose": "Verificar um fluxo sintético de cadastro",
+                      "title": "Criar registro sintético"
+                    },
+                    "contributions": [
+                      {
+                        "recordId": "candidate-a",
+                        "similarity": 1
+                      },
+                      {
+                        "recordId": "candidate-c",
+                        "similarity": 0.875
+                      },
+                      {
+                        "recordId": "candidate-d",
+                        "similarity": 0.875
+                      }
+                    ],
+                    "denominator": 3,
+                    "key": "9f9a3060153dcf8af85cfd8457f7bf8a4a3be080a581e96ce1acecbe8f70271a",
+                    "numerator": 2.75,
+                    "score": 0.9166666666666666,
+                    "support": 3,
+                    "testCaseId": "demo-create"
+                  },
+                  {
+                    "artifact": {
+                      "executionMode": "unspecified",
+                      "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                      "id": "demo-required",
+                      "metadata": {
+                        "extraSourceField": "Preserve without inventing scientific meaning",
+                        "fixture": true
+                      },
+                      "title": "Validar campos obrigatórios"
+                    },
+                    "contributions": [
+                      {
+                        "recordId": "candidate-c",
+                        "similarity": 0.875
+                      },
+                      {
+                        "recordId": "candidate-d",
+                        "similarity": 0.875
+                      }
+                    ],
+                    "denominator": 3,
+                    "key": "6721f97514fa477ce6ae850d3583c0d58392e4f99f2dcb5700f6db0e5f694519",
+                    "numerator": 1.75,
+                    "score": 0.5833333333333334,
+                    "support": 2,
+                    "testCaseId": "demo-required"
+                  }
+                ],
+                "k": 3,
+                "messages": [],
+                "method": "us_agent_e21_equations_demo_v1",
+                "mode": "equation_demonstration",
+                "neighbors": [
+                  {
+                    "distance": 0,
+                    "recordId": "candidate-a",
+                    "similarity": 1,
+                    "testCaseIds": [
+                      "demo-create"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-c",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      1,
+                      1,
+                      1,
+                      0,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "distance": 1,
+                    "recordId": "candidate-d",
+                    "similarity": 0.875,
+                    "testCaseIds": [
+                      "demo-create",
+                      "demo-required"
+                    ],
+                    "vector": [
+                      0,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "scientificReproduction": false,
+                "status": "completed"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "a7c8f7e61606bd78b5c67f273eaf923cbe230350bfee8aff592875409d0c8dcf"
+            },
+            "schemaVersion": 2,
+            "software": {
+              "adapterVersion": "e21-equations-adapter-v1",
+              "definitionAdapterVersion": "e21-equations-adapter-v1",
+              "kernelVersion": "policy-knn-v1",
+              "policyVersion": "e21-equations-policy-v1",
+              "runtime": {
+                "icu": "77.1",
+                "locale": "pt-BR",
+                "node": "v24.11.1"
+              }
+            }
+          },
+          "expectedStatus": "completed",
+          "outcomeHashes": [
+            "2d0dc405fe89ec953f2317229ad83e865387a6f5170139a01963fc5bb7790c4b",
+            "2d0dc405fe89ec953f2317229ad83e865387a6f5170139a01963fc5bb7790c4b"
+          ],
+          "partition": {
+            "content": {
+              "history": [
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-a"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-b"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-c"
+                },
+                {
+                  "group": "synthetic-history",
+                  "recordId": "candidate-d"
+                }
+              ],
+              "source": "Authored synthetic identities/groups; no claim of project independence inferred from feature equality.",
+              "targetGroup": "held-out-target"
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "b8bbb5c19bff49a76ce5df80c66b7bf29fe9ff6414d62d4733d07957c4de50ad"
+          },
+          "relevance": null,
+          "repeatable": true,
+          "status": "completed",
+          "statusMatches": true
+        }
+      ],
+      "summary": {
+        "allRepeatable": true,
+        "coverage": {
+          "allCases": {
+            "ratio": 0.5,
+            "targets": 6,
+            "withItems": 3
+          },
+          "judgedCases": {
+            "ratio": 0.4,
+            "targets": 5,
+            "withItems": 2
+          }
+        },
+        "independentTargets": false,
+        "relevance": {
+          "macro": {
+            "f1": {
+              "definedTargets": 4,
+              "undefinedTargets": 1,
+              "value": 0.41666666666666663
+            },
+            "f2": {
+              "definedTargets": 4,
+              "undefinedTargets": 1,
+              "value": 0.45833333333333337
+            },
+            "precision": {
+              "definedTargets": 2,
+              "undefinedTargets": 3,
+              "value": 0.75
+            },
+            "recall": {
+              "definedTargets": 4,
+              "undefinedTargets": 1,
+              "value": 0.5
+            }
+          },
+          "micro": {
+            "f1": 0.6666666666666666,
+            "f2": 0.625,
+            "fn": 2,
+            "fp": 1,
+            "precision": 0.75,
+            "recall": 0.6,
+            "tp": 3
+          },
+          "targets": 5
+        },
+        "repetitions": 2,
+        "statuses": {
+          "blocked": 1,
+          "completed": 3,
+          "no_items": 1,
+          "technical_failure": 1
+        },
+        "targets": 6,
+        "unexpectedStatuses": 0,
+        "unjudgedTargets": 1
+      }
+    }
+  },
+  "observations": {
+    "timingScope": "in_process_execution_including_validation_and_snapshots",
+    "runs": [
+      {
+        "caseId": "create-only",
+        "repetition": 1,
+        "durationMs": 81.5453
+      },
+      {
+        "caseId": "create-only",
+        "repetition": 2,
+        "durationMs": 29.04880000000003
+      },
+      {
+        "caseId": "both-tests",
+        "repetition": 1,
+        "durationMs": 27.129599999999982
+      },
+      {
+        "caseId": "both-tests",
+        "repetition": 2,
+        "durationMs": 21.639799999999923
+      },
+      {
+        "caseId": "known-empty",
+        "repetition": 1,
+        "durationMs": 23.057999999999993
+      },
+      {
+        "caseId": "known-empty",
+        "repetition": 2,
+        "durationMs": 18.260500000000093
+      },
+      {
+        "caseId": "insufficient",
+        "repetition": 1,
+        "durationMs": 17.146999999999935
+      },
+      {
+        "caseId": "insufficient",
+        "repetition": 2,
+        "durationMs": 11.653800000000047
+      },
+      {
+        "caseId": "invalid-input",
+        "repetition": 1,
+        "durationMs": 6.318400000000111
+      },
+      {
+        "caseId": "invalid-input",
+        "repetition": 2,
+        "durationMs": 7.864599999999882
+      },
+      {
+        "caseId": "unjudged",
+        "repetition": 1,
+        "durationMs": 19.504500000000007
+      },
+      {
+        "caseId": "unjudged",
+        "repetition": 2,
+        "durationMs": 24.242299999999886
+      }
+    ]
+  }
+}

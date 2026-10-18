@@ -1,24 +1,26 @@
 import { useEffect, useState } from 'react';
 import { recommenderApi } from '../services/recommender-api';
-import type { ConfiguredRun, ContentReference, RecommendationResult, ReplayResult } from '../types/configurable-recommendations';
+import type { ContentReference, RecommendationResult, ReplayResult } from '../types/configurable-recommendations';
 import { ConfiguredRunReview } from './ConfiguredRunReview';
 import { displayScientificMessage } from '../services/scientific-messages';
+import { isTestCaseRun, type MethodRun } from '../types/test-case-recommendations';
+import { TestCaseRunDetails } from './TestCaseRunDetails';
 
 export const configuredStatus: Record<RecommendationResult['status'], string> = {
-  blocked: "Missing data", no_candidates: "No compatible candidates", no_items: "Neighbor has no eligible NFRs", completed: "Suggestions found"
+  blocked: "Missing data", no_candidates: "No compatible candidates", no_items: "No recommended items", completed: "Suggestions found"
 };
 export function ReferenceDetails({ title, reference }: { title: string; reference: ContentReference }) {
   return <div className="configured-reference"><b>{title}</b><span>{reference.id} · {reference.version}</span><small>SHA-256</small><code>{reference.sha256}</code></div>;
 }
 
-function downloadRun(run: ConfiguredRun) {
+function downloadRun(run: MethodRun) {
   const url = URL.createObjectURL(new Blob([JSON.stringify(run, null, 2)], { type: 'application/json' }));
   const anchor = document.createElement('a'); anchor.href = url; anchor.download = `execucao-${run.id}.json`; anchor.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 export function ConfiguredRunDetails({ id }: { id: string }) {
-  const [run, setRun] = useState<ConfiguredRun>();
+  const [run, setRun] = useState<MethodRun>();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [retry, setRetry] = useState(0);
@@ -29,7 +31,7 @@ export function ConfiguredRunDetails({ id }: { id: string }) {
   useEffect(() => {
     const controller = new AbortController(); let active = true;
     setLoading(true); setRun(undefined); setError(''); setReplay(undefined); setCandidatePage(0); setDimensionPage(0);
-    recommenderApi.run(id, controller.signal).then(value => { if (active) setRun(value); })
+    recommenderApi.publishedRun(id, controller.signal).then(value => { if (active) setRun(value); })
       .catch((reason: Error) => { if (active) setError(reason.message); }).finally(() => { if (active) setLoading(false); });
     return () => { active = false; controller.abort(); };
   }, [id, retry]);
@@ -41,6 +43,10 @@ export function ConfiguredRunDetails({ id }: { id: string }) {
   }
   if (loading) return <p role="status">Loading run evidence…</p>;
   if (!run) return <div role="alert"><p>{error}</p><button onClick={() => setRetry(value => value + 1)}>Retry loading run</button></div>;
+  const actions = <><div className="configured-actions"><button disabled={replaying} onClick={() => void verify()}>{replaying ? 'Verifying…' : 'Verify replay'}</button><button onClick={() => downloadRun(run)}>Download JSON evidence</button></div>
+    {error && <p className="inline-error" role="alert">{error}</p>}
+    {replay && <div role={replay.verified ? 'status' : 'alert'}><p>{replay.verified ? 'Replay verified: result, explanation, and projection match the preserved run.' : 'Replay differs: the original evidence was preserved.'}</p><p>Result: {replay.resultMatches ? 'matches' : 'differs'} · Explanation: {replay.explanationMatches ? 'matches' : 'differs'} · Projection: {replay.projectionMatches ? 'matches' : 'differs'}</p></div>}</>;
+  if (isTestCaseRun(run)) return <article className="configured-result" aria-label="Run result"><TestCaseRunDetails key={run.id} run={run}/>{actions}</article>;
   const { content } = run.snapshot;
   const request = content.request.content, result = content.result.content, dataset = content.dataset.content;
   const candidates = content.explanation.content.candidates;
@@ -71,8 +77,6 @@ export function ConfiguredRunDetails({ id }: { id: string }) {
     </tbody></table></div>{!candidates.length && <p>No candidates were evaluated in this run.</p>}<div className="configured-actions"><button disabled={candidatePage === 0} onClick={() => setCandidatePage(value => value - 1)}>Previous candidates</button><span>Page {candidatePage + 1}</span><button disabled={(candidatePage + 1) * 50 >= candidates.length} onClick={() => setCandidatePage(value => value + 1)}>Next candidates</button></div></details>
     <details><summary>Versions, source, and integrity</summary><dl className="configured-provenance"><dt>Run</dt><dd>{run.id}</dd><dt>Technical actor</dt><dd>{run.createdBy}</dd><dt>Service duration</dt><dd>{run.durationMs.toLocaleString('en-US', { maximumFractionDigits: 2 })} ms (loading and calculation; excludes final persistence and network)</dd><dt>Method</dt><dd>{result.method} · k={result.k}</dd><dt>Adaptador</dt><dd>{content.software.adapterVersion}</dd><dt>Published adapter</dt><dd>{content.software.definitionAdapterVersion}</dd><dt>Policy / kernel</dt><dd>{content.software.policyVersion} / {content.software.kernelVersion}</dd><dt>Recorded runtime</dt><dd>{content.software.runtime.node} · ICU {content.software.runtime.icu} · {content.software.runtime.locale}</dd><dt>Package SHA-256</dt><dd>{run.snapshot.sha256}</dd><dt>Source file SHA-256</dt><dd>{dataset.import.fileSha256}</dd></dl>
       {content.definition.content.taxonomies.map(dependency => <ReferenceDetails key={`${dependency.snapshot.content.id}@${dependency.snapshot.content.version}`} title="Preserved taxonomy" reference={{ id: dependency.snapshot.content.id, version: dependency.snapshot.content.version, format: dependency.snapshot.format, sha256: dependency.snapshot.sha256 }}/>)}</details>
-    <div className="configured-actions"><button disabled={replaying} onClick={() => void verify()}>{replaying ? 'Verificando…' : "Verify replay"}</button><button onClick={() => downloadRun(run)}>Download JSON evidence</button></div>
-    {error && <p className="inline-error" role="alert">{error}</p>}
-    {replay && <div role={replay.verified ? 'status' : 'alert'}><p>{replay.verified ? "Replay verified: result, explanation, and projection match the preserved run." : "Replay differs: the original evidence was preserved."}</p><p>Resultado: {replay.resultMatches ? 'confere' : 'diverge'} · Explanation: {replay.explanationMatches ? 'confere' : 'diverge'} · Projection: {replay.projectionMatches ? 'confere' : 'diverge'}</p></div>}
+    {actions}
   </article>;
 }

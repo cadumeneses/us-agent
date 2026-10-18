@@ -1,6 +1,7 @@
 import express, { type ErrorRequestHandler } from 'express';
 import { apiRouter } from './routes/api.js';
 import { apiBoundary } from './security/api-boundary.js';
+import { testCaseReviewRouter } from './routes/test-case-review.js';
 
 export function createApp() {
   const app = express();
@@ -9,6 +10,7 @@ export function createApp() {
   app.set('trust proxy', false);
   app.use('/api', apiBoundary);
   app.use(express.json({ limit: '1mb' }));
+  app.use('/api/internal/test-case-reviews', testCaseReviewRouter);
   app.use('/api', apiRouter);
   app.use((_req, res) => res.status(404).json({ error: 'Endpoint not found.' }));
 

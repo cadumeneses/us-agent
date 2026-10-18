@@ -81,4 +81,4 @@ B10 entrega esse fluxo pela API; B11 acrescentou [execução persistida com base
 
 ## Bases de testes com catálogo
 
-B15c acrescenta [importações/bases schema 2 para a demonstração E21](testrec-execucoes-publicadas.md). O spec fixa a publicação do catálogo; a prévia preserva seu conteúdo e valida associações por ID. Ausência de associação é inválida e exige exclusão explícita; `[]` permanece conhecido e vazio. RNF continua usando schema 1. A interface de importação de testes está pendente em B17; recuperação de sua prévia pela tela RNF informa a limitação.
+B15c acrescenta [importações/bases schema 2 para a demonstração E21](testrec-execucoes-publicadas.md). O spec fixa a publicação do catálogo; a prévia preserva seu conteúdo e valida associações por ID. Ausência de associação é inválida e exige exclusão explícita; `[]` permanece conhecido e vazio. RNF continua usando schema 1. B17a acrescenta a [interface de importação de testes](testrec-interface.md), com seleção explícita de catálogo, referência preservada, invalidação da prévia após alterações e recuperação por ID.

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "kind": "synthetic_technical_pilot",
+  "recordedAt": "2026-10-18T10:42:15.436Z",
+  "scientificReproduction": false,
+  "protocol": {
+    "version": "testrec-evaluation-v1",
+    "method": "us_agent_e21_equations_demo_v1",
+    "repetitions": 2,
+    "partition": "declared_group_holdout",
+    "matching": "exact_test_id_within_catalog_publication",
+    "undefinedRatio": "null",
+    "failurePolicy": "empty_prediction_with_failure_status",
+    "returnedSet": "all_method_items",
+    "tuning": "none",
+    "configurationStudy": "not_performed",
+    "scientificReproduction": false
+  },
+  "git": {
+    "head": "1ee923ff85bf0d4b06658a77139287ac239e2e1a",
+    "dirty": true
+  },
+  "environment": {
+    "node": "v24.11.1",
+    "icu": "77.1",
+    "platform": "win32",
+    "arch": "x64",
+    "locale": "pt-BR"
+  },
+  "sources": {
+    "apps/api/src/domain/content-snapshot.ts": "43d0a3570567b4d3bfe5efbff3c2e225d093de4193b4fd1d26fe996c4c781d8a",
+    "apps/api/src/domain/dataset-import.ts": "9c1a197111c81f170a301094497fb683ad8a318414dea257b6f49732241edc2d",
+    "apps/api/src/domain/dataset-publication.ts": "40b65f17062376bf51d494f389ae5ce5bf1c1d8fcd6526828986123dd363c9fa",
+    "apps/api/src/domain/definition-publication.ts": "4ce1bf96e7cdd087a0b67db71e2214c0ffac7b0ed1478d4183e5f29308bb7759",
+    "apps/api/src/domain/import-formats.ts": "cb9d5ea48c69d6e7f2616efb150f2b1ec362be9876f9f485468da92e17ef9745",
+    "apps/api/src/domain/recommender-definition.ts": "63a98fff7644ac27fb8456dd6bdce5d1d843d13b13450cfb75d8e6198bfa7e81",
+    "apps/api/src/domain/recommender-taxonomy.ts": "19de6d6eb3f9e6f99f517e6a95e65e7339189e09c144da302de21dd5089a3575",
+    "apps/api/src/domain/test-case-catalog.ts": "6450ca070ee787670750ad8d4dd3f2eb0404129552a3615ca72364b48988a896",
+    "apps/api/src/domain/test-case-dataset.ts": "72bb15eb94a4086c14b3cfcdb042352ae7ec519690353965a60e186b974bf6cc",
+    "apps/api/src/domain/test-case-publication-integrity.ts": "364af05ab4ba02ff2b5636abeee29d6c2be76eb67d85ee42977c982e0078b214",
+    "apps/api/src/domain/test-case-publication.ts": "9a7627e4c68049e253a477004ee3fe7ad39b16257ddf0554b210489d28d28edf",
+    "apps/api/src/evaluation/recommendation-metrics.ts": "d9965ae4cecc56475cf216f20f86ce420a28b8ad433831d5cb462187498bc94a",
+    "apps/api/src/evaluation/testrec-evaluation.ts": "14ddfcc2bfe80379f36540e7c182a3c2cc2007131783c5b29307024811be1119",
+    "apps/api/src/evaluation/testrec-pilot.ts": "8b54cbfb805822e115102e54486246c3e3b24a22ab411568b11a22b87fef5b12",
+    "apps/api/src/routes/recommendation-runs.ts": "23657248fb12a4f105acc2334d337115ea1f1822f1bd806db388dc5900f3e325",
+    "apps/api/src/routes/recommender-datasets.ts": "959ed528c1a023d282e2ed3d7b70dcec97bfd56ba403f111af302b5c5ad4300e",
+    "apps/api/src/services/knn.ts": "9bef8809c5d17c9d7701bd17fb539efc2664e2188439be5368cb421b3d65acc5",
+    "apps/api/src/services/method-execution.ts": "04b39d0b97916fb61d93e3a4b4dfb9bba0c97b06728d147422eecd09b693bf14",
+    "apps/api/src/services/recommendation-review.ts": "fb9999b9b9d34b7ffc0d4fd44c5aafdd3a1ff5970b066fd0b86088f66ed2f6d9",
+    "apps/api/src/services/recommendation-runs.ts": "978e7be6848963f2b0530d238e6952ecb662a30036674853f28b99e83cf84d21",
+    "apps/api/src/services/recommender-datasets.ts": "298f7c6df16a4323bf87677edd93abcd410a8b7b8c13d81c4468c820f474e432",
+    "apps/api/src/services/recommender-definitions.ts": "e1fb0f3e38e665291d324cc346607dbdd44f9d154424523f9db9922518e25126",
+    "apps/api/src/services/recommender-methods.ts": "3e4dfd3a71801bebd3defe5e77dc5cdcc22e7b42134432490a8381d68204e8ed",
+    "apps/api/src/services/test-case-catalogs.ts": "7c5691a7c823ea2856bf939f666c1e6917b8d9a93c9bcfeb12c03aca4f30ab4e",
+    "apps/api/src/services/testrec-contract.ts": "533e61111b2790d0af6354795633f4057d5568fc0b9d2ac40c8f72b41d749269",
+    "apps/api/src/services/testrec-equations.ts": "d4574e69e3d27708102afc3aa6e54f9c16db3ea864c732523c6ef3a7a8d17aef",
+    "apps/api/src/services/testrec-method.ts": "dbb727e693e4c36a6d41971d8900f9bcbbe1fc1f50cbb98ade3ee6b6683844a7",
+    "config/recommenders/testrec-equations.draft.json": "4b9cd23901730938f374aaf523ae184282668d7c8b2bba8b14f2ead818bf76e2",
+    "database/migrations/023_test_case_dataset_runs.sql": "6594f3eb530f27d7bed3c5200558ab4dadf119062b12f4645389cc5e39138b88",
+    "docs/evidencias/b16b/published-runs.json": "72879aeb44fc6ad3bcaf233b6d28bb05482b5dfef991f1a6de6fc1409530ef9a",
+    "research/examples/testrec-e21/equations-synthetic.json": "e4850176fe374069fee5243ee757f8ba1118bcc54609de402e4d28d14e5c6945",
+    "research/examples/testrec-e21/synthetic-catalog.json": "d5d2f2b3ee1baa8c496effe6e233dd25f5fa4ea1489836f5a3e47ce1e3803b6e",
+    "research/pilots/testrec-v1/annotations.json": "9c4703bf94dbc7fb0e849f7ab9f6b7d16ad2ca98663d48a7a33baa52c1f24903",
+    "research/pilots/testrec-v1/protocol.md": "1a1780dac177076daa0cdc3c403444c2065f39f3f17807ac2af7e640d3595767",
+    "scripts/check-testrec-evaluation.mjs": "f9082f3fc7cba6de1c6494ae94ea3806957f8967ef16ea67582a1346c80d065c",
+    "scripts/check-testrec-runs.mjs": "754fd0d6541fa10ba48f7c4f09b0310d3450565a6847573f6c9a8f79651d73ed",
+    "scripts/evaluate-testrec.ts": "2c6069561a04f1c3034b6f9969aee33470594467843e13cf7dae316f70628462"
+  },
+  "artifacts": {
+    "bundle.json": "cf0b2e7f740327fc7021a816f78e346164ec2d3c69054964bdc26168b70e78b0",
+    "report.json": "b22b7db4f3e909620eaae76f236c62bc877a06f7ddd0a61cf9e6f3cf101b3187",
+    "targets.csv": "f22e1d4b2efcb9284c2a6f8f2a0022647be4675169b7776c085bd0b570b47b41"
+  },
+  "technicalGatePassed": true,
+  "limitations": [
+    "Synthetic evaluator verification only; no empirical quality claim.",
+    "Declared groups do not establish real-world independence.",
+    "Q01/Q02/Q03 and author data/protocol remain unresolved.",
+    "No participant configuration study or performance benchmark."
+  ]
+}

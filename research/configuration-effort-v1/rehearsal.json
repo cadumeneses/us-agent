@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "id": "configuration-effort-synthetic-v1",
+  "kind": "synthetic_rehearsal",
+  "protocol": {
+    "version": "configuration-effort-v1",
+    "sha256": "62b07cc2ed3203a2a6be37f67017f3f4cda80a23249bcd0986bb88c33da54fb1"
+  },
+  "materials": {
+    "id": "configuration-materials",
+    "version": "1",
+    "sha256": "c09f14616b46b64fd76c24c8449b4c37ce73a85e85885440345ebc3cc8be7a1a"
+  },
+  "provenance": {
+    "capture": "authored_fixture",
+    "independence": "not_established",
+    "artifactVerification": "references_declared_not_fetched"
+  },
+  "sessions": [
+    {
+      "id": "synthetic-a-rnf",
+      "participantCode": "synthetic-a",
+      "attempt": 1,
+      "order": 1,
+      "method": "ramos_2019_manhattan_k1_v2",
+      "environment": {
+        "softwareRevision": "1ee923ff85bf0d4b06658a77139287ac239e2e1a",
+        "interfaceLanguage": "en",
+        "workspaceState": "modified",
+        "softwareSnapshotSha256": "c65701fa3bc065f0e8b653bf0a2e8055668af5d2636087a860b2bc0c7b90642c",
+        "experience": "not_recorded",
+        "startingState": "provided_materials_new_namespace"
+      },
+      "events": [
+        {
+          "type": "start",
+          "atMs": 0
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 10000,
+          "criterion": "definition",
+          "reference": {
+            "id": "synthetic-rnf-definition",
+            "version": "synthetic.1",
+            "sha256": "461f3709e87486e6391b6ff182c575ef0b7d1fc424edfea3095ce5620cb4ce14"
+          }
+        },
+        {
+          "type": "change",
+          "atMs": 15000,
+          "scope": "configuration"
+        },
+        {
+          "type": "pause",
+          "atMs": 20000,
+          "reason": "environment"
+        },
+        {
+          "type": "resume",
+          "atMs": 50000
+        },
+        {
+          "type": "error",
+          "atMs": 60000,
+          "code": "taxonomy_reference"
+        },
+        {
+          "type": "help",
+          "atMs": 65000,
+          "kind": "procedural"
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 70000,
+          "criterion": "taxonomy",
+          "reference": {
+            "id": "synthetic-rnf-taxonomy",
+            "version": "synthetic.1",
+            "sha256": "dd27b0fd01d6fbe660f6a78e891c7ad5da3865dfa5e8760078787e7b10800735"
+          }
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 100000,
+          "criterion": "dataset",
+          "reference": {
+            "id": "synthetic-rnf-dataset",
+            "version": "synthetic.1",
+            "sha256": "5e71d49fe29a475400a59222383123887b3ba011802ae2ea45ba4061f9057a60"
+          }
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 130000,
+          "criterion": "run",
+          "reference": {
+            "id": "synthetic-rnf-run",
+            "version": "synthetic.1",
+            "sha256": "c2b716ef26a39e6e8c3eb48c7d17363641d0b1b965a3310ef6db2302a822c13b"
+          }
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 145000,
+          "criterion": "replay",
+          "reference": {
+            "id": "synthetic-rnf-replay",
+            "version": "synthetic.1",
+            "sha256": "6511e2ed021702be06b9c36748506620252caa9e00da09f49f9c30eb5aad8588"
+          }
+        },
+        {
+          "type": "finish",
+          "atMs": 150000,
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "id": "synthetic-a-testrec",
+      "participantCode": "synthetic-a",
+      "attempt": 1,
+      "order": 2,
+      "method": "us_agent_e21_equations_demo_v1",
+      "environment": {
+        "softwareRevision": "1ee923ff85bf0d4b06658a77139287ac239e2e1a",
+        "interfaceLanguage": "en",
+        "workspaceState": "modified",
+        "softwareSnapshotSha256": "c65701fa3bc065f0e8b653bf0a2e8055668af5d2636087a860b2bc0c7b90642c",
+        "experience": "not_recorded",
+        "startingState": "provided_materials_new_namespace"
+      },
+      "events": [
+        {
+          "type": "start",
+          "atMs": 0
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 10000,
+          "criterion": "taxonomy",
+          "reference": {
+            "id": "synthetic-testrec-taxonomy",
+            "version": "synthetic.1",
+            "sha256": "ce92f2bb755fe1ddfb4c65ba1d31c63fa775433c04715a252b23c0cd8dcb6c6b"
+          }
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 30000,
+          "criterion": "definition",
+          "reference": {
+            "id": "synthetic-testrec-definition",
+            "version": "synthetic.1",
+            "sha256": "e7f76aaed7a2f51b156e30d578ec2a41733be7f3e5bce8ca69cb24f0cd822e26"
+          }
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 60000,
+          "criterion": "catalog",
+          "reference": {
+            "id": "synthetic-testrec-catalog",
+            "version": "synthetic.1",
+            "sha256": "18619adea154d191cfbd0148a7c035587d2c0e7d63e3c7813f252b43d562a1ba"
+          }
+        },
+        {
+          "type": "change",
+          "atMs": 70000,
+          "scope": "application_code"
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 100000,
+          "criterion": "dataset",
+          "reference": {
+            "id": "synthetic-testrec-dataset",
+            "version": "synthetic.1",
+            "sha256": "bdb78bda89216ef5c2d92a8c063e4e525dbd643c68e3f22bc1bbfab571274db1"
+          }
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 180000,
+          "criterion": "run",
+          "reference": {
+            "id": "synthetic-testrec-run",
+            "version": "synthetic.1",
+            "sha256": "0c9872ec40b6a52acfc6fed5184ac61fad694dff498cf79ccab7ceacf582b517"
+          }
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 200000,
+          "criterion": "replay",
+          "reference": {
+            "id": "synthetic-testrec-replay",
+            "version": "synthetic.1",
+            "sha256": "bc9caf9ba7c43835f7813f31362f4167d1a459a65ea1159f3f18eb0ce0853747"
+          }
+        },
+        {
+          "type": "finish",
+          "atMs": 210000,
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "id": "synthetic-b-testrec",
+      "participantCode": "synthetic-b",
+      "attempt": 1,
+      "order": 1,
+      "method": "us_agent_e21_equations_demo_v1",
+      "environment": {
+        "softwareRevision": "1ee923ff85bf0d4b06658a77139287ac239e2e1a",
+        "interfaceLanguage": "en",
+        "workspaceState": "modified",
+        "softwareSnapshotSha256": "c65701fa3bc065f0e8b653bf0a2e8055668af5d2636087a860b2bc0c7b90642c",
+        "experience": "not_recorded",
+        "startingState": "provided_materials_new_namespace"
+      },
+      "events": [
+        {
+          "type": "start",
+          "atMs": 0
+        },
+        {
+          "type": "error",
+          "atMs": 10000,
+          "code": "catalog_import"
+        },
+        {
+          "type": "help",
+          "atMs": 15000,
+          "kind": "technical"
+        },
+        {
+          "type": "checkpoint",
+          "atMs": 20000,
+          "criterion": "definition",
+          "reference": {
+            "id": "synthetic-abandoned-definition",
+            "version": "synthetic.1",
+            "sha256": "09243797192ee3ab4f01ac3c0b10b7dfbcd9c7d0b6a546378ab8bb5ec4849d6a"
+          }
+        },
+        {
+          "type": "pause",
+          "atMs": 50000,
+          "reason": "interruption"
+        },
+        {
+          "type": "finish",
+          "atMs": 90000,
+          "outcome": "abandoned"
+        }
+      ]
+    }
+  ]
+}

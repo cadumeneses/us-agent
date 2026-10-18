@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "kind": "e26_public_source_audit",
+  "evidenceSha256": "0053c0e5ab71acbee438ac3bc9eeeb76d530b13274aac02b25a2c8fdfe17baa2",
+  "artifacts": {
+    "source-audit.json": "444e783f084ebb74f1c6bcc08311b52473310d6f0905a060e8cb1a95c5c15e02"
+  },
+  "limitations": [
+    "Source data audit, not an empirical reproduction.",
+    "PDF is user-provided and not redistributed."
+  ]
+}

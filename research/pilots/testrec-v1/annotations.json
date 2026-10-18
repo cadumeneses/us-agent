@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "authored_synthetic_judgment",
+  "source": "US-Agent technical fixtures authored for evaluator verification. These judgments are artificial, are not derived from ranking or acceptance, and do not represent author data or empirical relevance.",
+  "cases": [
+    { "id": "create-only", "variant": "standard", "expectedStatus": "completed", "testCaseIds": ["demo-create"] },
+    { "id": "both-tests", "variant": "standard", "expectedStatus": "completed", "testCaseIds": ["demo-create", "demo-required"] },
+    { "id": "known-empty", "variant": "empty-associations", "expectedStatus": "no_items", "testCaseIds": [] },
+    { "id": "insufficient", "variant": "two-neighbors", "expectedStatus": "blocked", "testCaseIds": ["demo-create"] },
+    { "id": "invalid-input", "variant": "invalid-platform", "expectedStatus": "technical_failure", "testCaseIds": ["demo-required"] },
+    { "id": "unjudged", "variant": "standard", "expectedStatus": "completed", "testCaseIds": null }
+  ]
+}

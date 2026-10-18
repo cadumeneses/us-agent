@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "configuration-materials",
+  "version": "1",
+  "kind": "technical_seeds_not_original_empirical_data",
+  "scope": "Seeds and compatibility illustrations for reviewing the measurement instrument; not a complete participant task pack.",
+  "methods": [
+    "ramos_2019_manhattan_k1_v2",
+    "us_agent_e21_equations_demo_v1"
+  ],
+  "files": [
+    {
+      "path": "config/recommenders/rnf-v2.draft.json",
+      "sha256": "c531fc216da54215aac897e2c6553f3dfd0ce9fcc4c9fb945cbbdc6953676e0e"
+    },
+    {
+      "path": "config/recommenders/testrec-equations.draft.json",
+      "sha256": "4b9cd23901730938f374aaf523ae184282668d7c8b2bba8b14f2ead818bf76e2"
+    },
+    {
+      "path": "research/baselines/rnf-v2/reference.json",
+      "sha256": "62a8059a6d11ab6026deade7c010b0682714bcc7e77f9132aac6c840792e1510"
+    },
+    {
+      "path": "research/examples/testrec-e21/equations-synthetic.json",
+      "sha256": "e4850176fe374069fee5243ee757f8ba1118bcc54609de402e4d28d14e5c6945"
+    },
+    {
+      "path": "research/examples/testrec-e21/synthetic-catalog.json",
+      "sha256": "d5d2f2b3ee1baa8c496effe6e233dd25f5fa4ea1489836f5a3e47ce1e3803b6e"
+    }
+  ],
+  "limits": [
+    "no_original_empirical_dataset",
+    "no_participant_activity",
+    "third_no_US_example_not_available",
+    "manuals_training_sample_and_protocol_review_still_required"
+  ]
+}

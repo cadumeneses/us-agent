@@ -1,0 +1,38 @@
+{
+  "definitionId": "study-review-001-tests",
+  "version": "1",
+  "datasetId": "study-review-001-test-base",
+  "taxonomy": {
+    "schemaVersion": 1,
+    "id": "study-review-001-criteria",
+    "version": "1",
+    "name": "Configuration exercise — criteria",
+    "kind": "list",
+    "selection": "any",
+    "source": "US-Agent technical exercise; synthetic context/criteria only.",
+    "nodes": [
+      {
+        "id": "required",
+        "name": "Required",
+        "description": "Required",
+        "parentId": null
+      },
+      {
+        "id": "unique",
+        "name": "Unique",
+        "description": "Unique",
+        "parentId": null
+      }
+    ]
+  },
+  "attributeId": "acceptance_criteria",
+  "attributeType": "taxonomy_node",
+  "catalogId": "study-review-001-catalog",
+  "source": {
+    "description": "US-Agent configuration task pack; technical demonstration, not original empirical data.",
+    "authorization": {
+      "basis": "synthetic",
+      "reference": "US-Agent configuration task pack; technical demonstration, not original empirical data."
+    }
+  }
+}

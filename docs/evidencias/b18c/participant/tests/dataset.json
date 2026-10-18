@@ -1,0 +1,108 @@
+[
+  {
+    "id": "candidate-a",
+    "provenance": {
+      "source": "US-Agent synthetic"
+    },
+    "values": {
+      "story_id": "synthetic-a",
+      "module": "Cadastro",
+      "operation": "criar",
+      "platforms": [
+        "Web"
+      ],
+      "application_domain": "Demo",
+      "acceptance_criteria": [
+        "required",
+        "unique"
+      ],
+      "nfrs": [
+        "privacy",
+        "audit"
+      ],
+      "test_case_ids": [
+        "demo-create"
+      ]
+    }
+  },
+  {
+    "id": "candidate-b",
+    "provenance": {
+      "source": "US-Agent synthetic"
+    },
+    "values": {
+      "story_id": "synthetic-b",
+      "module": "Cadastro",
+      "operation": "alterar",
+      "platforms": [
+        "Web"
+      ],
+      "application_domain": "Demo",
+      "acceptance_criteria": [
+        "required",
+        "unique"
+      ],
+      "nfrs": [
+        "privacy",
+        "audit"
+      ],
+      "test_case_ids": [
+        "demo-required"
+      ]
+    }
+  },
+  {
+    "id": "candidate-c",
+    "provenance": {
+      "source": "US-Agent synthetic"
+    },
+    "values": {
+      "story_id": "synthetic-c",
+      "module": "Cadastro",
+      "operation": "criar",
+      "platforms": [
+        "Web"
+      ],
+      "application_domain": "Outro",
+      "acceptance_criteria": [
+        "required",
+        "unique"
+      ],
+      "nfrs": [
+        "privacy",
+        "audit"
+      ],
+      "test_case_ids": [
+        "demo-create",
+        "demo-required"
+      ]
+    }
+  },
+  {
+    "id": "candidate-d",
+    "provenance": {
+      "source": "US-Agent synthetic"
+    },
+    "values": {
+      "story_id": "synthetic-d",
+      "module": "Outro",
+      "operation": "criar",
+      "platforms": [
+        "Web"
+      ],
+      "application_domain": "Demo",
+      "acceptance_criteria": [
+        "required",
+        "unique"
+      ],
+      "nfrs": [
+        "privacy",
+        "audit"
+      ],
+      "test_case_ids": [
+        "demo-create",
+        "demo-required"
+      ]
+    }
+  }
+]
