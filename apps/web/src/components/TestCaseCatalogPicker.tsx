@@ -19,9 +19,9 @@ export function TestCaseCatalogPicker({ value, onChange, required, refresh = 0, 
     }
   }, [autoSelect, value, onChange, available]);
   if (autoSelect && required) return <div>
-    {value && <p>Catálogo de testes selecionado com a base: <strong>{value.id}</strong> · {value.version}</p>}
-    <CatalogState catalog={catalog} title="catálogos de testes"/>
-    {!catalog.loading && !catalog.error && !available.length && <p>O catálogo desta base não está disponível nesta lista. Carregue mais versões, se houver, ou selecione outra base.</p>}
+    {value && <p>Test catalog selected with the dataset: <strong>{value.id}</strong> · {value.version}</p>}
+    <CatalogState catalog={catalog} title="test catalogs"/>
+    {!catalog.loading && !catalog.error && !available.length && <p>This dataset’s catalog is not available in the loaded list. Load more versions, if available, or select another dataset.</p>}
   </div>;
   return <div><label>Catalog and version<select value={value ? versionKey(value) : ''} onChange={event => {
     const selected = available.find(row => versionKey(row) === event.target.value);

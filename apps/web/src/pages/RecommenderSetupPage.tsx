@@ -10,7 +10,7 @@ export function RecommenderSetupPage() {
   const navigate = useNavigate();
   const changed = () => setRefresh(value => value + 1);
   return <section className="page configured-page"><PageTitle eyebrow="RECOMMENDERS" title="Configure and import datasets">Prepare versioned attributes, taxonomies, and datasets for traceable recommendations.</PageTitle>
-    <div className="configured-actions" role="group" aria-label="Recommender configuration">{[['definitions', "Definitions"], ['taxonomies', "Independent taxonomies"], ['catalogs', 'Test catalogs'], ['import', "Import dataset"]].map(([id, title]) => <button key={id} disabled={busy} aria-pressed={tab === id} onClick={() => setTab(id)}>{title}</button>)}<button disabled={busy} onClick={() => navigate('/configured-recommendations')}>Go to runs</button>{!busy && <Link to="/recommendations">Recomendadores</Link>}</div>
+    <div className="configured-actions" role="group" aria-label="Recommender configuration">{[['definitions', "Definitions"], ['taxonomies', "Independent taxonomies"], ['catalogs', 'Test catalogs'], ['import', "Import dataset"]].map(([id, title]) => <button key={id} disabled={busy} aria-pressed={tab === id} onClick={() => setTab(id)}>{title}</button>)}<button disabled={busy} onClick={() => navigate('/configured-recommendations')}>Go to runs</button>{!busy && <Link to="/recommendations">Recommenders</Link>}</div>
     {busy && <p role="status">Processing request…</p>}
     <div hidden={tab !== 'definitions'}><DefinitionEditor refresh={refresh} changed={changed} busy={busy} setBusy={setBusy}/></div>
     <div hidden={tab !== 'taxonomies'}><TaxonomyEditor refresh={refresh} changed={changed} busy={busy} setBusy={setBusy}/></div>

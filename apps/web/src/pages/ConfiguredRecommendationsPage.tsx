@@ -29,7 +29,7 @@ export function ConfiguredRecommendationsPage() {
   function completed(run: MethodRun) { setRefresh(value => value + 1); openRun(run.id); }
   return <section className="page configured-page">
     <PageTitle eyebrow="RECOMMENDERS" title="Run with a published dataset">Choose versions, complete the input, and inspect the evidence for each recommendation.</PageTitle>
-    <div className="configured-actions configured-tabs" role="group" aria-label="Recommender area"><button aria-pressed={tab === 'execute'} disabled={busy} onClick={() => setTab('execute')}>New run</button><button aria-pressed={tab === 'history'} disabled={busy} onClick={() => setTab('history')}>Run history</button>{!busy && <Link to="/recommender-setup">Configure and import datasets</Link>}<Link to="/recommendations">Escolher recomendador</Link></div>
+    <div className="configured-actions configured-tabs" role="group" aria-label="Recommender area"><button aria-pressed={tab === 'execute'} disabled={busy} onClick={() => setTab('execute')}>New run</button><button aria-pressed={tab === 'history'} disabled={busy} onClick={() => setTab('history')}>Run history</button>{!busy && <Link to="/recommender-setup">Configure and import datasets</Link>}<Link to="/recommendations">Choose a recommender</Link></div>
     <div hidden={tab !== 'execute'}>
       <section className="card configured-panel"><h2>1. Published definition</h2><p>The form follows the published attributes and method: Felipe Ramos's NFR policy or the synthetic E21 test-case equation demonstration.</p>
         <label>Definition and version<select disabled={busy || definitions.loading} value={selected} onChange={event => setSelected(event.target.value)}><option value="">Select a version</option>{definitions.rows.map(row => <option disabled={!supportsWebMethod(row.method)} key={identity(row)} value={identity(row)}>{row.name} · {row.id} · {row.version}{!supportsWebMethod(row.method) && ' · API only'}</option>)}</select></label>
@@ -44,8 +44,8 @@ export function ConfiguredRecommendationsPage() {
       <div className="configured-actions"><button disabled={history.loading || busy} onClick={() => setRefresh(value => value + 1)}>Refresh history</button></div>
       <CatalogState catalog={history} title="runs"/>
       {!history.loading && !history.error && !history.rows.length && <p>No runs recorded.</p>}
-      {history.rows.length > 0 && <div className="table-wrap"><table><thead><tr><th>Data</th><th>Definition / version</th><th>Dataset / version</th><th>Resultado</th><th>Evidence</th></tr></thead><tbody>{history.rows.map(row => <tr key={row.id}>
-        <td>{new Date(row.createdAt).toLocaleString('en-US')}</td><td>{row.definition.id} · {row.definition.version}</td><td>{row.dataset.id} · {row.dataset.version}</td><td>{configuredStatus[row.status]}</td><td><button aria-label={`Open run ${row.id}`} onClick={() => openRun(row.id)} aria-pressed={runId === row.id}>Abrir</button></td>
+      {history.rows.length > 0 && <div className="table-wrap"><table><thead><tr><th>Date</th><th>Definition / version</th><th>Dataset / version</th><th>Result</th><th>Evidence</th></tr></thead><tbody>{history.rows.map(row => <tr key={row.id}>
+        <td>{new Date(row.createdAt).toLocaleString('en-US')}</td><td>{row.definition.id} · {row.definition.version}</td><td>{row.dataset.id} · {row.dataset.version}</td><td>{configuredStatus[row.status]}</td><td><button aria-label={`Open run ${row.id}`} onClick={() => openRun(row.id)} aria-pressed={runId === row.id}>Open</button></td>
       </tr>)}</tbody></table></div>}
       {runId && <ConfiguredRunDetails key={runId} id={runId}/>}
     </section>
@@ -124,7 +124,7 @@ function ExecutionForm({ record, datasets, busy, onBusy, onCompleted, children }
       <p>Use original identifiers when representing the same artifact. Additional context appears in the form without changing the NFR calculation.</p>
       <ConfiguredInputFields attributes={definition.attributes} values={values} taxonomies={taxonomies} onChange={setValues}/>
       <label>Module/operation pair for this run<select value={labelIndex} onChange={event => setLabelIndex(event.target.value)}><option value="">Select a pair entered above</option>{labels.map((label, index) => <option key={index} value={index}>{label.module || "Empty module"} / {label.operation || "Empty operation"}</option>)}</select></label>
-      <div className="configured-actions"><button type="submit" className="primary" disabled={!dataset || busy}>{busy ? 'Executando…' : "Run recommendation"}</button></div>
+      <div className="configured-actions"><button type="submit" className="primary" disabled={!dataset || busy}>{busy ? 'Running…' : "Run recommendation"}</button></div>
       {!dataset && <p>Choose a compatible dataset to run.</p>}
     </section></fieldset>
     {issues.length > 0 && <div className="inline-error" role="alert"><p>Check these fields before running:</p><ul>{issues.map((issue, index) => <li key={index}>{issue}</li>)}</ul></div>}

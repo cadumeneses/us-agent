@@ -37,7 +37,7 @@ function projectInput(record: Publication, target: NfrContext['target'], labelIn
     } else if (raw && accepts(raw)) values[attribute.id] = raw;
   }
   return { id: target.storyId, values, provenance: {
-    source: `Projeto ${target.project}; perfil e classificação ${target.classificationId}`,
+    source: `Project ${target.project}; profile and classification ${target.classificationId}`,
     sourceRecordId: target.classificationId
   } };
 }
@@ -51,14 +51,14 @@ export function ProjectTestRecommendations({ story, busy, onBusy }: {
   const available = definitions.rows.filter(row => row.state === 'published' && row.method === TEST_CASE_METHOD && row.snapshot);
   const selected = available.find(row => versionKey(row) === choice) ?? (!choice && available.length === 1 ? available[0] : undefined);
   return <>
-    <section className="card configured-panel"><h2>Casos de teste</h2><p>Use uma configuração publicada e sua base de referência. O perfil e a classificação da história selecionada preenchem os campos compatíveis.</p>
-      <label>Recomendador e versão<select disabled={busy || definitions.loading} value={selected ? versionKey(selected) : ''} onChange={event => setChoice(event.target.value)}>
-        <option value="">Selecione uma configuração</option>{available.map(row => <option key={versionKey(row)} value={versionKey(row)}>{row.name} · {row.version}</option>)}
-      </select></label><CatalogState catalog={definitions} title="recomendadores"/>
-      {!definitions.loading && !definitions.error && !available.length && <p>Nenhum recomendador de casos de teste foi publicado. <Link to="/recommender-setup">Configurar recomendador e importar base</Link></p>}
+    <section className="card configured-panel"><h2>Test cases</h2><p>Use a published configuration and reference dataset. Compatible fields are filled from the selected story and project profile.</p>
+      <label>Recommender and version<select disabled={busy || definitions.loading} value={selected ? versionKey(selected) : ''} onChange={event => setChoice(event.target.value)}>
+        <option value="">Select a configuration</option>{available.map(row => <option key={versionKey(row)} value={versionKey(row)}>{row.name} · {row.version}</option>)}
+      </select></label><CatalogState catalog={definitions} title="recommenders"/>
+      {!definitions.loading && !definitions.error && !available.length && <p>No test-case recommender has been published. <Link to="/recommender-setup">Configure a recommender and import a dataset</Link></p>}
     </section>
     {selected && <ProjectTestExecution key={versionKey(selected)} summary={selected} story={story} datasets={datasets.rows} busy={busy} onBusy={onBusy}>
-      <CatalogState catalog={datasets} title="bases de referência"/>
+      <CatalogState catalog={datasets} title="reference datasets"/>
     </ProjectTestExecution>}
   </>;
 }
@@ -81,14 +81,14 @@ function ProjectTestExecution({ summary, story, datasets, busy, onBusy, children
       .then(([record, context]) => {
         if (!active) return;
         if (record.state !== 'published' || !record.snapshot || record.snapshot.sha256 !== summary.snapshot?.sha256 || record.snapshot.format !== summary.snapshot?.format) {
-          throw new Error('A configuração mudou. Atualize a página e selecione uma versão publicada.');
+          throw new Error('The configuration has changed. Refresh the page and select a published version.');
         }
         setLoaded({ record: record as Publication, context });
       }).catch((reason: Error) => { if (active) setError(reason.message); });
     return () => { active = false; controller.abort(); };
   }, [summary.id, summary.version, summary.snapshot?.sha256, summary.snapshot?.format, story.id, retry]);
-  if (error) return <section className="card configured-panel" role="alert"><p>{error}</p><button onClick={() => setRetry(value => value + 1)}>Tentar novamente</button></section>;
-  if (!loaded) return <p role="status">Carregando perfil do projeto e configuração…</p>;
+  if (error) return <section className="card configured-panel" role="alert"><p>{error}</p><button onClick={() => setRetry(value => value + 1)}>Try again</button></section>;
+  if (!loaded) return <p role="status">Loading the project profile and configuration…</p>;
   const { record, context } = loaded;
   const labels = context.target.labels;
   const labelIndex = labels.length === 1 ? 0 : pair === '' ? -1 : Number(pair);
@@ -97,18 +97,18 @@ function ProjectTestExecution({ summary, story, datasets, busy, onBusy, children
     Object.hasOwn(prepared.values, attribute.id) && (Array.isArray(prepared.values[attribute.id])
       ? (prepared.values[attribute.id] as JsonValue[]).length > 0 : !!prepared.values[attribute.id])).map(attribute => attribute.name) : [];
   return <>
-    {labels.length !== 1 && <section className="card configured-panel"><label>Classificação para esta recomendação<select disabled={busy} value={pair} onChange={event => { setPair(event.target.value); setResultId(''); }}>
-      <option value="">Selecione módulo e operação</option>{labels.map((label, index) => <option key={index} value={index}>{label.module} / {label.operation}</option>)}
+    {labels.length !== 1 && <section className="card configured-panel"><label>Classification for this recommendation<select disabled={busy} value={pair} onChange={event => { setPair(event.target.value); setResultId(''); }}>
+      <option value="">Select a module and operation</option>{labels.map((label, index) => <option key={index} value={index}>{label.module} / {label.operation}</option>)}
     </select></label></section>}
     {prepared && <>
-      <section className="card configured-panel"><h2>Complete os dados da história</h2>
-        <p>{copied.length ? `Preenchidos a partir do projeto e da classificação: ${copied.join(', ')}.` : 'Selecione abaixo os valores da taxonomia usada por este recomendador.'} Complete os critérios de aceitação e os demais campos necessários. As alterações abaixo valem para esta execução.</p>
-        {context.target.nfrs.length > 0 && <details><summary>RNFs já associados à história</summary><ul>{context.target.nfrs.map((item, index) => <li key={index}>{item.type} / {item.attribute}: {item.sentence}</li>)}</ul><p>Selecione no formulário os identificadores correspondentes da taxonomia do recomendador.</p></details>}
-        <details><summary>Perfil cadastrado no projeto</summary><p>Plataformas: {context.target.projectProfile.platforms.join(', ') || 'Não informadas'}</p><p>Domínios de aplicação: {context.target.projectProfile.applicationDomains.join(', ') || 'Não informados'}</p></details>
-        <p>Valores de outra taxonomia precisam de seleção explícita. O perfil cadastrado permanece disponível em “Ver perfil e tarefas”.</p>
+      <section className="card configured-panel"><h2>Complete the story details</h2>
+        <p>{copied.length ? `Filled from the project and classification: ${copied.join(', ')}.` : 'Select values from this recommender’s taxonomy below.'} Complete the acceptance criteria and any other required fields. Changes below apply to this run.</p>
+        {context.target.nfrs.length > 0 && <details><summary>NFRs already linked to the story</summary><ul>{context.target.nfrs.map((item, index) => <li key={index}>{item.type} / {item.attribute}: {item.sentence}</li>)}</ul><p>Select the corresponding identifiers from the recommender’s taxonomy in the form.</p></details>}
+        <details><summary>Saved project profile</summary><p>Platforms: {context.target.projectProfile.platforms.join(', ') || 'Not specified'}</p><p>Application domains: {context.target.projectProfile.applicationDomains.join(', ') || 'Not specified'}</p></details>
+        <p>Values from another taxonomy require explicit selection. Your saved profile is available under “View profile and tasks”.</p>
       </section>
       <TestCaseExecutionForm key={`${record.snapshot.sha256}:${labelIndex}`} record={record} datasets={datasets} busy={busy} onBusy={onBusy} initialInput={prepared} onCompleted={run => setResultId(run.id)}>{children}</TestCaseExecutionForm>
     </>}
-    {resultId && <section ref={resultPanel} tabIndex={-1} className="card configured-panel" aria-label="Resultado da recomendação de testes"><h2>Casos de teste recomendados</h2><p>Resultado salvo desta execução. Se alterar os campos, gere uma nova recomendação para atualizar os casos.</p><ConfiguredRunDetails key={resultId} id={resultId} compact/></section>}
+    {resultId && <section ref={resultPanel} tabIndex={-1} className="card configured-panel" aria-label="Test-case recommendation result"><h2>Recommended test cases</h2><p>This result was saved for this run. Run the recommendation again after changing the input.</p><ConfiguredRunDetails key={resultId} id={resultId} compact/></section>}
   </>;
 }

@@ -2,7 +2,7 @@
 
 Referência principal de escopo e aceite, explicitamente adotada pelo usuário em 19/10/2026: [US-Agent_Requisitos_e_Lacunas.md](../US-Agent_Requisitos_e_Lacunas.md), versão 1.0 de 17/10/2026. Este plano organiza sua execução; não substitui seus RF01–RF14, RQ01–RQ05 ou o critério global. A [conferência de aderência](aderencia-demandas-professor.md) registra o atendimento parcial e as lacunas atuais.
 
-Refinamento do segundo exemplo solicitado pelo usuário: a [entrega 036](entregas/036-selecao-recomendadores-no-projeto.md) reúne RNFs e casos de teste na aba **Recomendadores**, com seleção do projeto/história, preenchimento dos campos compatíveis e acesso às bases/configuração/histórico. O método de testes permanece demonstrativo; o terceiro exemplo e a flexibilidade dos atributos de cálculo continuam pendentes.
+Refinamento do segundo exemplo solicitado pelo usuário: a [entrega 036](entregas/036-selecao-recomendadores-no-projeto.md) reúne RNFs e casos de teste na aba **Recommenders**, com seleção do projeto/história, preenchimento dos campos compatíveis e acesso às bases/configuração/histórico. A interface deve permanecer em inglês. O método de testes permanece demonstrativo; o terceiro exemplo e a flexibilidade dos atributos de cálculo continuam pendentes.
 
 ## Estado verificado em 19/10/2026 — escopo esclarecido pelo usuário
 
