@@ -63,6 +63,8 @@ Em desenvolvimento, a conexão padrão é o PostgreSQL local (`DATABASE_TARGET=l
 
 ### Vercel
 
+Para atualizar o deploy, preparar os logins e aplicar migrations fora da Function, seguir [deploy-vercel.md](docs/deploy-vercel.md). A mensagem “A proteção de acesso da API não foi configurada” indica configuração de acesso ausente; migrations sozinhas não resolvem o login. O release novo exige migrations 025/026, provisionamento dos usuários e as variáveis de acesso descritas no roteiro.
+
 O projeto possui `api/index.ts` como entrada serverless e `vercel.json` para servir a SPA e encaminhar `/api/*` ao Express. No projeto da Vercel:
 
 1. mantenha a raiz do projeto na raiz deste repositório;

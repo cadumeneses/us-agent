@@ -2,12 +2,15 @@ import express, { type ErrorRequestHandler } from 'express';
 import { apiRouter } from './routes/api.js';
 import { apiBoundary } from './security/api-boundary.js';
 import { testCaseReviewRouter } from './routes/test-case-review.js';
+import { browserSessionAuthentication, webSessionRouter } from './security/web-sessions.js';
 
 export function createApp() {
   const app = express();
 
   app.disable('x-powered-by');
   app.set('trust proxy', false);
+  app.use('/api/auth', webSessionRouter);
+  app.use('/api', browserSessionAuthentication);
   app.use('/api', apiBoundary);
   app.use(express.json({ limit: '1mb' }));
   app.use('/api/internal/test-case-reviews', testCaseReviewRouter);

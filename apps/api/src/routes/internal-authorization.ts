@@ -1,5 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import type { Request, Response } from 'express';
+import { hasBrowserSession } from '../security/browser-identity.js';
 
 function loopbackAddress(value: string | undefined) {
   return value === '127.0.0.1' || value === '::1' || value === '::ffff:127.0.0.1';
@@ -20,6 +21,7 @@ export function isAuthorizedInternalRequest(req: Request, res: Response) {
     res.status(503).json({ error: 'Modo de acesso da API inválido.' });
     return false;
   }
+  if (hasBrowserSession(req)) return true;
   const configuredKey = process.env.INGEST_API_KEY;
   if (!configuredKey) {
     if (isLocalDevelopmentRequest(req) && req.header('authorization') === undefined) return true;

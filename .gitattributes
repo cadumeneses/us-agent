@@ -84,3 +84,6 @@ scripts/measure-configuration-v2.ts -text
 scripts/check-configuration-binding.mjs -text
 # These exported CSV snapshots deliberately preserve CRLF bytes.
 docs/evidencias/b18e/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+database/migrations.release.json -text
+database/migrations/025_private_web_sessions.sql -text
+database/migrations/026_private_web_users.sql -text

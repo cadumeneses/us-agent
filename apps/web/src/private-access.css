@@ -1,0 +1,11 @@
+.private-access{min-height:100vh;display:grid;place-items:center;padding:24px}
+.private-access-card{width:min(100%,400px);padding:32px;background:var(--color-white);border:1px solid var(--color-neutral-220);border-radius:12px}
+.private-access-card h1{margin:0 0 16px;font-size:26px}
+.private-access-card p{line-height:1.5;font-size:14px}
+.private-access-card form{display:grid;gap:12px;margin-top:24px}
+.private-access-card label{font-size:14px}
+.private-access-card input{width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--color-neutral-270);border-radius:6px}
+.private-access-card button{padding:12px;border:0;border-radius:6px;background:var(--color-brand-700);color:white;cursor:pointer}
+.private-access-card button:disabled{opacity:.6;cursor:wait}
+.private-access-card [role=alert]{color:var(--color-error-700,#b91c1c)}
+.private-signout{margin-top:6px;padding:0;border:0;background:transparent;color:inherit;text-decoration:underline;cursor:pointer}

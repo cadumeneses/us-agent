@@ -1,10 +1,12 @@
 import type { ApplicationContext, Classification, Dashboard, ProjectSprint, ReviewContext, Story, StoryDetails, Taxonomy } from '../types/models';
 import type { ProjectResearchProfile } from '../types/models';
 import type { NfrContext, NfrRun } from '../types/nfr';
+import { notifySessionExpired } from './web-session';
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(url, options);
   if (!response.ok) {
+    notifySessionExpired(response.status);
     const body = await response.json().catch(() => ({})) as { error?: string };
     throw new Error(body.error ?? 'Could not communicate with the API.');
   }

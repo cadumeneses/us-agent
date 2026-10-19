@@ -3,6 +3,7 @@ import type { ConfiguredDefinition, ConfiguredTaxonomy, DatasetRecord, TaxonomyR
 import type { BindTargetRequest, ClassificationDestination, ItemDecision, ItemDecisionRequest, RecommendationReview, RunTarget, Snapshot } from '../types/configurable-recommendations';
 import { TEST_CASE_METHOD, type MethodRun, type MethodImportRecord, type MethodImportSpec, type TestCaseCatalogRecord, type TestCaseCatalogSummary, type TestCaseRequest, type TestCaseRun } from '../types/test-case-recommendations';
 import type { TestReview, TestItemReview, TestTargetRecord, TestDecisionRequest, TestDecisionRecord, TestCopyRequest, TestCopyRecord } from '../types/test-case-assessments';
+import { notifySessionExpired } from './web-session';
 
 export class RecommenderApiError extends Error {
   constructor(public status: number, message: string) { super(message); }
@@ -11,6 +12,7 @@ export class RecommenderApiError extends Error {
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`/api/internal/${path}`, { ...options, credentials: 'same-origin' });
   if (!response.ok) {
+    notifySessionExpired(response.status);
     const body = await response.json().catch(() => ({})) as { error?: string; issues?: Array<{ path?: Array<string | number>; message: string }> };
     const details = body.issues?.slice(0, 12).map(issue => `${issue.path?.join('.') || 'Input'}: ${issue.message}`).join('\n');
     const message = response.status === 401

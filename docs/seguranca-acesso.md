@@ -1,5 +1,7 @@
 # Proteção de acesso — B13a
 
+Atualização de deploy em 19/10/2026: o [acesso por usuário e senha](deploy-vercel.md) acrescenta sessão persistida no servidor e cookie HttpOnly/Secure para a interface. As senhas são independentes da chave técnica; requer migrations 025/026, provisionamento de usuários e `WEB_APP_ORIGIN`. Os logins identificam as sessões no mesmo espaço privado, sem papéis ou isolamento de organizações. A autoria histórica dos registros de domínio não foi migrada. As regras históricas B13a abaixo continuam aplicáveis às integrações Bearer; as rotas operacionais também aceitam uma sessão válida com verificação de origem. O endpoint `/api/auth/session` permite consulta de estado, entrada e saída sob suas próprias verificações de origem, limite de corpo e tentativas.
+
 Implementação em 17/10/2026. B13a protege o perímetro HTTP e corrige as dependências identificadas. **B13 continua em andamento:** esta credencial técnica não identifica pessoas, não concede papéis e não separa organizações. A autoria anterior dos registros permanece intacta.
 
 ## Política efetiva
@@ -40,7 +42,7 @@ Respostas sob `/api` declaram `Cache-Control: no-store`, `X-Content-Type-Options
 
 O worker Python passa a enviar sua credencial também ao ler a taxonomia. A exportação CSV envia a mesma credencial ao consultar histórias; o arquivo exportado não inclui o segredo. Sem chave, continuam operando apenas no desenvolvimento local válido.
 
-**A interface web em ambiente protegido ainda depende da futura sessão pessoal de B13b.** Todas as rotas agora recusam o navegador sem credencial; antes parte delas estava exposta. Não colocar `INGEST_API_KEY` em código React, `VITE_*`, armazenamento do navegador ou no formulário de login. A chave continua sendo exclusivamente uma credencial de integração técnica nesta etapa. Não houve deploy, leitura de arquivos `.env` reais ou alteração de credenciais.
+**A interface web protegida usa agora usuário/senha e sessão do servidor**, conforme a atualização de deploy acima; papéis, autoria integrada dos registros e isolamento organizacional de B13 continuam pendentes. Não colocar `INGEST_API_KEY` em código React, `VITE_*`, armazenamento do navegador ou no formulário de login. A chave continua sendo exclusivamente uma credencial de integração técnica. O formulário recebe usuário e senha separados da chave e não persiste o segredo no navegador. A implementação B13a histórica não realizou deploy ou alteração de credenciais.
 
 Esta mudança não transforma um processo local em ambiente multiusuário confiável. Também não introduz rate limiting distribuído, gestão de segredos ou auditoria por pessoa. Bases restritas dependem dos critérios restantes da B13.
 

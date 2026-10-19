@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "hashFormat": "sha256_utf8_lf",
+  "migrations": [
+    {
+      "name": "001_initial_schema.sql",
+      "sha256": "042fab5ff40de71376fff29bc9ef1d9dbd3602afd0dc675b646cec60b68ee041"
+    },
+    {
+      "name": "002_application_context.sql",
+      "sha256": "a20bae2e1874bce6d3f36516f36cba8daa7084a3d7c90b0d88196c37bddd9b34"
+    },
+    {
+      "name": "003_disable_unavailable_committee_mode.sql",
+      "sha256": "8a3b33253899d85ccb06e63cd5b0f6fb3de1550d648375dba63f4bb694d4d2a9"
+    },
+    {
+      "name": "004_quality_plan_drafts.sql",
+      "sha256": "33378cf3530f40f43243dcab8d8bf7dc615c869d7566e21c28f547fb46c8d9e8"
+    },
+    {
+      "name": "005_enable_committee_mode.sql",
+      "sha256": "865ef334cee8e90dc4f2a9af2db8c26292c6bdc937980c8bdb6ac56c8c6b44ec"
+    },
+    {
+      "name": "005_story_details.sql",
+      "sha256": "6aab6fb53c1043efd4209ff59fc8252a9445434e90fd33ac518e0c967c019375"
+    },
+    {
+      "name": "006_taxonomy_descriptions.sql",
+      "sha256": "aa54171e7390214ad8a85a574ab74d592bf965a1d63c5bbf61daa57ac2f87b16"
+    },
+    {
+      "name": "007_multiple_active_taxonomies.sql",
+      "sha256": "c5214e4523b9123d0a199b1700400d6aed244ad02ae9b337c939873676b59541"
+    },
+    {
+      "name": "008_activate_existing_taxonomies.sql",
+      "sha256": "3089a8916d8b126ecaf09337107606ebf9ecb37e098fe8286616e3ab68f3ad75"
+    },
+    {
+      "name": "009_review_fallbacks.sql",
+      "sha256": "4899bd27400a843e003a6196e9b6e20b6e8e51b03130de2de32e0ca12137f9ef"
+    },
+    {
+      "name": "010_apply_fallback_suggestions.sql",
+      "sha256": "acf6dfe15fb6beb525d1849a3d0d28e9052d2f586078c435392589440e41a13b"
+    },
+    {
+      "name": "011_taxonomy_domains.sql",
+      "sha256": "61d8d777cc175814dc5764841771bee9437e9344cfa4ffe1999b144f4a50d176"
+    },
+    {
+      "name": "012_quality_plan_scopes.sql",
+      "sha256": "d9d6709f53faddfacead359b3c2c1f477496243b9e5929a9ac0dc04980f6df9a"
+    },
+    {
+      "name": "013_project_sprints.sql",
+      "sha256": "f117d314240a1ebcd80b50efc53a59bb880cba3a52dbb8a0ccfc80d3a857df4f"
+    },
+    {
+      "name": "014_research_input_profiles.sql",
+      "sha256": "d7d92c7c68d252cec8f36cc6a304e12290e762268f5b8719812aff4a2ec2258c"
+    },
+    {
+      "name": "015_nfr_recommendations.sql",
+      "sha256": "67a3a83860b9977b5d965d573682188c4cba4390c8586a9db494e58b1c862cbd"
+    },
+    {
+      "name": "016_classification_provenance.sql",
+      "sha256": "312c7013219bf47cd1bed0c56c9f340eddd8235cd9de9ffc7e99bc44d368e53e"
+    },
+    {
+      "name": "017_recommender_taxonomies.sql",
+      "sha256": "579fd4d51503a8980d8dd82b949d4903c440de8ddcf3be4f5b0e5c05bbfab55e"
+    },
+    {
+      "name": "018_recommender_definitions.sql",
+      "sha256": "e1c4905d22c4df1a3c8e60a344734f08e28b39d9e949c4f70f6941c76cf8dab3"
+    },
+    {
+      "name": "019_recommender_datasets.sql",
+      "sha256": "f5642a8f6f05343d24babacb7d881c721fb146f3ff436e9f101ae0fc04f43f42"
+    },
+    {
+      "name": "020_recommendation_runs.sql",
+      "sha256": "976ff52cc3bf829b669790b823e16137ec4e53d26dfd8c7523e51a6cd792dc24"
+    },
+    {
+      "name": "021_recommendation_review.sql",
+      "sha256": "d743ccf9b22cf3da2e0eb1e4f17903e4d03a781947d15e8c5438e06317fb99f6"
+    },
+    {
+      "name": "022_test_case_catalogs.sql",
+      "sha256": "01e4aee53aa07d693e19dc81f26b717427633117cd56fe950a4e9b32d256c178"
+    },
+    {
+      "name": "023_test_case_dataset_runs.sql",
+      "sha256": "6594f3eb530f27d7bed3c5200558ab4dadf119062b12f4645389cc5e39138b88"
+    },
+    {
+      "name": "024_test_case_reviews.sql",
+      "sha256": "661b06614e29bfc3139a01e77c4ecc31d21f91e9478500805444908fb2c1e2fe"
+    },
+    {
+      "name": "025_private_web_sessions.sql",
+      "sha256": "56c2134688f6574d92ad062aa63498eba3cdf94a6fe7cf53720f1551268f33d1"
+    },
+    {
+      "name": "026_private_web_users.sql",
+      "sha256": "2eca963506ae82df7410aa2c20f56b688e78ea698f5c0f609de876621f9000d5"
+    }
+  ]
+}
