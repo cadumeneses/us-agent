@@ -1,5 +1,7 @@
 # Atualização da Vercel e migrations
 
+Estado em 19/10/2026 após a [entrega 033](entregas/033-correcao-login-producao.md): variáveis corrigidas, migrations até 026 aplicadas e cinco usuários provisionados em produção. Login, acesso e saída dos cinco usuários foram verificados no endereço público. O roteiro abaixo permanece como procedimento para próximas atualizações; as etapas iniciais não devem ser repetidas para redefinir contas ou credenciais já configuradas.
+
 ## Diagnóstico do deploy atual
 
 Em 19/10/2026, `https://us-agent-api.vercel.app/api/health` respondeu HTTP 503 sem credencial. A mensagem da captura corresponde ao bloqueio da API quando `INGEST_API_KEY` não está configurada em produção. Esse bloqueio ocorre antes de consultar o banco: a captura não demonstra erro de migration.
@@ -73,7 +75,7 @@ npx vercel --prod
 node --env-file=.env.vercel.production scripts/check-vercel-config.mjs --url https://us-agent-api.vercel.app
 ```
 
-O probe exige 401 sem credencial e 200 com banco conectado usando a credencial técnica. Ele não imprime credenciais nem dados de negócio. A verificação humana final é abrir a interface, entrar com um dos usuários e sua senha, conferir o login exibido, carregar um projeto e usar **Sair**. Depois de sair, recarregar deve voltar à entrada. Nenhuma execução desses comandos de produção foi feita nesta preparação.
+O probe exige 401 sem credencial e 200 com banco conectado usando a credencial técnica. Ele não imprime credenciais nem dados de negócio. A verificação humana final é abrir a interface, entrar com um dos usuários e sua senha, conferir o login exibido, carregar um projeto e usar **Sair**. Depois de sair, recarregar deve voltar à entrada. A aplicação e a verificação HTTP em produção foram concluídas posteriormente na entrega 033; isso não registra uma inspeção visual ou avaliação com participantes.
 
 ## Migrations 025/026 e sessão
 

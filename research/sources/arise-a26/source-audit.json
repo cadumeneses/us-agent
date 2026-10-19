@@ -1,0 +1,801 @@
+{
+  "schemaVersion": 1,
+  "kind": "arise_source_diagnostic_not_empirical_reproduction",
+  "recordId": 17093973,
+  "verifiedPreservedFiles": 9,
+  "publishedFiles": 10,
+  "codeFilesInPublishedList": [],
+  "featureGroups": [
+    {
+      "sheet": "Environment",
+      "dimensions": 8,
+      "literalHeaders": [
+        "Environment E1.1.1",
+        "Environment E1.1.2",
+        "Environment E1.1.3",
+        "Environment E1.2",
+        "Environment E1.3",
+        "Environment E2.1",
+        "Environment E2.2",
+        "Environment E2.3"
+      ],
+      "duplicateHeadersAfterTrim": [],
+      "targetLabel": "PE",
+      "vectors": [
+        {
+          "label": "PE",
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "label": "P01",
+          "values": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "label": "P02",
+          "values": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P03",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "label": "P04",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P05",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P06",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P07",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P08",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "sheet": "Architecture",
+      "dimensions": 15,
+      "literalHeaders": [
+        "Architecture_A1.1.1",
+        "Architecture_A1.1.1.1",
+        "Architecture_A1.1.1.1 ",
+        "Architecture_A1.1.1.2",
+        "Architecture_A1.1.1.3",
+        "Architecture_A1.1.1.3 ",
+        "Architecture_A1.1.2",
+        "Architecture_A1.2",
+        "Architecture_A2.1",
+        "Architecture_A2.1.1",
+        "Architecture_A2.1.2",
+        "Architecture_A2.2",
+        "Architecture_A2.2.1",
+        "Architecture_A2.2.2",
+        "Architecture_A2.2.3"
+      ],
+      "duplicateHeadersAfterTrim": [
+        "Architecture_A1.1.1.1",
+        "Architecture_A1.1.1.3"
+      ],
+      "targetLabel": "PA",
+      "vectors": [
+        {
+          "label": "PA",
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "label": "P01",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P02",
+          "values": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P03",
+          "values": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P04",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P05",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P06",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P07",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P08",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "sheet": "Integration",
+      "dimensions": 14,
+      "literalHeaders": [
+        "Integration_I1",
+        "Integration_I1.1",
+        "Integration_I1.3",
+        "Integration_I2",
+        "Integration_I2.1",
+        "Integration_I2.1.1",
+        "Integration_I2.1.2",
+        "Integration_I2.1.2.1",
+        "Integration_I2.1.2.1.1",
+        "Integration_I2.2",
+        "Integration_I2.2.1",
+        "Integration_I2.2.1.1",
+        "Integration_I2.2.1.2",
+        "Integration_I2.2.1.3"
+      ],
+      "duplicateHeadersAfterTrim": [],
+      "targetLabel": "PA",
+      "vectors": [
+        {
+          "label": "PA",
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "label": "P01",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P02",
+          "values": [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P03",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P04",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P05",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P06",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P07",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P08",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "sheet": "Method",
+      "dimensions": 9,
+      "literalHeaders": [
+        "Method_M1.1",
+        "Method_M1.2",
+        "Method_M1.2.1",
+        "Method_M1.2.2",
+        "Method_M1.2.3",
+        "Method_M1.3",
+        "Method_M2",
+        "Method_M2.1",
+        "Method_M2.2"
+      ],
+      "duplicateHeadersAfterTrim": [],
+      "targetLabel": "PA",
+      "vectors": [
+        {
+          "label": "PA",
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "label": "P01",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "label": "P02",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P03",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "label": "P04",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P05",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P06",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "label": "P07",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "label": "P08",
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "literalConcatenation": {
+    "dimensions": 46,
+    "referenceRows": {
+      "Environment": "PE",
+      "Architecture": "PA",
+      "Integration": "PA",
+      "Method": "PA"
+    },
+    "formula": "1 - sum(abs(target_i - candidate_i)) / n",
+    "scores": [
+      {
+        "project": "P01",
+        "distance": 41,
+        "similarity": 0.10869565217391308
+      },
+      {
+        "project": "P03",
+        "distance": 42,
+        "similarity": 0.08695652173913049
+      },
+      {
+        "project": "P02",
+        "distance": 43,
+        "similarity": 0.06521739130434778
+      },
+      {
+        "project": "P04",
+        "distance": 44,
+        "similarity": 0.04347826086956519
+      },
+      {
+        "project": "P07",
+        "distance": 45,
+        "similarity": 0.021739130434782594
+      },
+      {
+        "project": "P05",
+        "distance": 46,
+        "similarity": 0.0
+      },
+      {
+        "project": "P06",
+        "distance": 46,
+        "similarity": 0.0
+      },
+      {
+        "project": "P08",
+        "distance": 46,
+        "similarity": 0.0
+      }
+    ],
+    "comparisonToArticle": [
+      {
+        "project": "P01",
+        "literalWorkbookScore": 0.10869565217391308,
+        "articleSection5Score": 0.81,
+        "matchesAtTwoDecimals": false
+      },
+      {
+        "project": "P03",
+        "literalWorkbookScore": 0.08695652173913049,
+        "articleSection5Score": 0.72,
+        "matchesAtTwoDecimals": false
+      },
+      {
+        "project": "P02",
+        "literalWorkbookScore": 0.06521739130434778,
+        "articleSection5Score": 0.65,
+        "matchesAtTwoDecimals": false
+      }
+    ]
+  },
+  "figure4LiteralReview": {
+    "highlightedNeighborRiskUnion": [
+      "A03",
+      "A13",
+      "M13",
+      "P09",
+      "P14",
+      "Q05",
+      "Q08"
+    ],
+    "displayedButNotInUnion": [
+      "A05",
+      "A08",
+      "E03",
+      "E13"
+    ],
+    "inUnionButNotDisplayed": [
+      "A03",
+      "A13",
+      "Q05",
+      "Q08"
+    ],
+    "tiedSimilarities": {
+      "0.65": [
+        "P02",
+        "P06"
+      ]
+    }
+  },
+  "limits": [
+    "PE_PA_identity_not_resolved",
+    "duplicate_columns_preserved",
+    "concatenation_is_a_diagnostic_convention_not_confirmed_author_code",
+    "no_complete_project_risk_association_matrix_identified",
+    "no_operational_import_or_empirical_reproduction"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-10-19T12:17:23.891Z",
+  "environment": "production_branch",
+  "origin": "https://us-agent-api.vercel.app",
+  "passed": true,
+  "results": [
+    {
+      "username": "mirko",
+      "login": 200,
+      "identityMatched": true,
+      "context": 200,
+      "recommenders": 200,
+      "logoutRevoked": true
+    },
+    {
+      "username": "danyllo",
+      "login": 200,
+      "identityMatched": true,
+      "context": 200,
+      "recommenders": 200,
+      "logoutRevoked": true
+    },
+    {
+      "username": "emanuel",
+      "login": 200,
+      "identityMatched": true,
+      "context": 200,
+      "recommenders": 200,
+      "logoutRevoked": true
+    },
+    {
+      "username": "carlos",
+      "login": 200,
+      "identityMatched": true,
+      "context": 200,
+      "recommenders": 200,
+      "logoutRevoked": true
+    },
+    {
+      "username": "ademar",
+      "login": 200,
+      "identityMatched": true,
+      "context": 200,
+      "recommenders": 200,
+      "logoutRevoked": true
+    }
+  ]
+}

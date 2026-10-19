@@ -1,6 +1,31 @@
 # Aderência às demandas relatadas do professor
 
+## Conferência contra o documento norte — 19/10/2026
+
+O usuário adotou [US-Agent_Requisitos_e_Lacunas.md](../US-Agent_Requisitos_e_Lacunas.md) como referência principal. O arquivo local foi lido integralmente e seu SHA-256 `ebd40a483ed6e64ee2cbcb5b3eeecd77111f5825c1e90fad085d269a5eb85e7b` coincide com REQ já registrado. A aprovação do usuário fixa o norte de trabalho; não representa aprovação atribuída ao professor. O diagnóstico do §3 refere-se ao commit antigo e não deve ser reaplicado como estado atual.
+
+**Conclusão: direção alinhada, atendimento parcial.** O maior risco atual é confundir infraestrutura compartilhada e três perfis específicos com a configurabilidade exigida em RF02/RF07 e §9.5. O outro desvio foi transformar reprodução científica ARISE em dependência do exemplo sem US; esse bloqueio foi removido, preservando a obrigação de documentar o método e as adaptações.
+
+| Requisitos do norte | Estado nesta revisão | O que ainda comprovar/entregar |
+| --- | --- | --- |
+| RF01, RF03–RF06, RF10; RQ01–RQ03 | Publicação versionada, taxonomias, importação/base explícita, explicação e replay entregues tecnicamente no recorte RNF/testes. | Reutilizar essas capacidades no terceiro caso e verificar seus novos caminhos. Isso não declara toda a plataforma concluída. |
+| RF02 e RF07 | Parcial: schema/formulário configuráveis e KNN comum, mas os adaptadores RNF/TestRec fixam vínculos de cálculo e K/parâmetros. Atributos adicionais de cálculo são recusados; contexto adicional é permitido. | Demonstrar atributo de cálculo acrescentado pela configuração, com efeito no formulário, validação, representação e explicação, sem editar código para esse campo. Preservar as políticas legadas. |
+| RF08 e RF14 | Terceiro exemplo executável ainda ausente; referência ARISE recebida. | Perfil de projeto → riscos no fluxo comum, sem US/sprint/classificação fictícios, com definição/taxonomias/base/entrada e verificação determinística. Dados sintéticos são demonstração; diferenças metodológicas ficam explícitas. |
+| RF09 | Importação/seleção manual atendem ao primeiro recorte; classificação US existente preservada. | Integração LLM genérica por atributo permanece P1; não é dependência do exemplo sem US. |
+| RF11 | Avaliação por item e cópias/adaptação de testes disponíveis. | Adaptação de sentenças RNF ainda não implementada; não declarar o escopo inteiro de adaptação humana concluído. |
+| RF12 | Correções multi-label, política/métricas e proveniência web entregues tecnicamente. | Na avaliação integrada, declarar motor efetivamente usado e medir propagação de erros; não presumir equivalência Python/web. |
+| RF13 e RQ05 | Avaliadores técnicos, exportações/replay e instrumento de configuração disponíveis. | Avaliação empírica quando houver referência completa e observações reais de esforço/passos/erros; separar classificação/recomendação e registrar falhas/vazios. |
+| RQ04 | Contas/sessões e perímetro entregues. | Autoria/auditoria de domínio, papéis e isolamento organizacional ainda parciais; login não conclui esse requisito. |
+
+Evidência da limitação de configuração: `configured-nfr.ts` declara slots semânticos obrigatórios, K=1 e recusa características extras; `testrec-method.ts` fixa parâmetros K=3 e também recusa atributos adicionais de cálculo. `recommender-methods.ts`/`method-execution.ts` despacham RNF e demonstração TestRec. Esses limites preservam os métodos existentes, mas não bastam ao critério global de plataforma configurável.
+
+Próxima entrega: B20/B21 com atributos de projeto configuráveis e recomendação de riscos pelo núcleo comum. Aceite inclui acrescentar um atributo usado no cálculo sem código específico, além de executar sem US e conferir itens, vizinhos, base, versões e replay. Depois consolidar os três exemplos, tutorial/arquitetura e avaliações do §9. Não acrescentar algoritmos, agentes ou administração geral para substituir essas evidências. As seções seguintes preservam o histórico das revisões.
+
+Esclarecimento atual do usuário (19/10/2026): o terceiro caso é um exemplo configurável sem US, inspirado em ARISE. A direção da plataforma está correta, mas a reprodução do artigo foi indevidamente promovida a dependência. B19 está suficiente; a próxima prioridade é implementar/demonstrar B20/B21 no fluxo comum com perfil de projeto, riscos e dados sintéticos identificados. Este esclarecimento prevalece sobre as prioridades históricas abaixo e não presume nova manifestação do professor.
+
 Revisão em 19/10/2026, após B18e. Base: documento `US-Agent_Requisitos_e_Lacunas.md` informado pelo usuário, plano, artigo E26 fornecido e evidências locais das entregas 001–030. Os áudios originais não foram reanalisados. Requisitos/aceites derivados são propostas de engenharia, não aprovação do professor.
+
+Atualização 035: ARISE/A26 foi confirmado e seu PDF/suplemento foram recebidos. O [contrato auditado](arise-contrato-e-auditoria.md) identifica as regras verificadas e as lacunas de representação/scores/IDs e associações/código. A pendência de acesso mencionada no encaminhamento anterior foi atendida; implementação do terceiro caso e avaliação integrada continuam abertas.
 
 **Conclusão: a direção atual está alinhada, mas o atendimento ainda é parcial.** O RNF ganhou configuração e rastreabilidade; o processo de avaliação passou a ser verificável; o segundo exemplo já usa os contratos no percurso web de configuração/importação/execução. A alegação central de generalidade ainda exige execução do caso sem US. Qualidade experimental ainda exige dados, referência e estudo apropriados.
 
@@ -18,7 +43,7 @@ Revisão em 19/10/2026, após B18e. Base: documento `US-Agent_Requisitos_e_Lacun
 
 B18e entrega o vínculo dos materiais B18c ao protocolo e ao analisador em versão explícita, com lote por sessão e preservação dos pacotes congelados ([entrega 030](entregas/030-vinculo-protocolo-materiais-analisador.md)). B18d percorreu os dois exercícios no navegador local e confirmou definições, valores importados, resultados, histórico, replay e exportação. As pendências técnicas de percurso e vínculo estão tratadas; faltam decisões metodológicas, conferência da instalação escolhida e coleta observada. A [entrega 029](entregas/029-verificacao-roteiros-no-navegador.md) preserva a evidência do navegador.
 
-Em paralelo, obter referência/material de Ademar para executar o terceiro caso sem US e complementar fontes/dados/protocolos empíricos de Felipe e Ednaldo. Para Ednaldo permanecem Q01, Q03 e o residual Q02/CT05; CT01/TC01 e a diferença com/sem heurística já foram esclarecidos em B02g. A conciliação B02h não autoriza preencher IDs/perfis ou escolher o recorte experimental. Evitar novas auditorias dos mesmos arquivos sem fonte ou pergunta nova. Não anunciar reprodução científica nem conclusão da generalidade enquanto esses critérios estiverem abertos.
+Em paralelo, obter texto integral e artefatos de ARISE/A26, confirmado pelo usuário em 19/10/2026 como trabalho de Ademar, para executar o terceiro caso sem US; complementar fontes/dados/protocolos empíricos de Felipe e Ednaldo. A [preparação ARISE](arise-preparacao-terceiro-exemplo.md) e a [pauta metodológica](revisao-metodologica-configuracao.md) registram os próximos passos concretos. Para Ednaldo permanecem Q01, Q03 e o residual Q02/CT05; CT01/TC01 e a diferença com/sem heurística já foram esclarecidos em B02g. A conciliação B02h não autoriza preencher IDs/perfis ou escolher o recorte experimental. Evitar novas auditorias dos mesmos arquivos sem fonte ou pergunta nova. Não anunciar reprodução científica nem conclusão da generalidade enquanto esses critérios estiverem abertos.
 
 Segurança entregue permanece preservada; login e organizações continuam condicionantes para bases restritas/uso multiusuário protegido. Não são o foco dos próximos incrementos locais. Aprovação técnica, compatibilidade com exemplos e aprovação científica da orientação são evidências distintas.
 

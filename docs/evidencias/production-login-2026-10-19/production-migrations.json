@@ -1,0 +1,140 @@
+{
+  "recordedAt": "2026-10-19T12:18:11.686Z",
+  "target": "ep-rapid-mouse-avz844uw.c-11.us-east-1.aws.neon.tech:5432/neondb",
+  "applied": [
+    "016_classification_provenance.sql",
+    "017_recommender_taxonomies.sql",
+    "018_recommender_definitions.sql",
+    "019_recommender_datasets.sql",
+    "020_recommendation_runs.sql",
+    "021_recommendation_review.sql",
+    "022_test_case_catalogs.sql",
+    "023_test_case_dataset_runs.sql",
+    "024_test_case_reviews.sql",
+    "025_private_web_sessions.sql",
+    "026_private_web_users.sql"
+  ],
+  "checkedExistingTables": 34,
+  "existingRowCountsPreserved": true,
+  "before": {
+    "app_users": "1",
+    "application_settings": "1",
+    "classification_attempts": "275",
+    "classification_fallback_evidence": "8",
+    "classification_fallback_suggestions": "8",
+    "classification_labels": "202",
+    "classification_runs": "5",
+    "classification_source_links": "170",
+    "classifications": "196",
+    "execution_modes": "2",
+    "nfr_recommendation_decisions": "6",
+    "nfr_recommendation_runs": "5",
+    "project_research_profiles": "13",
+    "project_source_rows": "1021",
+    "project_sprints": "13",
+    "projects": "14",
+    "provider_vote_evidence": "962",
+    "provider_vote_issues": "189",
+    "provider_vote_labels": "816",
+    "provider_vote_questions": "609",
+    "provider_votes": "583",
+    "quality_plan_drafts": "0",
+    "quality_plan_scope_stories": "0",
+    "quality_plan_scopes": "0",
+    "review_decisions": "4",
+    "stories": "196",
+    "story_functional_requirements": "0",
+    "story_non_functional_requirements": "448",
+    "story_tasks": "729",
+    "taxonomy_domains": "1",
+    "taxonomy_feedback": "2",
+    "taxonomy_modules": "4",
+    "taxonomy_operations": "19",
+    "taxonomy_versions": "1"
+  },
+  "after": {
+    "app_users": "1",
+    "application_settings": "1",
+    "classification_attempts": "275",
+    "classification_fallback_evidence": "8",
+    "classification_fallback_suggestions": "8",
+    "classification_labels": "202",
+    "classification_runs": "5",
+    "classification_source_links": "170",
+    "classifications": "196",
+    "execution_modes": "2",
+    "nfr_recommendation_decisions": "6",
+    "nfr_recommendation_runs": "5",
+    "project_research_profiles": "13",
+    "project_source_rows": "1021",
+    "project_sprints": "13",
+    "projects": "14",
+    "provider_vote_evidence": "962",
+    "provider_vote_issues": "189",
+    "provider_vote_labels": "816",
+    "provider_vote_questions": "609",
+    "provider_votes": "583",
+    "quality_plan_drafts": "0",
+    "quality_plan_scope_stories": "0",
+    "quality_plan_scopes": "0",
+    "review_decisions": "4",
+    "stories": "196",
+    "story_functional_requirements": "0",
+    "story_non_functional_requirements": "448",
+    "story_tasks": "729",
+    "taxonomy_domains": "1",
+    "taxonomy_feedback": "2",
+    "taxonomy_modules": "4",
+    "taxonomy_operations": "19",
+    "taxonomy_versions": "1"
+  },
+  "planned": [
+    {
+      "username": "mirko",
+      "status": "would_create"
+    },
+    {
+      "username": "danyllo",
+      "status": "would_create"
+    },
+    {
+      "username": "emanuel",
+      "status": "would_create"
+    },
+    {
+      "username": "carlos",
+      "status": "would_create"
+    },
+    {
+      "username": "ademar",
+      "status": "would_create"
+    }
+  ],
+  "provisioned": [
+    {
+      "username": "mirko",
+      "status": "created"
+    },
+    {
+      "username": "danyllo",
+      "status": "created"
+    },
+    {
+      "username": "emanuel",
+      "status": "created"
+    },
+    {
+      "username": "carlos",
+      "status": "created"
+    },
+    {
+      "username": "ademar",
+      "status": "created"
+    }
+  ],
+  "idempotentProvisioning": true,
+  "pending": [],
+  "outsideRelease": [
+    "016_sheet_source_links.sql"
+  ]
+}

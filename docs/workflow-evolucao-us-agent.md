@@ -1,12 +1,20 @@
 # Workflow e backlog de evolução do US-Agent
 
+Norte de escopo e aceite: [US-Agent_Requisitos_e_Lacunas.md](../US-Agent_Requisitos_e_Lacunas.md), adotado pelo usuário em 19/10/2026. O backlog acompanha os RF/RQ desse documento; a [conferência atual](aderencia-demandas-professor.md) distingue capacidade técnica, demonstração e avaliação científica.
+
 Data inicial: 17/10/2026. Usar com o [plano](plano-evolucao-us-agent.md) e a [matriz de fidelidade](referencias-e-fidelidade.md).
 
 Este roteiro acompanha trabalho planejado e implementado. “Planejado” não significa implementado, e uma capacidade existente só é considerada verificada após a evidência indicada. As entregas registram as mudanças, verificações e limitações de cada incremento.
 
 Atualização B18e (19/10/2026): [entrega 030](entregas/030-vinculo-protocolo-materiais-analisador.md) conclui o vínculo técnico protocolo/material/analisador, com lotes B18c por sessão e preservação dos pacotes anteriores. B14/B18 permanecem em andamento por decisões metodológicas, coleta e avaliação empírica; a próxima passagem exige essas evidências. O terceiro exemplo continua dependente de fonte/material B19.
 
+Atualização 034 (19/10/2026): login por pessoa e sessões entregues em 032–033, inclusive verificação em produção; B13 segue parcial por papéis, autoria/auditoria e organizações. ARISE/A26 foi confirmado pelo usuário para B19; faltam texto integral e artefatos. A [pauta metodológica](revisao-metodologica-configuracao.md) e a [preparação ARISE](arise-preparacao-terceiro-exemplo.md) tornam os próximos passos concretos sem declarar estudo ou reprodução concluídos.
+
+Atualização 035 (19/10/2026): PDF integral e suplemento ARISE fornecidos pelo usuário, dez checksums conferidos e nove arquivos preservados. O [contrato auditado](arise-contrato-e-auditoria.md) substitui a pendência de acesso por lacunas localizadas de representação/scores/IDs, associações empíricas e código. B20/B21 continuam abertos.
+
 ## 1. Ciclo de cada mudança
+
+Esclarecimento do usuário em 19/10/2026: ARISE é exemplo para demonstrar recomendação sem US. B19 está suficiente para iniciar essa demonstração; scripts, matriz empírica e divergências A01–A06 não bloqueiam B20/B21. Próxima prioridade: implementação do terceiro caso no fluxo comum, com dados sintéticos declarados e política local explícita.
 
 ```mermaid
 flowchart LR
@@ -54,15 +62,15 @@ Após a [revisão de escopo](revisao-de-escopo.md), B14 prioriza a avaliação c
 | B10 | E2 / RF05–06, RF09 | Importar CSV/JSON com mapeamento e prévia; publicar dataset rotulado com relatório, origem, autoria e hash. | B09 | Concluído: backend na entrega 006 e importação/publicação web em B12b, verificada em navegador em B12c |
 | B11 | E2 / RF06–07, RQ03 | Extrair políticas do KNN e selecionar base explícita; comparar legado e novo motor sobre entrada/base idênticas. | B10 | Concluído no backend: política separada, seleção explícita, mapeamentos e execuções com replay; entrega 007 |
 | B12 | E2 / RF01–02, RF10–11 | Entregar fluxo RNF: configurar, escolher base, preencher, executar, explicar, avaliar e consultar histórico. | B11 | Concluído tecnicamente no recorte RNF: B12a–B12c, decisões imutáveis e vertical verificado em Edge desktop/mobile; entrega 010. Aprovação científica e estudo de usabilidade permanecem separados |
-| B13 | E2 / RQ04 | Revisar autenticação/autorização, autoria, isolamento e alertas das dependências existentes; implementar o recorte definido e verificar acessos cruzados. | B03; concluir antes de bases empresariais | Em andamento: B13a fecha o perímetro HTTP e corrige os alertas npm; B13b (pessoas/sessões/papéis) e B13c (organizações/auditoria) pendentes. Entrega 011 e ADR 005 |
+| B13 | E2 / RQ04 | Revisar autenticação/autorização, autoria, isolamento e alertas das dependências existentes; implementar o recorte definido e verificar acessos cruzados. | B03; concluir antes de bases empresariais | Em andamento: B13a fecha o perímetro HTTP; contas individuais e sessões revogáveis entregues em 032–033. Papéis/permissões, autoria/auditoria de domínio e isolamento organizacional pendentes. Os logins compartilham o espaço atual; ADR 005 |
 | B14 | E2 / RF13, RQ05 | Executar piloto RNF com referência, exportação e protocolo; medir configuração e duração, fixando convenções/metas posteriores. | B12; B13 se dados restritos | Em andamento: B14a entrega avaliador sintético e B18b prepara instrumento/protocolo proposto de esforço (entrega 027). Avaliação empírica, protocolo/material de estudo, coleta humana e volume representativo pendentes |
 | B15 | E3 / RF02–04, RF14 | Fechar ficha Ednaldo, definir esquema de casos de teste e importar critérios/associações com a fonte disponível. | B02, B10 | Em andamento: B15a valida contrato E21 e tabela 4.6; B15b publica catálogos persistidos com arquivo original e versões imutáveis, entrega 015. B15c integra importação/publicação de associações com catálogo exato, entrega 017. Catálogos/associações originais pendentes |
 | B16 | E3 / RF07, RF10 | Implementar política confirmada de testes: representação, distância, k, heurística, agregação e ranking. | B11, B15 | Em andamento: B16a demonstra equações explícitas E21, KNN compartilhado e ranking sintético local; entrega 014. B16b integra a demonstração sintética ao executor/publicações comuns, entrega 017. Configuração Euclidiana e dados originais pendentes |
 | B17 | E3 / RF09–11, RF14 | Disponibilizar segundo recomendador no mesmo fluxo; copiar/adaptar teste mantendo origem, sem reclassificar base importada. | B12, B16 | Concluído tecnicamente no recorte demonstrativo: B17a interface e B17b avaliações/cópias versionadas, entregas 018–019. Destino na entrada preservada; confirmação científica e avaliação empírica permanecem separadas |
 | B18 | E3 / RF13–14, RQ05 | Avaliar segundo exemplo com protocolo confirmado e medir esforço de configuração; revisar com a orientação. | B17 | Em andamento: B18a prepara avaliador; B18b entrega instrumento; B18c fornece roteiros/arquivos; B18d verifica ambos no navegador; B18e vincula protocolo/material/analisador com lote por sessão e replay (entrega 030). Faltam decisões metodológicas, referência/dados de avaliação e coleta observada. A instalação da coleta deve ser conferida antes do estudo |
-| B19 | E4 / RF08, RF14 | Confirmar referência JSS/material; preencher ficha do método e identificar atributos, alvo e dados autorizados. | — | Referência candidata localizada |
-| B20 | E4 / RF08, RF10 | Configurar entrada independente de US, aplicar política confirmada e executar sem IDs ou rótulos artificiais. | B12, B19 | Planejado |
-| B21 | E4 / RF13–14 | Avaliar e demonstrar exemplo sem US; se faltarem dados, delimitar demonstração e reprodução pendente. | B20 | Planejado |
+| B19 | E4 / RF08, RF14 | Identificar exemplo com entrada de projeto independente de US e material suficiente para a demonstração. | — | Atendido para o exemplo: ARISE, texto e suplemento recebidos. Reprodução científica fora do aceite atual |
+| B20 | E4 / RF02, RF07–RF08, RF10 | Implementar perfil de projeto → riscos pelo fluxo comum; demonstrar atributo adicional de cálculo por configuração sem código específico. Base sintética explícita, política versionada e ausência de US/sprint/classificação obrigatórios. | B12, B19 | Próximo incremento prioritário; não depende dos scripts/dados empíricos ARISE. Preservar adaptações e limites segundo RF14 |
+| B21 | E4 / RF13–14 | Demonstrar pela interface configuração, importação, entrada sem US, recomendação, explicação, histórico e replay; conferir resultado determinístico esperado. | B20 | Planejado; aceite técnico da demonstração sem exigir métricas do artigo |
 | B22 | E5 / RF13, RQ01–05 | Rodar protocolo integrado, incluindo comparação de rótulos de referência/previstos e efeito das revisões. | B06, B14, B18, B21 | Planejado |
 | B23 | E5 / RF14, RQ05 | Consolidar pacotes reproduzíveis, arquitetura, tutorial, esforço de configuração e evidências do artigo/dissertação. | B22 | Planejado |
 

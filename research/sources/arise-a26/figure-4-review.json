@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "source": "User-provided A26 PDF, page 10, Figure 4; embedded X1.jpg visually inspected",
+  "articleSha256": "7e76ace7a48bcd4b2b60633d00dcf354d5ab6deb034effd229215abe719841e3",
+  "kind": "literal_visual_transcription_not_an_empirical_dataset",
+  "k": 3,
+  "projects": [
+    {"id": "P01", "similarity": 0.81, "risks": ["A03", "Q05", "M13"]},
+    {"id": "P02", "similarity": 0.65, "risks": ["A03", "Q05", "P09"]},
+    {"id": "P03", "similarity": 0.72, "risks": ["A13", "Q08", "P14"]},
+    {"id": "P04", "similarity": 0.35, "risks": ["A12", "I11", "M07"]},
+    {"id": "P05", "similarity": 0.41, "risks": ["A05", "Q16", "I22"]},
+    {"id": "P06", "similarity": 0.65, "risks": ["A05", "Q16", "M02"]},
+    {"id": "P07", "similarity": 0.26, "risks": ["A12", "Q14", "I10"]},
+    {"id": "P08", "similarity": 0.51, "risks": ["A05", "I11", "M10"]}
+  ],
+  "highlightedNeighbors": ["P01", "P03", "P02"],
+  "displayedRecommendations": ["E03", "E13", "A05", "A08", "M13", "P09", "P14"],
+  "observations": [
+    "P02 and P06 tie at 0.65; Figure 4 highlights P02 without defining a tie policy.",
+    "The literal union of highlighted-neighbor risk codes does not equal the displayed recommendations.",
+    "Q and P risk prefixes coexist with A and M; no automatic alias mapping was applied.",
+    "These eight illustrative projects must not be merged by ID with the 17-project empirical summary."
+  ]
+}

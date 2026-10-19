@@ -1,5 +1,17 @@
 # Execução de recomendadores pela interface
 
+## Fluxo atual — Recomendadores (19/10/2026)
+
+A aba **Recomendadores**, em `/recommendations`, reúne a escolha de RNFs e casos de teste. Depois de cadastrar projeto/perfil, tarefas e classificar histórias no fluxo existente, a pessoa escolhe o recomendador, o projeto e a história classificada. Há um atalho **Recomendadores** no detalhe do projeto, conservando esse contexto. Classificações que ainda precisam de revisão oferecem acesso à revisão antes de executar.
+
+RNFs reutilizam o contexto/histórico operacional e as decisões já existentes. Casos de teste usam definição e base publicadas; campos compatíveis são preenchidos com identidade da história, módulo/operação, plataformas e domínio de aplicação. Havendo mais de um par de classificação, a escolha é explícita. Critérios de aceitação, RNFs de contexto e valores que não pertencem à taxonomia selecionada são completados no formulário. Não se infere ID taxonômico por nome nem se reclassifica a base.
+
+Uma única configuração/base compatível carregada é selecionada automaticamente no fluxo de testes; múltiplas opções exigem escolha. O catálogo é o publicado exato da base e sua disponibilidade é consultada antes de habilitar a execução. Listas paginadas mantêm **Carregar mais**. Falta de publicação/base apresenta acesso à configuração, sem criar dados silenciosamente. A identidade/origem são preservadas no pedido, incluindo o identificador da classificação de origem; editar os campos da execução não altera o perfil salvo.
+
+O resultado destaca título/passos dos casos de teste; origem, vizinhos, avaliação/adaptação e replay ficam em seções expansíveis. O resultado preserva o input; avaliação de testes não cria automaticamente um vínculo operacional com a história. A implementação de testes continua sendo a demonstração E21 com base sintética e método identificado, sem alegar reprodução empírica.
+
+**Configuração, bases e histórico** abre as áreas existentes de configuração/importação e execuções com bases publicadas. Elas continuam em `/recommender-setup` e `/configured-recommendations`, acessíveis dentro da área Recomendadores. Links antigos com `classificationId` continuam abrindo o RNF daquela classificação. O registro B12 abaixo descreve o percurso técnico original.
+
 B12a acrescenta **Bases publicadas**, em `/configured-recommendations`; B12b integra **Configurar e importar bases**, em `/recommender-setup`; B12c acrescenta avaliação por item com destino explícito e histórico. O fluxo anterior de RNFs por história continua em `/recommendations`.
 
 ## Preparação e acesso

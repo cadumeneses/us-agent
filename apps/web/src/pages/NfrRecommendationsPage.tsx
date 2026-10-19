@@ -40,7 +40,7 @@ export function NfrRecommendationsPage() {
   </section>;
 }
 
-function NfrStory({ id }: { id: string }) {
+export function NfrStory({ id, onBusy }: { id: string; onBusy?: (value: boolean) => void }) {
   const [context, setContext] = useState<NfrContext>();
   const [runs, setRuns] = useState<NfrRun[]>([]);
   const [selected, setSelected] = useState('');
@@ -49,6 +49,8 @@ function NfrStory({ id }: { id: string }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const run = runs.find(item => item.id === selected);
+
+  useEffect(() => { onBusy?.(busy); return () => onBusy?.(false); }, [busy, onBusy]);
 
   useEffect(() => {
     let active = true;

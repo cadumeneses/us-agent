@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-19",
+  "referenceId": "A26",
+  "title": "ARISE: A framework for automated risk identification in Scrum using memory-based recommendation",
+  "doi": "10.1016/j.jss.2026.112987",
+  "referenceSelection": {
+    "status": "confirmed_by_user",
+    "confirmedOn": "2026-10-19",
+    "scope": "identity_of_the_third_example_only_not_methodological_approval"
+  },
+  "publisherUrl": "https://www.sciencedirect.com/science/article/pii/S0164121226002207",
+  "crossref": {
+    "url": "https://api.crossref.org/works/10.1016%2Fj.jss.2026.112987",
+    "httpStatus": 200,
+    "authors": ["Ademar Sousa", "Mirko Perkusich", "Danyllo Albuquerque", "Emanuel Dantas", "Felipe Ramos", "Salatiel Dantas", "Hyggo Oliveira de Almeida", "Angelo Perkusich"],
+    "versionOfRecordLicenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "versionOfRecordLicenseStart": "2026-06-15",
+    "relatedArtifactRelations": {},
+    "interpretation": "The article license does not establish the license or availability of an unidentified dataset or code repository."
+  },
+  "publisherAbstractObservations": {
+    "inputScope": "project_profiles",
+    "outputScope": "risk_recommendations",
+    "selectedDistance": "Manhattan",
+    "selectedK": 2,
+    "offlineProjectsReported": 17,
+    "practitionersReported": 24,
+    "fullMethodReviewed": false,
+    "implementationAuthorizedByTheseObservationsAlone": false
+  },
+  "fullTextAttempt": {
+    "url": "https://api.elsevier.com/content/article/pii/S0164121226002207?httpAccept=text%2Fxml",
+    "httpStatus": 429,
+    "result": "rate_limited_no_usable_full_text_obtained",
+    "retriedToBypassRestriction": false
+  },
+  "connectedDriveSearch": {
+    "queries": ["ARISE", "112987", "Ademar", "risk identification", "automated risk"],
+    "confirmedArticleCopyFound": false,
+    "scope": "bounded_search_not_an_exhaustive_inventory"
+  },
+  "initialSearchArtifacts": {
+    "confirmedRepositoryUrl": null,
+    "datasetRetrieved": false,
+    "codeRetrieved": false,
+    "fullTextRetrieved": false,
+    "status": "not_located_in_this_bounded_search_not_a_claim_of_nonexistence"
+  },
+  "initialReadiness": {
+    "B19_reference_identity": "complete",
+    "B19_method_and_material": "pending",
+    "B20_implementation": "not_ready",
+    "B21_empirical_evaluation": "not_ready"
+  },
+  "userProvidedMaterialFollowUp": {
+    "receivedOn": "2026-10-19",
+    "articleLocalName": "1-s2.0-S0164121226002207-main.pdf",
+    "articleSha256": "7e76ace7a48bcd4b2b60633d00dcf354d5ab6deb034effd229215abe719841e3",
+    "articlePages": 22,
+    "fullTextRetrieved": true,
+    "fullMethodReviewed": true,
+    "supplementUrl": "https://zenodo.org/records/17093973",
+    "supplementLicense": "cc-by-4.0",
+    "downloadedAndChecksumVerifiedFiles": 10,
+    "preservedFiles": 9,
+    "codeRetrieved": false,
+    "completeProjectRiskMatrixIdentified": false,
+    "inventory": "zenodo-17093973/inventory.json",
+    "audit": "source-audit.json",
+    "methodReview": "../../../docs/arise-contrato-e-auditoria.md"
+  },
+  "readiness": {
+    "B19_reference_identity": "complete",
+    "B19_material_access": "article_and_published_supplement_received",
+    "B19_method_and_material": "reviewed_with_explicit_open_questions",
+    "B20_faithful_reproduction": "unresolved_representation_scores_and_associations",
+    "B21_empirical_evaluation": "not_ready"
+  }
+}

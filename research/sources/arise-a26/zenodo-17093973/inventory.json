@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "recordId": 17093973,
+  "versionDoi": "10.5281/zenodo.17093973",
+  "retrievedOn": "2026-10-19",
+  "license": "cc-by-4.0",
+  "creator": "Sousa Neto, Ademar França de",
+  "sourceUrl": "https://zenodo.org/records/17093973",
+  "metadataSha256": "abcddf1e9f7f1a050be1c4ab1cce8622ff8c20e8226790aa617492bc4a95d83b",
+  "files": {
+    "Architecture.png": {
+      "bytes": 127712,
+      "md5": "c1070a8f211b519391dc9cef61f5f1d1",
+      "sha256": "4e6213fec5d4716c151e652ad4d91160a1e280e88a717a5cc901a2afa8539ed7"
+    },
+    "Examples of Feature Vectors.xlsx": {
+      "bytes": 14464,
+      "md5": "f60b097634fd5e28a757b27f5ca8d803",
+      "sha256": "7c5f4c1d1695eb6ca9ad29e823433589b112db3ae5d4a7c6a88ddc985212f184"
+    },
+    "identified_risk.pdf": {
+      "bytes": 50815,
+      "md5": "f1da675ac1ca86c72816426d4d10f3d9",
+      "sha256": "87512da21b969bb65dad12cfd910aafa472057f944457d7785186ca7ea59bb8b"
+    },
+    "Results_of_the_Friedman_Post_hoc_Tests.pdf": {
+      "bytes": 30404,
+      "md5": "e899cd2f75e7ef931c98bcc2f07e23aa",
+      "sha256": "33e9ab35fc4153327b7dac92cc8fb9c317e8bb2bc0d3eaee10d81a233de002e9"
+    },
+    "Project_features.pdf": {
+      "bytes": 46533,
+      "md5": "fe2a3103b5b0883e6c42fa1da8562ed1",
+      "sha256": "3aa98c07d897ca12ba97e896b33e8c9d5e32b0c211217cba4caee9ad75fc0d1e"
+    },
+    "Integration.png": {
+      "bytes": 130123,
+      "md5": "ef1f54c94ce4d0bd2f396ad26dffb968",
+      "sha256": "2bb93cf8ef10a8f11663b2341355d43e299ce6e3f525981aa0ff56b0657d2c66"
+    },
+    "Method.png": {
+      "bytes": 95652,
+      "md5": "d550fa554811ed7f720d41ceb4e05649",
+      "sha256": "2cea97b77f59a9b78a41a1532e6c6e525e0468b59895f9fb4d9a22253bc5dcd7"
+    },
+    "Results of the Shapiro-Wilk Normality Tests.pdf": {
+      "bytes": 47781,
+      "md5": "0ad31066468a59a4b85f14311592fdc2",
+      "sha256": "47480c4f075098ae6497d39b669e8cfac67a120528a7fbf278005f15564726be"
+    },
+    "Summary_Information_the_17_Mobile_Projects.pdf": {
+      "bytes": 33923,
+      "md5": "3324634ced79a3ab50d31ddf49a16073",
+      "sha256": "5f858623c45832b38aa1df701cdca5fcd295d4126664deb9850bc534253ea87a"
+    }
+  },
+  "excludedFiles": {
+    "Agile Project Risk Recommendation Approach Assessment Questionnaire (answers).xlsx": "Downloaded and checksum verified locally; participant responses not needed for the recommender contract and not redistributed here."
+  },
+  "article": {
+    "doi": "10.1016/j.jss.2026.112987",
+    "localName": "1-s2.0-S0164121226002207-main.pdf",
+    "bytes": 3190962,
+    "sha256": "7e76ace7a48bcd4b2b60633d00dcf354d5ab6deb034effd229215abe719841e3",
+    "pages": 22,
+    "redistributed": false
+  }
+}

@@ -1,6 +1,6 @@
 # Referências e fidelidade metodológica
 
-Atualização: 18/10/2026. Este documento acompanha o [plano](plano-evolucao-us-agent.md) e deve ser revisado em cada mudança que afete atributos, representação, filtros, distância, vizinhos ou avaliação.
+Atualização: 19/10/2026. Este documento acompanha o [plano](plano-evolucao-us-agent.md) e deve ser revisado em cada mudança que afete atributos, representação, filtros, distância, vizinhos ou avaliação.
 
 ## 1. Fontes efetivamente disponíveis
 
@@ -11,9 +11,9 @@ Atualização: 18/10/2026. Este documento acompanha o [plano](plano-evolucao-us-
 | E21 | Ednaldo Dilorenzo de Souza Filho. *Uma Abordagem para Recomendação de Casos de Teste em Projetos Ágeis Baseados no Scrum*. Tese, UFCG, 2021. | PDF local consultado, especialmente §§4.4–4.5 e capítulo 5. |
 | F25 | Ramos e colaboradores. *A Data-Driven Recommendation System for Enhancing Non-Functional Requirements Elicitation in Scrum-Based Projects*. IEEE Access, 2025. DOI `10.1109/ACCESS.2025.3548631`. | Texto da versão dos autores consultado parcialmente, com foco no método e avaliação. Conferir versão final antes de fixar o contrato científico. [Texto dos autores](https://www.researchgate.net/publication/389646847_A_Data-Driven_Recommendation_System_for_Enhancing_Non-Functional_Requirements_Elicitation_in_Scrum-Based_Projects). |
 | E26 | Dilorenzo e colaboradores. *Recommending Test Cases in Agile Software Development with a Taxonomy-Guided KNN Approach*. SAC 2026. DOI `10.1145/3748522.3779891`. | PDF integral fornecido pelo usuário, DOI e nove páginas conferidos; método, avaliação, limitações e disponibilidade de artefatos consultados em B02c. [Revisão comparativa e auditoria](revisao-artigo-ednaldo-e26.md). O registro Zenodo referenciado fornece quatro CSVs sob CC BY 4.0; código/folds e recorte ainda não confirmados. |
-| A26 | *ARISE: A framework for automated risk identification in Scrum using memory-based recommendation*. JSS, DOI `10.1016/j.jss.2026.112987`. | Candidato forte ao trabalho de Ademar: [resumo na editora](https://www.sciencedirect.com/science/article/pii/S0164121226002207). Confirmar com a orientação a referência pretendida e consultar texto/material completos. |
+| A26 | *ARISE: A framework for automated risk identification in Scrum using memory-based recommendation*. JSS, DOI `10.1016/j.jss.2026.112987`. | Identidade e PDF integral fornecidos pelo usuário; 22 páginas consultadas. Suplemento Zenodo 17093973 recebido, dez checksums conferidos e nove arquivos preservados sob CC BY 4.0. [Contrato e auditoria](arise-contrato-e-auditoria.md): representação/IDs/scores divergentes e matriz completa projeto–risco/scripts ainda pendentes. Não conclui reprodução científica. |
 
-Os PDFs locais estão na raiz do repositório, com prefixos `2019_FelipeRamos_` e `2021_EdnaldoFilho_`. Eles estavam fora do controle de versão na inspeção; registrar referências e hashes não significa incorporar os PDFs ao Git.
+Na inspeção histórica, os PDFs locais estavam na raiz do repositório, com prefixos `2019_FelipeRamos_` e `2021_EdnaldoFilho_`, fora do controle de versão. A busca por PDFs na árvore atual em 19/10/2026 não os encontrou. Posteriormente o usuário forneceu o PDF A26, agora consultado e identificado abaixo. Os hashes preservam o registro das consultas; não significam incorporar os artigos ao Git nem afirmar disponibilidade atual das demais cópias.
 
 Hashes SHA-256 dos arquivos consultados:
 
@@ -22,6 +22,7 @@ REQ ebd40a483ed6e64ee2cbcb5b3eeecd77111f5825c1e90fad085d269a5eb85e7b
 F19 a1e7092095f5d5f3139e5a2e9e6f5a756fbfe61a5d7bd086852026066cd371d7
 E21 f69cd99f2a68b2cc349bcb294f0873439d31c0a93a50272c3d6668740a1eee53
 E26 cc895b9d7cbc49af9c63f0466f1050b82b432450bf0798307229c5a0cf23f445
+A26 7e76ace7a48bcd4b2b60633d00dcf354d5ab6deb034effd229215abe719841e3
 ```
 
 ## 2. Matriz inicial dos métodos
@@ -85,7 +86,7 @@ O artigo SAC e o JSS candidatos são mais recentes que as teses locais. Confirma
 
 **Ação:** para cada publicação, registrar data/versão, páginas lidas e correspondência com a tese. Quando uma publicação não detalhar uma decisão, usar a tese como complemento identificado. Não misturar versões em um perfil chamado genericamente “método do autor”.
 
-Atualização B02c: o usuário identificou e forneceu E26 como artigo de Ednaldo. DOI/texto conferidos na cópia primária; esta parte de acesso/identificação está atendida. Faltam a comparação restante das versões, os materiais experimentais completos e a confirmação de Ademar. Isso não registra aceite científico da orientação.
+Atualização B02c: o usuário identificou e forneceu E26 como artigo de Ednaldo. DOI/texto conferidos na cópia primária; esta parte de acesso/identificação está atendida. Faltam a comparação restante das versões e os materiais experimentais completos. Em 19/10/2026, o usuário confirmou ARISE/A26 como trabalho de Ademar e posteriormente forneceu seu PDF e suplemento; a [auditoria 035](arise-contrato-e-auditoria.md) registra lacunas específicas ainda abertas. Isso não registra aceite científico da orientação.
 
 Atualização B02d: a [preparação de dados](preparacao-dados-ednaldo.md) mantém os originais e a auditoria B02c, localiza unidades físicas/contexto e preserva pares de classificação sem escolher valores. A lista de critérios deriva apenas do CSV público: textos exatos e mapeamento local reversível `ca_<ID literal>`. Não é hierarquia científica inferida, base limpa ou seleção experimental. Nenhum campo ausente, associação ou fórmula foi completado; Q01–Q03 permanecem abertas e não houve obtenção de novas fontes nesta etapa.
 

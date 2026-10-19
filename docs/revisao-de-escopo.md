@@ -1,5 +1,13 @@
 # Revisão de escopo e prioridade
 
+## Esclarecimento do usuário — 19/10/2026
+
+O caso de Ademar/ARISE é um exemplo de outra entrada para a plataforma, sem User Story. A revisão 035 investigou a fidelidade do artigo além do necessário ao aceite desse exemplo. A auditoria fica preservada como consulta; reprodução experimental, scripts originais e matriz empírica não são dependências da implementação.
+
+A infraestrutura segue na direção correta: contratos aceitam atributos de projeto e entrada sem referência obrigatória a US. Contudo, o executor instalado ainda distingue apenas RNF e demonstração TestRec; isso não demonstra o terceiro caso. A próxima prioridade é B20/B21: configurar perfil de projeto → riscos com base sintética declarada, política explícita e reutilização do fluxo comum de publicação/importação/execução/interface/histórico/replay. Não basta um script isolado ou remover US do formulário mantendo-a obrigatória no backend.
+
+E1, o vertical RNF e o segundo exemplo permanecem entregas técnicas válidas. Avaliação com participantes e lacunas científicas dos artigos continuam registradas; não bloqueiam a demonstração sem US. O aceite de E4 está atualizado no [plano](plano-evolucao-us-agent.md). Este esclarecimento prevalece sobre a ordem histórica abaixo.
+
 Data: 17/10/2026. Motivação: pedido do usuário para verificar se o desenvolvimento estava se afastando do escopo. Conferidos o documento de requisitos recebido, o plano, o workflow, a matriz de fidelidade e as entregas registradas.
 
 A situação posterior, após B14a/B15a, está na [conferência de aderência de 18/10/2026](aderencia-demandas-professor.md). As prioridades e a distinção entre demandas relatadas e requisitos derivados abaixo permanecem preservadas.

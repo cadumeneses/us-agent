@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "kind": "production_login_verification",
+  "recordedAt": "2026-10-19T12:26:40.547Z",
+  "repositoryHeadAtVerification": "76ccc1d4a6660a7f68152278c91c098925ebc797",
+  "origin": "https://us-agent-api.vercel.app",
+  "deploymentUrl": "https://us-agent-gyy1t7wxh-cadumeneses-projects.vercel.app",
+  "scope": "deployment_configuration_migrations_and_authentication_not_scientific_evaluation",
+  "branchTestTransport": "local_http_application_connected_to_neon_production_branch_copy",
+  "branchTestId": "br-falling-sky-avdylb5a",
+  "branchRemoved": true,
+  "artifacts": {
+    "branch-migrations.json": "03a06e92ab7148505a1c2e5a8379ca15b5830421abd0ee564f14a3d5995451bc",
+    "branch-auth.json": "1bfe4ac4541b813a49f842832123003ed8e325feed2c82227db68e3926ba42ec",
+    "production-migrations.json": "6d74e0ca25076a62602d3e5bb56ab3c6a74f0aea2664a9b4a94fc36238e85adc",
+    "production-auth.json": "5715bd20875870858ad8e0f35701c60c6bd1d9317b4ab2c9ee44db0e1aa673c9",
+    "production-health.json": "b8f19dc856cf56ac5129d66fb309c90518c76ca2793a44449268dbc28d3d0ad0"
+  }
+}

@@ -6,10 +6,22 @@ import { TestCaseAssessment } from './TestCaseAssessment';
 const statusText = { completed: 'Test suggestions found', blocked: 'Test demonstration blocked', no_items: 'Selected neighbors have no associated tests' };
 const issueText: Record<string, string> = { fewer_than_three_candidates: 'At least three eligible candidates are required.',
   unknown_test_associations: 'Eligible candidates have unknown test associations.', target_output_must_be_withheld: 'Target test answers must be withheld.' };
-export function TestCaseRunDetails({ run }: { run: TestCaseRun }) {
+export function TestCaseRunDetails({ run, compact = false }: { run: TestCaseRun; compact?: boolean }) {
   const content = run.snapshot.content, request = content.request.content, result = content.result.content;
   const explanation = content.explanation.content, representation = content.projection.content.representation;
   const [itemPage, setItemPage] = useState(0), [candidatePage, setCandidatePage] = useState(0), [dimensionPage, setDimensionPage] = useState(0);
+  if (compact) return <>
+    <h3>{result.status === 'completed' ? `${result.items.length} caso(s) de teste encontrado(s)` : result.status === 'blocked' ? 'Complete os dados da base para recomendar' : 'Nenhum caso de teste encontrado nos vizinhos selecionados'}</h3>
+    <p>{request.input.provenance.source} · {new Date(run.createdAt).toLocaleString('pt-BR')}</p>
+    {explanation.issues.map((issue, index) => <p role="status" key={index}>{issue.code === 'fewer_than_three_candidates' ? 'A base precisa de pelo menos três candidatos elegíveis.' : issue.code === 'unknown_test_associations' ? 'Existem candidatos sem associações de testes conhecidas na base.' : issueText[issue.code] ?? issue.code}</p>)}
+    {result.items.slice(itemPage * 20, (itemPage + 1) * 20).map(item => <section className="test-case-item configured-attribute" key={item.key} aria-label={`Test ${item.testCaseId}`}>
+      <h4>{item.artifact.title}</h4>{item.artifact.purpose && <p>{item.artifact.purpose}</p>}<pre className="configured-value">{item.artifact.gherkin}</pre>
+      <details><summary>Origem e contribuição deste caso</summary><p>Caso {item.testCaseId} · {item.support} de {result.k} vizinhos selecionados · score {item.score.toLocaleString('pt-BR', { maximumFractionDigits: 4 })}. O score não é uma probabilidade de correção.</p><ul>{item.contributions.map(row => <li key={row.recordId}>{row.recordId}: similaridade {row.similarity.toLocaleString('pt-BR', { maximumFractionDigits: 4 })}</li>)}</ul></details>
+    </section>)}
+    {result.items.length > 20 && <PageControls page={itemPage} setPage={setItemPage} count={result.items.length} size={20} name="tests"/>}
+    <details><summary>Base e critérios da recomendação</summary><p>Recomendador: {content.definition.content.definition.name} · {request.definition.version}. Base: {request.dataset.id} · {request.dataset.version}. Catálogo: {request.catalog.id} · {request.catalog.version}.</p><p>As características informadas são comparadas com a base selecionada. Os testes vêm dos três vizinhos escolhidos, sem geração por IA.</p><ul>{result.neighbors.map(row => <li key={row.recordId}>{row.recordId}: similaridade {row.similarity.toLocaleString('pt-BR', { maximumFractionDigits: 4 })}</li>)}</ul><p>Demonstração com base sintética; não constitui reprodução empírica do artigo.</p><details><summary>Entrada preservada</summary><pre className="configured-value">{JSON.stringify(request.input, null, 2)}</pre></details></details>
+    {result.status === 'completed' && <details><summary>Avaliar e adaptar os casos de teste</summary><TestCaseAssessment run={run} items={result.items.slice(itemPage * 20, (itemPage + 1) * 20)}/></details>}
+  </>;
   return <>
     <h3>{statusText[result.status]}</h3>
     <p className="configured-demo-notice">Synthetic E21 equation demonstration · Manhattan similarity · k=3. This is not a reproduction of the original selected Euclidean configuration or evidence of empirical accuracy. Q01/Q02 remain open.</p>

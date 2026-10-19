@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { recommenderApi } from '../services/recommender-api';
 import { initialValues, inputIssues } from '../services/configured-input';
 import type { ConfiguredInput, ContentReference, DatasetSummary, DefinitionRecord } from '../types/configurable-recommendations';
@@ -8,20 +9,24 @@ import { ReferenceDetails } from './ConfiguredRunDetails';
 import { sameReference, TestCaseCatalogPicker } from './TestCaseCatalogPicker';
 import { versionKey } from './VersionCatalog';
 
-export function TestCaseExecutionForm({ record, datasets, busy, onBusy, onCompleted, children }: {
+export function TestCaseExecutionForm({ record, datasets, busy, onBusy, onCompleted, children, initialInput }: {
   record: DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }; datasets: DatasetSummary[];
   busy: boolean; onBusy: (value: boolean) => void; onCompleted: (run: MethodRun) => void; children: React.ReactNode;
+  initialInput?: ConfiguredInput;
 }) {
   const definition = record.snapshot.content.definition, taxonomies = record.snapshot.content.taxonomies;
   const reference: ContentReference = { id: definition.id, version: definition.version, format: record.snapshot.format, sha256: record.snapshot.sha256 };
   const compatible = datasets.filter(row => row.state === 'published' && row.catalog && sameReference(row.definition, reference));
   const [choice, setChoice] = useState(''), [catalog, setCatalog] = useState<ContentReference>();
   const dataset = compatible.find(row => versionKey(row) === choice);
-  const [inputId, setInputId] = useState(''), [source, setSource] = useState('Manual synthetic input');
-  const [values, setValues] = useState<ConfiguredInput['values']>(() => initialValues(definition));
+  const [inputId, setInputId] = useState(initialInput?.id ?? ''), [source, setSource] = useState(initialInput?.provenance.source ?? 'Manual synthetic input');
+  const [values, setValues] = useState<ConfiguredInput['values']>(() => initialInput?.values ?? initialValues(definition));
   const [issues, setIssues] = useState<string[]>([]), [error, setError] = useState('');
   const submitting = useRef(false), pending = useRef<TestCaseRequest | null>(null);
   const selected = dataset?.catalog && catalog && sameReference(dataset.catalog, catalog);
+  useEffect(() => {
+    if (initialInput && !choice && compatible.length === 1) setChoice(versionKey(compatible[0]));
+  }, [initialInput, choice, compatible]);
   async function execute() {
     if (submitting.current || !dataset || !catalog || !selected) return;
     const next = inputIssues(definition, values, taxonomies);
@@ -34,7 +39,7 @@ export function TestCaseExecutionForm({ record, datasets, busy, onBusy, onComple
     }
     setIssues(next); setError(''); if (next.length) return;
     const payload = { definition: reference, dataset: { id: dataset.id, version: dataset.version, format: dataset.snapshot.format, sha256: dataset.snapshot.sha256 }, catalog,
-      input: { id: inputId, values, provenance: { source } } };
+      input: { id: inputId, values, provenance: { source, ...(initialInput?.provenance.sourceRecordId ? { sourceRecordId: initialInput.provenance.sourceRecordId } : {}) } } };
     if (!pending.current || JSON.stringify({ ...pending.current, id: undefined }) !== JSON.stringify(payload)) pending.current = { id: crypto.randomUUID(), ...payload };
     submitting.current = true; onBusy(true);
     try { const run = await recommenderApi.executeTestCases(pending.current); pending.current = null; onCompleted(run); }
@@ -42,19 +47,19 @@ export function TestCaseExecutionForm({ record, datasets, busy, onBusy, onComple
     finally { submitting.current = false; onBusy(false); }
   }
   return <form aria-label="Test-case execution" onSubmit={event => { event.preventDefault(); void execute(); }}>
-    <p className="configured-demo-notice">Synthetic E21 equation demonstration: Manhattan similarity, k=3. This does not reproduce the original selected Euclidean configuration. Q01/Q02 remain open.</p>
-    <fieldset disabled={busy} className="configured-form-body"><section className="card configured-panel"><h2>2. Reference dataset and catalog</h2>
-      <ReferenceDetails title="Selected definition" reference={reference}/>
-      <label>Dataset and version<select value={choice} onChange={event => { setChoice(event.target.value); setCatalog(undefined); }}><option value="">Select a compatible dataset</option>{compatible.map(row => <option key={versionKey(row)} value={versionKey(row)}>{row.id} · {row.version} · {row.recordCount} records</option>)}</select></label>
-      {!compatible.length && <p>No compatible test dataset is loaded. Load more datasets or publish one in configuration.</p>}{children}
-      {dataset?.catalog && <><ReferenceDetails title="Selected dataset" reference={{ id: dataset.id, version: dataset.version, ...dataset.snapshot }}/><TestCaseCatalogPicker key={versionKey(dataset)} value={catalog} required={dataset.catalog} onChange={setCatalog}/></>}
-      <p>Only the selected dataset and its exact catalog publication are used. Availability and hashes are checked again when running.</p>
-    </section><section className="card configured-panel"><h2>3. Input and execution</h2>
-      <div className="configured-input-meta"><label>Input identifier<input maxLength={160} value={inputId} onChange={event => setInputId(event.target.value)}/></label><label>Input source<input maxLength={500} value={source} onChange={event => setSource(event.target.value)}/></label></div>
-      <p>Enter the target characteristics. Test answers are withheld; no classification or label-pair selection is required.</p>
-      <ConfiguredInputFields attributes={definition.attributes.filter(row => row.role !== 'output')} values={values} taxonomies={taxonomies} onChange={setValues}/>
-      <div className="configured-actions"><button type="submit" className="primary" disabled={busy || !selected}>{busy ? 'Running…' : 'Run recommendation'}</button></div>
-      {!selected && <p>Choose a compatible dataset and its catalog to run.</p>}
+    {initialInput ? <p className="configured-demo-notice">Recomendação demonstrativa com base sintética. Revise a adequação dos casos de teste à sua história antes de utilizá-los.</p> : <p className="configured-demo-notice">Synthetic E21 equation demonstration: Manhattan similarity, k=3. This does not reproduce the original selected Euclidean configuration. Q01/Q02 remain open.</p>}
+    <fieldset disabled={busy} className="configured-form-body"><section className="card configured-panel"><h2>{initialInput ? 'Base de referência' : '2. Reference dataset and catalog'}</h2>
+      {!initialInput && <ReferenceDetails title="Selected definition" reference={reference}/>}
+      <label>{initialInput ? 'Base de referência e versão' : 'Dataset and version'}<select value={choice} onChange={event => { setChoice(event.target.value); setCatalog(undefined); }}><option value="">{initialInput ? 'Selecione uma base compatível' : 'Select a compatible dataset'}</option>{compatible.map(row => <option key={versionKey(row)} value={versionKey(row)}>{row.id} · {row.version} · {row.recordCount} {initialInput ? 'registros' : 'records'}</option>)}</select></label>
+      {!compatible.length && (initialInput ? <p>Nenhuma base compatível está carregada. Carregue mais bases ou <Link to="/recommender-setup">importe uma base para este recomendador</Link>.</p> : <p>No compatible test dataset is loaded. Load more datasets or publish one in configuration.</p>)}{children}
+      {dataset?.catalog && <>{!initialInput && <ReferenceDetails title="Selected dataset" reference={{ id: dataset.id, version: dataset.version, ...dataset.snapshot }}/>}<TestCaseCatalogPicker key={versionKey(dataset)} value={catalog} required={dataset.catalog} onChange={setCatalog} autoSelect={!!initialInput}/></>}
+      {initialInput ? <details><summary>Versões e método desta execução</summary><ReferenceDetails title="Recomendador" reference={reference}/>{dataset && <ReferenceDetails title="Base" reference={{ id: dataset.id, version: dataset.version, ...dataset.snapshot }}/>}<p>Demonstração das equações E21 com Manhattan e k=3. A configuração Euclidiana original não foi reproduzida.</p></details> : <p>Only the selected dataset and its exact catalog publication are used. Availability and hashes are checked again when running.</p>}
+    </section><section className="card configured-panel"><h2>{initialInput ? 'Dados para recomendar os testes' : '3. Input and execution'}</h2>
+      {initialInput ? <details><summary>Origem dos dados</summary><p>{source}</p><p>História: {inputId}</p></details> : <div className="configured-input-meta"><label>Input identifier<input maxLength={160} value={inputId} onChange={event => setInputId(event.target.value)}/></label><label>Input source<input maxLength={500} value={source} onChange={event => setSource(event.target.value)}/></label></div>}
+      <p>{initialInput ? 'Confira os campos e complete o que faltar para recomendar os testes.' : 'Enter the target characteristics. Test answers are withheld; no classification or label-pair selection is required.'}</p>
+      <ConfiguredInputFields attributes={definition.attributes.filter(row => row.role !== 'output' && (!initialInput || row.id !== definition.method.bindings.story_id))} values={values} taxonomies={taxonomies} onChange={setValues}/>
+      <div className="configured-actions"><button type="submit" className="primary" disabled={busy || !selected}>{initialInput ? busy ? 'Buscando casos de teste…' : 'Recomendar casos de teste' : busy ? 'Running…' : 'Run recommendation'}</button></div>
+      {!selected && <p>{initialInput ? 'Selecione uma base disponível para habilitar a recomendação.' : 'Choose a compatible dataset and its catalog to run.'}</p>}
     </section></fieldset>
     {issues.length > 0 && <div role="alert" className="inline-error"><p>Check these fields before running:</p><ul>{issues.map((issue, index) => <li key={index}>{issue}</li>)}</ul></div>}
     {error && <p role="alert" className="inline-error">{error} Your input was preserved for another attempt.</p>}

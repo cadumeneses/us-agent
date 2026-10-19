@@ -1,12 +1,20 @@
 # Plano de evolução do US-Agent
 
-## Estado verificado em 19/10/2026 — B18e
+Referência principal de escopo e aceite, explicitamente adotada pelo usuário em 19/10/2026: [US-Agent_Requisitos_e_Lacunas.md](../US-Agent_Requisitos_e_Lacunas.md), versão 1.0 de 17/10/2026. Este plano organiza sua execução; não substitui seus RF01–RF14, RQ01–RQ05 ou o critério global. A [conferência de aderência](aderencia-demandas-professor.md) registra o atendimento parcial e as lacunas atuais.
+
+Refinamento do segundo exemplo solicitado pelo usuário: a [entrega 036](entregas/036-selecao-recomendadores-no-projeto.md) reúne RNFs e casos de teste na aba **Recomendadores**, com seleção do projeto/história, preenchimento dos campos compatíveis e acesso às bases/configuração/histórico. O método de testes permanece demonstrativo; o terceiro exemplo e a flexibilidade dos atributos de cálculo continuam pendentes.
+
+## Estado verificado em 19/10/2026 — escopo esclarecido pelo usuário
+
+O terceiro caso serve para demonstrar outra maneira de recomendar sem User Story. ARISE é referência de exemplo; reproduzir seu experimento, obter seus scripts ou resolver todos os scores publicados não são condições de E4. B19 está suficiente para esse recorte. O próximo incremento prioritário é B20/B21: perfil de projeto → riscos pelo fluxo comum, com dados demonstrativos identificados e decisões locais explícitas. Esta orientação prevalece sobre as exigências de reprodução introduzidas nas revisões 034–035.
 
 B18e conclui o próximo incremento técnico indicado na revisão B18d: [protocolo/material/analisador vinculados](entregas/030-vinculo-protocolo-materiais-analisador.md), com lote por sessão, recusa de divergências e replay preservando os arquivos de tarefa. Os pacotes B18b/B18c anteriores permanecem intactos. Este estado prevalece sobre os encaminhamentos históricos abaixo.
 
-E1 está tecnicamente entregue; E2 tem vertical RNF e ensaio técnico, com avaliação empírica pendente; E3 tem demonstração de testes e instrumentação, com fidelidade/dados/avaliação empírica pendentes; E4 depende de fonte/material de Ademar para o exemplo sem US; E5 depende da consolidação e avaliação dos três exemplos. B14/B18 continuam em andamento: não houve coleta humana nem aprovação metodológica presumida.
+E1 está tecnicamente entregue; E2 tem vertical RNF e ensaio técnico, com avaliação empírica pendente; E3 tem demonstração de testes e instrumentação, com fidelidade/dados/avaliação empírica pendentes; E4 tem material suficiente e falta implementar/demonstrar o exemplo sem US no fluxo comum; E5 depende da consolidação e avaliação dos três exemplos. B14/B18 continuam em andamento: não houve coleta humana nem aprovação metodológica presumida. As lacunas de reprodução ARISE estão [registradas](arise-contrato-e-auditoria.md) e não bloqueiam E4.
 
-Próxima passagem: revisar e fixar decisões metodológicas do protocolo de configuração, conferir a instalação escolhida e coletar observações com auditoria dos checkpoints. Em paralelo, obter fontes/material de Ademar e complementar dados/protocolos empíricos de Felipe/Ednaldo. Sem novas fontes ou observações, não repetir auditorias dos mesmos dados nem criar resultados artificiais para encerrar esses critérios.
+Próxima passagem: implementar e demonstrar o terceiro caso com definição publicada, atributos de projeto configuráveis, pequena base sintética com associações explícitas a riscos, formulário sem US, resultado explicado e replay. Reutilizar publicação/importação/executor/interface comuns. A [pauta metodológica](revisao-metodologica-configuracao.md) e as lacunas empíricas dos artigos seguem em acompanhamento, sem bloquear este exemplo independente.
+
+As entregas 032–033 concluíram contas individuais, sessões e correção do login em produção. B13 permanece parcial por papéis, autoria/auditoria de domínio e isolamento organizacional. A [entrega 034](entregas/034-revisao-plano-e-preparacao-arise.md) consolida este estado e prepara a revisão científica sem alterar os pacotes congelados.
 
 ## Registro da revisão B18d
 
@@ -16,7 +24,7 @@ Próximo incremento técnico: vincular os materiais de tarefas ao instrumento em
 
 Evoluir o US-Agent para configurar recomendadores de Engenharia de Software, começando pelo RNF de Felipe, acrescentando os casos de teste de Ednaldo e demonstrando um caso sem User Story. A classificação assistida por IA, a decisão sob incerteza, a revisão humana e a evolução supervisionada das taxonomias continuam como capacidades centrais. A generalização deve reaproveitar essas capacidades e o motor existente, preservando o comportamento de cada método de referência.
 
-Este plano atende ao pedido atual do usuário. O documento `US-Agent_Requisitos_e_Lacunas.md` é uma fonte de requisitos e de evidências relatadas; suas propostas de arquitetura, prioridades e aceites não são tratadas como decisões aprovadas pelo professor. Os áudios originais não foram reanalisados nesta etapa.
+O documento `US-Agent_Requisitos_e_Lacunas.md` é o norte de trabalho adotado pelo usuário. Seus requisitos e aceites orientam as entregas; essa adoção não atribui ao professor aprovação das propostas de engenharia nem torna atual o diagnóstico do commit antigo. Os áudios originais não foram reanalisados nesta etapa.
 
 Leitura complementar: [workflow e backlog](workflow-evolucao-us-agent.md) e [referências e fidelidade metodológica](referencias-e-fidelidade.md).
 
@@ -147,11 +155,13 @@ A tese de 2021 escolhe Euclidiana, **k=3 e heurística de desempate pelo número
 
 **Escopo:** caso de riscos/tecnologias associado a Ademar. RF08, RF13–RF14; RQ01–RQ05.
 
-**Fazer:** confirmar com a orientação a referência JSS candidata e obter texto/material de reprodução; fechar entrada, atributos, taxonomias, alvo e política. Configurar o formulário sobre um perfil de projeto independente. Implementar somente as extensões do núcleo que o método realmente exigir.
+**Fazer:** usar ARISE como inspiração para um exemplo de perfil de projeto → riscos. Configurar atributos de projeto, catálogo de riscos e pequena base sintética com associações declaradas. Identificar a política como demonstração US-Agent, com representação, distância, K, desempate e agregação explícitos. Reutilizar publicação, importação, formulário, executor, explicação e histórico comuns; acrescentar somente as extensões necessárias.
 
 **Revisão:** executar sem US, sprint, `classificationId` ou módulo/operação artificiais. Validar se dados de risco são contexto de entrada, itens recomendáveis ou ambos conforme o método; não antecipar essa decisão.
 
-**Concluída quando:** o terceiro exemplo funciona pela configuração publicada, compartilha infraestrutura e produz execução auditável. Caso a referência permaneça pendente, validar tecnicamente o contrato sem US com dados sintéticos identificados, mantendo a reprodução de Ademar em aberto.
+**Concluída quando:** o terceiro exemplo funciona pela configuração publicada e interface, compartilha infraestrutura e produz execução auditável/replay sem criar US, sprint ou classificação. Alterar um atributo pela configuração deve refletir no formulário/validação; os resultados identificam base, vizinhos e riscos recuperados. Dados sintéticos e escolhas locais ficam declarados. Reprodução do estudo de Ademar é um objetivo adicional fora do aceite de E4.
+
+Para atender RF02/RF07 e o §9.5 do documento norte, demonstrar também um atributo adicional de cálculo configurado sem criar um campo específico no código: ele deve aparecer no formulário, validar os dados e participar da representação/distância/explicação. Trocar somente título ou acrescentar contexto não comprova essa capacidade. Políticas específicas podem permanecer versionadas para preservar RNF/TestRec; o novo exemplo não deve repetir um conjunto fechado de campos de risco no motor. A referência ARISE informa entrada, alvo e regras conhecidas; convenções locais e associações sintéticas ficam identificadas conforme RF14 e §10.
 
 ### E5 — Consolidar avaliação, experiência e material acadêmico
 
@@ -175,7 +185,7 @@ flowchart LR
     E3 --> E5
     E4 --> E5
     F[Comparar teses e artigos] --> E3
-    J[Confirmar JSS e dados] --> E4
+    J[Perfil de projeto e dados demonstrativos] --> E4
 ```
 
 Ordem de execução preferida: E0 → E1 → E2 → E3 → E4 → E5. A obtenção e comparação de referências começa em E0 e continua ao longo das entregas. Dependências externas do SAC/JSS não impedem preservar o RNF, corrigir métricas ou desenhar bases versionadas.

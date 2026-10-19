@@ -19,7 +19,7 @@ function downloadRun(run: MethodRun) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-export function ConfiguredRunDetails({ id }: { id: string }) {
+export function ConfiguredRunDetails({ id, compact = false }: { id: string; compact?: boolean }) {
   const [run, setRun] = useState<MethodRun>();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -46,7 +46,7 @@ export function ConfiguredRunDetails({ id }: { id: string }) {
   const actions = <><div className="configured-actions"><button disabled={replaying} onClick={() => void verify()}>{replaying ? 'Verifying…' : 'Verify replay'}</button><button onClick={() => downloadRun(run)}>Download JSON evidence</button></div>
     {error && <p className="inline-error" role="alert">{error}</p>}
     {replay && <div role={replay.verified ? 'status' : 'alert'}><p>{replay.verified ? 'Replay verified: result, explanation, and projection match the preserved run.' : 'Replay differs: the original evidence was preserved.'}</p><p>Result: {replay.resultMatches ? 'matches' : 'differs'} · Explanation: {replay.explanationMatches ? 'matches' : 'differs'} · Projection: {replay.projectionMatches ? 'matches' : 'differs'}</p></div>}</>;
-  if (isTestCaseRun(run)) return <article className="configured-result" aria-label="Run result"><TestCaseRunDetails key={run.id} run={run}/>{actions}</article>;
+  if (isTestCaseRun(run)) return <article className="configured-result" aria-label="Run result"><TestCaseRunDetails key={run.id} run={run} compact={compact}/>{compact ? <details><summary>Exportação e replay da execução</summary>{actions}</details> : actions}</article>;
   const { content } = run.snapshot;
   const request = content.request.content, result = content.result.content, dataset = content.dataset.content;
   const candidates = content.explanation.content.candidates;

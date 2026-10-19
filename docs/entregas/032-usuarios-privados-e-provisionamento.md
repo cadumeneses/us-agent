@@ -1,5 +1,7 @@
 # Entrega 032 — usuários privados e provisionamento
 
+Continuação: a [entrega 033](033-correcao-login-producao.md) aplica o release e o provisionamento em produção e confirma os cinco logins. O texto abaixo preserva o estado da preparação anterior à implantação.
+
 19/10/2026. Continuidade da preparação de deploy 031. O usuário solicitou cinco logins: `mirko`, `danyllo`, `emanuel`, `carlos` e `ademar`, com a senha inicial informada na conversa. A senha não é registrada neste documento, no código, em fixtures ou em migrations.
 
 ## Implementação
