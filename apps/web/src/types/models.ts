@@ -133,3 +133,10 @@ export type StoryDetails = {
   functionalRequirements: Array<{ id: string; description: string }>;
   nonFunctionalRequirements: Array<{ id: string; description: string; type: string; metric: string }>;
 };
+
+export type ProjectStory = {
+  storyId: string; externalId: string; text: string; project: string; sprint: string;
+  classificationId: string | null; status: string; module: string; operation: string;
+  labels: ClassificationLabel[]; confidence: number; taxonomyVersion: string; revision: number;
+};
+export type PreparedProjectStory = ProjectStory & { details: StoryDetails };

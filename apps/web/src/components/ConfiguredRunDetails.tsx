@@ -5,6 +5,8 @@ import { ConfiguredRunReview } from './ConfiguredRunReview';
 import { displayScientificMessage } from '../services/scientific-messages';
 import { isTestCaseRun, type MethodRun } from '../types/test-case-recommendations';
 import { TestCaseRunDetails } from './TestCaseRunDetails';
+import { ProjectRecommendationDetails } from './ProjectRecommendationDetails';
+const isProjectRun = (run: MethodRun): run is import('../types/project-recommendations').ProjectRecommendationRun => run.snapshot.content.schemaVersion === 3;
 
 export const configuredStatus: Record<RecommendationResult['status'], string> = {
   blocked: "Missing data", no_candidates: "No compatible candidates", no_items: "No recommended items", completed: "Suggestions found"
@@ -47,6 +49,7 @@ export function ConfiguredRunDetails({ id, compact = false }: { id: string; comp
     {error && <p className="inline-error" role="alert">{error}</p>}
     {replay && <div role={replay.verified ? 'status' : 'alert'}><p>{replay.verified ? 'Replay verified: result, explanation, and projection match the preserved run.' : 'Replay differs: the original evidence was preserved.'}</p><p>Result: {replay.resultMatches ? 'matches' : 'differs'} · Explanation: {replay.explanationMatches ? 'matches' : 'differs'} · Projection: {replay.projectionMatches ? 'matches' : 'differs'}</p></div>}</>;
   if (isTestCaseRun(run)) return <article className="configured-result" aria-label="Run result"><TestCaseRunDetails key={run.id} run={run} compact={compact}/>{compact ? <details><summary>Export and replay this run</summary>{actions}</details> : actions}</article>;
+  if (isProjectRun(run)) return <article className="configured-result" aria-label="Run result"><ProjectRecommendationDetails run={run}/>{actions}</article>;
   const { content } = run.snapshot;
   const request = content.request.content, result = content.result.content, dataset = content.dataset.content;
   const candidates = content.explanation.content.candidates;

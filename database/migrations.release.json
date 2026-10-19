@@ -109,6 +109,14 @@
     {
       "name": "026_private_web_users.sql",
       "sha256": "2eca963506ae82df7410aa2c20f56b688e78ea698f5c0f609de876621f9000d5"
+    },
+    {
+      "name": "027_story_preparations.sql",
+      "sha256": "1dd5e68cdf71664ebbb57be8e81ee45d0d04a4b1b3b661560b9348f13b1d18ef"
+    },
+    {
+      "name": "028_configurable_project_recommendations.sql",
+      "sha256": "e73e240fc0e269dfffc58a299ecf40928861f3e33569034e10a7625e82fad176"
     }
   ]
 }

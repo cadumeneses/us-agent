@@ -1,0 +1,12 @@
+{
+  "kind": "isolated_migration_rehearsal",
+  "recordedOn": "2026-10-19",
+  "branchId": "br-summer-shape-avdnmsg3",
+  "parentBranchId": "br-wandering-mountain-avtit63t",
+  "applied": [
+    "027_story_preparations.sql"
+  ],
+  "existingTables": 51,
+  "existingCountsPreserved": true,
+  "productionModified": false
+}

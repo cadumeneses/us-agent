@@ -4,6 +4,7 @@ import type { BindTargetRequest, ClassificationDestination, ItemDecision, ItemDe
 import { TEST_CASE_METHOD, type MethodRun, type MethodImportRecord, type MethodImportSpec, type TestCaseCatalogRecord, type TestCaseCatalogSummary, type TestCaseRequest, type TestCaseRun } from '../types/test-case-recommendations';
 import type { TestReview, TestItemReview, TestTargetRecord, TestDecisionRequest, TestDecisionRecord, TestCopyRequest, TestCopyRecord } from '../types/test-case-assessments';
 import { notifySessionExpired } from './web-session';
+import { CONFIGURABLE_KNN, type ProjectRecommendationRequest, type ProjectRecommendationRun, type ProjectRecommenderProfile } from '../types/project-recommendations';
 
 export class RecommenderApiError extends Error {
   constructor(public status: number, message: string) { super(message); }
@@ -25,7 +26,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 const versionPath = (id: string, version: string) => `${encodeURIComponent(id)}/versions/${encodeURIComponent(version)}`;
 const PAGE_SIZE = 50;
 const json = (method: string, body: unknown): RequestInit => ({ method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-export const supportsWebMethod = (method: string) => method === 'ramos_2019_manhattan_k1_v2' || method === TEST_CASE_METHOD;
+export const supportsWebMethod = (method: string) => method === 'ramos_2019_manhattan_k1_v2' || method === TEST_CASE_METHOD || method === CONFIGURABLE_KNN;
 const apiOnly = () => new RecommenderApiError(422, 'This method is currently available through the API. Its web interface is pending implementation.');
 export const recommenderApi = {
   pageSize: PAGE_SIZE,
@@ -40,10 +41,13 @@ export const recommenderApi = {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input)
   }),
   executeTestCases: (input: TestCaseRequest) => request<TestCaseRun>('recommendation-runs', json('POST', input)),
+  executeProject: (input: ProjectRecommendationRequest) => request<ProjectRecommendationRun>('recommendation-runs', json('POST', input)),
+  projectProfile: (project: string, definition: import('../types/configurable-recommendations').ContentReference, signal?: AbortSignal) => request<ProjectRecommenderProfile>('project-recommender-profile/load', { ...json('POST', { project, definition }), signal }),
+  saveProjectProfile: (project: string, definition: import('../types/configurable-recommendations').ContentReference, revision: number, values: import('../types/configurable-recommendations').ConfiguredInput['values']) => request<ProjectRecommenderProfile>('project-recommender-profile', json('PUT', { project, definition, revision, values })),
   publishedRun: async (id: string, signal?: AbortSignal) => {
     const record = await request<MethodRun>(`recommendation-runs/${encodeURIComponent(id)}`, { signal });
     const content = record.snapshot.content;
-    if (!(content.schemaVersion === 1 || content.schemaVersion === 2 && content.result.content.method === TEST_CASE_METHOD)) throw apiOnly();
+    if (!(content.schemaVersion === 1 || content.schemaVersion === 2 && content.result.content.method === TEST_CASE_METHOD || content.schemaVersion === 3 && content.result.content.method === CONFIGURABLE_KNN)) throw apiOnly();
     return record;
   },
   runs: (offset = 0, signal?: AbortSignal) => request<RunSummary[]>(`recommendation-runs?limit=${PAGE_SIZE}&offset=${offset}`, { signal }),

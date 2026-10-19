@@ -6,6 +6,7 @@ import { applyTaxonomyExpansion } from '../repositories/data-repository.js';
 import { emptyProjectResearchProfile } from './research-inputs.js';
 import type { ClassificationLabel, ClassificationProvenance } from '../domain/classification.js';
 import { canonicalLabels } from './classification-policy.js';
+import { copyPreparedStoryDetails, lockPreparedStory, type SavedStoryTarget } from './story-preparation.js';
 
 export type PreviewResult = {
   id: string;
@@ -128,7 +129,8 @@ async function saveFallbackSuggestions(client: PoolClient, classificationId: str
   }
 }
 
-export async function savePreviewClassifications(project: string, sprint: string, inputs: PreviewInput[], taxonomyVersion: string, executionMode: 'preview' | 'committee' = 'preview') {
+export async function savePreviewClassifications(project: string, sprint: string, inputs: PreviewInput[], taxonomyVersion: string, executionMode: 'preview' | 'committee' = 'preview', savedTarget?: SavedStoryTarget) {
+  if (savedTarget && inputs.length !== 1) throw new Error('A saved-story classification requires exactly one input.');
   if (!inputs.length || inputs.some(input => input.provenance.input.text !== input.text || input.provenance.taxonomy.version !== taxonomyVersion
     || input.provenance.engine !== inputs[0].provenance.engine || input.provenance.policyVersion !== inputs[0].provenance.policyVersion
     || input.provenance.promptVersion !== inputs[0].provenance.promptVersion)) {
@@ -152,7 +154,7 @@ export async function savePreviewClassifications(project: string, sprint: string
 
     for (const input of inputs) {
       const decision = input.provenance.decision;
-      const story = await client.query<{ id: string }>(`
+      const story = savedTarget ? { rows: [await lockPreparedStory(client, savedTarget, input.text, projectId)] } : await client.query<{ id: string }>(`
         INSERT INTO stories (project_id, sprint_id, external_id, content) VALUES ($1, $2, $3, $4)
         ON CONFLICT (project_id, external_id) DO UPDATE SET sprint_id = EXCLUDED.sprint_id, content = EXCLUDED.content, updated_at = NOW()
         RETURNING id
@@ -194,6 +196,8 @@ export async function savePreviewClassifications(project: string, sprint: string
           SELECT $1, description, position FROM story_functional_requirements WHERE classification_id = $2`, [classificationId, previousId]);
         await client.query(`INSERT INTO story_non_functional_requirements (classification_id, description, nfr_type, metric, position)
           SELECT $1, description, nfr_type, metric, position FROM story_non_functional_requirements WHERE classification_id = $2`, [classificationId, previousId]);
+      } else if (savedTarget) {
+        await copyPreparedStoryDetails(client, story.rows[0].id, classificationId);
       }
       for (const [position, label] of decision.labels.entries()) {
         await client.query(`INSERT INTO classification_labels (classification_id, module, operation, position)

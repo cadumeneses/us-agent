@@ -2,9 +2,19 @@
 
 ## Fluxo atual — Recommenders (19/10/2026)
 
+Atualização 038: **Project risks** recomenda a partir do perfil do projeto, sem selecionar história/classificação. Escolha configuração e base publicadas, complete os atributos adicionais e execute **Recommend**. O perfil específico é salvo por projeto/versão; itens, vizinhos, contribuições, histórico e replay são rastreáveis. O [roteiro de configuração](recomendador-projeto-configuravel.md) inclui template, referência sintética, pesos, `k`, atributos novos e limites. Aplicar migrations **027/028 antes do deploy**. Produção não foi atualizada nesta entrega.
+
+As instruções de classificação/histórias abaixo aplicam-se aos recomendadores de RNFs e testes. O fluxo de riscos usa somente o contexto exigido pela configuração. Os textos da interface permanecem em inglês e sem citações pessoais nos avisos/ajudas; referências científicas e evidências anteriores ficam na documentação.
+
+Atualização 037: em **My Projects**, cadastre a história por **Add user story**, salve e acrescente suas **Tasks**. **Classify story** usa a história salva; a classificação/reclassificação conserva sua identidade e os detalhes preparados. Histórias sem classificação aparecem no projeto com **Not classified** e entram nos totais. O texto ainda não classificado pode ser editado; o texto classificado é preservado como evidência.
+
+Para RNFs, **Reference source** permite **Published dataset** ou **Operational project history**. O modo publicado carrega a configuração e o perfil/tarefas/classificação salvos, permite escolher a base e conferir os campos em seção expansível. O histórico continua identificado como fonte operacional. Nenhuma seleção troca silenciosamente essas fontes. Os dois modos ficam na mesma aba; a área de bases conserva a execução manual avançada.
+
+Disponibilização deste fluxo exige migration 027 antes do deploy. A [entrega 037](entregas/037-historias-preparadas-e-base-no-projeto.md) registra o percurso manual na branch isolada, sem alteração de produção.
+
 A interface permanece em inglês: a aba **Recommenders**, em `/recommendations`, reúne **Non-functional requirements** e **Test cases**. Depois de cadastrar projeto/perfil, tarefas e classificar histórias no fluxo existente, a pessoa escolhe o recomendador, o projeto e a história classificada. Há um atalho **Recommenders** no detalhe do projeto, conservando esse contexto. Classificações que ainda precisam de revisão oferecem acesso à revisão antes de executar.
 
-RNFs reutilizam o contexto/histórico operacional e as decisões já existentes. Casos de teste usam definição e base publicadas; campos compatíveis são preenchidos com identidade da história, módulo/operação, plataformas e domínio de aplicação. Havendo mais de um par de classificação, a escolha é explícita. Critérios de aceitação, RNFs de contexto e valores que não pertencem à taxonomia selecionada são completados no formulário. Não se infere ID taxonômico por nome nem se reclassifica a base.
+RNFs reutilizam o contexto salvo tanto na base publicada escolhida quanto no histórico explicitamente selecionado. Casos de teste usam definição e base publicadas; campos compatíveis são preenchidos com identidade da história, módulo/operação, plataformas e domínio de aplicação. Havendo mais de um par de classificação, a escolha é explícita. Critérios de aceitação, RNFs de contexto e valores que não pertencem à taxonomia selecionada são completados no formulário. Não se infere ID taxonômico por nome nem se reclassifica a base.
 
 Uma única configuração/base compatível carregada é selecionada automaticamente no fluxo de testes; múltiplas opções exigem escolha. O catálogo é o publicado exato da base e sua disponibilidade é consultada antes de habilitar a execução. Listas paginadas mantêm **Carregar mais**. Falta de publicação/base apresenta acesso à configuração, sem criar dados silenciosamente. A identidade/origem são preservadas no pedido, incluindo o identificador da classificação de origem; editar os campos da execução não altera o perfil salvo.
 

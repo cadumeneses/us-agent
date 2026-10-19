@@ -33,5 +33,5 @@ export type TestCaseRun = Omit<ConfiguredRun, 'snapshot'> & { snapshot: Snapshot
     excluded: Array<{ recordId: string; code: string }>; ranked: TestNeighbor[] }>;
   software: ConfiguredRun['snapshot']['content']['software'];
 }> };
-export type MethodRun = ConfiguredRun | TestCaseRun;
+export type MethodRun = ConfiguredRun | TestCaseRun | import('./project-recommendations').ProjectRecommendationRun;
 export const isTestCaseRun = (run: MethodRun): run is TestCaseRun => run.snapshot.content.schemaVersion === 2;

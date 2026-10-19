@@ -1,5 +1,6 @@
 import type { ApplicationContext, Classification, Dashboard, ProjectSprint, ReviewContext, Story, StoryDetails, Taxonomy } from '../types/models';
-import type { ProjectResearchProfile } from '../types/models';
+import type { ProjectResearchProfile, ProjectStory, PreparedProjectStory } from '../types/models';
+import type { ConfiguredInput, ContentReference } from '../types/configurable-recommendations';
 import type { NfrContext, NfrRun } from '../types/nfr';
 import { notifySessionExpired } from './web-session';
 
@@ -14,6 +15,13 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  projectStoryCounts: () => request<Array<{project:string;stories:number;unclassified:number;cycles:number}>>('/api/project-story-counts'),
+  projectStories: (project: string) => request<ProjectStory[]>(`/api/project-stories?project=${encodeURIComponent(project)}`),
+  projectStory: (id: string) => request<PreparedProjectStory>(`/api/project-stories/${encodeURIComponent(id)}`),
+  createProjectStory: (input: { project: string; sprint: string; text: string; requestId: string }) => request<PreparedProjectStory>('/api/project-stories', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input) }),
+  saveProjectStory: (story: PreparedProjectStory, text: string, details: StoryDetails) => request<PreparedProjectStory>(`/api/project-stories/${encodeURIComponent(story.storyId)}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text, details, revision: story.revision, classificationId: story.classificationId }) }),
+  classifyProjectStory: (story: PreparedProjectStory, mode: string, taxonomyVersion: string) => request<{ runId: string; results: Classification[] }>(`/api/project-stories/${encodeURIComponent(story.storyId)}/classify`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ revision: story.revision, classificationId: story.classificationId, mode, taxonomyVersion }) }),
+  publishedRecommenderInput: (classificationId: string, definition: ContentReference) => request<ConfiguredInput>(`/api/classifications/${encodeURIComponent(classificationId)}/published-recommender-input`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(definition) }),
   projects: () => request<string[]>('/api/projects'),
   createProject: (name: string) => request<{ name: string }>('/api/projects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) }),
   nfrContext: (id: string) => request<NfrContext>(`/api/classifications/${id}/nfr-context`),

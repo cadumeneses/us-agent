@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, FolderKanban, Plus, X } from 'lucide-react';
 import { PageTitle } from '../components/ui';
@@ -13,6 +13,10 @@ export function ProjectsPage() {
   const [name, setName] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [counts,setCounts]=useState<Array<{project:string;stories:number;unclassified:number;cycles:number}>>([]);
+  const [countError,setCountError]=useState('');
+  useEffect(()=>{let active=true;setCountError('');api.projectStoryCounts().then(value=>{if(active)setCounts(value);})
+    .catch((reason:Error)=>{if(active)setCountError(reason.message);});return()=>{active=false;};},[projects,stories]);
 
   async function createProject(event: React.FormEvent) {
     event.preventDefault();
@@ -28,15 +32,17 @@ export function ProjectsPage() {
   }
 
   return <section className="page projects-page">
-    <PageTitle eyebrow="PROJECTS" title="My Projects">Access classified user stories and the NFRs linked to each project.</PageTitle>
+    <PageTitle eyebrow="PROJECTS" title="My Projects">Prepare stories and tasks, classify them when ready, and run recommenders.</PageTitle>
+    {countError&&<p role="alert" className="inline-error">Story totals could not be loaded. {countError}</p>}
     <div className="projects-list-head"><p>{projects.length} project{projects.length === 1 ? '' : 's'}</p><button className="primary project-action" type="button" onClick={() => { setError(''); setFormOpen(true); }}><Plus size={16}/> Add project</button></div>
     {loading ? <p className="state">Loading projects…</p> : projects.length ? <div className="projects-grid">
       {projects.map((project, index) => {
         const projectStories = stories.filter(story => story.project === project);
         const cycles = new Set(projectStories.map(story => story.sprint || 'Backlog'));
+        const total=counts.find(row=>row.project===project);
         return <Link className="card project-overview" key={project} to={`/projects/${encodeURIComponent(project)}`}>
           <i className={`project-mark ${['blue', 'violet', 'orange'][index % 3]}`}><FolderKanban size={19}/></i>
-          <div><h2>{project}</h2><p>{projectStories.length} stor{projectStories.length === 1 ? 'y' : 'ies'} · {cycles.size} cycle{cycles.size === 1 ? '' : 's'}</p></div>
+          <div><h2>{project}</h2><p>{total?`${total.stories} stor${total.stories===1?'y':'ies'} · ${total.unclassified} not classified · ${total.cycles} cycle${total.cycles===1?'':'s'}`:`${projectStories.length} classified stories · ${cycles.size} cycles`}</p></div>
           <span>View details <ArrowRight size={15}/></span>
         </Link>;
       })}

@@ -10,6 +10,7 @@ import { TEST_CASE_METHOD } from '../types/test-case-recommendations';
 import { CatalogState, useCatalog, versionKey } from './VersionCatalog';
 import { TestCaseExecutionForm } from './TestCaseExecutionForm';
 import { ConfiguredRunDetails } from './ConfiguredRunDetails';
+import { DefinitionExecution } from '../pages/ConfiguredRecommendationsPage';
 
 type Publication = DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> };
 
@@ -42,24 +43,27 @@ function projectInput(record: Publication, target: NfrContext['target'], labelIn
   } };
 }
 
-export function ProjectTestRecommendations({ story, busy, onBusy }: {
+export function ProjectTestRecommendations({ story, busy, onBusy, kind='tests' }: {
   story: Story; busy: boolean; onBusy: (value: boolean) => void;
+  kind?: 'tests'|'nfr';
 }) {
   const definitions = useCatalog(recommenderApi.definitions, 0);
   const datasets = useCatalog(recommenderApi.datasets, 0);
   const [choice, setChoice] = useState('');
-  const available = definitions.rows.filter(row => row.state === 'published' && row.method === TEST_CASE_METHOD && row.snapshot);
+  const [runId,setRunId]=useState('');
+  const available = definitions.rows.filter(row => row.state === 'published' && row.method === (kind==='tests'?TEST_CASE_METHOD:'ramos_2019_manhattan_k1_v2') && row.snapshot);
   const selected = available.find(row => versionKey(row) === choice) ?? (!choice && available.length === 1 ? available[0] : undefined);
   return <>
-    <section className="card configured-panel"><h2>Test cases</h2><p>Use a published configuration and reference dataset. Compatible fields are filled from the selected story and project profile.</p>
-      <label>Recommender and version<select disabled={busy || definitions.loading} value={selected ? versionKey(selected) : ''} onChange={event => setChoice(event.target.value)}>
+    <section className="card configured-panel"><h2>{kind==='tests'?'Test cases':'NFRs with a published dataset'}</h2><p>Use a published configuration and reference dataset. Compatible fields are filled from the selected story and project profile.</p>
+      <label>Recommender and version<select disabled={busy || definitions.loading} value={selected ? versionKey(selected) : ''} onChange={event => {setChoice(event.target.value);setRunId('');}}>
         <option value="">Select a configuration</option>{available.map(row => <option key={versionKey(row)} value={versionKey(row)}>{row.name} · {row.version}</option>)}
       </select></label><CatalogState catalog={definitions} title="recommenders"/>
-      {!definitions.loading && !definitions.error && !available.length && <p>No test-case recommender has been published. <Link to="/recommender-setup">Configure a recommender and import a dataset</Link></p>}
+      {!definitions.loading && !definitions.error && !available.length && <p>No compatible recommender has been published. <Link to="/recommender-setup">Configure a recommender and import a dataset</Link></p>}
     </section>
-    {selected && <ProjectTestExecution key={versionKey(selected)} summary={selected} story={story} datasets={datasets.rows} busy={busy} onBusy={onBusy}>
+    {selected && (kind==='tests'?<ProjectTestExecution key={versionKey(selected)} summary={selected} story={story} datasets={datasets.rows} busy={busy} onBusy={onBusy}>
       <CatalogState catalog={datasets} title="reference datasets"/>
-    </ProjectTestExecution>}
+    </ProjectTestExecution>:<DefinitionExecution key={versionKey(selected)} summary={selected} classificationId={story.id} datasets={datasets.rows} busy={busy} onBusy={onBusy} onCompleted={run=>setRunId(run.id)}><CatalogState catalog={datasets} title="reference datasets"/></DefinitionExecution>)}
+    {kind==='nfr'&&runId&&<section className="card configured-panel"><h2>NFR recommendation result</h2><ConfiguredRunDetails key={runId} id={runId}/></section>}
   </>;
 }
 

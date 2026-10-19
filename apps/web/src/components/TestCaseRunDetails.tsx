@@ -24,7 +24,7 @@ export function TestCaseRunDetails({ run, compact = false }: { run: TestCaseRun;
   </>;
   return <>
     <h3>{statusText[result.status]}</h3>
-    <p className="configured-demo-notice">Synthetic E21 equation demonstration · Manhattan similarity · k=3. This is not a reproduction of the original selected Euclidean configuration or evidence of empirical accuracy. Q01/Q02 remain open.</p>
+    <p className="configured-demo-notice">Synthetic demonstration using Manhattan similarity and three neighbors. The original experimental configuration has not been reproduced, and recommendation quality has not been empirically validated.</p>
     <p>Input <b>{request.input.id}</b> · {new Date(run.createdAt).toLocaleString('en-US')}</p>
     <div className="configured-references"><ReferenceDetails title="Definition used" reference={request.definition}/><ReferenceDetails title="Dataset used" reference={request.dataset}/><ReferenceDetails title="Test catalog used" reference={request.catalog}/></div>
     <p>Input source: {request.input.provenance.source}. Dataset: {content.dataset.content.source.description}.</p>

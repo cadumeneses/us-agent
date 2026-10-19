@@ -103,7 +103,7 @@ test('definition editor saves a configurable context, publishes only saved conte
   expect(button("Publish reviewed definition").disabled).toBe(false);
   await change(control("Name", scope), 'RNF revisado'); expect(button("Publish reviewed definition").disabled).toBe(true);
   await click(button("Save definition draft")); await click(button("Publish reviewed definition"));
-  expect(recommenderApi.publishDefinition).toHaveBeenCalledWith('rnf-ramos', 'ui-new', snapshotContent(currentDefinition).sha256);
+  expect(recommenderApi.publishDefinition).toHaveBeenCalledWith('nfr-recommender', 'ui-new', snapshotContent(currentDefinition).sha256);
   expect(scope.textContent).toContain("Definition published with immutable dependencies."); expect(control("Name", scope).matches(':disabled')).toBe(true);
 }, 15000);
 
@@ -125,7 +125,7 @@ test('test-case template publishes the explicit synthetic method with its own ad
     return { state: 'published', definition, snapshot: snapshotContent({ schemaVersion: 1, definition, taxonomies: [], implementation: { methodId: definition.method.id, adapterVersion: implementation.adapterVersion } }) };
   });
   await render(); const scope = editor('Definition editor'); await click(button('New test-case demonstration'));
-  expect(scope.textContent).toContain('Q01/Q02 remain pending'); expect(scope.textContent).not.toContain('Map IDs to scientific names');
+  expect(scope.textContent).toContain('Demonstration using synthetic test associations.'); expect(scope.textContent).not.toContain('Map IDs to scientific names');
   await change(control('Version', scope), 'web-demo'); await click(button('Save definition draft')); await click(button('Publish reviewed definition'));
   expect(currentDefinition.method.id).toBe('us_agent_e21_equations_demo_v1'); expect(currentDefinition.method.parameters.scientific_reproduction).toBe(false);
   expect(currentDefinition.attributes).toHaveLength(8); expect(scope.textContent).toContain('Definition published with immutable dependencies');
@@ -176,10 +176,10 @@ test('scientific taxonomy configuration sends stable IDs and an explicit complet
   const snapshot = snapshotContent(taxonomy), dependency = { state: 'published' as const, snapshot };
   vi.mocked(recommenderApi.taxonomyVersions).mockResolvedValue([{ id: taxonomy.id, version: taxonomy.version, name: taxonomy.name, state: 'published', kind: 'list', nodeCount: 1, snapshot }]);
   await render(); await click(button("New NFR from template")); const scope = editor("Definition editor"); await change(control("Version", scope), 'mapped');
-  const attribute = [...scope.querySelectorAll('details')].find(item => item.querySelector('summary')?.textContent?.startsWith('Plataformas ·'))!;
+  const attribute = [...scope.querySelectorAll('details')].find(item => item.querySelector('summary')?.textContent?.startsWith('Platforms'))!;
   await click(attribute.querySelector('summary')!); await change(control("Type", attribute), 'taxonomy_node'); await change(control("Published taxonomy", attribute), JSON.stringify(['platform-ui', '1']));
   await change(control("Attribute path"), 'platforms'); await change(control("Node ID", scope), 'browser'); await click(button("Add mapping entry"));
-  await change(control('Scientific name for browser'), 'Web'); await click(button("Save definition draft"));
+  await change(control('Comparison value for browser'), 'Web'); await click(button("Save definition draft"));
   expect(currentDefinition.method.parameters.legacy_names).toEqual({ platforms: { browser: 'Web' } });
   vi.mocked(recommenderApi.publishDefinition).mockImplementation(async () => {
     validateConfiguredNfrDefinition(currentDefinition, [dependency]);

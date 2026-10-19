@@ -1,0 +1,69 @@
+{
+  "kind": "manual_engineering_preview_not_a_participant_study",
+  "recordedOn": "2026-10-19",
+  "environment": "local HTTP API and browser against an isolated Neon branch",
+  "syntheticProject": "Workflow preview 20261019",
+  "observedBeforeClassification": {
+    "storyId": "271",
+    "classificationId": null,
+    "task": "Implement login form validation",
+    "evidence": "story-before-classification.png"
+  },
+  "afterReclassification": {
+    "storyId": "271",
+    "previousClassificationId": "271",
+    "classificationId": "272",
+    "storyCount": 1,
+    "tasks": [
+      {
+        "title": "Implement login form validation",
+        "category": "Validate input"
+      }
+    ],
+    "staleWriteStatus": 409
+  },
+  "projectCounts": {
+    "project": "Workflow preview 20261019",
+    "stories": 1,
+    "unclassified": 0,
+    "cycles": 1
+  },
+  "publishedRecommendation": {
+    "runId": "46bade20-6063-4656-b4d7-f58e0e1891c9",
+    "definition": {
+      "id": "workflow-rnf-preview",
+      "version": "1"
+    },
+    "dataset": {
+      "id": "workflow-rnf-base",
+      "version": "1"
+    },
+    "inputStoryId": "271",
+    "classificationSource": "272",
+    "status": "completed",
+    "itemCount": 1,
+    "items": [
+      "The service should remain available during routine usage."
+    ],
+    "replayVerified": true
+  },
+  "browserReview": {
+    "desktop": {
+      "width": 1440,
+      "height": 1000
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflowObserved": false
+    },
+    "language": "English"
+  },
+  "productionModified": false,
+  "newAutomatedTestCases": 0,
+  "existingSuites": {
+    "api": 154,
+    "web": 65
+  },
+  "existingTestAdjustment": "One expected loading label changed from Portuguese to English."
+}

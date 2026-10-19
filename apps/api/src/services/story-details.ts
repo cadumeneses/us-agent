@@ -1,5 +1,6 @@
 import { query, withTransaction } from '../database/pool.js';
 import { emptyTechnologies } from './research-inputs.js';
+import type { PoolClient } from 'pg';
 
 type Technologies = ReturnType<typeof emptyTechnologies>;
 
@@ -18,8 +19,9 @@ export async function loadStoryDetails(classificationId: string): Promise<StoryD
   return { tasks: tasks.rows, functionalRequirements: functionalRequirements.rows, nonFunctionalRequirements: nonFunctionalRequirements.rows };
 }
 
-export async function saveStoryDetails(classificationId: string, details: { tasks: Array<{ id?: string; title: string; done: boolean; category?: string; technologies?: Technologies }>; functionalRequirements: Array<{ description: string }>; nonFunctionalRequirements: Array<{ description: string; type: string; metric: string }> }) {
-  return withTransaction(async client => {
+export async function saveStoryDetails(classificationId: string, details: { tasks: Array<{ id?: string; title: string; done: boolean; category?: string; technologies?: Technologies }>; functionalRequirements: Array<{ description: string }>; nonFunctionalRequirements: Array<{ description: string; type: string; metric: string }> }, transaction?: PoolClient) {
+  const save = async (client: PoolClient) => {
+    await client.query('SELECT s.id FROM stories s JOIN classifications c ON c.story_id=s.id WHERE c.id=$1 FOR UPDATE OF s', [classificationId]);
     const exists = await client.query('SELECT 1 FROM classifications WHERE id = $1 FOR UPDATE', [classificationId]);
     if (!exists.rowCount) return false;
     const previousTasks = await client.query<{ id: string; title: string; category: string; technologies: Technologies; position: number }>('SELECT id::text, title, category, technologies, position FROM story_tasks WHERE classification_id = $1', [classificationId]);
@@ -32,6 +34,9 @@ export async function saveStoryDetails(classificationId: string, details: { task
     }
     for (const [position, item] of details.functionalRequirements.entries()) await client.query('INSERT INTO story_functional_requirements (classification_id, description, position) VALUES ($1, $2, $3)', [classificationId, item.description, position]);
     for (const [position, item] of details.nonFunctionalRequirements.entries()) await client.query('INSERT INTO story_non_functional_requirements (classification_id, description, nfr_type, metric, position) VALUES ($1, $2, $3, $4, $5)', [classificationId, item.description, item.type, item.metric, position]);
+    if (!transaction) await client.query(`UPDATE story_preparations SET revision=revision+1,updated_at=NOW()
+      WHERE story_id=(SELECT story_id FROM classifications WHERE id=$1)`, [classificationId]);
     return true;
-  });
+  };
+  return transaction ? save(transaction) : withTransaction(save);
 }

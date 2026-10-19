@@ -87,3 +87,5 @@ docs/evidencias/b18e/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-
 database/migrations.release.json -text
 database/migrations/025_private_web_sessions.sql -text
 database/migrations/026_private_web_users.sql -text
+database/migrations/027_story_preparations.sql -text
+database/migrations/028_configurable_project_recommendations.sql -text

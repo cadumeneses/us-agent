@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual-engineering-review",
+  "scientificReproduction": false,
+  "humanStudy": false,
+  "project": "Risk profile preview 20261019",
+  "productionModified": false,
+  "branchId": "br-jolly-tree-avvhg4tp",
+  "migrations": {
+    "applied": [
+      "027_story_preparations.sql",
+      "028_configurable_project_recommendations.sql"
+    ],
+    "existingTables": 51,
+    "existingCountsPreserved": true
+  },
+  "classificationsOrStoriesCreatedForProject": 0,
+  "publications": {
+    "project": "Risk profile preview 20261019",
+    "first": {
+      "definition": {
+        "id": "project-risks",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "3dc918d6466fef93297febcd0c3d47052ce40401d8398cd995b0461f478b8ccd"
+      },
+      "dataset": {
+        "id": "risk-reference",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "13d63ea29cafd10920ac7cc501d09e4240b03995ede27b8f193857cffdeb6d5b"
+      },
+      "preview": {
+        "valid": 3,
+        "invalid": 0
+      }
+    },
+    "second": {
+      "definition": {
+        "id": "project-risks",
+        "version": "2",
+        "format": "us-agent-json-v1",
+        "sha256": "a9f482ef8a151ba5c7c05ade5acc1f29bc7585b569109174a75b41b9a00f3a5b"
+      },
+      "dataset": {
+        "id": "risk-reference",
+        "version": "2",
+        "format": "us-agent-json-v1",
+        "sha256": "ba7176bfecc28bc5d8b7f9f19aed487e7c2295d3de13dae3a5fa3d6d1a3562c7"
+      },
+      "preview": {
+        "valid": 3,
+        "invalid": 0
+      }
+    },
+    "projectId": "233"
+  },
+  "attributeDemonstration": {
+    "attributeId": "team_distribution",
+    "introducedOnlyThroughConfiguration": true,
+    "weight": 5,
+    "distributedNeighbor": "reference-b",
+    "coLocatedNeighbor": "reference-a",
+    "noAttributeNeighbors": [
+      "reference-a",
+      "reference-b"
+    ]
+  },
+  "rejectionAndIdempotency": {
+    "sameRequestStatus": 201,
+    "sameRunHash": true,
+    "changedRequestStatus": 409,
+    "missingFeatureStatus": 422,
+    "wrongHashStatus": 422,
+    "wrongHashReason": "Hash da definição difere da publicação selecionada.",
+    "missingFeatureIssues": [
+      [
+        "team_distribution"
+      ]
+    ],
+    "staleProfileStatus": 409
+  },
+  "replays": [
+    {
+      "status": 200,
+      "id": "6c006bce-628e-4491-8ae9-7048bf26cb2a",
+      "originalSha256": "d01839256610007277dd7a8f1b442fdf4687aa82c7df607de2a53c58fcb2890f",
+      "verified": true,
+      "resultMatches": true,
+      "explanationMatches": true,
+      "projectionMatches": true
+    },
+    {
+      "status": 200,
+      "id": "d3b23cb5-f671-43ce-8b0f-cd71880b753b",
+      "originalSha256": "4262b24159dce8049a188938d8afcd57fd9ed8e9d5532e8150a4f1df7e540aaa",
+      "verified": true,
+      "resultMatches": true,
+      "explanationMatches": true,
+      "projectionMatches": true
+    },
+    {
+      "status": 200,
+      "id": "967917f1-3d65-4b80-819b-1b587782c9f0",
+      "originalSha256": "513d15fb7515a0ecc3d8d1a79cfe29649a64bb1c7a11ef90b3c62131b7b9b6b2",
+      "verified": true,
+      "resultMatches": true,
+      "explanationMatches": true,
+      "projectionMatches": true
+    }
+  ],
+  "existingSuites": {
+    "api": 154,
+    "web": 65,
+    "newCases": 0
+  },
+  "browserWorkflow": {
+    "configurationCreatedWithEditor": true,
+    "additionalFeatureCreatedWithEditor": true,
+    "importReviewedAndPublishedWithImporter": true,
+    "projectHasNoStories": true,
+    "profileSavedBeforeRun": true,
+    "runId": "9512c1fa-6fbd-41b5-b737-ee66e1c4af9a",
+    "runSha256": "fd9a04c068b7d048068d8b045148e0deabb56dc7827cd57658d6200798de194e",
+    "definition": {
+      "format": "us-agent-json-v1",
+      "id": "project-risks-ui",
+      "sha256": "153a85b63a86361118e93e9d1657ca01016698753d88020dca9f281129f1315c",
+      "version": "1"
+    },
+    "dataset": {
+      "format": "us-agent-json-v1",
+      "id": "risk-ui-reference",
+      "sha256": "d24ac7e2bf0110e6d7a5d8818ba9f74013329872a629928be316c784397323cd",
+      "version": "1"
+    },
+    "selectedNeighbor": "reference-b",
+    "replay": {
+      "id": "9512c1fa-6fbd-41b5-b737-ee66e1c4af9a",
+      "originalSha256": "fd9a04c068b7d048068d8b045148e0deabb56dc7827cd57658d6200798de194e",
+      "verified": true,
+      "resultMatches": true,
+      "explanationMatches": true,
+      "projectionMatches": true
+    },
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1050,
+        "contentWidth": 1425,
+        "horizontalOverflow": false
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "horizontalOverflow": false
+      }
+    ]
+  }
+}

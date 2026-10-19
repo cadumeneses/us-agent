@@ -1,0 +1,129 @@
+{
+  "state": "published",
+  "snapshot": {
+    "format": "us-agent-json-v1",
+    "sha256": "d24ac7e2bf0110e6d7a5d8818ba9f74013329872a629928be316c784397323cd",
+    "content": {
+      "definition": {
+        "format": "us-agent-json-v1",
+        "id": "project-risks-ui",
+        "sha256": "153a85b63a86361118e93e9d1657ca01016698753d88020dca9f281129f1315c",
+        "version": "1"
+      },
+      "id": "risk-ui-reference",
+      "import": {
+        "fileSha256": "3554cfa5913a5cd14d4afaa83fae664d3f826cea149f2fdc5454a05f0e6261d0",
+        "id": "85d2f2b7-11a3-4a4f-920f-ed7ff7394182",
+        "previewSha256": "b8349d0c7debbc838251a9b66c60db5d87feb0c9221787596151cf56bff6b2e2"
+      },
+      "importerVersion": "structured-import-v1",
+      "mapping": {
+        "attributes": {
+          "domains": {
+            "encoding": "value",
+            "path": [
+              "values",
+              "domains"
+            ]
+          },
+          "languages": {
+            "encoding": "value",
+            "path": [
+              "values",
+              "languages"
+            ]
+          },
+          "platforms": {
+            "encoding": "value",
+            "path": [
+              "values",
+              "platforms"
+            ]
+          },
+          "risks": {
+            "encoding": "value",
+            "path": [
+              "values",
+              "risks"
+            ]
+          },
+          "team_distribution": {
+            "encoding": "value",
+            "path": [
+              "values",
+              "team_distribution"
+            ]
+          }
+        },
+        "recordId": [
+          "id"
+        ]
+      },
+      "records": [
+        {
+          "id": "reference-a",
+          "provenance": {
+            "source": "import:3554cfa5913a5cd14d4afaa83fae664d3f826cea149f2fdc5454a05f0e6261d0",
+            "sourceRecordId": "reference-a"
+          },
+          "values": {
+            "domains": [
+              "Finance"
+            ],
+            "languages": [
+              "TypeScript"
+            ],
+            "platforms": [
+              "Web"
+            ],
+            "risks": [
+              "Changes in financial rules may require rework."
+            ],
+            "team_distribution": "co-located"
+          }
+        },
+        {
+          "id": "reference-b",
+          "provenance": {
+            "source": "import:3554cfa5913a5cd14d4afaa83fae664d3f826cea149f2fdc5454a05f0e6261d0",
+            "sourceRecordId": "reference-b"
+          },
+          "values": {
+            "domains": [
+              "Education"
+            ],
+            "languages": [
+              "TypeScript"
+            ],
+            "platforms": [
+              "Web"
+            ],
+            "risks": [
+              "Unclear acceptance criteria may cause rework."
+            ],
+            "team_distribution": "distributed"
+          }
+        }
+      ],
+      "schemaVersion": 1,
+      "selection": {
+        "excludedOrdinals": [],
+        "includedOrdinals": [
+          1,
+          2
+        ]
+      },
+      "source": {
+        "authorization": {
+          "basis": "synthetic",
+          "reference": "Locally authored synthetic examples; no empirical accuracy claim."
+        },
+        "description": "Synthetic project-risk associations for a UI demonstration."
+      },
+      "version": "1"
+    }
+  },
+  "publishedBy": "local-development",
+  "publishedAt": "2026-10-19T18:58:21.474Z",
+  "retiredAt": null
+}

@@ -1,0 +1,209 @@
+{
+  "state": "published",
+  "definition": {
+    "schemaVersion": 1,
+    "id": "project-risks-ui",
+    "version": "1",
+    "name": "Project risks",
+    "state": "published",
+    "attributes": [
+      {
+        "id": "platforms",
+        "name": "Platforms",
+        "valueType": {
+          "type": "category"
+        },
+        "scope": "project",
+        "cardinality": "many",
+        "required": true,
+        "role": "feature",
+        "representation": "presence"
+      },
+      {
+        "id": "domains",
+        "name": "Application domains",
+        "valueType": {
+          "type": "category"
+        },
+        "scope": "project",
+        "cardinality": "many",
+        "required": true,
+        "role": "feature",
+        "representation": "presence"
+      },
+      {
+        "id": "languages",
+        "name": "Languages",
+        "valueType": {
+          "type": "category"
+        },
+        "scope": "project",
+        "cardinality": "many",
+        "required": true,
+        "role": "feature",
+        "representation": "presence"
+      },
+      {
+        "id": "risks",
+        "name": "Risks",
+        "valueType": {
+          "type": "text"
+        },
+        "scope": "project",
+        "cardinality": "many",
+        "required": true,
+        "role": "output",
+        "representation": "none"
+      },
+      {
+        "id": "team_distribution",
+        "name": "Team distribution",
+        "valueType": {
+          "type": "category"
+        },
+        "scope": "project",
+        "cardinality": "single",
+        "required": true,
+        "role": "feature",
+        "representation": "presence"
+      }
+    ],
+    "method": {
+      "id": "configurable_project_knn_v1",
+      "version": "1",
+      "parameters": {
+        "k": 1,
+        "weights": {
+          "domains": 1,
+          "languages": 1,
+          "platforms": 1,
+          "team_distribution": 5
+        },
+        "distance": "weighted_manhattan",
+        "tie_break": "record_id",
+        "vocabulary": "target_and_dataset",
+        "aggregation": "neighbor_union",
+        "representation": "symmetric_binary_presence",
+        "profile_sources": {
+          "domains": "applicationDomains",
+          "languages": "technologies.languages",
+          "platforms": "platforms"
+        },
+        "missing_features": "reject"
+      },
+      "bindings": {}
+    }
+  },
+  "snapshot": {
+    "format": "us-agent-json-v1",
+    "sha256": "153a85b63a86361118e93e9d1657ca01016698753d88020dca9f281129f1315c",
+    "content": {
+      "definition": {
+        "attributes": [
+          {
+            "cardinality": "many",
+            "id": "platforms",
+            "name": "Platforms",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "project",
+            "valueType": {
+              "type": "category"
+            }
+          },
+          {
+            "cardinality": "many",
+            "id": "domains",
+            "name": "Application domains",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "project",
+            "valueType": {
+              "type": "category"
+            }
+          },
+          {
+            "cardinality": "many",
+            "id": "languages",
+            "name": "Languages",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "project",
+            "valueType": {
+              "type": "category"
+            }
+          },
+          {
+            "cardinality": "many",
+            "id": "risks",
+            "name": "Risks",
+            "representation": "none",
+            "required": true,
+            "role": "output",
+            "scope": "project",
+            "valueType": {
+              "type": "text"
+            }
+          },
+          {
+            "cardinality": "single",
+            "id": "team_distribution",
+            "name": "Team distribution",
+            "representation": "presence",
+            "required": true,
+            "role": "feature",
+            "scope": "project",
+            "valueType": {
+              "type": "category"
+            }
+          }
+        ],
+        "id": "project-risks-ui",
+        "method": {
+          "bindings": {},
+          "id": "configurable_project_knn_v1",
+          "parameters": {
+            "aggregation": "neighbor_union",
+            "distance": "weighted_manhattan",
+            "k": 1,
+            "missing_features": "reject",
+            "profile_sources": {
+              "domains": "applicationDomains",
+              "languages": "technologies.languages",
+              "platforms": "platforms"
+            },
+            "representation": "symmetric_binary_presence",
+            "tie_break": "record_id",
+            "vocabulary": "target_and_dataset",
+            "weights": {
+              "domains": 1,
+              "languages": 1,
+              "platforms": 1,
+              "team_distribution": 5
+            }
+          },
+          "version": "1"
+        },
+        "name": "Project risks",
+        "schemaVersion": 1,
+        "state": "published",
+        "version": "1"
+      },
+      "implementation": {
+        "adapterVersion": "configurable-project-knn-v1",
+        "methodId": "configurable_project_knn_v1"
+      },
+      "schemaVersion": 1,
+      "taxonomies": []
+    }
+  },
+  "draftSha256": "c4c49bb04aee6cdcae9239565ade6bd633acfe1892222495b14be7c38a56a3f6",
+  "createdBy": "local-development",
+  "publishedBy": "local-development",
+  "createdAt": "2026-10-19T18:53:19.752Z",
+  "updatedAt": "2026-10-19T18:53:38.212Z",
+  "publishedAt": "2026-10-19T18:53:38.212Z"
+}

@@ -1,0 +1,5 @@
+[
+  { "id": "reference-a", "values": { "platforms": ["Web"], "domains": ["Finance"], "languages": ["TypeScript"], "risks": ["Changes in financial rules may require rework.", "Integration failures may delay delivery."] } },
+  { "id": "reference-b", "values": { "platforms": ["Web"], "domains": ["Education"], "languages": ["TypeScript"], "risks": ["Unclear acceptance criteria may cause rework."] } },
+  { "id": "reference-c", "values": { "platforms": ["Mobile"], "domains": ["Health"], "languages": ["Kotlin"], "risks": ["Limited device coverage may leave compatibility issues undetected."] } }
+]

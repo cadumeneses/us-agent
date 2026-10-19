@@ -9,6 +9,9 @@ import { recommenderApi, supportsWebMethod } from '../services/recommender-api';
 import type { ConfiguredInput, ConfiguredRun, ContentReference, DatasetSummary, DefinitionRecord, DefinitionSummary, RecommendationRequest } from '../types/configurable-recommendations';
 import { TEST_CASE_METHOD, type MethodRun } from '../types/test-case-recommendations';
 import { TestCaseExecutionForm } from '../components/TestCaseExecutionForm';
+import { api } from '../services/api';
+import { CONFIGURABLE_KNN } from '../types/project-recommendations';
+import { ProjectRecommendationForm } from '../components/ProjectRiskRecommendations';
 
 const identity = (value: { id: string; version: string }) => JSON.stringify([value.id, value.version]);
 const matches = (left: ContentReference, right: ContentReference) => identity(left) === identity(right) && left.format === right.format && left.sha256 === right.sha256;
@@ -31,7 +34,7 @@ export function ConfiguredRecommendationsPage() {
     <PageTitle eyebrow="RECOMMENDERS" title="Run with a published dataset">Choose versions, complete the input, and inspect the evidence for each recommendation.</PageTitle>
     <div className="configured-actions configured-tabs" role="group" aria-label="Recommender area"><button aria-pressed={tab === 'execute'} disabled={busy} onClick={() => setTab('execute')}>New run</button><button aria-pressed={tab === 'history'} disabled={busy} onClick={() => setTab('history')}>Run history</button>{!busy && <Link to="/recommender-setup">Configure and import datasets</Link>}<Link to="/recommendations">Choose a recommender</Link></div>
     <div hidden={tab !== 'execute'}>
-      <section className="card configured-panel"><h2>1. Published definition</h2><p>The form follows the published attributes and method: Felipe Ramos's NFR policy or the synthetic E21 test-case equation demonstration.</p>
+      <section className="card configured-panel"><h2>1. Published definition</h2><p>Choose a configuration to load its input fields and compatible reference datasets.</p>
         <label>Definition and version<select disabled={busy || definitions.loading} value={selected} onChange={event => setSelected(event.target.value)}><option value="">Select a version</option>{definitions.rows.map(row => <option disabled={!supportsWebMethod(row.method)} key={identity(row)} value={identity(row)}>{row.name} · {row.id} · {row.version}{!supportsWebMethod(row.method) && ' · API only'}</option>)}</select></label>
         {!definitions.loading && !definitions.error && !definitions.rows.length && <p>No published definition is available. Open “Configure and import datasets” to prepare the recommender.</p>}
         <CatalogState catalog={definitions} title="definitions"/>
@@ -52,9 +55,10 @@ export function ConfiguredRecommendationsPage() {
   </section>;
 }
 
-function DefinitionExecution({ summary, datasets, busy, onBusy, onCompleted, children }: {
+export function DefinitionExecution({ summary, datasets, busy, onBusy, onCompleted, children, classificationId }: {
   summary: DefinitionSummary; datasets: DatasetSummary[]; busy: boolean; onBusy: (value: boolean) => void;
   onCompleted: (run: MethodRun) => void; children: React.ReactNode;
+  classificationId?: string;
 }) {
   const [record, setRecord] = useState<DefinitionRecord>();
   const [error, setError] = useState('');
@@ -71,13 +75,15 @@ function DefinitionExecution({ summary, datasets, busy, onBusy, onCompleted, chi
   }, [summary.id, summary.version, summary.snapshot?.sha256, summary.snapshot?.format, retry]);
   if (error) return <div className="card configured-panel" role="alert"><p>{error}</p><button onClick={() => setRetry(value => value + 1)}>Retry loading definition</button></div>;
   if (!record?.snapshot) return <p role="status">Loading definition attributes and taxonomies…</p>;
+  if (record.definition.method.id === CONFIGURABLE_KNN) return <><ProjectRecommendationForm key={record.snapshot.sha256} record={record as DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }} datasets={datasets} busy={busy} onBusy={onBusy} onCompleted={onCompleted}/>{children}</>;
   const Form = record.definition.method.id === TEST_CASE_METHOD ? TestCaseExecutionForm : ExecutionForm;
-  return <Form key={record.snapshot.sha256} record={record as DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }} datasets={datasets} busy={busy} onBusy={onBusy} onCompleted={onCompleted}>{children}</Form>;
+  return <Form key={`${record.snapshot.sha256}:${classificationId??''}`} record={record as DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }} datasets={datasets} busy={busy} onBusy={onBusy} onCompleted={onCompleted} classificationId={classificationId}>{children}</Form>;
 }
 
-function ExecutionForm({ record, datasets, busy, onBusy, onCompleted, children }: {
+function ExecutionForm({ record, datasets, busy, onBusy, onCompleted, children, classificationId }: {
   record: DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }; datasets: DatasetSummary[];
   busy: boolean; onBusy: (value: boolean) => void; onCompleted: (run: ConfiguredRun) => void; children: React.ReactNode;
+  classificationId?: string;
 }) {
   const definition = record.snapshot.content.definition, taxonomies = record.snapshot.content.taxonomies;
   const reference: ContentReference = { id: definition.id, version: definition.version, format: record.snapshot.format, sha256: record.snapshot.sha256 };
@@ -90,14 +96,24 @@ function ExecutionForm({ record, datasets, busy, onBusy, onCompleted, children }
   const [labelIndex, setLabelIndex] = useState('');
   const [issues, setIssues] = useState<string[]>([]);
   const [error, setError] = useState('');
+  const [sourceLoading,setSourceLoading]=useState(!!classificationId), [sourceError,setSourceError]=useState(''), [sourceRetry,setSourceRetry]=useState(0);
   const pending = useRef<RecommendationRequest | null>(null);
   const submitting = useRef(false);
   const labelValues = values[definition.method.bindings.labels];
   const labels = Array.isArray(labelValues) ? labelValues as Array<{ module?: string; operation?: string }> : [];
   const labelSignature = JSON.stringify(labelValues);
-  useEffect(() => { setLabelIndex(''); }, [labelSignature]);
+  const inputFields=<ConfiguredInputFields attributes={classificationId?definition.attributes.filter(attribute=>attribute.role!=='context'&&attribute.role!=='output'&&attribute.id!==definition.method.bindings.labels):definition.attributes} values={values} taxonomies={taxonomies} onChange={setValues}/>;
+  useEffect(() => { setLabelIndex(classificationId&&labels.length===1?'0':''); }, [labelSignature,classificationId]);
+  useEffect(()=>{
+    if(!classificationId)return;let active=true;setSourceLoading(true);setSourceError('');
+    api.publishedRecommenderInput(classificationId,reference).then(input=>{
+      if(active){setValues(input.values);setInputId(input.id);setSource(input.provenance.source);}
+    }).catch((reason:Error)=>{if(active)setSourceError(reason.message);}).finally(()=>{if(active)setSourceLoading(false);});
+    return ()=>{active=false;};
+  },[classificationId,record.snapshot.sha256,sourceRetry]);
+  useEffect(()=>{if(classificationId&&!datasetKey&&compatible.length===1)setDatasetKey(identity(compatible[0]));},[classificationId,datasetKey,compatible]);
   async function execute() {
-    if (submitting.current || !dataset) return;
+    if (submitting.current || !dataset || sourceLoading || sourceError) return;
     const nextIssues = inputIssues(definition, values, taxonomies);
     if (!inputId.trim()) nextIssues.push("Enter the input identifier.");
     if (!source.trim()) nextIssues.push("Enter the input source.");
@@ -105,7 +121,7 @@ function ExecutionForm({ record, datasets, busy, onBusy, onCompleted, children }
     setIssues(nextIssues); setError('');
     if (nextIssues.length) return;
     const payload = { definition: reference, dataset: { id: dataset.id, version: dataset.version, ...dataset.snapshot },
-      input: { id: inputId, values, provenance: { source } }, selection: { labelIndex: Number(labelIndex) } };
+      input: { id: inputId, values, provenance: { source,...(classificationId?{sourceRecordId:classificationId}:{}) } }, selection: { labelIndex: Number(labelIndex) } };
     // Preserve the UUID after an uncertain network failure. Changed input always gets a new UUID.
     if (!pending.current || JSON.stringify({ ...pending.current, id: undefined }) !== JSON.stringify(payload)) pending.current = { id: crypto.randomUUID(), ...payload };
     submitting.current = true; onBusy(true);
@@ -114,15 +130,17 @@ function ExecutionForm({ record, datasets, busy, onBusy, onCompleted, children }
     finally { submitting.current = false; onBusy(false); }
   }
   return <form onSubmit={event => { event.preventDefault(); void execute(); }}>
-    <fieldset disabled={busy} className="configured-form-body"><section className="card configured-panel"><h2>2. Reference dataset</h2>
-      <ReferenceDetails title="Selected definition" reference={reference}/>
+    {sourceLoading&&<p role="status">Loading saved project and story values…</p>}
+    {sourceError&&<div role="alert" className="inline-error"><p>{sourceError}</p><button type="button" onClick={()=>setSourceRetry(value=>value+1)}>Reload project input</button></div>}
+    <fieldset disabled={busy||sourceLoading||!!sourceError} className="configured-form-body"><section className="card configured-panel"><h2>2. Reference dataset</h2>
+      {classificationId?<details><summary>Selected recommender version</summary><ReferenceDetails title="Selected definition" reference={reference}/></details>:<ReferenceDetails title="Selected definition" reference={reference}/>}
       <label>Dataset and version<select value={dataset?.id ? datasetKey : ''} onChange={event => setDatasetKey(event.target.value)}><option value="">Select a compatible dataset</option>{compatible.map(row => <option key={identity(row)} value={identity(row)}>{row.id} · {row.version} · {row.recordCount} records</option>)}</select></label>
       {!compatible.length && <p>No compatible dataset is loaded. Load more datasets, if available, or publish a dataset linked to this definition through the API.</p>}
-      {children}{dataset && <ReferenceDetails title="Selected dataset" reference={{ id: dataset.id, version: dataset.version, ...dataset.snapshot }}/>}
+      {children}{dataset && (classificationId?<details><summary>Selected dataset version</summary><ReferenceDetails title="Selected dataset" reference={{ id: dataset.id, version: dataset.version, ...dataset.snapshot }}/></details>:<ReferenceDetails title="Selected dataset" reference={{ id: dataset.id, version: dataset.version, ...dataset.snapshot }}/>)}
       <p>Only this dataset will be compared. Availability and hashes are checked again when running.</p>
-    </section><section className="card configured-panel"><h2>3. Input and execution</h2><div className="configured-input-meta"><label>Input identifier<input maxLength={160} value={inputId} onChange={event => setInputId(event.target.value)}/></label><label>Input source<input maxLength={500} value={source} onChange={event => setSource(event.target.value)}/></label></div>
-      <p>Use original identifiers when representing the same artifact. Additional context appears in the form without changing the NFR calculation.</p>
-      <ConfiguredInputFields attributes={definition.attributes} values={values} taxonomies={taxonomies} onChange={setValues}/>
+    </section><section className="card configured-panel"><h2>3. Input and execution</h2>{classificationId?<details><summary>Saved input source</summary><p>{source}</p></details>:<div className="configured-input-meta"><label>Input identifier<input maxLength={160} value={inputId} onChange={event => setInputId(event.target.value)}/></label><label>Input source<input maxLength={500} value={source} onChange={event => setSource(event.target.value)}/></label></div>}
+      <p>{classificationId?'Values were loaded from the selected project and story. Review the input for this run and choose the reference dataset.':'Use original identifiers when representing the same artifact. Additional context appears in the form without changing the NFR calculation.'}</p>
+      {classificationId?<details open={issues.length>0?true:undefined}><summary>Review or adjust the project profile and tasks for this run</summary>{inputFields}</details>:inputFields}
       <label>Module/operation pair for this run<select value={labelIndex} onChange={event => setLabelIndex(event.target.value)}><option value="">Select a pair entered above</option>{labels.map((label, index) => <option key={index} value={index}>{label.module || "Empty module"} / {label.operation || "Empty operation"}</option>)}</select></label>
       <div className="configured-actions"><button type="submit" className="primary" disabled={!dataset || busy}>{busy ? 'Running…' : "Run recommendation"}</button></div>
       {!dataset && <p>Choose a compatible dataset to run.</p>}

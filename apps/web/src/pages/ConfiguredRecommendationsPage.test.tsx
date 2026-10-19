@@ -116,7 +116,7 @@ test('test-case execution pins the dataset catalog, withholds outputs and shows 
   expect(container.textContent).toContain('Test suggestions found');
   expect(container.textContent).toContain('0.9166666666666666');
   expect(container.textContent).toContain(t.original.snapshot.content.result.content.items[0].artifact.gherkin);
-  expect(container.textContent).toContain('Q01/Q02 remain open');
+  expect(container.textContent).toContain('has not been empirically validated');
   expect(recommenderApi.review).not.toHaveBeenCalled(); expect(recommenderApi.execute).not.toHaveBeenCalled();
 });
 test('test-case network retry preserves its UUID and changing the input uses another UUID', async () => {
@@ -133,7 +133,7 @@ test.each([0, 2, 3])('historical test run %s opens and replays without active de
   vi.mocked(recommenderApi.definitions).mockResolvedValue([]); vi.mocked(recommenderApi.datasets).mockResolvedValue([]);
   vi.mocked(recommenderApi.publishedRun).mockResolvedValue(run);
   await render(`/configured-recommendations?runId=${run.id}`); await click(button('Verify replay'));
-  expect(container.textContent).toContain('Replay verified'); expect(container.textContent).toContain('Synthetic E21 equation demonstration');
+  expect(container.textContent).toContain('Replay verified'); expect(container.textContent).toContain('Synthetic demonstration');
   if (index === 2) expect(container.textContent).toContain('Selected neighbors have no associated tests');
   if (index === 3) expect(container.textContent).toContain('At least three eligible candidates are required');
   expect(recommenderApi.review).not.toHaveBeenCalled();
@@ -204,7 +204,7 @@ test('double submission is locked while awaiting the run and navigation cannot d
   await ready(); let resolve!: (run: ConfiguredRun) => void;
   vi.mocked(recommenderApi.execute).mockReturnValue(new Promise(value => { resolve = value; }));
   await click(button("Run recommendation"));
-  expect(button('Executando…').disabled).toBe(true); expect(button("Run history").disabled).toBe(true);
+  expect(button('Running…').disabled).toBe(true); expect(button("Run history").disabled).toBe(true);
   expect(control("Definition and version").disabled).toBe(true);
   expect(recommenderApi.execute).toHaveBeenCalledTimes(1);
   vi.mocked(recommenderApi.run).mockResolvedValue(f.run());

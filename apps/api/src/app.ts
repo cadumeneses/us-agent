@@ -3,6 +3,8 @@ import { apiRouter } from './routes/api.js';
 import { apiBoundary } from './security/api-boundary.js';
 import { testCaseReviewRouter } from './routes/test-case-review.js';
 import { browserSessionAuthentication, webSessionRouter } from './security/web-sessions.js';
+import { projectStoriesRouter } from './routes/project-stories.js';
+import { configurableRecommendationsRouter } from './routes/configurable-recommendations.js';
 
 export function createApp() {
   const app = express();
@@ -13,6 +15,8 @@ export function createApp() {
   app.use('/api', browserSessionAuthentication);
   app.use('/api', apiBoundary);
   app.use(express.json({ limit: '1mb' }));
+  app.use('/api', projectStoriesRouter);
+  app.use('/api/internal', configurableRecommendationsRouter);
   app.use('/api/internal/test-case-reviews', testCaseReviewRouter);
   app.use('/api', apiRouter);
   app.use((_req, res) => res.status(404).json({ error: 'Endpoint not found.' }));

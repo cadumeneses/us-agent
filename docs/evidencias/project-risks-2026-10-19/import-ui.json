@@ -1,0 +1,311 @@
+{
+  "id": "85d2f2b7-11a3-4a4f-920f-ed7ff7394182",
+  "snapshot": {
+    "format": "us-agent-json-v1",
+    "sha256": "b8349d0c7debbc838251a9b66c60db5d87feb0c9221787596151cf56bff6b2e2",
+    "content": {
+      "definition": {
+        "content": {
+          "definition": {
+            "attributes": [
+              {
+                "cardinality": "many",
+                "id": "platforms",
+                "name": "Platforms",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "domains",
+                "name": "Application domains",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "languages",
+                "name": "Languages",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "risks",
+                "name": "Risks",
+                "representation": "none",
+                "required": true,
+                "role": "output",
+                "scope": "project",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "team_distribution",
+                "name": "Team distribution",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              }
+            ],
+            "id": "project-risks-ui",
+            "method": {
+              "bindings": {},
+              "id": "configurable_project_knn_v1",
+              "parameters": {
+                "aggregation": "neighbor_union",
+                "distance": "weighted_manhattan",
+                "k": 1,
+                "missing_features": "reject",
+                "profile_sources": {
+                  "domains": "applicationDomains",
+                  "languages": "technologies.languages",
+                  "platforms": "platforms"
+                },
+                "representation": "symmetric_binary_presence",
+                "tie_break": "record_id",
+                "vocabulary": "target_and_dataset",
+                "weights": {
+                  "domains": 1,
+                  "languages": 1,
+                  "platforms": 1,
+                  "team_distribution": 5
+                }
+              },
+              "version": "1"
+            },
+            "name": "Project risks",
+            "schemaVersion": 1,
+            "state": "published",
+            "version": "1"
+          },
+          "implementation": {
+            "adapterVersion": "configurable-project-knn-v1",
+            "methodId": "configurable_project_knn_v1"
+          },
+          "schemaVersion": 1,
+          "taxonomies": []
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "153a85b63a86361118e93e9d1657ca01016698753d88020dca9f281129f1315c"
+      },
+      "fields": [
+        {
+          "cardinality": "many",
+          "id": "platforms",
+          "path": [
+            "values",
+            "platforms"
+          ],
+          "required": true,
+          "role": "feature"
+        },
+        {
+          "cardinality": "many",
+          "id": "domains",
+          "path": [
+            "values",
+            "domains"
+          ],
+          "required": true,
+          "role": "feature"
+        },
+        {
+          "cardinality": "many",
+          "id": "languages",
+          "path": [
+            "values",
+            "languages"
+          ],
+          "required": true,
+          "role": "feature"
+        },
+        {
+          "cardinality": "many",
+          "id": "risks",
+          "path": [
+            "values",
+            "risks"
+          ],
+          "required": true,
+          "role": "output"
+        },
+        {
+          "cardinality": "single",
+          "id": "team_distribution",
+          "path": [
+            "values",
+            "team_distribution"
+          ],
+          "required": true,
+          "role": "feature"
+        }
+      ],
+      "file": {
+        "bom": false,
+        "byteLength": 389,
+        "encoding": "utf-8",
+        "name": "projects.synthetic.json",
+        "sha256": "3554cfa5913a5cd14d4afaa83fae664d3f826cea149f2fdc5454a05f0e6261d0"
+      },
+      "importerVersion": "structured-import-v1",
+      "report": {
+        "duplicate": 0,
+        "fatal": [],
+        "invalid": 0,
+        "rows": [
+          {
+            "id": "reference-a",
+            "input": {
+              "id": "reference-a",
+              "provenance": {
+                "source": "import:3554cfa5913a5cd14d4afaa83fae664d3f826cea149f2fdc5454a05f0e6261d0",
+                "sourceRecordId": "reference-a"
+              },
+              "values": {
+                "domains": [
+                  "Finance"
+                ],
+                "languages": [
+                  "TypeScript"
+                ],
+                "platforms": [
+                  "Web"
+                ],
+                "risks": [
+                  "Changes in financial rules may require rework."
+                ],
+                "team_distribution": "co-located"
+              }
+            },
+            "issues": [],
+            "line": null,
+            "ordinal": 1,
+            "status": "valid"
+          },
+          {
+            "id": "reference-b",
+            "input": {
+              "id": "reference-b",
+              "provenance": {
+                "source": "import:3554cfa5913a5cd14d4afaa83fae664d3f826cea149f2fdc5454a05f0e6261d0",
+                "sourceRecordId": "reference-b"
+              },
+              "values": {
+                "domains": [
+                  "Education"
+                ],
+                "languages": [
+                  "TypeScript"
+                ],
+                "platforms": [
+                  "Web"
+                ],
+                "risks": [
+                  "Unclear acceptance criteria may cause rework."
+                ],
+                "team_distribution": "distributed"
+              }
+            },
+            "issues": [],
+            "line": null,
+            "ordinal": 2,
+            "status": "valid"
+          }
+        ],
+        "sourceFields": [
+          "id",
+          "values"
+        ],
+        "total": 2,
+        "unmappedSourceFields": [],
+        "valid": 2
+      },
+      "schemaVersion": 1,
+      "spec": {
+        "definition": {
+          "format": "us-agent-json-v1",
+          "id": "project-risks-ui",
+          "sha256": "153a85b63a86361118e93e9d1657ca01016698753d88020dca9f281129f1315c",
+          "version": "1"
+        },
+        "format": "json",
+        "id": "risk-ui-reference",
+        "mapping": {
+          "attributes": {
+            "domains": {
+              "encoding": "value",
+              "path": [
+                "values",
+                "domains"
+              ]
+            },
+            "languages": {
+              "encoding": "value",
+              "path": [
+                "values",
+                "languages"
+              ]
+            },
+            "platforms": {
+              "encoding": "value",
+              "path": [
+                "values",
+                "platforms"
+              ]
+            },
+            "risks": {
+              "encoding": "value",
+              "path": [
+                "values",
+                "risks"
+              ]
+            },
+            "team_distribution": {
+              "encoding": "value",
+              "path": [
+                "values",
+                "team_distribution"
+              ]
+            }
+          },
+          "recordId": [
+            "id"
+          ]
+        },
+        "schemaVersion": 1,
+        "source": {
+          "authorization": {
+            "basis": "synthetic",
+            "reference": "Locally authored synthetic examples; no empirical accuracy claim."
+          },
+          "description": "Synthetic project-risk associations for a UI demonstration."
+        },
+        "version": "1"
+      }
+    }
+  },
+  "createdBy": "local-development",
+  "createdAt": "2026-10-19T18:55:45.870Z"
+}
