@@ -11,6 +11,7 @@
     "check:scientific-index": "node scripts/check-scientific-index.mjs",
     "evaluate:rnf": "tsx scripts/evaluate-rnf.ts",
     "evaluate:testrec": "tsx scripts/evaluate-testrec.ts",
+    "evaluate:integrated": "tsx scripts/evaluate-integrated.ts",
     "check:testrec-evaluation": "node scripts/check-testrec-evaluation.mjs",
     "audit:testrec-source": "tsx scripts/audit-testrec-source.ts",
     "prepare:testrec-source": "tsx scripts/prepare-testrec-source.ts",

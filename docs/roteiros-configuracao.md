@@ -1,5 +1,7 @@
 # Roteiros e materiais de configuração — B18c
 
+Estado vigente 039: o terceiro exemplo técnico já existe e o [tutorial atual dos três casos](tutorial-three-recommenders.md) usa os controles em inglês. Este documento e seus lotes continuam descrevendo somente os dois exercícios históricos. Não converter esses lotes em um estudo de três tarefas sem nova versão dos materiais/vínculo e revisão metodológica; não houve coleta humana.
+
 19/10/2026. Preparação RQ05/B14/B18, atualizada com B18d. O [lote preservado](evidencias/b18c/materials.json) contém dois exercícios com arquivos importáveis, instruções de uso e gabarito do observador. É uma proposta revisável; não houve estudo com pessoas ou aprovação da orientação.
 
 ## Exercícios entregues
@@ -41,4 +43,4 @@ Para repetir, construir API/web e iniciar o PostgreSQL local do projeto; executa
 
 B18b continua congelado e vinculado ao seu pacote inicial de sementes. B18e entrega o vínculo técnico dos lotes B18c ao [protocolo v2 e analisador](medicao-esforco-configuracao.md), com namespace/hash por sessão, regeneração das tarefas e lotes preservados para replay. A [entrega 030](entregas/030-vinculo-protocolo-materiais-analisador.md) registra a evidência artificial. Não substituir `configuration-effort-v1/materials.json` nem trocar apenas hashes em logs antigos. Os pacotes B18b e B18c continuam reproduzíveis separadamente. Os rótulos de prontidão nos arquivos B18c permanecem como registro histórico do lote congelado; o vínculo posterior não representa aprovação metodológica.
 
-Antes da coleta formal, fechar com a orientação amostra/recrutamento, treinamento, tempo/interrupção, ajuda, auditoria de checkpoints e tratamento de não iniciadas/perdas; vincular a versão final de arquivos ao instrumento e conferir o percurso na instalação efetivamente usada no estudo. Esses itens não receberam números ou aprovação presumidos. O terceiro exemplo sem US continua dependente do material de Ademar. A qualidade empírica de classificação/recomendação de Felipe/Ednaldo permanece uma avaliação distinta.
+Antes da coleta formal, fechar com a orientação amostra/recrutamento, treinamento, tempo/interrupção, ajuda, auditoria de checkpoints e tratamento de não iniciadas/perdas; vincular a versão final de arquivos ao instrumento e conferir o percurso na instalação efetivamente usada no estudo. Esses itens não receberam números ou aprovação presumidos. O terceiro exemplo sem US já funciona tecnicamente em 038, mas não integra os lotes/instrumentos históricos descritos aqui. A qualidade empírica de classificação/recomendação permanece uma avaliação distinta.

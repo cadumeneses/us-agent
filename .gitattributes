@@ -89,3 +89,7 @@ database/migrations/025_private_web_sessions.sql -text
 database/migrations/026_private_web_users.sql -text
 database/migrations/027_story_preparations.sql -text
 database/migrations/028_configurable_project_recommendations.sql -text
+scripts/evaluate-integrated.ts -text
+research/integrated-demonstration-v1/protocol.md -text
+docs/evidencias/integrated-demonstration-v1/** -text
+docs/evidencias/integrated-demonstration-v1/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

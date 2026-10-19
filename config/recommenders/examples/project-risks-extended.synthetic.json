@@ -1,0 +1,57 @@
+[
+  {
+    "id": "reference-a",
+    "values": {
+      "domains": [
+        "Finance"
+      ],
+      "languages": [
+        "TypeScript"
+      ],
+      "platforms": [
+        "Web"
+      ],
+      "risks": [
+        "Changes in financial rules may require rework.",
+        "Integration failures may delay delivery."
+      ],
+      "team_distribution": "co-located"
+    }
+  },
+  {
+    "id": "reference-b",
+    "values": {
+      "domains": [
+        "Education"
+      ],
+      "languages": [
+        "TypeScript"
+      ],
+      "platforms": [
+        "Web"
+      ],
+      "risks": [
+        "Unclear acceptance criteria may cause rework."
+      ],
+      "team_distribution": "distributed"
+    }
+  },
+  {
+    "id": "reference-c",
+    "values": {
+      "domains": [
+        "Health"
+      ],
+      "languages": [
+        "Kotlin"
+      ],
+      "platforms": [
+        "Mobile"
+      ],
+      "risks": [
+        "Limited device coverage may leave compatibility issues undetected."
+      ],
+      "team_distribution": "distributed"
+    }
+  }
+]

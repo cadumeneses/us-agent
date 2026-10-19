@@ -1,5 +1,7 @@
 # Atualização da Vercel e migrations
 
+Pré-condição para o código das entregas 037/038: aplicar **027 e 028 antes do deploy** pelo release de migrations (29 arquivos SQL). Isso acrescenta histórias preparadas e perfis/execuções configuráveis de projeto; não publica automaticamente definições ou bases demonstrativas. A consolidação 039 não consulta nem altera produção. O estado de produção descrito abaixo é a última verificação registrada em 033, não uma nova consulta ao ambiente.
+
 Estado em 19/10/2026 após a [entrega 033](entregas/033-correcao-login-producao.md): variáveis corrigidas, migrations até 026 aplicadas e cinco usuários provisionados em produção. Login, acesso e saída dos cinco usuários foram verificados no endereço público. O roteiro abaixo permanece como procedimento para próximas atualizações; as etapas iniciais não devem ser repetidas para redefinir contas ou credenciais já configuradas.
 
 ## Diagnóstico do deploy atual

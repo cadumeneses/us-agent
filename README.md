@@ -1,4 +1,19 @@
-﻿# WIS User Story Classifier
+﻿# US-Agent
+
+Plataforma de classificação e recomendadores KNN configurados com definições e bases versionadas. A interface em inglês oferece **Non-functional requirements**, **Test cases** e **Project risks** na aba **Recommenders**. O último usa perfil de projeto sem exigir User Story ou classificação.
+
+O [tutorial dos três exemplos](docs/tutorial-three-recommenders.md) reúne o fluxo de projeto e os arquivos de demonstração. A [arquitetura executada](docs/arquitetura-executada.md) delimita o que é compartilhado e o que cada método permite configurar. O [plano e pendências](docs/pendencias-e-proximos-passos.md) distingue capacidades técnicas, disponibilização e avaliação ainda necessária.
+
+Para repetir offline os cálculos preservados, sem API/banco/provedor, após instalar as dependências:
+
+```powershell
+npm.cmd run evaluate:integrated -- --output tmp/integrated-demo-new
+npm.cmd run evaluate:integrated -- --replay tmp/integrated-demo-new
+```
+
+O [protocolo](research/integrated-demonstration-v1/protocol.md) consolida 23 cenários existentes. A demonstração não mede qualidade empírica, classificação prevista ou esforço humano; não são adicionados testes automatizados. As anotações sintéticas de relevância ficam separadas por método. A instalação do código de projeto/perfil requer migrations **027/028 antes do deploy**.
+
+As notas de entregas a seguir preservam o estado de cada incremento em sua época. Para o estado consolidado, usar os documentos acima e a [entrega 039](docs/entregas/039-consolidacao-tres-exemplos.md).
 
 ## Planejamento de evolução
 
@@ -63,7 +78,7 @@ Em desenvolvimento, a conexão padrão é o PostgreSQL local (`DATABASE_TARGET=l
 
 ### Vercel
 
-Para atualizar o deploy, preparar os logins e aplicar migrations fora da Function, seguir [deploy-vercel.md](docs/deploy-vercel.md). A mensagem “A proteção de acesso da API não foi configurada” indica configuração de acesso ausente; migrations sozinhas não resolvem o login. O release novo exige migrations 025/026, provisionamento dos usuários e as variáveis de acesso descritas no roteiro.
+Para atualizar o deploy e aplicar migrations fora da Function, seguir [deploy-vercel.md](docs/deploy-vercel.md). A mensagem “A proteção de acesso da API não foi configurada” indica configuração de acesso ausente; migrations sozinhas não resolvem o login. Contas já provisionadas não devem ser redefinidas ao atualizar o código. As versões 037/038 exigem migrations 027/028; o release contém 29 arquivos SQL, incluindo duas migrations com prefixo 005. Esta consolidação não verifica nem atualiza produção.
 
 O projeto possui `api/index.ts` como entrada serverless e `vercel.json` para servir a SPA e encaminhar `/api/*` ao Express. No projeto da Vercel:
 
@@ -75,29 +90,13 @@ O projeto possui `api/index.ts` como entrada serverless e `vercel.json` para ser
 
 O pool é criado uma vez por instância e integrado ao gerenciamento de conexões da Vercel. Nenhuma Function depende do sistema de arquivos persistente.
 
-## Recomendação de requisitos não funcionais
+## Current recommendation workflow
 
-A aba **Recomendadores · RNFs** usa o método descrito por Felipe Ramos (2019):
-pré-filtragem por módulo/operação, exclusão de projetos de protótipo, vetores binários
-com as características do alvo, similaridade de Manhattan e k=1. Os RNFs são
-recuperados da US vizinha, com origem e comparação das características disponíveis
-na interface. Não há geração de testes nem plano de qualidade.
+Use **My Projects** to create a project and its profile. Save stories and tasks before classifying them. In **Recommenders**, choose NFRs or test cases and the reviewed story. NFRs offer an explicit choice between a published dataset and operational history. Test cases use a published dataset with its exact catalog.
 
-Preencha o perfil do projeto e as categorias das tarefas em **Meus projetos**.
-O histórico precisa conter outras US aceitas, com perfil completo e RNFs associados.
-Em **Recomendadores · RNFs**, escolha a US e o par módulo/operação, execute e avalie
-os resultados. **Aceitar e vincular** registra o RNF na US; rejeitar somente registra
-a avaliação. Execuções preservam snapshots de entrada, resultados e versão do método.
+For **Project risks**, select a project, configuration and dataset; no story is required. Additional categorical features, weights and neighbor count are configurable. Profile values are saved per project/configuration version. Results preserve items, source, representation, contributions and replay; operational risk acceptance/adaptation is not implemented.
 
-Classificação multi-label, comitê, incerteza, revisão e evolução da taxonomia são
-preservados. As adaptações e os limites da reprodução estão em
-[docs/motor-rnf.md](docs/motor-rnf.md). A base original da pesquisa ainda não foi
-localizada para download; exemplos dos testes automatizados não são essa base.
-
-Aplique as migrations normalmente com `npm.cmd run db:migrate`. As tabelas antigas
-de planos permanecem apenas como arquivo histórico, sem telas ou endpoints ativos.
-Após o build, `node scripts/check-nfr-recommendations.mjs` verifica o fluxo HTTP e a
-persistência em um schema temporário do PostgreSQL local, sem alterar dados da pesquisa.
+Follow the [three-example tutorial](docs/tutorial-three-recommenders.md). Method details and scientific limitations remain in the [fidelity documentation](docs/referencias-e-fidelidade.md). Similarity, acceptance and empirical accuracy are different measures.
 
 ## Motor de classificação
 

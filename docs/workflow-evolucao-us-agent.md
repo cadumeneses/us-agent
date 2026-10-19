@@ -2,7 +2,7 @@
 
 Norte de escopo e aceite: [US-Agent_Requisitos_e_Lacunas.md](../US-Agent_Requisitos_e_Lacunas.md), adotado pelo usuário em 19/10/2026. O backlog acompanha os RF/RQ desse documento; a [conferência atual](aderencia-demandas-professor.md) distingue capacidade técnica, demonstração e avaliação científica.
 
-Atualização vigente 038: **Recommenders** em inglês reúne RNF/testes/riscos. B20/B21 atendidos tecnicamente com perfil sem US, atributo adicional de cálculo definido por configuração, base publicada, explicação e replay. Perfis adicionais são persistidos por projeto/versão. Migrations 027/028 validadas em branch isolada; produção/deploy não alterados. Nenhum teste novo; somente expectativas existentes de idioma/apresentação ajustadas. Próximas frentes: B22/B23 e disponibilização. A entrega 037 continua preservando histórias/tarefas antes da classificação e sua identidade posterior.
+Atualização vigente 039: B22a/B23a acrescentam ensaio offline dos três exemplos com 23 condições já preservadas, pacote/replay, tutorial em inglês e arquitetura executada. Não há casos/testes novos nem coleta. B20/B21 continuam atendidos tecnicamente por 038; classificação prevista/revisada observada, relevância empírica e esforço humano permanecem não medidos. Para instalar 037/038, verificar o ambiente e aplicar 027/028 antes do código. Esta consolidação não consulta produção.
 
 Data inicial: 17/10/2026. Usar com o [plano](plano-evolucao-us-agent.md) e a [matriz de fidelidade](referencias-e-fidelidade.md).
 
@@ -73,8 +73,8 @@ Após a [revisão de escopo](revisao-de-escopo.md), B14 prioriza a avaliação c
 | B19 | E4 / RF08, RF14 | Identificar exemplo com entrada de projeto independente de US e material suficiente para a demonstração. | — | Atendido para o exemplo: ARISE, texto e suplemento recebidos. Reprodução científica fora do aceite atual |
 | B20 | E4 / RF02, RF07–RF08, RF10 | Implementar perfil de projeto → riscos pelo fluxo comum; demonstrar atributo adicional de cálculo por configuração sem código específico. | B12, B19 | Atendido tecnicamente em 038: atributos categóricos, pesos e k, perfil persistido, publicação/base e entrada sem história/classificação |
 | B21 | E4 / RF13–14 | Demonstrar configuração, importação, entrada sem US, recomendação, explicação, histórico e replay. | B20 | Demonstração local em 038, com dados sintéticos e efeito do atributo adicional; sem avaliação empírica presumida |
-| B22 | E5 / RF13, RQ01–05 | Rodar protocolo integrado, incluindo comparação de rótulos de referência/previstos e efeito das revisões. | B06, B14, B18, B21 | Planejado |
-| B23 | E5 / RF14, RQ05 | Consolidar pacotes reproduzíveis, arquitetura, tutorial, esforço de configuração e evidências do artigo/dissertação. | B22 | Planejado |
+| B22 | E5 / RF13, RQ01–05 | Rodar protocolo integrado, incluindo comparação de rótulos de referência/previstos e efeito das revisões. | B06, B14, B18, B21 | Parcial: B22a em 039 reexecuta 23 condições existentes offline. Faltam dados/relevância empíricos e previsões/revisões observadas pareadas; não substituídas por rótulos perturbados artificialmente |
+| B23 | E5 / RF14, RQ05 | Consolidar pacotes reproduzíveis, arquitetura, tutorial, esforço de configuração e evidências do artigo/dissertação. | B22 | Parcial: B23a em 039 entrega pacote integrado, tutorial e arquitetura. Faltam vínculo do estudo aos três casos, coleta e material acadêmico final |
 
 B07–B12 devem produzir demonstrações progressivas: configuração RNF executável → publicação recuperável → base importada → fluxo completo. Cada item poderá ser subdividido em mudanças menores quando o contrato estiver definido. B13 entra no desenho inicial e não fica para depois da exposição dos dados.
 
