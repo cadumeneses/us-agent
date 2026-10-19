@@ -1,6 +1,6 @@
 # Roteiros e materiais de configuração — B18c
 
-18/10/2026. Preparação RQ05/B14/B18. O [lote preservado](evidencias/b18c/materials.json) contém dois exercícios com arquivos importáveis, instruções de uso e gabarito do observador. É uma proposta revisável; não houve estudo com pessoas ou aprovação da orientação.
+19/10/2026. Preparação RQ05/B14/B18, atualizada com B18d. O [lote preservado](evidencias/b18c/materials.json) contém dois exercícios com arquivos importáveis, instruções de uso e gabarito do observador. É uma proposta revisável; não houve estudo com pessoas ou aprovação da orientação.
 
 ## Exercícios entregues
 
@@ -31,10 +31,14 @@ npm.cmd run check:configuration-tasks
 
 Cada namespace usa 1–24 caracteres de identificador em minúsculas e gera IDs de definição/base/catálogo/taxonomia próprios. Usar um lote novo por tentativa, confirmar que os IDs ainda não existem na instalação e conservar seus hashes. A ferramenta não publica os objetos nem cria/limpa ambientes. Ela recusa sobrescrita, preserva os arquivos de origem e verifica a repetibilidade de todos os artefatos.
 
-A [verificação offline](evidencias/b18c/verification.json) passa os arquivos pelos contratos reais de publicação, prévia, seleção e execução: um registro RNF e quatro registros de testes são válidos; o novo contexto não muda o resultado RNF; os vizinhos/scores de testes coincidem com a demonstração preservada. Não gera tempos humanos nem avalia pertinência científica. Os roteiros foram conferidos contra os componentes/guias existentes; este novo lote não foi percorrido no navegador nesta entrega.
+A [verificação offline](evidencias/b18c/verification.json) passa os arquivos pelos contratos reais de publicação, prévia, seleção e execução: um registro RNF e quatro registros de testes são válidos; o novo contexto não muda o resultado RNF; os vizinhos/scores de testes coincidem com a demonstração preservada. Não gera tempos humanos nem avalia pertinência científica.
+
+A [verificação B18d](evidencias/b18d/summary.json), posterior ao congelamento dos materiais, percorreu os dois roteiros por controles reais no Edge, com API e PostgreSQL locais. Conferiu igualdade das definições e dos resultados com o gabarito offline, IDs/valores/ordem dos registros, origem e hash do arquivo importado, alvo, histórico após recarga, replay e exportação integral. Não houve exclusões, histórias operacionais ou avaliações de sugestões. O importador registra proveniência por hash do arquivo; a declaração de uso fica preservada na publicação da base. Os materiais B18c permanecem byte a byte iguais.
+
+Para repetir, construir API/web e iniciar o PostgreSQL local do projeto; executar `npm.cmd run check:configuration-tasks-browser`. O script usa Edge no caminho Windows documentado no código, idioma `en`, servidor em `127.0.0.1`, schema aleatório descartável e perfil de navegador próprio. Guarda evidências em `tmp/configuration_browser_*` e remove somente o schema que criou. Não carrega `.env`, não usa a base de produção e não altera os registros de tentativas. Os UUIDs e hashes completos das novas execuções podem variar; definição, valores e resultados precisam coincidir. A [entrega 029](entregas/029-verificacao-roteiros-no-navegador.md) identifica a revisão verificada. Isso comprova o percurso técnico automatizado, sem medir tempo ou dificuldade de pessoas.
 
 ## Relação com o instrumento de medição
 
 B18b continua congelado e vinculado ao seu pacote inicial de sementes. Este lote B18c amplia a proposta de tarefas e **ainda precisa ser vinculado a uma nova versão do protocolo/material de coleta e ao analisador**. Não substituir silenciosamente `configuration-effort-v1/materials.json` nem trocar apenas hashes em logs antigos. Os pacotes B18b e B18c continuam reproduzíveis separadamente.
 
-Antes da coleta formal, fechar com a orientação amostra/recrutamento, treinamento, tempo/interrupção, ajuda, auditoria de checkpoints e tratamento de não iniciadas/perdas; vincular a versão final de arquivos ao instrumento e percorrer o lote na instalação real. Esses itens não receberam números ou aprovação presumidos. O terceiro exemplo sem US continua dependente do material de Ademar. A qualidade empírica de classificação/recomendação de Felipe/Ednaldo permanece uma avaliação distinta.
+Antes da coleta formal, fechar com a orientação amostra/recrutamento, treinamento, tempo/interrupção, ajuda, auditoria de checkpoints e tratamento de não iniciadas/perdas; vincular a versão final de arquivos ao instrumento e conferir o percurso na instalação efetivamente usada no estudo. Esses itens não receberam números ou aprovação presumidos. O terceiro exemplo sem US continua dependente do material de Ademar. A qualidade empírica de classificação/recomendação de Felipe/Ednaldo permanece uma avaliação distinta.

@@ -1,0 +1,896 @@
+{
+  "id": "bcf4f1e5-b5e3-439b-9366-b6e49d562c7a",
+  "snapshot": {
+    "format": "us-agent-json-v1",
+    "sha256": "ccb2210a6bc0900cb1c8f62107160e73e83a8285b1dfc49d03d344f4d2de217d",
+    "content": {
+      "dataset": {
+        "content": {
+          "definition": {
+            "format": "us-agent-json-v1",
+            "id": "study-review-001-rnf",
+            "sha256": "efa1d14f5603a954463af0d5b6f5e0195056ef275341add4c0fe22d3d70931f5",
+            "version": "1"
+          },
+          "id": "study-review-001-rnf-base",
+          "import": {
+            "fileSha256": "a5fda35cb59093921689805459675171a820559f8a76e7bfbe982ca85ac86c96",
+            "id": "53dfde67-1dac-4025-8bf8-20f8d1c2477c",
+            "previewSha256": "07fecbd1e23d6279961c6978757629d8a6dc001c0eedfadcf3fa949ea45f097c"
+          },
+          "importerVersion": "structured-import-v1",
+          "mapping": {
+            "attributes": {
+              "apis": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "apis"
+                ]
+              },
+              "application_domains": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "application_domains"
+                ]
+              },
+              "architectures": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "architectures"
+                ]
+              },
+              "classification_id": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "classification_id"
+                ]
+              },
+              "data_persistence": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "data_persistence"
+                ]
+              },
+              "frameworks": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "frameworks"
+                ]
+              },
+              "labels": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "labels"
+                ]
+              },
+              "languages": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "languages"
+                ]
+              },
+              "nfrs": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "nfrs"
+                ]
+              },
+              "objective": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "objective"
+                ]
+              },
+              "platforms": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "platforms"
+                ]
+              },
+              "project": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "project"
+                ]
+              },
+              "project_taxonomy_version": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "project_taxonomy_version"
+                ]
+              },
+              "review_status": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "review_status"
+                ]
+              },
+              "story_id": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "story_id"
+                ]
+              },
+              "study_context": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "study_context"
+                ]
+              },
+              "tasks": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "tasks"
+                ]
+              },
+              "taxonomy_version": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "taxonomy_version"
+                ]
+              },
+              "text": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "text"
+                ]
+              }
+            },
+            "recordId": [
+              "id"
+            ]
+          },
+          "records": [
+            {
+              "id": "exercise-rnf-neighbor",
+              "provenance": {
+                "source": "import:a5fda35cb59093921689805459675171a820559f8a76e7bfbe982ca85ac86c96",
+                "sourceRecordId": "exercise-rnf-neighbor"
+              },
+              "values": {
+                "apis": [
+                  "Mongoose"
+                ],
+                "application_domains": [
+                  "Education"
+                ],
+                "architectures": [
+                  "Client-server"
+                ],
+                "classification_id": "4",
+                "data_persistence": [
+                  "MongoDB"
+                ],
+                "frameworks": [
+                  "Angular"
+                ],
+                "labels": [
+                  {
+                    "module": "Registry",
+                    "operation": "Retrieve data"
+                  }
+                ],
+                "languages": [
+                  "TypeScript"
+                ],
+                "nfrs": [
+                  {
+                    "attribute": "response_time",
+                    "sentence": "Synthetic sentence for checking item retrieval.",
+                    "type": "Performance"
+                  }
+                ],
+                "objective": "product",
+                "platforms": [
+                  "Web"
+                ],
+                "project": "[DEMO] 4",
+                "project_taxonomy_version": "wis-v1",
+                "review_status": "reviewed",
+                "story_id": "4",
+                "study_context": "pilot",
+                "tasks": [
+                  {
+                    "category": "t6"
+                  },
+                  {
+                    "category": "t7"
+                  }
+                ],
+                "taxonomy_version": "wis-v1",
+                "text": "Illustrative data-retrieval profile; not a record from the original dataset."
+              }
+            }
+          ],
+          "schemaVersion": 1,
+          "selection": {
+            "excludedOrdinals": [],
+            "includedOrdinals": [
+              1
+            ]
+          },
+          "source": {
+            "authorization": {
+              "basis": "synthetic",
+              "reference": "US-Agent configuration task pack; technical demonstration, not original empirical data."
+            },
+            "description": "US-Agent configuration task pack; technical demonstration, not original empirical data."
+          },
+          "version": "1"
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "8ad2b8c8b6f59cd99c8a2c2e277bd480ce0e3483402491aa28b9ce00affdac98"
+      },
+      "definition": {
+        "content": {
+          "definition": {
+            "attributes": [
+              {
+                "cardinality": "single",
+                "id": "classification_id",
+                "name": "Classificação de origem",
+                "representation": "none",
+                "required": true,
+                "role": "context",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "story_id",
+                "name": "História de origem",
+                "representation": "none",
+                "required": true,
+                "role": "context",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "text",
+                "name": "Texto da história",
+                "representation": "none",
+                "required": true,
+                "role": "context",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "project",
+                "name": "Projeto",
+                "representation": "none",
+                "required": true,
+                "role": "context",
+                "scope": "project",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "taxonomy_version",
+                "name": "Versão da taxonomia da classificação",
+                "representation": "none",
+                "required": true,
+                "role": "context",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "review_status",
+                "name": "Estado da revisão",
+                "representation": "none",
+                "required": true,
+                "role": "filter",
+                "scope": "artifact",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "project_taxonomy_version",
+                "name": "Versão da taxonomia do perfil",
+                "representation": "none",
+                "required": true,
+                "role": "context",
+                "scope": "project",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "labels",
+                "name": "Pares módulo/operação",
+                "representation": "none",
+                "required": true,
+                "role": "filter",
+                "scope": "artifact",
+                "valueType": {
+                  "fields": {
+                    "module": {
+                      "type": "category"
+                    },
+                    "operation": {
+                      "type": "category"
+                    }
+                  },
+                  "type": "record"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "platforms",
+                "name": "Plataformas",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "application_domains",
+                "name": "Domínios de aplicação",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "architectures",
+                "name": "Arquiteturas",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "languages",
+                "name": "Linguagens",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "frameworks",
+                "name": "Frameworks",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "apis",
+                "name": "APIs",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "data_persistence",
+                "name": "Persistência",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "objective",
+                "name": "Objetivo",
+                "representation": "none",
+                "required": true,
+                "role": "filter",
+                "scope": "project",
+                "valueType": {
+                  "type": "enum",
+                  "values": [
+                    "",
+                    "product",
+                    "prototype"
+                  ]
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "tasks",
+                "name": "Categorias de tarefas",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "artifact",
+                "valueType": {
+                  "fields": {
+                    "category": {
+                      "type": "category"
+                    }
+                  },
+                  "type": "record"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "nfrs",
+                "name": "RNFs associados",
+                "representation": "none",
+                "required": true,
+                "role": "output",
+                "scope": "artifact",
+                "valueType": {
+                  "fields": {
+                    "attribute": {
+                      "type": "category"
+                    },
+                    "sentence": {
+                      "type": "text"
+                    },
+                    "type": {
+                      "type": "category"
+                    }
+                  },
+                  "type": "record"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "study_context",
+                "name": "Study context",
+                "representation": "none",
+                "required": true,
+                "role": "context",
+                "scope": "artifact",
+                "valueType": {
+                  "taxonomy": {
+                    "format": "us-agent-json-v1",
+                    "id": "study-review-001-context",
+                    "sha256": "d02936a9c290e7a75a44676cdcd48e2d0698ee8405029d3ebd52729518dafeb6",
+                    "version": "1"
+                  },
+                  "type": "taxonomy_node"
+                }
+              }
+            ],
+            "id": "study-review-001-rnf",
+            "method": {
+              "bindings": {
+                "apis": "apis",
+                "application_domains": "application_domains",
+                "architectures": "architectures",
+                "classification_id": "classification_id",
+                "data_persistence": "data_persistence",
+                "frameworks": "frameworks",
+                "labels": "labels",
+                "languages": "languages",
+                "nfrs": "nfrs",
+                "objective": "objective",
+                "platforms": "platforms",
+                "project": "project",
+                "project_taxonomy_version": "project_taxonomy_version",
+                "review_status": "review_status",
+                "story_id": "story_id",
+                "tasks": "tasks",
+                "taxonomy_version": "taxonomy_version",
+                "text": "text"
+              },
+              "id": "ramos_2019_manhattan_k1_v2",
+              "parameters": {
+                "k": 1
+              },
+              "version": "2"
+            },
+            "name": "RNF — compatibilidade Ramos 2019 / US-Agent v2",
+            "schemaVersion": 1,
+            "state": "published",
+            "version": "1"
+          },
+          "implementation": {
+            "adapterVersion": "rnf-v2-profile-adapter-v3",
+            "methodId": "ramos_2019_manhattan_k1_v2"
+          },
+          "schemaVersion": 1,
+          "taxonomies": [
+            {
+              "snapshot": {
+                "content": {
+                  "id": "study-review-001-context",
+                  "kind": "list",
+                  "name": "Configuration exercise — context",
+                  "nodes": [
+                    {
+                      "description": "Pilot context",
+                      "id": "pilot",
+                      "name": "Pilot context",
+                      "parentId": null
+                    }
+                  ],
+                  "schemaVersion": 1,
+                  "selection": "any",
+                  "source": "US-Agent technical exercise; synthetic context/criteria only.",
+                  "version": "1"
+                },
+                "format": "us-agent-json-v1",
+                "sha256": "d02936a9c290e7a75a44676cdcd48e2d0698ee8405029d3ebd52729518dafeb6"
+              },
+              "state": "published"
+            }
+          ]
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "efa1d14f5603a954463af0d5b6f5e0195056ef275341add4c0fe22d3d70931f5"
+      },
+      "explanation": {
+        "content": {
+          "candidates": [
+            {
+              "classificationId": "4",
+              "datasetRecordId": "exercise-rnf-neighbor",
+              "distance": 0,
+              "eligible": true,
+              "issues": [],
+              "rank": 1,
+              "similarity": 1,
+              "storyId": "4",
+              "vector": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          ],
+          "policy": {
+            "aggregation": "binary-cooccurrence_similarity_k1",
+            "distance": "manhattan",
+            "eligibility": "accepted-profile_product_same-module-operation_exclude-same-story",
+            "emptyNeighbor": "retain-neighbor-without-fallback",
+            "id": "ramos-v2-policy-v1",
+            "identity": "declared-story-id",
+            "k": 1,
+            "kernel": "policy-knn-v1",
+            "method": "ramos_2019_manhattan_k1_v2",
+            "representation": "target_binary_presence",
+            "similarity": "1-distance/target-dimensions",
+            "taxonomyComparison": "exact-legacy-names_without-version-filter",
+            "tieBreak": "classification-id_numeric-then-locale"
+          }
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "b48ce9097b721dfb884d05eef0875f290aa7803f343e658fc42070fc13c7eb01"
+      },
+      "projection": {
+        "content": {
+          "history": [
+            {
+              "classificationId": "4",
+              "labels": [
+                {
+                  "module": "Registry",
+                  "operation": "Retrieve data"
+                }
+              ],
+              "nfrs": [
+                {
+                  "attribute": "response_time",
+                  "sentence": "Synthetic sentence for checking item retrieval.",
+                  "type": "Performance"
+                }
+              ],
+              "project": "[DEMO] 4",
+              "projectProfile": {
+                "applicationDomains": [
+                  "Education"
+                ],
+                "architectures": [
+                  "Client-server"
+                ],
+                "objective": "product",
+                "platforms": [
+                  "Web"
+                ],
+                "taxonomyVersion": "wis-v1",
+                "technologies": {
+                  "apis": [
+                    "Mongoose"
+                  ],
+                  "dataPersistence": [
+                    "MongoDB"
+                  ],
+                  "frameworks": [
+                    "Angular"
+                  ],
+                  "languages": [
+                    "TypeScript"
+                  ]
+                }
+              },
+              "reviewStatus": "reviewed",
+              "storyId": "4",
+              "tasks": [
+                {
+                  "category": "t6"
+                },
+                {
+                  "category": "t7"
+                }
+              ],
+              "taxonomyVersion": "wis-v1",
+              "text": "Illustrative data-retrieval profile; not a record from the original dataset."
+            }
+          ],
+          "target": {
+            "classificationId": "1",
+            "labels": [
+              {
+                "module": "Registry",
+                "operation": "Retrieve data"
+              }
+            ],
+            "nfrs": [],
+            "project": "[DEMO] 1",
+            "projectProfile": {
+              "applicationDomains": [
+                "Education"
+              ],
+              "architectures": [
+                "Client-server"
+              ],
+              "objective": "product",
+              "platforms": [
+                "Web"
+              ],
+              "taxonomyVersion": "wis-v1",
+              "technologies": {
+                "apis": [
+                  "Mongoose"
+                ],
+                "dataPersistence": [
+                  "MongoDB"
+                ],
+                "frameworks": [
+                  "Angular"
+                ],
+                "languages": [
+                  "TypeScript"
+                ]
+              }
+            },
+            "reviewStatus": "reviewed",
+            "storyId": "1",
+            "tasks": [
+              {
+                "category": "t6"
+              },
+              {
+                "category": "t7"
+              }
+            ],
+            "taxonomyVersion": "wis-v1",
+            "text": "Illustrative data-retrieval profile; not a record from the original dataset."
+          }
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "82589f68833ad10be8a14b33b3f3953160504cade3afc5568820218a94e39db2"
+      },
+      "request": {
+        "content": {
+          "dataset": {
+            "format": "us-agent-json-v1",
+            "id": "study-review-001-rnf-base",
+            "sha256": "8ad2b8c8b6f59cd99c8a2c2e277bd480ce0e3483402491aa28b9ce00affdac98",
+            "version": "1"
+          },
+          "definition": {
+            "format": "us-agent-json-v1",
+            "id": "study-review-001-rnf",
+            "sha256": "efa1d14f5603a954463af0d5b6f5e0195056ef275341add4c0fe22d3d70931f5",
+            "version": "1"
+          },
+          "id": "bcf4f1e5-b5e3-439b-9366-b6e49d562c7a",
+          "input": {
+            "id": "exercise-rnf-target",
+            "provenance": {
+              "source": "US-Agent configuration task pack; technical demonstration, not original empirical data."
+            },
+            "values": {
+              "apis": [
+                "Mongoose"
+              ],
+              "application_domains": [
+                "Education"
+              ],
+              "architectures": [
+                "Client-server"
+              ],
+              "classification_id": "1",
+              "data_persistence": [
+                "MongoDB"
+              ],
+              "frameworks": [
+                "Angular"
+              ],
+              "labels": [
+                {
+                  "module": "Registry",
+                  "operation": "Retrieve data"
+                }
+              ],
+              "languages": [
+                "TypeScript"
+              ],
+              "nfrs": [],
+              "objective": "product",
+              "platforms": [
+                "Web"
+              ],
+              "project": "[DEMO] 1",
+              "project_taxonomy_version": "wis-v1",
+              "review_status": "reviewed",
+              "story_id": "1",
+              "study_context": "pilot",
+              "tasks": [
+                {
+                  "category": "t6"
+                },
+                {
+                  "category": "t7"
+                }
+              ],
+              "taxonomy_version": "wis-v1",
+              "text": "Illustrative data-retrieval profile; not a record from the original dataset."
+            }
+          },
+          "selection": {
+            "labelIndex": 0
+          }
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "adf47da8d3cbe017982ebd3cfd9b23d93d3dee97505b5b5b9ef59eea4fef183c"
+      },
+      "result": {
+        "content": {
+          "dimensions": [
+            "api:Mongoose",
+            "applicationDomain:Education",
+            "architecture:Client-server",
+            "framework:Angular",
+            "language:TypeScript",
+            "persistence:MongoDB",
+            "platform:Web",
+            "task:t6",
+            "task:t7"
+          ],
+          "eligibleCount": 1,
+          "excludedCount": 0,
+          "items": [
+            {
+              "alreadyLinked": false,
+              "attribute": "response_time",
+              "key": "ee667bae9d2b7b7e01428462213a0e99d272828664749b1549e5bc12568a3809",
+              "score": 1,
+              "sentence": "Synthetic sentence for checking item retrieval.",
+              "type": "Performance"
+            }
+          ],
+          "k": 1,
+          "label": {
+            "module": "Registry",
+            "operation": "Retrieve data"
+          },
+          "messages": [],
+          "method": "ramos_2019_manhattan_k1_v2",
+          "neighbor": {
+            "classificationId": "4",
+            "matched": [
+              "api:Mongoose",
+              "applicationDomain:Education",
+              "architecture:Client-server",
+              "framework:Angular",
+              "language:TypeScript",
+              "persistence:MongoDB",
+              "platform:Web",
+              "task:t6",
+              "task:t7"
+            ],
+            "missing": [],
+            "project": "[DEMO] 4",
+            "similarity": 1,
+            "storyId": "4",
+            "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+            "vector": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "status": "completed"
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "37be7574a42807fc71e74e2d24f911d13562c210bfa52ef7c8f704cf8bceeb73"
+      },
+      "schemaVersion": 1,
+      "software": {
+        "adapterVersion": "rnf-v2-profile-adapter-v3",
+        "definitionAdapterVersion": "rnf-v2-profile-adapter-v3",
+        "kernelVersion": "policy-knn-v1",
+        "policyVersion": "ramos-v2-policy-v1",
+        "runtime": {
+          "icu": "77.1",
+          "locale": "pt-BR",
+          "node": "v24.11.1"
+        }
+      }
+    }
+  },
+  "durationMs": 101.44470000000001,
+  "createdBy": "local-development",
+  "createdAt": "2026-10-19T10:11:31.355Z"
+}

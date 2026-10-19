@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "kind": "configuration_tasks_browser_verification",
+  "recordedAt": "2026-10-19T10:12:25.136115+00:00",
+  "participantStudyPerformed": false,
+  "empiricalClaim": false,
+  "sources": {
+    "scripts/check-configuration-tasks-browser.mjs": "9f9d69631618c58b23f82b720de42c92bd1600a82fe23474a550eaad4fbd9408",
+    "docs/evidencias/b18c/manifest.json": "d03ce00799ad87d5524f11b74886100c52f5b6c936640468ebe7905b67691138"
+  },
+  "artifacts": {
+    "summary.json": "32e9016a4845873cdb7d93d1435e4cba3711fc1dbab881f7bb763ff19c633f6c",
+    "rnf-run.json": "3956f305572b8a5a642ef7f56925dad8dbbc134f5f9feef184a0376f4ae20f09",
+    "tests-run.json": "c787205d805de80f7528a3e6fc8dc184e13cc0b5fe4d57dc37b5aa73735cbab4",
+    "rnf.png": "6ae22e7e23f6cd9164d8e7ce59038706b778e383fe3063dcf8db25f9c9dad96b",
+    "tests.png": "c24c8fad308a32db257bd01818ab30601abbc68dbc5fefe944982be0c863fe19"
+  }
+}

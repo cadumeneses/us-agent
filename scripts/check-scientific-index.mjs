@@ -29,7 +29,8 @@ const reviewedAssociations = json('docs/evidencias/b02g/manifest.json');
 const reconciledData = json('docs/evidencias/b02h/manifest.json');
 const configurationEffort = json('docs/evidencias/b18b/manifest.json');
 const configurationTasks = json('docs/evidencias/b18c/manifest.json');
-for (const inventory of [baseline.sourceHashes, pilot.sources, equations.content.sourceHashes, publishedEquations.content.sourceHashes, assessments.content.sourceHashes, testPilot.sources, sourceAudit.content.sourceHashes, sourcePreparation.sources, sourceTransport.sources, sourceVersions.sources, reviewedAssociations.sources, reconciledData.sources, configurationEffort.sources, configurationTasks.sources]) {
+const configurationBrowser = json('docs/evidencias/b18d/manifest.json');
+for (const inventory of [baseline.sourceHashes, pilot.sources, equations.content.sourceHashes, publishedEquations.content.sourceHashes, assessments.content.sourceHashes, testPilot.sources, sourceAudit.content.sourceHashes, sourcePreparation.sources, sourceTransport.sources, sourceVersions.sources, reviewedAssociations.sources, reconciledData.sources, configurationEffort.sources, configurationTasks.sources, configurationBrowser.sources]) {
   for (const [path, sha256] of Object.entries(inventory)) add(path, sha256);
 }
 const sourceCount = expected.size;
@@ -43,6 +44,7 @@ for (const [name, sha256] of Object.entries(reviewedAssociations.artifacts)) add
 for (const [name, sha256] of Object.entries(reconciledData.artifacts)) add(`docs/evidencias/b02h/${name}`, sha256);
 for (const [name, sha256] of Object.entries(configurationEffort.artifacts)) add(`docs/evidencias/b18b/${name}`, sha256);
 for (const [name, sha256] of Object.entries(configurationTasks.artifacts)) add(`docs/evidencias/b18c/${name}`, sha256);
+for (const [name, sha256] of Object.entries(configurationBrowser.artifacts)) add(`docs/evidencias/b18d/${name}`, sha256);
 for (const [path, sha256] of expected) {
   assert.equal(createHash('sha256').update(read(path)).digest('hex'), sha256, `Staged scientific bytes differ: ${path}`);
 }

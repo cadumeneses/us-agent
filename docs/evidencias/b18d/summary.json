@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "kind": "automated_browser_verification",
+  "participantStudyPerformed": false,
+  "empiricalClaim": false,
+  "softwareRevision": "6c1dff6405904ec140ee5a505777ad41668ddb6b",
+  "interfaceLanguage": "en",
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Edg/155.0.4283.62",
+    "revision": "@aa3a7406ba8c53a83536df539f07124d73c899bd",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+    "jsVersion": "15.5.9.7"
+  },
+  "namespace": "study-review-001",
+  "runs": {
+    "rnf": {
+      "id": "bcf4f1e5-b5e3-439b-9366-b6e49d562c7a",
+      "sha256": "ccb2210a6bc0900cb1c8f62107160e73e83a8285b1dfc49d03d344f4d2de217d",
+      "definitionSha256": "efa1d14f5603a954463af0d5b6f5e0195056ef275341add4c0fe22d3d70931f5",
+      "datasetSha256": "8ad2b8c8b6f59cd99c8a2c2e277bd480ce0e3483402491aa28b9ce00affdac98",
+      "resultSha256": "37be7574a42807fc71e74e2d24f911d13562c210bfa52ef7c8f704cf8bceeb73",
+      "records": 1,
+      "replayVerified": true,
+      "exportMatched": true
+    },
+    "tests": {
+      "id": "c49eab5c-903c-4fd9-bd61-239354832087",
+      "sha256": "874f3cfeeb96fe3fb6c3ca3210b89de3f810528ab88c5078294f2c8b4d4bec31",
+      "definitionSha256": "54cf724768c2a8163c508d7bc0ef5b780fe76417885188d9d6f89034d79db957",
+      "datasetSha256": "26872de72f4a7377bdd422e8e770287b95bbf136652a758b2ecfdefc333de655",
+      "resultSha256": "8bf162f6b4a118f9fcd2cab811cfc595f550e0d82151ed5977f023b57acfc04a",
+      "records": 4,
+      "replayVerified": true,
+      "exportMatched": true
+    }
+  },
+  "sources": {
+    "scripts/check-configuration-tasks-browser.mjs": "9f9d69631618c58b23f82b720de42c92bd1600a82fe23474a550eaad4fbd9408",
+    "docs/evidencias/b18c/manifest.json": "d03ce00799ad87d5524f11b74886100c52f5b6c936640468ebe7905b67691138",
+    "apps/web/src/components/RecommenderEditors.tsx": "f2e53290bb44d0a0d300455c142a2137f148a727c6b5ca0b2b1304398b51f2b8",
+    "apps/web/src/pages/RecommenderSetupPage.tsx": "e0437c606db4f3a2ad1e33fe0423bcca2fe529a19bcf23391defbf46e3b67c7d",
+    "apps/web/src/pages/ConfiguredRecommendationsPage.tsx": "0ab26ab0da0896354507f2b7ac44216032a2443dc7e838a9d03c0d2d30ecd7ae"
+  },
+  "browserExceptions": 0,
+  "verified": [
+    "manual-settings-through-controls",
+    "exact-published-definitions",
+    "one-and-four-records-no-exclusion",
+    "target-values-and-provenance",
+    "exact-offline-results",
+    "history-reload",
+    "replay",
+    "complete-evidence-download",
+    "no-operational-story-or-assessment"
+  ],
+  "limits": [
+    "automated_technical_check_not_a_human_attempt",
+    "not_a_scientific_article_reproduction",
+    "no_configuration_effort_measurement",
+    "final_protocol_and_instrument_binding_still_pending"
+  ]
+}

@@ -1,6 +1,6 @@
 # Aderência às demandas relatadas do professor
 
-Revisão em 18/10/2026, após B18c. Base: documento `US-Agent_Requisitos_e_Lacunas.md` informado pelo usuário, plano, artigo E26 fornecido e evidências locais das entregas 001–028. Os áudios originais não foram reanalisados. Requisitos/aceites derivados são propostas de engenharia, não aprovação do professor.
+Revisão em 19/10/2026, após B18d. Base: documento `US-Agent_Requisitos_e_Lacunas.md` informado pelo usuário, plano, artigo E26 fornecido e evidências locais das entregas 001–029. Os áudios originais não foram reanalisados. Requisitos/aceites derivados são propostas de engenharia, não aprovação do professor.
 
 **Conclusão: a direção atual está alinhada, mas o atendimento ainda é parcial.** O RNF ganhou configuração e rastreabilidade; o processo de avaliação passou a ser verificável; o segundo exemplo já usa os contratos no percurso web de configuração/importação/execução. A alegação central de generalidade ainda exige execução do caso sem US. Qualidade experimental ainda exige dados, referência e estudo apropriados.
 
@@ -14,9 +14,11 @@ Revisão em 18/10/2026, após B18c. Base: documento `US-Agent_Requisitos_e_Lacun
 | Avaliar a qualidade — A2/A5 | Protocolo, pacote/CSV/replay e métricas em 13 cenários sintéticos RNF de B14a e seis cenários sintéticos de testes B18a, com relevância separada e partição declarada. | Parcial: isso verifica o processo, sem medir utilidade nos dados originais nem esforço de participantes. Q01–Q03, dados e protocolo empírico continuam pendentes. |
 | Usar os exemplos e evidências na dissertação/artigo — A5 | Entregas, limites e matriz de fidelidade preservados. | Pendente consolidar os três exemplos e resultados empíricos; revisão da orientação ainda não registrada. |
 
-## Prioridade mantida
+## Prioridade atual
 
-Avançar B15/B16 a partir das partes confirmadas de Ednaldo e fechar as questões Q01/Q02 antes de anunciar fidelidade do ranking. B16a demonstra as equações explícitas sem preencher lacunas da fonte; B15c/B16b integram essa identidade no backend comum; B17a entrega configuração/importação/execução pela interface; B17b entrega avaliação/cópias na entrada preservada. B18a prepara protocolo técnico, julgamentos artificiais e avaliador reproduzível; o próximo critério é confirmar protocolo/referência e dados empíricos para avaliar o segundo exemplo e medir configuração, mantendo separada a reprodução ainda pendente. Acompanhar dados/protocolo empírico do RNF e referência do terceiro caso. Materiais externos pendentes não devem bloquear trabalho independente, mas também não podem ser substituídos por regras presumidas.
+Fechar o vínculo dos materiais B18c ao protocolo e ao analisador em versão explícita, sem alterar os pacotes congelados. B18d percorreu os dois exercícios no navegador local e confirmou definições, valores importados, resultados, histórico, replay e exportação. Isso resolve a pendência técnica do percurso deste lote, sem medir esforço humano. Faltam decisões metodológicas e coleta observada. A [entrega 029](entregas/029-verificacao-roteiros-no-navegador.md) registra os limites e a evidência.
+
+Em paralelo, obter referência/material de Ademar para executar o terceiro caso sem US e complementar fontes/dados/protocolos empíricos de Felipe e Ednaldo. Para Ednaldo permanecem Q01, Q03 e o residual Q02/CT05; CT01/TC01 e a diferença com/sem heurística já foram esclarecidos em B02g. A conciliação B02h não autoriza preencher IDs/perfis ou escolher o recorte experimental. Evitar novas auditorias dos mesmos arquivos sem fonte ou pergunta nova. Não anunciar reprodução científica nem conclusão da generalidade enquanto esses critérios estiverem abertos.
 
 Segurança entregue permanece preservada; login e organizações continuam condicionantes para bases restritas/uso multiusuário protegido. Não são o foco dos próximos incrementos locais. Aprovação técnica, compatibilidade com exemplos e aprovação científica da orientação são evidências distintas.
 

@@ -78,3 +78,4 @@ scripts/check-configuration-effort.mjs -text
 apps/api/src/evaluation/configuration-task-materials.ts -text
 scripts/prepare-configuration-tasks.ts -text
 scripts/check-configuration-tasks.mjs -text
+scripts/check-configuration-tasks-browser.mjs -text
