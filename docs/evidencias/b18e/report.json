@@ -1,0 +1,243 @@
+{
+  "format": "us-agent-json-v1",
+  "sha256": "96dc7ad41eb239f947438f203be6ca92592d421a0bb65030678b1bc9c1d00396",
+  "content": {
+    "artifactVerification": "references_declared_not_fetched",
+    "empiricalClaim": false,
+    "independentSessions": false,
+    "inputSha256": "fb07f907c8f92ba35b48e971c964ac29985527e55132fe835c9d4775ad8a9dad",
+    "kind": "synthetic_rehearsal",
+    "materials": {
+      "id": "configuration-effort-task-binding",
+      "sha256": "0f435d889e04c546b8206d76434e1e9b916887a100ef7dec3db34a5b02e3d9ef",
+      "version": "2"
+    },
+    "protocol": {
+      "sha256": "3a7e5d6f247f61afd1e6b030738087a90e284fa34a0e768d63fdd54690240bc7",
+      "version": "configuration-effort-v2"
+    },
+    "results": [
+      {
+        "activeMs": 120000,
+        "applicationCodeChanges": 0,
+        "attempt": 1,
+        "checkpoints": {
+          "dataset": {
+            "activeAtMs": 70000,
+            "elapsedAtMs": 100000,
+            "reference": {
+              "id": "synthetic-rnf-dataset",
+              "sha256": "5e71d49fe29a475400a59222383123887b3ba011802ae2ea45ba4061f9057a60",
+              "version": "synthetic.1"
+            }
+          },
+          "definition": {
+            "activeAtMs": 10000,
+            "elapsedAtMs": 10000,
+            "reference": {
+              "id": "synthetic-rnf-definition",
+              "sha256": "461f3709e87486e6391b6ff182c575ef0b7d1fc424edfea3095ce5620cb4ce14",
+              "version": "synthetic.1"
+            }
+          },
+          "replay": {
+            "activeAtMs": 115000,
+            "elapsedAtMs": 145000,
+            "reference": {
+              "id": "synthetic-rnf-replay",
+              "sha256": "6511e2ed021702be06b9c36748506620252caa9e00da09f49f9c30eb5aad8588",
+              "version": "synthetic.1"
+            }
+          },
+          "run": {
+            "activeAtMs": 100000,
+            "elapsedAtMs": 130000,
+            "reference": {
+              "id": "synthetic-rnf-run",
+              "sha256": "c2b716ef26a39e6e8c3eb48c7d17363641d0b1b965a3310ef6db2302a822c13b",
+              "version": "synthetic.1"
+            }
+          },
+          "taxonomy": {
+            "activeAtMs": 40000,
+            "elapsedAtMs": 70000,
+            "reference": {
+              "id": "synthetic-rnf-taxonomy",
+              "sha256": "dd27b0fd01d6fbe660f6a78e891c7ad5da3865dfa5e8760078787e7b10800735",
+              "version": "synthetic.1"
+            }
+          }
+        },
+        "completion": "reported_by_observer_not_independently_verified",
+        "configurationChanges": 1,
+        "elapsedMs": 150000,
+        "environment": {
+          "experience": "not_recorded",
+          "interfaceLanguage": "en",
+          "softwareRevision": "1ee923ff85bf0d4b06658a77139287ac239e2e1a",
+          "softwareSnapshotSha256": "c65701fa3bc065f0e8b653bf0a2e8055668af5d2636087a860b2bc0c7b90642c",
+          "startingState": "provided_materials_new_namespace",
+          "workspaceState": "modified"
+        },
+        "errors": 1,
+        "errorsByCode": {
+          "taxonomy_reference": 1
+        },
+        "helpByKind": {
+          "conceptual": 0,
+          "procedural": 1,
+          "technical": 0
+        },
+        "helpRequests": 1,
+        "method": "ramos_2019_manhattan_k1_v2",
+        "missingCheckpoints": [],
+        "order": 1,
+        "outcome": "completed",
+        "participantCode": "synthetic-a",
+        "pausedMs": 30000,
+        "sessionId": "synthetic-a-rnf",
+        "taskBatch": {
+          "namespace": "binding-check-0",
+          "sha256": "12aeeda742ee62487c4a0506d92c4da2bdfd4819d0978819718cc5b55b48d49b"
+        }
+      },
+      {
+        "activeMs": 210000,
+        "applicationCodeChanges": 1,
+        "attempt": 1,
+        "checkpoints": {
+          "catalog": {
+            "activeAtMs": 60000,
+            "elapsedAtMs": 60000,
+            "reference": {
+              "id": "synthetic-testrec-catalog",
+              "sha256": "18619adea154d191cfbd0148a7c035587d2c0e7d63e3c7813f252b43d562a1ba",
+              "version": "synthetic.1"
+            }
+          },
+          "dataset": {
+            "activeAtMs": 100000,
+            "elapsedAtMs": 100000,
+            "reference": {
+              "id": "synthetic-testrec-dataset",
+              "sha256": "bdb78bda89216ef5c2d92a8c063e4e525dbd643c68e3f22bc1bbfab571274db1",
+              "version": "synthetic.1"
+            }
+          },
+          "definition": {
+            "activeAtMs": 30000,
+            "elapsedAtMs": 30000,
+            "reference": {
+              "id": "synthetic-testrec-definition",
+              "sha256": "e7f76aaed7a2f51b156e30d578ec2a41733be7f3e5bce8ca69cb24f0cd822e26",
+              "version": "synthetic.1"
+            }
+          },
+          "replay": {
+            "activeAtMs": 200000,
+            "elapsedAtMs": 200000,
+            "reference": {
+              "id": "synthetic-testrec-replay",
+              "sha256": "bc9caf9ba7c43835f7813f31362f4167d1a459a65ea1159f3f18eb0ce0853747",
+              "version": "synthetic.1"
+            }
+          },
+          "run": {
+            "activeAtMs": 180000,
+            "elapsedAtMs": 180000,
+            "reference": {
+              "id": "synthetic-testrec-run",
+              "sha256": "0c9872ec40b6a52acfc6fed5184ac61fad694dff498cf79ccab7ceacf582b517",
+              "version": "synthetic.1"
+            }
+          },
+          "taxonomy": {
+            "activeAtMs": 10000,
+            "elapsedAtMs": 10000,
+            "reference": {
+              "id": "synthetic-testrec-taxonomy",
+              "sha256": "ce92f2bb755fe1ddfb4c65ba1d31c63fa775433c04715a252b23c0cd8dcb6c6b",
+              "version": "synthetic.1"
+            }
+          }
+        },
+        "completion": "reported_by_observer_not_independently_verified",
+        "configurationChanges": 0,
+        "elapsedMs": 210000,
+        "environment": {
+          "experience": "not_recorded",
+          "interfaceLanguage": "en",
+          "softwareRevision": "1ee923ff85bf0d4b06658a77139287ac239e2e1a",
+          "softwareSnapshotSha256": "c65701fa3bc065f0e8b653bf0a2e8055668af5d2636087a860b2bc0c7b90642c",
+          "startingState": "provided_materials_new_namespace",
+          "workspaceState": "modified"
+        },
+        "errors": 0,
+        "errorsByCode": {},
+        "helpByKind": {
+          "conceptual": 0,
+          "procedural": 0,
+          "technical": 0
+        },
+        "helpRequests": 0,
+        "method": "us_agent_e21_equations_demo_v1",
+        "missingCheckpoints": [],
+        "order": 2,
+        "outcome": "completed",
+        "participantCode": "synthetic-a",
+        "pausedMs": 0,
+        "sessionId": "synthetic-a-testrec",
+        "taskBatch": {
+          "namespace": "binding-check-1",
+          "sha256": "83fae821d0df153b7a0fee0d99485b299c433dab054503778fed0bfe3cf3401c"
+        }
+      }
+    ],
+    "summary": {
+      "byMethod": [
+        {
+          "completedTimingDenominator": 1,
+          "completedWithApplicationCodeChanges": 0,
+          "completedWithHelp": 1,
+          "completedWithoutRecordedHelpOrCodeChanges": 0,
+          "errorsAllSessions": 1,
+          "helpRequestsAllSessions": 1,
+          "medianActiveMsCompleted": 120000,
+          "medianElapsedMsCompleted": 150000,
+          "method": "ramos_2019_manhattan_k1_v2",
+          "outcomes": {
+            "abandoned": 0,
+            "completed": 1,
+            "incomplete": 0
+          },
+          "participantCodes": 1,
+          "reportedCompletionRatio": 1,
+          "sessions": 1
+        },
+        {
+          "completedTimingDenominator": 1,
+          "completedWithApplicationCodeChanges": 1,
+          "completedWithHelp": 0,
+          "completedWithoutRecordedHelpOrCodeChanges": 0,
+          "errorsAllSessions": 0,
+          "helpRequestsAllSessions": 0,
+          "medianActiveMsCompleted": 210000,
+          "medianElapsedMsCompleted": 210000,
+          "method": "us_agent_e21_equations_demo_v1",
+          "outcomes": {
+            "abandoned": 0,
+            "completed": 1,
+            "incomplete": 0
+          },
+          "participantCodes": 1,
+          "reportedCompletionRatio": 1,
+          "sessions": 1
+        }
+      ],
+      "participantCodes": 1,
+      "sessions": 2
+    },
+    "taskMaterialVerification": "bytes_and_regenerated_task_pack_checked_by_cli",
+    "version": "configuration-effort-v2"
+  }
+}

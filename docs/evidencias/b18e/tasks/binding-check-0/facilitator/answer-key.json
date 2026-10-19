@@ -1,0 +1,1427 @@
+{
+  "schemaVersion": 1,
+  "version": "configuration-task-pack-v1",
+  "namespace": "binding-check-0",
+  "scope": "offline_technical_oracle_not_participant_or_empirical_evidence",
+  "rnf": {
+    "definition": {
+      "schemaVersion": 1,
+      "id": "binding-check-0-rnf",
+      "version": "1",
+      "name": "RNF — compatibilidade Ramos 2019 / US-Agent v2",
+      "state": "draft",
+      "attributes": [
+        {
+          "id": "classification_id",
+          "name": "Classificação de origem",
+          "valueType": {
+            "type": "text"
+          },
+          "scope": "artifact",
+          "cardinality": "single",
+          "required": true,
+          "role": "context",
+          "representation": "none"
+        },
+        {
+          "id": "story_id",
+          "name": "História de origem",
+          "valueType": {
+            "type": "text"
+          },
+          "scope": "artifact",
+          "cardinality": "single",
+          "required": true,
+          "role": "context",
+          "representation": "none"
+        },
+        {
+          "id": "text",
+          "name": "Texto da história",
+          "valueType": {
+            "type": "text"
+          },
+          "scope": "artifact",
+          "cardinality": "single",
+          "required": true,
+          "role": "context",
+          "representation": "none"
+        },
+        {
+          "id": "project",
+          "name": "Projeto",
+          "valueType": {
+            "type": "text"
+          },
+          "scope": "project",
+          "cardinality": "single",
+          "required": true,
+          "role": "context",
+          "representation": "none"
+        },
+        {
+          "id": "taxonomy_version",
+          "name": "Versão da taxonomia da classificação",
+          "valueType": {
+            "type": "text"
+          },
+          "scope": "artifact",
+          "cardinality": "single",
+          "required": true,
+          "role": "context",
+          "representation": "none"
+        },
+        {
+          "id": "review_status",
+          "name": "Estado da revisão",
+          "valueType": {
+            "type": "text"
+          },
+          "scope": "artifact",
+          "cardinality": "single",
+          "required": true,
+          "role": "filter",
+          "representation": "none"
+        },
+        {
+          "id": "project_taxonomy_version",
+          "name": "Versão da taxonomia do perfil",
+          "valueType": {
+            "type": "text"
+          },
+          "scope": "project",
+          "cardinality": "single",
+          "required": true,
+          "role": "context",
+          "representation": "none"
+        },
+        {
+          "id": "labels",
+          "name": "Pares módulo/operação",
+          "valueType": {
+            "type": "record",
+            "fields": {
+              "module": {
+                "type": "category"
+              },
+              "operation": {
+                "type": "category"
+              }
+            }
+          },
+          "scope": "artifact",
+          "cardinality": "many",
+          "required": true,
+          "role": "filter",
+          "representation": "none"
+        },
+        {
+          "id": "platforms",
+          "name": "Plataformas",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "application_domains",
+          "name": "Domínios de aplicação",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "architectures",
+          "name": "Arquiteturas",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "languages",
+          "name": "Linguagens",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "frameworks",
+          "name": "Frameworks",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "apis",
+          "name": "APIs",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "data_persistence",
+          "name": "Persistência",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "objective",
+          "name": "Objetivo",
+          "valueType": {
+            "type": "enum",
+            "values": [
+              "",
+              "product",
+              "prototype"
+            ]
+          },
+          "scope": "project",
+          "cardinality": "single",
+          "required": true,
+          "role": "filter",
+          "representation": "none"
+        },
+        {
+          "id": "tasks",
+          "name": "Categorias de tarefas",
+          "valueType": {
+            "type": "record",
+            "fields": {
+              "category": {
+                "type": "category"
+              }
+            }
+          },
+          "scope": "artifact",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "nfrs",
+          "name": "RNFs associados",
+          "valueType": {
+            "type": "record",
+            "fields": {
+              "type": {
+                "type": "category"
+              },
+              "attribute": {
+                "type": "category"
+              },
+              "sentence": {
+                "type": "text"
+              }
+            }
+          },
+          "scope": "artifact",
+          "cardinality": "many",
+          "required": true,
+          "role": "output",
+          "representation": "none"
+        },
+        {
+          "id": "study_context",
+          "name": "Study context",
+          "valueType": {
+            "type": "taxonomy_node",
+            "taxonomy": {
+              "id": "binding-check-0-context",
+              "version": "1",
+              "format": "us-agent-json-v1",
+              "sha256": "368f2e40c2ba7206d77cfdc10387a14b7038530670aecd1ce9f1651eba55d0c7"
+            }
+          },
+          "scope": "artifact",
+          "cardinality": "single",
+          "required": true,
+          "role": "context",
+          "representation": "none"
+        }
+      ],
+      "method": {
+        "id": "ramos_2019_manhattan_k1_v2",
+        "version": "2",
+        "parameters": {
+          "k": 1
+        },
+        "bindings": {
+          "classification_id": "classification_id",
+          "story_id": "story_id",
+          "text": "text",
+          "project": "project",
+          "taxonomy_version": "taxonomy_version",
+          "review_status": "review_status",
+          "project_taxonomy_version": "project_taxonomy_version",
+          "labels": "labels",
+          "platforms": "platforms",
+          "application_domains": "application_domains",
+          "architectures": "architectures",
+          "languages": "languages",
+          "frameworks": "frameworks",
+          "apis": "apis",
+          "data_persistence": "data_persistence",
+          "objective": "objective",
+          "tasks": "tasks",
+          "nfrs": "nfrs"
+        }
+      }
+    },
+    "definitionSnapshot": {
+      "format": "us-agent-json-v1",
+      "sha256": "68bfd7ef1838831bcd1af9aba69777899dd9859575a182146729c3e5a264e911",
+      "content": {
+        "definition": {
+          "attributes": [
+            {
+              "cardinality": "single",
+              "id": "classification_id",
+              "name": "Classificação de origem",
+              "representation": "none",
+              "required": true,
+              "role": "context",
+              "scope": "artifact",
+              "valueType": {
+                "type": "text"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "story_id",
+              "name": "História de origem",
+              "representation": "none",
+              "required": true,
+              "role": "context",
+              "scope": "artifact",
+              "valueType": {
+                "type": "text"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "text",
+              "name": "Texto da história",
+              "representation": "none",
+              "required": true,
+              "role": "context",
+              "scope": "artifact",
+              "valueType": {
+                "type": "text"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "project",
+              "name": "Projeto",
+              "representation": "none",
+              "required": true,
+              "role": "context",
+              "scope": "project",
+              "valueType": {
+                "type": "text"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "taxonomy_version",
+              "name": "Versão da taxonomia da classificação",
+              "representation": "none",
+              "required": true,
+              "role": "context",
+              "scope": "artifact",
+              "valueType": {
+                "type": "text"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "review_status",
+              "name": "Estado da revisão",
+              "representation": "none",
+              "required": true,
+              "role": "filter",
+              "scope": "artifact",
+              "valueType": {
+                "type": "text"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "project_taxonomy_version",
+              "name": "Versão da taxonomia do perfil",
+              "representation": "none",
+              "required": true,
+              "role": "context",
+              "scope": "project",
+              "valueType": {
+                "type": "text"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "labels",
+              "name": "Pares módulo/operação",
+              "representation": "none",
+              "required": true,
+              "role": "filter",
+              "scope": "artifact",
+              "valueType": {
+                "fields": {
+                  "module": {
+                    "type": "category"
+                  },
+                  "operation": {
+                    "type": "category"
+                  }
+                },
+                "type": "record"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "platforms",
+              "name": "Plataformas",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "application_domains",
+              "name": "Domínios de aplicação",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "architectures",
+              "name": "Arquiteturas",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "languages",
+              "name": "Linguagens",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "frameworks",
+              "name": "Frameworks",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "apis",
+              "name": "APIs",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "data_persistence",
+              "name": "Persistência",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "objective",
+              "name": "Objetivo",
+              "representation": "none",
+              "required": true,
+              "role": "filter",
+              "scope": "project",
+              "valueType": {
+                "type": "enum",
+                "values": [
+                  "",
+                  "product",
+                  "prototype"
+                ]
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "tasks",
+              "name": "Categorias de tarefas",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "artifact",
+              "valueType": {
+                "fields": {
+                  "category": {
+                    "type": "category"
+                  }
+                },
+                "type": "record"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "nfrs",
+              "name": "RNFs associados",
+              "representation": "none",
+              "required": true,
+              "role": "output",
+              "scope": "artifact",
+              "valueType": {
+                "fields": {
+                  "attribute": {
+                    "type": "category"
+                  },
+                  "sentence": {
+                    "type": "text"
+                  },
+                  "type": {
+                    "type": "category"
+                  }
+                },
+                "type": "record"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "study_context",
+              "name": "Study context",
+              "representation": "none",
+              "required": true,
+              "role": "context",
+              "scope": "artifact",
+              "valueType": {
+                "taxonomy": {
+                  "format": "us-agent-json-v1",
+                  "id": "binding-check-0-context",
+                  "sha256": "368f2e40c2ba7206d77cfdc10387a14b7038530670aecd1ce9f1651eba55d0c7",
+                  "version": "1"
+                },
+                "type": "taxonomy_node"
+              }
+            }
+          ],
+          "id": "binding-check-0-rnf",
+          "method": {
+            "bindings": {
+              "apis": "apis",
+              "application_domains": "application_domains",
+              "architectures": "architectures",
+              "classification_id": "classification_id",
+              "data_persistence": "data_persistence",
+              "frameworks": "frameworks",
+              "labels": "labels",
+              "languages": "languages",
+              "nfrs": "nfrs",
+              "objective": "objective",
+              "platforms": "platforms",
+              "project": "project",
+              "project_taxonomy_version": "project_taxonomy_version",
+              "review_status": "review_status",
+              "story_id": "story_id",
+              "tasks": "tasks",
+              "taxonomy_version": "taxonomy_version",
+              "text": "text"
+            },
+            "id": "ramos_2019_manhattan_k1_v2",
+            "parameters": {
+              "k": 1
+            },
+            "version": "2"
+          },
+          "name": "RNF — compatibilidade Ramos 2019 / US-Agent v2",
+          "schemaVersion": 1,
+          "state": "published",
+          "version": "1"
+        },
+        "implementation": {
+          "adapterVersion": "rnf-v2-profile-adapter-v3",
+          "methodId": "ramos_2019_manhattan_k1_v2"
+        },
+        "schemaVersion": 1,
+        "taxonomies": [
+          {
+            "snapshot": {
+              "content": {
+                "id": "binding-check-0-context",
+                "kind": "list",
+                "name": "Configuration exercise — context",
+                "nodes": [
+                  {
+                    "description": "Pilot context",
+                    "id": "pilot",
+                    "name": "Pilot context",
+                    "parentId": null
+                  }
+                ],
+                "schemaVersion": 1,
+                "selection": "any",
+                "source": "US-Agent technical exercise; synthetic context/criteria only.",
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "368f2e40c2ba7206d77cfdc10387a14b7038530670aecd1ce9f1651eba55d0c7"
+            },
+            "state": "published"
+          }
+        ]
+      }
+    },
+    "importSpec": {
+      "schemaVersion": 1,
+      "id": "binding-check-0-rnf-base",
+      "version": "1",
+      "definition": {
+        "id": "binding-check-0-rnf",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "68bfd7ef1838831bcd1af9aba69777899dd9859575a182146729c3e5a264e911"
+      },
+      "format": "json",
+      "source": {
+        "description": "US-Agent configuration task pack; technical demonstration, not original empirical data.",
+        "authorization": {
+          "basis": "synthetic",
+          "reference": "US-Agent configuration task pack; technical demonstration, not original empirical data."
+        }
+      },
+      "mapping": {
+        "recordId": [
+          "id"
+        ],
+        "attributes": {
+          "classification_id": {
+            "path": [
+              "values",
+              "classification_id"
+            ],
+            "encoding": "value"
+          },
+          "story_id": {
+            "path": [
+              "values",
+              "story_id"
+            ],
+            "encoding": "value"
+          },
+          "text": {
+            "path": [
+              "values",
+              "text"
+            ],
+            "encoding": "value"
+          },
+          "project": {
+            "path": [
+              "values",
+              "project"
+            ],
+            "encoding": "value"
+          },
+          "taxonomy_version": {
+            "path": [
+              "values",
+              "taxonomy_version"
+            ],
+            "encoding": "value"
+          },
+          "review_status": {
+            "path": [
+              "values",
+              "review_status"
+            ],
+            "encoding": "value"
+          },
+          "project_taxonomy_version": {
+            "path": [
+              "values",
+              "project_taxonomy_version"
+            ],
+            "encoding": "value"
+          },
+          "labels": {
+            "path": [
+              "values",
+              "labels"
+            ],
+            "encoding": "value"
+          },
+          "platforms": {
+            "path": [
+              "values",
+              "platforms"
+            ],
+            "encoding": "value"
+          },
+          "application_domains": {
+            "path": [
+              "values",
+              "application_domains"
+            ],
+            "encoding": "value"
+          },
+          "architectures": {
+            "path": [
+              "values",
+              "architectures"
+            ],
+            "encoding": "value"
+          },
+          "languages": {
+            "path": [
+              "values",
+              "languages"
+            ],
+            "encoding": "value"
+          },
+          "frameworks": {
+            "path": [
+              "values",
+              "frameworks"
+            ],
+            "encoding": "value"
+          },
+          "apis": {
+            "path": [
+              "values",
+              "apis"
+            ],
+            "encoding": "value"
+          },
+          "data_persistence": {
+            "path": [
+              "values",
+              "data_persistence"
+            ],
+            "encoding": "value"
+          },
+          "objective": {
+            "path": [
+              "values",
+              "objective"
+            ],
+            "encoding": "value"
+          },
+          "tasks": {
+            "path": [
+              "values",
+              "tasks"
+            ],
+            "encoding": "value"
+          },
+          "nfrs": {
+            "path": [
+              "values",
+              "nfrs"
+            ],
+            "encoding": "value"
+          },
+          "study_context": {
+            "path": [
+              "values",
+              "study_context"
+            ],
+            "encoding": "value"
+          }
+        }
+      }
+    },
+    "expectedValidRows": 1,
+    "expectedExcludedOrdinals": [],
+    "result": {
+      "format": "us-agent-json-v1",
+      "sha256": "37be7574a42807fc71e74e2d24f911d13562c210bfa52ef7c8f704cf8bceeb73",
+      "content": {
+        "dimensions": [
+          "api:Mongoose",
+          "applicationDomain:Education",
+          "architecture:Client-server",
+          "framework:Angular",
+          "language:TypeScript",
+          "persistence:MongoDB",
+          "platform:Web",
+          "task:t6",
+          "task:t7"
+        ],
+        "eligibleCount": 1,
+        "excludedCount": 0,
+        "items": [
+          {
+            "alreadyLinked": false,
+            "attribute": "response_time",
+            "key": "ee667bae9d2b7b7e01428462213a0e99d272828664749b1549e5bc12568a3809",
+            "score": 1,
+            "sentence": "Synthetic sentence for checking item retrieval.",
+            "type": "Performance"
+          }
+        ],
+        "k": 1,
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "messages": [],
+        "method": "ramos_2019_manhattan_k1_v2",
+        "neighbor": {
+          "classificationId": "4",
+          "matched": [
+            "api:Mongoose",
+            "applicationDomain:Education",
+            "architecture:Client-server",
+            "framework:Angular",
+            "language:TypeScript",
+            "persistence:MongoDB",
+            "platform:Web",
+            "task:t6",
+            "task:t7"
+          ],
+          "missing": [],
+          "project": "[DEMO] 4",
+          "similarity": 1,
+          "storyId": "4",
+          "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+          "vector": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "status": "completed"
+      }
+    }
+  },
+  "tests": {
+    "definition": {
+      "schemaVersion": 1,
+      "id": "binding-check-0-tests",
+      "version": "1",
+      "name": "Test cases — E21 equations, synthetic demonstration",
+      "state": "draft",
+      "attributes": [
+        {
+          "id": "story_id",
+          "name": "Source story ID",
+          "valueType": {
+            "type": "text"
+          },
+          "scope": "artifact",
+          "cardinality": "single",
+          "required": true,
+          "role": "context",
+          "representation": "none"
+        },
+        {
+          "id": "module",
+          "name": "Module",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "artifact",
+          "cardinality": "single",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "operation",
+          "name": "Operation",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "artifact",
+          "cardinality": "single",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "platforms",
+          "name": "Platforms",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "application_domain",
+          "name": "Application domain",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "single",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "acceptance_criteria",
+          "name": "Acceptance criterion IDs",
+          "valueType": {
+            "type": "taxonomy_node",
+            "taxonomy": {
+              "id": "binding-check-0-criteria",
+              "version": "1",
+              "format": "us-agent-json-v1",
+              "sha256": "2232be25cc57ce5f150f10833e222ae8d822ed279c012f359064908a4ed7c3f9"
+            }
+          },
+          "scope": "artifact",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "nfrs",
+          "name": "Context NFR IDs",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "project",
+          "cardinality": "many",
+          "required": true,
+          "role": "feature",
+          "representation": "presence"
+        },
+        {
+          "id": "test_case_ids",
+          "name": "Associated test IDs",
+          "valueType": {
+            "type": "category"
+          },
+          "scope": "artifact",
+          "cardinality": "many",
+          "required": false,
+          "role": "output",
+          "representation": "none"
+        }
+      ],
+      "method": {
+        "id": "us_agent_e21_equations_demo_v1",
+        "version": "1",
+        "parameters": {
+          "mode": "equation_demonstration",
+          "reference": "E21",
+          "scientific_reproduction": false,
+          "sources": "synthetic_only",
+          "representation": "target_binary_presence",
+          "k": 3,
+          "similarity": "normalized_manhattan_eq4_2",
+          "aggregation": "sum_similarity_over_k_eq4_3",
+          "tie": "more_test_ids_then_ascending_record_id",
+          "eligibility": "exclude_target_record_or_story",
+          "insufficient_candidates": "block",
+          "unknown_associations": "block",
+          "zero_similarity": "keep",
+          "item_tie": "ascending_test_id"
+        },
+        "bindings": {
+          "story_id": "story_id",
+          "module": "module",
+          "operation": "operation",
+          "platforms": "platforms",
+          "application_domain": "application_domain",
+          "acceptance_criteria": "acceptance_criteria",
+          "nfrs": "nfrs",
+          "test_case_ids": "test_case_ids"
+        }
+      }
+    },
+    "definitionSnapshot": {
+      "format": "us-agent-json-v1",
+      "sha256": "e385c14adff2ba6442630a6f30bea947b688e7d70454b8e129ea336c79b1edd6",
+      "content": {
+        "definition": {
+          "attributes": [
+            {
+              "cardinality": "single",
+              "id": "story_id",
+              "name": "Source story ID",
+              "representation": "none",
+              "required": true,
+              "role": "context",
+              "scope": "artifact",
+              "valueType": {
+                "type": "text"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "module",
+              "name": "Module",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "artifact",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "operation",
+              "name": "Operation",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "artifact",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "platforms",
+              "name": "Platforms",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "single",
+              "id": "application_domain",
+              "name": "Application domain",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "acceptance_criteria",
+              "name": "Acceptance criterion IDs",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "artifact",
+              "valueType": {
+                "taxonomy": {
+                  "format": "us-agent-json-v1",
+                  "id": "binding-check-0-criteria",
+                  "sha256": "2232be25cc57ce5f150f10833e222ae8d822ed279c012f359064908a4ed7c3f9",
+                  "version": "1"
+                },
+                "type": "taxonomy_node"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "nfrs",
+              "name": "Context NFR IDs",
+              "representation": "presence",
+              "required": true,
+              "role": "feature",
+              "scope": "project",
+              "valueType": {
+                "type": "category"
+              }
+            },
+            {
+              "cardinality": "many",
+              "id": "test_case_ids",
+              "name": "Associated test IDs",
+              "representation": "none",
+              "required": false,
+              "role": "output",
+              "scope": "artifact",
+              "valueType": {
+                "type": "category"
+              }
+            }
+          ],
+          "id": "binding-check-0-tests",
+          "method": {
+            "bindings": {
+              "acceptance_criteria": "acceptance_criteria",
+              "application_domain": "application_domain",
+              "module": "module",
+              "nfrs": "nfrs",
+              "operation": "operation",
+              "platforms": "platforms",
+              "story_id": "story_id",
+              "test_case_ids": "test_case_ids"
+            },
+            "id": "us_agent_e21_equations_demo_v1",
+            "parameters": {
+              "aggregation": "sum_similarity_over_k_eq4_3",
+              "eligibility": "exclude_target_record_or_story",
+              "insufficient_candidates": "block",
+              "item_tie": "ascending_test_id",
+              "k": 3,
+              "mode": "equation_demonstration",
+              "reference": "E21",
+              "representation": "target_binary_presence",
+              "scientific_reproduction": false,
+              "similarity": "normalized_manhattan_eq4_2",
+              "sources": "synthetic_only",
+              "tie": "more_test_ids_then_ascending_record_id",
+              "unknown_associations": "block",
+              "zero_similarity": "keep"
+            },
+            "version": "1"
+          },
+          "name": "Test cases — E21 equations, synthetic demonstration",
+          "schemaVersion": 1,
+          "state": "published",
+          "version": "1"
+        },
+        "implementation": {
+          "adapterVersion": "e21-equations-adapter-v1",
+          "methodId": "us_agent_e21_equations_demo_v1"
+        },
+        "schemaVersion": 1,
+        "taxonomies": [
+          {
+            "snapshot": {
+              "content": {
+                "id": "binding-check-0-criteria",
+                "kind": "list",
+                "name": "Configuration exercise — criteria",
+                "nodes": [
+                  {
+                    "description": "Required",
+                    "id": "required",
+                    "name": "Required",
+                    "parentId": null
+                  },
+                  {
+                    "description": "Unique",
+                    "id": "unique",
+                    "name": "Unique",
+                    "parentId": null
+                  }
+                ],
+                "schemaVersion": 1,
+                "selection": "any",
+                "source": "US-Agent technical exercise; synthetic context/criteria only.",
+                "version": "1"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "2232be25cc57ce5f150f10833e222ae8d822ed279c012f359064908a4ed7c3f9"
+            },
+            "state": "published"
+          }
+        ]
+      }
+    },
+    "importSpec": {
+      "schemaVersion": 2,
+      "id": "binding-check-0-test-base",
+      "version": "1",
+      "definition": {
+        "id": "binding-check-0-tests",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "e385c14adff2ba6442630a6f30bea947b688e7d70454b8e129ea336c79b1edd6"
+      },
+      "catalog": {
+        "id": "binding-check-0-catalog",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "89547861cbeb22faec1b0ef7726a99dbc52a535f9a8c65503d28ec501acb845d"
+      },
+      "format": "json",
+      "source": {
+        "description": "US-Agent configuration task pack; technical demonstration, not original empirical data.",
+        "authorization": {
+          "basis": "synthetic",
+          "reference": "US-Agent configuration task pack; technical demonstration, not original empirical data."
+        }
+      },
+      "mapping": {
+        "recordId": [
+          "id"
+        ],
+        "attributes": {
+          "story_id": {
+            "path": [
+              "values",
+              "story_id"
+            ],
+            "encoding": "value"
+          },
+          "module": {
+            "path": [
+              "values",
+              "module"
+            ],
+            "encoding": "value"
+          },
+          "operation": {
+            "path": [
+              "values",
+              "operation"
+            ],
+            "encoding": "value"
+          },
+          "platforms": {
+            "path": [
+              "values",
+              "platforms"
+            ],
+            "encoding": "value"
+          },
+          "application_domain": {
+            "path": [
+              "values",
+              "application_domain"
+            ],
+            "encoding": "value"
+          },
+          "acceptance_criteria": {
+            "path": [
+              "values",
+              "acceptance_criteria"
+            ],
+            "encoding": "value"
+          },
+          "nfrs": {
+            "path": [
+              "values",
+              "nfrs"
+            ],
+            "encoding": "value"
+          },
+          "test_case_ids": {
+            "path": [
+              "values",
+              "test_case_ids"
+            ],
+            "encoding": "value"
+          }
+        }
+      }
+    },
+    "expectedValidRows": 4,
+    "expectedExcludedOrdinals": [],
+    "result": {
+      "format": "us-agent-json-v1",
+      "sha256": "e76a1ec932b79e7e96be10eafe180a079a7f5dcb1b90a17887622c0bc56682f6",
+      "content": {
+        "items": [
+          {
+            "artifact": {
+              "executionMode": "manual",
+              "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+              "id": "demo-create",
+              "metadata": {
+                "fixture": true
+              },
+              "purpose": "Verificar um fluxo sintético de cadastro",
+              "title": "Criar registro sintético"
+            },
+            "contributions": [
+              {
+                "recordId": "candidate-a",
+                "similarity": 1
+              },
+              {
+                "recordId": "candidate-c",
+                "similarity": 0.875
+              },
+              {
+                "recordId": "candidate-d",
+                "similarity": 0.875
+              }
+            ],
+            "denominator": 3,
+            "key": "bdf9372848b6c6f21d21a26456cdd443fa9be76669222ea55d72aedf44b40edb",
+            "numerator": 2.75,
+            "score": 0.9166666666666666,
+            "support": 3,
+            "testCaseId": "demo-create"
+          },
+          {
+            "artifact": {
+              "executionMode": "unspecified",
+              "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+              "id": "demo-required",
+              "metadata": {
+                "extraSourceField": "Preserve without inventing scientific meaning",
+                "fixture": true
+              },
+              "title": "Validar campos obrigatórios"
+            },
+            "contributions": [
+              {
+                "recordId": "candidate-c",
+                "similarity": 0.875
+              },
+              {
+                "recordId": "candidate-d",
+                "similarity": 0.875
+              }
+            ],
+            "denominator": 3,
+            "key": "75cf32debe060f7d2488a7f12bcb840603b8798affd1394dc16e51921de861d5",
+            "numerator": 1.75,
+            "score": 0.5833333333333334,
+            "support": 2,
+            "testCaseId": "demo-required"
+          }
+        ],
+        "k": 3,
+        "messages": [],
+        "method": "us_agent_e21_equations_demo_v1",
+        "mode": "equation_demonstration",
+        "neighbors": [
+          {
+            "distance": 0,
+            "recordId": "candidate-a",
+            "similarity": 1,
+            "testCaseIds": [
+              "demo-create"
+            ],
+            "vector": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "distance": 1,
+            "recordId": "candidate-c",
+            "similarity": 0.875,
+            "testCaseIds": [
+              "demo-create",
+              "demo-required"
+            ],
+            "vector": [
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "distance": 1,
+            "recordId": "candidate-d",
+            "similarity": 0.875,
+            "testCaseIds": [
+              "demo-create",
+              "demo-required"
+            ],
+            "vector": [
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        ],
+        "scientificReproduction": false,
+        "status": "completed"
+      }
+    }
+  },
+  "limits": [
+    "offline_import_UUID_is_not_a_database_publication",
+    "dataset_and_run_hashes_must_be_taken_from_actual_participant_artifacts",
+    "no_original_empirical_dataset",
+    "no_participant_observation",
+    "third_no_US_example_not_available"
+  ]
+}

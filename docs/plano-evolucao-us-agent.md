@@ -1,5 +1,15 @@
 # Plano de evolução do US-Agent
 
+## Estado verificado em 19/10/2026 — B18e
+
+B18e conclui o próximo incremento técnico indicado na revisão B18d: [protocolo/material/analisador vinculados](entregas/030-vinculo-protocolo-materiais-analisador.md), com lote por sessão, recusa de divergências e replay preservando os arquivos de tarefa. Os pacotes B18b/B18c anteriores permanecem intactos. Este estado prevalece sobre os encaminhamentos históricos abaixo.
+
+E1 está tecnicamente entregue; E2 tem vertical RNF e ensaio técnico, com avaliação empírica pendente; E3 tem demonstração de testes e instrumentação, com fidelidade/dados/avaliação empírica pendentes; E4 depende de fonte/material de Ademar para o exemplo sem US; E5 depende da consolidação e avaliação dos três exemplos. B14/B18 continuam em andamento: não houve coleta humana nem aprovação metodológica presumida.
+
+Próxima passagem: revisar e fixar decisões metodológicas do protocolo de configuração, conferir a instalação escolhida e coletar observações com auditoria dos checkpoints. Em paralelo, obter fontes/material de Ademar e complementar dados/protocolos empíricos de Felipe/Ednaldo. Sem novas fontes ou observações, não repetir auditorias dos mesmos dados nem criar resultados artificiais para encerrar esses critérios.
+
+## Registro da revisão B18d
+
 Data inicial: 17/10/2026. Revisão: 19/10/2026, após B18d. A direção continua alinhada às demandas relatadas, com atendimento parcial. RNF e demonstração de testes compartilham configuração, importação, execução e evidência; B18a/B18b preparam avaliação/instrumento, e B18c/B18d entregam materiais de configuração verificados offline e no navegador. B02g/B02h concluem a derivação candidata e a conciliação literal dos dados disponíveis de Ednaldo, sem preencher faltantes. A [entrega 029](entregas/029-verificacao-roteiros-no-navegador.md) registra a revisão e o percurso dos dois exercícios. Continuam pendentes vínculo final protocolo/material/analisador, decisões metodológicas e coleta, fontes/avaliação empírica de Felipe e Ednaldo, e terceiro exemplo sem US. Este estado substitui os encaminhamentos históricos abaixo.
 
 Próximo incremento técnico: vincular os materiais de tarefas ao instrumento em uma versão explícita, preservando o replay dos pacotes existentes. Aceite: análise recusa protocolo/material divergente e identifica o lote efetivamente usado, sem inventar sessões humanas. Em paralelo, obter as fontes que faltam para o terceiro exemplo e para a fidelidade dos dois primeiros. O percurso automatizado B18d fecha a verificação técnica destes roteiros nesta instalação local; não fecha a avaliação com participantes. Antes de coleta, revisar o protocolo com a orientação e verificar a instalação efetivamente usada.

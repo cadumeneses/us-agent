@@ -1,0 +1,38 @@
+{
+  "definitionId": "binding-check-0-tests",
+  "version": "1",
+  "datasetId": "binding-check-0-test-base",
+  "taxonomy": {
+    "schemaVersion": 1,
+    "id": "binding-check-0-criteria",
+    "version": "1",
+    "name": "Configuration exercise — criteria",
+    "kind": "list",
+    "selection": "any",
+    "source": "US-Agent technical exercise; synthetic context/criteria only.",
+    "nodes": [
+      {
+        "id": "required",
+        "name": "Required",
+        "description": "Required",
+        "parentId": null
+      },
+      {
+        "id": "unique",
+        "name": "Unique",
+        "description": "Unique",
+        "parentId": null
+      }
+    ]
+  },
+  "attributeId": "acceptance_criteria",
+  "attributeType": "taxonomy_node",
+  "catalogId": "binding-check-0-catalog",
+  "source": {
+    "description": "US-Agent configuration task pack; technical demonstration, not original empirical data.",
+    "authorization": {
+      "basis": "synthetic",
+      "reference": "US-Agent configuration task pack; technical demonstration, not original empirical data."
+    }
+  }
+}

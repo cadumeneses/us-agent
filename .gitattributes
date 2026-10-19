@@ -79,3 +79,8 @@ apps/api/src/evaluation/configuration-task-materials.ts -text
 scripts/prepare-configuration-tasks.ts -text
 scripts/check-configuration-tasks.mjs -text
 scripts/check-configuration-tasks-browser.mjs -text
+apps/api/src/evaluation/configuration-effort-v2.ts -text
+scripts/measure-configuration-v2.ts -text
+scripts/check-configuration-binding.mjs -text
+# These exported CSV snapshots deliberately preserve CRLF bytes.
+docs/evidencias/b18e/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

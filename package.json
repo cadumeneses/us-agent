@@ -24,6 +24,8 @@
     "reconcile:testrec-data": "tsx scripts/reconcile-testrec-data.ts",
     "check:testrec-reconciliation": "node scripts/check-testrec-reconciliation.mjs",
     "measure:configuration": "tsx scripts/measure-configuration.ts",
+    "measure:configuration-v2": "tsx scripts/measure-configuration-v2.ts",
+    "check:configuration-binding": "node scripts/check-configuration-binding.mjs",
     "check:configuration-effort": "node scripts/check-configuration-effort.mjs",
     "prepare:configuration-tasks": "tsx scripts/prepare-configuration-tasks.ts",
     "check:configuration-tasks": "node scripts/check-configuration-tasks.mjs",

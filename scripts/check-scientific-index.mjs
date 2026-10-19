@@ -1,11 +1,13 @@
-// Read-only verification of the exact Git blobs prepared for commit.
+// Read-only verification of exact bytes in the index, or explicitly in the worktree.
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 
-if (process.argv.length !== 2) throw new Error('Usage: npm run check:scientific-index');
+const worktree = process.argv.length === 3 && process.argv[2] === '--worktree';
+if (process.argv.length !== 2 && !worktree) throw new Error('Usage: npm run check:scientific-index [-- --worktree]');
 const git = (...args) => execFileSync('git', args, { maxBuffer: 20_000_000 });
-const read = path => git('show', `:${path}`);
+const read = path => worktree ? readFileSync(path) : git('show', `:${path}`);
 const json = path => JSON.parse(read(path).toString('utf8'));
 const expected = new Map();
 function add(path, sha256) {
@@ -30,7 +32,8 @@ const reconciledData = json('docs/evidencias/b02h/manifest.json');
 const configurationEffort = json('docs/evidencias/b18b/manifest.json');
 const configurationTasks = json('docs/evidencias/b18c/manifest.json');
 const configurationBrowser = json('docs/evidencias/b18d/manifest.json');
-for (const inventory of [baseline.sourceHashes, pilot.sources, equations.content.sourceHashes, publishedEquations.content.sourceHashes, assessments.content.sourceHashes, testPilot.sources, sourceAudit.content.sourceHashes, sourcePreparation.sources, sourceTransport.sources, sourceVersions.sources, reviewedAssociations.sources, reconciledData.sources, configurationEffort.sources, configurationTasks.sources, configurationBrowser.sources]) {
+const configurationBinding = json('docs/evidencias/b18e/manifest.json');
+for (const inventory of [baseline.sourceHashes, pilot.sources, equations.content.sourceHashes, publishedEquations.content.sourceHashes, assessments.content.sourceHashes, testPilot.sources, sourceAudit.content.sourceHashes, sourcePreparation.sources, sourceTransport.sources, sourceVersions.sources, reviewedAssociations.sources, reconciledData.sources, configurationEffort.sources, configurationTasks.sources, configurationBrowser.sources, configurationBinding.sources]) {
   for (const [path, sha256] of Object.entries(inventory)) add(path, sha256);
 }
 const sourceCount = expected.size;
@@ -45,12 +48,14 @@ for (const [name, sha256] of Object.entries(reconciledData.artifacts)) add(`docs
 for (const [name, sha256] of Object.entries(configurationEffort.artifacts)) add(`docs/evidencias/b18b/${name}`, sha256);
 for (const [name, sha256] of Object.entries(configurationTasks.artifacts)) add(`docs/evidencias/b18c/${name}`, sha256);
 for (const [name, sha256] of Object.entries(configurationBrowser.artifacts)) add(`docs/evidencias/b18d/${name}`, sha256);
+for (const [name, sha256] of Object.entries(configurationBinding.artifacts)) add(`docs/evidencias/b18e/${name}`, sha256);
 for (const [path, sha256] of expected) {
-  assert.equal(createHash('sha256').update(read(path)).digest('hex'), sha256, `Staged scientific bytes differ: ${path}`);
+  assert.equal(createHash('sha256').update(read(path)).digest('hex'), sha256, `Scientific bytes differ (${worktree ? 'worktree' : 'index'}): ${path}`);
 }
-const attributes = git('check-attr', '--cached', '-z', 'text', '--', ...expected.keys()).toString('utf8').split('\0');
+const attributes = git('check-attr', ...(worktree ? [] : ['--cached']), '-z', 'text', '--', ...expected.keys()).toString('utf8').split('\0');
 for (let index = 0; index < attributes.length - 1; index += 3) {
-  assert.equal(attributes[index + 2], 'unset', `Staged .gitattributes must preserve bytes: ${attributes[index]}`);
+  assert.equal(attributes[index + 2], 'unset', `.gitattributes must preserve bytes: ${attributes[index]}`);
 }
 console.log(JSON.stringify({ sourceFiles: sourceCount, artifactFiles: expected.size - sourceCount,
-  stagedHashesMatched: expected.size, lineEndingsPreserved: true, readOnly: true }, null, 2));
+  checkedTree: worktree ? 'worktree' : 'index', ...(worktree ? { worktreeHashesMatched: expected.size } : { stagedHashesMatched: expected.size }),
+  lineEndingsPreserved: true, readOnly: true }, null, 2));

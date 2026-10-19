@@ -1,5 +1,17 @@
 # Preparação da medição de esforço de configuração — B18b
 
+Atualização B18e, 19/10/2026: o [protocolo v2](../research/configuration-effort-v2/protocol.md) e a [entrega 030](entregas/030-vinculo-protocolo-materiais-analisador.md) vinculam explicitamente os lotes B18c ao analisador. As instruções v1 abaixo continuam válidas para os pacotes históricos. A vinculação técnica está entregue; decisões metodológicas e coleta permanecem pendentes.
+
+Para nova análise, gerar um lote por tentativa e registrar em cada sessão `taskBatch: { namespace, sha256 }`, com hash dos bytes de `materials.json` do lote. Usar `schemaVersion: 2`, protocolo e materiais de `research/configuration-effort-v2` por hash. O [ensaio v2](evidencias/b18e/input.json) demonstra o formato com dados artificiais.
+
+```powershell
+npm.cmd run measure:configuration-v2 -- --input observacoes-v2.json --tasks lote-tentativa-001 --tasks lote-tentativa-002 --output tmp/analise-v2
+npm.cmd run measure:configuration-v2 -- --replay docs/evidencias/b18e
+npm.cmd run check:configuration-binding
+```
+
+Informar um `--tasks` por lote usado e diretório de saída novo. O replay usa os lotes copiados no pacote. JSON e CSV preservam o lote de cada sessão; o CLI recusa divergências e regenera as tarefas antes da análise. Referências aos artefatos dos checkpoints continuam declaradas pelo observador, sem busca automática. Não converter logs v1 apenas trocando versões/hashes.
+
 18/10/2026. Preparação técnica de RQ05/B14/B18. O instrumento analisa registros declarados pelo observador e exporta entrada, relatório, CSV e manifesto reproduzíveis. O [protocolo versionado](../research/configuration-effort-v1/protocol.md) é uma proposta metodológica do US-Agent para revisão da orientação; não houve recrutamento, coleta com pessoas ou aprovação científica registrada.
 
 ## O que está implementado

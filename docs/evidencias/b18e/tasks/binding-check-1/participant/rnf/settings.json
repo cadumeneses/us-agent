@@ -1,0 +1,48 @@
+{
+  "definitionId": "binding-check-1-rnf",
+  "version": "1",
+  "datasetId": "binding-check-1-rnf-base",
+  "taxonomy": {
+    "schemaVersion": 1,
+    "id": "binding-check-1-context",
+    "version": "1",
+    "name": "Configuration exercise — context",
+    "kind": "list",
+    "selection": "any",
+    "source": "US-Agent technical exercise; synthetic context/criteria only.",
+    "nodes": [
+      {
+        "id": "pilot",
+        "name": "Pilot context",
+        "description": "Pilot context",
+        "parentId": null
+      }
+    ]
+  },
+  "additionalAttribute": {
+    "id": "study_context",
+    "name": "Study context",
+    "valueType": {
+      "type": "taxonomy_node",
+      "taxonomy": {
+        "id": "binding-check-1-context",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "1632ff0fd95b9334cad0328d7274526f93bd26bada1891e4ca183226272f600a"
+      }
+    },
+    "scope": "artifact",
+    "cardinality": "single",
+    "required": true,
+    "role": "context",
+    "representation": "none"
+  },
+  "labelIndex": 0,
+  "source": {
+    "description": "US-Agent configuration task pack; technical demonstration, not original empirical data.",
+    "authorization": {
+      "basis": "synthetic",
+      "reference": "US-Agent configuration task pack; technical demonstration, not original empirical data."
+    }
+  }
+}

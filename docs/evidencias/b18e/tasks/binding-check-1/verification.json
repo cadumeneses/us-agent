@@ -1,0 +1,223 @@
+{
+  "format": "us-agent-json-v1",
+  "sha256": "50909606454b7e8fe3a726bd114570f7aef12b4635b447c89c0514cca84106be",
+  "content": {
+    "excludedRows": 0,
+    "namespace": "binding-check-1",
+    "offlineOnly": true,
+    "participantStudyPerformed": false,
+    "rnf": {
+      "extraContextDoesNotChangeResult": true,
+      "result": {
+        "content": {
+          "dimensions": [
+            "api:Mongoose",
+            "applicationDomain:Education",
+            "architecture:Client-server",
+            "framework:Angular",
+            "language:TypeScript",
+            "persistence:MongoDB",
+            "platform:Web",
+            "task:t6",
+            "task:t7"
+          ],
+          "eligibleCount": 1,
+          "excludedCount": 0,
+          "items": [
+            {
+              "alreadyLinked": false,
+              "attribute": "response_time",
+              "key": "ee667bae9d2b7b7e01428462213a0e99d272828664749b1549e5bc12568a3809",
+              "score": 1,
+              "sentence": "Synthetic sentence for checking item retrieval.",
+              "type": "Performance"
+            }
+          ],
+          "k": 1,
+          "label": {
+            "module": "Registry",
+            "operation": "Retrieve data"
+          },
+          "messages": [],
+          "method": "ramos_2019_manhattan_k1_v2",
+          "neighbor": {
+            "classificationId": "4",
+            "matched": [
+              "api:Mongoose",
+              "applicationDomain:Education",
+              "architecture:Client-server",
+              "framework:Angular",
+              "language:TypeScript",
+              "persistence:MongoDB",
+              "platform:Web",
+              "task:t6",
+              "task:t7"
+            ],
+            "missing": [],
+            "project": "[DEMO] 4",
+            "similarity": 1,
+            "storyId": "4",
+            "text": "Illustrative data-retrieval profile; not a record from the original dataset.",
+            "vector": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "status": "completed"
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "37be7574a42807fc71e74e2d24f911d13562c210bfa52ef7c8f704cf8bceeb73"
+      },
+      "validRows": 1
+    },
+    "sourceRecordValuesPreservedExceptDeclaredContextAndTargetAnswerWithholding": true,
+    "tests": {
+      "neighbors": [
+        "candidate-a",
+        "candidate-c",
+        "candidate-d"
+      ],
+      "result": {
+        "content": {
+          "items": [
+            {
+              "artifact": {
+                "executionMode": "manual",
+                "gherkin": "Dado um formulário de demonstração\nQuando envio um registro válido\nEntão vejo a confirmação",
+                "id": "demo-create",
+                "metadata": {
+                  "fixture": true
+                },
+                "purpose": "Verificar um fluxo sintético de cadastro",
+                "title": "Criar registro sintético"
+              },
+              "contributions": [
+                {
+                  "recordId": "candidate-a",
+                  "similarity": 1
+                },
+                {
+                  "recordId": "candidate-c",
+                  "similarity": 0.875
+                },
+                {
+                  "recordId": "candidate-d",
+                  "similarity": 0.875
+                }
+              ],
+              "denominator": 3,
+              "key": "a6d5dc7804113971da42ef15ab76cdc813a212bede513a50e7f32edda242b6e3",
+              "numerator": 2.75,
+              "score": 0.9166666666666666,
+              "support": 3,
+              "testCaseId": "demo-create"
+            },
+            {
+              "artifact": {
+                "executionMode": "unspecified",
+                "gherkin": "Dado um formulário de demonstração\nQuando envio o formulário sem o nome\nEntão vejo a indicação do campo obrigatório",
+                "id": "demo-required",
+                "metadata": {
+                  "extraSourceField": "Preserve without inventing scientific meaning",
+                  "fixture": true
+                },
+                "title": "Validar campos obrigatórios"
+              },
+              "contributions": [
+                {
+                  "recordId": "candidate-c",
+                  "similarity": 0.875
+                },
+                {
+                  "recordId": "candidate-d",
+                  "similarity": 0.875
+                }
+              ],
+              "denominator": 3,
+              "key": "0c3c460d52a71538b51190215b4882db8d4555ee37e8f7988c1620c07b1045f8",
+              "numerator": 1.75,
+              "score": 0.5833333333333334,
+              "support": 2,
+              "testCaseId": "demo-required"
+            }
+          ],
+          "k": 3,
+          "messages": [],
+          "method": "us_agent_e21_equations_demo_v1",
+          "mode": "equation_demonstration",
+          "neighbors": [
+            {
+              "distance": 0,
+              "recordId": "candidate-a",
+              "similarity": 1,
+              "testCaseIds": [
+                "demo-create"
+              ],
+              "vector": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "distance": 1,
+              "recordId": "candidate-c",
+              "similarity": 0.875,
+              "testCaseIds": [
+                "demo-create",
+                "demo-required"
+              ],
+              "vector": [
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "distance": 1,
+              "recordId": "candidate-d",
+              "similarity": 0.875,
+              "testCaseIds": [
+                "demo-create",
+                "demo-required"
+              ],
+              "vector": [
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          ],
+          "scientificReproduction": false,
+          "status": "completed"
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "beadca087215545187be3ea21a42e87ac003d734fe748e20c5fe61388545ee81"
+      },
+      "validRows": 4
+    },
+    "version": "configuration-task-pack-v1"
+  }
+}

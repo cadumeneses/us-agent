@@ -1,6 +1,6 @@
 # Aderência às demandas relatadas do professor
 
-Revisão em 19/10/2026, após B18d. Base: documento `US-Agent_Requisitos_e_Lacunas.md` informado pelo usuário, plano, artigo E26 fornecido e evidências locais das entregas 001–029. Os áudios originais não foram reanalisados. Requisitos/aceites derivados são propostas de engenharia, não aprovação do professor.
+Revisão em 19/10/2026, após B18e. Base: documento `US-Agent_Requisitos_e_Lacunas.md` informado pelo usuário, plano, artigo E26 fornecido e evidências locais das entregas 001–030. Os áudios originais não foram reanalisados. Requisitos/aceites derivados são propostas de engenharia, não aprovação do professor.
 
 **Conclusão: a direção atual está alinhada, mas o atendimento ainda é parcial.** O RNF ganhou configuração e rastreabilidade; o processo de avaliação passou a ser verificável; o segundo exemplo já usa os contratos no percurso web de configuração/importação/execução. A alegação central de generalidade ainda exige execução do caso sem US. Qualidade experimental ainda exige dados, referência e estudo apropriados.
 
@@ -16,7 +16,7 @@ Revisão em 19/10/2026, após B18d. Base: documento `US-Agent_Requisitos_e_Lacun
 
 ## Prioridade atual
 
-Fechar o vínculo dos materiais B18c ao protocolo e ao analisador em versão explícita, sem alterar os pacotes congelados. B18d percorreu os dois exercícios no navegador local e confirmou definições, valores importados, resultados, histórico, replay e exportação. Isso resolve a pendência técnica do percurso deste lote, sem medir esforço humano. Faltam decisões metodológicas e coleta observada. A [entrega 029](entregas/029-verificacao-roteiros-no-navegador.md) registra os limites e a evidência.
+B18e entrega o vínculo dos materiais B18c ao protocolo e ao analisador em versão explícita, com lote por sessão e preservação dos pacotes congelados ([entrega 030](entregas/030-vinculo-protocolo-materiais-analisador.md)). B18d percorreu os dois exercícios no navegador local e confirmou definições, valores importados, resultados, histórico, replay e exportação. As pendências técnicas de percurso e vínculo estão tratadas; faltam decisões metodológicas, conferência da instalação escolhida e coleta observada. A [entrega 029](entregas/029-verificacao-roteiros-no-navegador.md) preserva a evidência do navegador.
 
 Em paralelo, obter referência/material de Ademar para executar o terceiro caso sem US e complementar fontes/dados/protocolos empíricos de Felipe e Ednaldo. Para Ednaldo permanecem Q01, Q03 e o residual Q02/CT05; CT01/TC01 e a diferença com/sem heurística já foram esclarecidos em B02g. A conciliação B02h não autoriza preencher IDs/perfis ou escolher o recorte experimental. Evitar novas auditorias dos mesmos arquivos sem fonte ou pergunta nova. Não anunciar reprodução científica nem conclusão da generalidade enquanto esses critérios estiverem abertos.
 

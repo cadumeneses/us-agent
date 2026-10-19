@@ -1,0 +1,8 @@
+{
+  "id": "configuration-effort-task-binding",
+  "version": "2",
+  "taskPackVersion": "configuration-task-pack-v1",
+  "taskGenerator": "scripts/prepare-configuration-tasks.ts",
+  "sessionBinding": "taskBatch.namespace_and_materials_json_bytes_sha256",
+  "participantStudyPerformed": false
+}
