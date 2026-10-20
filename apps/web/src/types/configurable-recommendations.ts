@@ -18,7 +18,7 @@ export type ConfiguredDefinition = {
 export type TaxonomyDependency = {
   state: 'published' | 'retired';
   snapshot: Snapshot<{ schemaVersion: 1; id: string; version: string; name: string; kind: 'list' | 'tree';
-    selection: 'any' | 'leaf'; source: string; nodes: Array<{ id: string; name: string; description: string; parentId: string | null }> }>;
+    selection: 'any' | 'leaf'; source: string; nodes: Array<{ id: string; name: string; description: string; parentId: string | null; selectable?: boolean }> }>;
 };
 export type DefinitionPublication = { schemaVersion: 1; definition: ConfiguredDefinition; taxonomies: TaxonomyDependency[];
   implementation: { methodId: string; adapterVersion: string } };
@@ -91,4 +91,10 @@ export type ItemDecisionRequest = { id: string; runSha256: string; targetSha256:
 export type ItemDecision = { id: string; snapshot: Snapshot<{ schemaVersion: 1; run: { id: string; format: 'us-agent-json-v1'; sha256: string };
   target: { format: 'us-agent-json-v1'; sha256: string }; request: Snapshot<ItemDecisionRequest>; originalItem: RecommendationResult['items'][number];
   association: null | { identitySha256: string; materialization: 'input_only' | 'created' | 'already_present' } }>; createdBy: string; createdAt: string };
-export type RecommendationReview = { runId: string; runSha256: string; target: RunTarget | null; decisions: ItemDecision[] };
+export type NfrCopyRequest = { id: string; runSha256: string; targetSha256: string; decisionId: string; itemKey: string;
+  previousCopy: { id: string; sha256: string } | null; sentence: string; reason: string };
+export type NfrCopy = { id: string; createdBy: string; createdAt: string; snapshot: Snapshot<{
+  schemaVersion: 1; request: Snapshot<NfrCopyRequest>; revision: number; previous: { id: string; sha256: string } | null;
+  artifact: { type: string; attribute: string; sentence: string }; originalItem: Snapshot<RecommendationResult['items'][number]>;
+}> };
+export type RecommendationReview = { runId: string; runSha256: string; target: RunTarget | null; decisions: ItemDecision[]; copies?: NfrCopy[] };

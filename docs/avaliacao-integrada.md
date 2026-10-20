@@ -1,5 +1,7 @@
 # Avaliação integrada: escopo técnico e pendências empíricas
 
+Atualização 042: as 23 condições foram repetidas novamente com gate técnico aprovado e hash determinístico `40ec09df722e799c02afc27f03a36d8f586f805b5b2edc1b853f2ae991b60871`. O [estudo v3](estudo-tres-casos-v3.md) fecha a preparação técnica do instrumento/tarefas para os três casos; o [artigo](academico/artigo-us-agent.md) e o [capítulo](academico/capitulo-implementacao-avaliacao.md) relatam o estado sustentado. O registro observado continua vazio; relevância, previsão/revisão pareadas e esforço humano seguem não medidos.
+
 Consolidação B22a/B23a em 039. O ensaio executa novamente **23 condições já preservadas**, sem criar testes, alvos, previsões, julgamentos ou observações de participantes. Cada condição é repetida duas vezes. Exemplos e variantes compartilham dados; as 23 condições não são amostras independentes.
 
 | Exemplo | Condições | Origem | Comparação |

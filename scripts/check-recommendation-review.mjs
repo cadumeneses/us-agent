@@ -43,6 +43,23 @@ export async function checkRecommendationReview({ pool, request, publishDefiniti
   const rejected = await call(run, '/decisions', 'POST', body(run, target, 1, 'rejected'));
   assert.equal(rejected.snapshot.content.association, null); assert.equal(await count('recommender_item_links'), 1);
   const reviewed = await call(run, '/review'); assert.equal(reviewed.decisions.length, 2); assert.equal(reviewed.target.snapshot.sha256, target.snapshot.sha256);
+  const adaptation = {id:randomUUID(),runSha256:run.snapshot.sha256,targetSha256:target.snapshot.sha256,
+    decisionId:acceptedResults[0].id,itemKey:accepted.itemKey,previousCopy:null,sentence:'Adapted to this input without changing the original.',reason:'Explicit contextual correction.'};
+  const copy=await call(run,'/copies','POST',adaptation,201);
+  assert.equal(copy.snapshot.content.revision,1);
+  assert.equal(copy.snapshot.content.artifact.sentence,adaptation.sentence);
+  assert.equal(copy.snapshot.content.originalItem.content.sentence,run.snapshot.content.result.content.items[0].sentence);
+  assert.deepEqual(await call(run,'/copies','POST',adaptation,201),copy);
+  await call(run,'/copies','POST',{...adaptation,reason:'Changed retry'},409);
+  await call(run,'/copies','POST',{...adaptation,id:randomUUID()},409);
+  const second=await call(run,'/copies','POST',{...adaptation,id:randomUUID(),previousCopy:{id:copy.id,sha256:copy.snapshot.sha256},sentence:'Second preserved adaptation.'},201);
+  assert.equal(second.snapshot.content.revision,2);
+  await call(run,'/copies','POST',{...adaptation,id:randomUUID(),decisionId:rejected.id,itemKey:rejected.snapshot.content.request.content.itemKey},409);
+  const historyCopies=(await call(run,'/review')).copies;
+  assert.equal(historyCopies.length,2);
+  assert.equal(snapshotContent(second.snapshot.content).sha256,second.snapshot.sha256);
+  await assert.rejects(pool.query('UPDATE nfr_adapted_copies SET created_by=$1 WHERE id=$2',['forged',copy.id]),/immutable/);
+  assert.equal(await count('story_non_functional_requirements'),0);
   for (const decision of reviewed.decisions) assert.equal(snapshotContent(decision.snapshot.content).sha256, decision.snapshot.sha256);
   assert.deepEqual(await call(run, ''), run); assert.equal((await call(run, '/replay', 'POST', {})).verified, true);
   const repeated = await create(), repeatedTarget = await bind(repeated);

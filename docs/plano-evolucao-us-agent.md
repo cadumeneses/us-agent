@@ -1,5 +1,12 @@
 # Plano de evolução do US-Agent
 
+**Estado vigente 042 (20/10/2026):** [pendências técnicas citadas tratadas](entregas/042-fechamento-tecnico-e-preparacao-empirica.md): adaptação RNF com cópias/histórico, papéis/organizações/autoria/auditoria, tarefas/instrumento v3 dos três casos e artigo/capítulo redigidos. Build, 154 testes API, 65 web e checks HTTP/PostgreSQL locais aprovados; 23 condições integradas preservadas. B13/RF11 têm entrega técnica local no recorte documentado. O plano completo continua dependente de dados/julgamentos/participantes e observações reais, revisão metodológica/acadêmica e implantação de 029–031. O registro de sessões observadas é vazio. Esta atualização prevalece sobre estados históricos abaixo.
+
+Atualização 041 (20/10/2026): [migração do catálogo WIS preparada](entregas/041-preparacao-migracao-catalogo-wis.md), com 029 no release de produção, cópia para rascunhos, mapa de IDs e verificação de preservação. Não aplicada em produção. A troca do consumo pela classificação/revisão continua pendente; seguir a ordem até 028 → código compatível → 029.
+
+Revisão 040 (20/10/2026): [conferência do plano e taxonomias](entregas/040-revisao-plano-e-taxonomias.md). O plano completo permanece parcial pelos aceites empíricos, estudo dos três casos, material acadêmico, B13 e adaptação RNF. O cadastro de taxonomias agora tem uma entrada única na interface; integrar o catálogo WIS/classificação às publicações comuns, preservando histórico e revisão, continua pendente. Esta revisão não verifica produção.
+
+
 Referência principal de escopo e aceite, explicitamente adotada pelo usuário em 19/10/2026: [US-Agent_Requisitos_e_Lacunas.md](../US-Agent_Requisitos_e_Lacunas.md), versão 1.0 de 17/10/2026. Este plano organiza sua execução; não substitui seus RF01–RF14, RQ01–RQ05 ou o critério global. A [conferência de aderência](aderencia-demandas-professor.md) registra o atendimento parcial e as lacunas atuais.
 
 Estado após a [entrega 039](entregas/039-consolidacao-tres-exemplos.md): os três exemplos técnicos têm [tutorial](tutorial-three-recommenders.md), [arquitetura executada](arquitetura-executada.md) e [ensaio offline integrado](avaliacao-integrada.md) com 23 condições preservadas. B20/B21 seguem atendidos tecnicamente; B22a/B23a consolidam execução e documentação. B22/B23 completos continuam dependentes das evidências empíricas/observadas e do material acadêmico final. Interface permanece em inglês e sem citações pessoais nos textos do produto.

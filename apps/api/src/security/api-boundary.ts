@@ -20,7 +20,7 @@ export function isAllowedOrigin(req: Request, origin: string) {
   return Boolean(process.env.INGEST_API_KEY) && (process.env.API_ALLOWED_ORIGINS ?? '').split(',').map(value => value.trim()).some(value => originUrl(value)?.origin === origin);
 }
 
-const allowedCors = cors({ origin: true, methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'], allowedHeaders: ['Content-Type', 'Authorization'], maxAge: 600 });
+const allowedCors = cors({ origin: true, methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'], allowedHeaders: ['Content-Type', 'Authorization', 'X-Organization-Id'], maxAge: 600 });
 
 // Run before body parsers, uploads and every API router, including legacy RNF routes.
 export const apiBoundary: RequestHandler = (req, res, next) => {

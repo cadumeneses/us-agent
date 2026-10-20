@@ -1,5 +1,9 @@
 # Aderência às demandas relatadas do professor
 
+## Atualização 042 — 20/10/2026
+
+RF11 recebeu [adaptação RNF versionada](adaptacao-rnf.md) no fluxo com base publicada. B13/RQ04 receberam [papéis, organizações, autoria e auditoria](acesso-organizacoes-e-auditoria.md), com conferência local de acessos cruzados, concorrência e revogação. [Tarefas/instrumento v3](estudo-tres-casos-v3.md) cobrem os três exemplos e os [textos acadêmicos](academico/artigo-us-agent.md) estão redigidos. Esses itens deixam de ser ausências de implementação no recorte entregue. O atendimento global continua parcial por dados/julgamentos/observações humanas e revisão acadêmica; nenhum resultado empírico ou deploy é presumido. A [entrega 042](entregas/042-fechamento-tecnico-e-preparacao-empirica.md) é o estado vigente; os quadros anteriores permanecem como histórico.
+
 ## Conferência contra o documento norte — 19/10/2026
 
 O usuário adotou [US-Agent_Requisitos_e_Lacunas.md](../US-Agent_Requisitos_e_Lacunas.md) como referência principal. O arquivo local foi lido integralmente e seu SHA-256 `ebd40a483ed6e64ee2cbcb5b3eeecd77111f5825c1e90fad085d269a5eb85e7b` coincide com REQ já registrado. A aprovação do usuário fixa o norte de trabalho; não representa aprovação atribuída ao professor. O diagnóstico do §3 refere-se ao commit antigo e não deve ser reaplicado como estado atual.

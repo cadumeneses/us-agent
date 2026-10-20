@@ -4,6 +4,8 @@ Plataforma de classificação e recomendadores KNN configurados com definições
 
 O [tutorial dos três exemplos](docs/tutorial-three-recommenders.md) reúne o fluxo de projeto e os arquivos de demonstração. A [arquitetura executada](docs/arquitetura-executada.md) delimita o que é compartilhado e o que cada método permite configurar. O [plano e pendências](docs/pendencias-e-proximos-passos.md) distingue capacidades técnicas, disponibilização e avaliação ainda necessária.
 
+A [entrega 042](docs/entregas/042-fechamento-tecnico-e-preparacao-empirica.md) acrescenta [adaptação versionada de RNFs](docs/adaptacao-rnf.md), [organizações/papéis/autoria/auditoria](docs/acesso-organizacoes-e-auditoria.md), [estudo dos três casos v3](docs/estudo-tres-casos-v3.md), [artigo técnico](docs/academico/artigo-us-agent.md) e [capítulo](docs/academico/capitulo-implementacao-avaliacao.md). O release atual possui 32 migrations, até 031; seguir a ordem operacional 042 para implantá-lo. Não houve coleta com participantes nem deploy desse incremento.
+
 Para repetir offline os cálculos preservados, sem API/banco/provedor, após instalar as dependências:
 
 ```powershell
@@ -11,9 +13,9 @@ npm.cmd run evaluate:integrated -- --output tmp/integrated-demo-new
 npm.cmd run evaluate:integrated -- --replay tmp/integrated-demo-new
 ```
 
-O [protocolo](research/integrated-demonstration-v1/protocol.md) consolida 23 cenários existentes. A demonstração não mede qualidade empírica, classificação prevista ou esforço humano; não são adicionados testes automatizados. As anotações sintéticas de relevância ficam separadas por método. A instalação do código de projeto/perfil requer migrations **027/028 antes do deploy**.
+O [protocolo](research/integrated-demonstration-v1/protocol.md) consolida 23 cenários existentes. A demonstração não mede qualidade empírica, classificação prevista ou esforço humano; não são adicionados testes automatizados. As anotações sintéticas de relevância ficam separadas por método. A instalação atual requer o release até **031**, conforme a ordem operacional 042.
 
-As notas de entregas a seguir preservam o estado de cada incremento em sua época. Para o estado consolidado, usar os documentos acima e a [entrega 039](docs/entregas/039-consolidacao-tres-exemplos.md).
+As notas de entregas a seguir preservam o estado de cada incremento em sua época. Para o estado consolidado, usar os documentos acima e a [entrega 042](docs/entregas/042-fechamento-tecnico-e-preparacao-empirica.md).
 
 ## Planejamento de evolução
 

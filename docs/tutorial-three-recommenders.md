@@ -1,5 +1,7 @@
 # Three recommenders: operator tutorial
 
+The current release also provides **Access and audit** for organization selection and role administration, and **Adapt accepted NFR** for separately versioned contextual sentences. See the [access guide](acesso-organizacoes-e-auditoria.md), [NFR adaptation guide](adaptacao-rnf.md), and [three-task study v3](estudo-tres-casos-v3.md). Deployment requires the current release through migration 031; follow the [042 deployment sequence](entregas/042-fechamento-tecnico-e-preparacao-empirica.md). No participant study is claimed by these examples.
+
 This guide describes the English interface delivered through 038. It covers ordinary project work and a repeatable demonstration with supplied files. The examples are synthetic or reconstructed compatibility material; they do not establish recommendation accuracy or participant effort.
 
 ## Prepare an installation
@@ -40,8 +42,8 @@ If this namespace/destination is already used, choose a different lowercase iden
 
 ### Non-functional requirements
 
-1. Open **Configuration, datasets, and history → Configure recommenders and datasets**. In **Independent taxonomies**, create and publish the list specified by `participant/rnf/settings.json → taxonomy`, preserving its IDs, node text, source and selection rule.
-2. In **Definitions**, select **New NFR from template**. Use the definition ID/version from the settings and a neutral name such as `NFR example`. Preserve the method and existing bindings. Add the `study_context` attribute exactly as described in `additionalAttribute`: single, required, artifact scope, context role, no vector representation. Select the taxonomy publication created above. Save and publish the reviewed draft.
+1. Open **Taxonomies** from the sidebar or recommender setup. Create and publish the list specified by `participant/rnf/settings.json → taxonomy`, preserving its IDs, node text, source and selection rule.
+2. Return through **Configure recommenders**. In **Definitions**, select **New NFR from template**. Use the definition ID/version from the settings and a neutral name such as `NFR example`. Preserve the method and existing bindings. Add the `study_context` attribute exactly as described in `additionalAttribute`: single, required, artifact scope, context role, no vector representation. Select the taxonomy publication created above. Save and publish the reviewed draft.
 3. In **Import dataset**, choose that definition, then **Load dataset schema**. Enter the dataset ID/version and source/use declaration from the settings. Select JSON and upload `participant/rnf/dataset.json`. Use **Use US-Agent record mapping**, review all mappings, then **Generate import preview**. Publish only after inspecting the records and any errors. Do not import the target file as a reference record.
 4. Open **View published dataset runs → New run**. Choose the definition and compatible dataset. Enter `id`, `provenance.source` and the values in `participant/rnf/target.json`. Expand the published configuration to find attribute IDs if display names differ. Keep the output list `nfrs` empty. Select the declared module/operation pair and choose **Run recommendation**.
 5. Inspect the neighbor and requirement items. The added context field is validated and preserved but does **not** change the NFR calculation. Use the project-risk exercise below to demonstrate a new calculation feature.
@@ -49,8 +51,8 @@ If this namespace/destination is already used, choose a different lowercase iden
 ### Test cases
 
 1. In **Test catalogs**, publish `participant/tests/catalog.json` using the catalog ID/version and synthetic declaration from `participant/tests/settings.json`. The preview includes the actual file hash to review.
-2. In **Independent taxonomies**, create and publish the criteria list from the same settings, including all node IDs, names and descriptions.
-3. In **Definitions**, select **New test-case demonstration**. Set the ID/version from the settings and name it `Test-case example`. Change the `acceptance_criteria` attribute to **Taxonomy node**, selecting the exact criteria publication. Preserve all other bindings and the implemented method parameters. Save and publish the reviewed draft.
+2. Open **Taxonomies** and create and publish the criteria list from the same settings, including all node IDs, names and descriptions.
+3. Return through **Configure recommenders**. In **Definitions**, select **New test-case demonstration**. Set the ID/version from the settings and name it `Test-case example`. Change the `acceptance_criteria` attribute to **Taxonomy node**, selecting the exact criteria publication. Preserve all other bindings and the implemented method parameters. Save and publish the reviewed draft.
 4. Import `participant/tests/dataset.json` with the published definition, the exact synthetic catalog, dataset identity and source from the settings. Use the record mapping and inspect the four records before publishing. Output test IDs belong to reference records; missing associations must not be invented.
 5. In **View published dataset runs → New run**, select the definition, base and exact catalog. Fill `participant/tests/target.json`. Output answers are withheld by the form. Use **Run recommendation**, then inspect the returned titles, steps, neighbors and contributions. These are retrieved test artifacts, not newly generated tests.
 

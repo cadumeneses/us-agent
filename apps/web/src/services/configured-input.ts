@@ -18,7 +18,7 @@ export function taxonomyOptions(type: Extract<ScalarType, { type: 'taxonomy_node
   const { content } = dependency.snapshot;
   const parents = new Set(content.nodes.map(node => node.parentId));
   const nodes = new Map(content.nodes.map(node => [node.id, node]));
-  return content.nodes.filter(node => content.selection === 'any' || !parents.has(node.id)).map(node => {
+  return content.nodes.filter(node => node.selectable !== false && (content.selection === 'any' || !parents.has(node.id))).map(node => {
     const path = [node.name];
     const seen = new Set([node.id]);
     let parent = node.parentId;

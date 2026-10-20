@@ -86,7 +86,7 @@ function validateMappings(prepared: ReturnType<typeof prepareDefinition>, depend
   for (const [path, type] of prepared.mappedTypes) {
     const content = dependencies.find(dependency => dependency.snapshot.content.id === type.taxonomy.id && dependency.snapshot.content.version === type.taxonomy.version)!.snapshot.content;
     const parents = new Set(content.nodes.map(node => node.parentId));
-    const selectable = new Set(content.nodes.filter(node => content.selection === 'any' || !parents.has(node.id)).map(node => node.id));
+    const selectable = new Set(content.nodes.filter(node => node.selectable !== false && (content.selection === 'any' || !parents.has(node.id))).map(node => node.id));
     const mapping = prepared.legacyNames[path];
     if (Object.keys(mapping).length !== selectable.size || Object.keys(mapping).some(id => !selectable.has(id))) throw new Error(`Mapeamento ${path} deve cobrir exatamente os nós selecionáveis da taxonomia.`);
   }

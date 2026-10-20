@@ -16,7 +16,7 @@ try {
   client = new pg.Client({ connectionString: scoped }); await client.connect();
   const migrations = await loadMigrationRelease();
   const initial = await migrationStatus(client, migrations);
-  assert.equal(initial.pending.length, 27);
+  assert.equal(initial.pending.length, migrations.length);
   await applyMigrationRelease(client, migrations);
   assert.deepEqual((await migrationStatus(client, migrations)).pending, []);
   let reapplied = 0; await applyMigrationRelease(client, migrations, () => reapplied++); assert.equal(reapplied, 0);

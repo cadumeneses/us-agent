@@ -1,6 +1,10 @@
 # Atualização da Vercel e migrations
 
-Pré-condição para o código das entregas 037/038: aplicar **027 e 028 antes do deploy** pelo release de migrations (29 arquivos SQL). Isso acrescenta histórias preparadas e perfis/execuções configuráveis de projeto; não publica automaticamente definições ou bases demonstrativas. A consolidação 039 não consulta nem altera produção. O estado de produção descrito abaixo é a última verificação registrada em 033, não uma nova consulta ao ambiente.
+**Ordem vigente 042:** o release agora contém **32 arquivos**, até 031 (adaptação RNF e organizações/auditoria). Para instalar este conjunto completo, usar o [roteiro 042](entregas/042-fechamento-tecnico-e-preparacao-empirica.md): ensaio numa cópia/branch atual de produção, janela de manutenção, aplicar 029–031 e publicar o código compatível antes de reabrir o tráfego. O novo runtime exige 030/031; a ordem 041 de publicar o código com somente 028 deixa de ser suficiente para este conjunto. Produção não foi alterada nesta entrega.
+
+Atualização 041: release com **30 arquivos**, incluindo a preparação do catálogo WIS em 029. Seguir o [roteiro de migração do catálogo](migracao-catalogo-wis.md): aplicar até **028** com `--through`, publicar o código compatível com `selectable` e somente depois aplicar **029** e verificar os rascunhos. Esta preparação não foi aplicada em produção.
+
+Pré-condição para o código das entregas 037/038: aplicar **027 e 028 antes do deploy**. Isso acrescenta histórias preparadas e perfis/execuções configuráveis de projeto; não publica automaticamente definições ou bases demonstrativas. A consolidação 039 não consulta nem altera produção. O estado de produção descrito abaixo é a última verificação registrada em 033, não uma nova consulta ao ambiente.
 
 Estado em 19/10/2026 após a [entrega 033](entregas/033-correcao-login-producao.md): variáveis corrigidas, migrations até 026 aplicadas e cinco usuários provisionados em produção. Login, acesso e saída dos cinco usuários foram verificados no endereço público. O roteiro abaixo permanece como procedimento para próximas atualizações; as etapas iniciais não devem ser repetidas para redefinir contas ou credenciais já configuradas.
 
@@ -50,7 +54,7 @@ npm.cmd run db:release:check
 node --env-file=.env.vercel.production scripts/migrate-deployment.mjs --status
 ```
 
-`--status` usa transação somente leitura e não cria sequer `schema_migrations`. Mostra destino sem usuário/senha, migrations pendentes e nomes já aplicados fora do release. O release atual contém 27 arquivos, de 001 até 026, incluindo os dois arquivos 005 históricos. A migration local não versionada `016_sheet_source_links.sql` fica fora. Novas migrations exigem revisão e atualização explícita de `database/migrations.release.json`; `npm.cmd run db:release` usa somente SQL já rastreado pelo Git.
+`--status` usa transação somente leitura e não cria sequer `schema_migrations`. Mostra destino sem usuário/senha, migrations pendentes e nomes já aplicados fora do release. O release atual contém 30 arquivos, de 001 até 029, incluindo os dois arquivos 005 históricos. A migration local não versionada `016_sheet_source_links.sql` fica fora. Novas migrations exigem revisão e atualização explícita de `database/migrations.release.json`; `npm.cmd run db:release` usa somente SQL já rastreado pelo Git. Antes de aplicar 029, seguir a ordem especial descrita acima.
 
 3. Primeiro testar em branch/cópia do banco de produção, usando arquivo de ambiente separado e conferindo o destino. Para aplicar, copiar exatamente `target` exibido pelo status:
 

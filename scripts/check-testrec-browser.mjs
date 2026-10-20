@@ -103,12 +103,13 @@ try {
   const storedCatalog = (await pool.query('SELECT original_file, content_sha256 FROM test_case_catalog_versions')).rows[0];
   assert.deepEqual(storedCatalog.original_file, catalogBytes);
   // Independent acceptance-criteria taxonomy, with IDs preserved in the imported data.
-  await click('Independent taxonomies'); await click('New taxonomy'); const taxScope = '[aria-label="Taxonomy editor"]';
+  await click('Taxonomies'); await click('New taxonomy'); const taxScope = '[aria-label="Taxonomy editor"]';
   for (const [label, value] of [['ID', 'browser-criteria'], ['Version', '1'], ['Name', 'Acceptance criteria demo'], ['Taxonomy source', 'Synthetic browser fixture'], ['Node ID', 'required'], ['Node name', 'Required fields']]) await edit(label, value, taxScope);
   await click('Add node');
   await evaluate(`{const fields=[...document.querySelectorAll('${taxScope} fieldset.configured-subeditor')];fields.at(-1).id='second-node';}`);
   await edit('Node ID', 'unique', '#second-node'); await edit('Node name', 'Unique values', '#second-node');
   await click('Save taxonomy draft'); await text('Draft saved. Review the nodes'); await click('Publish reviewed taxonomy'); await text('Taxonomy published with immutable content');
+  await cdp('Page.navigate', { url: `${origin}/recommender-setup` }); await text('Configure and import datasets');
   await click('Definitions'); await click('New test-case demonstration'); const defScope = '[aria-label="Definition editor"]';
   await edit('ID', 'browser-tests', defScope); await edit('Version', '1', defScope);
   await evaluate(`{const field=[...document.querySelectorAll('${defScope} details.configured-subeditor')].find(x=>x.querySelector('summary')?.textContent.includes('acceptance_criteria'));field.open=true;field.id='criteria-attribute';}`);

@@ -15,6 +15,10 @@ export const recommendationDecisionSchema = z.strictObject({ id: z.uuid(), runSh
   itemKey: sha256, decision: z.enum(['accepted', 'rejected']), notes: z.string().max(2000).default('') });
 export type RecommendationDecisionRequest = z.infer<typeof recommendationDecisionSchema>;
 
+export const nfrCopyRequestSchema = z.strictObject({ id: z.uuid(), runSha256: sha256, targetSha256: sha256,
+  decisionId: z.uuid(), itemKey: sha256, previousCopy: z.strictObject({ id: z.uuid(), sha256 }).nullable(),
+  sentence: z.string().trim().min(1).max(20000), reason: z.string().trim().min(5).max(2000) });
+
 export function decisionItem(content: RecommendationContent, itemKey: string): NfrSuggestion {
   const result = content.result.content;
   if (result.status !== 'completed') throw new Error('A execução não contém sugestões avaliáveis.');

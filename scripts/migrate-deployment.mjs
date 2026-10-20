@@ -1,12 +1,14 @@
 import assert from 'node:assert/strict';
 import pg from 'pg';
-import { loadMigrationRelease, migrationConnection, migrationStatus, applyMigrationRelease } from './lib/deployment-migrations.mjs';
+import { loadMigrationRelease, migrationConnection, migrationStatus, applyMigrationRelease, migrationPrefix } from './lib/deployment-migrations.mjs';
 
 async function main() {
-  const [mode, flag, expectedTarget, ...extra] = process.argv.slice(2);
-  assert.ok(['--status', '--apply', '--verify-files'].includes(mode) && !extra.length, 'Use --verify-files | --status | --apply --expect-target host:port/database.');
+  const [mode, flag, expectedTarget, throughFlag, through, ...extra] = process.argv.slice(2);
+  assert.ok(['--status', '--apply', '--verify-files'].includes(mode) && !extra.length, 'Use --verify-files | --status | --apply --expect-target host:port/database [--through migration.sql].');
   assert.ok(mode === '--apply' ? flag === '--expect-target' && expectedTarget : !flag, 'Applying requires --expect-target host:port/database; other modes take no arguments.');
+  assert.ok(throughFlag === undefined ? through === undefined : mode === '--apply' && throughFlag === '--through' && through, 'Only --apply accepts --through migration.sql.');
   const migrations = await loadMigrationRelease();
+  const selected = migrationPrefix(migrations, through);
   if (mode === '--verify-files') {
     console.log(JSON.stringify({ releaseVerified: true, migrations: migrations.map(row => row.name), hashFormat: 'sha256_utf8_lf' }, null, 2)); return;
   }
@@ -21,7 +23,8 @@ async function main() {
       await client.query('COMMIT');
       console.log(JSON.stringify({ target, readOnly: true, ...status }, null, 2));
     } else {
-      const status = await applyMigrationRelease(client, migrations, name => console.log(`Applied ${name}`));
+      await applyMigrationRelease(client, selected, name => console.log(`Applied ${name}`));
+      const status = await migrationStatus(client, migrations);
       console.log(JSON.stringify({ target, ...status }, null, 2));
     }
   } finally { await client.end(); }

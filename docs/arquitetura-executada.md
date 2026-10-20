@@ -1,5 +1,7 @@
 # Arquitetura executada dos três recomendadores
 
+Atualização 042: a implementação acrescenta [organizações/papéis/autoria/auditoria](acesso-organizacoes-e-auditoria.md), com escopo transacional de domínio por requisição e registry central, e [cópias versionadas de RNFs](adaptacao-rnf.md). Essas capacidades têm conferência HTTP/PostgreSQL local; implantação/revisão científica não são presumidas. O [roteiro 042](entregas/042-fechamento-tecnico-e-preparacao-empirica.md) substitui instruções antigas de instalação do conjunto completo.
+
 Estado técnico após 038; consolidação B23 em 039. Esta descrição trata do software implementado, sem transformar as tabelas/serviços em garantias de avaliação empírica ou isolamento organizacional.
 
 ```mermaid

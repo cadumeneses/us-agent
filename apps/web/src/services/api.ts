@@ -3,9 +3,10 @@ import type { ProjectResearchProfile, ProjectStory, PreparedProjectStory } from 
 import type { ConfiguredInput, ContentReference } from '../types/configurable-recommendations';
 import type { NfrContext, NfrRun } from '../types/nfr';
 import { notifySessionExpired } from './web-session';
+import { organizationOptions, type AccessContext } from './organization';
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(url, options);
+  const response = await fetch(url, organizationOptions(options));
   if (!response.ok) {
     notifySessionExpired(response.status);
     const body = await response.json().catch(() => ({})) as { error?: string };
@@ -15,6 +16,10 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  accessContext: () => request<AccessContext>('/api/access/context'),
+  accessMembers: () => request<Array<{username:string;role:string;active:boolean}>>('/api/access/members'),
+  updateMember: (username:string,role:string,active:boolean) => request('/api/access/members/'+encodeURIComponent(username),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({role,active})}),
+  audit: (offset=0) => request<{events:Array<Record<string,unknown>>;access:Array<Record<string,unknown>>;offset:number;limit:number}>(`/api/access/audit?offset=${offset}`),
   projectStoryCounts: () => request<Array<{project:string;stories:number;unclassified:number;cycles:number}>>('/api/project-story-counts'),
   projectStories: (project: string) => request<ProjectStory[]>(`/api/project-stories?project=${encodeURIComponent(project)}`),
   projectStory: (id: string) => request<PreparedProjectStory>(`/api/project-stories/${encodeURIComponent(id)}`),

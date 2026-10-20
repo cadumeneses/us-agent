@@ -1,3 +1,4 @@
+import { currentActor } from '../security/request-context.js';
 import { Router, type ErrorRequestHandler } from 'express';
 import { z } from 'zod';
 import { taxonomyIdSchema, taxonomyVersionSchema } from '../domain/recommender-taxonomy.js';
@@ -7,7 +8,7 @@ import { isAuthorizedInternalRequest } from './internal-authorization.js';
 export const recommenderTaxonomiesRouter = Router();
 recommenderTaxonomiesRouter.use((req, res, next) => { if (isAuthorizedInternalRequest(req, res)) next(); });
 const pathSchema = z.strictObject({ id: taxonomyIdSchema, version: taxonomyVersionSchema });
-const actor = () => process.env.INGEST_API_KEY ? 'internal-api' : 'local-development';
+const actor = () => currentActor();
 
 recommenderTaxonomiesRouter.get('/', async (req, res) => {
   const options = z.strictObject({ id: taxonomyIdSchema.optional(), state: z.enum(['draft', 'published', 'retired']).optional(),

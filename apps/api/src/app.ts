@@ -5,6 +5,7 @@ import { testCaseReviewRouter } from './routes/test-case-review.js';
 import { browserSessionAuthentication, webSessionRouter } from './security/web-sessions.js';
 import { projectStoriesRouter } from './routes/project-stories.js';
 import { configurableRecommendationsRouter } from './routes/configurable-recommendations.js';
+import { organizationAccess, organizationAccessRouter } from './security/organization-access.js';
 
 export function createApp() {
   const app = express();
@@ -14,7 +15,9 @@ export function createApp() {
   app.use('/api/auth', webSessionRouter);
   app.use('/api', browserSessionAuthentication);
   app.use('/api', apiBoundary);
+  app.use('/api', organizationAccess);
   app.use(express.json({ limit: '1mb' }));
+  app.use('/api/access', organizationAccessRouter);
   app.use('/api', projectStoriesRouter);
   app.use('/api/internal', configurableRecommendationsRouter);
   app.use('/api/internal/test-case-reviews', testCaseReviewRouter);

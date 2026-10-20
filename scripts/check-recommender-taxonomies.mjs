@@ -36,7 +36,9 @@ try {
   const path = (id, version = '1') => `/${id}/versions/${version}`;
   const tree = JSON.parse(await readFile(new URL('../config/taxonomies/acceptance-demo.v1.json', import.meta.url), 'utf8'));
   const list = JSON.parse(await readFile(new URL('../config/taxonomies/languages-demo.v1.json', import.meta.url), 'utf8'));
-  assert.deepEqual(await request(), []);
+  const staged = await request();
+  assert.ok(staged.length > 0);
+  assert.ok(staged.every(item => item.id === 'wis-legacy' && item.state === 'draft' && item.createdBy === 'migration:029'));
 
   // Existing internal authorization: required key when configured; fail closed on Vercel without it.
   process.env.INGEST_API_KEY = 'local-check-only';

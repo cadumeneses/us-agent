@@ -1,5 +1,5 @@
 import type { PoolClient } from 'pg';
-import { pool, withTransaction } from '../database/pool.js';
+import { query, withTransaction } from '../database/pool.js';
 import { emptyProjectResearchProfile, projectResearchProfileSchema, type ProjectResearchProfile } from './research-inputs.js';
 import { nfrKey, normalizeNfr, profileIssues, recommendNfr, usableClassification, type Nfr, type NfrProfile, type NfrResult } from './nfr-engine.js';
 
@@ -55,8 +55,10 @@ async function requireTarget(client: Pick<PoolClient, 'query'>, profiles: NfrPro
 }
 
 export async function nfrContext(classificationId: string) {
-  const target = await requireTarget(pool, await loadProfiles(pool), classificationId);
-  return { target, issues: profileIssues(target) };
+  return withTransaction(async client => {
+    const target = await requireTarget(client, await loadProfiles(client), classificationId);
+    return { target, issues: profileIssues(target) };
+  });
 }
 
 export async function createNfrRun(classificationId: string, labelIndex: number): Promise<NfrRun> {
@@ -75,7 +77,7 @@ export async function createNfrRun(classificationId: string, labelIndex: number)
 }
 
 export async function listNfrRuns(classificationId: string): Promise<NfrRun[]> {
-  const result = await pool.query<{ id: string; classificationId: string; createdAt: string; result: NfrResult; target: NfrRun['target']; decisions: NfrRun['decisions'] }>(`
+  const result = await query<{ id: string; classificationId: string; createdAt: string; result: NfrResult; target: NfrRun['target']; decisions: NfrRun['decisions'] }>(`
     SELECT run.id::text, run.classification_id::text AS "classificationId", run.created_at::text AS "createdAt", run.result,
       jsonb_build_object('text', input_snapshot->'target'->>'text', 'project', input_snapshot->'target'->>'project',
         'taxonomyVersion', input_snapshot->'target'->>'taxonomyVersion') AS target,

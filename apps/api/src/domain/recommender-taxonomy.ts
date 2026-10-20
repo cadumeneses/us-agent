@@ -15,8 +15,8 @@ export const recommenderTaxonomySchema = z.strictObject({
   kind: z.enum(['list', 'tree']), selection: z.enum(['any', 'leaf']),
   source: z.string().min(1).max(2000).refine(value => Boolean(value.trim()), 'Informe a origem.'),
   nodes: z.array(z.strictObject({
-    id: taxonomyIdSchema, name: z.string().min(1).max(160).refine(value => Boolean(value.trim()), 'Informe o nome do nó.'),
-    description: z.string().max(2000), parentId: taxonomyIdSchema.nullable()
+    id: taxonomyIdSchema, name: z.string().min(1).max(180).refine(value => Boolean(value.trim()), 'Informe o nome do nó.'),
+    description: z.string(), parentId: taxonomyIdSchema.nullable(), selectable: z.boolean().optional()
   })).min(1).max(5000)
 }).superRefine((taxonomy, context) => {
   const nodes = new Map(taxonomy.nodes.map(node => [node.id, node]));
@@ -86,6 +86,6 @@ export function resolveTaxonomies(references: TaxonomyReference[], rawDependenci
 export function taxonomyNodeValidator(reference: TaxonomyReference, dependencies: readonly TaxonomyDependency[]): z.ZodType<string> {
   const content = dependencies.find(dependency => dependency.snapshot.content.id === reference.id && dependency.snapshot.content.version === reference.version)!.snapshot.content;
   const parents = new Set(content.nodes.map(node => node.parentId));
-  const selectable = new Set(content.nodes.filter(node => content.selection === 'any' || !parents.has(node.id)).map(node => node.id));
+  const selectable = new Set(content.nodes.filter(node => node.selectable !== false && (content.selection === 'any' || !parents.has(node.id))).map(node => node.id));
   return z.string().refine(id => selectable.has(id), `Selecione um ID permitido em ${reference.id}@${reference.version} (${content.selection}).`);
 }

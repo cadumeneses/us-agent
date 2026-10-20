@@ -1,17 +1,18 @@
 import type { ConfiguredRun, DatasetSummary, DefinitionRecord, DefinitionSummary, RecommendationRequest, ReplayResult, RunSummary } from '../types/configurable-recommendations';
 import type { ConfiguredDefinition, ConfiguredTaxonomy, DatasetRecord, TaxonomyRecord, TaxonomySummary } from '../types/configurable-recommendations';
-import type { BindTargetRequest, ClassificationDestination, ItemDecision, ItemDecisionRequest, RecommendationReview, RunTarget, Snapshot } from '../types/configurable-recommendations';
+import type { BindTargetRequest, ClassificationDestination, ItemDecision, ItemDecisionRequest, RecommendationReview, RunTarget, Snapshot, NfrCopy, NfrCopyRequest } from '../types/configurable-recommendations';
 import { TEST_CASE_METHOD, type MethodRun, type MethodImportRecord, type MethodImportSpec, type TestCaseCatalogRecord, type TestCaseCatalogSummary, type TestCaseRequest, type TestCaseRun } from '../types/test-case-recommendations';
 import type { TestReview, TestItemReview, TestTargetRecord, TestDecisionRequest, TestDecisionRecord, TestCopyRequest, TestCopyRecord } from '../types/test-case-assessments';
 import { notifySessionExpired } from './web-session';
 import { CONFIGURABLE_KNN, type ProjectRecommendationRequest, type ProjectRecommendationRun, type ProjectRecommenderProfile } from '../types/project-recommendations';
+import { organizationOptions } from './organization';
 
 export class RecommenderApiError extends Error {
   constructor(public status: number, message: string) { super(message); }
 }
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`/api/internal/${path}`, { ...options, credentials: 'same-origin' });
+  const response = await fetch(`/api/internal/${path}`, { ...organizationOptions(options), credentials: 'same-origin' });
   if (!response.ok) {
     notifySessionExpired(response.status);
     const body = await response.json().catch(() => ({})) as { error?: string; issues?: Array<{ path?: Array<string | number>; message: string }> };
@@ -85,6 +86,7 @@ export const recommenderApi = {
   destination: (id: string, classificationId: string) => request<Snapshot<ClassificationDestination>>(`recommendation-runs/${encodeURIComponent(id)}/destinations/${encodeURIComponent(classificationId)}`),
   bindTarget: (id: string, input: BindTargetRequest) => request<RunTarget>(`recommendation-runs/${encodeURIComponent(id)}/target`, json('POST', input)),
   decideItem: (id: string, input: ItemDecisionRequest) => request<ItemDecision>(`recommendation-runs/${encodeURIComponent(id)}/decisions`, json('POST', input)),
+  saveNfrCopy: (id: string, input: NfrCopyRequest) => request<NfrCopy>(`recommendation-runs/${encodeURIComponent(id)}/copies`, json('POST', input)),
   testReview: (id: string, signal?: AbortSignal) => request<TestReview>(`test-case-reviews/${encodeURIComponent(id)}`, { signal }),
   testItemReview: (id: string, itemKey: string, offset = 0, signal?: AbortSignal) => request<TestItemReview>(`test-case-reviews/${encodeURIComponent(id)}/items/${encodeURIComponent(itemKey)}?limit=5&offset=${offset}`, { signal }),
   confirmTestTarget: (id: string, runSha256: string) => request<TestTargetRecord>(`test-case-reviews/${encodeURIComponent(id)}/target`, json('POST', { runSha256, target: { kind: 'input' } })),

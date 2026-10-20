@@ -80,6 +80,11 @@ test('validates taxonomy IDs, leaf selection, cardinality and record fields inde
   assert.throws(() => validateRecommendationInput(config, input), /indisponível/);
   const all = publication({ ...taxonomy(), selection: 'any' });
   assert.doesNotThrow(() => validateRecommendationInput(definition(all), { ...input, values: { languages: ['language'] } }, [all]));
+  const inactive = taxonomy();
+  inactive.nodes[1].selectable = false;
+  const restricted = publication(parseRecommenderTaxonomy(inactive));
+  assert.throws(() => validateRecommendationInput(definition(restricted), input, [restricted]));
+  assert.doesNotThrow(() => validateRecommendationInput(definition(restricted), { ...input, values: { languages: ['python'] } }, [restricted]));
 });
 
 test('optional taxonomy attributes still require a valid published dependency and distinct attributes use their own catalogs', () => {

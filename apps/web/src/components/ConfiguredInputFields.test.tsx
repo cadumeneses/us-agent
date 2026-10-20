@@ -68,6 +68,10 @@ test('taxonomy resolution requires the exact hash and honors leaf-only selection
   const type = { type: 'taxonomy_node' as const, taxonomy: ref };
   expect(taxonomyOptions(type, [taxonomy])).toEqual([{ id: 'browser', label: 'Contexto / Navegador', description: 'Nome de apresentação' }]);
   expect(taxonomyOptions({ ...type, taxonomy: { ...ref, sha256: '0'.repeat(64) } }, [taxonomy])).toEqual([]);
+  const inactive = structuredClone(taxonomy);
+  inactive.snapshot.content.nodes[1].selectable = false;
+  expect(taxonomyOptions(type, [inactive])).toEqual([]);
+  expect(inputIssues(definition, { ...initialValues(definition), platform: 'browser' }, [inactive])).toContain('Plataforma: choose a node from the published taxonomy.');
   const values = { ...initialValues(definition), amount: 1, environment: 'field', platform: 'root' };
   expect(inputIssues(definition, values, [taxonomy])).toContain('Plataforma: choose a node from the published taxonomy.');
   expect(emptyValue({ type: 'record', fields: { active: { type: 'boolean' }, value: { type: 'number' } } })).toEqual({ active: false, value: null });

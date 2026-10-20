@@ -1,3 +1,4 @@
+import { currentActor } from '../security/request-context.js';
 import { Router, type ErrorRequestHandler } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
@@ -10,7 +11,7 @@ import { TestCaseCatalogRequestError } from '../services/test-case-catalogs.js';
 export const recommenderDatasetsRouter = Router();
 recommenderDatasetsRouter.use((req, res, next) => { if (isAuthorizedInternalRequest(req, res)) next(); });
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: IMPORT_MAX_BYTES, files: 1, fields: 1, fieldSize: 200_000 } });
-const actor = () => process.env.INGEST_API_KEY ? 'internal-api' : 'local-development';
+const actor = () => currentActor();
 const importPath = z.strictObject({ importId: z.uuid() });
 
 recommenderDatasetsRouter.post('/imports/preview', upload.single('file'), async (req, res) => {

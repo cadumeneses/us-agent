@@ -1,3 +1,4 @@
+import { currentActor } from '../security/request-context.js';
 import { Router, type ErrorRequestHandler } from 'express';
 import { z } from 'zod';
 import { definitionIdentitySchema } from '../domain/recommender-definition.js';
@@ -5,14 +6,14 @@ import { isAuthorizedInternalRequest } from './internal-authorization.js';
 import { createRecommendationRun, listRecommendationRuns, loadRecommendationRun, replayRecommendationRun, RecommendationRequestError } from '../services/recommendation-runs.js';
 import { DatasetRequestError } from '../services/recommender-datasets.js';
 import { TestCaseCatalogRequestError } from '../services/test-case-catalogs.js';
-import { bindRecommendationTarget, decideRecommendationItem, previewRecommendationDestination, recommendationReview } from '../services/recommendation-review.js';
+import { bindRecommendationTarget, decideRecommendationItem, previewRecommendationDestination, recommendationReview, createNfrCopy } from '../services/recommendation-review.js';
 import { classificationIdentity } from '../domain/recommendation-review.js';
 
 export const recommendationRunsRouter = Router();
 recommendationRunsRouter.use((req, res, next) => { if (isAuthorizedInternalRequest(req, res)) next(); });
 const path = z.strictObject({ id: z.uuid() });
 recommendationRunsRouter.post('/', async (req, res) => {
-  res.status(201).json(await createRecommendationRun(req.body, process.env.INGEST_API_KEY ? 'internal-api' : 'local-development'));
+  res.status(201).json(await createRecommendationRun(req.body, currentActor()));
 });
 recommendationRunsRouter.get('/', async (req, res) => {
   const options = z.strictObject({ definitionId: definitionIdentitySchema.shape.id.optional(), datasetId: definitionIdentitySchema.shape.id.optional(),
@@ -26,10 +27,13 @@ recommendationRunsRouter.get('/:id/destinations/:classificationId', async (req, 
   res.json(await previewRecommendationDestination(params.id, params.classificationId));
 });
 recommendationRunsRouter.post('/:id/target', async (req, res) => {
-  res.json(await bindRecommendationTarget(path.parse(req.params).id, req.body, process.env.INGEST_API_KEY ? 'internal-api' : 'local-development'));
+  res.json(await bindRecommendationTarget(path.parse(req.params).id, req.body, currentActor()));
 });
 recommendationRunsRouter.post('/:id/decisions', async (req, res) => {
-  res.json(await decideRecommendationItem(path.parse(req.params).id, req.body, process.env.INGEST_API_KEY ? 'internal-api' : 'local-development'));
+  res.json(await decideRecommendationItem(path.parse(req.params).id, req.body, currentActor()));
+});
+recommendationRunsRouter.post('/:id/copies', async (req,res) => {
+  res.status(201).json(await createNfrCopy(path.parse(req.params).id,req.body,currentActor()));
 });
 recommendationRunsRouter.post('/:id/replay', async (req, res) => {
   if (req.body !== undefined && !z.strictObject({}).safeParse(req.body).success) throw new RecommendationRequestError(400, 'Replay usa apenas os snapshots registrados.');

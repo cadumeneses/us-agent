@@ -58,6 +58,9 @@ test('API boundary rejects requests before handlers or body/upload parsing, acro
     assert.equal((await send('/probe', { method: 'POST', headers: { authorization: 'Bearer synthetic-test-credential' } })).status, 200);
     assert.equal(writes, 1);
     const authorized = { authorization: 'Bearer synthetic-test-credential' };
+    // A production request fails closed when the organization registry is unavailable.
+    assert.equal((await send('/api/classifications/invalid/details', { headers: authorized })).status, 503);
+    environment({ INGEST_API_KEY: 'synthetic-test-credential' });
     assert.equal((await send('/api/classifications/invalid/details', { headers: authorized })).status, 400);
     const form = new FormData(); form.set('file', new Blob(['Como usuário, quero consultar meu cadastro para conferir os dados.']), 'synthetic.txt');
     const imported = await send('/api/import', { method: 'POST', headers: authorized, body: form });

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 3,
+  "id": "configuration-study-v3",
+  "kind": "observed_sessions",
+  "protocolSha256": "96d6a166b2654f37fdfe92b10e19da4fc3215083b790eecfc7b2b1a63f0d0581",
+  "methodology": {
+    "status": "pending",
+    "reviewEvidence": ""
+  },
+  "plannedAttempts": [],
+  "sessions": []
+}

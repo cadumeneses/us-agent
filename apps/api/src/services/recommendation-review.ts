@@ -1,7 +1,7 @@
 import type { PoolClient } from 'pg';
 import { withTransaction } from '../database/pool.js';
 import { canonicalJson, snapshotContent, type ContentSnapshot } from '../domain/content-snapshot.js';
-import { associationIdentity, bindRecommendationTargetSchema, classificationIdentity, decisionItem, inputAssociationScope, recommendationDecisionSchema } from '../domain/recommendation-review.js';
+import { associationIdentity, bindRecommendationTargetSchema, classificationIdentity, decisionItem, inputAssociationScope, recommendationDecisionSchema, nfrCopyRequestSchema } from '../domain/recommendation-review.js';
 import type { RecommendationContent } from './recommendation-execution.js';
 import { loadRnfRecommendationRun as loadRecommendationRun, RecommendationRequestError } from './recommendation-runs.js';
 import { nfrKey, normalizeNfr, type Label, type Nfr } from './nfr-engine.js';
@@ -24,6 +24,60 @@ type TargetRow = Row<TargetContent> & { run_id: string; kind: string };
 type DecisionRow = Row<DecisionContent> & { id: string; run_id: string; item_key: string; decision: string; request_sha256: string; link_identity_sha256: string | null };
 type LinkContent = { schemaVersion: 1; identity: ReturnType<typeof associationIdentity>; item: Nfr };
 type LinkRow = Row<LinkContent> & { identity_sha256: string; item_key: string };
+
+type NfrCopyContent = {
+  schemaVersion: 1; run: TargetContent['run']; targetSha256: string; decisionSha256: string;
+  request: ContentSnapshot<ReturnType<typeof nfrCopyRequestSchema.parse>>;
+  originalItem: ContentSnapshot<ReturnType<typeof decisionItem>>; artifact: Nfr;
+  revision: number; previous: { id: string; sha256: string } | null;
+};
+type NfrCopyRow = Row<NfrCopyContent> & { id: string; decision_id: string; run_id: string; item_key: string;
+  revision: number; previous_copy_id: string | null; request_sha256: string };
+function nfrCopyRecord(row: NfrCopyRow) {
+  const record = envelope(row), content = record.snapshot.content, request = content.request;
+  if (content.run.id !== row.run_id || request.content.id !== row.id || request.content.decisionId !== row.decision_id ||
+      request.content.itemKey !== row.item_key || content.revision !== row.revision ||
+      content.previous?.id !== (row.previous_copy_id ?? undefined) || request.sha256 !== row.request_sha256 ||
+      snapshotContent(request.content).sha256 !== request.sha256 || snapshotContent(content.originalItem.content).sha256 !== content.originalItem.sha256 ||
+      content.artifact.sentence !== request.content.sentence || content.artifact.type !== content.originalItem.content.type ||
+      content.artifact.attribute !== content.originalItem.content.attribute) throw new Error('NFR adaptation evidence is inconsistent.');
+  return { id: row.id, ...record };
+}
+
+export async function createNfrCopy(runId: string, raw: unknown, actor: string) {
+  validateReviewJson(raw); const request = nfrCopyRequestSchema.parse(raw), requestSnapshot = snapshotContent(request);
+  return withTransaction(async client => {
+    await client.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))',[JSON.stringify(['nfr-copy',request.id])]);
+    const run = await lockedRun(client, runId, request.runSha256);
+    const retry = (await client.query<NfrCopyRow>('SELECT * FROM nfr_adapted_copies WHERE id=$1', [request.id])).rows[0];
+    if (retry) {
+      const record = nfrCopyRecord(retry);
+      if (retry.run_id !== runId || retry.request_sha256 !== requestSnapshot.sha256) throw new RecommendationRequestError(409, 'Adaptation ID already used for another request.');
+      return record;
+    }
+    const target = (await client.query<TargetRow>('SELECT * FROM recommender_run_targets WHERE run_id=$1', [runId])).rows[0];
+    const decision = (await client.query<DecisionRow>('SELECT * FROM recommender_item_decisions WHERE id=$1 AND run_id=$2 AND item_key=$3', [request.decisionId, runId, request.itemKey])).rows[0];
+    if (!target || !decision || decision.decision !== 'accepted') throw new RecommendationRequestError(409, 'Accept the original NFR at a confirmed destination before adapting it.');
+    const checkedTarget = targetRecord(target), checkedDecision = decisionRecord(decision);
+    if (checkedTarget.snapshot.sha256 !== request.targetSha256 || checkedDecision.snapshot.content.target.sha256 !== request.targetSha256 ||
+        checkedDecision.snapshot.content.run.sha256 !== run.snapshot.sha256) throw new RecommendationRequestError(409, 'Adaptation references differ from the preserved assessment.');
+    const latest = (await client.query<NfrCopyRow>('SELECT * FROM nfr_adapted_copies WHERE decision_id=$1 ORDER BY revision DESC LIMIT 1', [request.decisionId])).rows[0];
+    const previous = latest ? nfrCopyRecord(latest) : null;
+    if (previous ? request.previousCopy?.id !== previous.id || request.previousCopy.sha256 !== previous.snapshot.sha256 : request.previousCopy !== null)
+      throw new RecommendationRequestError(409, 'The adaptation changed. Reload the latest revision.');
+    const original = decisionItem(run.snapshot.content, request.itemKey);
+    if (snapshotContent(original).sha256 !== snapshotContent(checkedDecision.snapshot.content.originalItem).sha256) throw new Error('NFR differs from its accepted original.');
+    const snapshot = snapshotContent<NfrCopyContent>({ schemaVersion: 1, run: checkedTarget.snapshot.content.run,
+      targetSha256: request.targetSha256, decisionSha256: checkedDecision.snapshot.sha256, request: requestSnapshot,
+      originalItem: snapshotContent(original), artifact: { type: original.type, attribute: original.attribute, sentence: request.sentence },
+      revision: latest ? latest.revision + 1 : 1, previous: previous ? { id: previous.id, sha256: previous.snapshot.sha256 } : null });
+    const saved = await client.query<NfrCopyRow>(`INSERT INTO nfr_adapted_copies
+      (id,decision_id,run_id,item_key,revision,previous_copy_id,request_sha256,content,hash_format,content_sha256,created_by)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11) RETURNING *`,
+      [request.id,request.decisionId,runId,request.itemKey,snapshot.content.revision,previous?.id ?? null,requestSnapshot.sha256,JSON.stringify(snapshot.content),snapshot.format,snapshot.sha256,actor]);
+    return nfrCopyRecord(saved.rows[0]);
+  });
+}
 
 function validateReviewJson(raw: unknown) {
   try { canonicalJson(raw); }
@@ -120,10 +174,22 @@ export async function recommendationReview(runId: string) {
     const run = await loadRecommendationRun(runId, client);
     const targets = await client.query<TargetRow>('SELECT * FROM recommender_run_targets WHERE run_id = $1', [runId]);
     const decisions = await client.query<DecisionRow>('SELECT * FROM recommender_item_decisions WHERE run_id = $1 ORDER BY created_at, id', [runId]);
+    const copies = await client.query<NfrCopyRow>('SELECT * FROM nfr_adapted_copies WHERE run_id=$1 ORDER BY created_at,id', [runId]);
     const target = targets.rows[0] ? targetRecord(targets.rows[0]) : null;
     const records = decisions.rows.map(decisionRecord);
+    const adaptations = copies.rows.map(nfrCopyRecord);
+    for (const copy of adaptations) {
+      const content = copy.snapshot.content, decision = records.find(record=>record.id===content.request.content.decisionId);
+      const previous = content.previous ? adaptations.find(record=>record.id===content.previous!.id) : null;
+      if (!decision || decision.snapshot.content.request.content.decision !== 'accepted' || content.decisionSha256 !== decision.snapshot.sha256 ||
+          content.targetSha256 !== target?.snapshot.sha256 || content.run.sha256 !== run.snapshot.sha256 ||
+          content.originalItem.sha256 !== snapshotContent(decision.snapshot.content.originalItem).sha256 ||
+          (previous ? previous.snapshot.sha256 !== content.previous?.sha256 || previous.snapshot.content.revision+1 !== content.revision ||
+            previous.snapshot.content.request.content.decisionId !== decision.id : content.previous !== null || content.revision !== 1))
+        throw new Error('NFR adaptation chain diverges from its accepted source.');
+    }
     if (target && target.snapshot.content.run.sha256 !== run.snapshot.sha256 || records.some(decision => decision.snapshot.content.run.sha256 !== run.snapshot.sha256 || decision.snapshot.content.target.sha256 !== target?.snapshot.sha256)) throw new Error('Revisão diverge da execução ou do destino preservado.');
-    return { runId, runSha256: run.snapshot.sha256, target, decisions: records };
+    return { runId, runSha256: run.snapshot.sha256, target, decisions: records, copies: adaptations };
   });
 }
 export async function decideRecommendationItem(runId: string, raw: unknown, actor: string) {

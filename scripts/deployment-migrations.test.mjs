@@ -1,11 +1,16 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { loadMigrationRelease, migrationConnection, sqlHash, applyMigrationRelease } from './lib/deployment-migrations.mjs';
+import { loadMigrationRelease, migrationConnection, sqlHash, applyMigrationRelease, migrationPrefix } from './lib/deployment-migrations.mjs';
 
 test('deployment release pins all reviewed migrations and excludes untracked local SQL', async () => {
   const migrations = await loadMigrationRelease();
-  assert.equal(migrations.length, 27);
-  assert.equal(migrations.at(-1).name, '026_private_web_users.sql');
+  assert.equal(migrations.length, 32);
+  assert.equal(migrations.at(-1).name, '031_organizations_and_audit.sql');
+  const previous = migrationPrefix(migrations, '028_configurable_project_recommendations.sql');
+  assert.equal(previous.length, 29);
+  assert.equal(previous.at(-1).name, '028_configurable_project_recommendations.sql');
+  assert.ok(!previous.some(row => row.name === '029_legacy_taxonomy_staging.sql'));
+  assert.throws(() => migrationPrefix(migrations, 'unknown.sql'), /Unknown/);
   assert.ok(!migrations.some(row => row.name === '016_sheet_source_links.sql'));
   assert.equal(sqlHash('SELECT 1;\r\n'), sqlHash('SELECT 1;\n'));
   assert.notEqual(sqlHash('SELECT 1;\n'), sqlHash('SELECT 2;\n'));

@@ -20,6 +20,13 @@ export async function loadMigrationRelease() {
   }));
 }
 
+export function migrationPrefix(migrations, through) {
+  if (!through) return migrations;
+  const index = migrations.findIndex(migration => migration.name === through);
+  assert.ok(index >= 0, 'Unknown --through migration; use a name from the verified release.');
+  return migrations.slice(0, index + 1);
+}
+
 export function migrationConnection(env) {
   // Never use the application pool URL or a local fallback for deployment migrations.
   const connectionString = env.MIGRATION_DATABASE_URL || env.DATABASE_URL_UNPOOLED || env.POSTGRES_URL_NON_POOLING;

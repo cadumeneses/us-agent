@@ -1,3 +1,4 @@
+import { currentActor } from '../security/request-context.js';
 import { Router, type ErrorRequestHandler } from 'express';
 import { z } from 'zod';
 import { contentReferenceSchema } from '../domain/dataset-import.js';
@@ -13,7 +14,7 @@ import { isAuthorizedInternalRequest } from './internal-authorization.js';
 // Extension of the shared lifecycle. Historical method implementations remain unchanged.
 export const configurableRecommendationsRouter = Router();
 configurableRecommendationsRouter.use((req, res, next) => { if (isAuthorizedInternalRequest(req, res)) next(); });
-const actor = () => process.env.INGEST_API_KEY ? 'internal-api' : 'local-development';
+const actor = () => currentActor();
 configurableRecommendationsRouter.post('/recommender-definitions/:id/versions/:version/publish', async (req, res, next) => {
   const definition = await loadDefinitionVersion(String(req.params.id), String(req.params.version));
   if (definition.definition.method.id !== CONFIGURABLE_KNN) return next();

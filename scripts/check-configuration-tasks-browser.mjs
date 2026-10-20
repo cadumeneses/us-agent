@@ -112,7 +112,7 @@ try {
       await edit('Catalog use declaration', settings.source.authorization.reference);
       await click('Publish reviewed catalog'); await text('Catalog published with its original file');
     }
-    await click('Independent taxonomies'); await click('New taxonomy');
+    await click('Taxonomies'); await click('New taxonomy');
     const scope = '[aria-label="Taxonomy editor"]', taxonomy = settings.taxonomy;
     for (const [label, value] of [['ID', taxonomy.id], ['Version', taxonomy.version], ['Name', taxonomy.name], ['Taxonomy source', taxonomy.source], ['Structure', taxonomy.kind], ['Selectable nodes', taxonomy.selection]]) await edit(label, value, scope);
     for (const [index, node] of taxonomy.nodes.entries()) {
@@ -122,6 +122,7 @@ try {
       await evaluate(`document.querySelector('#task-node').removeAttribute('id')`);
     }
     await click('Save taxonomy draft'); await text('Draft saved. Review the nodes'); await click('Publish reviewed taxonomy'); await text('Taxonomy published with immutable content');
+    await cdp('Page.navigate', { url: `${origin}/recommender-setup` }); await text('Configure and import datasets');
     await click('Definitions'); await click(task === 'rnf' ? 'New NFR from template' : 'New test-case demonstration');
     const defScope = '[aria-label="Definition editor"]';
     await edit('ID', settings.definitionId, defScope); await edit('Version', settings.version, defScope);

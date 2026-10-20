@@ -15,7 +15,7 @@ import { api } from '../services/api';
 import type { ClassificationDestination, ConfiguredRun, ItemDecision, RecommendationReview } from '../types/configurable-recommendations';
 import { ConfiguredRunReview } from './ConfiguredRunReview';
 
-vi.mock('../services/recommender-api', () => ({ recommenderApi: { review: vi.fn(), destination: vi.fn(), bindTarget: vi.fn(), decideItem: vi.fn() } }));
+vi.mock('../services/recommender-api', () => ({ recommenderApi: { review: vi.fn(), destination: vi.fn(), bindTarget: vi.fn(), decideItem: vi.fn(), saveNfrCopy: vi.fn() } }));
 vi.mock('../services/api', () => ({ api: { stories: vi.fn() } }));
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 function fixture(): ConfiguredRun {
@@ -39,6 +39,12 @@ let run: ConfiguredRun, review: RecommendationReview, root: Root, container: HTM
 beforeEach(() => {
   vi.resetAllMocks(); run = fixture(); review = { runId: run.id, runSha256: run.snapshot.sha256, target: null, decisions: [] };
   vi.mocked(recommenderApi.review).mockImplementation(async () => structuredClone(review));
+  vi.mocked(recommenderApi.saveNfrCopy).mockImplementation(async (_id,input) => {
+    const original=run.snapshot.content.result.content.items.find(item=>item.key===input.itemKey)!;
+    const copy={id:input.id,createdBy:'reviewer',createdAt:run.createdAt,snapshot:snapshotContent({schemaVersion:1 as const,
+      request:snapshotContent(input),revision:1,previous:null,artifact:{type:original.type,attribute:original.attribute,sentence:input.sentence},originalItem:snapshotContent(original)})};
+    review.copies=[copy];return copy;
+  });
   vi.mocked(api.stories).mockResolvedValue([{ id: '27', project: destination.project, text: destination.text, sprint: 'Backlog', labels: destination.labels, module: 'Registry', operation: 'Retrieve data', status: 'reviewed', taxonomyVersion: 'wis-v1', metricsSource: 'rules', confidence: 1, uncertainty: 0, consensus: 1 }]);
   vi.mocked(recommenderApi.destination).mockResolvedValue(snapshotContent(destination));
   vi.mocked(recommenderApi.bindTarget).mockImplementation(async (_id, raw) => {
@@ -74,6 +80,13 @@ test('acceptance/rejection require destination confirmation and preserve raw ite
   await click(button("Accept and link", cards[0])); await click(button("Reject", cards[1]));
   expect(container.textContent).toContain("Accepted and linked to the preserved input."); expect(container.textContent).toContain("Rejected. This decision created no link.");
   expect(review.decisions[0].snapshot.content.request.content.notes).toBe('Pertinente para a entrada.'); expect(review.decisions[1].snapshot.content.association).toBeNull();
+  await change(control('Adapted sentence',cards[0]),'Adapted to the destination.');
+  await change(control('Reason for adaptation',cards[0]),'Context checked explicitly.');
+  await click(button('Save NFR adaptation',cards[0]));
+  expect(recommenderApi.saveNfrCopy).toHaveBeenCalledWith(run.id,expect.objectContaining({decisionId:review.decisions[0].id,
+    targetSha256:review.target!.snapshot.sha256,previousCopy:null,sentence:'Adapted to the destination.'}));
+  expect(cards[0].textContent).toContain('Revision 1');expect(cards[0].textContent).toContain('Adapted to the destination.');
+  expect(review.copies?.[0].snapshot.content.originalItem.content.sentence).toBe(run.snapshot.content.result.content.items[0].sentence);
   expect(JSON.stringify(run)).toBe(before);
 });
 

@@ -3,6 +3,7 @@ import { api } from '../services/api';
 import { recommenderApi } from '../services/recommender-api';
 import type { BindTargetRequest, ClassificationDestination, ConfiguredRun, ItemDecisionRequest, RecommendationReview, Snapshot } from '../types/configurable-recommendations';
 import type { Story } from '../types/models';
+import { NfrAdaptation } from './NfrAdaptation';
 
 function exportReview(run: ConfiguredRun, review: RecommendationReview) {
   const url = URL.createObjectURL(new Blob([JSON.stringify({ run, review }, null, 2)], { type: 'application/json' }));
@@ -77,6 +78,9 @@ export function ConfiguredRunReview({ run }: { run: ConfiguredRun }) {
       const decision = review?.decisions.find(value => value.snapshot.content.request.content.itemKey === item.key);
       return <article className="nfr-item" key={item.key} aria-label={`Suggestion: ${item.sentence}`}><span className="tag">{item.type} / {item.attribute}</span><p>{item.sentence}</p><small>Utility: {(item.score * 100).toLocaleString('en-US', { maximumFractionDigits: 2 })}%{item.alreadyLinked ? " · Already present in the original input" : ''}</small>
         {decision ? <div className="configured-decision" role="status"><p>{decision.snapshot.content.request.content.decision === 'rejected' ? "Rejected. This decision created no link." : decision.snapshot.content.association?.materialization === 'input_only' ? "Accepted and linked to the preserved input." : "Accepted. The link to the story was confirmed when the decision was recorded."}</p><p>{decision.snapshot.content.request.content.notes || "No notes."}</p><small>{decision.createdBy} · {new Date(decision.createdAt).toLocaleString('en-US')}</small><details><summary>Decision evidence</summary><p className="configured-hash">SHA-256: {decision.snapshot.sha256}</p>{decision.snapshot.content.association && <p className="configured-hash">Link: {decision.snapshot.content.association.identitySha256}</p>}</details></div> : <fieldset disabled={loading || busy || !target} className="configured-form-body"><label>Suggestion notes<textarea maxLength={2000} value={notes[item.key] ?? ''} onChange={event => setNotes({ ...notes, [item.key]: event.target.value })}/></label><div className="configured-actions"><button className="primary" onClick={() => void decide(item.key, 'accepted')}>Accept and link</button><button onClick={() => void decide(item.key, 'rejected')}>Reject</button></div></fieldset>}
+        {decision?.snapshot.content.request.content.decision === 'accepted' && <NfrAdaptation key={`${decision.id}:${(review?.copies ?? []).filter(copy=>copy.snapshot.content.request.content.decisionId === decision.id).length}`} run={run} decision={decision}
+          copies={(review?.copies ?? []).filter(copy=>copy.snapshot.content.request.content.decisionId === decision.id)}
+          saved={copy=>setReview(current=>current && ({ ...current,copies:[...(current.copies ?? []).filter(value=>value.id!==copy.id),copy] }))}/>}
       </article>;
     })}</div>
     {review && <button disabled={busy || loading} onClick={() => exportReview(run, review)}>Download evidence with assessments</button>}

@@ -117,6 +117,18 @@
     {
       "name": "028_configurable_project_recommendations.sql",
       "sha256": "e73e240fc0e269dfffc58a299ecf40928861f3e33569034e10a7625e82fad176"
+    },
+    {
+      "name": "029_legacy_taxonomy_staging.sql",
+      "sha256": "6b54ca100d516569feea68dfa9d8e1f9e02efd56ff730f59b4d1aad0e720d570"
+    },
+    {
+      "name": "030_nfr_adapted_copies.sql",
+      "sha256": "2d3ed2e76d785af40fafeb73d87663c4ff84dce22a9fca984690f79c0734a2b3"
+    },
+    {
+      "name": "031_organizations_and_audit.sql",
+      "sha256": "0dcdfafcf943b6fee1f4a8dfee9c08716cd639201d410fbb080d40a71db1d7e5"
     }
   ]
 }

@@ -1,5 +1,7 @@
 # Pauta de revisão metodológica da configuração
 
+Atualização 042 (20/10/2026): o [estudo v3](estudo-tres-casos-v3.md) já oferece tarefas, propostas concretas para D01–D12 e instrumento com artefatos/replay para os três casos, incluindo riscos sem US. A implementação não depende mais de aguardar o terceiro exemplo. As decisões continuam propostas até revisão humana registrada, e não há coleta observada. A pauta abaixo preserva o estado histórico v2.
+
 19/10/2026. Preparação B14/B18/RQ05. Esta ficha reúne escolhas que precisam de fechamento com a orientação; não registra aprovação, recrutamento ou coleta. Não altera os protocolos/materiais congelados nem fabrica decisões, participantes ou tempos.
 
 ## Material concreto para a revisão

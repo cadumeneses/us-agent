@@ -1,5 +1,6 @@
 import { attachDatabasePool } from '@vercel/functions';
 import pg, { type PoolClient, type QueryResult, type QueryResultRow } from 'pg';
+import { requestScope } from '../security/request-context.js';
 
 const { Pool } = pg;
 const localDatabaseUrl = 'postgresql://us_agent:us_agent_local@localhost:5432/us_agent';
@@ -32,6 +33,7 @@ export function query<Row extends QueryResultRow>(text: string, values: unknown[
   if (!connectionString) {
     throw new Error('DATABASE_URL não foi configurada. Consulte o arquivo .env.example.');
   }
+  if (requestScope.getStore()) return withTransaction(client => client.query<Row>(text,values));
   return pool.query<Row>(text, values);
 }
 
@@ -39,6 +41,16 @@ export async function withTransaction<T>(operation: (client: PoolClient) => Prom
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
+    const scope = requestScope.getStore();
+    if (scope) {
+      if (scope.schema) {
+        if (!/^[a-z_][a-z0-9_]{0,62}$/.test(scope.schema)) throw new Error('Invalid organization schema.');
+        await client.query(`SET LOCAL search_path TO "${scope.schema}", pg_catalog`);
+      }
+      const literal = (value: string) => "'" + value.replaceAll("'", "''") + "'";
+      await client.query(`SET LOCAL app.actor = ${literal(scope.actor)}`);
+      await client.query(`SET LOCAL app.organization_id = ${literal(scope.organizationId)}`);
+    }
     const result = await operation(client);
     await client.query('COMMIT');
     return result;

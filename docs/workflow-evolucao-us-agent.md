@@ -1,5 +1,12 @@
 # Workflow e backlog de evolução do US-Agent
 
+**Atualização vigente 042:** [fechamento técnico e preparação empírica](entregas/042-fechamento-tecnico-e-preparacao-empirica.md). Adaptação RNF e B13 implementados/verificados localmente; tarefas/instrumento v3 dos três métodos e textos acadêmicos entregues. B14/B18/B22 permanecem abertos apenas nos aceites empíricos descritos, e B23 aguarda revisão/incorporação desses resultados. Implantação do conjunto 029–031 não realizada; seguir o roteiro 042. Não tratar os estados históricos de B13/RF11 como o diagnóstico atual.
+
+Atualização 041: [preparação da migração WIS](entregas/041-preparacao-migracao-catalogo-wis.md) entregue localmente: 029 no release, cópia aditiva para rascunhos, IDs e metadados preservados, operações desativadas não selecionáveis. Implantação e troca da leitura/classificação/revisão continuam pendentes, conforme o roteiro operacional.
+
+Revisão 040 (20/10/2026): [conferência do plano e taxonomias](entregas/040-revisao-plano-e-taxonomias.md). O plano completo permanece parcial pelos aceites empíricos, estudo dos três casos, material acadêmico, B13 e adaptação RNF. O cadastro de taxonomias agora tem uma entrada única na interface; integrar o catálogo WIS/classificação às publicações comuns, preservando histórico e revisão, continua pendente. Esta revisão não verifica produção.
+
+
 Norte de escopo e aceite: [US-Agent_Requisitos_e_Lacunas.md](../US-Agent_Requisitos_e_Lacunas.md), adotado pelo usuário em 19/10/2026. O backlog acompanha os RF/RQ desse documento; a [conferência atual](aderencia-demandas-professor.md) distingue capacidade técnica, demonstração e avaliação científica.
 
 Atualização vigente 039: B22a/B23a acrescentam ensaio offline dos três exemplos com 23 condições já preservadas, pacote/replay, tutorial em inglês e arquitetura executada. Não há casos/testes novos nem coleta. B20/B21 continuam atendidos tecnicamente por 038; classificação prevista/revisada observada, relevância empírica e esforço humano permanecem não medidos. Para instalar 037/038, verificar o ambiente e aplicar 027/028 antes do código. Esta consolidação não consulta produção.

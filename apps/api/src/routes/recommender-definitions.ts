@@ -1,3 +1,4 @@
+import { currentActor } from '../security/request-context.js';
 import { Router, type ErrorRequestHandler } from 'express';
 import { z } from 'zod';
 import { definitionIdentitySchema } from '../domain/recommender-definition.js';
@@ -6,7 +7,7 @@ import { isAuthorizedInternalRequest } from './internal-authorization.js';
 
 export const recommenderDefinitionsRouter = Router();
 recommenderDefinitionsRouter.use((req, res, next) => { if (isAuthorizedInternalRequest(req, res)) next(); });
-const actor = () => process.env.INGEST_API_KEY ? 'internal-api' : 'local-development';
+const actor = () => currentActor();
 const noContent = (body: unknown) => body === undefined || z.strictObject({}).safeParse(body).success;
 
 recommenderDefinitionsRouter.get('/', async (req, res) => {

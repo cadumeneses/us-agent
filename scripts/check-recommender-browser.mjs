@@ -92,9 +92,10 @@ try {
     window.uiEdit=async(name,value,selector='.page')=>{const label=window.uiLabel(name,document.querySelector(selector));if(!label)throw Error('Missing field: '+name);const el=label.querySelector('input,select,textarea');el.closest('details')?.setAttribute('open','');el.scrollIntoView({block:'center'});const proto=el instanceof HTMLSelectElement?HTMLSelectElement.prototype:el instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;Object.getOwnPropertyDescriptor(proto,'value').set.call(el,value);el.dispatchEvent(new Event(el instanceof HTMLSelectElement?'change':'input',{bubbles:true}));await new Promise(r=>setTimeout(r,30));};
   ` });
   await cdp('Page.navigate', { url: `${origin}/recommender-setup` }); await text('Configure and import datasets');
-  await click('Independent taxonomies'); await click('New taxonomy'); const taxScope = '[aria-label="Taxonomy editor"]';
+  await click('Taxonomies'); await click('New taxonomy'); const taxScope = '[aria-label="Taxonomy editor"]';
   for (const [label, value] of [['ID', 'browser-context'], ['Version', '1'], ['Name', 'Context do piloto'], ['Taxonomy source', 'Synthetic browser verification'], ['Node ID', 'demo'], ['Node name', 'Demonstração']]) await edit(label, value, taxScope);
   await click('Save taxonomy draft'); await text('Draft saved. Review the nodes'); await click('Publish reviewed taxonomy'); await text('Taxonomy published with immutable content');
+  await cdp('Page.navigate', { url: `${origin}/recommender-setup` }); await text('Configure and import datasets');
   await click('Definitions'); await click('New NFR from template'); const defScope = '[aria-label="Definition editor"]';
   await edit('ID', 'browser-rnf', defScope); await edit('Version', '1', defScope); await click('Add attribute');
   await evaluate(`{const el=[...document.querySelectorAll('${defScope} details')].find(x=>x.querySelector('summary')?.textContent.startsWith('Attribute 19'));el.id='browser-new-attribute';el.open=true;}`);

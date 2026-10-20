@@ -2,6 +2,10 @@
 
 B08 implementa catálogos separados da taxonomia WIS. Cada catálogo tem ID, versão, origem, nome e nós identificados com nome, descrição e pai opcional. O intercâmbio inicial é JSON; listas e hierarquias não dependem dos termos domínio, módulo e operação.
 
+Atualização 040: o menu **Taxonomies** e o acesso pela configuração dos recomendadores levam ao mesmo editor em `/taxonomy` (`/taxonomias` também é aceito). O catálogo WIS aparece em uma seção de consulta; propostas de classificação continuam na fila de revisão. A [revisão](entregas/040-revisao-plano-e-taxonomias.md) registra o limite atual: a persistência e o consumo WIS ainda precisam ser integrados às publicações comuns, preservando histórico e revisão.
+
+Atualização 041: a [migration 029 e seu roteiro](migracao-catalogo-wis.md) preparam a cópia WIS para rascunhos, com retrato original e mapa de IDs. Nós podem declarar `selectable: false` para permanecer na árvore sem virar opção de entrada; omitir o campo preserva a regra anterior de `selection`. Nomes de nós aceitam 180 caracteres e descrições longas, dentro do limite HTTP. A preparação não altera a leitura do classificador nem publica os catálogos automaticamente.
+
 ## Demonstração e API
 
 Após o build, `npm.cmd run check:recommender-taxonomies` cria um schema temporário no PostgreSQL **local**, aplica as migrations nele e percorre publicação, consulta, validação, retirada e vínculos com atributos. O schema é removido ao terminar. O comando não lê `.env` nem chama provedores. Também executa os oito casos RNF com duas dependências publicadas e compara as saídas inteiras.

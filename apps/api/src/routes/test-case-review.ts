@@ -1,3 +1,4 @@
+import { currentActor } from '../security/request-context.js';
 import { Router, type ErrorRequestHandler } from 'express';
 import { z } from 'zod';
 import { isAuthorizedInternalRequest } from './internal-authorization.js';
@@ -6,7 +7,7 @@ import { RecommendationRequestError } from '../services/recommendation-runs.js';
 export const testCaseReviewRouter = Router();
 testCaseReviewRouter.use((req, res, next) => { if (isAuthorizedInternalRequest(req, res)) next(); });
 const identity = z.strictObject({ id: z.uuid() });
-const actor = () => process.env.INGEST_API_KEY ? 'internal-api' : 'local-development';
+const actor = () => currentActor();
 testCaseReviewRouter.get('/:id', async (req, res) => { res.json(await testReview(identity.parse(req.params).id)); });
 testCaseReviewRouter.post('/:id/target', async (req, res) => { res.json(await confirmTestTarget(identity.parse(req.params).id, req.body, actor())); });
 testCaseReviewRouter.post('/:id/decisions', async (req, res) => { res.json(await decideTestItem(identity.parse(req.params).id, req.body, actor())); });

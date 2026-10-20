@@ -1,3 +1,4 @@
+import { currentActor } from '../security/request-context.js';
 import { Router, type ErrorRequestHandler } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
@@ -16,7 +17,7 @@ testCaseCatalogsRouter.post('/:id/versions/:version/publish', upload.single('fil
   try { spec = parseImportJson(req.body.spec); }
   catch (error) { throw new TestCaseCatalogRequestError(422, error instanceof Error ? error.message : 'Declaração inválida.'); }
   const filename = req.file.originalname.replaceAll('\\', '/').split('/').at(-1)!;
-  res.json(await publishTestCaseCatalog(id, version, req.file.buffer, filename, spec, process.env.INGEST_API_KEY ? 'internal-api' : 'local-development'));
+  res.json(await publishTestCaseCatalog(id, version, req.file.buffer, filename, spec, currentActor()));
 });
 testCaseCatalogsRouter.get('/', async (req, res) => {
   const options = z.strictObject({ id: definitionIdentitySchema.shape.id.optional(), state: z.enum(['published', 'retired']).optional(),

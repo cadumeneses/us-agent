@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 import template from '../../../../config/recommenders/rnf-v2.draft.json';
 import baseline from '../../../../research/baselines/rnf-v2/reference.json';
@@ -15,6 +15,7 @@ import type { NfrProfile } from '../../../api/src/services/nfr-engine';
 import { recommenderApi } from '../services/recommender-api';
 import type { ConfiguredDefinition, DefinitionRecord, DefinitionSummary, ImportRecord } from '../types/configurable-recommendations';
 import { RecommenderSetupPage } from './RecommenderSetupPage';
+import { TaxonomyPage } from './TaxonomyPage';
 import { testCaseFixture } from '../test-fixtures/test-case';
 import { buildTestCaseImportPreview } from '../../../api/src/domain/test-case-dataset';
 import { validateImplementedDefinition } from '../../../api/src/services/recommender-methods';
@@ -62,7 +63,7 @@ beforeEach(() => {
   container = document.createElement('div'); document.body.append(container); root = createRoot(container);
 });
 afterEach(async () => { await act(async () => root.unmount()); container.remove(); });
-async function render() { await act(async () => root.render(<MemoryRouter><RecommenderSetupPage/></MemoryRouter>)); }
+async function render() { await act(async () => root.render(<MemoryRouter><Routes><Route path="/" element={<RecommenderSetupPage/>}/><Route path="/taxonomy" element={<TaxonomyPage/>}/></Routes></MemoryRouter>)); }
 const editor = (name: string) => container.querySelector(`[aria-label="${name}"]`)!;
 function button(text: string, scope: ParentNode = container) {
   const target = [...scope.querySelectorAll('button')].find(item => item.textContent === text); if (!target) throw new Error(`Botão ausente: ${text}`); return target;
@@ -190,7 +191,7 @@ test('scientific taxonomy configuration sends stable IDs and an explicit complet
 }, 15000);
 
 test('taxonomy editor validates tree structure, preserves a failed draft and publishes its exact saved hash', async () => {
-  await render(); await click(button("Independent taxonomies")); await click(button("New taxonomy")); const scope = editor("Taxonomy editor");
+  await render(); await click(button("Taxonomies")); await click(button("New taxonomy")); const scope = editor("Taxonomy editor");
   await change(control('ID', scope), 'ui-areas'); await change(control("Version", scope), '1'); await change(control("Name", scope), 'Áreas'); await change(control("Taxonomy source"), "Synthetic demonstration"); await change(control('Structure'), 'tree'); await change(control("Selectable nodes"), 'leaf');
   await change(control("Node ID", scope), 'root'); await change(control("Node name", scope), 'Raiz'); await change(control("Parent ID (empty for root)", scope), 'missing');
   await click(button("Save taxonomy draft")); expect(scope.textContent).toContain('Pai inexistente'); expect(control("Node ID", scope).value).toBe('root'); expect(button("Publish reviewed taxonomy").disabled).toBe(true);
