@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { ConfiguredInputFields } from '../components/ConfiguredInputFields';
 import { ConfiguredRunDetails, ReferenceDetails, configuredStatus } from '../components/ConfiguredRunDetails';
 import { PageTitle } from '../components/ui';
+import { RecommenderNavigation } from '../components/RecommenderNavigation';
 import { CatalogState, useCatalog } from '../components/VersionCatalog';
 import { initialValues, inputIssues } from '../services/configured-input';
 import { recommenderApi, supportsWebMethod } from '../services/recommender-api';
@@ -32,6 +33,7 @@ export function ConfiguredRecommendationsPage() {
   function completed(run: MethodRun) { setRefresh(value => value + 1); openRun(run.id); }
   return <section className="page configured-page">
     <PageTitle eyebrow="RECOMMENDERS" title="Run with a published dataset">Choose versions, complete the input, and inspect the evidence for each recommendation.</PageTitle>
+    <RecommenderNavigation busy={busy}/>
     <div className="configured-actions configured-tabs" role="group" aria-label="Recommender area"><button aria-pressed={tab === 'execute'} disabled={busy} onClick={() => setTab('execute')}>New run</button><button aria-pressed={tab === 'history'} disabled={busy} onClick={() => setTab('history')}>Run history</button>{!busy && <Link to="/recommender-setup">Configure and import datasets</Link>}<Link to="/recommendations">Choose a recommender</Link></div>
     <div hidden={tab !== 'execute'}>
       <section className="card configured-panel"><h2>1. Published definition</h2><p>Choose a configuration to load its input fields and compatible reference datasets.</p>

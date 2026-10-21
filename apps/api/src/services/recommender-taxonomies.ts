@@ -1,6 +1,7 @@
 import { query, withTransaction } from '../database/pool.js';
 import { snapshotContent } from '../domain/content-snapshot.js';
 import { parseRecommenderTaxonomy } from '../domain/recommender-taxonomy.js';
+import { validateWisTaxonomy } from '../domain/wis-taxonomy.js';
 
 export class TaxonomyRequestError extends Error {
   constructor(public status: number, message: string) { super(message); }
@@ -14,7 +15,7 @@ type Row = {
 function record(row: Row) {
   const content = parseRecommenderTaxonomy(row.content);
   const snapshot = snapshotContent(content);
-  if (row.taxonomy_id !== content.id || row.version !== content.version ||
+  if (row.taxonomy_id !== content.id || row.version !== content.version || row.state !== 'draft' && !content.nodes.length ||
       row.state !== 'draft' && (row.hash_format !== snapshot.format || row.content_sha256 !== snapshot.sha256)) {
     throw new Error('Conteúdo da taxonomia diverge da identidade ou hash persistidos.');
   }
@@ -24,6 +25,7 @@ function record(row: Row) {
 
 export async function saveTaxonomyDraft(raw: unknown, actor: string) {
   const content = parseRecommenderTaxonomy(raw);
+  try { validateWisTaxonomy(content); } catch (error) { throw new TaxonomyRequestError(422, (error as Error).message); }
   return withTransaction(async client => {
     const saved = await client.query<Row>(`INSERT INTO recommender_taxonomy_versions (taxonomy_id, version, content, created_by)
       VALUES ($1, $2, $3::jsonb, $4)
@@ -58,6 +60,14 @@ export async function publishTaxonomyVersion(id: string, version: string, actor:
     const current = await client.query<Row>('SELECT * FROM recommender_taxonomy_versions WHERE taxonomy_id = $1 AND version = $2 FOR UPDATE', [id, version]);
     if (!current.rows[0]) throw new TaxonomyRequestError(404, 'Versão de taxonomia não encontrada.');
     const previous = record(current.rows[0]); // Validate stored graph and hash before any state change.
+    if (!previous.snapshot.content.nodes.length) throw new TaxonomyRequestError(422, 'Add at least one node before publishing this taxonomy.');
+    try { validateWisTaxonomy(previous.snapshot.content); } catch (error) { throw new TaxonomyRequestError(422, (error as Error).message); }
+    if (id === 'wis' && previous.state === 'draft') {
+      const conflict = await client.query(`SELECT 1 FROM wis_taxonomy_bindings b WHERE b.version=$1
+        AND NOT EXISTS(SELECT 1 FROM wis_taxonomy_node_bindings n WHERE n.version=b.version)
+        AND EXISTS(SELECT 1 FROM taxonomy_modules m WHERE m.taxonomy_version_id=b.taxonomy_version_id)`, [version]);
+      if (conflict.rowCount) throw new TaxonomyRequestError(409, 'This WIS source evolved after the empty draft. Save and publish under a new version.');
+    }
     if (previous.state === 'retired') throw new TaxonomyRequestError(409, 'Versão retirada não pode ser republicada; crie uma nova versão.');
     if (expectedDraftSha256 !== undefined && expectedDraftSha256 !== previous.snapshot.sha256) throw new TaxonomyRequestError(409, 'O rascunho foi alterado desde a revisão. Carregue e revise a versão atual antes de publicar.');
     if (previous.state === 'published') return previous;

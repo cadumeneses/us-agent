@@ -1,6 +1,6 @@
 # Banco de dados
 
-O PostgreSQL é a fonte de dados da API. O schema é relacional e não depende de colunas JSON para os dados operacionais.
+O PostgreSQL é a fonte de dados da API. Dados operacionais usam tabelas relacionais; versões de taxonomias e configurações também preservam conteúdo JSONB e hashes para reprodução.
 
 ## Modelo
 
@@ -9,7 +9,8 @@ O PostgreSQL é a fonte de dados da API. O schema é relacional e não depende d
 - `provider_votes`, `provider_vote_labels`, `provider_vote_evidence`, `provider_vote_issues` e `provider_vote_questions`: respostas dos modelos.
 - `classification_attempts`: reruns e métricas de incerteza.
 - `review_decisions` e `taxonomy_feedback`: human-in-the-loop.
-- `taxonomy_versions`, `taxonomy_modules` e `taxonomy_operations`: taxonomia versionada.
+- `recommender_taxonomy_versions`: catálogo compartilhado de taxonomias versionadas, incluindo a WIS de módulo → operação.
+- `taxonomy_versions`, `taxonomy_modules` e `taxonomy_operations`: projeção de compatibilidade da WIS para classificação/histórico; os vínculos comuns ficam em `wis_taxonomy_bindings` e `wis_taxonomy_node_bindings` (migration 032).
 - `app_users`, `execution_modes` e `application_settings`: contexto exibido pela WEB.
 
 ## Fluxo de mudanças

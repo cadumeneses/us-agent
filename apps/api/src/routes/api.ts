@@ -2,7 +2,7 @@ import { nfrRouter } from './nfr.js';
 import { Router } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
-import { addTaxonomyDomain, addTaxonomyOperation, applyFallbackSuggestion, assignStoriesToSprint, createProject, createProjectSprint, createTaxonomyVersion, loadProjects, loadProjectSprints, loadReviewContext, loadStories, loadTaxonomy, updateProjectSprintStatus } from '../repositories/data-repository.js';
+import { addTaxonomyDomain, addTaxonomyModule, addTaxonomyOperation, applyFallbackSuggestion, assignStoriesToSprint, createProject, createProjectSprint, createTaxonomyVersion, loadProjects, loadProjectSprints, loadReviewContext, loadStories, loadTaxonomy, updateProjectSprintStatus } from '../repositories/data-repository.js';
 import { classifyPreview, parseImportedStories } from '../services/classifier.js';
 import { classifyWithAi, ClassificationConfigurationError } from '../services/ai-classifier.js';
 import { buildDashboard, filterStories } from '../services/stories.js';
@@ -207,9 +207,16 @@ apiRouter.put('/sprints/:id/stories', async (req, res) => {
   }
 });
 
-apiRouter.post('/taxonomy/operations', async (req, res) => { const parsed = taxonomyOperationRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Invalid operation data.' }); await addTaxonomyOperation(parsed.data); res.status(201).json(await loadTaxonomy()); });
-apiRouter.post('/taxonomy/domains', async (req, res) => { const parsed = taxonomyDomainRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Invalid domain data.' }); await addTaxonomyDomain(parsed.data); res.status(201).json(await loadTaxonomy()); });
-apiRouter.post('/taxonomy/versions', async (req, res) => { const parsed = taxonomyVersionRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Invalid version.' }); await createTaxonomyVersion(parsed.data.version); res.status(201).json(await loadTaxonomy()); });
+apiRouter.post('/taxonomy/operations', async (req, res) => { const parsed = taxonomyOperationRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Invalid operation data.' }); await addTaxonomyOperation(parsed.data); res.status(201).json(await loadTaxonomy(parsed.data.version)); });
+apiRouter.post('/taxonomy/domains', async (req, res) => { const parsed = taxonomyDomainRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Invalid domain data.' }); await addTaxonomyDomain(parsed.data); res.status(201).json(await loadTaxonomy(parsed.data.version)); });
+apiRouter.post('/taxonomy/modules', async (req, res) => {
+  const parsed = z.object({ domain: z.string().trim().min(2).max(120), module: z.string().trim().min(2).max(120), description: z.string().trim().min(5).max(1000), version: z.string().trim().min(1).max(40) }).safeParse(req.body);
+  if (!parsed.success) return void res.status(400).json({ error: 'Enter the version, domain, module name and description.' });
+  const result = await addTaxonomyModule(parsed.data);
+  if (result.status !== 'created') return void res.status(409).json({ error: { inactive_version: 'This WIS version is inactive.', domain_not_found: 'Select an existing domain in this WIS version.', module_exists: 'A module with this name already exists in this WIS version.' }[result.status] });
+  res.status(201).json(await loadTaxonomy(parsed.data.version));
+});
+apiRouter.post('/taxonomy/versions', async (req, res) => { const parsed = taxonomyVersionRequest.safeParse(req.body); if (!parsed.success) return void res.status(400).json({ error: 'Invalid version.' }); await createTaxonomyVersion(parsed.data.version); res.status(201).json(await loadTaxonomy(parsed.data.version)); });
 
 apiRouter.post('/taxonomy/fallback-suggestions/:id/apply', async (req, res) => {
   if (!/^\d+$/.test(req.params.id)) return void res.status(400).json({ error: 'Invalid suggestion identifier.' });

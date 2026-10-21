@@ -292,6 +292,11 @@ export async function loadReviewContext(classificationId: string): Promise<Revie
 }
 
 export async function loadTaxonomy(versionFilter?: string): Promise<Taxonomy> {
+  if (versionFilter) {
+    const binding = await query<{ version: string }>(`SELECT v.version FROM wis_taxonomy_bindings b
+      JOIN taxonomy_versions v ON v.id=b.taxonomy_version_id WHERE b.version=$1`, [versionFilter]);
+    versionFilter = binding.rows[0]?.version ?? versionFilter;
+  }
   const versions = await query<{ version: string; active: boolean; modules: number; operations: number }>(`
     SELECT version, is_active AS active,
       (SELECT COUNT(*)::int FROM taxonomy_modules WHERE taxonomy_version_id = taxonomy_versions.id) AS modules,
@@ -312,11 +317,11 @@ export async function loadTaxonomy(versionFilter?: string): Promise<Taxonomy> {
     JOIN taxonomy_domains domain ON domain.taxonomy_version_id = version.id
     LEFT JOIN taxonomy_modules module ON module.domain_id = domain.id
     LEFT JOIN taxonomy_operations operation ON operation.module_id = module.id AND operation.is_active
-    WHERE version.is_active ${versionFilter ? 'AND version.version = $1' : ''}
+    WHERE ${versionFilter ? 'version.version = $1' : 'version.is_active'}
     ORDER BY domain.position, module.position, operation.position
   `, versionFilter ? [versionFilter] : []);
 
-  if (!result.rows.length) return { version: '', modules: {}, descriptions: {}, domains: {}, moduleDomains: {}, taxonomies: versions.rows };
+  if (!result.rows.length) return { version: versions.rows.find(row => row.version === versionFilter)?.version ?? '', modules: {}, descriptions: {}, domains: {}, moduleDomains: {}, taxonomies: versions.rows };
   const modules: Record<string, string[]> = {};
   const descriptions: Record<string, Record<string, string>> = {};
   const domains: NonNullable<Taxonomy['domains']> = {};
@@ -378,7 +383,7 @@ async function findActiveTaxonomyVersion(client: PoolClient, version?: string) {
   const result = await client.query<{ id: string }>(`
     SELECT id::text
     FROM taxonomy_versions
-    WHERE is_active ${version ? 'AND version = $1' : ''}
+    WHERE is_active ${version ? 'AND (version = $1 OR id IN (SELECT taxonomy_version_id FROM wis_taxonomy_bindings WHERE version=$1))' : ''}
     ORDER BY created_at DESC, id DESC
     LIMIT 1
   `, version ? [version] : []);
@@ -459,6 +464,21 @@ export async function addTaxonomyDomain(input: { domain: string; description: st
     const versionId = await findActiveTaxonomyVersion(client, input.version);
     if (!versionId) throw new Error(input.version ? 'The selected taxonomy version is inactive.' : 'No active taxonomy was found.');
     await ensureDomain(client, versionId, input.domain, input.description);
+  });
+}
+
+export async function addTaxonomyModule(input: { domain: string; module: string; description: string; version: string }) {
+  return withTransaction(async client => {
+    const versionId = await findActiveTaxonomyVersion(client, input.version);
+    if (!versionId) return { status: 'inactive_version' as const };
+    const { rows: [domain] } = await client.query<{ id: string }>(
+      'SELECT id::text FROM taxonomy_domains WHERE taxonomy_version_id = $1 AND name = $2', [versionId, input.domain]);
+    if (!domain) return { status: 'domain_not_found' as const };
+    if ((await client.query('SELECT 1 FROM taxonomy_modules WHERE taxonomy_version_id = $1 AND name = $2', [versionId, input.module])).rowCount) {
+      return { status: 'module_exists' as const };
+    }
+    await ensureModule(client, versionId, domain.id, input.module, input.description);
+    return { status: 'created' as const };
   });
 }
 

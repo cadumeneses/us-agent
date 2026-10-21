@@ -94,7 +94,7 @@ try {
   await cdp('Page.navigate', { url: `${origin}/recommender-setup` }); await text('Configure and import datasets');
   await click('Taxonomies'); await click('New taxonomy'); const taxScope = '[aria-label="Taxonomy editor"]';
   for (const [label, value] of [['ID', 'browser-context'], ['Version', '1'], ['Name', 'Context do piloto'], ['Taxonomy source', 'Synthetic browser verification'], ['Node ID', 'demo'], ['Node name', 'Demonstração']]) await edit(label, value, taxScope);
-  await click('Save taxonomy draft'); await text('Draft saved. Review the nodes'); await click('Publish reviewed taxonomy'); await text('Taxonomy published with immutable content');
+  await click('Save taxonomy draft'); await text('Draft saved. Review the nodes'); await click('Publish reviewed taxonomy'); await text('Taxonomy published. Recommender attributes');
   await cdp('Page.navigate', { url: `${origin}/recommender-setup` }); await text('Configure and import datasets');
   await click('Definitions'); await click('New NFR from template'); const defScope = '[aria-label="Definition editor"]';
   await edit('ID', 'browser-rnf', defScope); await edit('Version', '1', defScope); await click('Add attribute');
@@ -115,7 +115,8 @@ try {
   await text('Run with a published dataset'); await edit('Definition and version', JSON.stringify(['browser-rnf', '1'])); await text('3. Input and execution');
   await edit('Dataset and version', JSON.stringify(['browser-base', '1'])); await edit('Input identifier', input.id);
   // Drive each generated input through the real form controls.
-  await evaluate(`(async()=>{const values=${JSON.stringify(input.values)},attributes=${JSON.stringify(template.attributes)};
+  const formAttributes = template.attributes.map(attribute => ({...attribute,name:attribute.id.split('_').map(word=>word.charAt(0).toUpperCase()+word.slice(1)).join(' ')}));
+  await evaluate(`(async()=>{const values=${JSON.stringify(input.values)},attributes=${JSON.stringify(formAttributes)};
     for(const a of attributes){const section=[...document.querySelectorAll('.configured-attribute')].find(x=>x.querySelector('legend')?.textContent===a.name||window.uiLabel(a.name,x));section.id='browser-field';
       if(a.cardinality==='many'){for(const [index,item] of values[a.id].entries()){await window.uiClick('Add '+a.name,'#browser-field');const row=section.querySelectorAll('.configured-list-item')[index];row.id='browser-row';if(a.valueType.type==='record'){for(const [key,value] of Object.entries(item))await window.uiEdit(key,String(value),'#browser-row');}else await window.uiEdit(a.name+' '+(index+1),String(item),'#browser-row');row.removeAttribute('id');}}
       else await window.uiEdit(a.name,String(values[a.id]),'#browser-field');section.removeAttribute('id');}
@@ -146,20 +147,20 @@ try {
   await cdp('Page.navigate', { url: `${origin}/` }); await text('My Projects');
   await until(`location.pathname === '/projects'`, 'root redirects to projects');
   await click('Add project'); await edit('Project name', 'Rebase browser project'); await click('Create project');
-  await text('No stories yet.');
+  await text('Add a user story, prepare its tasks, then classify it.');
   assert.equal((await pool.query('SELECT count(*)::int AS n FROM projects WHERE name=$1', ['Rebase browser project'])).rows[0].n, 1);
   await cdp('Page.navigate', { url: `${origin}/recommendations?classificationId=${classification.id}` });
   await text('Check the story context'); await text('Enter the project platform.');
   assert.equal(await evaluate('document.documentElement.lang'), 'en');
-  await evaluate(`[...document.querySelectorAll('button')].find(x=>x.textContent.trim()==='How it works').click()`);
-  await text('US-Agent adaptations');
+  await text('Compare with the operational history using the existing NFR policy.');
+  assert.equal(await evaluate(`window.uiLabel('Reference source',document.querySelector('.page')).querySelector('select').value`),'history');
   await cdp('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1100, deviceScaleFactor: 1, mobile: false });
   const legacyCapture = await cdp('Page.captureScreenshot', { format: 'png' });
-  await writeFile(resolve(artifacts, 'legacy-nfr-english.png'), Buffer.from(legacyCapture.data, 'base64'));
+  await writeFile(resolve(artifacts, 'operational-history-english.png'), Buffer.from(legacyCapture.data, 'base64'));
   assert.deepEqual(browserErrors, []);
   const summary = { schemaVersion: 1, browser: await cdp('Browser.getVersion'), runId, rawRunSha256: stored.content_sha256, observations,
     verified: ['taxonomy-publication', 'definition-context', 'import-preview-publication', 'dynamic-input', 'explicit-destination', 'accept-reject', 'persisted-history', 'replay',
-      'project-first-routing', 'create-empty-project', 'english-presentation', 'scientific-disclaimer'], scope: 'Synthetic local browser verification; not an empirical article reproduction.' };
+      'project-first-routing', 'create-empty-project', 'english-presentation', 'operational-history-selection'], scope: 'Synthetic local browser verification; not an empirical article reproduction.' };
   await writeFile(resolve(artifacts, 'summary.json'), JSON.stringify(summary, null, 2));
   console.log(`Browser workflow verified. Evidence: ${artifacts}`);
 } finally {

@@ -38,7 +38,8 @@ try {
   const list = JSON.parse(await readFile(new URL('../config/taxonomies/languages-demo.v1.json', import.meta.url), 'utf8'));
   const staged = await request();
   assert.ok(staged.length > 0);
-  assert.ok(staged.every(item => item.id === 'wis-legacy' && item.state === 'draft' && item.createdBy === 'migration:029'));
+  assert.ok(staged.some(item => item.id === 'wis' && item.state === 'published'));
+  assert.ok(staged.filter(item => item.id === 'wis-legacy').every(item => item.state === 'retired'));
 
   // Existing internal authorization: required key when configured; fail closed on Vercel without it.
   process.env.INGEST_API_KEY = 'local-check-only';
@@ -102,7 +103,7 @@ try {
   assert.deepEqual(await request(path(tree.id)), published);
   const items = await request('?state=published&limit=2&offset=0');
   assert.equal(items.length, 2); assert.ok(items.every(item => !('content' in item.snapshot)));
-  assert.equal((await request('?state=published&limit=2&offset=2')).length, 1);
+  assert.equal((await request('?state=published&limit=2&offset=2')).length, 2);
   await request('?limit=101', 'GET', undefined, 422);
 
   const dependencies = [second, published].map(({ state, snapshot }) => ({ state, snapshot }));

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Modal } from './Modal';
 import { X } from 'lucide-react';
 import type { StoryDetails } from '../types/models';
 import { emptyTechnologies, TechnologyFields } from './ResearchProfile';
@@ -54,7 +55,7 @@ export function StoryItemModal({ editor, details, module, operation, saving, onC
       onSave({ ...details, nonFunctionalRequirements: items });
     }
   }
-  return <div className="modal-backdrop"><form className="project-modal card research-item-modal" onSubmit={submit}>
+  return <Modal label={`${editor.index === undefined ? 'Add' : 'Edit'} ${title}`} busy={saving} onClose={onClose}><form className="project-modal card research-item-modal" onSubmit={submit}>
     <div className="modal-head"><div><span>{editor.index === undefined ? 'ADD' : 'EDIT'}</span><h2>{title}</h2></div><button type="button" disabled={saving} onClick={onClose} aria-label="Close"><X size={18}/></button></div>
     <fieldset disabled={saving}>
       {editor.kind === 'nonFunctional' && <label>Requirement example<select value={exampleIndex} onChange={event => { const index = event.target.value; setExampleIndex(index); if (index) { const example = nfrCatalog[Number(index) - 1]; setText(example.sentence); setType(example.type); setMetric(example.attribute); } }}><option value="">No example selected</option>{nfrCatalog.map((item, index) => <option key={index} value={index + 1}>{item.type} / {item.attribute} · {item.sentence.slice(0, 82)}{item.sentence.length > 82 ? '…' : ''}</option>)}</select><small>The examples have specific values and contexts. Adapt the statement before linking it to the story.</small></label>}
@@ -72,5 +73,5 @@ export function StoryItemModal({ editor, details, module, operation, saving, onC
       </div>}
     </fieldset>
     <div className="modal-actions"><button type="button" disabled={saving} onClick={onClose}>Cancel</button><button className="primary" disabled={saving}>Save</button></div>
-  </form></div>;
+  </form></Modal>;
 }

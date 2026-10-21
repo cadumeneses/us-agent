@@ -31,7 +31,7 @@ test('catalog publication pins reviewed BOM/CRLF bytes, preserves artifacts and 
     const snapshot = buildTestCasePublication(Buffer.from(await original.arrayBuffer()), original.name, { expectedFileSha256: sha256, authorization: { basis: 'synthetic', reference } });
     return { ...t.catalog, snapshot: { ...snapshot, content: { ...snapshot.content, schemaVersion: 1 as const, file: { ...snapshot.content.file, encoding: 'utf-8' as const } } } };
   });
-  await render(); await upload(file); expect(button('Publish reviewed catalog').disabled).toBe(true);
+  await render(); await act(async () => button('Import test catalog').click()); await upload(file); expect(button('Publish reviewed catalog').disabled).toBe(true);
   await click('Review catalog file');
   expect(container.textContent).toContain(source.items[0].gherkin); expect(button('Publish reviewed catalog').disabled).toBe(true);
   await act(async () => { const textarea = container.querySelector('textarea')!; Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(textarea, 'Authored fixture'); textarea.dispatchEvent(new Event('input', { bubbles: true })); });

@@ -1,64 +1,65 @@
-# Preparação do catálogo WIS para o modelo versionado
+# WIS no catálogo comum de taxonomias
 
-**Atualização 042:** para publicar o código completo de adaptação/acesso, seguir a [ordem operacional 042](entregas/042-fechamento-tecnico-e-preparacao-empirica.md), com 030/031 antes de reabrir o runtime novo e janela de manutenção. O procedimento 041 abaixo descreve o incremento anterior isolado; não basta para o release completo atual de 32 arquivos.
+21/10/2026. A WIS é uma taxonomia versionada do mesmo catálogo usado pelas demais, com identidade `wis` e árvore de **dois níveis: módulo → operação**. Não existe uma área separada de WIS nem um fluxo de preparação de cópias para recomendadores.
 
-20/10/2026. Migration [029_legacy_taxonomy_staging.sql](../database/migrations/029_legacy_taxonomy_staging.sql), incluída por hash no release de produção, agora com 30 arquivos. Preparada e ensaiada localmente; não aplicada em produção ou em uma branch de produção nesta entrega.
+## Uso
 
-## Resultado e características preservadas
+1. Abrir **Taxonomies** e selecionar a versão WIS na listagem comum.
+2. Consultar os módulos e suas operações no editor comum.
+3. Para ampliar uma publicação, escolher **Create a new taxonomy version**, informar a versão e adicionar módulos/operações.
+4. Salvar o rascunho e publicar depois de revisar. Essa mesma publicação passa a atender à classificação e aos atributos de recomendadores.
 
-Cada versão WIS não vazia gera um **rascunho** de `wis-legacy`, versão `wis-v-<ID original>`. O nome `WIS: <versão original>` conserva o rótulo de origem, inclusive espaços e caracteres incompatíveis com IDs novos. A árvore mantém domínio → módulo → operação, nomes, descrições integrais e ordem por posição original, com desempate por ID. Nós recebem IDs estáveis `wis-domain-<ID>`, `wis-module-<ID>` e `wis-operation-<ID>`, sem equivalência inferida por nome.
+Módulos são nós raiz organizadores; operações são seus filhos selecionáveis. A WIS não tem um nó intermediário de domínio. Outras taxonomias mantêm seus próprios formatos de lista/árvore e regras de seleção.
 
-Domínios/módulos são organizadores, mesmo quando vazios; não viram opções selecionáveis. Operações ativas recebem `selectable: true`; operações desativadas permanecem na árvore com `selectable: false`. O editor permite consultar/editar essa propriedade; formulário e validação da API a respeitam. O novo campo é opcional: publicações anteriores sem ele conservam o conteúdo, hashes e comportamento. O nome do nó aceita até 180 caracteres, como as operações WIS; descrições não são truncadas pelo limite antigo de 2.000 caracteres. O limite HTTP de 1 MB permanece.
+Rascunhos podem estar vazios enquanto são preparados. Publicações exigem conteúdo. Versões publicadas preservam conteúdo e hash; o crescimento acontece em novas versões. Versões retiradas ficam disponíveis pela opção **Include retired versions**.
 
-`legacy_taxonomy_imports` guarda o retrato original completo: IDs, versões, datas, flags de atividade, posições, descrições e relações. Essa evidência é imutável; `legacy_taxonomy_node_map` expõe a correspondência de IDs. Versões vazias permanecem nessa evidência, com destino nulo, sem fabricar nós. Versões WIS inativas são copiadas como rascunhos, com o estado original registrado, e não são reativadas.
+## Migration 032
 
-Nenhuma tabela WIS, projeto, história, classificação, par de rótulos, execução ou snapshot existente é alterado. O classificador e a revisão continuam usando WIS. **Aplicar 029 não publica os rascunhos nem troca a leitura da classificação.** A troca exige outro incremento de compatibilidade e uma decisão explícita sobre a versão publicada por projeto/classificação.
+[032_unified_wis_taxonomy.sql](../database/migrations/032_unified_wis_taxonomy.sql) integra as versões WIS ao armazenamento comum `recommender_taxonomy_versions`, cujo nome técnico anterior foi mantido. A API comum de taxonomias lista, carrega, salva, publica e retira versões WIS. Os nomes dos endpoints e tabelas existentes não determinam uma separação funcional entre classificação e recomendadores.
 
-## Procedimento de produção
+A migration:
 
-Usar a conexão direta existente, em arquivo local ignorado pelo Git; não usar URL com pooler. Conferir o destino pelo status. Antes de executar em produção, ensaiar a sequência numa branch/cópia atual de produção com seu próprio arquivo de ambiente e destino. O ensaio local não substitui essa verificação dos dados reais.
+- Importa módulos e operações como nós de dois níveis, preservando IDs estáveis, nomes, descrições, ordem e operações inativas. Domínios antigos permanecem como metadados de compatibilidade, fora da árvore WIS.
+- Mantém versões ativas publicadas, versões inativas retiradas e versões vazias em rascunho. Rótulos antigos que não cabem na sintaxe comum de versão recebem uma identidade válida com vínculo explícito ao original.
+- Preserva as tabelas, IDs e vínculos de projetos, histórias, classificações e catálogos anteriores. Não reclassifica histórias nem muda seus pares de rótulos.
+- Publica uma projeção relacional de cada nova versão WIS para os consumidores de classificação existentes, dentro da mesma transação. Trata-se de compatibilidade de armazenamento, não de um segundo catálogo editável na interface.
+- Registra alterações feitas por rotas antigas de revisão/importação como novas versões WIS no catálogo comum. Vários eventos de uma transação produzem uma única versão final; versões já publicadas não são sobrescritas.
+- Retira as cópias de preparação `wis-legacy` criadas pela 029 que continuam intocadas. Conteúdo, hashes e evidências permanecem consultáveis; rascunhos alterados por usuários não são arquivados automaticamente.
+- Identifica as gravações de migração por `migration:032` na auditoria. Uma implantação fora de uma requisição de usuário usa o escopo `offline`, no próprio schema migrado.
 
-1. Conferir os arquivos e o estado do ambiente:
+Os vínculos `wis_taxonomy_bindings` e `wis_taxonomy_node_bindings` relacionam a publicação comum aos identificadores de compatibilidade. A retirada de uma versão antiga não desativa a projeção de uma versão mais recente. As rotas existentes aceitam a identidade comum por meio desses vínculos.
+
+## Validação local
+
+```powershell
+npm.cmd run build
+npm.cmd test
+npm.cmd run check:deployment-migrations
+npm.cmd run check:wis-catalog
+npm.cmd run check:recommender-taxonomies
+npm.cmd run check:classification-workflow
+npm.cmd run check:organization-access
+npm.cmd run check:private-web-access
+npm.cmd run check:workspace-ux
+npm.cmd run check:recommender-browser
+```
+
+Os verificadores de integração criam schemas descartáveis no PostgreSQL local. Incluem publicação pelo endpoint comum, atualização da classificação, consulta por identidade compartilhada, hashes JavaScript/SQL, Unicode, preservação histórica, operações inativas, rascunho vazio que ganha conteúdo, rejeição de terceiro nível, revisão antiga, retirada e repetição idempotente.
+
+[Evidências de interface e execução](evidencias/ui-ux-2026-10-21/unified-wis/README.md). São ensaios técnicos sintéticos, não dados de avaliação com participantes.
+
+## Implantação
+
+Seguir o [roteiro 043](entregas/043-wis-unificada-e-ui-ux.md) para os comandos e a ordem completa de ensaio e implantação.
+
+O release agora contém **33 arquivos**, até 032. A 032 exige ensaio em uma cópia atual de produção e implantação coordenada com o código desta revisão. Usar o executor transacional e conexão direta, conferir o destino e manter o tráfego em manutenção durante a transição:
 
 ```powershell
 npm.cmd run db:release:check
 node --env-file=.env.vercel.production scripts/migrate-deployment.mjs --status
-```
-
-2. Se houver pendências anteriores, aplicar **somente até 028** antes do código. O parâmetro `--through` limita a aplicação ao prefixo revisado do release; o status final ainda mostra a 029 pendente. Substituir o destino pelo `target` exato do status:
-
-```powershell
-node --env-file=.env.vercel.production scripts/migrate-deployment.mjs --apply --expect-target "HOST_DIRETO:5432/BANCO" --through 028_configurable_project_recommendations.sql
-```
-
-3. Publicar a API e a interface desta entrega, incluindo o suporte a `selectable`. Conferir login, leitura dos projetos e a tela de taxonomias. **Não aplicar 029 enquanto houver instâncias antigas atendendo consultas dos recomendadores**: o parser anterior rejeita o campo novo. A API nova funciona com as migrations até 028, sem depender da tabela de importações no runtime.
-
-4. Aplicar o restante do release e verificar a cópia, sem publicar os rascunhos:
-
-```powershell
 node --env-file=.env.vercel.production scripts/migrate-deployment.mjs --apply --expect-target "HOST_DIRETO:5432/BANCO"
-node --env-file=.env.vercel.production scripts/verify-legacy-taxonomy-migration.mjs --expect-target "HOST_DIRETO:5432/BANCO"
-node --env-file=.env.vercel.production scripts/migrate-deployment.mjs --status
 ```
 
-O verificador usa uma transação somente leitura e confere nomes, descrições, relações, ordem, flags, quantidade, identidade e validade dos rascunhos. Recusa divergências entre a fonte atual e o retrato importado. Se WIS mudar depois da cópia, preparar outra versão/importação antes da troca; não editar a evidência original nem assumir sincronização automática. O verificador é destinado ao estágio anterior à publicação e exige destinos ainda em rascunho.
+Depois de publicar o código, verificar login, catálogo único, árvore WIS, criação/publicação de uma nova versão, classificação, seleção da taxonomia nos recomendadores e permissões. Esta revisão aplicou a 032 somente em schemas locais de ensaio; **produção ainda não recebeu a 032 nem o código novo**.
 
-5. Conferir visualmente os rascunhos `WIS: …` em **Taxonomies**, inclusive operações desativadas e seções vazias; conferir que projetos/classificação/revisão mantêm seu funcionamento. Registrar as saídas do status e do verificador no registro da implantação, sem credenciais. Não publicar/retirar catálogos nesta etapa de preparação.
-
-## Falhas e reversão operacional
-
-A 029 bloqueia escrita concorrente nas quatro tabelas-fonte durante a cópia; o runner usa timeout de lock de 10 segundos, timeout de execução de 120 segundos e uma transação por arquivo. Colisão de destino, relações inconsistentes entre versões, mais de 5.000 nós, nomes inválidos ou conteúdo acima do orçamento de 900.000 bytes interrompem a migration, sem truncar ou descartar registros. Corrigir a condição e repetir pelo runner. Se 029 falhar, migrations anteriores já confirmadas permanecem aplicadas; 029 não fica registrada como concluída.
-
-Não executar o SQL avulso nem reaplicá-lo manualmente: a repetição segura é pelo ledger `schema_migrations`. A aplicação repetida pelo runner ignora 029 já registrada. A migration não remove estruturas antigas, portanto uma falha de preparação não exige restaurar dados WIS. Após sucesso, manter o código compatível com `selectable`; não voltar ao parser antigo enquanto os rascunhos migrados estiverem expostos. Não há migration destrutiva de retorno: guardar o estágio importado e manter o classificador em WIS é a reversão operacional desta etapa.
-
-## Evidências locais
-
-```powershell
-npm.cmd run build
-npm.cmd run check:legacy-taxonomy-migration
-npm.cmd run check:recommender-taxonomies
-npm.cmd run check:deployment-migrations
-npm.cmd run check:nfr-baseline
-```
-
-O ensaio de 029 usa schema descartável no PostgreSQL local e um fixture com versões ativas/inativas/vazias, posições repetidas, domínio/módulo vazio, operação de 180 caracteres, descrição acima de 2.000 caracteres e operações desativadas. Resultado: quatro versões preservadas, três rascunhos, uma versão vazia registrada, 38 nós e três operações desativadas; rollback por colisão, repetição, fonte intacta, evidência imutável e detecção de divergência conferidos. São dados de ensaio, não contagens de produção. Os oito cenários RNF permaneceram iguais; passaram os checks HTTP/publicação, cinco testes de domínio, cinco testes do release e 17 testes web existentes pertinentes.
+O verificador histórico de 029 permanece específico à preparação anterior e não é um gate deste novo fluxo. Os registros anteriores continuam na [entrega 041](entregas/041-preparacao-migracao-catalogo-wis.md) e nos documentos da época; as evidências de [027–031 em produção](evidencias/production-migrations-2026-10-21/README.md) não equivalem à aplicação da 032.

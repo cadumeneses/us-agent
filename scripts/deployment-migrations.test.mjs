@@ -4,8 +4,8 @@ import { loadMigrationRelease, migrationConnection, sqlHash, applyMigrationRelea
 
 test('deployment release pins all reviewed migrations and excludes untracked local SQL', async () => {
   const migrations = await loadMigrationRelease();
-  assert.equal(migrations.length, 32);
-  assert.equal(migrations.at(-1).name, '031_organizations_and_audit.sql');
+  assert.equal(migrations.length, 33);
+  assert.equal(migrations.at(-1).name, '032_unified_wis_taxonomy.sql');
   const previous = migrationPrefix(migrations, '028_configurable_project_recommendations.sql');
   assert.equal(previous.length, 29);
   assert.equal(previous.at(-1).name, '028_configurable_project_recommendations.sql');

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { api } from '../services/api';
+import { Modal } from './Modal';
 import type { PreparedProjectStory } from '../types/models';
 
 export function ProjectStoryEditor({ project, story, onSaved, onClose }: {
@@ -23,12 +24,12 @@ export function ProjectStoryEditor({ project, story, onSaved, onClose }: {
     } catch (reason) { setError((reason as Error).message); }
     finally { running.current=false; setBusy(false); }
   }
-  return <div className="modal-backdrop"><form className="project-modal card" role="dialog" aria-modal="true" aria-labelledby="story-editor-title" onSubmit={event => void save(event)}>
+  return <Modal label={story ? 'Edit story' : 'Add user story'} busy={busy} onClose={onClose}><form className="project-modal card" aria-labelledby="story-editor-title" onSubmit={event => void save(event)}>
     <div className="modal-head"><h2 id="story-editor-title">{story ? 'Edit story' : 'Add user story'}</h2><button type="button" aria-label="Close" disabled={busy} onClick={onClose}>×</button></div>
     <p>Save the story first, add its tasks, then classify it when ready.</p>
     <fieldset disabled={busy}><label>Sprint<input required maxLength={120} value={sprint} disabled={!!story} onChange={event => setSprint(event.target.value)}/></label>
       <label>User story<textarea autoFocus required minLength={10} maxLength={20000} value={text} onChange={event => setText(event.target.value)}/></label></fieldset>
     {error && <p role="alert" className="inline-error">{error}</p>}
     <div className="modal-actions"><button type="button" disabled={busy} onClick={onClose}>Cancel</button><button type="submit" className="primary" disabled={busy || text.trim().length<10 || !sprint.trim()}>{busy ? 'Saving…' : 'Save story'}</button></div>
-  </form></div>;
+  </form></Modal>;
 }

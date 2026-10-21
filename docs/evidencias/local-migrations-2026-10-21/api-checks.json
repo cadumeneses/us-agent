@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-10-21T13:06:37.567Z",
+  "localOnly": true,
+  "results": [
+    {
+      "path": "/api/health",
+      "status": 200
+    },
+    {
+      "path": "/api/stories",
+      "status": 200,
+      "count": 24
+    },
+    {
+      "path": "/api/dashboard",
+      "status": 200
+    },
+    {
+      "path": "/api/taxonomy",
+      "status": 200
+    },
+    {
+      "path": "/api/internal/recommender-taxonomies",
+      "status": 200,
+      "count": 2
+    }
+  ]
+}

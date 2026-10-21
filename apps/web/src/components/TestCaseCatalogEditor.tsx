@@ -19,6 +19,7 @@ export async function reviewTestCaseFile(file: File) {
 }
 export function TestCaseCatalogEditor({ refresh, changed, busy, setBusy }: { refresh: number; changed: () => void; busy: boolean; setBusy: (value: boolean) => void }) {
   const versions = useCatalog(recommenderApi.testCaseCatalogs, refresh);
+  const [mode, setMode] = useState('browse');
   const [choice, setChoice] = useState(''), [loaded, setLoaded] = useState<TestCaseCatalogRecord>();
   const [file, setFile] = useState<File>(), [reviewed, setReviewed] = useState<Awaited<ReturnType<typeof reviewTestCaseFile>>>();
   const [reference, setReference] = useState(''), [error, setError] = useState(''), [message, setMessage] = useState(''), [page, setPage] = useState(0);
@@ -30,13 +31,16 @@ export function TestCaseCatalogEditor({ refresh, changed, busy, setBusy }: { ref
   const catalog = reviewed?.catalog ?? loaded?.snapshot.content.catalog.content;
   return <section className="card configured-panel" aria-label="Test catalog editor"><h2>Test-case catalogs</h2>
     <p>Catalogs preserve test artifacts independently from taxonomies and dataset associations. This web flow publishes synthetic demonstration catalogs only.</p>
-    <fieldset disabled={busy} className="configured-form-body"><label>Catalog to inspect<select value={choice} onChange={event => setChoice(event.target.value)}><option value="">Select</option>{versions.rows.map(row => <option key={versionKey(row)} value={versionKey(row)}>{row.id} · {row.version} · {row.state}</option>)}</select></label>
+    <div className="section-navigation" role="group" aria-label="Test catalog tasks"><button disabled={busy} aria-pressed={mode === 'browse'} onClick={() => setMode('browse')}>Browse catalogs</button><button disabled={busy} aria-pressed={mode === 'import'} onClick={() => setMode('import')}>Import test catalog</button></div>
+    <fieldset hidden={mode !== 'browse'} disabled={busy} className="configured-form-body"><label>Catalog to inspect<select value={choice} onChange={event => setChoice(event.target.value)}><option value="">Select</option>{versions.rows.map(row => <option key={versionKey(row)} value={versionKey(row)}>{row.id} · {row.version} · {row.state}</option>)}</select></label>
       <button type="button" disabled={!choice || versions.loading} onClick={() => void action(async () => {
         const summary = versions.rows.find(row => versionKey(row) === choice); if (!summary) return;
         const record = await recommenderApi.testCaseCatalog(summary.id, summary.version);
         if (record.snapshot.sha256 !== summary.snapshot.sha256 || record.snapshot.format !== summary.snapshot.format) throw new Error('Catalog changed. Refresh the versions.');
         setLoaded(record); setReviewed(undefined); setPage(0);
       })}>Inspect catalog version</button><CatalogState catalog={versions} title="catalog versions"/>
+    </fieldset>
+    <fieldset hidden={mode !== 'import'} disabled={busy} className="configured-form-body">
       <label>Catalog JSON file (up to 5 MB)<input type="file" accept=".json,application/json" onChange={event => { setFile(event.target.files?.[0]); setReviewed(undefined); setLoaded(undefined); setPage(0); setError(''); setMessage(''); }}/></label>
       <button type="button" disabled={!file} onClick={() => void action(async () => { if (file) { setReviewed(await reviewTestCaseFile(file)); setLoaded(undefined); setPage(0); } })}>Review catalog file</button>
       <label>Catalog use declaration<textarea maxLength={2000} value={reference} onChange={event => setReference(event.target.value)}/></label>

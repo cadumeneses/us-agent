@@ -363,7 +363,7 @@ export async function saveReview(input: ReviewInput) {
         JOIN taxonomy_modules taxonomy_module ON taxonomy_module.taxonomy_version_id = version.id
         JOIN taxonomy_operations taxonomy_operation ON taxonomy_operation.module_id = taxonomy_module.id
         WHERE version.is_active AND taxonomy_operation.is_active
-          AND ($3 = '' OR version.version = $3)
+          AND ($3 = '' OR version.version = $3 OR version.id IN (SELECT taxonomy_version_id FROM wis_taxonomy_bindings WHERE version=$3))
           AND taxonomy_module.name = $1 AND taxonomy_operation.name = $2
       `, [module, operation, current.rows[0].taxonomy_version]);
         if (!valid.rowCount) throw new ReviewValidationError('The module and operation do not belong to the active taxonomy.');

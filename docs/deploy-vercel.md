@@ -1,5 +1,15 @@
 # Atualização da Vercel e migrations
 
+## Procedimento atual
+
+O pacote atual inclui a migration 032 e a WIS no mesmo catálogo das demais taxonomias. Usar o [roteiro 043](entregas/043-wis-unificada-e-ui-ux.md) para preflight, ensaio em cópia atual de produção, janela de manutenção, migration e deploy coordenados. O manifesto tem 33 arquivos. A 032 está aplicada no desenvolvimento local; ainda não foi aplicada em produção.
+
+## Histórico dos procedimentos anteriores
+
+As seções abaixo preservam instruções e estados anteriores. Contagens e ordens de implantação antigas não substituem o roteiro 043.
+
+**Atualização da WIS — 21/10/2026:** o release atual tem **33 arquivos, até 032**. A WIS passa ao catálogo comum de taxonomias com dois níveis (módulo → operação). Seguir o [guia vigente](migracao-catalogo-wis.md): ensaio em cópia atual de produção, aplicação da 032 e publicação coordenada do código. A 032 foi ensaiada localmente; não foi aplicada em produção nesta revisão. As instruções 042 abaixo são o registro do conjunto anterior.
+
 **Ordem vigente 042:** o release agora contém **32 arquivos**, até 031 (adaptação RNF e organizações/auditoria). Para instalar este conjunto completo, usar o [roteiro 042](entregas/042-fechamento-tecnico-e-preparacao-empirica.md): ensaio numa cópia/branch atual de produção, janela de manutenção, aplicar 029–031 e publicar o código compatível antes de reabrir o tráfego. O novo runtime exige 030/031; a ordem 041 de publicar o código com somente 028 deixa de ser suficiente para este conjunto. Produção não foi alterada nesta entrega.
 
 Atualização 041: release com **30 arquivos**, incluindo a preparação do catálogo WIS em 029. Seguir o [roteiro de migração do catálogo](migracao-catalogo-wis.md): aplicar até **028** com `--through`, publicar o código compatível com `selectable` e somente depois aplicar **029** e verificar os rascunhos. Esta preparação não foi aplicada em produção.

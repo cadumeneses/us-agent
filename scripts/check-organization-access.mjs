@@ -56,7 +56,9 @@ try{
   const events=await call('admin','/api/access/audit');
   assert.ok(events.events.some(event=>event.actor==='admin'&&event.table_name==='projects'&&event.operation==='INSERT'));
   assert.ok(events.access.some(event=>event.actor==='admin'&&event.subject==='maintainer'));
-  assert.ok(events.events.every(event=>event.organization_id==='default'));
+  // 032 records its catalog import after audit triggers exist, without a user request scope.
+  assert.ok(events.events.filter(event=>event.actor==='migration:032').every(event=>event.organization_id==='offline'));
+  assert.ok(events.events.filter(event=>event.actor!=='migration:032').every(event=>event.organization_id==='default'));
   await assert.rejects(client.query("DELETE FROM domain_audit_events"),/immutable/);
   // Transaction-local scope must not bleed through reused pool connections.
   const both=await Promise.all(Array.from({length:12},(_,index)=>call('admin','/api/projects','GET',undefined,200,index%2?'isolated':'default')));

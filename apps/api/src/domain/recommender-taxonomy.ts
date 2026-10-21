@@ -17,7 +17,7 @@ export const recommenderTaxonomySchema = z.strictObject({
   nodes: z.array(z.strictObject({
     id: taxonomyIdSchema, name: z.string().min(1).max(180).refine(value => Boolean(value.trim()), 'Informe o nome do nó.'),
     description: z.string(), parentId: taxonomyIdSchema.nullable(), selectable: z.boolean().optional()
-  })).min(1).max(5000)
+  })).max(5000)
 }).superRefine((taxonomy, context) => {
   const nodes = new Map(taxonomy.nodes.map(node => [node.id, node]));
   const seen = new Set<string>();
@@ -65,6 +65,7 @@ export function resolveTaxonomies(references: TaxonomyReference[], rawDependenci
     canonicalJson(raw);
     const dependency = dependencySchema.parse(raw);
     const { content, sha256 } = dependency.snapshot;
+    if (!content.nodes.length) throw new Error('A published taxonomy requires at least one node.');
     if (snapshotContent(content).sha256 !== sha256) throw new Error(`Hash inválido da taxonomia ${content.id}@${content.version}.`);
     const id = key(content.id, content.version);
     if (catalog.has(id)) throw new Error(`Dependência taxonômica duplicada: ${content.id}@${content.version}.`);

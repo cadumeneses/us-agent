@@ -42,7 +42,7 @@ function feedbackTarget(feedback: ReviewContext['taxonomyFeedbacks'][number]) {
 }
 
 export function ReviewPage() {
-  const [params] = useSearchParams();
+  const [params, setParams] = useSearchParams();
   const requestedId = params.get('classificationId');
   const workspace = useWorkspace();
   const [stories, setStories] = useState<Story[]>([]);
@@ -359,7 +359,7 @@ export function ReviewPage() {
     <div className="review-grid">
       <div className="card queue">
         <CardHead title={`Pending (${stories.length})`}/>
-        {stories.map(story => <button className={selected?.id === story.id ? 'queue-item selected' : 'queue-item'} onClick={() => setSelected(story)} key={story.id}><span className="risk-dot"/><div><b>{story.text}</b><small>{story.module} · {Math.round(story.confidence * 100)}% confidence</small></div><ChevronRight size={16}/></button>)}
+        {stories.map(story => <button disabled={saving || savingProposal || !!applyingSuggestion || !!applyingFeedback} aria-pressed={selected?.id === story.id} className={selected?.id === story.id ? 'queue-item selected' : 'queue-item'} onClick={() => { setSelected(story); setParams({ classificationId: story.id }); }} key={story.id}><span className="risk-dot"/><div><b>{story.text}</b><small>{story.module} · {Math.round(story.confidence * 100)}% confidence</small></div><ChevronRight size={16} aria-hidden="true"/></button>)}
         {!stories.length && <div className="empty">The queue is empty.</div>}
       </div>
       <div className="card review-panel">

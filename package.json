@@ -62,6 +62,8 @@
     "db:status:deploy": "node scripts/migrate-deployment.mjs --status",
     "db:migrate:deploy": "node scripts/migrate-deployment.mjs --apply",
     "check:deployment-migrations": "node --test scripts/deployment-migrations.test.mjs",
+    "check:wis-catalog": "node scripts/check-wis-catalog.mjs",
+    "check:workspace-ux": "node scripts/check-workspace-ux.mjs",
     "check:vercel-config": "node scripts/check-vercel-config.mjs",
     "auth:prepare-users": "node scripts/prepare-web-users.mjs",
     "auth:provision-users": "node scripts/provision-web-users.mjs",

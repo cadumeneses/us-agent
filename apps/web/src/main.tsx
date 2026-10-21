@@ -5,5 +5,6 @@ import App from './App';
 import { WebAccessGate } from './components/WebAccessGate';
 import './styles.css';
 import './private-access.css';
+import './ux.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter><WebAccessGate><App /></WebAccessGate></BrowserRouter></React.StrictMode>);

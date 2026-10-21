@@ -129,6 +129,10 @@
     {
       "name": "031_organizations_and_audit.sql",
       "sha256": "0dcdfafcf943b6fee1f4a8dfee9c08716cd639201d410fbb080d40a71db1d7e5"
+    },
+    {
+      "name": "032_unified_wis_taxonomy.sql",
+      "sha256": "8008fe64d320e6c2f24a7e2423d1fc6635bf7a9225d629779cc8b6e13cd797a6"
     }
   ]
 }

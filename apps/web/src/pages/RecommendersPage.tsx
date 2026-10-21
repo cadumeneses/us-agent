@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Check, ClipboardCheck, FileCheck2, ShieldAlert } from 'lucide-react';
 import { PageTitle } from '../components/ui';
+import { RecommenderNavigation } from '../components/RecommenderNavigation';
 import { useWorkspace } from '../services/workspace';
 import { NfrStory } from './NfrRecommendationsPage';
 import { ProjectRiskRecommendations } from '../components/ProjectRiskRecommendations';
@@ -40,6 +41,7 @@ export function RecommendersPage() {
   }
   return <section className="page configured-page recommenders-page">
     <PageTitle eyebrow="PROJECT RECOMMENDATIONS" title="Recommenders">Choose a recommender, then complete the project context it needs.</PageTitle>
+    <RecommenderNavigation busy={busy}/>
     <div className="recommender-choices" role="group" aria-label="Choose a recommender">
       {recommenders.map(({ id, title, description, icon: Icon }) => <button type="button" key={id} className="card recommender-choice" aria-pressed={method === id} disabled={busy} onClick={() => change({ recommender: id })}>
         <span className="recommender-choice-icon"><Icon size={22}/>{method === id && <Check size={18} aria-label="Selected"/>}</span><strong>{title}</strong><span>{description}</span>

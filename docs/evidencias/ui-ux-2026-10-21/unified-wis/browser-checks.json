@@ -1,0 +1,324 @@
+{
+  "recordedAt": "2026-10-21T12:26:51.942Z",
+  "syntheticLocalFixtures": true,
+  "checks": [
+    {
+      "name": "taxonomies",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "Taxonomies",
+      "alerts": []
+    },
+    {
+      "name": "projects",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "My Projects",
+      "alerts": []
+    },
+    {
+      "name": "project",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "Research workspace",
+      "alerts": []
+    },
+    {
+      "name": "classify",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "Classify Stories",
+      "alerts": []
+    },
+    {
+      "name": "recommenders",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "Recommenders",
+      "alerts": []
+    },
+    {
+      "name": "setup",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "Configure and import datasets",
+      "alerts": []
+    },
+    {
+      "name": "runs",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "Run with a published dataset",
+      "alerts": []
+    },
+    {
+      "name": "review",
+      "width": 1440,
+      "scroll": 1425,
+      "heading": "Review Queue",
+      "alerts": []
+    },
+    {
+      "name": "dashboard",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "Dashboard",
+      "alerts": []
+    },
+    {
+      "name": "access",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "Access and audit",
+      "alerts": []
+    },
+    {
+      "name": "history",
+      "width": 1440,
+      "scroll": 1440,
+      "heading": "Classification history",
+      "alerts": []
+    },
+    {
+      "name": "taxonomies",
+      "width": 1024,
+      "scroll": 1024,
+      "heading": "Taxonomies",
+      "alerts": []
+    },
+    {
+      "name": "projects",
+      "width": 1024,
+      "scroll": 1024,
+      "heading": "My Projects",
+      "alerts": []
+    },
+    {
+      "name": "project",
+      "width": 1024,
+      "scroll": 1009,
+      "heading": "Research workspace",
+      "alerts": []
+    },
+    {
+      "name": "classify",
+      "width": 1024,
+      "scroll": 1024,
+      "heading": "Classify Stories",
+      "alerts": []
+    },
+    {
+      "name": "recommenders",
+      "width": 1024,
+      "scroll": 1024,
+      "heading": "Recommenders",
+      "alerts": []
+    },
+    {
+      "name": "setup",
+      "width": 1024,
+      "scroll": 1024,
+      "heading": "Configure and import datasets",
+      "alerts": []
+    },
+    {
+      "name": "runs",
+      "width": 1024,
+      "scroll": 1024,
+      "heading": "Run with a published dataset",
+      "alerts": []
+    },
+    {
+      "name": "review",
+      "width": 1024,
+      "scroll": 1009,
+      "heading": "Review Queue",
+      "alerts": []
+    },
+    {
+      "name": "dashboard",
+      "width": 1024,
+      "scroll": 1009,
+      "heading": "Dashboard",
+      "alerts": []
+    },
+    {
+      "name": "access",
+      "width": 1024,
+      "scroll": 1024,
+      "heading": "Access and audit",
+      "alerts": []
+    },
+    {
+      "name": "history",
+      "width": 1024,
+      "scroll": 1024,
+      "heading": "Classification history",
+      "alerts": []
+    },
+    {
+      "name": "taxonomies",
+      "width": 768,
+      "scroll": 768,
+      "heading": "Taxonomies",
+      "alerts": []
+    },
+    {
+      "name": "projects",
+      "width": 768,
+      "scroll": 768,
+      "heading": "My Projects",
+      "alerts": []
+    },
+    {
+      "name": "project",
+      "width": 768,
+      "scroll": 753,
+      "heading": "Research workspace",
+      "alerts": []
+    },
+    {
+      "name": "classify",
+      "width": 768,
+      "scroll": 768,
+      "heading": "Classify Stories",
+      "alerts": []
+    },
+    {
+      "name": "recommenders",
+      "width": 768,
+      "scroll": 768,
+      "heading": "Recommenders",
+      "alerts": []
+    },
+    {
+      "name": "setup",
+      "width": 768,
+      "scroll": 753,
+      "heading": "Configure and import datasets",
+      "alerts": []
+    },
+    {
+      "name": "runs",
+      "width": 768,
+      "scroll": 768,
+      "heading": "Run with a published dataset",
+      "alerts": []
+    },
+    {
+      "name": "review",
+      "width": 768,
+      "scroll": 753,
+      "heading": "Review Queue",
+      "alerts": []
+    },
+    {
+      "name": "dashboard",
+      "width": 768,
+      "scroll": 753,
+      "heading": "Dashboard",
+      "alerts": []
+    },
+    {
+      "name": "access",
+      "width": 768,
+      "scroll": 768,
+      "heading": "Access and audit",
+      "alerts": []
+    },
+    {
+      "name": "history",
+      "width": 768,
+      "scroll": 768,
+      "heading": "Classification history",
+      "alerts": []
+    },
+    {
+      "name": "taxonomies",
+      "width": 375,
+      "scroll": 375,
+      "heading": "Taxonomies",
+      "alerts": []
+    },
+    {
+      "name": "projects",
+      "width": 375,
+      "scroll": 375,
+      "heading": "My Projects",
+      "alerts": []
+    },
+    {
+      "name": "project",
+      "width": 375,
+      "scroll": 360,
+      "heading": "Research workspace",
+      "alerts": []
+    },
+    {
+      "name": "classify",
+      "width": 375,
+      "scroll": 360,
+      "heading": "Classify Stories",
+      "alerts": []
+    },
+    {
+      "name": "recommenders",
+      "width": 375,
+      "scroll": 375,
+      "heading": "Recommenders",
+      "alerts": []
+    },
+    {
+      "name": "setup",
+      "width": 375,
+      "scroll": 360,
+      "heading": "Configure and import datasets",
+      "alerts": []
+    },
+    {
+      "name": "runs",
+      "width": 375,
+      "scroll": 375,
+      "heading": "Run with a published dataset",
+      "alerts": []
+    },
+    {
+      "name": "review",
+      "width": 375,
+      "scroll": 360,
+      "heading": "Review Queue",
+      "alerts": []
+    },
+    {
+      "name": "dashboard",
+      "width": 375,
+      "scroll": 360,
+      "heading": "Dashboard",
+      "alerts": []
+    },
+    {
+      "name": "access",
+      "width": 375,
+      "scroll": 360,
+      "heading": "Access and audit",
+      "alerts": []
+    },
+    {
+      "name": "history",
+      "width": 375,
+      "scroll": 375,
+      "heading": "Classification history",
+      "alerts": []
+    }
+  ],
+  "flows": [
+    "one taxonomy catalog",
+    "shared WIS editor with two levels",
+    "ordinary WIS save and publication updates classification",
+    "membership editing separate from list",
+    "audit tables",
+    "project dialog Escape and focus return",
+    "mobile navigation Escape and inert content"
+  ],
+  "runtimeErrors": []
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, FolderKanban, Plus, X } from 'lucide-react';
 import { PageTitle } from '../components/ui';
+import { Modal } from '../components/Modal';
 import { api } from '../services/api';
 import { useWorkspace } from '../services/workspace';
 
@@ -47,6 +48,6 @@ export function ProjectsPage() {
         </Link>;
       })}
     </div> : <div className="card empty large">No projects yet. Add your first project to get started.</div>}
-    {formOpen && <div className="modal-backdrop" onMouseDown={() => !saving && setFormOpen(false)}><form className="project-modal card" onSubmit={event => void createProject(event)} onMouseDown={event => event.stopPropagation()}><div className="modal-head"><div><span>NEW PROJECT</span><h2>Add project</h2></div><button type="button" disabled={saving} aria-label="Close" onClick={() => setFormOpen(false)}><X size={18}/></button></div><p>Create the project first. You can add and classify its user stories from the project page.</p><label>Project name<input required minLength={2} maxLength={160} value={name} onChange={event => setName(event.target.value)} placeholder="Example: Customer Portal" autoFocus/></label>{error && <p className="inline-error" role="alert">{error}</p>}<div className="modal-actions"><button type="button" disabled={saving} onClick={() => setFormOpen(false)}>Cancel</button><button className="primary" disabled={saving || name.trim().length < 2}>{saving ? 'Creating…' : 'Create project'}</button></div></form></div>}
+    {formOpen && <Modal label="Add project" busy={saving} onClose={() => setFormOpen(false)}><form className="project-modal card" onSubmit={event => void createProject(event)}><div className="modal-head"><div><span>NEW PROJECT</span><h2>Add project</h2></div><button type="button" disabled={saving} aria-label="Close" onClick={() => setFormOpen(false)}><X size={18}/></button></div><p>Create the project first. You can add and classify its user stories from the project page.</p><label>Project name<input required minLength={2} maxLength={160} value={name} onChange={event => setName(event.target.value)} placeholder="Example: Customer Portal" autoFocus/></label>{error && <p className="inline-error" role="alert">{error}</p>}<div className="modal-actions"><button type="button" disabled={saving} onClick={() => setFormOpen(false)}>Cancel</button><button className="primary" disabled={saving || name.trim().length < 2}>{saving ? 'Creating…' : 'Create project'}</button></div></form></Modal>}
   </section>;
 }
