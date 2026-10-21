@@ -1,0 +1,90 @@
+/* Keep component controls independent from page-wide button and input defaults. */
+.tag-field .tag-input-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+.tag-field .tag-chip {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 1 auto;
+  gap: 4px;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 0 0 12px;
+  border-radius: 8px;
+  background: var(--color-brand-100);
+  color: var(--color-brand-700);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.tag-chip-label { min-width: 0; overflow-wrap: anywhere; }
+.tag-field .tag-input-wrap .tag-chip > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-brand-700);
+}
+.tag-field .tag-input-wrap .tag-chip > button:hover:not(:disabled) { background: var(--color-brand-200); }
+.tag-field .tag-input-wrap button > svg { display: block; flex: 0 0 16px; width: 16px; height: 16px; }
+.tag-field .tag-entry { display: flex; align-items: center; gap: 8px; flex: 1 1 240px; min-width: 0; }
+.tag-field .tag-input-wrap input.tag-input[role=combobox] {
+  flex: 1 1 auto;
+  width: 0;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 4px;
+  font-size: 16px;
+}
+.tag-field .tag-input-wrap .tag-add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 76px;
+  min-height: 44px;
+  height: 44px;
+  padding: 8px 12px;
+  margin: 0 0 0 auto;
+  border: 1px solid var(--color-neutral-280);
+  border-radius: 6px;
+  background: var(--color-white);
+  color: var(--color-brand-700);
+  font-size: 14px;
+  font-weight: 500;
+}
+.tag-field .tag-input-wrap .tag-add-button:disabled { opacity: .55; }
+.tag-field .tag-options button { min-height: 44px; padding: 10px 12px; font-size: 14px; }
+.tag-field .tag-custom-option { min-height: 44px; padding: 8px 12px; font-size: 14px; }
+.tag-field :is(button, input):focus-visible { outline: 3px solid var(--color-brand-500); outline-offset: 2px; }
+.research-profile > form > fieldset { align-items: start; }
+.research-profile .research-profile-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-neutral-210);
+}
+.research-profile .research-profile-actions > button { flex: 0 0 auto; width: auto; min-width: 128px; min-height: 44px; padding: 10px 16px; }
+.research-profile-actions [role=status] { color: var(--color-success-700); font-size: 14px; }

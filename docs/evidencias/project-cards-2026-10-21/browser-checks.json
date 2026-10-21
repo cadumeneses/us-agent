@@ -1,0 +1,271 @@
+{
+  "recordedAt": "2026-10-21T19:48:33.329Z",
+  "syntheticLocalFixtures": true,
+  "skill": "UI UX Pro Max",
+  "checks": [
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "cards": [
+        {
+          "name": "Customer portal for regional teams with a descriptive project name",
+          "width": 366,
+          "height": 264.25,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            1,
+            1,
+            1
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-0-name"
+        },
+        {
+          "name": "Test",
+          "width": 366,
+          "height": 264.25,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-1-name"
+        },
+        {
+          "name": "fg",
+          "width": 366,
+          "height": 264.25,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            24,
+            0,
+            1
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-2-name"
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024,
+      "cards": [
+        {
+          "name": "Customer portal for regional teams with a descriptive project name",
+          "width": 351,
+          "height": 264.25,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            1,
+            1,
+            1
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-0-name"
+        },
+        {
+          "name": "Test",
+          "width": 351,
+          "height": 264.25,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-1-name"
+        },
+        {
+          "name": "fg",
+          "width": 351,
+          "height": 228.6875,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            24,
+            0,
+            1
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-2-name"
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "scrollWidth": 753,
+      "cards": [
+        {
+          "name": "Customer portal for regional teams with a descriptive project name",
+          "width": 467,
+          "height": 239.0625,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            1,
+            1,
+            1
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-0-name"
+        },
+        {
+          "name": "Test",
+          "width": 467,
+          "height": 228.6875,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-1-name"
+        },
+        {
+          "name": "fg",
+          "width": 467,
+          "height": 228.6875,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            24,
+            0,
+            1
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-2-name"
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "scrollWidth": 360,
+      "cards": [
+        {
+          "name": "Customer portal for regional teams with a descriptive project name",
+          "width": 328,
+          "height": 264.25,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            1,
+            1,
+            1
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-0-name"
+        },
+        {
+          "name": "Test",
+          "width": 328,
+          "height": 228.6875,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            0,
+            0,
+            0
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-1-name"
+        },
+        {
+          "name": "fg",
+          "width": 328,
+          "height": 228.6875,
+          "footerHeight": 44,
+          "labels": [
+            "Stories",
+            "To classify",
+            "Cycles"
+          ],
+          "values": [
+            24,
+            0,
+            1
+          ],
+          "overlap": false,
+          "nestedControls": 0,
+          "labelledBy": "_r_1_-2-name"
+        }
+      ]
+    }
+  ],
+  "verified": [
+    "separate title metrics and action",
+    "three real project totals including zeros",
+    "no overlap at four widths",
+    "long project names remain available",
+    "one native link per card",
+    "visible keyboard focus",
+    "Enter opens the project",
+    "touch-sized footer",
+    "no horizontal overflow"
+  ],
+  "runtimeErrors": []
+}

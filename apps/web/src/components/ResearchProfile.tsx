@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Plus, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { api } from '../services/api';
+import '../tag-field.css';
 import type { ProjectResearchProfile, ResearchTechnologies, Taxonomy } from '../types/models';
 
 export const emptyTechnologies = (): ResearchTechnologies => ({ languages: [], frameworks: [], apis: [], dataPersistence: [] });
@@ -34,6 +35,7 @@ export function TagField({ label, values, options = [], onChange }: { label: str
   const suggestions = options.filter(option => !values.some(value => searchText(value) === searchText(option)) && (!query || searchText(option).includes(query)));
   const exactMatch = [...values, ...options].some(value => searchText(value) === query);
   const custom = text.trim() && !exactMatch ? text.trim() : '';
+  const pendingTag = suggestions.find(option => searchText(option) === query) ?? custom;
 
   function add(value: string) {
     const trimmed = value.trim();
@@ -57,9 +59,9 @@ export function TagField({ label, values, options = [], onChange }: { label: str
   return <div className="tag-field">
     <label htmlFor={id}>{label}</label>
     <div className="tag-input-wrap" onClick={() => inputRef.current?.focus()}>
-      {values.map(value => <span className="tag-chip" key={value}>{value}<button type="button" aria-label={`Remove ${value}`} onMouseDown={event => event.preventDefault()} onClick={() => onChange(values.filter(item => item !== value))}><X size={12}/></button></span>)}
-      <input ref={inputRef} id={id} value={text} maxLength={120} role="combobox" aria-autocomplete="list" aria-expanded={open} aria-controls={`${id}-options`} aria-activedescendant={open && suggestions[active] ? `${id}-option-${active}` : undefined} placeholder={values.length ? 'Add another tag' : 'Search or add a tag'} onFocus={() => setOpen(true)} onClick={() => setOpen(true)} onBlur={() => { if (text.trim()) add(options.find(option => searchText(option) === query) ?? text); setOpen(false); }} onChange={event => { setText(event.target.value); setActive(0); setOpen(true); }} onKeyDown={handleKeyDown}/>
-      <button className="tag-add-button" type="button" aria-label={`Add ${text || 'tag'}`} disabled={!custom || values.length >= 100} onMouseDown={event => event.preventDefault()} onClick={() => add(custom)}><Plus size={15}/></button>
+      {values.map(value => <span className="tag-chip" key={value}><span className="tag-chip-label">{value}</span><button type="button" aria-label={`Remove ${value} from ${label}`} onMouseDown={event => event.preventDefault()} onClick={() => onChange(values.filter(item => item !== value))}><X size={16} aria-hidden="true"/></button></span>)}
+      <div className="tag-entry"><input ref={inputRef} className="tag-input" id={id} value={text} maxLength={120} role="combobox" aria-autocomplete="list" aria-expanded={open} aria-controls={`${id}-options`} aria-activedescendant={open && suggestions[active] ? `${id}-option-${active}` : undefined} placeholder={values.length ? 'Add another tag' : 'Search or add a tag'} onFocus={() => setOpen(true)} onClick={() => setOpen(true)} onBlur={() => { if (text.trim()) add(options.find(option => searchText(option) === query) ?? text); setOpen(false); }} onChange={event => { setText(event.target.value); setActive(0); setOpen(true); }} onKeyDown={handleKeyDown}/>
+        <button className="tag-add-button" type="button" aria-label={`Add tag to ${label}`} disabled={!pendingTag || values.length >= 100} onMouseDown={event => event.preventDefault()} onClick={() => add(pendingTag)}><Plus size={16} aria-hidden="true"/>Add</button></div>
     </div>
     {open && suggestions.length > 0 && <div className="tag-options" id={`${id}-options`} role="listbox">{suggestions.map((option, index) => <button type="button" role="option" id={`${id}-option-${index}`} aria-selected={active === index} className={active === index ? 'active' : ''} key={option} onMouseDown={event => event.preventDefault()} onClick={() => add(option)}>{option}</button>)}</div>}
     {open && custom && <button className="tag-custom-option" type="button" onMouseDown={event => event.preventDefault()} onClick={() => add(custom)}>Add “{custom}” as a new tag</button>}
@@ -109,8 +111,8 @@ export function ResearchProfile({ project }: { project: string }) {
       <label>Purpose<select value={profile.objective} onChange={event => update({ ...profile, objective: event.target.value as ProjectResearchProfile['objective'] })}><option value="">Not specified</option><option value="product">Product</option><option value="prototype">Prototype</option></select></label>
       <TagField label="Software architectures" values={profile.architectures} options={profileOptions.architectures} onChange={architectures => update({ ...profile, architectures })}/>
       <TechnologyFields value={profile.technologies} onChange={technologies => update({ ...profile, technologies })}/>
-      <button className="primary" type="submit">{saving ? 'Saving…' : 'Save profile'}</button>
-      {saved && <span role="status">Profile saved.</span>}
+      <div className="research-profile-actions"><button className="primary" type="submit">{saving ? 'Saving…' : 'Save profile'}</button>
+        {saved && <span role="status">Profile saved.</span>}</div>
     </fieldset></form>}
   </details>;
 }

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
+import '../project-cards.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, FolderKanban, Plus, X } from 'lucide-react';
 import { PageTitle } from '../components/ui';
@@ -16,6 +17,7 @@ export function ProjectsPage() {
   const [error, setError] = useState('');
   const [counts,setCounts]=useState<Array<{project:string;stories:number;unclassified:number;cycles:number}>>([]);
   const [countError,setCountError]=useState('');
+  const cardId = useId();
   useEffect(()=>{let active=true;setCountError('');api.projectStoryCounts().then(value=>{if(active)setCounts(value);})
     .catch((reason:Error)=>{if(active)setCountError(reason.message);});return()=>{active=false;};},[projects,stories]);
 
@@ -38,13 +40,15 @@ export function ProjectsPage() {
     <div className="projects-list-head"><p>{projects.length} project{projects.length === 1 ? '' : 's'}</p><button className="primary project-action" type="button" onClick={() => { setError(''); setFormOpen(true); }}><Plus size={16}/> Add project</button></div>
     {loading ? <p className="state">Loading projects…</p> : projects.length ? <div className="projects-grid">
       {projects.map((project, index) => {
-        const projectStories = stories.filter(story => story.project === project);
-        const cycles = new Set(projectStories.map(story => story.sprint || 'Backlog'));
         const total=counts.find(row=>row.project===project);
-        return <Link className="card project-overview" key={project} to={`/projects/${encodeURIComponent(project)}`}>
-          <i className={`project-mark ${['blue', 'violet', 'orange'][index % 3]}`}><FolderKanban size={19}/></i>
-          <div><h2>{project}</h2><p>{total?`${total.stories} stor${total.stories===1?'y':'ies'} · ${total.unclassified} not classified · ${total.cycles} cycle${total.cycles===1?'':'s'}`:`${projectStories.length} classified stories · ${cycles.size} cycles`}</p></div>
-          <span>View details <ArrowRight size={15}/></span>
+        return <Link className="card project-overview" key={project} to={`/projects/${encodeURIComponent(project)}`} aria-labelledby={`${cardId}-${index}-name`}>
+          <div className="project-card-heading"><span className="project-card-icon" aria-hidden="true"><FolderKanban size={20}/></span><h2 id={`${cardId}-${index}-name`}>{project}</h2></div>
+          <dl className="project-card-stats" aria-busy={!total && !countError}>
+            <div><dt>Stories</dt><dd>{total?.stories ?? '—'}</dd></div>
+            <div><dt>To classify</dt><dd>{total?.unclassified ?? '—'}</dd></div>
+            <div><dt>Cycles</dt><dd>{total?.cycles ?? '—'}</dd></div>
+          </dl>
+          <span className="project-card-footer"><span>Open project</span><ArrowRight size={18} aria-hidden="true"/></span>
         </Link>;
       })}
     </div> : <div className="card empty large">No projects yet. Add your first project to get started.</div>}

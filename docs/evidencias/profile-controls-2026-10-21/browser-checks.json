@@ -1,0 +1,653 @@
+{
+  "recordedAt": "2026-10-21T19:04:14.618Z",
+  "syntheticLocalFixtures": true,
+  "skill": "UI UX Pro Max",
+  "checks": [
+    {
+      "width": 1440,
+      "scrollWidth": 1425,
+      "save": {
+        "width": 128,
+        "height": 44
+      },
+      "buttons": [
+        {
+          "label": "Remove Web from Platforms",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Platforms",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Information resources from Application domains",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Application domains",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Model-view-controller from Software architectures",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Software architectures",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Java from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Python from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove JavaScript from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Programming languages",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Angular from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Express from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Node from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Frameworks",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Cytoscape from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Mongoose from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Request-promise from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove D3js from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to APIs",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove MongoDB from Data persistence",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Data persistence",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        }
+      ],
+      "tagFont": "14px"
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1009,
+      "save": {
+        "width": 128,
+        "height": 44
+      },
+      "buttons": [
+        {
+          "label": "Remove Web from Platforms",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Platforms",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Information resources from Application domains",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Application domains",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Model-view-controller from Software architectures",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Software architectures",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Java from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Python from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove JavaScript from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Programming languages",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Angular from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Express from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Node from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Frameworks",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Cytoscape from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Mongoose from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Request-promise from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove D3js from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to APIs",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove MongoDB from Data persistence",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Data persistence",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        }
+      ],
+      "tagFont": "14px"
+    },
+    {
+      "width": 768,
+      "scrollWidth": 753,
+      "save": {
+        "width": 128,
+        "height": 44
+      },
+      "buttons": [
+        {
+          "label": "Remove Web from Platforms",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Platforms",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Information resources from Application domains",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Application domains",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Model-view-controller from Software architectures",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Software architectures",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Java from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Python from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove JavaScript from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Programming languages",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Angular from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Express from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Node from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Frameworks",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Cytoscape from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Mongoose from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Request-promise from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove D3js from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to APIs",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove MongoDB from Data persistence",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Data persistence",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        }
+      ],
+      "tagFont": "14px"
+    },
+    {
+      "width": 375,
+      "scrollWidth": 360,
+      "save": {
+        "width": 128,
+        "height": 44
+      },
+      "buttons": [
+        {
+          "label": "Remove Web from Platforms",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Platforms",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Information resources from Application domains",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Application domains",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Model-view-controller from Software architectures",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Software architectures",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Java from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Python from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove JavaScript from Programming languages",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Programming languages",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Angular from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Express from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Node from Frameworks",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Frameworks",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Cytoscape from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Mongoose from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove Request-promise from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove D3js from APIs",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to APIs",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Remove MongoDB from Data persistence",
+          "width": 44,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        },
+        {
+          "label": "Add tag to Data persistence",
+          "width": 76,
+          "height": 44,
+          "iconWidth": 16,
+          "iconHeight": 16
+        }
+      ],
+      "tagFont": "14px"
+    }
+  ],
+  "verified": [
+    "visible remove and add icons",
+    "44px tag buttons",
+    "input and Add stay grouped",
+    "compact save action outside the field grid",
+    "readable wrapping tags",
+    "suggested tag added with Add",
+    "custom tag added with Enter",
+    "tag removed with Space",
+    "case-insensitive duplicate prevention",
+    "profile saved through real API",
+    "no horizontal overflow"
+  ],
+  "runtimeErrors": []
+}
