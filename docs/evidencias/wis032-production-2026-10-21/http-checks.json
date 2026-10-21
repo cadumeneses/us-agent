@@ -1,0 +1,55 @@
+{
+  "recordedAt": "2026-10-21T16:46:28.919Z",
+  "origin": "https://us-agent-api.vercel.app",
+  "probes": [
+    {
+      "path": "/api/health",
+      "authenticated": false,
+      "status": 401
+    },
+    {
+      "path": "/api/health",
+      "authenticated": true,
+      "status": 200,
+      "database": "connected"
+    },
+    {
+      "path": "/api/access/context",
+      "authenticated": true,
+      "status": 200
+    },
+    {
+      "path": "/api/projects",
+      "authenticated": true,
+      "status": 200,
+      "count": 14
+    },
+    {
+      "path": "/api/stories",
+      "authenticated": true,
+      "status": 200,
+      "count": 196
+    },
+    {
+      "path": "/api/dashboard",
+      "authenticated": true,
+      "status": 200
+    },
+    {
+      "path": "/api/taxonomy",
+      "authenticated": true,
+      "status": 200
+    },
+    {
+      "path": "/api/internal/recommender-taxonomies",
+      "authenticated": true,
+      "status": 200,
+      "count": 2,
+      "wis": {
+        "version": "1.0.0",
+        "state": "published",
+        "nodeCount": 23
+      }
+    }
+  ]
+}

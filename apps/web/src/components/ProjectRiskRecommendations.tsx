@@ -6,27 +6,29 @@ import { CONFIGURABLE_KNN, type ProjectRecommendationRequest } from '../types/pr
 import type { ConfiguredInput, ContentReference, DatasetSummary, DefinitionRecord } from '../types/configurable-recommendations';
 import { ConfiguredInputFields } from './ConfiguredInputFields';
 import { ConfiguredRunDetails } from './ConfiguredRunDetails';
-import { CatalogState, useCatalog, versionKey } from './VersionCatalog';
+import { CatalogState, useCatalog, useDefinitionChoice, versionKey } from './VersionCatalog';
 
-export function ProjectRiskRecommendations({ project, busy, onBusy }: { project: string; busy: boolean; onBusy: (value: boolean) => void }) {
+export function ProjectRiskRecommendations({ project, busy, onBusy, custom = false, definitionKey = '' }: { project?: string; busy: boolean; onBusy: (value: boolean) => void; custom?: boolean; definitionKey?: string }) {
   const definitions = useCatalog(recommenderApi.definitions, 0), datasets = useCatalog(recommenderApi.datasets, 0);
-  const [choice, setChoice] = useState(''), [record, setRecord] = useState<DefinitionRecord>(), [error, setError] = useState(''), [retry, setRetry] = useState(0);
+  const [choice, setChoice] = useState(definitionKey), [record, setRecord] = useState<DefinitionRecord>(), [error, setError] = useState(''), [retry, setRetry] = useState(0);
   const available = definitions.rows.filter(row => row.method === CONFIGURABLE_KNN);
-  const selected = available.find(row => versionKey(row) === choice) ?? (!choice && available.length === 1 ? available[0] : undefined);
+  const selection = useDefinitionChoice(choice, available);
+  const selected = selection.selected ?? (!choice && available.length === 1 ? available[0] : undefined);
   useEffect(() => {
     const controller = new AbortController(); let active = true;
     setRecord(undefined); setError('');
     if (selected) recommenderApi.definition(selected.id, selected.version, controller.signal).then(value => {
-      if (value.state !== 'published' || value.snapshot?.sha256 !== selected.snapshot?.sha256) throw new Error('Configuration changed. Reload the available versions.');
+      if (value.state !== 'published' || value.definition.method.id !== CONFIGURABLE_KNN || value.snapshot?.sha256 !== selected.snapshot?.sha256) throw new Error('Configuration changed. Reload the available versions.');
       if (active) setRecord(value);
     }).catch((reason: Error) => { if (active) setError(reason.message); });
     return () => { active = false; controller.abort(); };
   }, [selected?.id, selected?.version, selected?.snapshot?.sha256, retry]);
   return <>
-    <section className="card configured-panel"><h2>Project risks</h2><p>Compare your project profile with a selected reference dataset to find risks observed in similar projects.</p>
-      <label>Recommender and version<select disabled={busy || definitions.loading} value={selected ? versionKey(selected) : ''} onChange={event => setChoice(event.target.value)}><option value="">Select a configuration</option>{available.map(row => <option key={versionKey(row)} value={versionKey(row)}>{row.name} · {row.version}</option>)}</select></label>
+    <section className="card configured-panel"><h2>{custom ? 'Your KNN recommenders' : 'Project risks'}</h2><p>{custom ? 'Choose your published configuration. Compare a registered project or enter a profile to get its associated recommendations.' : 'Compare your project profile with a selected reference dataset to find risks observed in similar projects.'}</p>
+      <label>Recommender and version<select disabled={busy || definitions.loading} value={selected ? versionKey(selected) : ''} onChange={event => setChoice(event.target.value)}><option value="">Select a configuration</option>{selected && !available.some(row => versionKey(row) === versionKey(selected)) && <option value={versionKey(selected)}>{selected.name} · {selected.version}</option>}{available.map(row => <option key={versionKey(row)} value={versionKey(row)}>{row.name} · {row.version}</option>)}</select></label>
+      {selection.error && <p role="alert">{selection.error} <button type="button" disabled={busy} onClick={selection.retry}>Retry selected recommender</button></p>}
       <CatalogState catalog={definitions} title="recommenders"/>
-      {!definitions.loading && !definitions.error && !available.length && <p>No project recommender has been published. <Link to="/recommender-setup">Create a project-risk configuration and import a reference dataset</Link></p>}
+      {!definitions.loading && !definitions.error && !available.length && <p>No project recommender has been published. <Link to="/recommenders/new">Create your own KNN recommender</Link></p>}
       {error && <div role="alert"><p>{error}</p><button disabled={busy} onClick={() => setRetry(value => value + 1)}>Retry loading configuration</button></div>}
       {selected && !record && !error && <p role="status">Loading configuration…</p>}
     </section>
@@ -35,14 +37,15 @@ export function ProjectRiskRecommendations({ project, busy, onBusy }: { project:
 }
 
 type Publication = DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> };
-export function ProjectRecommendationForm({ record, project, datasets, busy, onBusy, onCompleted }: {
+export function ProjectRecommendationForm({ record, project, datasets, busy, onBusy, onCompleted, initialDatasetKey = '' }: {
   record: Publication; project?: string; datasets: DatasetSummary[]; busy: boolean; onBusy: (value: boolean) => void;
   onCompleted?: (run: import('../types/project-recommendations').ProjectRecommendationRun) => void;
+  initialDatasetKey?: string;
 }) {
   const definition = record.snapshot.content.definition;
   const reference: ContentReference = { id: definition.id, version: definition.version, format: record.snapshot.format, sha256: record.snapshot.sha256 };
   const compatible = datasets.filter(row => row.state === 'published' && row.definition.id === reference.id && row.definition.version === reference.version && row.definition.sha256 === reference.sha256 && row.definition.format === reference.format);
-  const [datasetKey, setDatasetKey] = useState('');
+  const [datasetKey, setDatasetKey] = useState(initialDatasetKey);
   const dataset = compatible.find(row => versionKey(row) === datasetKey) ?? (!datasetKey && compatible.length === 1 ? compatible[0] : undefined);
   const [values, setValues] = useState<ConfiguredInput['values']>(() => initialValues(definition));
   const [inputId, setInputId] = useState(''), [source, setSource] = useState('Manual project profile');
@@ -81,14 +84,14 @@ export function ProjectRecommendationForm({ record, project, datasets, busy, onB
         setRevision(saved.revision); setSavedSignature(signature);
       }
       if (!run || !dataset) { setMessage('Project profile saved.'); return; }
-      const payload = { definition: reference, dataset: { id: dataset.id, version: dataset.version, ...dataset.snapshot }, input: { id: inputId, values, provenance: { source } } };
+      const payload = { definition: reference, dataset: { id: dataset.id, version: dataset.version, format: dataset.snapshot.format, sha256: dataset.snapshot.sha256 }, input: { id: inputId, values, provenance: { source } } };
       if (!pending.current || JSON.stringify({ ...pending.current, id: undefined }) !== JSON.stringify(payload)) pending.current = { id: crypto.randomUUID(), ...payload };
       const result = await recommenderApi.executeProject(pending.current); pending.current = null;
       setRunId(result.id); onCompleted?.(result);
     } catch (reason) { setError((reason as Error).message); }
     finally { submitting.current = false; onBusy(false); }
   }
-  return <section className="card configured-panel"><h2>Project profile</h2><p>Fields follow the selected configuration. The saved profile is specific to this project and configuration version.</p>
+  return <section className="card configured-panel"><h2>{definition.name}</h2><p>Fields follow the selected configuration. {project ? 'The saved profile is specific to this project and configuration version.' : 'Enter the profile you want to compare.'}</p>
     {loading && <p role="status">Loading project profile…</p>}{loadError && <p role="alert">{loadError}</p>}
     <fieldset disabled={busy || loading || !!loadError} className="configured-form-body">
       {!project && <><label>Profile identifier<input value={inputId} onChange={event => setInputId(event.target.value)}/></label><label>Profile source<input value={source} onChange={event => setSource(event.target.value)}/></label></>}

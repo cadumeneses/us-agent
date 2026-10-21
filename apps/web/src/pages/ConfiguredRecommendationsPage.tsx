@@ -4,7 +4,7 @@ import { ConfiguredInputFields } from '../components/ConfiguredInputFields';
 import { ConfiguredRunDetails, ReferenceDetails, configuredStatus } from '../components/ConfiguredRunDetails';
 import { PageTitle } from '../components/ui';
 import { RecommenderNavigation } from '../components/RecommenderNavigation';
-import { CatalogState, useCatalog } from '../components/VersionCatalog';
+import { CatalogState, useCatalog, useDefinitionChoice } from '../components/VersionCatalog';
 import { initialValues, inputIssues } from '../services/configured-input';
 import { recommenderApi, supportsWebMethod } from '../services/recommender-api';
 import type { ConfiguredInput, ConfiguredRun, ContentReference, DatasetSummary, DefinitionRecord, DefinitionSummary, RecommendationRequest } from '../types/configurable-recommendations';
@@ -21,11 +21,12 @@ export function ConfiguredRecommendationsPage() {
   const [params, setParams] = useSearchParams();
   const [tab, setTab] = useState(params.has('runId') ? 'history' : 'execute');
   const [refresh, setRefresh] = useState(0);
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(() => params.has('definitionId') && params.has('definitionVersion') ? identity({ id: params.get('definitionId')!, version: params.get('definitionVersion')! }) : '');
   const [busy, setBusy] = useState(false);
   const definitions = useCatalog(recommenderApi.definitions, 0);
   const datasets = useCatalog(recommenderApi.datasets, 0);
-  const selectedDefinition = definitions.rows.find(row => identity(row) === selected);
+  const definitionChoice = useDefinitionChoice(selected, definitions.rows);
+  const selectedDefinition = definitionChoice.selected;
   const runId = params.get('runId');
   const history = useCatalog(recommenderApi.runs, refresh);
   useEffect(() => { if (runId) setTab('history'); }, [runId]);
@@ -37,11 +38,12 @@ export function ConfiguredRecommendationsPage() {
     <div className="configured-actions configured-tabs" role="group" aria-label="Recommender area"><button aria-pressed={tab === 'execute'} disabled={busy} onClick={() => setTab('execute')}>New run</button><button aria-pressed={tab === 'history'} disabled={busy} onClick={() => setTab('history')}>Run history</button>{!busy && <Link to="/recommender-setup">Configure and import datasets</Link>}<Link to="/recommendations">Choose a recommender</Link></div>
     <div hidden={tab !== 'execute'}>
       <section className="card configured-panel"><h2>1. Published definition</h2><p>Choose a configuration to load its input fields and compatible reference datasets.</p>
-        <label>Definition and version<select disabled={busy || definitions.loading} value={selected} onChange={event => setSelected(event.target.value)}><option value="">Select a version</option>{definitions.rows.map(row => <option disabled={!supportsWebMethod(row.method)} key={identity(row)} value={identity(row)}>{row.name} · {row.id} · {row.version}{!supportsWebMethod(row.method) && ' · API only'}</option>)}</select></label>
+        <label>Definition and version<select disabled={busy || definitions.loading} value={selected} onChange={event => setSelected(event.target.value)}><option value="">Select a version</option>{selectedDefinition && !definitions.rows.some(row => identity(row) === selected) && <option value={selected}>{selectedDefinition.name} · {selectedDefinition.version}</option>}{definitions.rows.map(row => <option disabled={!supportsWebMethod(row.method)} key={identity(row)} value={identity(row)}>{row.name} · {row.id} · {row.version}{!supportsWebMethod(row.method) && ' · API only'}</option>)}</select></label>
+        {definitionChoice.error && <p role="alert">{definitionChoice.error} <button type="button" disabled={busy} onClick={definitionChoice.retry}>Retry selected recommender</button></p>}
         {!definitions.loading && !definitions.error && !definitions.rows.length && <p>No published definition is available. Open “Configure and import datasets” to prepare the recommender.</p>}
         <CatalogState catalog={definitions} title="definitions"/>
       </section>
-      {selectedDefinition && <DefinitionExecution key={identity(selectedDefinition)} summary={selectedDefinition} datasets={datasets.rows} busy={busy} onBusy={setBusy} onCompleted={completed}>
+      {selectedDefinition && <DefinitionExecution key={identity(selectedDefinition)} summary={selectedDefinition} datasets={datasets.rows} busy={busy} onBusy={setBusy} onCompleted={completed} project={params.get('project') ?? undefined} initialDatasetKey={params.has('datasetId') && params.has('datasetVersion') ? identity({ id: params.get('datasetId')!, version: params.get('datasetVersion')! }) : undefined}>
         <CatalogState catalog={datasets} title="datasets"/>
       </DefinitionExecution>}
     </div>
@@ -57,10 +59,11 @@ export function ConfiguredRecommendationsPage() {
   </section>;
 }
 
-export function DefinitionExecution({ summary, datasets, busy, onBusy, onCompleted, children, classificationId }: {
+export function DefinitionExecution({ summary, datasets, busy, onBusy, onCompleted, children, classificationId, project, initialDatasetKey }: {
   summary: DefinitionSummary; datasets: DatasetSummary[]; busy: boolean; onBusy: (value: boolean) => void;
   onCompleted: (run: MethodRun) => void; children: React.ReactNode;
   classificationId?: string;
+  project?: string; initialDatasetKey?: string;
 }) {
   const [record, setRecord] = useState<DefinitionRecord>();
   const [error, setError] = useState('');
@@ -77,7 +80,7 @@ export function DefinitionExecution({ summary, datasets, busy, onBusy, onComplet
   }, [summary.id, summary.version, summary.snapshot?.sha256, summary.snapshot?.format, retry]);
   if (error) return <div className="card configured-panel" role="alert"><p>{error}</p><button onClick={() => setRetry(value => value + 1)}>Retry loading definition</button></div>;
   if (!record?.snapshot) return <p role="status">Loading definition attributes and taxonomies…</p>;
-  if (record.definition.method.id === CONFIGURABLE_KNN) return <><ProjectRecommendationForm key={record.snapshot.sha256} record={record as DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }} datasets={datasets} busy={busy} onBusy={onBusy} onCompleted={onCompleted}/>{children}</>;
+  if (record.definition.method.id === CONFIGURABLE_KNN) return <><ProjectRecommendationForm key={record.snapshot.sha256} record={record as DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }} datasets={datasets} busy={busy} onBusy={onBusy} onCompleted={onCompleted} project={project} initialDatasetKey={initialDatasetKey}/>{children}</>;
   const Form = record.definition.method.id === TEST_CASE_METHOD ? TestCaseExecutionForm : ExecutionForm;
   return <Form key={`${record.snapshot.sha256}:${classificationId??''}`} record={record as DefinitionRecord & { snapshot: NonNullable<DefinitionRecord['snapshot']> }} datasets={datasets} busy={busy} onBusy={onBusy} onCompleted={onCompleted} classificationId={classificationId}>{children}</Form>;
 }

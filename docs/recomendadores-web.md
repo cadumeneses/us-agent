@@ -1,5 +1,7 @@
 # Execução de recomendadores pela interface
 
+Atualização de 21/10/2026: o [cadastro genérico de recomendadores KNN](recomendadores-personalizados.md) permite criar instâncias próprias, configurar campos e saídas, preparar bases por arquivo ou projetos registrados e abrir formulários gerados pelas definições. As instâncias publicadas aparecem pelo nome na tela principal.
+
 ## Fluxo atual — Recommenders (19/10/2026)
 
 Atualização 038: **Project risks** recomenda a partir do perfil do projeto, sem selecionar história/classificação. Escolha configuração e base publicadas, complete os atributos adicionais e execute **Recommend**. O perfil específico é salvo por projeto/versão; itens, vizinhos, contribuições, histórico e replay são rastreáveis. O [roteiro de configuração](recomendador-projeto-configuravel.md) inclui template, referência sintética, pesos, `k`, atributos novos e limites. Aplicar migrations **027/028 antes do deploy**. Produção não foi atualizada nesta entrega.

@@ -2,6 +2,8 @@
 
 ## Procedimento atual
 
+**Execução concluída em 21/10/2026:** a 032 foi ensaiada em cópia atual e aplicada em produção. Não restam pendências no manifesto. Catálogo WIS, integridade dos dados e rotas autenticadas foram conferidos; [evidências](evidencias/wis032-production-2026-10-21/README.md). Não foi realizado deploy de código nesta execução. O texto de preparação abaixo registra o estado anterior à aplicação.
+
 O pacote atual inclui a migration 032 e a WIS no mesmo catálogo das demais taxonomias. Usar o [roteiro 043](entregas/043-wis-unificada-e-ui-ux.md) para preflight, ensaio em cópia atual de produção, janela de manutenção, migration e deploy coordenados. O manifesto tem 33 arquivos. A 032 está aplicada no desenvolvimento local; ainda não foi aplicada em produção.
 
 ## Histórico dos procedimentos anteriores

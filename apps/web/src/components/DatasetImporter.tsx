@@ -1,4 +1,8 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CONFIGURABLE_KNN } from '../types/project-recommendations';
+import { customDatasetExample, downloadJson } from '../services/custom-recommender';
+import { RegisteredProjectDataset } from './RegisteredProjectDataset';
 import { recommenderApi, supportsWebMethod } from '../services/recommender-api';
 import type { ConfiguredInput, ContentReference, DatasetRecord, DefinitionRecord, ImportSpec } from '../types/configurable-recommendations';
 import { TEST_CASE_METHOD, type MethodImportRecord, type MethodImportSpec } from '../types/test-case-recommendations';
@@ -10,7 +14,7 @@ type FieldMapping = { included: boolean; path: string; encoding: 'value' | 'json
 const pathParts = (text: string) => text.split('\n');
 const validPath = (parts: string[]) => parts.length <= 20 && parts.every(part => part.length > 0 && part.length <= 240);
 
-export function DatasetImporter({ refresh, changed, busy, setBusy }: { refresh: number; changed: () => void; busy: boolean; setBusy: (value: boolean) => void }) {
+export function DatasetImporter({ refresh, changed, busy, setBusy, initialDefinition }: { refresh: number; changed: () => void; busy: boolean; setBusy: (value: boolean) => void; initialDefinition?: DefinitionRecord }) {
   const definitions = useCatalog(recommenderApi.definitions, refresh);
   const [choice, setChoice] = useState(''), [definition, setDefinition] = useState<DefinitionRecord>();
   const [id, setId] = useState(''), [version, setVersion] = useState('');
@@ -19,16 +23,29 @@ export function DatasetImporter({ refresh, changed, busy, setBusy }: { refresh: 
   const [recordPath, setRecordPath] = useState(''), [mapping, setMapping] = useState<Record<string, FieldMapping>>({});
   const [file, setFile] = useState<File>(), [preview, setPreview] = useState<MethodImportRecord>();
   const [catalog, setCatalog] = useState<ContentReference>();
+  const [dataSource, setDataSource] = useState('file');
   const [excluded, setExcluded] = useState<number[]>([]), [published, setPublished] = useState<DatasetRecord>();
   const [error, setError] = useState(''), [page, setPage] = useState(0), [recoverId, setRecoverId] = useState('');
   const running = useRef(false);
   const invalidate = () => { setPreview(undefined); setExcluded([]); setPublished(undefined); setPage(0); setError(''); };
+  function loadSchema(record: DefinitionRecord) {
+    setDefinition(record); setMapping(Object.fromEntries(record.definition.attributes.map(field => [field.id, { included: field.required, path: '', encoding: 'value' }])));
+    setDataSource('file'); setFile(undefined); setCatalog(undefined); invalidate();
+  }
+  useEffect(() => {
+    if (initialDefinition?.state === 'published' && initialDefinition.snapshot) { setChoice(versionKey(initialDefinition.definition)); loadSchema(initialDefinition); }
+  }, [initialDefinition]);
+  function useRecordMapping() {
+    setRecordPath('id'); setMapping(Object.fromEntries(fields.map(field => [field.id, { included: true,
+      path: `values\n${field.id}`, encoding: 'value' }])));
+  }
   async function action(task: () => Promise<void>) {
     if (running.current) return; running.current = true; setBusy(true); setError('');
     try { await task(); } catch (reason) { setError((reason as Error).message); } finally { running.current = false; setBusy(false); }
   }
   const fields = definition?.snapshot?.content.definition.attributes ?? [];
   const testCases = definition?.definition.method.id === TEST_CASE_METHOD;
+  const custom = definition?.definition.method.id === CONFIGURABLE_KNN;
   function importSpec(): MethodImportSpec {
     if (!definition?.snapshot || definition.state !== 'published') throw new Error("Load a published definition.");
     if (!id || !version || !source.trim() || !basis || !authorization.trim()) throw new Error("Enter the dataset ID, version, source, and use declaration.");
@@ -66,18 +83,25 @@ export function DatasetImporter({ refresh, changed, busy, setBusy }: { refresh: 
       const summary = definitions.rows.find(item => versionKey(item) === choice)!;
       const record = await recommenderApi.definition(summary.id, summary.version);
       if (record.state !== 'published' || !record.snapshot || record.snapshot.sha256 !== summary.snapshot?.sha256) throw new Error("Definition unavailable or changed. Refresh the list.");
-      setDefinition(record); setMapping(Object.fromEntries(record.definition.attributes.map(field => [field.id, { included: field.required, path: '', encoding: 'value' }]))); invalidate();
+      loadSchema(record);
     })}>Load dataset schema</button><CatalogState catalog={definitions} title="import definitions"/>
     {definition?.snapshot && <><ReferenceDetails title="Import definition" reference={{ id: definition.definition.id, version: definition.definition.version, format: definition.snapshot.format, sha256: definition.snapshot.sha256 }}/>
       {testCases && <><p>Demonstration with synthetic test associations. Every dataset record must declare its test IDs; [] means known empty. Missing associations require an explicit exclusion.</p><TestCaseCatalogPicker value={catalog} refresh={refresh} onChange={value => { setCatalog(value); invalidate(); }}/></>}
-      <div className="configured-editor-grid"><label>Dataset ID<input value={id} maxLength={80} onChange={event => { setId(event.target.value); invalidate(); }}/></label><label>Dataset version<input value={version} maxLength={80} onChange={event => { setVersion(event.target.value); invalidate(); }}/></label><label>File format<select value={format} onChange={event => { setFormat(event.target.value as 'csv' | 'json'); invalidate(); }}><option value="json">JSON</option><option value="csv">CSV</option></select></label>
+      <div className="configured-editor-grid"><label>Dataset ID<input value={id} maxLength={80} onChange={event => { setId(event.target.value); invalidate(); }}/></label><label>Dataset version<input value={version} maxLength={80} onChange={event => { setVersion(event.target.value); invalidate(); }}/></label><label>File format<select disabled={dataSource === 'projects'} value={format} onChange={event => { setFormat(event.target.value as 'csv' | 'json'); invalidate(); }}><option value="json">JSON</option><option value="csv">CSV</option></select></label>
         {format === 'csv' && <label>CSV delimiter<select value={delimiter} onChange={event => { setDelimiter(event.target.value as typeof delimiter); invalidate(); }}><option value=",">Comma</option><option value=";">Semicolon</option><option value={'\t'}>Tab</option></select></label>}</div>
       <label>Source description<textarea maxLength={500} value={source} onChange={event => { setSource(event.target.value); invalidate(); }}/></label>
       <div className="configured-editor-grid"><label>Use declaration<select value={basis} onChange={event => { setBasis(event.target.value as typeof basis); invalidate(); }}><option value="">Select</option><option value="synthetic">Synthetic demonstration</option><option value="public-license">Public license</option><option value="permission">Permission granted</option><option value="owned">Own data</option></select></label><label>Authorization reference<textarea maxLength={2000} value={authorization} onChange={event => { setAuthorization(event.target.value); invalidate(); }}/></label></div>
-      <label>CSV or JSON file (up to 5 MB)<input type="file" accept=".json,.csv,application/json,text/csv" onChange={event => {
+      {custom && <><label>Reference data source<select value={dataSource} onChange={event => { setDataSource(event.target.value); setFile(undefined); invalidate(); }}><option value="file">Import CSV or JSON</option><option value="projects">Build from registered projects</option></select></label>
+        <button type="button" onClick={() => { try { downloadJson(customDatasetExample(definition.snapshot!.content), `${definition.definition.id}.synthetic-example.json`); } catch (reason) { setError((reason as Error).message); } }}>Download example for this recommender</button><p>The example uses synthetic associations and follows this configuration's fields. Replace it with your reference data or declare it as a synthetic demonstration.</p>
+        {dataSource === 'projects' && <RegisteredProjectDataset key={definition.snapshot.sha256} definition={definition} busy={busy} setBusy={setBusy} onEdit={() => { setFile(undefined); invalidate(); }} onUse={prepared => {
+          setFormat('json'); setFile(prepared); useRecordMapping(); invalidate();
+        }}/>}
+      </>}
+      {dataSource === 'file' && <label>CSV or JSON file (up to 5 MB)<input type="file" accept=".json,.csv,application/json,text/csv" onChange={event => {
         invalidate(); const selected = event.target.files?.[0]; setFile(selected);
         if (selected && (!selected.size || selected.size > 5_000_000)) setError("The file must contain between 1 and 5,000,000 bytes.");
-      }}/></label>
+      }}/></label>}
+      {dataSource === 'projects' && file && <p role="status">Selected project records prepared. Complete the source declaration, then generate and review the import preview.</p>}
       <h3>Explicit mapping</h3><p>Enter one source key per line. For a column with a dot in its name, enter its full name on one line. For nested JSON, use multiple lines.</p>
       <button type="button" onClick={() => { setRecordPath('id'); setMapping(Object.fromEntries(fields.map(field => [field.id, { included: true,
         path: format === 'json' ? `values\n${field.id}` : field.id,
@@ -116,6 +140,7 @@ export function DatasetImporter({ refresh, changed, busy, setBusy }: { refresh: 
         setPublished(result); changed();
       })}>Publish reviewed dataset</button>
       {published && <><p role="status">Dataset published. The version and selection were preserved.</p><ReferenceDetails title="Published dataset" reference={{ id: published.snapshot.content.id, version: published.snapshot.content.version, format: published.snapshot.format, sha256: published.snapshot.sha256 }}/></>}
+      {published && <Link to={`/configured-recommendations?definitionId=${encodeURIComponent(published.snapshot.content.definition.id)}&definitionVersion=${encodeURIComponent(published.snapshot.content.definition.version)}&datasetId=${encodeURIComponent(published.snapshot.content.id)}&datasetVersion=${encodeURIComponent(published.snapshot.content.version)}`}>Run this recommender with this dataset</Link>}
     </div>}{error && <p className="inline-error" role="alert">{error}</p>}
   </section>;
 }

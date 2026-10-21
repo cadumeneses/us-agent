@@ -1,5 +1,7 @@
 # WIS unificada e revisão da interface
 
+**Execução posterior à preparação:** em 21/10/2026 a 032 foi ensaiada em cópia atual de produção e aplicada no banco real, sem pendências. Dados, hashes e rotas autenticadas foram verificados. [Registro da execução](../evidencias/wis032-production-2026-10-21/README.md). Não houve deploy de código nessa execução; o roteiro abaixo preserva a preparação original.
+
 21/10/2026. Pacote preparado para commit e implantação coordenada. Esta preparação não executa migrations nem publica código em produção.
 
 ## Resultado

@@ -50,6 +50,8 @@ Os verificadores de integração criam schemas descartáveis no PostgreSQL local
 
 ## Implantação
 
+**Atualização de execução — 21/10/2026:** a 032 já foi ensaiada em cópia atual e aplicada em produção, sem pendências. Os dados operacionais foram preservados e a API retornou a WIS publicada no catálogo comum. [Evidências](evidencias/wis032-production-2026-10-21/README.md). Não houve deploy de código nesta execução. As observações de preparação abaixo descrevem o estado anterior à aplicação.
+
 Seguir o [roteiro 043](entregas/043-wis-unificada-e-ui-ux.md) para os comandos e a ordem completa de ensaio e implantação.
 
 O release agora contém **33 arquivos**, até 032. A 032 exige ensaio em uma cópia atual de produção e implantação coordenada com o código desta revisão. Usar o executor transacional e conexão direta, conferir o destino e manter o tráfego em manutenção durante a transição:

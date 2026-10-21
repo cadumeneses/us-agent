@@ -1,0 +1,201 @@
+{
+  "recordedAt": "2026-10-21T16:46:18.303Z",
+  "phase": "production",
+  "target": "ep-rapid-mouse-avz844uw.c-11.us-east-1.aws.neon.tech:5432/neondb",
+  "statusBefore": {
+    "schema": "public",
+    "database": "neondb",
+    "applied": [
+      "001_initial_schema.sql",
+      "002_application_context.sql",
+      "003_disable_unavailable_committee_mode.sql",
+      "004_quality_plan_drafts.sql",
+      "005_enable_committee_mode.sql",
+      "005_story_details.sql",
+      "006_taxonomy_descriptions.sql",
+      "007_multiple_active_taxonomies.sql",
+      "008_activate_existing_taxonomies.sql",
+      "009_review_fallbacks.sql",
+      "010_apply_fallback_suggestions.sql",
+      "011_taxonomy_domains.sql",
+      "012_quality_plan_scopes.sql",
+      "013_project_sprints.sql",
+      "014_research_input_profiles.sql",
+      "015_nfr_recommendations.sql",
+      "016_classification_provenance.sql",
+      "016_sheet_source_links.sql",
+      "017_recommender_taxonomies.sql",
+      "018_recommender_definitions.sql",
+      "019_recommender_datasets.sql",
+      "020_recommendation_runs.sql",
+      "021_recommendation_review.sql",
+      "022_test_case_catalogs.sql",
+      "023_test_case_dataset_runs.sql",
+      "024_test_case_reviews.sql",
+      "025_private_web_sessions.sql",
+      "026_private_web_users.sql",
+      "027_story_preparations.sql",
+      "028_configurable_project_recommendations.sql",
+      "029_legacy_taxonomy_staging.sql",
+      "030_nfr_adapted_copies.sql",
+      "031_organizations_and_audit.sql"
+    ],
+    "pending": [
+      "032_unified_wis_taxonomy.sql"
+    ],
+    "outsideRelease": [
+      "016_sheet_source_links.sql"
+    ]
+  },
+  "applied": [
+    "032_unified_wis_taxonomy.sql"
+  ],
+  "statusAfter": {
+    "schema": "public",
+    "database": "neondb",
+    "applied": [
+      "001_initial_schema.sql",
+      "002_application_context.sql",
+      "003_disable_unavailable_committee_mode.sql",
+      "004_quality_plan_drafts.sql",
+      "005_enable_committee_mode.sql",
+      "005_story_details.sql",
+      "006_taxonomy_descriptions.sql",
+      "007_multiple_active_taxonomies.sql",
+      "008_activate_existing_taxonomies.sql",
+      "009_review_fallbacks.sql",
+      "010_apply_fallback_suggestions.sql",
+      "011_taxonomy_domains.sql",
+      "012_quality_plan_scopes.sql",
+      "013_project_sprints.sql",
+      "014_research_input_profiles.sql",
+      "015_nfr_recommendations.sql",
+      "016_classification_provenance.sql",
+      "016_sheet_source_links.sql",
+      "017_recommender_taxonomies.sql",
+      "018_recommender_definitions.sql",
+      "019_recommender_datasets.sql",
+      "020_recommendation_runs.sql",
+      "021_recommendation_review.sql",
+      "022_test_case_catalogs.sql",
+      "023_test_case_dataset_runs.sql",
+      "024_test_case_reviews.sql",
+      "025_private_web_sessions.sql",
+      "026_private_web_users.sql",
+      "027_story_preparations.sql",
+      "028_configurable_project_recommendations.sql",
+      "029_legacy_taxonomy_staging.sql",
+      "030_nfr_adapted_copies.sql",
+      "031_organizations_and_audit.sql",
+      "032_unified_wis_taxonomy.sql"
+    ],
+    "pending": [],
+    "outsideRelease": [
+      "016_sheet_source_links.sql"
+    ]
+  },
+  "organizations": [
+    {
+      "id": "default",
+      "schema_name": "public"
+    }
+  ],
+  "before": {
+    "projects": {
+      "n": 14,
+      "digest": "9f8f288aa63a58a9203f5a6724075de8"
+    },
+    "stories": {
+      "n": 196,
+      "digest": "7bc382a16bd321a2763d177b6b2777fb"
+    },
+    "classifications": {
+      "n": 196,
+      "digest": "1625f8bd8331bd1ceee4d93d25a25156"
+    },
+    "classification_labels": {
+      "n": 202,
+      "digest": "2a0992d1bd5f6d1ac788551d4556a171"
+    },
+    "taxonomy_versions": {
+      "n": 1,
+      "digest": "22cb1436d0e8a076b42b180fb6d714f5"
+    },
+    "taxonomy_domains": {
+      "n": 1,
+      "digest": "64d83078a02caa845643362c5bef7ef4"
+    },
+    "taxonomy_modules": {
+      "n": 4,
+      "digest": "35b184db69e887472feebcde30ce1d8c"
+    },
+    "taxonomy_operations": {
+      "n": 19,
+      "digest": "f8d6e07277f963903ab90c9933afd681"
+    },
+    "web_users": {
+      "n": 5,
+      "digest": "d399ed550c58a14ab04ff4040c1f3eb2"
+    },
+    "organization_memberships": {
+      "n": 5,
+      "digest": "788380915c61242663880b3572ea1234"
+    }
+  },
+  "after": {
+    "projects": {
+      "n": 14,
+      "digest": "9f8f288aa63a58a9203f5a6724075de8"
+    },
+    "stories": {
+      "n": 196,
+      "digest": "7bc382a16bd321a2763d177b6b2777fb"
+    },
+    "classifications": {
+      "n": 196,
+      "digest": "1625f8bd8331bd1ceee4d93d25a25156"
+    },
+    "classification_labels": {
+      "n": 202,
+      "digest": "2a0992d1bd5f6d1ac788551d4556a171"
+    },
+    "taxonomy_versions": {
+      "n": 1,
+      "digest": "22cb1436d0e8a076b42b180fb6d714f5"
+    },
+    "taxonomy_domains": {
+      "n": 1,
+      "digest": "64d83078a02caa845643362c5bef7ef4"
+    },
+    "taxonomy_modules": {
+      "n": 4,
+      "digest": "35b184db69e887472feebcde30ce1d8c"
+    },
+    "taxonomy_operations": {
+      "n": 19,
+      "digest": "f8d6e07277f963903ab90c9933afd681"
+    },
+    "web_users": {
+      "n": 5,
+      "digest": "d399ed550c58a14ab04ff4040c1f3eb2"
+    },
+    "organization_memberships": {
+      "n": 5,
+      "digest": "788380915c61242663880b3572ea1234"
+    }
+  },
+  "operationalContentPreserved": true,
+  "publishedHistoryPreserved": true,
+  "twoLevels": true,
+  "hashesVerified": true,
+  "idempotent": true,
+  "taxonomies": [
+    {
+      "version": "1.0.0",
+      "state": "published",
+      "modules": 4,
+      "operations": 19,
+      "hashVerified": true
+    }
+  ]
+}

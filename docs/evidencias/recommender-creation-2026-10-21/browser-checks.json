@@ -1,0 +1,250 @@
+{
+  "recordedAt": "2026-10-21T18:51:35.999Z",
+  "syntheticLocalFixtures": true,
+  "skill": "UI UX Pro Max",
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Edg/155.0.4283.62",
+    "revision": "@aa3a7406ba8c53a83536df539f07124d73c899bd",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+    "jsVersion": "15.5.9.7"
+  },
+  "checks": [
+    {
+      "name": "name",
+      "height": 1000,
+      "width": 1440,
+      "scrollWidth": 1440,
+      "step": "STEP 1 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "name",
+      "height": 1000,
+      "width": 1024,
+      "scrollWidth": 1009,
+      "step": "STEP 1 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "name",
+      "height": 1000,
+      "width": 768,
+      "scrollWidth": 753,
+      "step": "STEP 1 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "name",
+      "height": 1000,
+      "width": 375,
+      "scrollWidth": 360,
+      "step": "STEP 1 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "inputs",
+      "height": 1000,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "step": "STEP 2 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "inputs",
+      "height": 1000,
+      "width": 1024,
+      "scrollWidth": 1009,
+      "step": "STEP 2 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "inputs",
+      "height": 1000,
+      "width": 768,
+      "scrollWidth": 753,
+      "step": "STEP 2 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "inputs",
+      "height": 1000,
+      "width": 375,
+      "scrollWidth": 360,
+      "step": "STEP 2 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "recommendations",
+      "height": 1000,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "step": "STEP 3 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "recommendations",
+      "height": 1000,
+      "width": 1024,
+      "scrollWidth": 1009,
+      "step": "STEP 3 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "recommendations",
+      "height": 1000,
+      "width": 768,
+      "scrollWidth": 753,
+      "step": "STEP 3 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "recommendations",
+      "height": 1000,
+      "width": 375,
+      "scrollWidth": 360,
+      "step": "STEP 3 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "matching",
+      "height": 1000,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "step": "STEP 4 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "matching",
+      "height": 1000,
+      "width": 1024,
+      "scrollWidth": 1009,
+      "step": "STEP 4 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "matching",
+      "height": 1000,
+      "width": 768,
+      "scrollWidth": 753,
+      "step": "STEP 4 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "matching",
+      "height": 1000,
+      "width": 375,
+      "scrollWidth": 360,
+      "step": "STEP 4 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "review",
+      "height": 1000,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "step": "STEP 5 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "review",
+      "height": 1000,
+      "width": 1024,
+      "scrollWidth": 1009,
+      "step": "STEP 5 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "review",
+      "height": 1000,
+      "width": 768,
+      "scrollWidth": 753,
+      "step": "STEP 5 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "review",
+      "height": 1000,
+      "width": 375,
+      "scrollWidth": 360,
+      "step": "STEP 5 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "review-reduced-motion",
+      "height": 375,
+      "width": 812,
+      "scrollWidth": 797,
+      "step": "STEP 5 / 5",
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "created",
+      "height": 1000,
+      "width": 1440,
+      "scrollWidth": 1440,
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "created",
+      "height": 1000,
+      "width": 375,
+      "scrollWidth": 360,
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "main-list",
+      "height": 1000,
+      "width": 1440,
+      "scrollWidth": 1425,
+      "unlabelled": 0,
+      "smallControls": []
+    },
+    {
+      "name": "main-list",
+      "height": 1000,
+      "width": 375,
+      "scrollWidth": 360,
+      "unlabelled": 0,
+      "smallControls": []
+    }
+  ],
+  "verified": [
+    "dedicated navigation tab",
+    "five progressive steps",
+    "advanced IDs collapsed",
+    "linked inline errors and summary focus",
+    "back preserves answers",
+    "no writes before review",
+    "KNN publication through real API and PostgreSQL",
+    "published definition handed to dataset setup",
+    "instance in main list",
+    "responsive layouts",
+    "44px controls",
+    "reduced motion"
+  ],
+  "runtimeErrors": []
+}

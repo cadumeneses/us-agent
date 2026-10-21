@@ -1,6 +1,6 @@
 ﻿# US-Agent
 
-Plataforma de classificação e recomendadores KNN configurados com definições e bases versionadas. A interface em inglês oferece **Non-functional requirements**, **Test cases** e **Project risks** na aba **Recommenders**. O último usa perfil de projeto sem exigir User Story ou classificação.
+Plataforma de classificação e recomendadores KNN configurados com definições e bases versionadas. A interface em inglês oferece **Non-functional requirements**, **Test cases**, **Project risks** e [recomendadores personalizados](docs/recomendadores-personalizados.md) na aba **Recommenders**. O usuário pode criar instâncias KNN com campos, taxonomias, pesos e bases próprios, incluindo bases montadas a partir dos projetos cadastrados. Os recomendadores por perfil de projeto dispensam User Story ou classificação.
 
 O [tutorial dos três exemplos](docs/tutorial-three-recommenders.md) reúne o fluxo de projeto e os arquivos de demonstração. A [arquitetura executada](docs/arquitetura-executada.md) delimita o que é compartilhado e o que cada método permite configurar. O [plano e pendências](docs/pendencias-e-proximos-passos.md) distingue capacidades técnicas, disponibilização e avaliação ainda necessária.
 
