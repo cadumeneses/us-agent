@@ -68,6 +68,7 @@
     "auth:prepare-users": "node scripts/prepare-web-users.mjs",
     "auth:provision-users": "node scripts/provision-web-users.mjs",
     "check:private-web-access": "node scripts/check-private-web-access.mjs",
+    "check:reviewer-guide": "node scripts/check-public-reviewer-guide.mjs --static-only",
     "db:import": "npm run db:import -w @us-agent/api",
     "db:seed:ramos": "node --env-file=.env scripts/seed-ramos-example.mjs",
     "db:check:ramos": "tsx --env-file=.env scripts/check-ramos-example.ts"

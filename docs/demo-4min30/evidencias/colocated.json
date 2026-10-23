@@ -1,0 +1,568 @@
+{
+  "id": "fb05815c-16b3-4d81-b6d7-6fe31cb06bc3",
+  "snapshot": {
+    "format": "us-agent-json-v1",
+    "sha256": "1288ac3c67a09908e7e26d060672e4743dd6ed705559cb0599af9c6e83ae9ea0",
+    "content": {
+      "dataset": {
+        "content": {
+          "definition": {
+            "format": "us-agent-json-v1",
+            "id": "project-risk-recommender",
+            "sha256": "55bceb5969a0412cf544ab2a12f5d142718b0b04f5e4aafa9e3b8390a62d98eb",
+            "version": "2"
+          },
+          "id": "project-risk-recommender-base",
+          "import": {
+            "fileSha256": "3a7ee8922980a29f18a9343a63c87c308c226133bc8406f101312c0ade2ac580",
+            "id": "dcbb4b98-9b5a-4f0e-b821-a364f62bb130",
+            "previewSha256": "f9154cb22c520e8c8bc5394195e3d5c962e93cf5b1390e515122df53f02fff96"
+          },
+          "importerVersion": "structured-import-v1",
+          "mapping": {
+            "attributes": {
+              "domains": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "domains"
+                ]
+              },
+              "languages": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "languages"
+                ]
+              },
+              "platforms": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "platforms"
+                ]
+              },
+              "risks": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "risks"
+                ]
+              },
+              "team_distribution": {
+                "encoding": "value",
+                "path": [
+                  "values",
+                  "team_distribution"
+                ]
+              }
+            },
+            "recordId": [
+              "id"
+            ]
+          },
+          "records": [
+            {
+              "id": "P01",
+              "provenance": {
+                "source": "import:3a7ee8922980a29f18a9343a63c87c308c226133bc8406f101312c0ade2ac580",
+                "sourceRecordId": "P01"
+              },
+              "values": {
+                "domains": [
+                  "Information resources"
+                ],
+                "languages": [
+                  "TypeScript",
+                  "JavaScript",
+                  "HTML/CSS"
+                ],
+                "platforms": [
+                  "Web"
+                ],
+                "risks": [
+                  "Changes to information visualizations may require user interface rework."
+                ],
+                "team_distribution": "co-located"
+              }
+            },
+            {
+              "id": "P09",
+              "provenance": {
+                "source": "import:3a7ee8922980a29f18a9343a63c87c308c226133bc8406f101312c0ade2ac580",
+                "sourceRecordId": "P09"
+              },
+              "values": {
+                "domains": [
+                  "Information resources"
+                ],
+                "languages": [
+                  "JavaScript",
+                  "TypeScript"
+                ],
+                "platforms": [
+                  "Web"
+                ],
+                "risks": [
+                  "Communication failures between distributed teams may delay integrations."
+                ],
+                "team_distribution": "distributed"
+              }
+            },
+            {
+              "id": "P03",
+              "provenance": {
+                "source": "import:3a7ee8922980a29f18a9343a63c87c308c226133bc8406f101312c0ade2ac580",
+                "sourceRecordId": "P03"
+              },
+              "values": {
+                "domains": [
+                  "Information resources"
+                ],
+                "languages": [
+                  "JavaScript",
+                  "Java"
+                ],
+                "platforms": [
+                  "Web"
+                ],
+                "risks": [
+                  "Integration incompatibilities may delay delivery."
+                ],
+                "team_distribution": "distributed"
+              }
+            }
+          ],
+          "schemaVersion": 1,
+          "selection": {
+            "excludedOrdinals": [],
+            "includedOrdinals": [
+              1,
+              2,
+              3
+            ]
+          },
+          "source": {
+            "authorization": {
+              "basis": "synthetic",
+              "reference": "Internal example preparation authorized by the workspace user on 2026-10-22. Synthetic associations are explicitly declared."
+            },
+            "description": "Technical profiles copied from registered projects P01, P09 and P03. Associated risks and team_distribution values are synthetic examples, not observed project risks."
+          },
+          "version": "2"
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "b0e38ebd6f99425725dda8fa1688adc4088419cacf96642471ce445a1ed3b51a"
+      },
+      "definition": {
+        "content": {
+          "definition": {
+            "attributes": [
+              {
+                "cardinality": "many",
+                "id": "platforms",
+                "name": "Platforms",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "domains",
+                "name": "Application domains",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "languages",
+                "name": "Languages",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "category"
+                }
+              },
+              {
+                "cardinality": "many",
+                "id": "risks",
+                "name": "Risks",
+                "representation": "none",
+                "required": true,
+                "role": "output",
+                "scope": "project",
+                "valueType": {
+                  "type": "text"
+                }
+              },
+              {
+                "cardinality": "single",
+                "id": "team_distribution",
+                "name": "Team distribution",
+                "representation": "presence",
+                "required": true,
+                "role": "feature",
+                "scope": "project",
+                "valueType": {
+                  "type": "enum",
+                  "values": [
+                    "co-located",
+                    "distributed"
+                  ]
+                }
+              }
+            ],
+            "id": "project-risk-recommender",
+            "method": {
+              "bindings": {},
+              "id": "configurable_project_knn_v1",
+              "parameters": {
+                "aggregation": "neighbor_union",
+                "distance": "weighted_manhattan",
+                "k": 1,
+                "missing_features": "reject",
+                "profile_sources": {
+                  "domains": "applicationDomains",
+                  "languages": "technologies.languages",
+                  "platforms": "platforms"
+                },
+                "representation": "symmetric_binary_presence",
+                "tie_break": "record_id",
+                "vocabulary": "target_and_dataset",
+                "weights": {
+                  "domains": 1,
+                  "languages": 1,
+                  "platforms": 1,
+                  "team_distribution": 5
+                }
+              },
+              "version": "1"
+            },
+            "name": "Project Risk Recommender",
+            "schemaVersion": 1,
+            "state": "published",
+            "version": "2"
+          },
+          "implementation": {
+            "adapterVersion": "configurable-project-knn-v1",
+            "methodId": "configurable_project_knn_v1"
+          },
+          "schemaVersion": 1,
+          "taxonomies": []
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "55bceb5969a0412cf544ab2a12f5d142718b0b04f5e4aafa9e3b8390a62d98eb"
+      },
+      "explanation": {
+        "content": {
+          "excluded": [],
+          "policy": {
+            "aggregation": "union-of-neighbor-outputs",
+            "distance": "weighted-binary-manhattan",
+            "emptyFeatures": "reject",
+            "missingOutputs": "reject",
+            "normalization": "sum-of-dimension-weights",
+            "selfExclusion": "exact-record-id",
+            "tieBreak": "record-id-codepoint-ascending",
+            "vocabulary": "target-and-complete-dataset"
+          },
+          "ranked": [
+            {
+              "contributions": [
+                {
+                  "attributeId": "platforms",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "domains",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "languages",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "team_distribution",
+                  "distance": 0,
+                  "weight": 5
+                }
+              ],
+              "distance": 0,
+              "recordId": "P01",
+              "similarity": 1,
+              "vector": [
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0
+              ]
+            },
+            {
+              "contributions": [
+                {
+                  "attributeId": "platforms",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "domains",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "languages",
+                  "distance": 1,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "team_distribution",
+                  "distance": 10,
+                  "weight": 5
+                }
+              ],
+              "distance": 11,
+              "recordId": "P09",
+              "similarity": 0.3125,
+              "vector": [
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                1
+              ]
+            },
+            {
+              "contributions": [
+                {
+                  "attributeId": "platforms",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "domains",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "languages",
+                  "distance": 3,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "team_distribution",
+                  "distance": 10,
+                  "weight": 5
+                }
+              ],
+              "distance": 13,
+              "recordId": "P03",
+              "similarity": 0.1875,
+              "vector": [
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "94e2208ccc91d3e92b5eeb9852d4b139cbff1fd892f156fc9b30bfec9e3b1832"
+      },
+      "projection": {
+        "content": {
+          "dimensions": [
+            {
+              "attributeId": "platforms",
+              "value": "Web",
+              "weight": 1
+            },
+            {
+              "attributeId": "domains",
+              "value": "Information resources",
+              "weight": 1
+            },
+            {
+              "attributeId": "languages",
+              "value": "HTML/CSS",
+              "weight": 1
+            },
+            {
+              "attributeId": "languages",
+              "value": "Java",
+              "weight": 1
+            },
+            {
+              "attributeId": "languages",
+              "value": "JavaScript",
+              "weight": 1
+            },
+            {
+              "attributeId": "languages",
+              "value": "TypeScript",
+              "weight": 1
+            },
+            {
+              "attributeId": "team_distribution",
+              "value": "co-located",
+              "weight": 5
+            },
+            {
+              "attributeId": "team_distribution",
+              "value": "distributed",
+              "weight": 5
+            }
+          ],
+          "targetVector": [
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            0
+          ],
+          "totalWeight": 16
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "ebc3c6a42c269ec40093e40ce4b575238a0e9f004643f79f1ea3b6493dff1d13"
+      },
+      "request": {
+        "content": {
+          "dataset": {
+            "format": "us-agent-json-v1",
+            "id": "project-risk-recommender-base",
+            "sha256": "b0e38ebd6f99425725dda8fa1688adc4088419cacf96642471ce445a1ed3b51a",
+            "version": "2"
+          },
+          "definition": {
+            "format": "us-agent-json-v1",
+            "id": "project-risk-recommender",
+            "sha256": "55bceb5969a0412cf544ab2a12f5d142718b0b04f5e4aafa9e3b8390a62d98eb",
+            "version": "2"
+          },
+          "id": "fb05815c-16b3-4d81-b6d7-6fe31cb06bc3",
+          "input": {
+            "id": "information-resources-web-profile",
+            "provenance": {
+              "source": "Profile copied from P01. Risk associations and team distribution are illustrative."
+            },
+            "values": {
+              "domains": [
+                "Information resources"
+              ],
+              "languages": [
+                "TypeScript",
+                "JavaScript",
+                "HTML/CSS"
+              ],
+              "platforms": [
+                "Web"
+              ],
+              "risks": [],
+              "team_distribution": "co-located"
+            }
+          }
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "9637ac21b7547e32f63d687badf066bd26daa4f4869af09f3f07c0e9eebe2bc5"
+      },
+      "result": {
+        "content": {
+          "items": [
+            {
+              "attributeId": "risks",
+              "key": "7fa8908e52a652ea6c37ffb53a6df3d3a1607a31095e724659aee5802f3c2fdc",
+              "recordIds": [
+                "P01"
+              ],
+              "support": 1,
+              "text": "Changes to information visualizations may require user interface rework."
+            }
+          ],
+          "k": 1,
+          "method": "configurable_project_knn_v1",
+          "neighbors": [
+            {
+              "contributions": [
+                {
+                  "attributeId": "platforms",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "domains",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "languages",
+                  "distance": 0,
+                  "weight": 1
+                },
+                {
+                  "attributeId": "team_distribution",
+                  "distance": 0,
+                  "weight": 5
+                }
+              ],
+              "distance": 0,
+              "recordId": "P01",
+              "similarity": 1,
+              "vector": [
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0
+              ]
+            }
+          ],
+          "scientificReproduction": false,
+          "status": "completed"
+        },
+        "format": "us-agent-json-v1",
+        "sha256": "4f9b3fa929c4e02f305232f5d95b085e75b967e8ebc816f1edfe0fd09c9b8ba4"
+      },
+      "schemaVersion": 3,
+      "software": {
+        "adapterVersion": "configurable-project-knn-v1",
+        "definitionAdapterVersion": "configurable-project-knn-v1",
+        "kernelVersion": "policy-knn-v1",
+        "policyVersion": "weighted-presence-union-v1"
+      }
+    }
+  },
+  "durationMs": 10.993359000014607,
+  "createdBy": "internal-api",
+  "createdAt": "2026-10-22T19:51:48.301Z"
+}

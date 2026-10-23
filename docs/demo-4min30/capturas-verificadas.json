@@ -1,0 +1,283 @@
+{
+  "capturedAt": "2026-10-23T11:13:31.682Z",
+  "mode": "Local rendering of deployed production assets with read-only production data",
+  "productionOrigin": "https://us-agent-api.vercel.app",
+  "personalLoginTested": false,
+  "localAuthGate": "disabled for technical read-only preview",
+  "productionWrites": 0,
+  "screenshots": [
+    "01-recommenders",
+    "02a-definition-selection",
+    "02-definition",
+    "03-team-feature",
+    "04-risk-profile",
+    "05-team-and-recommend",
+    "06-distributed-p09",
+    "07-colocated-p01",
+    "08-nfr-source",
+    "09-confirm-destination",
+    "09a-accept-access-control",
+    "10-adaptation-form",
+    "11-replay-and-export"
+  ],
+  "liveRunStatus": {
+    "targetConfirmed": false,
+    "decisionCount": 0,
+    "copyCount": 0
+  },
+  "requests": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/index-CQQF2U5U.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/index-BFol37LS.css",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/access/context",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/context",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/RecommendersPage-7OBpw8eL.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/TestCaseCatalogPicker-D5Bd7avH.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/ConfiguredRunDetails-2FGkNOtn.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/RecommenderNavigation-DBJmUkag.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/configured-input-s2Ni9g2_.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/ConfiguredRecommendationsPage-SXqjP5pm.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/check-C6ZdAu_t.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/ui-DCKi2chC.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/projects",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/stories",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommender-definitions",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/ConfigurableMethodEditor-CcEwHhPV.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/RecommenderSetupPage-zHp2BiCZ.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/assets/RecommenderEditors-B4dY7zig.js",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommender-taxonomies",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommender-definitions",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/test-case-catalogs",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommender-definitions/project-risk-recommender/versions/2",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommender-datasets",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommendation-runs",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/project-recommender-profile/load",
+      "method": "POST",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommendation-runs/5a30e0cc-e9c5-4243-adc8-3075467a91e4",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommendation-runs/fb05815c-16b3-4d81-b6d7-6fe31cb06bc3",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommendation-runs/35919ff9-ad09-418e-8ac6-ecec1be50acc",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommendation-runs/35919ff9-ad09-418e-8ac6-ecec1be50acc/review",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommendation-runs/b134e0b7-3b71-4cc7-aef2-7c867ea5df92",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommendation-runs/b134e0b7-3b71-4cc7-aef2-7c867ea5df92/review",
+      "method": "GET",
+      "status": 200,
+      "productionWrite": false
+    },
+    {
+      "path": "/api/internal/recommendation-runs/b134e0b7-3b71-4cc7-aef2-7c867ea5df92/replay",
+      "method": "POST",
+      "status": 200,
+      "productionWrite": false
+    }
+  ],
+  "errors": [],
+  "entryAssets": [
+    {
+      "path": "/assets/index-CQQF2U5U.js",
+      "sha256": "f519ab7ca941653e210be0ab9691d47b64264a7a72e764f0813c9fcadb06a6dc"
+    },
+    {
+      "path": "/assets/index-BFol37LS.css",
+      "sha256": "9b16bce7ca3e1d4099dd049927cb1de67bc56a17e95adc0bba8096247bb2db80"
+    },
+    {
+      "path": "/assets/RecommendersPage-7OBpw8eL.js",
+      "sha256": "eebc72a9bca3a187d38fe049ae4d9e4789c490c5fe257ae99f60dfd443fe98b9"
+    },
+    {
+      "path": "/assets/TestCaseCatalogPicker-D5Bd7avH.js",
+      "sha256": "46545fcb5b821ad480c5979d1080e7146929384722c0ccc6226de7b22523c9b3"
+    },
+    {
+      "path": "/assets/ConfiguredRunDetails-2FGkNOtn.js",
+      "sha256": "e09f03a0f9d0b06862fef04421ab0eced7f57925667b57e60c5584e002894e16"
+    },
+    {
+      "path": "/assets/RecommenderNavigation-DBJmUkag.js",
+      "sha256": "80a983e2141f669a2580c7013c28ecebbb6666085aa760238e0d9fbe6cb6b9d1"
+    },
+    {
+      "path": "/assets/configured-input-s2Ni9g2_.js",
+      "sha256": "ce8f5f1cc2fdc614cdee76074eafbbe57f932dcee153851a9eb8bb4c2a690fb0"
+    },
+    {
+      "path": "/assets/ConfiguredRecommendationsPage-SXqjP5pm.js",
+      "sha256": "aee9cd89a1599f498c8b71b279f555d4e95c787d18ba5f63e42d036640aa65cf"
+    },
+    {
+      "path": "/assets/check-C6ZdAu_t.js",
+      "sha256": "1fb28625c8374607998518bdf0056c0db4037420736af020f9f9be2ee34a5ed2"
+    },
+    {
+      "path": "/assets/ui-DCKi2chC.js",
+      "sha256": "1551c9bfcf3e61af4860507cbd11391ab64eb53ef5f09ea35166a8ce4b7d4def"
+    },
+    {
+      "path": "/assets/ConfigurableMethodEditor-CcEwHhPV.js",
+      "sha256": "e4cb7840a9d31734ad0c7325dc8ec444ebe878bb27eca5092632fc2aa6a66600"
+    },
+    {
+      "path": "/assets/RecommenderSetupPage-zHp2BiCZ.js",
+      "sha256": "44eb0f3348260ad4c382f82196fa65c20afe8a2bc32983e8cd238a46b8670631"
+    },
+    {
+      "path": "/assets/RecommenderEditors-B4dY7zig.js",
+      "sha256": "eaab8e416658f8722192d2b09eab350850d5f12b019f987280d1f859fd477444"
+    }
+  ]
+}

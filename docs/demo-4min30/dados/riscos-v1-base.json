@@ -1,0 +1,57 @@
+[
+  {
+    "id": "P01",
+    "values": {
+      "platforms": [
+        "Web"
+      ],
+      "domains": [
+        "Information resources"
+      ],
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS"
+      ],
+      "risks": [
+        "Changes to information visualizations may require user interface rework."
+      ]
+    }
+  },
+  {
+    "id": "P09",
+    "values": {
+      "platforms": [
+        "Web"
+      ],
+      "domains": [
+        "Information resources"
+      ],
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "risks": [
+        "Communication failures between distributed teams may delay integrations."
+      ]
+    }
+  },
+  {
+    "id": "P03",
+    "values": {
+      "platforms": [
+        "Web"
+      ],
+      "domains": [
+        "Information resources"
+      ],
+      "languages": [
+        "JavaScript",
+        "Java"
+      ],
+      "risks": [
+        "Integration incompatibilities may delay delivery."
+      ]
+    }
+  }
+]

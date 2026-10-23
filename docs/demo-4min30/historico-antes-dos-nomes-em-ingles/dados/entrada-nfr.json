@@ -1,0 +1,44 @@
+{
+  "id": "269",
+  "values": {
+    "classification_id": "269",
+    "story_id": "269",
+    "text": "Como coordenador, quero consolidar notas dos alunos.",
+    "project": "Projeto Emanuel",
+    "taxonomy_version": "1.0.0",
+    "review_status": "reviewed",
+    "project_taxonomy_version": "1.0.0",
+    "labels": [
+      {
+        "module": "Registry",
+        "operation": "Retrieve data"
+      }
+    ],
+    "platforms": [
+      "Web"
+    ],
+    "application_domains": [
+      "Educação"
+    ],
+    "architectures": [
+      "MVC"
+    ],
+    "languages": [
+      "JavaScript"
+    ],
+    "frameworks": [
+      "Angular",
+      "Node"
+    ],
+    "apis": [],
+    "data_persistence": [
+      "MongoDB"
+    ],
+    "objective": "product",
+    "tasks": [],
+    "nfrs": []
+  },
+  "provenance": {
+    "source": "Projeto Emanuel; classificação 269; entrada preservada para demonstração."
+  }
+}

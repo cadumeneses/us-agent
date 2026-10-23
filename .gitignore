@@ -30,5 +30,24 @@ temp/
 *.log
 *.sqlite
 *.db
+
+# Generated delivery bundles, recordings, and local media analysis
+/artifacts/
+/docs/demo-4min30.zip
+/docs/demo-4min30/*.zip
+/docs/demo-4min30/GUIA-ILUSTRADO.pdf
+
+# Downloaded reference paper (not a project source file)
+/1-s2.0-S0164121226002207-main.pdf
+
+# LaTeX compilation intermediates; keep figure sources and final figure assets
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc
 .vercel
 .env*

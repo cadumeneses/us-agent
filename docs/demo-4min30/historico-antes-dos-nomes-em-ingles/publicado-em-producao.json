@@ -1,0 +1,497 @@
+{
+  "completedAt": "2026-10-22T19:43:42.495Z",
+  "origin": "https://us-agent-api.vercel.app",
+  "organizationId": "default",
+  "sourceProjectsPreserved": true,
+  "sourceStoryListPreserved": true,
+  "project": "[DEMO] Roteiro 4m30",
+  "publications": [
+    {
+      "definition": {
+        "id": "demo-video-project-risks",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "4a696dc2dff507b951cb06091db083053e24e5a3b881dfbd97c88baf83f612bf"
+      },
+      "dataset": {
+        "id": "demo-video-project-risks-base",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "f73b09eb070600a88b90c923006dd9b1e62163951f46c3363e2eb7ec2333275c"
+      },
+      "recordCount": 3
+    },
+    {
+      "definition": {
+        "id": "demo-video-project-risks",
+        "version": "2",
+        "format": "us-agent-json-v1",
+        "sha256": "3e41389519b9e5de4e7c18b1bf2607c0be511e2491f6c23dc02f66266d58ead1"
+      },
+      "dataset": {
+        "id": "demo-video-project-risks-base",
+        "version": "2",
+        "format": "us-agent-json-v1",
+        "sha256": "7fff677ff9c3d5cf9c899bc4aa368406014c81dc82f8493aea580c21d603d0b1"
+      },
+      "recordCount": 3
+    },
+    {
+      "definition": {
+        "id": "demo-video-nfr",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "9ddabf7ff7b031e509563ec29b2d5bf2ecaf68258197e020ef84e76d9393a393"
+      },
+      "dataset": {
+        "id": "demo-video-nfr-base",
+        "version": "1",
+        "format": "us-agent-json-v1",
+        "sha256": "9beafa447c26a1131fec146d06cf98db3cc2c10e2cb9d550f4efd7a67b6e5760"
+      },
+      "recordCount": 2
+    }
+  ],
+  "runs": {
+    "baseline": {
+      "id": "691b8a07-3369-451a-9210-d56c7e618815",
+      "sha256": "509605b5d6df053ccc8f1fe128e7baaf5250d46146b1585f836987731e740078",
+      "url": "https://us-agent-api.vercel.app/configured-recommendations?runId=691b8a07-3369-451a-9210-d56c7e618815",
+      "result": {
+        "items": [
+          {
+            "attributeId": "risks",
+            "key": "f2f55c97d6f24d1775dce8d8ffab1e731351448bfb0ca4b057fa03df0d3f40fc",
+            "recordIds": [
+              "P01"
+            ],
+            "support": 1,
+            "text": "[DEMO] Alterações na visualização de informações podem exigir retrabalho na interface."
+          }
+        ],
+        "k": 1,
+        "method": "configurable_project_knn_v1",
+        "neighbors": [
+          {
+            "contributions": [
+              {
+                "attributeId": "platforms",
+                "distance": 0,
+                "weight": 1
+              },
+              {
+                "attributeId": "domains",
+                "distance": 0,
+                "weight": 1
+              },
+              {
+                "attributeId": "languages",
+                "distance": 0,
+                "weight": 1
+              }
+            ],
+            "distance": 0,
+            "recordId": "P01",
+            "similarity": 1,
+            "vector": [
+              1,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        ],
+        "scientificReproduction": false,
+        "status": "completed"
+      },
+      "replay": {
+        "id": "691b8a07-3369-451a-9210-d56c7e618815",
+        "originalSha256": "509605b5d6df053ccc8f1fe128e7baaf5250d46146b1585f836987731e740078",
+        "verified": true,
+        "resultMatches": true,
+        "explanationMatches": true,
+        "projectionMatches": true
+      }
+    },
+    "distributed": {
+      "id": "dd267f21-fa5e-4fa5-96a7-7eb5d37fd1ea",
+      "sha256": "7fbc436c7ff761d96464317ff0deaf65038f35850d387b59522530b43de5a9fb",
+      "url": "https://us-agent-api.vercel.app/configured-recommendations?runId=dd267f21-fa5e-4fa5-96a7-7eb5d37fd1ea",
+      "result": {
+        "items": [
+          {
+            "attributeId": "risks",
+            "key": "626f23c003d5c2954ca3a65beb9e24a54f3171cc6e8ac2edb49e45687d0ef344",
+            "recordIds": [
+              "P09"
+            ],
+            "support": 1,
+            "text": "[DEMO] Falhas de comunicação entre equipes distribuídas podem atrasar integrações."
+          }
+        ],
+        "k": 1,
+        "method": "configurable_project_knn_v1",
+        "neighbors": [
+          {
+            "contributions": [
+              {
+                "attributeId": "platforms",
+                "distance": 0,
+                "weight": 1
+              },
+              {
+                "attributeId": "domains",
+                "distance": 0,
+                "weight": 1
+              },
+              {
+                "attributeId": "languages",
+                "distance": 1,
+                "weight": 1
+              },
+              {
+                "attributeId": "team_distribution",
+                "distance": 0,
+                "weight": 5
+              }
+            ],
+            "distance": 1,
+            "recordId": "P09",
+            "similarity": 0.9375,
+            "vector": [
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          }
+        ],
+        "scientificReproduction": false,
+        "status": "completed"
+      },
+      "replay": {
+        "id": "dd267f21-fa5e-4fa5-96a7-7eb5d37fd1ea",
+        "originalSha256": "7fbc436c7ff761d96464317ff0deaf65038f35850d387b59522530b43de5a9fb",
+        "verified": true,
+        "resultMatches": true,
+        "explanationMatches": true,
+        "projectionMatches": true
+      }
+    },
+    "colocated": {
+      "id": "a777c267-12d4-4170-8d04-1620f8d1abf2",
+      "sha256": "bbad9fe665152035abb9272f33446c963abdbcff0155155fc8afaa446aec3d7b",
+      "url": "https://us-agent-api.vercel.app/configured-recommendations?runId=a777c267-12d4-4170-8d04-1620f8d1abf2",
+      "result": {
+        "items": [
+          {
+            "attributeId": "risks",
+            "key": "f2f55c97d6f24d1775dce8d8ffab1e731351448bfb0ca4b057fa03df0d3f40fc",
+            "recordIds": [
+              "P01"
+            ],
+            "support": 1,
+            "text": "[DEMO] Alterações na visualização de informações podem exigir retrabalho na interface."
+          }
+        ],
+        "k": 1,
+        "method": "configurable_project_knn_v1",
+        "neighbors": [
+          {
+            "contributions": [
+              {
+                "attributeId": "platforms",
+                "distance": 0,
+                "weight": 1
+              },
+              {
+                "attributeId": "domains",
+                "distance": 0,
+                "weight": 1
+              },
+              {
+                "attributeId": "languages",
+                "distance": 0,
+                "weight": 1
+              },
+              {
+                "attributeId": "team_distribution",
+                "distance": 0,
+                "weight": 5
+              }
+            ],
+            "distance": 0,
+            "recordId": "P01",
+            "similarity": 1,
+            "vector": [
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        ],
+        "scientificReproduction": false,
+        "status": "completed"
+      },
+      "replay": {
+        "id": "a777c267-12d4-4170-8d04-1620f8d1abf2",
+        "originalSha256": "bbad9fe665152035abb9272f33446c963abdbcff0155155fc8afaa446aec3d7b",
+        "verified": true,
+        "resultMatches": true,
+        "explanationMatches": true,
+        "projectionMatches": true
+      }
+    },
+    "nfr-rehearsal": {
+      "id": "970922af-9750-4163-ba6c-6fe137f7bdd7",
+      "sha256": "46c4c798a8d7880357f4b750df0acda6ad937aac227153391f263895bf8354fe",
+      "url": "https://us-agent-api.vercel.app/configured-recommendations?runId=970922af-9750-4163-ba6c-6fe137f7bdd7",
+      "result": {
+        "dimensions": [
+          "applicationDomain:Educação",
+          "architecture:MVC",
+          "framework:Angular",
+          "framework:Node",
+          "language:JavaScript",
+          "persistence:MongoDB",
+          "platform:Web"
+        ],
+        "eligibleCount": 2,
+        "excludedCount": 0,
+        "items": [
+          {
+            "alreadyLinked": false,
+            "attribute": "confidentiality",
+            "key": "274dfc25fa03527b5dcb882e81a24d098d7aa83f31c24b0c189a945782f885b5",
+            "score": 0.4285714285714286,
+            "sentence": "The system must capture the user identification and timestamp when information is created, or deleted.",
+            "type": "Security"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "transit_delay",
+            "key": "284cc8faef54e565fcfcc64f1cdca2db1392f6b30a515f720637e1ff7247785f",
+            "score": 0.4285714285714286,
+            "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page.",
+            "type": "Performance"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "fault_tolerance",
+            "key": "3fa9ed113eeb8f0f155f3c6abfb3cee002de1c9d28919d5ad995af2b0ccefab5",
+            "score": 0.4285714285714286,
+            "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+            "type": "Reliability"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "access_control",
+            "key": "9733da69ddfd592df5c00c78ab17948296f1d36410d5035969aa62140b0ddb80",
+            "score": 0.4285714285714286,
+            "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+            "type": "Security"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "availability",
+            "key": "9e05e77d7212572e7081243364d01972294aa9e0556995cf52e2d0391082cb8a",
+            "score": 0.4285714285714286,
+            "sentence": "The system must notify users and customers when the function they are accessing is unavailable.",
+            "type": "Reliability"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "response_time",
+            "key": "ef85b3090dede367f4965dd906fe5fb6fb197129a3079553793c5018b20d6a39",
+            "score": 0.4285714285714286,
+            "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users.",
+            "type": "Performance"
+          }
+        ],
+        "k": 1,
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "messages": [
+          "Empate: selecionada a classificação de menor identificador. Política determinística do US-Agent; k permanece igual a 1."
+        ],
+        "method": "ramos_2019_manhattan_k1_v2",
+        "neighbor": {
+          "classificationId": "86",
+          "matched": [
+            "framework:Angular",
+            "language:JavaScript",
+            "platform:Web"
+          ],
+          "missing": [
+            "applicationDomain:Educação",
+            "architecture:MVC",
+            "framework:Node",
+            "persistence:MongoDB"
+          ],
+          "project": "P02",
+          "similarity": 0.4285714285714286,
+          "storyId": "86",
+          "text": "As an administrator, I want to create, read, update, and delete organizations so that I can manage organization data efficiently.",
+          "vector": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1
+          ]
+        },
+        "status": "completed"
+      },
+      "replay": {
+        "id": "970922af-9750-4163-ba6c-6fe137f7bdd7",
+        "originalSha256": "46c4c798a8d7880357f4b750df0acda6ad937aac227153391f263895bf8354fe",
+        "verified": true,
+        "resultMatches": true,
+        "explanationMatches": true,
+        "projectionMatches": true
+      }
+    },
+    "nfr-live": {
+      "id": "3a17e01a-9214-4b9b-b23f-48c7755ade5d",
+      "sha256": "fc0d6c7cbf1bf5ee8555c3d3975f4ae0f515a399192ff3221545349b3a7071dd",
+      "url": "https://us-agent-api.vercel.app/configured-recommendations?runId=3a17e01a-9214-4b9b-b23f-48c7755ade5d",
+      "result": {
+        "dimensions": [
+          "applicationDomain:Educação",
+          "architecture:MVC",
+          "framework:Angular",
+          "framework:Node",
+          "language:JavaScript",
+          "persistence:MongoDB",
+          "platform:Web"
+        ],
+        "eligibleCount": 2,
+        "excludedCount": 0,
+        "items": [
+          {
+            "alreadyLinked": false,
+            "attribute": "confidentiality",
+            "key": "274dfc25fa03527b5dcb882e81a24d098d7aa83f31c24b0c189a945782f885b5",
+            "score": 0.4285714285714286,
+            "sentence": "The system must capture the user identification and timestamp when information is created, or deleted.",
+            "type": "Security"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "transit_delay",
+            "key": "284cc8faef54e565fcfcc64f1cdca2db1392f6b30a515f720637e1ff7247785f",
+            "score": 0.4285714285714286,
+            "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page.",
+            "type": "Performance"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "fault_tolerance",
+            "key": "3fa9ed113eeb8f0f155f3c6abfb3cee002de1c9d28919d5ad995af2b0ccefab5",
+            "score": 0.4285714285714286,
+            "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+            "type": "Reliability"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "access_control",
+            "key": "9733da69ddfd592df5c00c78ab17948296f1d36410d5035969aa62140b0ddb80",
+            "score": 0.4285714285714286,
+            "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+            "type": "Security"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "availability",
+            "key": "9e05e77d7212572e7081243364d01972294aa9e0556995cf52e2d0391082cb8a",
+            "score": 0.4285714285714286,
+            "sentence": "The system must notify users and customers when the function they are accessing is unavailable.",
+            "type": "Reliability"
+          },
+          {
+            "alreadyLinked": false,
+            "attribute": "response_time",
+            "key": "ef85b3090dede367f4965dd906fe5fb6fb197129a3079553793c5018b20d6a39",
+            "score": 0.4285714285714286,
+            "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users.",
+            "type": "Performance"
+          }
+        ],
+        "k": 1,
+        "label": {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        "messages": [
+          "Empate: selecionada a classificação de menor identificador. Política determinística do US-Agent; k permanece igual a 1."
+        ],
+        "method": "ramos_2019_manhattan_k1_v2",
+        "neighbor": {
+          "classificationId": "86",
+          "matched": [
+            "framework:Angular",
+            "language:JavaScript",
+            "platform:Web"
+          ],
+          "missing": [
+            "applicationDomain:Educação",
+            "architecture:MVC",
+            "framework:Node",
+            "persistence:MongoDB"
+          ],
+          "project": "P02",
+          "similarity": 0.4285714285714286,
+          "storyId": "86",
+          "text": "As an administrator, I want to create, read, update, and delete organizations so that I can manage organization data efficiently.",
+          "vector": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1
+          ]
+        },
+        "status": "completed"
+      },
+      "replay": {
+        "id": "3a17e01a-9214-4b9b-b23f-48c7755ade5d",
+        "originalSha256": "fc0d6c7cbf1bf5ee8555c3d3975f4ae0f515a399192ff3221545349b3a7071dd",
+        "verified": true,
+        "resultMatches": true,
+        "explanationMatches": true,
+        "projectionMatches": true
+      }
+    }
+  },
+  "adaptation": {
+    "runId": "970922af-9750-4163-ba6c-6fe137f7bdd7",
+    "copyId": "143b1100-2d36-4190-817d-16d491c11242",
+    "revision": 1,
+    "sentence": "O sistema deve permitir que o coordenador consulte e consolide somente as notas dos alunos e turmas para os quais possui autorização de acesso.",
+    "reason": "Contextualização do RNF de controle de acesso à consulta e consolidação de notas no Projeto Emanuel; cópia separada para demonstração."
+  },
+  "nfrLiveReadyWithoutDecisions": true,
+  "authenticationActor": "internal-api",
+  "limitations": [
+    "Riscos e distribuição da equipe são sintéticos; perfis técnicos vêm dos projetos cadastrados.",
+    "A adaptação ficará associada à entrada preservada, sem editar a história 269.",
+    "UUIDs e hashes offline não são publicações em produção."
+  ]
+}

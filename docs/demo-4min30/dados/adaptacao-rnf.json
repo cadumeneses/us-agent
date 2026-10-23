@@ -1,0 +1,4 @@
+{
+  "sentence": "The system must allow coordinators to view and consolidate grades only for students and classes they are authorized to access.",
+  "reason": "Adapt the access-control requirement to the coordinator role and the grade-consolidation workflow in Projeto Emanuel; preserve the original requirement as a separate artifact."
+}

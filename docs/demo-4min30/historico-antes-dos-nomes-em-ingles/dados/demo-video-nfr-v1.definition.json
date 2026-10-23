@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "id": "demo-video-nfr",
+  "version": "1",
+  "name": "[DEMO] RNFs — referências do P02",
+  "state": "draft",
+  "attributes": [
+    {
+      "id": "classification_id",
+      "name": "Classification Id",
+      "valueType": {
+        "type": "text"
+      },
+      "scope": "artifact",
+      "cardinality": "single",
+      "required": true,
+      "role": "context",
+      "representation": "none"
+    },
+    {
+      "id": "story_id",
+      "name": "Story Id",
+      "valueType": {
+        "type": "text"
+      },
+      "scope": "artifact",
+      "cardinality": "single",
+      "required": true,
+      "role": "context",
+      "representation": "none"
+    },
+    {
+      "id": "text",
+      "name": "Text",
+      "valueType": {
+        "type": "text"
+      },
+      "scope": "artifact",
+      "cardinality": "single",
+      "required": true,
+      "role": "context",
+      "representation": "none"
+    },
+    {
+      "id": "project",
+      "name": "Project",
+      "valueType": {
+        "type": "text"
+      },
+      "scope": "project",
+      "cardinality": "single",
+      "required": true,
+      "role": "context",
+      "representation": "none"
+    },
+    {
+      "id": "taxonomy_version",
+      "name": "Taxonomy Version",
+      "valueType": {
+        "type": "text"
+      },
+      "scope": "artifact",
+      "cardinality": "single",
+      "required": true,
+      "role": "context",
+      "representation": "none"
+    },
+    {
+      "id": "review_status",
+      "name": "Review Status",
+      "valueType": {
+        "type": "text"
+      },
+      "scope": "artifact",
+      "cardinality": "single",
+      "required": true,
+      "role": "filter",
+      "representation": "none"
+    },
+    {
+      "id": "project_taxonomy_version",
+      "name": "Project Taxonomy Version",
+      "valueType": {
+        "type": "text"
+      },
+      "scope": "project",
+      "cardinality": "single",
+      "required": true,
+      "role": "context",
+      "representation": "none"
+    },
+    {
+      "id": "labels",
+      "name": "Labels",
+      "valueType": {
+        "type": "record",
+        "fields": {
+          "module": {
+            "type": "category"
+          },
+          "operation": {
+            "type": "category"
+          }
+        }
+      },
+      "scope": "artifact",
+      "cardinality": "many",
+      "required": true,
+      "role": "filter",
+      "representation": "none"
+    },
+    {
+      "id": "platforms",
+      "name": "Platforms",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "application_domains",
+      "name": "Application Domains",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "architectures",
+      "name": "Architectures",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "languages",
+      "name": "Languages",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "frameworks",
+      "name": "Frameworks",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "apis",
+      "name": "Apis",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "data_persistence",
+      "name": "Data Persistence",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "objective",
+      "name": "Objective",
+      "valueType": {
+        "type": "enum",
+        "values": [
+          "",
+          "product",
+          "prototype"
+        ]
+      },
+      "scope": "project",
+      "cardinality": "single",
+      "required": true,
+      "role": "filter",
+      "representation": "none"
+    },
+    {
+      "id": "tasks",
+      "name": "Tasks",
+      "valueType": {
+        "type": "record",
+        "fields": {
+          "category": {
+            "type": "category"
+          }
+        }
+      },
+      "scope": "artifact",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "nfrs",
+      "name": "Nfrs",
+      "valueType": {
+        "type": "record",
+        "fields": {
+          "type": {
+            "type": "category"
+          },
+          "attribute": {
+            "type": "category"
+          },
+          "sentence": {
+            "type": "text"
+          }
+        }
+      },
+      "scope": "artifact",
+      "cardinality": "many",
+      "required": true,
+      "role": "output",
+      "representation": "none"
+    }
+  ],
+  "method": {
+    "id": "ramos_2019_manhattan_k1_v2",
+    "version": "2",
+    "parameters": {
+      "k": 1
+    },
+    "bindings": {
+      "classification_id": "classification_id",
+      "story_id": "story_id",
+      "text": "text",
+      "project": "project",
+      "taxonomy_version": "taxonomy_version",
+      "review_status": "review_status",
+      "project_taxonomy_version": "project_taxonomy_version",
+      "labels": "labels",
+      "platforms": "platforms",
+      "application_domains": "application_domains",
+      "architectures": "architectures",
+      "languages": "languages",
+      "frameworks": "frameworks",
+      "apis": "apis",
+      "data_persistence": "data_persistence",
+      "objective": "objective",
+      "tasks": "tasks",
+      "nfrs": "nfrs"
+    }
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "checkedAt": "2026-10-22T19:52:55.409Z",
+  "origin": "https://us-agent-api.vercel.app",
+  "organizationId": "default",
+  "operation": "GET_ONLY",
+  "productionMutations": 0,
+  "anonymousHealthStatus": 401,
+  "checks": [
+    {
+      "name": "health",
+      "path": "/api/health",
+      "status": 200,
+      "database": "connected"
+    },
+    {
+      "name": "organization",
+      "path": "/api/access/context",
+      "status": 200,
+      "organizationId": "default",
+      "authentication": "technical_bearer_not_a_personal_browser_session"
+    },
+    {
+      "name": "definitions",
+      "path": "/api/internal/recommender-definitions?limit=100",
+      "status": 200,
+      "countOnPage": 6,
+      "pageLimit": 100,
+      "publications": [
+        {
+          "id": "demo-video-nfr",
+          "version": "1",
+          "state": "retired",
+          "method": "ramos_2019_manhattan_k1_v2"
+        },
+        {
+          "id": "demo-video-project-risks",
+          "version": "1",
+          "state": "retired",
+          "method": "configurable_project_knn_v1"
+        },
+        {
+          "id": "demo-video-project-risks",
+          "version": "2",
+          "state": "retired",
+          "method": "configurable_project_knn_v1"
+        },
+        {
+          "id": "nfr-recommender",
+          "version": "1",
+          "state": "published",
+          "method": "ramos_2019_manhattan_k1_v2"
+        },
+        {
+          "id": "project-risk-recommender",
+          "version": "1",
+          "state": "published",
+          "method": "configurable_project_knn_v1"
+        },
+        {
+          "id": "project-risk-recommender",
+          "version": "2",
+          "state": "published",
+          "method": "configurable_project_knn_v1"
+        }
+      ]
+    },
+    {
+      "name": "datasets",
+      "path": "/api/internal/recommender-datasets?limit=100",
+      "status": 200,
+      "countOnPage": 6,
+      "pageLimit": 100,
+      "publications": [
+        {
+          "id": "demo-video-nfr-base",
+          "version": "1",
+          "state": "retired"
+        },
+        {
+          "id": "demo-video-project-risks-base",
+          "version": "1",
+          "state": "retired"
+        },
+        {
+          "id": "demo-video-project-risks-base",
+          "version": "2",
+          "state": "retired"
+        },
+        {
+          "id": "nfr-recommender-base",
+          "version": "1",
+          "state": "published"
+        },
+        {
+          "id": "project-risk-recommender-base",
+          "version": "1",
+          "state": "published"
+        },
+        {
+          "id": "project-risk-recommender-base",
+          "version": "2",
+          "state": "published"
+        }
+      ]
+    },
+    {
+      "name": "runs",
+      "path": "/api/internal/recommendation-runs?limit=100",
+      "status": 200,
+      "countOnPage": 10,
+      "pageLimit": 100,
+      "publications": [
+        {
+          "id": "35919ff9-ad09-418e-8ac6-ecec1be50acc"
+        },
+        {
+          "id": "b134e0b7-3b71-4cc7-aef2-7c867ea5df92"
+        },
+        {
+          "id": "fb05815c-16b3-4d81-b6d7-6fe31cb06bc3"
+        },
+        {
+          "id": "5a30e0cc-e9c5-4243-adc8-3075467a91e4"
+        },
+        {
+          "id": "08ece41f-5f15-479f-a31c-31b0d22135ec"
+        },
+        {
+          "id": "3a17e01a-9214-4b9b-b23f-48c7755ade5d"
+        },
+        {
+          "id": "970922af-9750-4163-ba6c-6fe137f7bdd7"
+        },
+        {
+          "id": "a777c267-12d4-4170-8d04-1620f8d1abf2"
+        },
+        {
+          "id": "dd267f21-fa5e-4fa5-96a7-7eb5d37fd1ea"
+        },
+        {
+          "id": "691b8a07-3369-451a-9210-d56c7e618815"
+        }
+      ]
+    },
+    {
+      "name": "taxonomies",
+      "path": "/api/internal/recommender-taxonomies?limit=100",
+      "status": 200,
+      "countOnPage": 2,
+      "pageLimit": 100,
+      "publications": [
+        {
+          "id": "wis",
+          "version": "1.0.0",
+          "state": "published"
+        },
+        {
+          "id": "wis-legacy",
+          "version": "wis-v-1",
+          "state": "retired"
+        }
+      ]
+    },
+    {
+      "name": "testCatalogs",
+      "path": "/api/internal/test-case-catalogs?limit=100",
+      "status": 200,
+      "countOnPage": 0,
+      "pageLimit": 100,
+      "publications": []
+    },
+    {
+      "name": "members",
+      "path": "/api/access/members",
+      "status": 200,
+      "countOnPage": 5,
+      "pageLimit": 100,
+      "roles": {
+        "admin": 5
+      }
+    }
+  ],
+  "frontend": {
+    "entry": "/assets/index-CQQF2U5U.js",
+    "assets": [
+      {
+        "path": "/assets/index-CQQF2U5U.js",
+        "sha256": "f519ab7ca941653e210be0ab9691d47b64264a7a72e764f0813c9fcadb06a6dc"
+      },
+      {
+        "path": "/assets/AccessPage-D6zdAZj6.js",
+        "sha256": "913361e9f999bb374d0b1e9e63c4d487d9d01551cfa3d48e4c336c4396a36bd5"
+      },
+      {
+        "path": "/assets/ui-DCKi2chC.js",
+        "sha256": "1551c9bfcf3e61af4860507cbd11391ab64eb53ef5f09ea35166a8ce4b7d4def"
+      },
+      {
+        "path": "/assets/arrow-left-DLxf7eNX.js",
+        "sha256": "f0959ce47201fba0b39fe91e8ff45062607013210a2f9fda095d7b4984b7c33a"
+      },
+      {
+        "path": "/assets/plus-D-zVq3RS.js",
+        "sha256": "4efef7a2718b0d8853c6b5b01264438c134271609b978d7e2cb9bef775a6effa"
+      },
+      {
+        "path": "/assets/ClassifyPage-ClWJxhHO.js",
+        "sha256": "633a67bed07724a982bc96b151bf4b379535c0b0a086b9ef1cfb17f287870a32"
+      },
+      {
+        "path": "/assets/DashboardPage-CqJ70KB9.js",
+        "sha256": "4a5719bdb8a01eafbadc85e2127a7cfd21790ba926932930f61531ffbc9c89fc"
+      },
+      {
+        "path": "/assets/StoryTable-D7wJj5bA.js",
+        "sha256": "c05cd3a5542c82d9509a030ae85b7985eed02d05ee1d92fe34824a5776f776a3"
+      },
+      {
+        "path": "/assets/ReviewPage-Cl1LArIP.js",
+        "sha256": "91b878276d5b49ce715f0b905bae66efc5fecbaafa2a8d4f1b1ec685451fc23f"
+      },
+      {
+        "path": "/assets/StoriesPage-B2A-0Qsv.js",
+        "sha256": "1d2a047fa562a1b98e4869de831e26e86a9a9a4f84e3dba23794c453a9f4eb78"
+      },
+      {
+        "path": "/assets/TaxonomyPage-ennfs8n4.js",
+        "sha256": "96d007cd2d9ccb9f889417526954cc32e2125f89c1587ff2d6dc01025dedc55a"
+      },
+      {
+        "path": "/assets/configured-input-s2Ni9g2_.js",
+        "sha256": "ce8f5f1cc2fdc614cdee76074eafbbe57f932dcee153851a9eb8bb4c2a690fb0"
+      },
+      {
+        "path": "/assets/ConfiguredRunDetails-2FGkNOtn.js",
+        "sha256": "e09f03a0f9d0b06862fef04421ab0eced7f57925667b57e60c5584e002894e16"
+      },
+      {
+        "path": "/assets/RecommenderEditors-B4dY7zig.js",
+        "sha256": "eaab8e416658f8722192d2b09eab350850d5f12b019f987280d1f859fd477444"
+      },
+      {
+        "path": "/assets/ConfigurableMethodEditor-CcEwHhPV.js",
+        "sha256": "e4cb7840a9d31734ad0c7325dc8ec444ebe878bb27eca5092632fc2aa6a66600"
+      },
+      {
+        "path": "/assets/RecommendersPage-7OBpw8eL.js",
+        "sha256": "eebc72a9bca3a187d38fe049ae4d9e4789c490c5fe257ae99f60dfd443fe98b9"
+      },
+      {
+        "path": "/assets/RecommenderNavigation-DBJmUkag.js",
+        "sha256": "80a983e2141f669a2580c7013c28ecebbb6666085aa760238e0d9fbe6cb6b9d1"
+      },
+      {
+        "path": "/assets/ConfiguredRecommendationsPage-SXqjP5pm.js",
+        "sha256": "aee9cd89a1599f498c8b71b279f555d4e95c787d18ba5f63e42d036640aa65cf"
+      },
+      {
+        "path": "/assets/TestCaseCatalogPicker-D5Bd7avH.js",
+        "sha256": "46545fcb5b821ad480c5979d1080e7146929384722c0ccc6226de7b22523c9b3"
+      },
+      {
+        "path": "/assets/check-C6ZdAu_t.js",
+        "sha256": "1fb28625c8374607998518bdf0056c0db4037420736af020f9f9be2ee34a5ed2"
+      },
+      {
+        "path": "/assets/ProjectsPage-L3_iEG5Z.js",
+        "sha256": "17c1ba24f297d6f26ba6f1b76b1ed7a2c66de4b10308bd3cee39d272fd4c2519"
+      },
+      {
+        "path": "/assets/Modal-Cfkts0Ny.js",
+        "sha256": "535495048010ef27fdee8c64edb64689e7502042c68cbad32ddd80487de8ab94"
+      },
+      {
+        "path": "/assets/arrow-right-C0mKjQt7.js",
+        "sha256": "141764614ac284273e48da8318b0842e9bea6a1c3c6ba9fa228572a42c5e3806"
+      },
+      {
+        "path": "/assets/ProjectDetailsPage-xGefA5Vs.js",
+        "sha256": "6fa8293801b1e3bf83dea477e92928a664adad6c1b15b3cdb9fe2e88340ea29d"
+      },
+      {
+        "path": "/assets/RecommenderSetupPage-zHp2BiCZ.js",
+        "sha256": "44eb0f3348260ad4c382f82196fa65c20afe8a2bc32983e8cd238a46b8670631"
+      },
+      {
+        "path": "/assets/NewRecommenderPage-gLM7hk-P.js",
+        "sha256": "ee7485917584df9cd156608726f42fb700277bda60d22d0bb15407d70d480580"
+      }
+    ],
+    "labelsFoundInDeployedCode": {
+      "Non-functional requirements": true,
+      "Test cases": true,
+      "Project risks": true,
+      "New project-risk recommender": true,
+      "Create a new definition version": true,
+      "Add comparison feature": true,
+      "Number of neighbors (k)": true,
+      "Import dataset": true,
+      "Use US-Agent record mapping": true,
+      "Generate import preview": true,
+      "Publish reviewed dataset": true,
+      "Verify replay": true,
+      "Download JSON evidence": true,
+      "Adapt accepted NFR": true,
+      "Save NFR adaptation": true,
+      "Download evidence with assessments": true,
+      "Access and audit": true,
+      "New recommender": true
+    },
+    "limitation": "Deployed assets inspected; no authenticated personal-browser walkthrough or production writes performed."
+  }
+}

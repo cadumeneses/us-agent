@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "id": "project-risk-recommender",
+  "version": "2",
+  "name": "Project Risk Recommender",
+  "state": "draft",
+  "attributes": [
+    {
+      "id": "platforms",
+      "name": "Platforms",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "domains",
+      "name": "Application domains",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "languages",
+      "name": "Languages",
+      "valueType": {
+        "type": "category"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    },
+    {
+      "id": "risks",
+      "name": "Risks",
+      "valueType": {
+        "type": "text"
+      },
+      "scope": "project",
+      "cardinality": "many",
+      "required": true,
+      "role": "output",
+      "representation": "none"
+    },
+    {
+      "id": "team_distribution",
+      "name": "Team distribution",
+      "valueType": {
+        "type": "enum",
+        "values": [
+          "co-located",
+          "distributed"
+        ]
+      },
+      "scope": "project",
+      "cardinality": "single",
+      "required": true,
+      "role": "feature",
+      "representation": "presence"
+    }
+  ],
+  "method": {
+    "id": "configurable_project_knn_v1",
+    "version": "1",
+    "parameters": {
+      "k": 1,
+      "representation": "symmetric_binary_presence",
+      "distance": "weighted_manhattan",
+      "vocabulary": "target_and_dataset",
+      "missing_features": "reject",
+      "tie_break": "record_id",
+      "aggregation": "neighbor_union",
+      "weights": {
+        "platforms": 1,
+        "domains": 1,
+        "languages": 1,
+        "team_distribution": 5
+      },
+      "profile_sources": {
+        "platforms": "platforms",
+        "domains": "applicationDomains",
+        "languages": "technologies.languages"
+      }
+    },
+    "bindings": {}
+  }
+}

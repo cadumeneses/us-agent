@@ -1,0 +1,1425 @@
+{
+  "run": {
+    "id": "b134e0b7-3b71-4cc7-aef2-7c867ea5df92",
+    "snapshot": {
+      "format": "us-agent-json-v1",
+      "sha256": "35377dd379bd6f17e8c9d413f93a28320e9ef3fd0db888a6ddbb17c9222f5bc4",
+      "content": {
+        "dataset": {
+          "content": {
+            "definition": {
+              "format": "us-agent-json-v1",
+              "id": "nfr-recommender",
+              "sha256": "e7e107000cbefb8ceb0d4f739290c65cc5209dda3119e3b35d64c523f69b0044",
+              "version": "1"
+            },
+            "id": "nfr-recommender-base",
+            "import": {
+              "fileSha256": "1a1f96af942beb276a9bca99d1fc46dbb85a156b4afe883ea25b03f539d2fd83",
+              "id": "01e9542a-1c42-4e33-b9f2-3ff02f07cae7",
+              "previewSha256": "d255913d552cdccb9afe7e7045edf3f90a54a132d79a933b304466a865fbcce6"
+            },
+            "importerVersion": "structured-import-v1",
+            "mapping": {
+              "attributes": {
+                "apis": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "apis"
+                  ]
+                },
+                "application_domains": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "application_domains"
+                  ]
+                },
+                "architectures": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "architectures"
+                  ]
+                },
+                "classification_id": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "classification_id"
+                  ]
+                },
+                "data_persistence": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "data_persistence"
+                  ]
+                },
+                "frameworks": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "frameworks"
+                  ]
+                },
+                "labels": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "labels"
+                  ]
+                },
+                "languages": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "languages"
+                  ]
+                },
+                "nfrs": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "nfrs"
+                  ]
+                },
+                "objective": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "objective"
+                  ]
+                },
+                "platforms": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "platforms"
+                  ]
+                },
+                "project": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "project"
+                  ]
+                },
+                "project_taxonomy_version": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "project_taxonomy_version"
+                  ]
+                },
+                "review_status": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "review_status"
+                  ]
+                },
+                "story_id": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "story_id"
+                  ]
+                },
+                "tasks": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "tasks"
+                  ]
+                },
+                "taxonomy_version": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "taxonomy_version"
+                  ]
+                },
+                "text": {
+                  "encoding": "value",
+                  "path": [
+                    "values",
+                    "text"
+                  ]
+                }
+              },
+              "recordId": [
+                "id"
+              ]
+            },
+            "records": [
+              {
+                "id": "91",
+                "provenance": {
+                  "source": "import:1a1f96af942beb276a9bca99d1fc46dbb85a156b4afe883ea25b03f539d2fd83",
+                  "sourceRecordId": "91"
+                },
+                "values": {
+                  "apis": [],
+                  "application_domains": [
+                    "Communications"
+                  ],
+                  "architectures": [
+                    "Client-server"
+                  ],
+                  "classification_id": "91",
+                  "data_persistence": [
+                    "MySQL"
+                  ],
+                  "frameworks": [
+                    "Angular",
+                    "Springboot"
+                  ],
+                  "labels": [
+                    {
+                      "module": "Registry",
+                      "operation": "Insert data"
+                    },
+                    {
+                      "module": "Registry",
+                      "operation": "Retrieve data"
+                    },
+                    {
+                      "module": "Registry",
+                      "operation": "Update data"
+                    },
+                    {
+                      "module": "Registry",
+                      "operation": "Remove data"
+                    }
+                  ],
+                  "languages": [
+                    "JavaScript",
+                    "Java"
+                  ],
+                  "nfrs": [
+                    {
+                      "attribute": "availability",
+                      "sentence": "The system must notify users and customers when the function they are accessing is unavailable.",
+                      "type": "Reliability"
+                    },
+                    {
+                      "attribute": "fault_tolerance",
+                      "sentence": "If the server goes offline during data insertion, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data insertion operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+                      "type": "Reliability"
+                    },
+                    {
+                      "attribute": "integrity",
+                      "sentence": "The system must identify data that did not pass edit checks, and present such data to the customer/user for correction. Edit checking will continue until all data submitted is correct.",
+                      "type": "Reliability"
+                    },
+                    {
+                      "attribute": "confidentiality",
+                      "sentence": "The system must capture the user identification and timestamp when information is created, or deleted.",
+                      "type": "Security"
+                    },
+                    {
+                      "attribute": "fault_tolerance",
+                      "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+                      "type": "Reliability"
+                    },
+                    {
+                      "attribute": "transit_delay",
+                      "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page.",
+                      "type": "Performance"
+                    },
+                    {
+                      "attribute": "access_control",
+                      "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+                      "type": "Security"
+                    },
+                    {
+                      "attribute": "response_time",
+                      "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users.",
+                      "type": "Performance"
+                    }
+                  ],
+                  "objective": "product",
+                  "platforms": [
+                    "Web"
+                  ],
+                  "project": "P02",
+                  "project_taxonomy_version": "1.0.0",
+                  "review_status": "accepted_auto",
+                  "story_id": "91",
+                  "tasks": [
+                    {
+                      "category": "Criar tela inserção"
+                    },
+                    {
+                      "category": "Criar método de inserção"
+                    },
+                    {
+                      "category": "Criar tela alteração"
+                    },
+                    {
+                      "category": "Criar serviço alteração"
+                    },
+                    {
+                      "category": "Remover dados banco de dados"
+                    },
+                    {
+                      "category": "Alterar tela para exclusão"
+                    },
+                    {
+                      "category": "Criar tela listagem"
+                    },
+                    {
+                      "category": "Criar paginação para listagem"
+                    },
+                    {
+                      "category": "Criar ordenação para listagem"
+                    },
+                    {
+                      "category": "Criar serviço de listagem"
+                    }
+                  ],
+                  "taxonomy_version": "1.0.0",
+                  "text": "As a project manager, I want to create, read, update, and delete project variables so that I can configure and manage project parameters effectively."
+                }
+              },
+              {
+                "id": "86",
+                "provenance": {
+                  "source": "import:1a1f96af942beb276a9bca99d1fc46dbb85a156b4afe883ea25b03f539d2fd83",
+                  "sourceRecordId": "86"
+                },
+                "values": {
+                  "apis": [],
+                  "application_domains": [
+                    "Communications"
+                  ],
+                  "architectures": [
+                    "Client-server"
+                  ],
+                  "classification_id": "86",
+                  "data_persistence": [
+                    "MySQL"
+                  ],
+                  "frameworks": [
+                    "Angular",
+                    "Springboot"
+                  ],
+                  "labels": [
+                    {
+                      "module": "Registry",
+                      "operation": "Insert data"
+                    },
+                    {
+                      "module": "Registry",
+                      "operation": "Retrieve data"
+                    },
+                    {
+                      "module": "Registry",
+                      "operation": "Update data"
+                    },
+                    {
+                      "module": "Registry",
+                      "operation": "Remove data"
+                    }
+                  ],
+                  "languages": [
+                    "JavaScript",
+                    "Java"
+                  ],
+                  "nfrs": [
+                    {
+                      "attribute": "transit_delay",
+                      "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page.",
+                      "type": "Performance"
+                    },
+                    {
+                      "attribute": "access_control",
+                      "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+                      "type": "Security"
+                    },
+                    {
+                      "attribute": "response_time",
+                      "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users.",
+                      "type": "Performance"
+                    },
+                    {
+                      "attribute": "availability",
+                      "sentence": "The system must notify users and customers when the function they are accessing is unavailable.",
+                      "type": "Reliability"
+                    },
+                    {
+                      "attribute": "confidentiality",
+                      "sentence": "The system must capture the user identification and timestamp when information is created, or deleted.",
+                      "type": "Security"
+                    },
+                    {
+                      "attribute": "fault_tolerance",
+                      "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+                      "type": "Reliability"
+                    }
+                  ],
+                  "objective": "product",
+                  "platforms": [
+                    "Web"
+                  ],
+                  "project": "P02",
+                  "project_taxonomy_version": "1.0.0",
+                  "review_status": "accepted_auto",
+                  "story_id": "86",
+                  "tasks": [
+                    {
+                      "category": "Criar tela listagem"
+                    },
+                    {
+                      "category": "Criar paginação para listagem"
+                    },
+                    {
+                      "category": "Criar ordenação para listagem"
+                    },
+                    {
+                      "category": "Criar tela listagem"
+                    },
+                    {
+                      "category": "Criar tela inserção"
+                    },
+                    {
+                      "category": "Remover dados banco de dados"
+                    },
+                    {
+                      "category": "Alterar tela para exclusão"
+                    }
+                  ],
+                  "taxonomy_version": "1.0.0",
+                  "text": "As an administrator, I want to create, read, update, and delete organizations so that I can manage organization data efficiently."
+                }
+              }
+            ],
+            "schemaVersion": 1,
+            "selection": {
+              "excludedOrdinals": [],
+              "includedOrdinals": [
+                1,
+                2
+              ]
+            },
+            "source": {
+              "authorization": {
+                "basis": "permission",
+                "reference": "Internal reuse authorized by the workspace user on 2026-10-22; original operational records remain unchanged."
+              },
+              "description": "Profiles, labels and existing non-functional requirements copied from P02 classifications 91 and 86."
+            },
+            "version": "1"
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "8157eaee3069dc859edee339b2c52bdc59a34919d683b2ac9bf17e43ed8b5e46"
+        },
+        "definition": {
+          "content": {
+            "definition": {
+              "attributes": [
+                {
+                  "cardinality": "single",
+                  "id": "classification_id",
+                  "name": "Classification Id",
+                  "representation": "none",
+                  "required": true,
+                  "role": "context",
+                  "scope": "artifact",
+                  "valueType": {
+                    "type": "text"
+                  }
+                },
+                {
+                  "cardinality": "single",
+                  "id": "story_id",
+                  "name": "Story Id",
+                  "representation": "none",
+                  "required": true,
+                  "role": "context",
+                  "scope": "artifact",
+                  "valueType": {
+                    "type": "text"
+                  }
+                },
+                {
+                  "cardinality": "single",
+                  "id": "text",
+                  "name": "Text",
+                  "representation": "none",
+                  "required": true,
+                  "role": "context",
+                  "scope": "artifact",
+                  "valueType": {
+                    "type": "text"
+                  }
+                },
+                {
+                  "cardinality": "single",
+                  "id": "project",
+                  "name": "Project",
+                  "representation": "none",
+                  "required": true,
+                  "role": "context",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "text"
+                  }
+                },
+                {
+                  "cardinality": "single",
+                  "id": "taxonomy_version",
+                  "name": "Taxonomy Version",
+                  "representation": "none",
+                  "required": true,
+                  "role": "context",
+                  "scope": "artifact",
+                  "valueType": {
+                    "type": "text"
+                  }
+                },
+                {
+                  "cardinality": "single",
+                  "id": "review_status",
+                  "name": "Review Status",
+                  "representation": "none",
+                  "required": true,
+                  "role": "filter",
+                  "scope": "artifact",
+                  "valueType": {
+                    "type": "text"
+                  }
+                },
+                {
+                  "cardinality": "single",
+                  "id": "project_taxonomy_version",
+                  "name": "Project Taxonomy Version",
+                  "representation": "none",
+                  "required": true,
+                  "role": "context",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "text"
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "labels",
+                  "name": "Labels",
+                  "representation": "none",
+                  "required": true,
+                  "role": "filter",
+                  "scope": "artifact",
+                  "valueType": {
+                    "fields": {
+                      "module": {
+                        "type": "category"
+                      },
+                      "operation": {
+                        "type": "category"
+                      }
+                    },
+                    "type": "record"
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "platforms",
+                  "name": "Platforms",
+                  "representation": "presence",
+                  "required": true,
+                  "role": "feature",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "category"
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "application_domains",
+                  "name": "Application Domains",
+                  "representation": "presence",
+                  "required": true,
+                  "role": "feature",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "category"
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "architectures",
+                  "name": "Architectures",
+                  "representation": "presence",
+                  "required": true,
+                  "role": "feature",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "category"
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "languages",
+                  "name": "Languages",
+                  "representation": "presence",
+                  "required": true,
+                  "role": "feature",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "category"
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "frameworks",
+                  "name": "Frameworks",
+                  "representation": "presence",
+                  "required": true,
+                  "role": "feature",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "category"
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "apis",
+                  "name": "Apis",
+                  "representation": "presence",
+                  "required": true,
+                  "role": "feature",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "category"
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "data_persistence",
+                  "name": "Data Persistence",
+                  "representation": "presence",
+                  "required": true,
+                  "role": "feature",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "category"
+                  }
+                },
+                {
+                  "cardinality": "single",
+                  "id": "objective",
+                  "name": "Objective",
+                  "representation": "none",
+                  "required": true,
+                  "role": "filter",
+                  "scope": "project",
+                  "valueType": {
+                    "type": "enum",
+                    "values": [
+                      "",
+                      "product",
+                      "prototype"
+                    ]
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "tasks",
+                  "name": "Tasks",
+                  "representation": "presence",
+                  "required": true,
+                  "role": "feature",
+                  "scope": "artifact",
+                  "valueType": {
+                    "fields": {
+                      "category": {
+                        "type": "category"
+                      }
+                    },
+                    "type": "record"
+                  }
+                },
+                {
+                  "cardinality": "many",
+                  "id": "nfrs",
+                  "name": "Nfrs",
+                  "representation": "none",
+                  "required": true,
+                  "role": "output",
+                  "scope": "artifact",
+                  "valueType": {
+                    "fields": {
+                      "attribute": {
+                        "type": "category"
+                      },
+                      "sentence": {
+                        "type": "text"
+                      },
+                      "type": {
+                        "type": "category"
+                      }
+                    },
+                    "type": "record"
+                  }
+                }
+              ],
+              "id": "nfr-recommender",
+              "method": {
+                "bindings": {
+                  "apis": "apis",
+                  "application_domains": "application_domains",
+                  "architectures": "architectures",
+                  "classification_id": "classification_id",
+                  "data_persistence": "data_persistence",
+                  "frameworks": "frameworks",
+                  "labels": "labels",
+                  "languages": "languages",
+                  "nfrs": "nfrs",
+                  "objective": "objective",
+                  "platforms": "platforms",
+                  "project": "project",
+                  "project_taxonomy_version": "project_taxonomy_version",
+                  "review_status": "review_status",
+                  "story_id": "story_id",
+                  "tasks": "tasks",
+                  "taxonomy_version": "taxonomy_version",
+                  "text": "text"
+                },
+                "id": "ramos_2019_manhattan_k1_v2",
+                "parameters": {
+                  "k": 1
+                },
+                "version": "2"
+              },
+              "name": "Non-functional Requirement Recommender",
+              "schemaVersion": 1,
+              "state": "published",
+              "version": "1"
+            },
+            "implementation": {
+              "adapterVersion": "rnf-v2-profile-adapter-v3",
+              "methodId": "ramos_2019_manhattan_k1_v2"
+            },
+            "schemaVersion": 1,
+            "taxonomies": []
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "e7e107000cbefb8ceb0d4f739290c65cc5209dda3119e3b35d64c523f69b0044"
+        },
+        "explanation": {
+          "content": {
+            "candidates": [
+              {
+                "classificationId": "86",
+                "datasetRecordId": "86",
+                "distance": 4,
+                "eligible": true,
+                "issues": [],
+                "rank": 1,
+                "similarity": 0.4285714285714286,
+                "storyId": "86",
+                "vector": [
+                  0,
+                  0,
+                  1,
+                  0,
+                  1,
+                  0,
+                  1
+                ]
+              },
+              {
+                "classificationId": "91",
+                "datasetRecordId": "91",
+                "distance": 4,
+                "eligible": true,
+                "issues": [],
+                "rank": 2,
+                "similarity": 0.4285714285714286,
+                "storyId": "91",
+                "vector": [
+                  0,
+                  0,
+                  1,
+                  0,
+                  1,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "policy": {
+              "aggregation": "binary-cooccurrence_similarity_k1",
+              "distance": "manhattan",
+              "eligibility": "accepted-profile_product_same-module-operation_exclude-same-story",
+              "emptyNeighbor": "retain-neighbor-without-fallback",
+              "id": "ramos-v2-policy-v1",
+              "identity": "declared-story-id",
+              "k": 1,
+              "kernel": "policy-knn-v1",
+              "method": "ramos_2019_manhattan_k1_v2",
+              "representation": "target_binary_presence",
+              "similarity": "1-distance/target-dimensions",
+              "taxonomyComparison": "exact-legacy-names_without-version-filter",
+              "tieBreak": "classification-id_numeric-then-locale"
+            }
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "b8dee1282afc999a87e4ae72ee48e4b0de59e208357421da8b0c00b3431178a7"
+        },
+        "projection": {
+          "content": {
+            "history": [
+              {
+                "classificationId": "91",
+                "labels": [
+                  {
+                    "module": "Registry",
+                    "operation": "Insert data"
+                  },
+                  {
+                    "module": "Registry",
+                    "operation": "Retrieve data"
+                  },
+                  {
+                    "module": "Registry",
+                    "operation": "Update data"
+                  },
+                  {
+                    "module": "Registry",
+                    "operation": "Remove data"
+                  }
+                ],
+                "nfrs": [
+                  {
+                    "attribute": "availability",
+                    "sentence": "The system must notify users and customers when the function they are accessing is unavailable.",
+                    "type": "Reliability"
+                  },
+                  {
+                    "attribute": "fault_tolerance",
+                    "sentence": "If the server goes offline during data insertion, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data insertion operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+                    "type": "Reliability"
+                  },
+                  {
+                    "attribute": "integrity",
+                    "sentence": "The system must identify data that did not pass edit checks, and present such data to the customer/user for correction. Edit checking will continue until all data submitted is correct.",
+                    "type": "Reliability"
+                  },
+                  {
+                    "attribute": "confidentiality",
+                    "sentence": "The system must capture the user identification and timestamp when information is created, or deleted.",
+                    "type": "Security"
+                  },
+                  {
+                    "attribute": "fault_tolerance",
+                    "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+                    "type": "Reliability"
+                  },
+                  {
+                    "attribute": "transit_delay",
+                    "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page.",
+                    "type": "Performance"
+                  },
+                  {
+                    "attribute": "access_control",
+                    "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+                    "type": "Security"
+                  },
+                  {
+                    "attribute": "response_time",
+                    "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users.",
+                    "type": "Performance"
+                  }
+                ],
+                "project": "P02",
+                "projectProfile": {
+                  "applicationDomains": [
+                    "Communications"
+                  ],
+                  "architectures": [
+                    "Client-server"
+                  ],
+                  "objective": "product",
+                  "platforms": [
+                    "Web"
+                  ],
+                  "taxonomyVersion": "1.0.0",
+                  "technologies": {
+                    "apis": [],
+                    "dataPersistence": [
+                      "MySQL"
+                    ],
+                    "frameworks": [
+                      "Angular",
+                      "Springboot"
+                    ],
+                    "languages": [
+                      "JavaScript",
+                      "Java"
+                    ]
+                  }
+                },
+                "reviewStatus": "accepted_auto",
+                "storyId": "91",
+                "tasks": [
+                  {
+                    "category": "Criar tela inserção"
+                  },
+                  {
+                    "category": "Criar método de inserção"
+                  },
+                  {
+                    "category": "Criar tela alteração"
+                  },
+                  {
+                    "category": "Criar serviço alteração"
+                  },
+                  {
+                    "category": "Remover dados banco de dados"
+                  },
+                  {
+                    "category": "Alterar tela para exclusão"
+                  },
+                  {
+                    "category": "Criar tela listagem"
+                  },
+                  {
+                    "category": "Criar paginação para listagem"
+                  },
+                  {
+                    "category": "Criar ordenação para listagem"
+                  },
+                  {
+                    "category": "Criar serviço de listagem"
+                  }
+                ],
+                "taxonomyVersion": "1.0.0",
+                "text": "As a project manager, I want to create, read, update, and delete project variables so that I can configure and manage project parameters effectively."
+              },
+              {
+                "classificationId": "86",
+                "labels": [
+                  {
+                    "module": "Registry",
+                    "operation": "Insert data"
+                  },
+                  {
+                    "module": "Registry",
+                    "operation": "Retrieve data"
+                  },
+                  {
+                    "module": "Registry",
+                    "operation": "Update data"
+                  },
+                  {
+                    "module": "Registry",
+                    "operation": "Remove data"
+                  }
+                ],
+                "nfrs": [
+                  {
+                    "attribute": "transit_delay",
+                    "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page.",
+                    "type": "Performance"
+                  },
+                  {
+                    "attribute": "access_control",
+                    "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+                    "type": "Security"
+                  },
+                  {
+                    "attribute": "response_time",
+                    "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users.",
+                    "type": "Performance"
+                  },
+                  {
+                    "attribute": "availability",
+                    "sentence": "The system must notify users and customers when the function they are accessing is unavailable.",
+                    "type": "Reliability"
+                  },
+                  {
+                    "attribute": "confidentiality",
+                    "sentence": "The system must capture the user identification and timestamp when information is created, or deleted.",
+                    "type": "Security"
+                  },
+                  {
+                    "attribute": "fault_tolerance",
+                    "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+                    "type": "Reliability"
+                  }
+                ],
+                "project": "P02",
+                "projectProfile": {
+                  "applicationDomains": [
+                    "Communications"
+                  ],
+                  "architectures": [
+                    "Client-server"
+                  ],
+                  "objective": "product",
+                  "platforms": [
+                    "Web"
+                  ],
+                  "taxonomyVersion": "1.0.0",
+                  "technologies": {
+                    "apis": [],
+                    "dataPersistence": [
+                      "MySQL"
+                    ],
+                    "frameworks": [
+                      "Angular",
+                      "Springboot"
+                    ],
+                    "languages": [
+                      "JavaScript",
+                      "Java"
+                    ]
+                  }
+                },
+                "reviewStatus": "accepted_auto",
+                "storyId": "86",
+                "tasks": [
+                  {
+                    "category": "Criar tela listagem"
+                  },
+                  {
+                    "category": "Criar paginação para listagem"
+                  },
+                  {
+                    "category": "Criar ordenação para listagem"
+                  },
+                  {
+                    "category": "Criar tela listagem"
+                  },
+                  {
+                    "category": "Criar tela inserção"
+                  },
+                  {
+                    "category": "Remover dados banco de dados"
+                  },
+                  {
+                    "category": "Alterar tela para exclusão"
+                  }
+                ],
+                "taxonomyVersion": "1.0.0",
+                "text": "As an administrator, I want to create, read, update, and delete organizations so that I can manage organization data efficiently."
+              }
+            ],
+            "target": {
+              "classificationId": "269",
+              "labels": [
+                {
+                  "module": "Registry",
+                  "operation": "Retrieve data"
+                }
+              ],
+              "nfrs": [],
+              "project": "Projeto Emanuel",
+              "projectProfile": {
+                "applicationDomains": [
+                  "Educação"
+                ],
+                "architectures": [
+                  "MVC"
+                ],
+                "objective": "product",
+                "platforms": [
+                  "Web"
+                ],
+                "taxonomyVersion": "1.0.0",
+                "technologies": {
+                  "apis": [],
+                  "dataPersistence": [
+                    "MongoDB"
+                  ],
+                  "frameworks": [
+                    "Angular",
+                    "Node"
+                  ],
+                  "languages": [
+                    "JavaScript"
+                  ]
+                }
+              },
+              "reviewStatus": "reviewed",
+              "storyId": "269",
+              "tasks": [],
+              "taxonomyVersion": "1.0.0",
+              "text": "Como coordenador, quero consolidar notas dos alunos."
+            }
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "a5824b87aeafcfe9f97bbcf1964f88713241f5adc8794cb9632d026656787abf"
+        },
+        "request": {
+          "content": {
+            "dataset": {
+              "format": "us-agent-json-v1",
+              "id": "nfr-recommender-base",
+              "sha256": "8157eaee3069dc859edee339b2c52bdc59a34919d683b2ac9bf17e43ed8b5e46",
+              "version": "1"
+            },
+            "definition": {
+              "format": "us-agent-json-v1",
+              "id": "nfr-recommender",
+              "sha256": "e7e107000cbefb8ceb0d4f739290c65cc5209dda3119e3b35d64c523f69b0044",
+              "version": "1"
+            },
+            "id": "b134e0b7-3b71-4cc7-aef2-7c867ea5df92",
+            "input": {
+              "id": "269",
+              "provenance": {
+                "source": "Source: Projeto Emanuel; classification 269; preserved recommendation input."
+              },
+              "values": {
+                "apis": [],
+                "application_domains": [
+                  "Educação"
+                ],
+                "architectures": [
+                  "MVC"
+                ],
+                "classification_id": "269",
+                "data_persistence": [
+                  "MongoDB"
+                ],
+                "frameworks": [
+                  "Angular",
+                  "Node"
+                ],
+                "labels": [
+                  {
+                    "module": "Registry",
+                    "operation": "Retrieve data"
+                  }
+                ],
+                "languages": [
+                  "JavaScript"
+                ],
+                "nfrs": [],
+                "objective": "product",
+                "platforms": [
+                  "Web"
+                ],
+                "project": "Projeto Emanuel",
+                "project_taxonomy_version": "1.0.0",
+                "review_status": "reviewed",
+                "story_id": "269",
+                "tasks": [],
+                "taxonomy_version": "1.0.0",
+                "text": "Como coordenador, quero consolidar notas dos alunos."
+              }
+            },
+            "selection": {
+              "labelIndex": 0
+            }
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "ea1b7ac950999239f917a8ff53c51ecb903fbc15b929cd5e19a6eed5f2a888a6"
+        },
+        "result": {
+          "content": {
+            "dimensions": [
+              "applicationDomain:Educação",
+              "architecture:MVC",
+              "framework:Angular",
+              "framework:Node",
+              "language:JavaScript",
+              "persistence:MongoDB",
+              "platform:Web"
+            ],
+            "eligibleCount": 2,
+            "excludedCount": 0,
+            "items": [
+              {
+                "alreadyLinked": false,
+                "attribute": "confidentiality",
+                "key": "274dfc25fa03527b5dcb882e81a24d098d7aa83f31c24b0c189a945782f885b5",
+                "score": 0.4285714285714286,
+                "sentence": "The system must capture the user identification and timestamp when information is created, or deleted.",
+                "type": "Security"
+              },
+              {
+                "alreadyLinked": false,
+                "attribute": "transit_delay",
+                "key": "284cc8faef54e565fcfcc64f1cdca2db1392f6b30a515f720637e1ff7247785f",
+                "score": 0.4285714285714286,
+                "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page.",
+                "type": "Performance"
+              },
+              {
+                "alreadyLinked": false,
+                "attribute": "fault_tolerance",
+                "key": "3fa9ed113eeb8f0f155f3c6abfb3cee002de1c9d28919d5ad995af2b0ccefab5",
+                "score": 0.4285714285714286,
+                "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+                "type": "Reliability"
+              },
+              {
+                "alreadyLinked": false,
+                "attribute": "access_control",
+                "key": "9733da69ddfd592df5c00c78ab17948296f1d36410d5035969aa62140b0ddb80",
+                "score": 0.4285714285714286,
+                "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+                "type": "Security"
+              },
+              {
+                "alreadyLinked": false,
+                "attribute": "availability",
+                "key": "9e05e77d7212572e7081243364d01972294aa9e0556995cf52e2d0391082cb8a",
+                "score": 0.4285714285714286,
+                "sentence": "The system must notify users and customers when the function they are accessing is unavailable.",
+                "type": "Reliability"
+              },
+              {
+                "alreadyLinked": false,
+                "attribute": "response_time",
+                "key": "ef85b3090dede367f4965dd906fe5fb6fb197129a3079553793c5018b20d6a39",
+                "score": 0.4285714285714286,
+                "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users.",
+                "type": "Performance"
+              }
+            ],
+            "k": 1,
+            "label": {
+              "module": "Registry",
+              "operation": "Retrieve data"
+            },
+            "messages": [
+              "Empate: selecionada a classificação de menor identificador. Política determinística do US-Agent; k permanece igual a 1."
+            ],
+            "method": "ramos_2019_manhattan_k1_v2",
+            "neighbor": {
+              "classificationId": "86",
+              "matched": [
+                "framework:Angular",
+                "language:JavaScript",
+                "platform:Web"
+              ],
+              "missing": [
+                "applicationDomain:Educação",
+                "architecture:MVC",
+                "framework:Node",
+                "persistence:MongoDB"
+              ],
+              "project": "P02",
+              "similarity": 0.4285714285714286,
+              "storyId": "86",
+              "text": "As an administrator, I want to create, read, update, and delete organizations so that I can manage organization data efficiently.",
+              "vector": [
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            },
+            "status": "completed"
+          },
+          "format": "us-agent-json-v1",
+          "sha256": "e5d4cd7a187b8ecc7832a447b3c873f7c31ca450d441251db4e141ae724d03d7"
+        },
+        "schemaVersion": 1,
+        "software": {
+          "adapterVersion": "rnf-v2-profile-adapter-v3",
+          "definitionAdapterVersion": "rnf-v2-profile-adapter-v3",
+          "kernelVersion": "policy-knn-v1",
+          "policyVersion": "ramos-v2-policy-v1",
+          "runtime": {
+            "icu": "78.3",
+            "locale": "en-US",
+            "node": "v24.21.0"
+          }
+        }
+      }
+    },
+    "durationMs": 45.25452400001814,
+    "createdBy": "internal-api",
+    "createdAt": "2026-10-22T19:51:48.591Z"
+  },
+  "review": {
+    "runId": "b134e0b7-3b71-4cc7-aef2-7c867ea5df92",
+    "runSha256": "35377dd379bd6f17e8c9d413f93a28320e9ef3fd0db888a6ddbb17c9222f5bc4",
+    "target": {
+      "snapshot": {
+        "format": "us-agent-json-v1",
+        "sha256": "d15741a3f1dcd2102eb9f5f43fa7cdefb357000b81252210e64dce45692f06b8",
+        "content": {
+          "destination": {
+            "kind": "input",
+            "scopeSha256": "3b1ff6ad8532cd29dcfc4d88a24f73fbf317d738c645b3a68de942057f0e8dd6"
+          },
+          "input": {
+            "content": {
+              "id": "269",
+              "provenance": {
+                "source": "Source: Projeto Emanuel; classification 269; preserved recommendation input."
+              },
+              "values": {
+                "apis": [],
+                "application_domains": [
+                  "Educação"
+                ],
+                "architectures": [
+                  "MVC"
+                ],
+                "classification_id": "269",
+                "data_persistence": [
+                  "MongoDB"
+                ],
+                "frameworks": [
+                  "Angular",
+                  "Node"
+                ],
+                "labels": [
+                  {
+                    "module": "Registry",
+                    "operation": "Retrieve data"
+                  }
+                ],
+                "languages": [
+                  "JavaScript"
+                ],
+                "nfrs": [],
+                "objective": "product",
+                "platforms": [
+                  "Web"
+                ],
+                "project": "Projeto Emanuel",
+                "project_taxonomy_version": "1.0.0",
+                "review_status": "reviewed",
+                "story_id": "269",
+                "tasks": [],
+                "taxonomy_version": "1.0.0",
+                "text": "Como coordenador, quero consolidar notas dos alunos."
+              }
+            },
+            "format": "us-agent-json-v1",
+            "sha256": "accc8e5878b2574dd4193c5d95f68c4b64520309b5165a7ed0c2c2649533b9c8"
+          },
+          "request": {
+            "runSha256": "35377dd379bd6f17e8c9d413f93a28320e9ef3fd0db888a6ddbb17c9222f5bc4",
+            "target": {
+              "kind": "input"
+            }
+          },
+          "run": {
+            "format": "us-agent-json-v1",
+            "id": "b134e0b7-3b71-4cc7-aef2-7c867ea5df92",
+            "sha256": "35377dd379bd6f17e8c9d413f93a28320e9ef3fd0db888a6ddbb17c9222f5bc4"
+          },
+          "schemaVersion": 1
+        }
+      },
+      "createdBy": "internal-api",
+      "createdAt": "2026-10-22T19:51:49.160Z"
+    },
+    "decisions": [
+      {
+        "id": "385ede06-9209-44e7-afdd-fb10e83c9833",
+        "snapshot": {
+          "format": "us-agent-json-v1",
+          "sha256": "fadfe81ce7b292043a6e530b47e0bf901f8a85678991c82e8a52a73e9a1645a2",
+          "content": {
+            "association": {
+              "identitySha256": "c6bdef1be744d477fb5a448d2953e5c0eef3f624436672f30219074059a381cb",
+              "materialization": "input_only"
+            },
+            "originalItem": {
+              "alreadyLinked": false,
+              "attribute": "access_control",
+              "key": "9733da69ddfd592df5c00c78ab17948296f1d36410d5035969aa62140b0ddb80",
+              "score": 0.4285714285714286,
+              "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+              "type": "Security"
+            },
+            "request": {
+              "content": {
+                "decision": "accepted",
+                "id": "385ede06-9209-44e7-afdd-fb10e83c9833",
+                "itemKey": "9733da69ddfd592df5c00c78ab17948296f1d36410d5035969aa62140b0ddb80",
+                "notes": "Access-control requirement accepted for the preserved input only.",
+                "runSha256": "35377dd379bd6f17e8c9d413f93a28320e9ef3fd0db888a6ddbb17c9222f5bc4",
+                "targetSha256": "d15741a3f1dcd2102eb9f5f43fa7cdefb357000b81252210e64dce45692f06b8"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "e6660bb2792db0ee8389223bb34413d735320b97ffd4219c2f996522123ae752"
+            },
+            "run": {
+              "format": "us-agent-json-v1",
+              "id": "b134e0b7-3b71-4cc7-aef2-7c867ea5df92",
+              "sha256": "35377dd379bd6f17e8c9d413f93a28320e9ef3fd0db888a6ddbb17c9222f5bc4"
+            },
+            "schemaVersion": 1,
+            "target": {
+              "format": "us-agent-json-v1",
+              "sha256": "d15741a3f1dcd2102eb9f5f43fa7cdefb357000b81252210e64dce45692f06b8"
+            }
+          }
+        },
+        "createdBy": "internal-api",
+        "createdAt": "2026-10-22T19:51:49.439Z"
+      }
+    ],
+    "copies": [
+      {
+        "id": "359145cb-b902-4ce5-84fe-c97b27bfe708",
+        "snapshot": {
+          "format": "us-agent-json-v1",
+          "sha256": "43b313b2352a635b43c0ca6989e3335353a1046d6b41c479ce942e93e56d3561",
+          "content": {
+            "artifact": {
+              "attribute": "access_control",
+              "sentence": "The system must allow coordinators to view and consolidate grades only for students and classes they are authorized to access.",
+              "type": "Security"
+            },
+            "decisionSha256": "fadfe81ce7b292043a6e530b47e0bf901f8a85678991c82e8a52a73e9a1645a2",
+            "originalItem": {
+              "content": {
+                "alreadyLinked": false,
+                "attribute": "access_control",
+                "key": "9733da69ddfd592df5c00c78ab17948296f1d36410d5035969aa62140b0ddb80",
+                "score": 0.4285714285714286,
+                "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+                "type": "Security"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "fd6eb7ac34da7bcbcdad2d73e4c9edea021515f3464458477e2d1c4b8568eef0"
+            },
+            "previous": null,
+            "request": {
+              "content": {
+                "decisionId": "385ede06-9209-44e7-afdd-fb10e83c9833",
+                "id": "359145cb-b902-4ce5-84fe-c97b27bfe708",
+                "itemKey": "9733da69ddfd592df5c00c78ab17948296f1d36410d5035969aa62140b0ddb80",
+                "previousCopy": null,
+                "reason": "Adapt the access-control requirement to the coordinator role and the grade-consolidation workflow in Projeto Emanuel; preserve the original requirement as a separate artifact.",
+                "runSha256": "35377dd379bd6f17e8c9d413f93a28320e9ef3fd0db888a6ddbb17c9222f5bc4",
+                "sentence": "The system must allow coordinators to view and consolidate grades only for students and classes they are authorized to access.",
+                "targetSha256": "d15741a3f1dcd2102eb9f5f43fa7cdefb357000b81252210e64dce45692f06b8"
+              },
+              "format": "us-agent-json-v1",
+              "sha256": "2105a0c21c6cf8537986b53059cda2ae2291482b58ba14ca9f78679ec1daada5"
+            },
+            "revision": 1,
+            "run": {
+              "format": "us-agent-json-v1",
+              "id": "b134e0b7-3b71-4cc7-aef2-7c867ea5df92",
+              "sha256": "35377dd379bd6f17e8c9d413f93a28320e9ef3fd0db888a6ddbb17c9222f5bc4"
+            },
+            "schemaVersion": 1,
+            "targetSha256": "d15741a3f1dcd2102eb9f5f43fa7cdefb357000b81252210e64dce45692f06b8"
+          }
+        },
+        "createdBy": "internal-api",
+        "createdAt": "2026-10-22T19:51:49.748Z"
+      }
+    ]
+  }
+}

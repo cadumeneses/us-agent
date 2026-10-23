@@ -1,0 +1,45 @@
+{
+  "capturedAt": "2026-10-23T17:00:15.555Z",
+  "origin": "https://us-agent-api.vercel.app",
+  "definition": {
+    "id": "project-risk-recommender",
+    "version": "2",
+    "sha256": "55bceb5969a0412cf544ab2a12f5d142718b0b04f5e4aafa9e3b8390a62d98eb"
+  },
+  "dataset": {
+    "format": "us-agent-json-v1",
+    "id": "project-risk-recommender-base",
+    "sha256": "acfdca5ba1958b5c6355b227d2f5cd7e9b89c8425a93f506c927b7ca96d9a0e8",
+    "version": "2"
+  },
+  "run": {
+    "id": "04cba9cb-0e1a-452f-833a-935391019699",
+    "sha256": "1f802189596525401bb240736d548b457d1fb00bd305e5fa676eaa0e544dbbeb",
+    "replayVerified": true,
+    "dataset": {
+      "format": "us-agent-json-v1",
+      "id": "project-risk-recommender-base",
+      "sha256": "acfdca5ba1958b5c6355b227d2f5cd7e9b89c8425a93f506c927b7ca96d9a0e8",
+      "version": "2"
+    }
+  },
+  "maximumImageHeightMm": 42,
+  "captionsEmbedded": false,
+  "uiContentReplaced": false,
+  "images": [
+    {
+      "file": "figures/fig2a-config-enhanced.png",
+      "sourceFile": "a-knn-configuration.png",
+      "width": 4292,
+      "height": 2356,
+      "sha256": "3769bb0e4e0ac1f15e806a6a9767577a5ac0a204ea42a80d0a29bf9280fe8ade"
+    },
+    {
+      "file": "figures/fig2b-distributed-enhanced.png",
+      "sourceFile": "b-neighbor-and-contributions.png",
+      "width": 4292,
+      "height": 3016,
+      "sha256": "139acef4455aec9a181126433c065448daa8df95c23b5814a263814a12366597"
+    }
+  ]
+}

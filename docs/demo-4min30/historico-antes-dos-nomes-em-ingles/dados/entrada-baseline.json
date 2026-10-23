@@ -1,0 +1,20 @@
+{
+  "id": "demo-video-profile",
+  "values": {
+    "platforms": [
+      "Web"
+    ],
+    "domains": [
+      "Information resources"
+    ],
+    "languages": [
+      "TypeScript",
+      "JavaScript",
+      "HTML/CSS"
+    ],
+    "risks": []
+  },
+  "provenance": {
+    "source": "Demonstração: perfil copiado de P01; riscos e distribuição da equipe são ilustrativos."
+  }
+}

@@ -1,0 +1,3 @@
+As an administrator, I want to create, read, update, and delete organizations so that I can manage organization data efficiently.
+As a project manager, I want to create, read, update, and delete project variables so that I can configure and manage project parameters effectively.
+Como coordenador, quero consolidar notas dos alunos.

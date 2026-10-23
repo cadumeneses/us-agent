@@ -1,0 +1,21 @@
+# Reviewer workspace and usage guide
+
+Published guide: https://us-agent-api.vercel.app/guide
+
+The guide now covers the complete application: projects and profiles; saved stories, sprints and tasks; classification and text import; human review and provenance; classification history and Dashboard; WIS taxonomy versions; recommendation scenarios; custom KNN creation and dataset import; evidence/export; and administrative access restrictions. It includes 16 screenshots. The application tour precedes the recommendation exercises.
+
+A browser check created a separate P03 copy of the existing grade-consolidation story, adapted a listing task using an existing P02 task category, classified the saved copy with Local preview and taxonomy 1.0.0, and confirmed Registry / Retrieve data through human review. A further pending copy is prepared for reviewers. The original story records 86 and 269 were compared before/after and remained unchanged. Additional rehearsal copies are present; counts are intentionally not fixed in the guide. Classification mode labels in the reviewer organization are now English. The reviewed story shows Reviewed in project details and Completed in the history table; review retains the automatic run confidence.
+
+Deployment limitations are explicit: no test-case catalog/compatible definition/dataset is currently published, legacy taxonomy proposals do not constitute WIS version publication, and the Dashboard counter labelled “Automatically accepted” includes human-reviewed records in this build. The guide does not claim these unavailable or differently defined results were demonstrated successfully.
+
+Application: https://us-agent-api.vercel.app/
+
+The guide is public, in English, with exact inputs, expected results, source inspection, acceptance/adaptation, replay, export, and 16 screenshots captured after a real reviewer login. It needs no local installation or API credential. At the owner's explicit request, the Access section now displays the shared reviewer username and password, with a direct sign-in link. The generator reads only that account's credentials from the ignored local file `tmp/icse2027-reviewer/credentials.json`; other accounts and server credentials are not included.
+
+The account `icse2027.reviewer` belongs only to `icse2027-review` (“ICSE 2027 Reviewer Workspace”). Its maintainer role enables the demonstration workflows inside this isolated organization. It cannot list accounts, inspect access audit records, manage memberships, or access other organizations. The existing owner remains the organization administrator. No other user accounts, credentials, sessions, or memberships were copied.
+
+The workspace contains copies of six existing projects, three classified stories (86, 91, 269), their labels, tasks, NFRs and classification evidence. Published risk definitions 1/2 and NFR definition 1, with their compatible datasets, were prepared in that organization. Existing NFR wording is preserved. Risk associations and team-distribution values remain explicitly identified as synthetic demonstration examples. Original source story records were checked unchanged during preparation.
+
+Preparation exposed a pre-existing isolation defect: the default reader for non-configurable recommendation runs bypassed the scoped database query helper. Loading and replaying RNF/test runs now use the selected organization, including the legacy dispatcher. Regression checks create real RNF publications and runs in two disposable local schemas, verify loading and replay in each, and reject foreign run loading, replay, review, and destination binding.
+
+Validation: production build; 157 API tests and 84 web tests; the local organization integration check with real sessions and concurrent scope checks; 26 production API checks with the reviewer password; and a separate browser check of sign-in, retained deep link, hidden account-management navigation, a new NFR run, source inspection, acceptance, adapted revision, verified replay, and sign-out. The public guide was checked at desktop and mobile widths. Test decisions and adaptations exist only inside the reviewer workspace. Reports are in the ignored `tmp/icse2027-reviewer` directory and contain no password.

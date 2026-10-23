@@ -1,0 +1,21 @@
+{
+  "id": "information-resources-web-profile",
+  "values": {
+    "platforms": [
+      "Web"
+    ],
+    "domains": [
+      "Information resources"
+    ],
+    "languages": [
+      "TypeScript",
+      "JavaScript",
+      "HTML/CSS"
+    ],
+    "risks": [],
+    "team_distribution": "distributed"
+  },
+  "provenance": {
+    "source": "Profile copied from P01. Risk associations and team distribution are illustrative."
+  }
+}

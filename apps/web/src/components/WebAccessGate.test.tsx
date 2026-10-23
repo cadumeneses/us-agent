@@ -11,7 +11,7 @@ function Content() {
   const signOut = usePrivateSignOut();
   return <div>Protected workspace{signOut && <button onClick={() => void signOut()}>Sair</button>}</div>;
 }
-beforeEach(() => { container = document.createElement('div'); document.body.append(container); root = createRoot(container); });
+beforeEach(() => { sessionStorage.clear(); container = document.createElement('div'); document.body.append(container); root = createRoot(container); });
 afterEach(async () => { await act(async () => root.unmount()); container.remove(); vi.unstubAllGlobals(); });
 const render = () => act(async () => root.render(<WebAccessGate><Content/></WebAccessGate>));
 async function password(value: string) {
@@ -31,6 +31,7 @@ test('anonymous visitors see a password form and protected content is not mounte
   expect(container.textContent).not.toContain('Protected workspace');
   expect(container.querySelector<HTMLInputElement>('#private-password')?.type).toBe('password');
   expect(container.querySelector<HTMLInputElement>('#private-username')?.autocomplete).toBe('username');
+  expect(container.querySelector('a[href="/guide"]')?.textContent).toContain('Reviewer Guide');
 });
 
 test('a rejected login clears the password; success mounts the workspace and logout removes it', async () => {
@@ -43,8 +44,10 @@ test('a rejected login clears the password; success mounts the workspace and log
   await act(async () => container.querySelector('form')!.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })));
   expect(container.textContent).toContain('Senha inválida.'); expect(container.querySelector<HTMLInputElement>('#private-password')!.value).toBe('');
   await password('valid private password');
+  sessionStorage.setItem('us-agent-organization', 'another-users-workspace');
   await act(async () => container.querySelector('form')!.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })));
   expect(container.textContent).toContain('Protected workspace');
+  expect(sessionStorage.getItem('us-agent-organization')).toBeNull();
   expect(fetcher.mock.calls[2][1].body).toBe(JSON.stringify({ username: 'mirko', password: 'valid private password' }));
   await act(async () => container.querySelector('button')!.click());
   expect(fetcher.mock.calls[3][1].method).toBe('DELETE');
@@ -55,7 +58,7 @@ test('expired sessions unmount the workspace and return to login', async () => {
   vi.stubGlobal('fetch', vi.fn(() => response({ enabled: true, authenticated: true })));
   await render(); expect(container.textContent).toContain('Protected workspace');
   await act(async () => window.dispatchEvent(new Event('us-agent:session-expired')));
-  expect(container.textContent).toContain('Sua sessão expirou.');
+  expect(container.textContent).toContain('Your session expired.');
   expect(container.textContent).not.toContain('Protected workspace');
 });
 
@@ -63,5 +66,5 @@ test('misconfigured deployment shows an actionable error without opening the wor
   vi.stubGlobal('fetch', vi.fn(() => response({ error: 'Aplique a migration 025.' }, 503)));
   await render(); expect(container.textContent).toContain('Aplique a migration 025.');
   expect(container.textContent).not.toContain('Protected workspace');
-  expect(container.textContent).toContain('Tentar novamente');
+  expect(container.textContent).toContain('Try again');
 });

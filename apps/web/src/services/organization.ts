@@ -1,4 +1,7 @@
 const key = 'us-agent-organization';
+export function clearOrganizationSelection() {
+  try { sessionStorage.removeItem(key); } catch { /* Storage can be unavailable. */ }
+}
 export function organizationOptions(options?: RequestInit): RequestInit | undefined {
   let id: string | null = null;
   try { id=sessionStorage.getItem(key); } catch { /* Storage can be unavailable. */ }

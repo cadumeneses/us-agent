@@ -1,0 +1,57 @@
+[
+  {
+    "id": "P01",
+    "values": {
+      "platforms": [
+        "Web"
+      ],
+      "domains": [
+        "Information resources"
+      ],
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "HTML/CSS"
+      ],
+      "risks": [
+        "[DEMO] Alterações na visualização de informações podem exigir retrabalho na interface."
+      ]
+    }
+  },
+  {
+    "id": "P09",
+    "values": {
+      "platforms": [
+        "Web"
+      ],
+      "domains": [
+        "Information resources"
+      ],
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "risks": [
+        "[DEMO] Falhas de comunicação entre equipes distribuídas podem atrasar integrações."
+      ]
+    }
+  },
+  {
+    "id": "P03",
+    "values": {
+      "platforms": [
+        "Web"
+      ],
+      "domains": [
+        "Information resources"
+      ],
+      "languages": [
+        "JavaScript",
+        "Java"
+      ],
+      "risks": [
+        "[DEMO] Incompatibilidades entre integrações podem atrasar a entrega."
+      ]
+    }
+  }
+]

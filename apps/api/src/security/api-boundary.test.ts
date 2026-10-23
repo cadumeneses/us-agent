@@ -11,7 +11,7 @@ function environment(values: Partial<Record<typeof envKeys[number], string>> = {
   for (const key of envKeys) { if (values[key] === undefined) delete process.env[key]; else process.env[key] = values[key]; }
 }
 
-test('API boundary rejects requests before handlers or body/upload parsing, across legacy and configurable routes', async () => {
+test('API boundary rejects requests before handlers or body/upload parsing, across legacy and configurable routes', async t => {
   const saved = Object.fromEntries(envKeys.map(key => [key, process.env[key]]));
   // Importing the app does not open a database connection; denied routes never touch it.
   const { createApp } = await import('../app.js');
@@ -59,7 +59,11 @@ test('API boundary rejects requests before handlers or body/upload parsing, acro
     assert.equal(writes, 1);
     const authorized = { authorization: 'Bearer synthetic-test-credential' };
     // A production request fails closed when the organization registry is unavailable.
-    assert.equal((await send('/api/classifications/invalid/details', { headers: authorized })).status, 503);
+    const { pool } = await import('../database/pool.js');
+    const unavailableRegistry = t.mock.method(pool, 'query', async () => { throw new Error('Test registry unavailable'); });
+    try {
+      assert.equal((await send('/api/classifications/invalid/details', { headers: authorized })).status, 503);
+    } finally { unavailableRegistry.mock.restore(); }
     environment({ INGEST_API_KEY: 'synthetic-test-credential' });
     assert.equal((await send('/api/classifications/invalid/details', { headers: authorized })).status, 400);
     const form = new FormData(); form.set('file', new Blob(['Como usuário, quero consultar meu cadastro para conferir os dados.']), 'synthetic.txt');

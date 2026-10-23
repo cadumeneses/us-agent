@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { clearOrganizationSelection } from '../services/organization';
 
 const AccessContext = createContext<{ signOut?: () => Promise<void>; username?: string }>({});
 export const usePrivateSignOut = () => useContext(AccessContext).signOut;
@@ -20,7 +21,7 @@ export function WebAccessGate({ children }: { children: ReactNode }) {
   }
   useEffect(() => {
     void status();
-    const expired = () => { setPassword(''); setError('Sua sessão expirou. Entre novamente.'); setState('login'); };
+    const expired = () => { clearOrganizationSelection(); setPassword(''); setError('Your session expired. Please sign in again.'); setState('login'); };
     window.addEventListener('us-agent:session-expired', expired);
     return () => window.removeEventListener('us-agent:session-expired', expired);
   }, []);
@@ -30,7 +31,7 @@ export function WebAccessGate({ children }: { children: ReactNode }) {
       const response = await fetch('/api/auth/session', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: username.trim().toLowerCase(), password }) });
       const body = await response.json();
       if (!response.ok) throw Error(body.error || 'Não foi possível entrar.');
-      setPassword(''); setUsername(body.username); setState('ready');
+      clearOrganizationSelection(); setPassword(''); setUsername(body.username); setState('ready');
     } catch (reason) { setPassword(''); setError(reason instanceof Error ? reason.message : 'Não foi possível entrar.'); }
     finally { setBusy(false); }
   }
@@ -39,20 +40,21 @@ export function WebAccessGate({ children }: { children: ReactNode }) {
     try {
       const response = await fetch('/api/auth/session', { method: 'DELETE', credentials: 'same-origin' });
       if (!response.ok) throw Error('Não foi possível encerrar a sessão. Tente novamente.');
-      setPassword(''); setState('login');
+      clearOrganizationSelection(); setPassword(''); setState('login');
     } catch (reason) { window.alert(reason instanceof Error ? reason.message : 'Não foi possível sair.'); }
     finally { setBusy(false); }
   }
   if (state === 'ready') return <AccessContext.Provider value={{ signOut: enabled ? signOut : undefined, username: username || undefined }}>{children}</AccessContext.Provider>;
   return <main className="private-access"><section className="private-access-card"><h1>US-Agent</h1>
-    {state === 'loading' ? <p role="status">Verificando acesso…</p> : state === 'unavailable' ? <>
-      <p role="alert">{error}</p><button onClick={() => void status()}>Tentar novamente</button></> : <>
-      <p>Entre com seu usuário e senha.</p><form onSubmit={signIn}>
-        <label htmlFor="private-username">Usuário</label>
+    {state === 'loading' ? <p role="status">Checking access…</p> : state === 'unavailable' ? <>
+      <p role="alert">{error}</p><button onClick={() => void status()}>Try again</button></> : <>
+      <p>Sign in with your username and password.</p><form onSubmit={signIn}>
+        <label htmlFor="private-username">Username</label>
         <input id="private-username" name="username" type="text" autoComplete="username" autoCapitalize="none" spellCheck={false} required maxLength={64} value={username} onChange={event => setUsername(event.target.value)} disabled={busy}/>
-        <label htmlFor="private-password">Senha de acesso</label>
+        <label htmlFor="private-password">Password</label>
         <input id="private-password" name="password" type="password" autoComplete="current-password" required maxLength={1024} value={password} onChange={event => setPassword(event.target.value)} disabled={busy}/>
-        {error && <p role="alert">{error}</p>}<button type="submit" disabled={busy || !password || !username.trim()}>{busy ? 'Entrando…' : 'Entrar'}</button>
+        {error && <p role="alert">{error}</p>}<button type="submit" disabled={busy || !password || !username.trim()}>{busy ? 'Signing in…' : 'Sign in'}</button>
       </form></>}
+    <p><a href="/guide">Reviewer Guide · ICSE 2027</a></p>
   </section></main>;
 }

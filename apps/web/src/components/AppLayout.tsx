@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { BrainCircuit, ClipboardCheck, FileCheck2, FolderKanban, FolderTree, History, LayoutDashboard, Menu, ShieldCheck, Sparkles, X } from 'lucide-react';
+import { BookOpen, BrainCircuit, ClipboardCheck, FileCheck2, FolderKanban, FolderTree, History, LayoutDashboard, Menu, ShieldCheck, Sparkles, X } from 'lucide-react';
 import { api } from '../services/api';
 import type { ApplicationContext } from '../types/models';
 import { WorkspaceProvider } from '../services/workspace';
@@ -13,7 +13,7 @@ const navigation = [
     ['Recommenders', '/recommendations', ClipboardCheck], ['Review Queue', '/review', FileCheck2],
     ['Classification history', '/runs', History], ['Dashboard', '/dashboard', LayoutDashboard]
   ] },
-  { title: 'Manage', items: [['Taxonomies', '/taxonomy', FolderTree], ['Access and audit', '/access', ShieldCheck]] }
+  { title: 'Manage', items: [['Taxonomies', '/taxonomy', FolderTree], ['Access and audit', '/access', ShieldCheck], ['Reviewer Guide', '/guide', BookOpen]] }
 ] as const;
 
 export function AppLayout() {
@@ -68,7 +68,7 @@ export function AppLayout() {
     {open && mobile && <button className="navigation-scrim" aria-label="Close navigation" tabIndex={-1} onClick={() => { setOpen(false); menuButton.current?.focus(); }}/>}
     <aside id="primary-navigation" ref={sidebar} inert={mobile && !open} className={open ? 'sidebar open' : 'sidebar'} aria-label="Application navigation">
       <div className="brand"><span className="brand-icon"><BrainCircuit size={19} aria-hidden="true"/></span><div><strong>US-Agent</strong><small>Project workspace</small></div>{mobile && <button aria-label="Close navigation" className="mobile-nav-close" onClick={() => { setOpen(false); menuButton.current?.focus(); }}><X size={20}/></button>}</div>
-      <nav aria-label="Main navigation">{navigation.map(group => <div className="navigation-group" key={group.title}><span className="navigation-label">{group.title}</span>{group.items.map(([label, path, Icon]) => <NavLink key={path} to={path} className={({ isActive }) => isActive || path === '/recommendations' && ['/configured-recommendations', '/recommender-setup', '/recommenders/new'].includes(pathname) ? 'active' : undefined} onClick={() => setOpen(false)}><Icon size={18} aria-hidden="true"/><span>{label}</span></NavLink>)}</div>)}</nav>
+      <nav aria-label="Main navigation">{navigation.map(group => <div className="navigation-group" key={group.title}><span className="navigation-label">{group.title}</span>{group.items.filter(([,path]) => path !== '/access' || access?.role === 'admin').map(([label, path, Icon]) => path === '/guide' ? <a key={path} href={path}><Icon size={18} aria-hidden="true"/><span>{label}</span></a> : <NavLink key={path} to={path} className={({ isActive }) => isActive || path === '/recommendations' && ['/configured-recommendations', '/recommender-setup', '/recommenders/new'].includes(pathname) ? 'active' : undefined} onClick={() => setOpen(false)}><Icon size={18} aria-hidden="true"/><span>{label}</span></NavLink>)}</div>)}</nav>
       <div className="sidebar-foot"><div className="avatar">{username?.slice(0,2).toUpperCase() ?? context.user.initials}</div><div><b>{username ?? context.user.displayName}</b><small>{username ? 'Private access' : context.user.role}</small>{signOut && <button className="private-signout" onClick={() => void signOut()}>Sign out</button>}</div></div>
     </aside>
     <main ref={content} id="workspace-content" inert={mobile && open}>

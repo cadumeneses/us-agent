@@ -1,0 +1,241 @@
+[
+  {
+    "id": "91",
+    "values": {
+      "classification_id": "91",
+      "story_id": "91",
+      "text": "As a project manager, I want to create, read, update, and delete project variables so that I can configure and manage project parameters effectively.",
+      "project": "P02",
+      "taxonomy_version": "1.0.0",
+      "review_status": "accepted_auto",
+      "project_taxonomy_version": "1.0.0",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Insert data"
+        },
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        {
+          "module": "Registry",
+          "operation": "Update data"
+        },
+        {
+          "module": "Registry",
+          "operation": "Remove data"
+        }
+      ],
+      "platforms": [
+        "Web"
+      ],
+      "application_domains": [
+        "Communications"
+      ],
+      "architectures": [
+        "Client-server"
+      ],
+      "languages": [
+        "JavaScript",
+        "Java"
+      ],
+      "frameworks": [
+        "Angular",
+        "Springboot"
+      ],
+      "apis": [],
+      "data_persistence": [
+        "MySQL"
+      ],
+      "objective": "product",
+      "tasks": [
+        {
+          "category": "Criar tela inserção"
+        },
+        {
+          "category": "Criar método de inserção"
+        },
+        {
+          "category": "Criar tela alteração"
+        },
+        {
+          "category": "Criar serviço alteração"
+        },
+        {
+          "category": "Remover dados banco de dados"
+        },
+        {
+          "category": "Alterar tela para exclusão"
+        },
+        {
+          "category": "Criar tela listagem"
+        },
+        {
+          "category": "Criar paginação para listagem"
+        },
+        {
+          "category": "Criar ordenação para listagem"
+        },
+        {
+          "category": "Criar serviço de listagem"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Reliability",
+          "attribute": "availability",
+          "sentence": "The system must notify users and customers when the function they are accessing is unavailable."
+        },
+        {
+          "type": "Reliability",
+          "attribute": "fault_tolerance",
+          "sentence": "If the server goes offline during data insertion, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data insertion operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users."
+        },
+        {
+          "type": "Reliability",
+          "attribute": "integrity",
+          "sentence": "The system must identify data that did not pass edit checks, and present such data to the customer/user for correction. Edit checking will continue until all data submitted is correct."
+        },
+        {
+          "type": "Security",
+          "attribute": "confidentiality",
+          "sentence": "The system must capture the user identification and timestamp when information is created, or deleted."
+        },
+        {
+          "type": "Reliability",
+          "attribute": "fault_tolerance",
+          "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users."
+        },
+        {
+          "type": "Performance",
+          "attribute": "transit_delay",
+          "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page."
+        },
+        {
+          "type": "Security",
+          "attribute": "access_control",
+          "sentence": "The system must provide the capability for users see just the information they have permission to access."
+        },
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users."
+        }
+      ]
+    },
+    "provenance": {
+      "source": "Copy of classification 91 from P02; operational content preserved."
+    }
+  },
+  {
+    "id": "86",
+    "values": {
+      "classification_id": "86",
+      "story_id": "86",
+      "text": "As an administrator, I want to create, read, update, and delete organizations so that I can manage organization data efficiently.",
+      "project": "P02",
+      "taxonomy_version": "1.0.0",
+      "review_status": "accepted_auto",
+      "project_taxonomy_version": "1.0.0",
+      "labels": [
+        {
+          "module": "Registry",
+          "operation": "Insert data"
+        },
+        {
+          "module": "Registry",
+          "operation": "Retrieve data"
+        },
+        {
+          "module": "Registry",
+          "operation": "Update data"
+        },
+        {
+          "module": "Registry",
+          "operation": "Remove data"
+        }
+      ],
+      "platforms": [
+        "Web"
+      ],
+      "application_domains": [
+        "Communications"
+      ],
+      "architectures": [
+        "Client-server"
+      ],
+      "languages": [
+        "JavaScript",
+        "Java"
+      ],
+      "frameworks": [
+        "Angular",
+        "Springboot"
+      ],
+      "apis": [],
+      "data_persistence": [
+        "MySQL"
+      ],
+      "objective": "product",
+      "tasks": [
+        {
+          "category": "Criar tela listagem"
+        },
+        {
+          "category": "Criar paginação para listagem"
+        },
+        {
+          "category": "Criar ordenação para listagem"
+        },
+        {
+          "category": "Criar tela listagem"
+        },
+        {
+          "category": "Criar tela inserção"
+        },
+        {
+          "category": "Remover dados banco de dados"
+        },
+        {
+          "category": "Alterar tela para exclusão"
+        }
+      ],
+      "nfrs": [
+        {
+          "type": "Performance",
+          "attribute": "transit_delay",
+          "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page."
+        },
+        {
+          "type": "Security",
+          "attribute": "access_control",
+          "sentence": "The system must provide the capability for users see just the information they have permission to access."
+        },
+        {
+          "type": "Performance",
+          "attribute": "response_time",
+          "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users."
+        },
+        {
+          "type": "Reliability",
+          "attribute": "availability",
+          "sentence": "The system must notify users and customers when the function they are accessing is unavailable."
+        },
+        {
+          "type": "Security",
+          "attribute": "confidentiality",
+          "sentence": "The system must capture the user identification and timestamp when information is created, or deleted."
+        },
+        {
+          "type": "Reliability",
+          "attribute": "fault_tolerance",
+          "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users."
+        }
+      ]
+    },
+    "provenance": {
+      "source": "Copy of classification 86 from P02; operational content preserved."
+    }
+  }
+]

@@ -1,0 +1,276 @@
+{
+  "checkedAt": "2026-10-22T19:41:57.836Z",
+  "offlineOnly": true,
+  "productionWrites": false,
+  "imports": {
+    "risk1": 3,
+    "risk2": 3,
+    "nfr": 2
+  },
+  "riskBaseline": {
+    "items": [
+      {
+        "attributeId": "risks",
+        "key": "f2f55c97d6f24d1775dce8d8ffab1e731351448bfb0ca4b057fa03df0d3f40fc",
+        "recordIds": [
+          "P01"
+        ],
+        "support": 1,
+        "text": "[DEMO] Alterações na visualização de informações podem exigir retrabalho na interface."
+      }
+    ],
+    "k": 1,
+    "method": "configurable_project_knn_v1",
+    "neighbors": [
+      {
+        "contributions": [
+          {
+            "attributeId": "platforms",
+            "distance": 0,
+            "weight": 1
+          },
+          {
+            "attributeId": "domains",
+            "distance": 0,
+            "weight": 1
+          },
+          {
+            "attributeId": "languages",
+            "distance": 0,
+            "weight": 1
+          }
+        ],
+        "distance": 0,
+        "recordId": "P01",
+        "similarity": 1,
+        "vector": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      }
+    ],
+    "scientificReproduction": false,
+    "status": "completed"
+  },
+  "controlledRiskPair": [
+    {
+      "items": [
+        {
+          "attributeId": "risks",
+          "key": "626f23c003d5c2954ca3a65beb9e24a54f3171cc6e8ac2edb49e45687d0ef344",
+          "recordIds": [
+            "P09"
+          ],
+          "support": 1,
+          "text": "[DEMO] Falhas de comunicação entre equipes distribuídas podem atrasar integrações."
+        }
+      ],
+      "k": 1,
+      "method": "configurable_project_knn_v1",
+      "neighbors": [
+        {
+          "contributions": [
+            {
+              "attributeId": "platforms",
+              "distance": 0,
+              "weight": 1
+            },
+            {
+              "attributeId": "domains",
+              "distance": 0,
+              "weight": 1
+            },
+            {
+              "attributeId": "languages",
+              "distance": 1,
+              "weight": 1
+            },
+            {
+              "attributeId": "team_distribution",
+              "distance": 0,
+              "weight": 5
+            }
+          ],
+          "distance": 1,
+          "recordId": "P09",
+          "similarity": 0.9375,
+          "vector": [
+            1,
+            1,
+            0,
+            0,
+            1,
+            1,
+            0,
+            1
+          ]
+        }
+      ],
+      "scientificReproduction": false,
+      "status": "completed"
+    },
+    {
+      "items": [
+        {
+          "attributeId": "risks",
+          "key": "f2f55c97d6f24d1775dce8d8ffab1e731351448bfb0ca4b057fa03df0d3f40fc",
+          "recordIds": [
+            "P01"
+          ],
+          "support": 1,
+          "text": "[DEMO] Alterações na visualização de informações podem exigir retrabalho na interface."
+        }
+      ],
+      "k": 1,
+      "method": "configurable_project_knn_v1",
+      "neighbors": [
+        {
+          "contributions": [
+            {
+              "attributeId": "platforms",
+              "distance": 0,
+              "weight": 1
+            },
+            {
+              "attributeId": "domains",
+              "distance": 0,
+              "weight": 1
+            },
+            {
+              "attributeId": "languages",
+              "distance": 0,
+              "weight": 1
+            },
+            {
+              "attributeId": "team_distribution",
+              "distance": 0,
+              "weight": 5
+            }
+          ],
+          "distance": 0,
+          "recordId": "P01",
+          "similarity": 1,
+          "vector": [
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      ],
+      "scientificReproduction": false,
+      "status": "completed"
+    }
+  ],
+  "nfr": {
+    "dimensions": [
+      "applicationDomain:Educação",
+      "architecture:MVC",
+      "framework:Angular",
+      "framework:Node",
+      "language:JavaScript",
+      "persistence:MongoDB",
+      "platform:Web"
+    ],
+    "eligibleCount": 2,
+    "excludedCount": 0,
+    "items": [
+      {
+        "alreadyLinked": false,
+        "attribute": "confidentiality",
+        "key": "274dfc25fa03527b5dcb882e81a24d098d7aa83f31c24b0c189a945782f885b5",
+        "score": 0.4285714285714286,
+        "sentence": "The system must capture the user identification and timestamp when information is created, or deleted.",
+        "type": "Security"
+      },
+      {
+        "alreadyLinked": false,
+        "attribute": "transit_delay",
+        "key": "284cc8faef54e565fcfcc64f1cdca2db1392f6b30a515f720637e1ff7247785f",
+        "score": 0.4285714285714286,
+        "sentence": "The system must provide pagination when the number of returned search results exceeds the number of records to be displayed per page.",
+        "type": "Performance"
+      },
+      {
+        "alreadyLinked": false,
+        "attribute": "fault_tolerance",
+        "key": "3fa9ed113eeb8f0f155f3c6abfb3cee002de1c9d28919d5ad995af2b0ccefab5",
+        "score": 0.4285714285714286,
+        "sentence": "If the server goes offline during data removal, the system must display a loading for a maximum of 1 minute. If the backend comes back in the meantime, the data removal operation must be performed automatically. Otherwise, if the server remains unresponsive after 1 minute, the system must notify the server problem for users.",
+        "type": "Reliability"
+      },
+      {
+        "alreadyLinked": false,
+        "attribute": "access_control",
+        "key": "9733da69ddfd592df5c00c78ab17948296f1d36410d5035969aa62140b0ddb80",
+        "score": 0.4285714285714286,
+        "sentence": "The system must provide the capability for users see just the information they have permission to access.",
+        "type": "Security"
+      },
+      {
+        "alreadyLinked": false,
+        "attribute": "availability",
+        "key": "9e05e77d7212572e7081243364d01972294aa9e0556995cf52e2d0391082cb8a",
+        "score": 0.4285714285714286,
+        "sentence": "The system must notify users and customers when the function they are accessing is unavailable.",
+        "type": "Reliability"
+      },
+      {
+        "alreadyLinked": false,
+        "attribute": "response_time",
+        "key": "ef85b3090dede367f4965dd906fe5fb6fb197129a3079553793c5018b20d6a39",
+        "score": 0.4285714285714286,
+        "sentence": "In 100% of all cases, the system must have a mean response time of <= 3s between event <search items> and event <display text information of listed items>. It is assumed that there are 200 concurrent users.",
+        "type": "Performance"
+      }
+    ],
+    "k": 1,
+    "label": {
+      "module": "Registry",
+      "operation": "Retrieve data"
+    },
+    "messages": [
+      "Empate: selecionada a classificação de menor identificador. Política determinística do US-Agent; k permanece igual a 1."
+    ],
+    "method": "ramos_2019_manhattan_k1_v2",
+    "neighbor": {
+      "classificationId": "86",
+      "matched": [
+        "framework:Angular",
+        "language:JavaScript",
+        "platform:Web"
+      ],
+      "missing": [
+        "applicationDomain:Educação",
+        "architecture:MVC",
+        "framework:Node",
+        "persistence:MongoDB"
+      ],
+      "project": "P02",
+      "similarity": 0.4285714285714286,
+      "storyId": "86",
+      "text": "As an administrator, I want to create, read, update, and delete organizations so that I can manage organization data efficiently.",
+      "vector": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    "status": "completed"
+  },
+  "sameDefinitionAndDatasetWithinPair": true,
+  "onlyChangedAttribute": "team_distribution",
+  "repeatabilityVerified": true
+}

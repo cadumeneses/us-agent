@@ -1,4 +1,4 @@
-import { pool, query, withTransaction } from '../database/pool.js';
+import { query, withTransaction } from '../database/pool.js';
 import { canonicalJson, snapshotContent } from '../domain/content-snapshot.js';
 import { lockPublishedDataset, lockPublishedDefinition } from './recommender-datasets.js';
 import { executeMethodRecommendation, methodRecommendationRequestSchema, canReplayMethod, type MethodRecommendationContent } from './method-execution.js';
@@ -50,12 +50,13 @@ export async function createRecommendationRun(raw: unknown, actor: string) {
   });
 }
 
-export async function loadRecommendationRun(id: string, reader: Pick<PoolClient, 'query'> = pool) {
-  const result = await reader.query<Row>('SELECT * FROM recommender_runs WHERE id = $1', [id]);
+export async function loadRecommendationRun(id: string, reader?: Pick<PoolClient, 'query'>) {
+  const sql = 'SELECT * FROM recommender_runs WHERE id = $1';
+  const result = reader ? await reader.query<Row>(sql, [id]) : await query<Row>(sql, [id]);
   if (!result.rows[0]) throw new RecommendationRequestError(404, 'Execução não encontrada.');
   return record(result.rows[0]);
 }
-export async function loadRnfRecommendationRun(id: string, reader: Pick<PoolClient, 'query'> = pool) {
+export async function loadRnfRecommendationRun(id: string, reader?: Pick<PoolClient, 'query'>) {
   const run = await loadRecommendationRun(id, reader);
   if (run.snapshot.content.schemaVersion !== 1) throw new RecommendationRequestError(422, 'Test-case assessment is not implemented yet; the original execution remains available.');
   return { ...run, snapshot: { ...run.snapshot, content: run.snapshot.content } };
